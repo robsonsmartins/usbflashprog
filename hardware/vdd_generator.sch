@@ -1,0 +1,745 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr User 8268 5846
+encoding utf-8
+Sheet 3 8
+Title "USB Flash/EPROM Programmer"
+Date "2022-04-23"
+Rev "v0.1.0 rev.E"
+Comp "Robson Martins"
+Comment1 "https://usbflashprog.robsonmartins.com"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+Entry Wire Line
+	1250 1750 1350 1850
+Entry Wire Line
+	1250 2450 1350 2550
+$Comp
+L Device:R R?
+U 1 1 626EA7E2
+P 1850 1850
+AR Path="/6268EC8D/626EA7E2" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626EA7E2" Ref="R?"  Part="1" 
+F 0 "R?" V 1643 1850 50  0000 C CNN
+F 1 "1K" V 1734 1850 50  0000 C CNN
+F 2 "" V 1780 1850 50  0001 C CNN
+F 3 "~" H 1850 1850 50  0001 C CNN
+	1    1850 1850
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 626EA7EE
+P 4050 2000
+AR Path="/6268EC8D/626EA7EE" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626EA7EE" Ref="R?"  Part="1" 
+F 0 "R?" H 4120 2046 50  0000 L CNN
+F 1 "470R" H 4120 1955 50  0000 L CNN
+F 2 "" V 3980 2000 50  0001 C CNN
+F 3 "~" H 4050 2000 50  0001 C CNN
+	1    4050 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C?
+U 1 1 626EA7F4
+P 3450 2050
+AR Path="/6268EC8D/626EA7F4" Ref="C?"  Part="1" 
+AR Path="/626CC8F1/626EA7F4" Ref="C?"  Part="1" 
+F 0 "C?" H 3500 1950 50  0000 L CNN
+F 1 "470uF" H 3476 1873 50  0000 L CNN
+F 2 "" H 3488 1900 50  0001 C CNN
+F 3 "~" H 3450 2050 50  0001 C CNN
+	1    3450 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 626EA7FA
+P 3750 2050
+AR Path="/6268EC8D/626EA7FA" Ref="C?"  Part="1" 
+AR Path="/626CC8F1/626EA7FA" Ref="C?"  Part="1" 
+F 0 "C?" H 3800 1950 50  0000 L CNN
+F 1 "100nF" H 3798 1870 50  0000 L CNN
+F 2 "" H 3788 1900 50  0001 C CNN
+F 3 "~" H 3750 2050 50  0001 C CNN
+	1    3750 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:BAT46 D?
+U 1 1 626EA800
+P 3050 2050
+AR Path="/6268EC8D/626EA800" Ref="D?"  Part="1" 
+AR Path="/626CC8F1/626EA800" Ref="D?"  Part="1" 
+F 0 "D?" V 3100 2200 50  0000 C CNN
+F 1 "BAT46" V 3183 2273 50  0000 C CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal" H 3050 1875 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/85662/bat46.pdf" H 3050 2050 50  0001 C CNN
+	1    3050 2050
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:L_Core_Ferrite L?
+U 1 1 626EA80C
+P 3250 1850
+AR Path="/6268EC8D/626EA80C" Ref="L?"  Part="1" 
+AR Path="/626CC8F1/626EA80C" Ref="L?"  Part="1" 
+F 0 "L?" V 3200 1800 50  0000 L CNN
+F 1 "100uH" V 3121 1723 50  0000 L CNN
+F 2 "" H 3250 1850 50  0001 C CNN
+F 3 "~" H 3250 1850 50  0001 C CNN
+	1    3250 1850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+9V #PWR?
+U 1 1 626EA812
+P 2700 1050
+AR Path="/6268EC8D/626EA812" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626EA812" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 2700 900 50  0001 C CNN
+F 1 "+9V" H 2715 1223 50  0000 C CNN
+F 2 "" H 2700 1050 50  0001 C CNN
+F 3 "" H 2700 1050 50  0001 C CNN
+	1    2700 1050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 626EA818
+P 2350 2350
+AR Path="/6268EC8D/626EA818" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626EA818" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 2350 2100 50  0001 C CNN
+F 1 "GND" H 2355 2177 50  0001 C CNN
+F 2 "" H 2350 2350 50  0001 C CNN
+F 3 "" H 2350 2350 50  0001 C CNN
+	1    2350 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 626EA81E
+P 3450 2350
+AR Path="/6268EC8D/626EA81E" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626EA81E" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 3450 2100 50  0001 C CNN
+F 1 "GND" H 3455 2177 50  0001 C CNN
+F 2 "" H 3450 2350 50  0001 C CNN
+F 3 "" H 3450 2350 50  0001 C CNN
+	1    3450 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 626EA824
+P 3750 2350
+AR Path="/6268EC8D/626EA824" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626EA824" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 3750 2100 50  0001 C CNN
+F 1 "GND" H 3755 2177 50  0001 C CNN
+F 2 "" H 3750 2350 50  0001 C CNN
+F 3 "" H 3750 2350 50  0001 C CNN
+	1    3750 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 626EA82A
+P 4050 3000
+AR Path="/6268EC8D/626EA82A" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626EA82A" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 4050 2750 50  0001 C CNN
+F 1 "GND" H 4055 2827 50  0001 C CNN
+F 2 "" H 4050 3000 50  0001 C CNN
+F 3 "" H 4050 3000 50  0001 C CNN
+	1    4050 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1350 1850 1700 1850
+Wire Wire Line
+	3450 2350 3450 2200
+Wire Wire Line
+	3750 2350 3750 2200
+Wire Wire Line
+	4050 3000 4050 2950
+Entry Wire Line
+	1150 2550 1250 2650
+Entry Wire Line
+	1150 2650 1250 2750
+Wire Wire Line
+	1050 2550 1150 2550
+Wire Wire Line
+	1050 2650 1150 2650
+Entry Wire Line
+	1250 3150 1350 3250
+$Comp
+L Device:LED D?
+U 1 1 626EA854
+P 1750 3850
+AR Path="/6268EC8D/626EA854" Ref="D?"  Part="1" 
+AR Path="/626CC8F1/626EA854" Ref="D?"  Part="1" 
+F 0 "D?" V 1789 3732 50  0000 R CNN
+F 1 "RED" V 1698 3732 50  0000 R CNN
+F 2 "" H 1750 3850 50  0001 C CNN
+F 3 "~" H 1750 3850 50  0001 C CNN
+	1    1750 3850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Transistor_BJT:BC327 Q?
+U 1 1 626EA85A
+P 3050 3250
+AR Path="/6268EC8D/626EA85A" Ref="Q?"  Part="1" 
+AR Path="/626CC8F1/626EA85A" Ref="Q?"  Part="1" 
+F 0 "Q?" H 3241 3204 50  0000 L CNN
+F 1 "BC327" H 3241 3295 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 3250 3175 50  0001 L CIN
+F 3 "http://www.onsemi.com/pub_link/Collateral/BC327-D.PDF" H 3050 3250 50  0001 L CNN
+	1    3050 3250
+	1    0    0    1   
+$EndComp
+$Comp
+L 74xx:74LS06N U?
+U 2 1 626EA860
+P 2150 3250
+AR Path="/6268EC8D/626EA860" Ref="U?"  Part="1" 
+AR Path="/626CC8F1/626EA860" Ref="U?"  Part="2" 
+F 0 "U?" H 2150 3567 50  0000 C CNN
+F 1 "74LS06N" H 2150 3476 50  0000 C CNN
+F 2 "" H 2150 3250 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS06N" H 2150 3250 50  0001 C CNN
+	2    2150 3250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 626EA866
+P 2650 3250
+AR Path="/6268EC8D/626EA866" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626EA866" Ref="R?"  Part="1" 
+F 0 "R?" V 2443 3250 50  0000 C CNN
+F 1 "2K2" V 2534 3250 50  0000 C CNN
+F 2 "" V 2580 3250 50  0001 C CNN
+F 3 "~" H 2650 3250 50  0001 C CNN
+	1    2650 3250
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 626EA86C
+P 1750 3450
+AR Path="/6268EC8D/626EA86C" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626EA86C" Ref="R?"  Part="1" 
+F 0 "R?" H 1820 3496 50  0000 L CNN
+F 1 "100R" H 1820 3405 50  0000 L CNN
+F 2 "" V 1680 3450 50  0001 C CNN
+F 3 "~" H 1750 3450 50  0001 C CNN
+	1    1750 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 626EA872
+P 1750 4050
+AR Path="/6268EC8D/626EA872" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626EA872" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1750 3800 50  0001 C CNN
+F 1 "GND" H 1755 3877 50  0001 C CNN
+F 2 "" H 1750 4050 50  0001 C CNN
+F 3 "" H 1750 4050 50  0001 C CNN
+	1    1750 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 626EA878
+P 2850 3050
+AR Path="/6268EC8D/626EA878" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626EA878" Ref="R?"  Part="1" 
+F 0 "R?" H 2920 3096 50  0000 L CNN
+F 1 "2K2" H 2920 3005 50  0000 L CNN
+F 2 "" V 2780 3050 50  0001 C CNN
+F 3 "~" H 2850 3050 50  0001 C CNN
+	1    2850 3050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 626EA87F
+P 3150 3850
+AR Path="/6268EC8D/626EA87F" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626EA87F" Ref="R?"  Part="1" 
+F 0 "R?" H 3220 3896 50  0000 L CNN
+F 1 "1K" H 3220 3805 50  0000 L CNN
+F 2 "" V 3080 3850 50  0001 C CNN
+F 3 "~" H 3150 3850 50  0001 C CNN
+	1    3150 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 626EA885
+P 3150 4050
+AR Path="/6268EC8D/626EA885" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626EA885" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 3150 3800 50  0001 C CNN
+F 1 "GND" H 3155 3877 50  0001 C CNN
+F 2 "" H 3150 4050 50  0001 C CNN
+F 3 "" H 3150 4050 50  0001 C CNN
+	1    3150 4050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4050 3450 4050 3550
+Wire Wire Line
+	3150 3050 3150 2850
+Wire Wire Line
+	3150 2850 3250 2850
+Wire Wire Line
+	1850 3250 1750 3250
+Entry Wire Line
+	1150 2850 1250 2950
+Wire Wire Line
+	1050 2850 1150 2850
+Text Notes 1874 4025 0    50   ~ 0
+VDD
+Wire Wire Line
+	1750 3300 1750 3250
+Connection ~ 1750 3250
+Wire Wire Line
+	1750 3250 1350 3250
+Wire Wire Line
+	1750 3600 1750 3700
+Wire Wire Line
+	1750 4000 1750 4050
+Wire Wire Line
+	2450 3250 2500 3250
+Wire Wire Line
+	2800 3250 2850 3250
+Wire Wire Line
+	2850 3200 2850 3250
+Connection ~ 2850 3250
+Wire Wire Line
+	2850 2900 2850 2850
+Wire Wire Line
+	2850 2850 3150 2850
+Connection ~ 3150 2850
+Wire Wire Line
+	3150 4000 3150 4050
+Text HLabel 1050 2850 0    50   Input ~ 0
+VDD_CTRL
+Text HLabel 1050 2550 0    50   Input ~ 0
+VDD_PWM
+Text HLabel 1050 2650 0    50   Output ~ 0
+VDD_FB
+Text Label 1350 3250 0    50   ~ 0
+VDD_CTRL
+Text GLabel 3250 2850 2    50   UnSpc ~ 0
+VDD_RAW
+$Comp
+L power:VDD #PWR?
+U 1 1 626ECEF8
+P 4050 3450
+F 0 "#PWR?" H 4050 3300 50  0001 C CNN
+F 1 "VDD" H 4065 3623 50  0000 C CNN
+F 2 "" H 4050 3450 50  0001 C CNN
+F 3 "" H 4050 3450 50  0001 C CNN
+	1    4050 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_BJT:BC327 Q?
+U 1 1 626EE52F
+P 2950 1550
+AR Path="/6268EC8D/626EE52F" Ref="Q?"  Part="1" 
+AR Path="/626CC8F1/626EE52F" Ref="Q?"  Part="1" 
+F 0 "Q?" H 3141 1504 50  0000 L CNN
+F 1 "BC327" H 3141 1595 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 3150 1475 50  0001 L CIN
+F 3 "http://www.onsemi.com/pub_link/Collateral/BC327-D.PDF" H 2950 1550 50  0001 L CNN
+	1    2950 1550
+	1    0    0    1   
+$EndComp
+$Comp
+L Transistor_BJT:BC547 Q?
+U 1 1 626EF1CC
+P 2250 1850
+F 0 "Q?" H 2441 1896 50  0000 L CNN
+F 1 "BC547" H 2441 1805 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 2450 1775 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/BC550-D.pdf" H 2250 1850 50  0001 L CNN
+	1    2250 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 626F5207
+P 2500 1550
+AR Path="/6268EC8D/626F5207" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626F5207" Ref="R?"  Part="1" 
+F 0 "R?" V 2293 1550 50  0000 C CNN
+F 1 "4K7" V 2384 1550 50  0000 C CNN
+F 2 "" V 2430 1550 50  0001 C CNN
+F 3 "~" H 2500 1550 50  0001 C CNN
+	1    2500 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 626F5E39
+P 2700 1350
+AR Path="/6268EC8D/626F5E39" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626F5E39" Ref="R?"  Part="1" 
+F 0 "R?" H 2770 1396 50  0000 L CNN
+F 1 "2K2" H 2770 1305 50  0000 L CNN
+F 2 "" V 2630 1350 50  0001 C CNN
+F 3 "~" H 2700 1350 50  0001 C CNN
+	1    2700 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 626F7A4B
+P 3050 2350
+AR Path="/6268EC8D/626F7A4B" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/626F7A4B" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 3050 2100 50  0001 C CNN
+F 1 "GND" H 3055 2177 50  0001 C CNN
+F 2 "" H 3050 2350 50  0001 C CNN
+F 3 "" H 3050 2350 50  0001 C CNN
+	1    3050 2350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 2350 2350 2050
+Text Label 1350 1850 0    50   ~ 0
+VDD_PWM
+Text Label 1350 2550 0    50   ~ 0
+VDD_FB
+Wire Wire Line
+	2350 1650 2350 1550
+Wire Wire Line
+	2650 1550 2700 1550
+Wire Wire Line
+	2700 1500 2700 1550
+Connection ~ 2700 1550
+Wire Wire Line
+	2700 1550 2750 1550
+Wire Wire Line
+	2700 1200 2700 1150
+Wire Wire Line
+	3050 1350 3050 1150
+Connection ~ 2700 1150
+Wire Wire Line
+	2700 1150 2700 1050
+Wire Wire Line
+	3050 1750 3050 1850
+Connection ~ 3050 1850
+Wire Wire Line
+	3050 1850 3050 1900
+Wire Wire Line
+	3050 2200 3050 2350
+Wire Wire Line
+	3750 1900 3750 1850
+Connection ~ 3750 1850
+Wire Wire Line
+	3750 1850 4050 1850
+Wire Wire Line
+	3450 1900 3450 1850
+Connection ~ 3450 1850
+$Comp
+L Device:R R?
+U 1 1 626EA7E8
+P 4050 2800
+AR Path="/6268EC8D/626EA7E8" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/626EA7E8" Ref="R?"  Part="1" 
+F 0 "R?" H 4120 2846 50  0000 L CNN
+F 1 "330R" H 4120 2755 50  0000 L CNN
+F 2 "" V 3980 2800 50  0001 C CNN
+F 3 "~" H 4050 2800 50  0001 C CNN
+	1    4050 2800
+	1    0    0    -1  
+$EndComp
+Text GLabel 4250 1500 2    50   UnSpc ~ 0
+VDD_RAW
+Wire Wire Line
+	4050 1500 4250 1500
+$Comp
+L 74xx:74LS06N U?
+U 3 1 6270BE54
+P 5600 1850
+AR Path="/6268EC8D/6270BE54" Ref="U?"  Part="1" 
+AR Path="/626CC8F1/6270BE54" Ref="U?"  Part="3" 
+F 0 "U?" H 5600 2167 50  0000 C CNN
+F 1 "74LS06N" H 5600 2076 50  0000 C CNN
+F 2 "" H 5600 1850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/gpn/sn74LS06N" H 5600 1850 50  0001 C CNN
+	3    5600 1850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6270C898
+P 6100 1850
+AR Path="/6268EC8D/6270C898" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/6270C898" Ref="R?"  Part="1" 
+F 0 "R?" V 5893 1850 50  0000 C CNN
+F 1 "2K2" V 5984 1850 50  0000 C CNN
+F 2 "" V 6030 1850 50  0001 C CNN
+F 3 "~" H 6100 1850 50  0001 C CNN
+	1    6100 1850
+	0    1    1    0   
+$EndComp
+$Comp
+L Transistor_BJT:BC327 Q?
+U 1 1 6270CBBC
+P 6500 1850
+AR Path="/6268EC8D/6270CBBC" Ref="Q?"  Part="1" 
+AR Path="/626CC8F1/6270CBBC" Ref="Q?"  Part="1" 
+F 0 "Q?" H 6691 1804 50  0000 L CNN
+F 1 "BC327" H 6691 1895 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 6700 1775 50  0001 L CIN
+F 3 "http://www.onsemi.com/pub_link/Collateral/BC327-D.PDF" H 6500 1850 50  0001 L CNN
+	1    6500 1850
+	1    0    0    1   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6270D13B
+P 6300 1650
+AR Path="/6268EC8D/6270D13B" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/6270D13B" Ref="R?"  Part="1" 
+F 0 "R?" H 6370 1696 50  0000 L CNN
+F 1 "2K2" H 6370 1605 50  0000 L CNN
+F 2 "" V 6230 1650 50  0001 C CNN
+F 3 "~" H 6300 1650 50  0001 C CNN
+	1    6300 1650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6270D597
+P 6600 2350
+AR Path="/6268EC8D/6270D597" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/6270D597" Ref="R?"  Part="1" 
+F 0 "R?" H 6670 2396 50  0000 L CNN
+F 1 "10K" H 6670 2305 50  0000 L CNN
+F 2 "" V 6530 2350 50  0001 C CNN
+F 3 "~" H 6600 2350 50  0001 C CNN
+	1    6600 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 6270DA28
+P 6600 2550
+AR Path="/6268EC8D/6270DA28" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/6270DA28" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6600 2300 50  0001 C CNN
+F 1 "GND" H 6605 2377 50  0001 C CNN
+F 2 "" H 6600 2550 50  0001 C CNN
+F 3 "" H 6600 2550 50  0001 C CNN
+	1    6600 2550
+	1    0    0    -1  
+$EndComp
+Text GLabel 6700 1450 2    50   UnSpc ~ 0
+VDD_RAW
+$Comp
+L power:VPP #PWR?
+U 1 1 6270E1AF
+P 7400 2050
+F 0 "#PWR?" H 7400 1900 50  0001 C CNN
+F 1 "VPP" H 7415 2223 50  0000 C CNN
+F 2 "" H 7400 2050 50  0001 C CNN
+F 3 "" H 7400 2050 50  0001 C CNN
+	1    7400 2050
+	1    0    0    -1  
+$EndComp
+Entry Wire Line
+	4700 1750 4800 1850
+Wire Wire Line
+	4800 1850 5300 1850
+Wire Wire Line
+	7400 2150 7400 2050
+Wire Wire Line
+	5900 1850 5950 1850
+Wire Wire Line
+	6250 1850 6300 1850
+Wire Wire Line
+	6300 1800 6300 1850
+Connection ~ 6300 1850
+Wire Wire Line
+	6300 1500 6300 1450
+Wire Wire Line
+	6300 1450 6600 1450
+Wire Wire Line
+	6600 1650 6600 1450
+Connection ~ 6600 1450
+Wire Wire Line
+	6600 1450 6700 1450
+Wire Wire Line
+	6600 2500 6600 2550
+Text Label 4800 1850 0    50   ~ 0
+VDD_ON_VPP
+Wire Wire Line
+	6600 2050 6600 2150
+$Comp
+L Diode:1N4148 D?
+U 1 1 6271992C
+P 7000 2150
+F 0 "D?" H 7000 2250 50  0000 C CNN
+F 1 "1N4148" H 6950 2350 50  0000 C CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P7.62mm_Horizontal" H 7000 1975 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/1N4148_1N4448.pdf" H 7000 2150 50  0001 C CNN
+	1    7000 2150
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6850 2150 6600 2150
+Connection ~ 6600 2150
+Wire Wire Line
+	6600 2150 6600 2200
+Wire Wire Line
+	7150 2150 7400 2150
+Wire Wire Line
+	2000 1850 2050 1850
+Wire Wire Line
+	3050 1150 2700 1150
+Wire Wire Line
+	4050 1500 4050 1850
+Wire Wire Line
+	3100 1850 3050 1850
+Wire Wire Line
+	3400 1850 3450 1850
+Wire Wire Line
+	3450 1850 3750 1850
+Wire Wire Line
+	4050 2150 4050 2550
+Connection ~ 4050 1850
+Wire Wire Line
+	1350 2550 4050 2550
+Connection ~ 4050 2550
+Wire Wire Line
+	4050 2550 4050 2650
+Wire Bus Line
+	1250 750  4700 750 
+Text HLabel 1050 2950 0    50   Input ~ 0
+VDD_ON_VPP
+Entry Wire Line
+	1150 2950 1250 3050
+Wire Wire Line
+	1150 2950 1050 2950
+Wire Wire Line
+	3150 3450 3150 3550
+Wire Wire Line
+	3150 3550 4050 3550
+Connection ~ 3150 3550
+Wire Wire Line
+	3150 3550 3150 3700
+Text GLabel 5200 2900 0    50   UnSpc ~ 0
+VDD_RAW
+$Comp
+L Device:R R?
+U 1 1 627BFC58
+P 5550 2900
+AR Path="/6268EC8D/627BFC58" Ref="R?"  Part="1" 
+AR Path="/626CC8F1/627BFC58" Ref="R?"  Part="1" 
+F 0 "R?" V 5343 2900 50  0000 C CNN
+F 1 "100R" V 5434 2900 50  0000 C CNN
+F 2 "" V 5480 2900 50  0001 C CNN
+F 3 "~" H 5550 2900 50  0001 C CNN
+	1    5550 2900
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:CP C?
+U 1 1 627C025D
+P 6600 3150
+AR Path="/6268EC8D/627C025D" Ref="C?"  Part="1" 
+AR Path="/626CC8F1/627C025D" Ref="C?"  Part="1" 
+F 0 "C?" H 6650 3050 50  0000 L CNN
+F 1 "22uF" H 6626 2973 50  0000 L CNN
+F 2 "" H 6638 3000 50  0001 C CNN
+F 3 "~" H 6600 3150 50  0001 C CNN
+	1    6600 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 627C0998
+P 6600 3400
+AR Path="/6268EC8D/627C0998" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/627C0998" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6600 3150 50  0001 C CNN
+F 1 "GND" H 6605 3227 50  0001 C CNN
+F 2 "" H 6600 3400 50  0001 C CNN
+F 3 "" H 6600 3400 50  0001 C CNN
+	1    6600 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N47xxA D?
+U 1 1 627C1989
+P 5900 3150
+F 0 "D?" V 5854 3230 50  0000 L CNN
+F 1 "1N4733A" V 5945 3230 50  0000 L CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 5900 2975 50  0001 C CNN
+F 3 "https://www.vishay.com/docs/85816/1n4728a.pdf" H 5900 3150 50  0001 C CNN
+	1    5900 3150
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 627C3DB8
+P 5900 3400
+AR Path="/6268EC8D/627C3DB8" Ref="#PWR?"  Part="1" 
+AR Path="/626CC8F1/627C3DB8" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5900 3150 50  0001 C CNN
+F 1 "GND" H 5905 3227 50  0001 C CNN
+F 2 "" H 5900 3400 50  0001 C CNN
+F 3 "" H 5900 3400 50  0001 C CNN
+	1    5900 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5200 2900 5400 2900
+Wire Wire Line
+	5700 2900 5900 2900
+Wire Wire Line
+	6600 2900 6600 3000
+Wire Wire Line
+	5900 3000 5900 2900
+Wire Wire Line
+	5900 3300 5900 3400
+Wire Wire Line
+	6600 3400 6600 3300
+$Comp
+L power:VCC #PWR?
+U 1 1 627CBA0D
+P 7400 2700
+F 0 "#PWR?" H 7400 2550 50  0001 C CNN
+F 1 "VCC" H 7415 2873 50  0000 C CNN
+F 2 "" H 7400 2700 50  0001 C CNN
+F 3 "" H 7400 2700 50  0001 C CNN
+	1    7400 2700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7400 2700 7400 2900
+Connection ~ 5900 2900
+Wire Wire Line
+	5900 2900 6600 2900
+Connection ~ 6600 2900
+Wire Wire Line
+	6600 2900 7400 2900
+Wire Bus Line
+	4700 750  4700 2450
+Wire Bus Line
+	1250 750  1250 4200
+$EndSCHEMATC

@@ -1,0 +1,830 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 4 8
+Title "USB Flash/EPROM Programmer"
+Date "2022-04-23"
+Rev "v0.1.0 rev.E"
+Comp "Robson Martins"
+Comment1 "https://usbflashprog.robsonmartins.com"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L 74xx:74HC595 U?
+U 1 1 628DDCD5
+P 4200 1800
+AR Path="/626516AA/628DDCD5" Ref="U?"  Part="1" 
+AR Path="/627EA631/628DDCD5" Ref="U?"  Part="1" 
+F 0 "U?" H 4400 2400 50  0000 C CNN
+F 1 "74HC595" H 4500 1100 50  0000 C CNN
+F 2 "" H 4200 1800 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf" H 4200 1800 50  0001 C CNN
+	1    4200 1800
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC595 U?
+U 1 1 628DDCDB
+P 4200 3500
+AR Path="/626516AA/628DDCDB" Ref="U?"  Part="1" 
+AR Path="/627EA631/628DDCDB" Ref="U?"  Part="1" 
+F 0 "U?" H 4400 4100 50  0000 C CNN
+F 1 "74HC595" H 4500 2800 50  0000 C CNN
+F 2 "" H 4200 3500 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/sn74hc595.pdf" H 4200 3500 50  0001 C CNN
+	1    4200 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 628DDCE7
+P 4200 2500
+AR Path="/626516AA/628DDCE7" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628DDCE7" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 4200 2250 50  0001 C CNN
+F 1 "GND" H 4205 2327 50  0001 C CNN
+F 2 "" H 4200 2500 50  0001 C CNN
+F 3 "" H 4200 2500 50  0001 C CNN
+	1    4200 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 628DDCED
+P 4200 4200
+AR Path="/626516AA/628DDCED" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628DDCED" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 4200 3950 50  0001 C CNN
+F 1 "GND" H 4205 4027 50  0001 C CNN
+F 2 "" H 4200 4200 50  0001 C CNN
+F 3 "" H 4200 4200 50  0001 C CNN
+	1    4200 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 628DDD11
+P 4200 1200
+AR Path="/626516AA/628DDD11" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628DDD11" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 4200 1050 50  0001 C CNN
+F 1 "VCC" H 4203 1348 50  0000 C CNN
+F 2 "" H 4200 1200 50  0001 C CNN
+F 3 "" H 4200 1200 50  0001 C CNN
+	1    4200 1200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 628DDD17
+P 4200 2900
+AR Path="/626516AA/628DDD17" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628DDD17" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 4200 2750 50  0001 C CNN
+F 1 "VCC" H 4199 3051 50  0000 C CNN
+F 2 "" H 4200 2900 50  0001 C CNN
+F 3 "" H 4200 2900 50  0001 C CNN
+	1    4200 2900
+	1    0    0    -1  
+$EndComp
+Entry Wire Line
+	3200 1300 3300 1400
+Entry Wire Line
+	3200 1500 3300 1600
+Entry Wire Line
+	3200 1600 3300 1700
+Entry Wire Line
+	3200 1800 3300 1900
+Wire Wire Line
+	3300 1400 3800 1400
+Wire Wire Line
+	3300 1600 3800 1600
+Wire Wire Line
+	3300 1700 3800 1700
+Wire Wire Line
+	3300 1900 3800 1900
+Wire Wire Line
+	3800 3100 3600 3100
+Wire Wire Line
+	3600 3100 3600 2700
+Wire Wire Line
+	3600 2700 4800 2700
+Wire Wire Line
+	4800 2700 4800 2300
+Wire Wire Line
+	4800 2300 4600 2300
+Entry Wire Line
+	3200 3200 3300 3300
+Entry Wire Line
+	3200 3300 3300 3400
+Entry Wire Line
+	3200 3500 3300 3600
+Wire Wire Line
+	3300 3300 3800 3300
+Wire Wire Line
+	3300 3400 3800 3400
+Wire Wire Line
+	3300 3600 3800 3600
+Entry Wire Line
+	5200 1400 5300 1500
+Entry Wire Line
+	5200 1500 5300 1600
+Entry Wire Line
+	5200 1600 5300 1700
+Entry Wire Line
+	5200 1700 5300 1800
+Entry Wire Line
+	5200 1800 5300 1900
+Entry Wire Line
+	5200 1900 5300 2000
+Entry Wire Line
+	5200 2000 5300 2100
+Entry Wire Line
+	5200 2100 5300 2200
+Entry Wire Line
+	5200 3100 5300 3200
+Entry Wire Line
+	5200 3200 5300 3300
+Entry Wire Line
+	5200 3300 5300 3400
+Entry Wire Line
+	5200 3400 5300 3500
+Entry Wire Line
+	5200 3500 5300 3600
+Entry Wire Line
+	5200 3600 5300 3700
+Entry Wire Line
+	5200 3700 5300 3800
+Entry Wire Line
+	5200 3800 5300 3900
+Wire Wire Line
+	4600 1400 5200 1400
+Wire Wire Line
+	5200 1500 4600 1500
+Wire Wire Line
+	4600 1600 5200 1600
+Wire Wire Line
+	5200 1700 4600 1700
+Wire Wire Line
+	4600 1800 5200 1800
+Wire Wire Line
+	5200 1900 4600 1900
+Wire Wire Line
+	4600 2000 5200 2000
+Wire Wire Line
+	5200 2100 4600 2100
+Wire Wire Line
+	4600 3100 5200 3100
+Wire Wire Line
+	5200 3200 4600 3200
+Wire Wire Line
+	4600 3300 5200 3300
+Wire Wire Line
+	5200 3400 4600 3400
+Wire Wire Line
+	4600 3500 5200 3500
+Wire Wire Line
+	5200 3600 4600 3600
+Wire Wire Line
+	4600 3700 5200 3700
+Wire Wire Line
+	5200 3800 4600 3800
+Entry Wire Line
+	3100 2200 3200 2300
+Wire Wire Line
+	3000 2200 3100 2200
+Entry Wire Line
+	3100 2300 3200 2400
+Entry Wire Line
+	3100 2400 3200 2500
+Entry Wire Line
+	3100 2500 3200 2600
+Wire Wire Line
+	3000 2300 3100 2300
+Wire Wire Line
+	3000 2400 3100 2400
+Wire Wire Line
+	3000 2500 3100 2500
+Entry Wire Line
+	3100 2700 3200 2800
+Entry Wire Line
+	3100 2800 3200 2900
+Wire Wire Line
+	3000 2700 3100 2700
+Wire Wire Line
+	3000 2800 3100 2800
+$Comp
+L Device:C C?
+U 1 1 628DDE76
+P 1600 6900
+AR Path="/626516AA/628DDE76" Ref="C?"  Part="1" 
+AR Path="/627EA631/628DDE76" Ref="C?"  Part="1" 
+F 0 "C?" H 1715 6946 50  0000 L CNN
+F 1 "100nF" H 1715 6855 50  0000 L CNN
+F 2 "" H 1638 6750 50  0001 C CNN
+F 3 "~" H 1600 6900 50  0001 C CNN
+	1    1600 6900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 628DDE7C
+P 1600 7300
+AR Path="/626516AA/628DDE7C" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628DDE7C" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1600 7050 50  0001 C CNN
+F 1 "GND" H 1605 7127 50  0001 C CNN
+F 2 "" H 1600 7300 50  0001 C CNN
+F 3 "" H 1600 7300 50  0001 C CNN
+	1    1600 7300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1600 7300 1600 7200
+Wire Wire Line
+	1600 6750 1600 6600
+$Comp
+L power:VCC #PWR?
+U 1 1 628DDE84
+P 1600 6500
+AR Path="/626516AA/628DDE84" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628DDE84" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 1600 6350 50  0001 C CNN
+F 1 "VCC" H 1599 6645 50  0000 C CNN
+F 2 "" H 1600 6500 50  0001 C CNN
+F 3 "" H 1600 6500 50  0001 C CNN
+	1    1600 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 628DDE8A
+P 2100 6900
+AR Path="/626516AA/628DDE8A" Ref="C?"  Part="1" 
+AR Path="/627EA631/628DDE8A" Ref="C?"  Part="1" 
+F 0 "C?" H 2215 6946 50  0000 L CNN
+F 1 "100nF" H 2215 6855 50  0000 L CNN
+F 2 "" H 2138 6750 50  0001 C CNN
+F 3 "~" H 2100 6900 50  0001 C CNN
+	1    2100 6900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 628DDE90
+P 2600 6900
+AR Path="/626516AA/628DDE90" Ref="C?"  Part="1" 
+AR Path="/627EA631/628DDE90" Ref="C?"  Part="1" 
+F 0 "C?" H 2715 6946 50  0000 L CNN
+F 1 "100nF" H 2715 6855 50  0000 L CNN
+F 2 "" H 2638 6750 50  0001 C CNN
+F 3 "~" H 2600 6900 50  0001 C CNN
+	1    2600 6900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2600 6750 2600 6600
+Wire Wire Line
+	1600 6600 2100 6600
+Connection ~ 1600 6600
+Wire Wire Line
+	1600 6600 1600 6500
+Wire Wire Line
+	1600 7200 2100 7200
+Connection ~ 1600 7200
+Wire Wire Line
+	1600 7200 1600 7050
+Wire Wire Line
+	2600 7200 2600 7050
+Wire Wire Line
+	2100 6750 2100 6600
+Connection ~ 2100 6600
+Wire Wire Line
+	2100 6600 2600 6600
+Wire Wire Line
+	2100 7050 2100 7200
+Connection ~ 2100 7200
+Wire Wire Line
+	2100 7200 2600 7200
+Text Label 3300 1400 0    50   ~ 0
+DSIN
+Text Label 3300 1600 0    50   ~ 0
+DCLK
+Text Label 3300 3300 0    50   ~ 0
+DCLK
+Text Label 3300 1700 0    50   ~ 0
+~DCLR~
+Text Label 3300 3400 0    50   ~ 0
+~DCLR~
+Text Label 3300 1900 0    50   ~ 0
+DRCK
+Text Label 3300 3600 0    50   ~ 0
+DRCK
+Entry Wire Line
+	3200 3600 3300 3700
+Entry Wire Line
+	3200 1900 3300 2000
+Wire Wire Line
+	3300 2000 3800 2000
+Wire Wire Line
+	3300 3700 3800 3700
+Text Label 3300 2000 0    50   ~ 0
+OE
+Text Label 3300 3700 0    50   ~ 0
+OE
+Text Label 5200 1400 2    50   ~ 0
+D0
+Text Label 5200 1500 2    50   ~ 0
+D1
+Text Label 5200 1600 2    50   ~ 0
+D2
+Text Label 5200 1700 2    50   ~ 0
+D3
+Text Label 5200 1800 2    50   ~ 0
+D4
+Text Label 5200 1900 2    50   ~ 0
+D5
+Text Label 5200 2000 2    50   ~ 0
+D6
+Text Label 5200 2100 2    50   ~ 0
+D7
+Text Label 5200 3100 2    50   ~ 0
+D8
+Text Label 5200 3200 2    50   ~ 0
+D9
+Text Label 5200 3300 2    50   ~ 0
+D10
+Text Label 5200 3400 2    50   ~ 0
+D11
+Text Label 5200 3500 2    50   ~ 0
+D12
+Text Label 5200 3600 2    50   ~ 0
+D13
+Text Label 5200 3700 2    50   ~ 0
+D14
+Text Label 5200 3800 2    50   ~ 0
+D15
+Text HLabel 3000 2200 0    50   Input ~ 0
+DSIN
+Text HLabel 3000 2300 0    50   Input ~ 0
+DCLK
+Text HLabel 3000 2400 0    50   Input ~ 0
+~DCLR~
+Text HLabel 3000 2500 0    50   Input ~ 0
+DRCK
+Text HLabel 3000 2700 0    50   Input ~ 0
+OE
+$Comp
+L 74xx:74HC165 U?
+U 1 1 628F7770
+P 6500 2000
+F 0 "U?" H 6100 2900 50  0000 C CNN
+F 1 "74HC165" H 6100 2800 50  0000 C CNN
+F 2 "" H 6500 2000 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT165.pdf" H 6500 2000 50  0001 C CNN
+	1    6500 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 628F9955
+P 6500 3000
+AR Path="/626516AA/628F9955" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628F9955" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6500 2750 50  0001 C CNN
+F 1 "GND" H 6505 2827 50  0001 C CNN
+F 2 "" H 6500 3000 50  0001 C CNN
+F 3 "" H 6500 3000 50  0001 C CNN
+	1    6500 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 628FB231
+P 6500 1100
+AR Path="/626516AA/628FB231" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628FB231" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6500 950 50  0001 C CNN
+F 1 "VCC" H 6503 1248 50  0000 C CNN
+F 2 "" H 6500 1100 50  0001 C CNN
+F 3 "" H 6500 1100 50  0001 C CNN
+	1    6500 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L 74xx:74HC165 U?
+U 1 1 628FD34E
+P 6500 4300
+F 0 "U?" H 6100 5200 50  0000 C CNN
+F 1 "74HC165" H 6100 5100 50  0000 C CNN
+F 2 "" H 6500 4300 50  0001 C CNN
+F 3 "https://assets.nexperia.com/documents/data-sheet/74HC_HCT165.pdf" H 6500 4300 50  0001 C CNN
+	1    6500 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 628FD354
+P 6500 5300
+AR Path="/626516AA/628FD354" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628FD354" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6500 5050 50  0001 C CNN
+F 1 "GND" H 6505 5127 50  0001 C CNN
+F 2 "" H 6500 5300 50  0001 C CNN
+F 3 "" H 6500 5300 50  0001 C CNN
+	1    6500 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VCC #PWR?
+U 1 1 628FD35A
+P 6500 3400
+AR Path="/626516AA/628FD35A" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628FD35A" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 6500 3250 50  0001 C CNN
+F 1 "VCC" H 6503 3548 50  0000 C CNN
+F 2 "" H 6500 3400 50  0001 C CNN
+F 3 "" H 6500 3400 50  0001 C CNN
+	1    6500 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7000 1400 7200 1400
+Wire Wire Line
+	7200 1400 7200 3200
+Wire Wire Line
+	7200 3200 5800 3200
+Wire Wire Line
+	5800 3200 5800 3700
+Wire Wire Line
+	5800 3700 6000 3700
+$Comp
+L power:GND #PWR?
+U 1 1 628FFA20
+P 5900 5300
+AR Path="/626516AA/628FFA20" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628FFA20" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5900 5050 50  0001 C CNN
+F 1 "GND" H 5905 5127 50  0001 C CNN
+F 2 "" H 5900 5300 50  0001 C CNN
+F 3 "" H 5900 5300 50  0001 C CNN
+	1    5900 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 628FFDD1
+P 5900 3000
+AR Path="/626516AA/628FFDD1" Ref="#PWR?"  Part="1" 
+AR Path="/627EA631/628FFDD1" Ref="#PWR?"  Part="1" 
+F 0 "#PWR?" H 5900 2750 50  0001 C CNN
+F 1 "GND" H 5905 2827 50  0001 C CNN
+F 2 "" H 5900 3000 50  0001 C CNN
+F 3 "" H 5900 3000 50  0001 C CNN
+	1    5900 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5900 3000 5900 2700
+Wire Wire Line
+	5900 2700 6000 2700
+Wire Wire Line
+	5900 5300 5900 5000
+Wire Wire Line
+	5900 5000 6000 5000
+Wire Wire Line
+	6000 1400 5900 1400
+Wire Wire Line
+	5900 1400 5900 2700
+Connection ~ 5900 2700
+Entry Wire Line
+	5300 1400 5400 1500
+Entry Wire Line
+	5300 1500 5400 1600
+Entry Wire Line
+	5300 1600 5400 1700
+Entry Wire Line
+	5300 1700 5400 1800
+Entry Wire Line
+	5300 1800 5400 1900
+Entry Wire Line
+	5300 1900 5400 2000
+Entry Wire Line
+	5300 2000 5400 2100
+Entry Wire Line
+	5300 2100 5400 2200
+Entry Wire Line
+	5300 3700 5400 3800
+Entry Wire Line
+	5300 3800 5400 3900
+Entry Wire Line
+	5300 3900 5400 4000
+Entry Wire Line
+	5300 4000 5400 4100
+Entry Wire Line
+	5300 4100 5400 4200
+Entry Wire Line
+	5300 4200 5400 4300
+Entry Wire Line
+	5300 4300 5400 4400
+Entry Wire Line
+	5300 4400 5400 4500
+Entry Wire Line
+	8200 3700 8300 3800
+Entry Wire Line
+	5300 4600 5400 4700
+Entry Wire Line
+	5300 4800 5400 4900
+Entry Wire Line
+	5300 2300 5400 2400
+Entry Wire Line
+	5300 2500 5400 2600
+Wire Wire Line
+	6000 3800 5400 3800
+Wire Wire Line
+	5400 3900 6000 3900
+Wire Wire Line
+	6000 4000 5400 4000
+Wire Wire Line
+	5400 4100 6000 4100
+Wire Wire Line
+	6000 4200 5400 4200
+Wire Wire Line
+	5400 4300 6000 4300
+Wire Wire Line
+	6000 4400 5400 4400
+Wire Wire Line
+	5400 4500 6000 4500
+Wire Wire Line
+	5400 4700 6000 4700
+Wire Wire Line
+	5400 4900 6000 4900
+Wire Wire Line
+	6000 2600 5400 2600
+Wire Wire Line
+	5400 2400 6000 2400
+Wire Wire Line
+	6000 2200 5400 2200
+Wire Wire Line
+	5400 2100 6000 2100
+Wire Wire Line
+	6000 2000 5400 2000
+Wire Wire Line
+	5400 1900 6000 1900
+Wire Wire Line
+	6000 1800 5400 1800
+Wire Wire Line
+	5400 1700 6000 1700
+Wire Wire Line
+	6000 1600 5400 1600
+Wire Wire Line
+	5400 1500 6000 1500
+Text Label 5400 4500 0    50   ~ 0
+D0
+Text Label 5400 4400 0    50   ~ 0
+D1
+Text Label 5400 4300 0    50   ~ 0
+D2
+Text Label 5400 4200 0    50   ~ 0
+D3
+Text Label 5400 4100 0    50   ~ 0
+D4
+Text Label 5400 4000 0    50   ~ 0
+D5
+Text Label 5400 3900 0    50   ~ 0
+D6
+Text Label 5400 3800 0    50   ~ 0
+D7
+Text Label 5400 2200 0    50   ~ 0
+D8
+Text Label 5400 2100 0    50   ~ 0
+D9
+Text Label 5400 2000 0    50   ~ 0
+D10
+Text Label 5400 1900 0    50   ~ 0
+D11
+Text Label 5400 1800 0    50   ~ 0
+D12
+Text Label 5400 1700 0    50   ~ 0
+D13
+Text Label 5400 1600 0    50   ~ 0
+D14
+Text Label 5400 1500 0    50   ~ 0
+D15
+Text Label 5400 2600 0    50   ~ 0
+DCLK
+Text Label 5400 4900 0    50   ~ 0
+DCLK
+Text Label 5400 2400 0    50   ~ 0
+~DCLR~
+Text Label 5400 4700 0    50   ~ 0
+~DCLR~
+Text HLabel 3000 2800 0    50   Output ~ 0
+DSOUT
+Wire Bus Line
+	5300 900  3200 900 
+$Comp
+L Device:C C?
+U 1 1 62935E88
+P 3100 6900
+AR Path="/626516AA/62935E88" Ref="C?"  Part="1" 
+AR Path="/627EA631/62935E88" Ref="C?"  Part="1" 
+F 0 "C?" H 3215 6946 50  0000 L CNN
+F 1 "100nF" H 3215 6855 50  0000 L CNN
+F 2 "" H 3138 6750 50  0001 C CNN
+F 3 "~" H 3100 6900 50  0001 C CNN
+	1    3100 6900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2600 7200 3100 7200
+Wire Wire Line
+	3100 7200 3100 7050
+Connection ~ 2600 7200
+Wire Wire Line
+	2600 6600 3100 6600
+Wire Wire Line
+	3100 6600 3100 6750
+Connection ~ 2600 6600
+$Comp
+L Transistor_BJT:BC547 Q?
+U 1 1 6293B8A7
+P 7400 3600
+F 0 "Q?" V 7635 3600 50  0000 C CNN
+F 1 "BC547" V 7726 3600 50  0000 C CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 7600 3525 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/BC550-D.pdf" H 7400 3600 50  0001 L CNN
+	1    7400 3600
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6293C506
+P 7400 3200
+F 0 "R?" H 7470 3246 50  0000 L CNN
+F 1 "1K" H 7470 3155 50  0000 L CNN
+F 2 "" V 7330 3200 50  0001 C CNN
+F 3 "~" H 7400 3200 50  0001 C CNN
+	1    7400 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 6293C827
+P 7400 3000
+F 0 "#PWR?" H 7400 2850 50  0001 C CNN
+F 1 "+3V3" H 7415 3173 50  0000 C CNN
+F 2 "" H 7400 3000 50  0001 C CNN
+F 3 "" H 7400 3000 50  0001 C CNN
+	1    7400 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6293CDC3
+P 7700 3200
+F 0 "R?" H 7770 3246 50  0000 L CNN
+F 1 "4K7" H 7770 3155 50  0000 L CNN
+F 2 "" V 7630 3200 50  0001 C CNN
+F 3 "~" H 7700 3200 50  0001 C CNN
+	1    7700 3200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR?
+U 1 1 6295E6E3
+P 7700 3000
+F 0 "#PWR?" H 7700 2850 50  0001 C CNN
+F 1 "+3V3" H 7715 3173 50  0000 C CNN
+F 2 "" H 7700 3000 50  0001 C CNN
+F 3 "" H 7700 3000 50  0001 C CNN
+	1    7700 3000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 3700 7700 3700
+Wire Wire Line
+	7000 3700 7200 3700
+Wire Wire Line
+	7700 3700 7700 3350
+Wire Wire Line
+	7400 3400 7400 3350
+Wire Wire Line
+	7700 3000 7700 3050
+Wire Wire Line
+	7400 3000 7400 3050
+Text Label 8200 3700 2    50   ~ 0
+DSOUT
+Wire Wire Line
+	7700 3700 8200 3700
+Connection ~ 7700 3700
+Wire Bus Line
+	5300 900  8300 900 
+Connection ~ 5300 900 
+Text HLabel 8600 1400 2    50   BiDi ~ 0
+D0
+Text HLabel 8600 1500 2    50   BiDi ~ 0
+D1
+Text HLabel 8600 1600 2    50   BiDi ~ 0
+D2
+Text HLabel 8600 1700 2    50   BiDi ~ 0
+D3
+Text HLabel 8600 1800 2    50   BiDi ~ 0
+D4
+Text HLabel 8600 1900 2    50   BiDi ~ 0
+D5
+Text HLabel 8600 2000 2    50   BiDi ~ 0
+D6
+Text HLabel 8600 2100 2    50   BiDi ~ 0
+D7
+Text HLabel 8600 2200 2    50   BiDi ~ 0
+D8
+Text HLabel 8600 2300 2    50   BiDi ~ 0
+D9
+Text HLabel 8600 2400 2    50   BiDi ~ 0
+D10
+Text HLabel 8600 2500 2    50   BiDi ~ 0
+D11
+Text HLabel 8600 2600 2    50   BiDi ~ 0
+D12
+Text HLabel 8600 2700 2    50   BiDi ~ 0
+D13
+Text HLabel 8600 2800 2    50   BiDi ~ 0
+D14
+Text HLabel 8600 2900 2    50   BiDi ~ 0
+D15
+Entry Wire Line
+	8300 1300 8400 1400
+Entry Wire Line
+	8300 1400 8400 1500
+Entry Wire Line
+	8300 1500 8400 1600
+Entry Wire Line
+	8300 1600 8400 1700
+Entry Wire Line
+	8300 1800 8400 1900
+Entry Wire Line
+	8300 1700 8400 1800
+Entry Wire Line
+	8300 1900 8400 2000
+Entry Wire Line
+	8300 2000 8400 2100
+Entry Wire Line
+	8300 2200 8400 2300
+Entry Wire Line
+	8300 2100 8400 2200
+Entry Wire Line
+	8300 2300 8400 2400
+Entry Wire Line
+	8300 2400 8400 2500
+Entry Wire Line
+	8300 2500 8400 2600
+Entry Wire Line
+	8300 2600 8400 2700
+Entry Wire Line
+	8300 2700 8400 2800
+Entry Wire Line
+	8300 2800 8400 2900
+Wire Wire Line
+	8400 1400 8600 1400
+Wire Wire Line
+	8400 1500 8600 1500
+Wire Wire Line
+	8400 1600 8600 1600
+Wire Wire Line
+	8400 1700 8600 1700
+Wire Wire Line
+	8400 1800 8600 1800
+Wire Wire Line
+	8400 1900 8600 1900
+Wire Wire Line
+	8400 2000 8600 2000
+Wire Wire Line
+	8400 2100 8600 2100
+Wire Wire Line
+	8400 2200 8600 2200
+Wire Wire Line
+	8400 2300 8600 2300
+Wire Wire Line
+	8400 2400 8600 2400
+Wire Wire Line
+	8400 2500 8600 2500
+Wire Wire Line
+	8400 2600 8600 2600
+Wire Wire Line
+	8400 2700 8600 2700
+Wire Wire Line
+	8400 2800 8600 2800
+Wire Wire Line
+	8400 2900 8600 2900
+Wire Bus Line
+	8300 900  8300 5500
+Wire Bus Line
+	3200 900  3200 5500
+Wire Bus Line
+	5300 900  5300 5500
+$EndSCHEMATC

@@ -1,7 +1,7 @@
-# USB Flash/EPROM Programmer
+# <img align="left" src="images/icon.png" alt="usbflashprog" title="usbflashprog">USB Flash/EPROM Programmer
 A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to PC by USB port.
 
-Project site: [USB Flash/EPROM Programmer](https://www.robsonmartins.com/content/eletr/projects/usbflashprog/)
+Project site: [USB Flash/EPROM Programmer](https://usbflashprog.robsonmartins.com)
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 

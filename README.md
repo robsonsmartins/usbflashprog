@@ -1,4 +1,4 @@
-# <img align="left" src="images/icon.png" alt="usbflashprog" title="usbflashprog">USB Flash/EPROM Programmer
+# <img align="left" src="/images/icon.png" alt="usbflashprog" title="usbflashprog">USB Flash/EPROM Programmer
 A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to PC by USB port.
 
 [![Latest Tag][tag-shield]][tag-url]

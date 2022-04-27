@@ -6,7 +6,7 @@
 
   (title_block
     (title "USB Flash/EPROM Programmer")
-    (date "2022-04-23")
+    (date "2022-04-27")
     (rev "v0.1.0 rev.E")
     (company "Robson Martins")
     (comment 1 "https://usbflashprog.robsonmartins.com")
@@ -2986,9 +2986,19 @@
     (effects (font (size 1.27 1.27)) (justify left bottom))
     (uuid 9f0ccf61-eeea-43ae-a1a0-cfbbe20f7b2f)
   )
+  (text "ALL CAPACITORS, EXCEPT THE ELECTROLYTIC, ARE OF THE CERAMIC TYPE."
+    (at 283.21 160.02 0)
+    (effects (font (size 1.016 1.016)) (justify right bottom))
+    (uuid a01eb089-caf7-4be5-8795-4e02a73c1c22)
+  )
   (text "VDD" (at 228.6 53.34 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid a48b449b-6de9-40a5-8212-aa178ee29b25)
+  )
+  (text "ALL RESISTORS, EXCEPT AS INDICATED, ARE 1/8W, 10% TOLERANCE."
+    (at 283.21 165.1 0)
+    (effects (font (size 1.016 1.016)) (justify right bottom))
+    (uuid b47a41eb-6c33-4519-8949-2ee12b7853bf)
   )
   (text "*NC" (at 152.4 50.8 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
@@ -3033,6 +3043,11 @@
   (text "VSS" (at 228.6 33.02 180)
     (effects (font (size 1.27 1.27)) (justify right bottom))
     (uuid f1a50dd1-3f8c-4d03-a136-4e90ea20fb06)
+  )
+  (text "ALL ELECTROLYTIC CAPACITORS, EXCEPT AS INDICATED, ARE 16V."
+    (at 283.21 162.56 0)
+    (effects (font (size 1.016 1.016)) (justify right bottom))
+    (uuid fa4de52f-10f7-4f11-b19f-4b87abd5fc6f)
   )
 
   (label "D7" (at 152.4 81.28 0)

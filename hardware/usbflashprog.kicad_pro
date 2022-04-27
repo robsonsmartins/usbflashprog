@@ -457,5 +457,7 @@
       "Serial Bus"
     ]
   ],
-  "text_variables": {}
+  "text_variables": {
+    "AUTHOR": "Robson Martins"
+  }
 }

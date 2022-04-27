@@ -4,11 +4,13 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 ## Documentation
 
+### Specifications
+
+The most up-to-date project specifications can be accessed here: [Specifications of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/doc/specs.pdf).
+
+## Software versions
+
 The following software (open source/freeware and multiplatform) were used to write the documentation:
 
 - [LibreOffice](https://www.libreoffice.org/), version 7.3.2.2.
 - [yEd Graph Editor](https://www.yworks.com/products/yed), version 3.22.
-
-## Specifications
-
-The most up-to-date project specifications can be accessed here: [Specifications of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/doc/specs.pdf).

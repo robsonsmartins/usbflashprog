@@ -3542,7 +3542,7 @@
     (property "Value" "10uF" (id 1) (at 216.3572 148.463 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm" (id 2) (at 214.3252 151.13 0)
+    (property "Footprint" "" (id 2) (at 214.3252 151.13 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 213.36 147.32 0)
@@ -3561,7 +3561,7 @@
     (property "Value" "10uF" (id 1) (at 254.4572 143.383 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm" (id 2) (at 252.4252 146.05 0)
+    (property "Footprint" "" (id 2) (at 252.4252 146.05 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 251.46 142.24 0)
@@ -4786,28 +4786,28 @@
       (reference "#PWR0111") (unit 1) (value "GND") (footprint "")
     )
     (path "/00000000-0000-0000-0000-0000626538df"
-      (reference "C1") (unit 1) (value "10uF") (footprint "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm")
+      (reference "C1") (unit 1) (value "10uF") (footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm")
     )
     (path "/00000000-0000-0000-0000-0000626542c9"
-      (reference "C2") (unit 1) (value "10uF") (footprint "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm")
+      (reference "C2") (unit 1) (value "10uF") (footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm")
     )
     (path "/00000000-0000-0000-0000-00006265f2db"
       (reference "C3") (unit 1) (value "100nF") (footprint "Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm")
     )
     (path "/00000000-0000-0000-0000-0000626cc8f1/00000000-0000-0000-0000-0000626ea7f4"
-      (reference "C4") (unit 1) (value "470uF") (footprint "Capacitor_THT:CP_Radial_D10.0mm_P7.50mm")
+      (reference "C4") (unit 1) (value "470uF") (footprint "Capacitor_THT:CP_Radial_D8.0mm_P3.80mm")
     )
     (path "/00000000-0000-0000-0000-0000626cc8f1/00000000-0000-0000-0000-0000626ea7fa"
       (reference "C5") (unit 1) (value "100nF") (footprint "Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm")
     )
     (path "/00000000-0000-0000-0000-0000626cc8f1/00000000-0000-0000-0000-0000627c025d"
-      (reference "C6") (unit 1) (value "22uF") (footprint "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm")
+      (reference "C6") (unit 1) (value "22uF") (footprint "Capacitor_THT:CP_Radial_D5.0mm_P2.50mm")
     )
     (path "/00000000-0000-0000-0000-00006268ec8d/00000000-0000-0000-0000-000062672922"
       (reference "C7") (unit 1) (value "100nF") (footprint "Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm")
     )
     (path "/00000000-0000-0000-0000-00006268ec8d/00000000-0000-0000-0000-000062694864"
-      (reference "C8") (unit 1) (value "100uF") (footprint "Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm")
+      (reference "C8") (unit 1) (value "100uF") (footprint "Capacitor_THT:CP_Radial_D8.0mm_P3.50mm")
     )
     (path "/00000000-0000-0000-0000-00006268ec8d/00000000-0000-0000-0000-000062694ee8"
       (reference "C9") (unit 1) (value "100nF") (footprint "Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm")
@@ -4912,7 +4912,7 @@
       (reference "L1") (unit 1) (value "100uH") (footprint "Inductor_THT:L_Toroid_Vertical_L13.0mm_W6.5mm_P5.60mm")
     )
     (path "/00000000-0000-0000-0000-00006268ec8d/00000000-0000-0000-0000-000062697554"
-      (reference "L2") (unit 1) (value "300uH") (footprint "Inductor_THT:L_Toroid_Vertical_L16.0mm_W8.0mm_P7.62mm")
+      (reference "L2") (unit 1) (value "300uH") (footprint "Inductor_THT:L_Toroid_Vertical_L13.0mm_W6.5mm_P5.60mm")
     )
     (path "/00000000-0000-0000-0000-0000626cc8f1/00000000-0000-0000-0000-0000626ef1cc"
       (reference "Q1") (unit 1) (value "BC547") (footprint "Package_TO_SOT_THT:TO-92_Inline_Wide")
@@ -5116,7 +5116,7 @@
       (reference "R51") (unit 1) (value "100R") (footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-0000627eb794/3cd54b60-8f9b-46d2-82ca-584e18d4e3bd"
-      (reference "R52") (unit 1) (value "560R") (footprint "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal")
+      (reference "R52") (unit 1) (value "560R") (footprint "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P15.24mm_Horizontal")
     )
     (path "/00000000-0000-0000-0000-000062654db0"
       (reference "U1") (unit 1) (value "7809") (footprint "Package_TO_SOT_THT:TO-220-3_Vertical")

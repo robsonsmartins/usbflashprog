@@ -2,14 +2,15 @@
 <export version="E">
   <design>
     <source>E:\Users\Robson\Documentos\Pagina Robson\github\usbflashprog\hardware\usbflashprog.kicad_sch</source>
-    <date>26/04/2022 20:40:26</date>
+    <date>27/04/2022 23:32:14</date>
     <tool>Eeschema (6.0.4)</tool>
+    <textvar name="AUTHOR">Robson Martins</textvar>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>usbflashprog.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -27,7 +28,7 @@
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>vdd_generator.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -45,7 +46,7 @@
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>vpp_generator.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -63,7 +64,7 @@
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>cpu.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -81,7 +82,7 @@
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>address_bus.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -99,7 +100,7 @@
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>control_signals.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -117,7 +118,7 @@
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>data_bus.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -135,7 +136,7 @@
         <title>USB Flash/EPROM Programmer</title>
         <company>Robson Martins</company>
         <rev>v0.1.0 rev.E</rev>
-        <date>2022-04-23</date>
+        <date>2022-04-27</date>
         <source>serial_bus.kicad_sch</source>
         <comment number="1" value="https://usbflashprog.robsonmartins.com"/>
         <comment number="2" value=""/>
@@ -152,7 +153,7 @@
   <components>
     <comp ref="C1">
       <value>10uF</value>
-      <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
       <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="usbflashprog.kicad_sch"/>
@@ -161,7 +162,7 @@
     </comp>
     <comp ref="C2">
       <value>10uF</value>
-      <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
       <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="usbflashprog.kicad_sch"/>
@@ -170,7 +171,7 @@
     </comp>
     <comp ref="C3">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="usbflashprog.kicad_sch"/>
@@ -237,7 +238,7 @@
     </comp>
     <comp ref="J2">
       <value>Parallel Adapter</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x24_P2.54mm_Vertical</footprint>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_2x24_P2.54mm_Vertical</footprint>
       <libsource lib="Connector_Generic" part="Conn_02x24_Odd_Even" description="Generic connector, double row, 02x24, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="usbflashprog.kicad_sch"/>
@@ -246,7 +247,7 @@
     </comp>
     <comp ref="J3">
       <value>Serial Adapter</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Vertical</footprint>
+      <footprint>Connector_PinSocket_2.54mm:PinSocket_2x10_P2.54mm_Vertical</footprint>
       <libsource lib="Connector_Generic" part="Conn_02x10_Odd_Even" description="Generic connector, double row, 02x10, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="usbflashprog.kicad_sch"/>
@@ -255,7 +256,7 @@
     </comp>
     <comp ref="R1">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="usbflashprog.kicad_sch"/>
@@ -274,7 +275,7 @@
     </comp>
     <comp ref="C4">
       <value>470uF</value>
-      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P7.50mm</footprint>
       <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -283,7 +284,7 @@
     </comp>
     <comp ref="C5">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -292,7 +293,7 @@
     </comp>
     <comp ref="C6">
       <value>22uF</value>
-      <footprint>Capacitor_THT:CP_Radial_D5.0mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:CP_Radial_D8.0mm_P3.50mm</footprint>
       <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -389,7 +390,7 @@
     </comp>
     <comp ref="R2">
       <value>100R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -398,7 +399,7 @@
     </comp>
     <comp ref="R3">
       <value>1K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -407,7 +408,7 @@
     </comp>
     <comp ref="R4">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -416,7 +417,7 @@
     </comp>
     <comp ref="R5">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -425,7 +426,7 @@
     </comp>
     <comp ref="R6">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -434,7 +435,7 @@
     </comp>
     <comp ref="R7">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -443,7 +444,7 @@
     </comp>
     <comp ref="R8">
       <value>1K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -452,7 +453,7 @@
     </comp>
     <comp ref="R9">
       <value>470R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -461,7 +462,7 @@
     </comp>
     <comp ref="R10">
       <value>330R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -470,7 +471,7 @@
     </comp>
     <comp ref="R11">
       <value>100R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -479,7 +480,7 @@
     </comp>
     <comp ref="R12">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -488,7 +489,7 @@
     </comp>
     <comp ref="R13">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -497,7 +498,7 @@
     </comp>
     <comp ref="R14">
       <value>10K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VDD Generator"/>
       <property name="Sheetfile" value="vdd_generator.kicad_sch"/>
@@ -516,7 +517,7 @@
     </comp>
     <comp ref="C7">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -525,7 +526,7 @@
     </comp>
     <comp ref="C8">
       <value>100uF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C_Polarized" description="Polarized capacitor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -534,7 +535,7 @@
     </comp>
     <comp ref="C9">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -591,7 +592,7 @@
     </comp>
     <comp ref="R15">
       <value>100R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -600,7 +601,7 @@
     </comp>
     <comp ref="R16">
       <value>220R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -609,7 +610,7 @@
     </comp>
     <comp ref="R17">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -618,7 +619,7 @@
     </comp>
     <comp ref="R18">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -627,7 +628,7 @@
     </comp>
     <comp ref="R19">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -636,7 +637,7 @@
     </comp>
     <comp ref="R20">
       <value>3K9</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -645,7 +646,7 @@
     </comp>
     <comp ref="R21">
       <value>470R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="VPP Generator"/>
       <property name="Sheetfile" value="vpp_generator.kicad_sch"/>
@@ -654,7 +655,7 @@
     </comp>
     <comp ref="C10">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="CPU"/>
       <property name="Sheetfile" value="cpu.kicad_sch"/>
@@ -663,7 +664,7 @@
     </comp>
     <comp ref="R22">
       <value>1K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="CPU"/>
       <property name="Sheetfile" value="cpu.kicad_sch"/>
@@ -691,7 +692,7 @@
     </comp>
     <comp ref="C11">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -700,7 +701,7 @@
     </comp>
     <comp ref="C12">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -709,7 +710,7 @@
     </comp>
     <comp ref="C13">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -758,7 +759,7 @@
     </comp>
     <comp ref="R23">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -767,7 +768,7 @@
     </comp>
     <comp ref="R24">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -776,7 +777,7 @@
     </comp>
     <comp ref="R25">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -785,7 +786,7 @@
     </comp>
     <comp ref="R26">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -794,7 +795,7 @@
     </comp>
     <comp ref="R27">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -803,7 +804,7 @@
     </comp>
     <comp ref="R28">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Address Bus"/>
       <property name="Sheetfile" value="address_bus.kicad_sch"/>
@@ -842,7 +843,7 @@
     </comp>
     <comp ref="C14">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -941,7 +942,7 @@
     </comp>
     <comp ref="R29">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -950,7 +951,7 @@
     </comp>
     <comp ref="R30">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -959,7 +960,7 @@
     </comp>
     <comp ref="R31">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -968,7 +969,7 @@
     </comp>
     <comp ref="R32">
       <value>10K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -977,7 +978,7 @@
     </comp>
     <comp ref="R33">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -986,7 +987,7 @@
     </comp>
     <comp ref="R34">
       <value>470R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -995,7 +996,7 @@
     </comp>
     <comp ref="R35">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1004,7 +1005,7 @@
     </comp>
     <comp ref="R36">
       <value>470R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1013,7 +1014,7 @@
     </comp>
     <comp ref="R37">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1022,7 +1023,7 @@
     </comp>
     <comp ref="R38">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1031,7 +1032,7 @@
     </comp>
     <comp ref="R39">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1040,7 +1041,7 @@
     </comp>
     <comp ref="R40">
       <value>100R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1049,7 +1050,7 @@
     </comp>
     <comp ref="R41">
       <value>470R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1058,7 +1059,7 @@
     </comp>
     <comp ref="R42">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
@@ -1073,11 +1074,11 @@
       <property name="Sheetname" value="Control Signals"/>
       <property name="Sheetfile" value="control_signals.kicad_sch"/>
       <sheetpath names="/Control Signals/" tstamps="/00000000-0000-0000-0000-0000627eb55b/"/>
-      <tstamps>00000000-0000-0000-0000-0000628381c2 00000000-0000-0000-0000-0000628175d5 00000000-0000-0000-0000-00006280d3ea 00000000-0000-0000-0000-00006281758c 00000000-0000-0000-0000-00006288a0e5 00000000-0000-0000-0000-00006280aec2</tstamps>
+      <tstamps>00000000-0000-0000-0000-00006281758c 00000000-0000-0000-0000-00006288a0e5 00000000-0000-0000-0000-00006280d3ea 00000000-0000-0000-0000-0000628175d5 00000000-0000-0000-0000-0000628381c2 00000000-0000-0000-0000-00006280aec2</tstamps>
     </comp>
     <comp ref="C15">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Data Bus"/>
       <property name="Sheetfile" value="data_bus.kicad_sch"/>
@@ -1086,7 +1087,7 @@
     </comp>
     <comp ref="C16">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Data Bus"/>
       <property name="Sheetfile" value="data_bus.kicad_sch"/>
@@ -1095,7 +1096,7 @@
     </comp>
     <comp ref="C17">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Data Bus"/>
       <property name="Sheetfile" value="data_bus.kicad_sch"/>
@@ -1104,7 +1105,7 @@
     </comp>
     <comp ref="C18">
       <value>100nF</value>
-      <footprint>Capacitor_THT:C_Disc_D5.0mm_W2.5mm_P2.50mm</footprint>
+      <footprint>Capacitor_THT:C_Disc_D6.0mm_W2.5mm_P5.00mm</footprint>
       <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
       <property name="Sheetname" value="Data Bus"/>
       <property name="Sheetfile" value="data_bus.kicad_sch"/>
@@ -1123,7 +1124,7 @@
     </comp>
     <comp ref="R43">
       <value>1K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Data Bus"/>
       <property name="Sheetfile" value="data_bus.kicad_sch"/>
@@ -1132,7 +1133,7 @@
     </comp>
     <comp ref="R44">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Data Bus"/>
       <property name="Sheetfile" value="data_bus.kicad_sch"/>
@@ -1231,7 +1232,7 @@
     </comp>
     <comp ref="R45">
       <value>1K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -1240,7 +1241,7 @@
     </comp>
     <comp ref="R46">
       <value>4K7</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -1249,7 +1250,7 @@
     </comp>
     <comp ref="R47">
       <value>1K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -1258,7 +1259,7 @@
     </comp>
     <comp ref="R48">
       <value>1K</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -1267,7 +1268,7 @@
     </comp>
     <comp ref="R49">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -1276,7 +1277,7 @@
     </comp>
     <comp ref="R50">
       <value>2K2</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -1285,7 +1286,7 @@
     </comp>
     <comp ref="R51">
       <value>100R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -1294,7 +1295,7 @@
     </comp>
     <comp ref="R52">
       <value>560R</value>
-      <footprint>Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal</footprint>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal</footprint>
       <libsource lib="Device" part="R" description="Resistor"/>
       <property name="Sheetname" value="Serial Bus"/>
       <property name="Sheetfile" value="serial_bus.kicad_sch"/>
@@ -2104,246 +2105,236 @@
       <node ref="U2" pin="11" pintype="input"/>
       <node ref="U4" pin="15" pinfunction="QA" pintype="tri_state"/>
     </net>
-    <net code="36" name="/Address Bus/~{ACLR}">
+    <net code="35" name="/Address Bus/~{ACLR}">
       <node ref="U3" pin="5" pinfunction="GPIO3" pintype="bidirectional"/>
       <node ref="U5" pin="10" pinfunction="~{SRCLR}" pintype="input"/>
       <node ref="U6" pin="10" pinfunction="~{SRCLR}" pintype="input"/>
       <node ref="U7" pin="10" pinfunction="~{SRCLR}" pintype="input"/>
     </net>
-    <net code="37" name="/CPU/CE">
+    <net code="36" name="/CPU/CE">
       <node ref="R32" pin="1" pintype="passive"/>
       <node ref="U3" pin="15" pinfunction="GPIO11" pintype="bidirectional"/>
     </net>
-    <net code="38" name="/CPU/DCLK">
+    <net code="37" name="/CPU/DCLK">
       <node ref="U10" pin="11" pinfunction="SRCLK" pintype="input"/>
       <node ref="U11" pin="2" pinfunction="CP" pintype="input"/>
       <node ref="U12" pin="2" pinfunction="CP" pintype="input"/>
       <node ref="U3" pin="9" pinfunction="GPIO6" pintype="bidirectional"/>
       <node ref="U9" pin="11" pinfunction="SRCLK" pintype="input"/>
     </net>
-    <net code="39" name="/CPU/DRCK">
+    <net code="38" name="/CPU/DRCK">
       <node ref="U10" pin="12" pinfunction="RCLK" pintype="input"/>
       <node ref="U3" pin="7" pinfunction="GPIO5" pintype="bidirectional"/>
       <node ref="U9" pin="12" pinfunction="RCLK" pintype="input"/>
     </net>
-    <net code="40" name="/CPU/DSIN">
+    <net code="39" name="/CPU/DSIN">
       <node ref="U3" pin="6" pinfunction="GPIO4" pintype="bidirectional"/>
       <node ref="U9" pin="14" pinfunction="SER" pintype="input"/>
     </net>
-    <net code="41" name="/CPU/DSOUT">
+    <net code="40" name="/CPU/DSOUT">
       <node ref="Q13" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R44" pin="2" pintype="passive"/>
       <node ref="U3" pin="11" pinfunction="GPIO8" pintype="bidirectional"/>
     </net>
-    <net code="42" name="/CPU/OE">
+    <net code="41" name="/CPU/OE">
       <node ref="U10" pin="13" pinfunction="~{OE}" pintype="input"/>
       <node ref="U3" pin="12" pinfunction="GPIO9" pintype="bidirectional"/>
       <node ref="U8" pin="3" pintype="input"/>
       <node ref="U9" pin="13" pinfunction="~{OE}" pintype="input"/>
     </net>
-    <net code="43" name="/CPU/SCK_INT">
+    <net code="42" name="/CPU/SCK_INT">
       <node ref="U2" pin="13" pintype="input"/>
       <node ref="U3" pin="24" pinfunction="GPIO18" pintype="bidirectional"/>
     </net>
-    <net code="44" name="/CPU/SDI_INT">
+    <net code="43" name="/CPU/SDI_INT">
       <node ref="Q14" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R46" pin="2" pintype="passive"/>
       <node ref="U3" pin="21" pinfunction="GPIO16" pintype="bidirectional"/>
     </net>
-    <net code="45" name="/CPU/SDO_INT">
+    <net code="44" name="/CPU/SDO_INT">
       <node ref="U3" pin="25" pinfunction="GPIO19" pintype="bidirectional"/>
       <node ref="U8" pin="13" pintype="input"/>
     </net>
-    <net code="46" name="/CPU/VCCLK">
+    <net code="45" name="/CPU/VCCLK">
       <node ref="U3" pin="19" pinfunction="GPIO14" pintype="bidirectional"/>
       <node ref="U4" pin="11" pinfunction="SRCLK" pintype="input"/>
     </net>
-    <net code="47" name="/CPU/VCRCK">
+    <net code="46" name="/CPU/VCRCK">
       <node ref="U3" pin="17" pinfunction="GPIO13" pintype="bidirectional"/>
       <node ref="U4" pin="12" pinfunction="RCLK" pintype="input"/>
     </net>
-    <net code="48" name="/CPU/VCSIN">
+    <net code="47" name="/CPU/VCSIN">
       <node ref="U3" pin="16" pinfunction="GPIO12" pintype="bidirectional"/>
       <node ref="U4" pin="14" pinfunction="SER" pintype="input"/>
     </net>
-    <net code="49" name="/CPU/VDD_CTRL">
+    <net code="48" name="/CPU/VDD_CTRL">
       <node ref="R2" pin="1" pintype="passive"/>
       <node ref="U2" pin="3" pintype="input"/>
       <node ref="U3" pin="29" pinfunction="GPIO22" pintype="bidirectional"/>
     </net>
-    <net code="50" name="/CPU/VDD_FB">
+    <net code="49" name="/CPU/VDD_FB">
       <node ref="R10" pin="1" pintype="passive"/>
       <node ref="R9" pin="2" pintype="passive"/>
       <node ref="U3" pin="31" pinfunction="GPIO26_ADC0" pintype="bidirectional"/>
     </net>
-    <net code="51" name="/CPU/VDD_ON_VPP">
+    <net code="50" name="/CPU/VDD_ON_VPP">
       <node ref="U2" pin="5" pintype="input"/>
       <node ref="U3" pin="22" pinfunction="GPIO17" pintype="bidirectional"/>
     </net>
-    <net code="52" name="/CPU/VDD_PWM">
+    <net code="51" name="/CPU/VDD_PWM">
       <node ref="R3" pin="2" pintype="passive"/>
       <node ref="U3" pin="26" pinfunction="GPIO20" pintype="bidirectional"/>
     </net>
-    <net code="53" name="/CPU/VPP_CTRL">
+    <net code="52" name="/CPU/VPP_CTRL">
       <node ref="R15" pin="1" pintype="passive"/>
       <node ref="U2" pin="1" pintype="input"/>
       <node ref="U3" pin="34" pinfunction="GPIO28_ADC2" pintype="bidirectional"/>
     </net>
-    <net code="54" name="/CPU/VPP_FB">
+    <net code="53" name="/CPU/VPP_FB">
       <node ref="R20" pin="2" pintype="passive"/>
       <node ref="R21" pin="1" pintype="passive"/>
       <node ref="U3" pin="32" pinfunction="GPIO27_ADC1" pintype="bidirectional"/>
     </net>
-    <net code="55" name="/CPU/VPP_ON_CE">
+    <net code="54" name="/CPU/VPP_ON_CE">
       <node ref="U4" pin="2" pinfunction="QC" pintype="tri_state"/>
       <node ref="U8" pin="11" pintype="input"/>
     </net>
-    <net code="56" name="/CPU/VPP_ON_OE">
+    <net code="55" name="/CPU/VPP_ON_OE">
       <node ref="U4" pin="3" pinfunction="QD" pintype="tri_state"/>
       <node ref="U8" pin="1" pintype="input"/>
     </net>
-    <net code="57" name="/CPU/VPP_ON_WE">
+    <net code="56" name="/CPU/VPP_ON_WE">
       <node ref="U4" pin="4" pinfunction="QE" pintype="tri_state"/>
       <node ref="U8" pin="5" pintype="input"/>
     </net>
-    <net code="58" name="/CPU/VPP_PWM">
+    <net code="57" name="/CPU/VPP_PWM">
       <node ref="R16" pin="2" pintype="passive"/>
       <node ref="U3" pin="27" pinfunction="GPIO21" pintype="bidirectional"/>
     </net>
-    <net code="59" name="/CPU/WE">
+    <net code="58" name="/CPU/WE">
       <node ref="U3" pin="14" pinfunction="GPIO10" pintype="bidirectional"/>
       <node ref="U8" pin="9" pintype="input"/>
     </net>
-    <net code="61" name="/CPU/~{DCLR}">
+    <net code="59" name="/CPU/~{DCLR}">
       <node ref="U10" pin="10" pinfunction="~{SRCLR}" pintype="input"/>
       <node ref="U11" pin="1" pinfunction="~{PL}" pintype="input"/>
       <node ref="U12" pin="1" pinfunction="~{PL}" pintype="input"/>
       <node ref="U3" pin="10" pinfunction="GPIO7" pintype="bidirectional"/>
       <node ref="U9" pin="10" pinfunction="~{SRCLR}" pintype="input"/>
     </net>
-    <net code="62" name="/CPU/~{VCCLR}">
+    <net code="60" name="/CPU/~{VCCLR}">
       <node ref="U3" pin="20" pinfunction="GPIO15" pintype="bidirectional"/>
       <node ref="U4" pin="10" pinfunction="~{SRCLR}" pintype="input"/>
     </net>
-    <net code="64" name="/Control Signals/~{OEINT}">
-      <node ref="D14" pin="2" pinfunction="A" pintype="passive"/>
-      <node ref="R34" pin="2" pintype="passive"/>
-      <node ref="U8" pin="4" pintype="open_collector"/>
-    </net>
-    <net code="65" name="/Control Signals/~{WEINT}">
-      <node ref="D15" pin="2" pinfunction="A" pintype="passive"/>
-      <node ref="R36" pin="2" pintype="passive"/>
-      <node ref="U8" pin="8" pintype="open_collector"/>
-    </net>
-    <net code="66" name="/D0">
+    <net code="61" name="/D0">
       <node ref="J2" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="U12" pin="6" pinfunction="D7" pintype="input"/>
       <node ref="U9" pin="15" pinfunction="QA" pintype="tri_state"/>
     </net>
-    <net code="67" name="/D1">
+    <net code="62" name="/D1">
       <node ref="J2" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="U12" pin="5" pinfunction="D6" pintype="input"/>
       <node ref="U9" pin="1" pinfunction="QB" pintype="tri_state"/>
     </net>
-    <net code="68" name="/D2">
+    <net code="63" name="/D2">
       <node ref="J2" pin="3" pinfunction="Pin_3" pintype="passive"/>
       <node ref="U12" pin="4" pinfunction="D5" pintype="input"/>
       <node ref="U9" pin="2" pinfunction="QC" pintype="tri_state"/>
     </net>
-    <net code="69" name="/D3">
+    <net code="64" name="/D3">
       <node ref="J2" pin="5" pinfunction="Pin_5" pintype="passive"/>
       <node ref="U12" pin="3" pinfunction="D4" pintype="input"/>
       <node ref="U9" pin="3" pinfunction="QD" pintype="tri_state"/>
     </net>
-    <net code="70" name="/D4">
+    <net code="65" name="/D4">
       <node ref="J2" pin="6" pinfunction="Pin_6" pintype="passive"/>
       <node ref="U12" pin="14" pinfunction="D3" pintype="input"/>
       <node ref="U9" pin="4" pinfunction="QE" pintype="tri_state"/>
     </net>
-    <net code="71" name="/D5">
+    <net code="66" name="/D5">
       <node ref="J2" pin="7" pinfunction="Pin_7" pintype="passive"/>
       <node ref="U12" pin="13" pinfunction="D2" pintype="input"/>
       <node ref="U9" pin="5" pinfunction="QF" pintype="tri_state"/>
     </net>
-    <net code="72" name="/D6">
+    <net code="67" name="/D6">
       <node ref="J2" pin="8" pinfunction="Pin_8" pintype="passive"/>
       <node ref="U12" pin="12" pinfunction="D1" pintype="input"/>
       <node ref="U9" pin="6" pinfunction="QG" pintype="tri_state"/>
     </net>
-    <net code="73" name="/D7">
+    <net code="68" name="/D7">
       <node ref="J2" pin="9" pinfunction="Pin_9" pintype="passive"/>
       <node ref="U12" pin="11" pinfunction="D0" pintype="input"/>
       <node ref="U9" pin="7" pinfunction="QH" pintype="tri_state"/>
     </net>
-    <net code="74" name="/D8">
+    <net code="69" name="/D8">
       <node ref="J2" pin="41" pinfunction="Pin_41" pintype="passive"/>
       <node ref="U10" pin="15" pinfunction="QA" pintype="tri_state"/>
       <node ref="U11" pin="6" pinfunction="D7" pintype="input"/>
     </net>
-    <net code="75" name="/D9">
+    <net code="70" name="/D9">
       <node ref="J2" pin="42" pinfunction="Pin_42" pintype="passive"/>
       <node ref="U10" pin="1" pinfunction="QB" pintype="tri_state"/>
       <node ref="U11" pin="5" pinfunction="D6" pintype="input"/>
     </net>
-    <net code="76" name="/D10">
+    <net code="71" name="/D10">
       <node ref="J2" pin="43" pinfunction="Pin_43" pintype="passive"/>
       <node ref="U10" pin="2" pinfunction="QC" pintype="tri_state"/>
       <node ref="U11" pin="4" pinfunction="D5" pintype="input"/>
     </net>
-    <net code="77" name="/D11">
+    <net code="72" name="/D11">
       <node ref="J2" pin="44" pinfunction="Pin_44" pintype="passive"/>
       <node ref="U10" pin="3" pinfunction="QD" pintype="tri_state"/>
       <node ref="U11" pin="3" pinfunction="D4" pintype="input"/>
     </net>
-    <net code="78" name="/D12">
+    <net code="73" name="/D12">
       <node ref="J2" pin="45" pinfunction="Pin_45" pintype="passive"/>
       <node ref="U10" pin="4" pinfunction="QE" pintype="tri_state"/>
       <node ref="U11" pin="14" pinfunction="D3" pintype="input"/>
     </net>
-    <net code="79" name="/D13">
+    <net code="74" name="/D13">
       <node ref="J2" pin="46" pinfunction="Pin_46" pintype="passive"/>
       <node ref="U10" pin="5" pinfunction="QF" pintype="tri_state"/>
       <node ref="U11" pin="13" pinfunction="D2" pintype="input"/>
     </net>
-    <net code="80" name="/D14">
+    <net code="75" name="/D14">
       <node ref="J2" pin="47" pinfunction="Pin_47" pintype="passive"/>
       <node ref="U10" pin="6" pinfunction="QG" pintype="tri_state"/>
       <node ref="U11" pin="12" pinfunction="D1" pintype="input"/>
     </net>
-    <net code="81" name="/D15">
+    <net code="76" name="/D15">
       <node ref="J2" pin="48" pinfunction="Pin_48" pintype="passive"/>
       <node ref="U10" pin="7" pinfunction="QH" pintype="tri_state"/>
       <node ref="U11" pin="11" pinfunction="D0" pintype="input"/>
     </net>
-    <net code="82" name="/SCK">
+    <net code="77" name="/SCK">
       <node ref="J3" pin="7" pinfunction="Pin_7" pintype="passive"/>
       <node ref="J3" pin="8" pinfunction="Pin_8" pintype="passive"/>
       <node ref="Q15" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R49" pin="2" pintype="passive"/>
     </net>
-    <net code="83" name="/SDI">
+    <net code="78" name="/SDI">
       <node ref="J3" pin="12" pinfunction="Pin_12" pintype="passive"/>
       <node ref="Q14" pin="3" pinfunction="E" pintype="passive"/>
     </net>
-    <net code="84" name="/SDO">
+    <net code="79" name="/SDO">
       <node ref="J3" pin="11" pinfunction="Pin_11" pintype="passive"/>
       <node ref="Q16" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R50" pin="2" pintype="passive"/>
     </net>
-    <net code="86" name="/~{CE}">
+    <net code="81" name="/~{CE}">
       <node ref="D17" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J2" pin="10" pinfunction="Pin_10" pintype="passive"/>
       <node ref="Q12" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R40" pin="2" pintype="passive"/>
       <node ref="R42" pin="1" pintype="passive"/>
     </net>
-    <net code="87" name="/~{OE}">
+    <net code="82" name="/~{OE}">
       <node ref="D14" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J2" pin="12" pinfunction="Pin_12" pintype="passive"/>
       <node ref="Q9" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R38" pin="1" pintype="passive"/>
     </net>
-    <net code="88" name="/~{WE}">
+    <net code="83" name="/~{WE}">
       <node ref="D15" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D18" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J2" pin="19" pinfunction="Pin_19" pintype="passive"/>
@@ -2351,7 +2342,7 @@
       <node ref="J3" pin="18" pinfunction="Pin_18" pintype="passive"/>
       <node ref="R39" pin="1" pintype="passive"/>
     </net>
-    <net code="89" name="GND">
+    <net code="84" name="GND">
       <node ref="C1" pin="2" pintype="passive"/>
       <node ref="C10" pin="2" pintype="passive"/>
       <node ref="C11" pin="2" pintype="passive"/>
@@ -2432,203 +2423,213 @@
       <node ref="U8" pin="7" pinfunction="GND" pintype="power_in"/>
       <node ref="U9" pin="8" pinfunction="GND" pintype="power_in"/>
     </net>
-    <net code="90" name="Net-(C1-Pad1)">
+    <net code="85" name="Net-(C1-Pad1)">
       <node ref="C1" pin="1" pintype="passive"/>
       <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="U1" pin="1" pinfunction="VI" pintype="power_in"/>
     </net>
-    <net code="91" name="Net-(D1-Pad2)">
+    <net code="86" name="Net-(D1-Pad2)">
       <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="J1" pin="1" pintype="passive"/>
     </net>
-    <net code="92" name="Net-(D2-Pad2)">
+    <net code="87" name="Net-(D2-Pad2)">
       <node ref="D2" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="U1" pin="2" pinfunction="GND" pintype="power_in"/>
     </net>
-    <net code="93" name="Net-(D3-Pad2)">
+    <net code="88" name="Net-(D3-Pad2)">
       <node ref="D3" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="R1" pin="2" pintype="passive"/>
     </net>
-    <net code="94" name="Net-(D4-Pad2)">
+    <net code="89" name="Net-(D4-Pad2)">
       <node ref="D4" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="R1" pin="1" pintype="passive"/>
       <node ref="U1" pin="3" pinfunction="VO" pintype="power_out"/>
     </net>
-    <net code="95" name="Net-(D6-Pad2)">
+    <net code="90" name="Net-(D6-Pad2)">
       <node ref="D6" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="R2" pin="2" pintype="passive"/>
     </net>
-    <net code="96" name="Net-(D7-Pad1)">
+    <net code="91" name="Net-(D7-Pad1)">
       <node ref="D7" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="L1" pin="1" pinfunction="1" pintype="passive"/>
       <node ref="Q2" pin="1" pinfunction="C" pintype="passive"/>
     </net>
-    <net code="97" name="Net-(D9-Pad2)">
+    <net code="92" name="Net-(D9-Pad2)">
       <node ref="D9" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="Q4" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R14" pin="1" pintype="passive"/>
     </net>
-    <net code="98" name="Net-(D10-Pad2)">
+    <net code="93" name="Net-(D10-Pad2)">
       <node ref="D10" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="R15" pin="2" pintype="passive"/>
     </net>
-    <net code="99" name="Net-(D11-Pad2)">
+    <net code="94" name="Net-(D11-Pad2)">
       <node ref="D11" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="L2" pin="2" pinfunction="2" pintype="passive"/>
       <node ref="Q5" pin="2" pinfunction="C" pintype="passive"/>
     </net>
-    <net code="100" name="Net-(D16-Pad1)">
+    <net code="95" name="Net-(D14-Pad2)">
+      <node ref="D14" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R34" pin="2" pintype="passive"/>
+      <node ref="U8" pin="4" pintype="open_collector"/>
+    </net>
+    <net code="96" name="Net-(D15-Pad2)">
+      <node ref="D15" pin="2" pinfunction="A" pintype="passive"/>
+      <node ref="R36" pin="2" pintype="passive"/>
+      <node ref="U8" pin="8" pintype="open_collector"/>
+    </net>
+    <net code="97" name="Net-(D16-Pad1)">
       <node ref="D16" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="D18" pin="2" pinfunction="A" pintype="passive"/>
     </net>
-    <net code="101" name="Net-(D16-Pad2)">
+    <net code="98" name="Net-(D16-Pad2)">
       <node ref="D16" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="Q10" pin="1" pinfunction="C" pintype="passive"/>
     </net>
-    <net code="102" name="Net-(D17-Pad2)">
+    <net code="99" name="Net-(D17-Pad2)">
       <node ref="D17" pin="2" pinfunction="A" pintype="passive"/>
       <node ref="R41" pin="2" pintype="passive"/>
     </net>
-    <net code="103" name="Net-(Q1-Pad1)">
+    <net code="100" name="Net-(Q1-Pad1)">
       <node ref="Q1" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R4" pin="2" pintype="passive"/>
     </net>
-    <net code="104" name="Net-(Q1-Pad2)">
+    <net code="101" name="Net-(Q1-Pad2)">
       <node ref="Q1" pin="2" pinfunction="B" pintype="input"/>
       <node ref="R3" pin="1" pintype="passive"/>
     </net>
-    <net code="105" name="Net-(Q2-Pad2)">
+    <net code="102" name="Net-(Q2-Pad2)">
       <node ref="Q2" pin="2" pinfunction="B" pintype="input"/>
       <node ref="R4" pin="1" pintype="passive"/>
       <node ref="R6" pin="2" pintype="passive"/>
     </net>
-    <net code="106" name="Net-(Q4-Pad2)">
-      <node ref="Q4" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R12" pin="1" pintype="passive"/>
-      <node ref="R13" pin="2" pintype="passive"/>
-    </net>
-    <net code="107" name="Net-(Q5-Pad1)">
-      <node ref="Q5" pin="1" pinfunction="B" pintype="input"/>
-      <node ref="R16" pin="1" pintype="passive"/>
-    </net>
-    <net code="108" name="Net-(Q6-Pad2)">
-      <node ref="Q6" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R17" pin="1" pintype="passive"/>
-      <node ref="R18" pin="2" pintype="passive"/>
-    </net>
-    <net code="109" name="Net-(Q7-Pad2)">
-      <node ref="Q7" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R23" pin="2" pintype="passive"/>
-      <node ref="R25" pin="2" pintype="passive"/>
-    </net>
-    <net code="110" name="Net-(Q8-Pad2)">
-      <node ref="Q8" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R24" pin="2" pintype="passive"/>
-      <node ref="R26" pin="2" pintype="passive"/>
-    </net>
-    <net code="111" name="Net-(Q9-Pad2)">
-      <node ref="Q9" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R29" pin="2" pintype="passive"/>
-      <node ref="R33" pin="2" pintype="passive"/>
-    </net>
-    <net code="112" name="Net-(Q10-Pad2)">
-      <node ref="Q10" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R30" pin="2" pintype="passive"/>
-      <node ref="R35" pin="2" pintype="passive"/>
-    </net>
-    <net code="113" name="Net-(Q11-Pad1)">
-      <node ref="Q11" pin="1" pinfunction="C" pintype="passive"/>
-      <node ref="R40" pin="1" pintype="passive"/>
-    </net>
-    <net code="114" name="Net-(Q11-Pad2)">
-      <node ref="Q11" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R31" pin="2" pintype="passive"/>
-      <node ref="R37" pin="2" pintype="passive"/>
-    </net>
-    <net code="115" name="Net-(Q12-Pad2)">
-      <node ref="Q12" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R32" pin="2" pintype="passive"/>
-    </net>
-    <net code="116" name="Net-(Q13-Pad2)">
-      <node ref="Q13" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R43" pin="2" pintype="passive"/>
-    </net>
-    <net code="117" name="Net-(Q13-Pad3)">
-      <node ref="Q13" pin="3" pinfunction="E" pintype="passive"/>
-      <node ref="U12" pin="9" pinfunction="Q7" pintype="output"/>
-    </net>
-    <net code="118" name="Net-(Q14-Pad2)">
-      <node ref="Q14" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R45" pin="2" pintype="passive"/>
-    </net>
-    <net code="119" name="Net-(Q15-Pad2)">
-      <node ref="Q15" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R47" pin="2" pintype="passive"/>
-      <node ref="U2" pin="12" pintype="open_collector"/>
-    </net>
-    <net code="120" name="Net-(Q16-Pad2)">
-      <node ref="Q16" pin="2" pinfunction="B" pintype="input"/>
-      <node ref="R48" pin="2" pintype="passive"/>
-      <node ref="U8" pin="12" pintype="open_collector"/>
-    </net>
-    <net code="121" name="Net-(R5-Pad1)">
+    <net code="103" name="Net-(Q3-Pad2)">
       <node ref="Q3" pin="2" pinfunction="B" pintype="input"/>
       <node ref="R5" pin="1" pintype="passive"/>
       <node ref="R7" pin="2" pintype="passive"/>
     </net>
-    <net code="122" name="Net-(R5-Pad2)">
+    <net code="104" name="Net-(Q4-Pad2)">
+      <node ref="Q4" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R12" pin="1" pintype="passive"/>
+      <node ref="R13" pin="2" pintype="passive"/>
+    </net>
+    <net code="105" name="Net-(Q5-Pad1)">
+      <node ref="Q5" pin="1" pinfunction="B" pintype="input"/>
+      <node ref="R16" pin="1" pintype="passive"/>
+    </net>
+    <net code="106" name="Net-(Q6-Pad2)">
+      <node ref="Q6" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R17" pin="1" pintype="passive"/>
+      <node ref="R18" pin="2" pintype="passive"/>
+    </net>
+    <net code="107" name="Net-(Q7-Pad2)">
+      <node ref="Q7" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R23" pin="2" pintype="passive"/>
+      <node ref="R25" pin="2" pintype="passive"/>
+    </net>
+    <net code="108" name="Net-(Q8-Pad2)">
+      <node ref="Q8" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R24" pin="2" pintype="passive"/>
+      <node ref="R26" pin="2" pintype="passive"/>
+    </net>
+    <net code="109" name="Net-(Q9-Pad2)">
+      <node ref="Q9" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R29" pin="2" pintype="passive"/>
+      <node ref="R33" pin="2" pintype="passive"/>
+    </net>
+    <net code="110" name="Net-(Q10-Pad2)">
+      <node ref="Q10" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R30" pin="2" pintype="passive"/>
+      <node ref="R35" pin="2" pintype="passive"/>
+    </net>
+    <net code="111" name="Net-(Q11-Pad1)">
+      <node ref="Q11" pin="1" pinfunction="C" pintype="passive"/>
+      <node ref="R40" pin="1" pintype="passive"/>
+    </net>
+    <net code="112" name="Net-(Q11-Pad2)">
+      <node ref="Q11" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R31" pin="2" pintype="passive"/>
+      <node ref="R37" pin="2" pintype="passive"/>
+    </net>
+    <net code="113" name="Net-(Q12-Pad2)">
+      <node ref="Q12" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R32" pin="2" pintype="passive"/>
+    </net>
+    <net code="114" name="Net-(Q13-Pad2)">
+      <node ref="Q13" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R43" pin="2" pintype="passive"/>
+    </net>
+    <net code="115" name="Net-(Q13-Pad3)">
+      <node ref="Q13" pin="3" pinfunction="E" pintype="passive"/>
+      <node ref="U12" pin="9" pinfunction="Q7" pintype="output"/>
+    </net>
+    <net code="116" name="Net-(Q14-Pad2)">
+      <node ref="Q14" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R45" pin="2" pintype="passive"/>
+    </net>
+    <net code="117" name="Net-(Q15-Pad2)">
+      <node ref="Q15" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R47" pin="2" pintype="passive"/>
+      <node ref="U2" pin="12" pintype="open_collector"/>
+    </net>
+    <net code="118" name="Net-(Q16-Pad2)">
+      <node ref="Q16" pin="2" pinfunction="B" pintype="input"/>
+      <node ref="R48" pin="2" pintype="passive"/>
+      <node ref="U8" pin="12" pintype="open_collector"/>
+    </net>
+    <net code="119" name="Net-(R5-Pad2)">
       <node ref="R5" pin="2" pintype="passive"/>
       <node ref="U2" pin="4" pintype="open_collector"/>
     </net>
-    <net code="123" name="Net-(R12-Pad2)">
+    <net code="120" name="Net-(R12-Pad2)">
       <node ref="R12" pin="2" pintype="passive"/>
       <node ref="U2" pin="6" pintype="open_collector"/>
     </net>
-    <net code="124" name="Net-(R17-Pad2)">
+    <net code="121" name="Net-(R17-Pad2)">
       <node ref="R17" pin="2" pintype="passive"/>
       <node ref="U2" pin="2" pintype="open_collector"/>
     </net>
-    <net code="125" name="Net-(R22-Pad2)">
+    <net code="122" name="Net-(R22-Pad2)">
       <node ref="R22" pin="2" pintype="passive"/>
       <node ref="U3" pin="30" pinfunction="RUN" pintype="input"/>
     </net>
-    <net code="126" name="Net-(R23-Pad1)">
+    <net code="123" name="Net-(R23-Pad1)">
       <node ref="R23" pin="1" pintype="passive"/>
       <node ref="U2" pin="8" pintype="open_collector"/>
     </net>
-    <net code="127" name="Net-(R24-Pad1)">
+    <net code="124" name="Net-(R24-Pad1)">
       <node ref="R24" pin="1" pintype="passive"/>
       <node ref="U2" pin="10" pintype="open_collector"/>
     </net>
-    <net code="128" name="Net-(R29-Pad1)">
+    <net code="125" name="Net-(R29-Pad1)">
       <node ref="R29" pin="1" pintype="passive"/>
       <node ref="U8" pin="2" pintype="open_collector"/>
     </net>
-    <net code="129" name="Net-(R30-Pad1)">
+    <net code="126" name="Net-(R30-Pad1)">
       <node ref="R30" pin="1" pintype="passive"/>
       <node ref="U8" pin="6" pintype="open_collector"/>
     </net>
-    <net code="130" name="Net-(R31-Pad1)">
+    <net code="127" name="Net-(R31-Pad1)">
       <node ref="R31" pin="1" pintype="passive"/>
       <node ref="U8" pin="10" pintype="open_collector"/>
     </net>
-    <net code="131" name="Net-(U5-Pad9)">
+    <net code="128" name="Net-(U5-Pad9)">
       <node ref="U5" pin="9" pinfunction="QH'" pintype="output"/>
       <node ref="U6" pin="14" pinfunction="SER" pintype="input"/>
     </net>
-    <net code="132" name="Net-(U6-Pad9)">
+    <net code="129" name="Net-(U6-Pad9)">
       <node ref="U6" pin="9" pinfunction="QH'" pintype="output"/>
       <node ref="U7" pin="14" pinfunction="SER" pintype="input"/>
     </net>
-    <net code="133" name="Net-(U10-Pad14)">
+    <net code="130" name="Net-(U10-Pad14)">
       <node ref="U10" pin="14" pinfunction="SER" pintype="input"/>
       <node ref="U9" pin="9" pinfunction="QH'" pintype="output"/>
     </net>
-    <net code="134" name="Net-(U11-Pad9)">
+    <net code="131" name="Net-(U11-Pad9)">
       <node ref="U11" pin="9" pinfunction="Q7" pintype="output"/>
       <node ref="U12" pin="10" pinfunction="DS" pintype="input"/>
     </net>
-    <net code="135" name="VCC">
+    <net code="132" name="VCC">
       <node ref="C11" pin="1" pintype="passive"/>
       <node ref="C12" pin="1" pintype="passive"/>
       <node ref="C13" pin="1" pintype="passive"/>
@@ -2647,13 +2648,13 @@
       <node ref="U7" pin="16" pinfunction="VCC" pintype="power_in"/>
       <node ref="U9" pin="16" pinfunction="VCC" pintype="power_in"/>
     </net>
-    <net code="136" name="VDD">
+    <net code="133" name="VDD">
       <node ref="J2" pin="20" pinfunction="Pin_20" pintype="passive"/>
       <node ref="Q3" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R51" pin="1" pintype="passive"/>
       <node ref="R8" pin="1" pintype="passive"/>
     </net>
-    <net code="137" name="VDD5">
+    <net code="134" name="VDD5">
       <node ref="D19" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J3" pin="3" pinfunction="Pin_3" pintype="passive"/>
       <node ref="J3" pin="4" pinfunction="Pin_4" pintype="passive"/>
@@ -2663,7 +2664,7 @@
       <node ref="R50" pin="1" pintype="passive"/>
       <node ref="R51" pin="2" pintype="passive"/>
     </net>
-    <net code="138" name="VDD_RAW">
+    <net code="135" name="VDD_RAW">
       <node ref="C4" pin="1" pintype="passive"/>
       <node ref="C5" pin="1" pintype="passive"/>
       <node ref="L1" pin="2" pinfunction="2" pintype="passive"/>
@@ -2677,20 +2678,20 @@
       <node ref="R7" pin="1" pintype="passive"/>
       <node ref="R9" pin="1" pintype="passive"/>
     </net>
-    <net code="139" name="VPP">
+    <net code="136" name="VPP">
       <node ref="D9" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J2" pin="34" pinfunction="Pin_34" pintype="passive"/>
       <node ref="Q6" pin="1" pinfunction="C" pintype="passive"/>
       <node ref="R19" pin="1" pintype="passive"/>
       <node ref="R52" pin="1" pintype="passive"/>
     </net>
-    <net code="140" name="VPP13">
+    <net code="137" name="VPP13">
       <node ref="D20" pin="1" pinfunction="K" pintype="passive"/>
       <node ref="J3" pin="1" pinfunction="Pin_1" pintype="passive"/>
       <node ref="J3" pin="2" pinfunction="Pin_2" pintype="passive"/>
       <node ref="R52" pin="2" pintype="passive"/>
     </net>
-    <net code="141" name="VPP_RAW">
+    <net code="138" name="VPP_RAW">
       <node ref="C8" pin="1" pintype="passive"/>
       <node ref="C9" pin="1" pintype="passive"/>
       <node ref="D11" pin="1" pinfunction="K" pintype="passive"/>
@@ -2708,43 +2709,43 @@
       <node ref="R35" pin="1" pintype="passive"/>
       <node ref="R37" pin="1" pintype="passive"/>
     </net>
-    <net code="142" name="unconnected-(U3-Pad35)">
+    <net code="139" name="unconnected-(U3-Pad35)">
       <node ref="U3" pin="35" pinfunction="ADC_VREF" pintype="unspecified+no_connect"/>
     </net>
-    <net code="143" name="unconnected-(U3-Pad37)">
+    <net code="140" name="unconnected-(U3-Pad37)">
       <node ref="U3" pin="37" pinfunction="3V3_EN" pintype="input+no_connect"/>
     </net>
-    <net code="144" name="unconnected-(U3-Pad41)">
+    <net code="141" name="unconnected-(U3-Pad41)">
       <node ref="U3" pin="41" pinfunction="SWCLK" pintype="input+no_connect"/>
     </net>
-    <net code="145" name="unconnected-(U3-Pad42)">
+    <net code="142" name="unconnected-(U3-Pad42)">
       <node ref="U3" pin="42" pinfunction="GND" pintype="power_in+no_connect"/>
     </net>
-    <net code="146" name="unconnected-(U3-Pad43)">
+    <net code="143" name="unconnected-(U3-Pad43)">
       <node ref="U3" pin="43" pinfunction="SWDIO" pintype="bidirectional+no_connect"/>
     </net>
-    <net code="147" name="unconnected-(U4-Pad5)">
+    <net code="144" name="unconnected-(U4-Pad5)">
       <node ref="U4" pin="5" pinfunction="QF" pintype="tri_state+no_connect"/>
     </net>
-    <net code="148" name="unconnected-(U4-Pad6)">
+    <net code="145" name="unconnected-(U4-Pad6)">
       <node ref="U4" pin="6" pinfunction="QG" pintype="tri_state+no_connect"/>
     </net>
-    <net code="149" name="unconnected-(U4-Pad7)">
+    <net code="146" name="unconnected-(U4-Pad7)">
       <node ref="U4" pin="7" pinfunction="QH" pintype="tri_state+no_connect"/>
     </net>
-    <net code="150" name="unconnected-(U4-Pad9)">
+    <net code="147" name="unconnected-(U4-Pad9)">
       <node ref="U4" pin="9" pinfunction="QH'" pintype="output+no_connect"/>
     </net>
-    <net code="151" name="unconnected-(U7-Pad9)">
+    <net code="148" name="unconnected-(U7-Pad9)">
       <node ref="U7" pin="9" pinfunction="QH'" pintype="output+no_connect"/>
     </net>
-    <net code="152" name="unconnected-(U10-Pad9)">
+    <net code="149" name="unconnected-(U10-Pad9)">
       <node ref="U10" pin="9" pinfunction="QH'" pintype="output+no_connect"/>
     </net>
-    <net code="153" name="unconnected-(U11-Pad7)">
+    <net code="150" name="unconnected-(U11-Pad7)">
       <node ref="U11" pin="7" pinfunction="~{Q7}" pintype="output+no_connect"/>
     </net>
-    <net code="154" name="unconnected-(U12-Pad7)">
+    <net code="151" name="unconnected-(U12-Pad7)">
       <node ref="U12" pin="7" pinfunction="~{Q7}" pintype="output+no_connect"/>
     </net>
   </nets>

@@ -12,7 +12,7 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 ## Contents
 
 * [About the Project](#about-the-project)
-* [Specifications](#specifications)
+* [Documentation](#documentation)
 * [Hardware Design](#hardware-design)
 * [Contributing](#contributing)
 * [License](#license)
@@ -25,13 +25,13 @@ The purpose of this board is to allow the programming, reading and verification 
 
 In a future release, programming of some microcontroller families (eg. Microchip PIC, or 8051) may also be supported, via firmware and software upgrade.
 
-## Specifications
+## Documentation
 
-The most up-to-date project specifications can be accessed here: [Specifications of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/doc/specs.pdf).
+The most up-to-date project documentation can be accessed here: [Documentation of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/doc/).
 
 ## Hardware Design
 
-The most up-to-date schematic diagram can be accessed here: [Schematic diagram of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/hardware/usbflashprog_sch.pdf).
+The most up-to-date hardware design can be accessed here: [Hardware design of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/hardware/).
 
 ## Contributing
 

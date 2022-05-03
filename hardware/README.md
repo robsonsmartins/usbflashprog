@@ -10,7 +10,7 @@ The most up-to-date schematic diagram can be accessed here: [Schematic diagram o
 
 ### Bill of Materials (BOM)
 
-The most up-to-date BOM can be accessed here: [Schematic diagram of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/hardware/usbflashprog_bom.pdf).
+The most up-to-date BOM can be accessed here: [Bill of Materials of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/hardware/usbflashprog_bom.pdf).
 
 ## Software versions
 

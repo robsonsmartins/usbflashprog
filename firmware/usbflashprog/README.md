@@ -42,7 +42,8 @@ The following software was used to develop the firmware:
 - [CMake](https://packages.ubuntu.com/jammy/cmake), version 3.22.1-1ubuntu1.
 - [Doxygen](https://packages.ubuntu.com/jammy/doxygen), version 1.9.1-2ubuntu2.
 
-**author** Robson Martins<br>
-        https://www.robsonmartins.com
+**author** [Robson Martins](https://www.robsonmartins.com)
+
 **version** 0.1
+
 **date** 2022

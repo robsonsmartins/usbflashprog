@@ -39,6 +39,7 @@ The following software was used to develop the firmware:
 - [Pico SDK](https://github.com/raspberrypi/pico-sdk), version 1.3.0.
 - [ARM GCC](https://packages.ubuntu.com/jammy/gcc-arm-none-eabi), version 15:10.3-2021.07-4.
 - [GCC](https://packages.ubuntu.com/jammy/gcc), version 4:11.2.0-1ubuntu1.
+<<<<<<< HEAD
 - [CMake](https://packages.ubuntu.com/jammy/cmake), version 3.22.1-1ubuntu1.
 - [Doxygen](https://packages.ubuntu.com/jammy/doxygen), version 1.9.1-2ubuntu2.
 
@@ -46,3 +47,12 @@ The following software was used to develop the firmware:
         https://www.robsonmartins.com
 **version** 0.1
 **date** 2022
+=======
+- [CMake] (https://packages.ubuntu.com/jammy/cmake), version 3.22.1-1ubuntu1.
+- [Doxygen] (https://packages.ubuntu.com/jammy/doxygen), version 1.9.1-2ubuntu2.
+
+@author Robson Martins<br>
+        https://www.robsonmartins.com
+@version 0.1
+@date 2022
+>>>>>>> 9e189a7a9522a19c0d2f9b52cb33f6765dbb24e0

@@ -14,6 +14,7 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 * [About the Project](#about-the-project)
 * [Documentation](#documentation)
 * [Hardware Design](#hardware-design)
+* [Firmware Project](#firmware-project)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
@@ -32,6 +33,10 @@ The most up-to-date project documentation can be accessed here: [Documentation o
 ## Hardware Design
 
 The most up-to-date hardware design can be accessed here: [Hardware design of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/hardware/).
+
+## Firmware Project
+
+The most up-to-date firmware project can be accessed here: [Firmware Project of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/firmware/).
 
 ## Contributing
 

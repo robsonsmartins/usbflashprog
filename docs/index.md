@@ -2,6 +2,10 @@
 
 A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to PC by USB port.
 
+## Project Site
+
+[USB Flash/EPROM Programmer Project Site](https://usbflashprog.robsonmartins.com)
+
 ## Documentation
 
 ### Specifications
@@ -12,12 +16,23 @@ The most up-to-date project specifications can be accessed here: [Specifications
 
 The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/firmware/html/index.html).
 
+### Hardware Documentation
+
+#### Schematic Diagram
+
+The most up-to-date schematic diagram can be accessed here: [Schematic diagram of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/hardware/usbflashprog_sch.pdf).
+
+#### Bill of Materials (BOM)
+
+The most up-to-date BOM can be accessed here: [Bill of Materials of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/hardware/usbflashprog_bom.pdf).
+
 ## Software versions
 
 The following software (open source/freeware and multiplatform) were used to write the documentation:
 
 - [LibreOffice](https://www.libreoffice.org/), version 7.3.2.2.
 - [yEd Graph Editor](https://www.yworks.com/products/yed), version 3.22.
+- [Doxygen](https://packages.ubuntu.com/jammy/doxygen), version 1.9.1-2ubuntu2.
 
 ---
 

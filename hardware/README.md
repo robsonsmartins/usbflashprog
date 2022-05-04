@@ -6,11 +6,11 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 ### Schematic Diagram
 
-The most up-to-date schematic diagram can be accessed here: [Schematic diagram of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/hardware/usbflashprog_sch.pdf).
+The most up-to-date schematic diagram can be accessed here: [Schematic diagram of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/hardware/usbflashprog_sch.pdf).
 
 ### Bill of Materials (BOM)
 
-The most up-to-date BOM can be accessed here: [Bill of Materials of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/hardware/usbflashprog_bom.pdf).
+The most up-to-date BOM can be accessed here: [Bill of Materials of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/hardware/usbflashprog_bom.pdf).
 
 ## Software versions
 

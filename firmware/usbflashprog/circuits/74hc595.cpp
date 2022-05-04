@@ -16,39 +16,39 @@
 
 #include "circuits/74hc595.hpp"
 
-HC595::HC595(): _oe(false) {
+HC595::HC595(): oe_(false) {
     configure();
 }
 
 HC595::HC595(uint sinPin, uint clkPin, uint clrPin,
-             uint rckPin, uint oePin, uint pulseTime): _oe(false) {
+             uint rckPin, uint oePin, uint pulseTime): oe_(false) {
     configure(sinPin, clkPin, clrPin, rckPin, oePin, pulseTime);
 }
 
 void HC595::configure(uint sinPin, uint clkPin, uint clrPin,
                       uint rckPin, uint oePin, uint pulseTime) {
-    _sinPin    =    sinPin;
-    _clkPin    =    clkPin;
-    _clrPin    =    clrPin;
-    _rckPin    =    rckPin;
-    _oePin     =     oePin;
-    _pulseTime = pulseTime;
+    sinPin_    =    sinPin;
+    clkPin_    =    clkPin;
+    clrPin_    =    clrPin;
+    rckPin_    =    rckPin;
+    oePin_     =     oePin;
+    pulseTime_ = pulseTime;
 }
 
 void HC595::clear() {
-    if (_clrPin != 0xFF) {
-        _gpio.resetPin(_clrPin);
-        sleep_us(_pulseTime);
-        _gpio.setPin(_clrPin);
+    if (clrPin_ != 0xFF) {
+        gpio_.resetPin(clrPin_);
+        sleep_us(pulseTime_);
+        gpio_.setPin(clrPin_);
     }
-    for (auto& data : _buffer) { data = 0; }
+    for (auto& data : buffer_) { data = 0; }
 }
 
 void HC595::outputEnable(bool value) {
-    if (_oePin != 0xFF) {
-        _gpio.setPin(_oePin, !value);
+    if (oePin_ != 0xFF) {
+        gpio_.setPin(oePin_, !value);
     }
-    _oe = value;
+    oe_ = value;
 }
 
 void HC595::outputDisable() {
@@ -77,63 +77,75 @@ void HC595::writeDWord(uint32_t value) {
 
 void HC595::writeData(const uint8_t* buffer, uint size) {
     if (!size || !buffer) { return; }
-    if (_buffer.size() < size) { _buffer.resize(size); }
-    if (_rckPin != 0xFF) { _gpio.resetPin(_rckPin); }
+    if (buffer_.size() < size) { buffer_.resize(size); }
+    if (rckPin_ != 0xFF) { gpio_.resetPin(rckPin_); }
     buffer += size - 1;
-    for (uint8_t* pData = _buffer.data() + size - 1;
+    for (uint8_t* pData = buffer_.data() + size - 1;
          size != 0; size--, pData--, buffer--) {
         *pData = *buffer;
-        if (_sinPin != 0xFF && _clkPin != 0xFF) {
-            _gpio.resetPin(_clkPin);
+        if (sinPin_ != 0xFF && clkPin_ != 0xFF) {
+            gpio_.resetPin(clkPin_);
             for (int bit = 7; bit >= 0; bit--) {
-                _gpio.setPin(_sinPin, (*pData) & (1 << bit));
-                sleep_us(_pulseTime);
-                _gpio.setPin(_clkPin);
-                sleep_us(_pulseTime);
-                _gpio.resetPin(_clkPin);
+                gpio_.setPin(sinPin_, (*pData) & (1 << bit));
+                sleep_us(pulseTime_);
+                gpio_.setPin(clkPin_);
+                sleep_us(pulseTime_);
+                gpio_.resetPin(clkPin_);
             }
         }
-        if (_rckPin != 0xFF) {
-            _gpio.setPin(_rckPin);
-            sleep_us(_pulseTime);
-            _gpio.resetPin(_rckPin);
+        if (rckPin_ != 0xFF) {
+            gpio_.setPin(rckPin_);
+            sleep_us(pulseTime_);
+            gpio_.resetPin(rckPin_);
         }
     }
 }
 
 void HC595::setBit(uint bit, bool value) {
     uint index = bit / 8;
-    if (index + 1 > _buffer.size()) {
-        _buffer.resize(index + 1);
+    if (index + 1 > buffer_.size()) {
+        buffer_.resize(index + 1);
     }
-    uint8_t data = _buffer[index];
+    uint8_t data = buffer_[index];
     uint8_t mask = 0x01 << (bit - (index * 8));
     if (value) {
         data |= mask;
     } else {
         data &= ~mask;
     }
-    _buffer[index] = data;
-    writeData(_buffer.data(), _buffer.size());
+    buffer_[index] = data;
+    writeData(buffer_.data(), buffer_.size());
 }
 
 void HC595::resetBit(uint bit) {
     setBit(bit, false);
 }
 
+void HC595::toggleBit(uint bit) {
+    uint index = bit / 8;
+    if (index + 1 > buffer_.size()) {
+        buffer_.resize(index + 1);
+    }
+    uint8_t data = buffer_[index];
+    uint8_t mask = 0x01 << (bit - (index * 8));
+    data ^= mask;
+    buffer_[index] = data;
+    writeData(buffer_.data(), buffer_.size());
+}
+
 const HC595::TData& HC595::getData(void) const {
-    return _buffer;
+    return buffer_;
 }
 
 const bool HC595::getBit(uint bit) const {
     uint index = bit / 8;
-    uint8_t data = (index < _buffer.size())
-        ? _buffer[index]
+    uint8_t data = (index < buffer_.size())
+        ? buffer_[index]
         : 0;
     uint8_t mask = 0x01 << (bit - (index * 8));
     return (data & mask);
 }
 
 const bool HC595::getOE(void) const {
-    return _oe;
+    return oe_;
 }

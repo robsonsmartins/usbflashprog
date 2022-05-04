@@ -116,6 +116,11 @@ class HC595 {
      */
     void resetBit(uint bit);
     /**
+     * @brief Toggles a bit of any HC595 in cascade.
+     * @param bit Number of bit (0..n).
+     */
+    void toggleBit(uint bit);
+    /**
      * @brief Gets the data written in HC595 units.
      * @return Reference to "software stored" data buffer.
      */
@@ -136,23 +141,23 @@ class HC595 {
     /** @brief Default value to pulse time, in microseconds. */
     static const uint DEFAULT_PULSE_TIME_US = 1;
     /** @brief Pulse time, in microseconds. */
-    uint _pulseTime;
+    uint pulseTime_;
     /** @brief ~OE GPIO pin number. */
-    uint _oePin;
+    uint oePin_;
     /** @brief SIN GPIO pin number. */
-    uint _sinPin;
+    uint sinPin_;
     /** @brief CLK GPIO pin number. */
-    uint _clkPin;
+    uint clkPin_;
     /** @brief ~CLR GPIO pin number. */
-    uint _clrPin;
+    uint clrPin_;
     /** @brief RCK GPIO pin number. */
-    uint _rckPin;
+    uint rckPin_;
     /** @brief GPIO handler. */
-    Gpio _gpio;
+    Gpio gpio_;
     /** @brief Current data buffer. */
-    TData _buffer;
+    TData buffer_;
     /** @brief Current OE pin status. */
-    bool _oe;
+    bool oe_;
 };
 
 #endif  // CIRCUITS_74HC595_HPP_

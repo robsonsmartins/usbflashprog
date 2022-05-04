@@ -45,6 +45,7 @@ The following software was used to develop the firmware:
 - [ARM GCC](https://packages.ubuntu.com/jammy/gcc-arm-none-eabi), version 15:10.3-2021.07-4.
 - [GCC](https://packages.ubuntu.com/jammy/gcc), version 4:11.2.0-1ubuntu1.
 - [CMake](https://packages.ubuntu.com/jammy/cmake), version 3.22.1-1ubuntu1.
+- [Google Test](https://packages.ubuntu.com/jammy/googletest), version 1.11.0-3.
 - [Doxygen](https://packages.ubuntu.com/jammy/doxygen), version 1.9.1-2ubuntu2.
 
 **author** [Robson Martins](https://www.robsonmartins.com)

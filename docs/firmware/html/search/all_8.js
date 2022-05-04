@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['resetbit_19',['resetBit',['../a00836.html#a6c7039212405b09322959a8237c59413',1,'HC595']]],
-  ['resetpin_20',['resetPin',['../a00840.html#ab27c0877384e6c463f77b574f65c5dfe',1,'Gpio']]]
+  ['pulldown_27',['pullDown',['../a00858.html#a3027e8bfc7f2d40daec39f77d84b1625',1,'Gpio']]],
+  ['pullup_28',['pullUp',['../a00858.html#af3666fbbddd420e34894f13aa8ef0df0',1,'Gpio']]]
 ];

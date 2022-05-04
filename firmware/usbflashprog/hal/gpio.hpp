@@ -69,15 +69,29 @@ class Gpio {
      * @param pin The pin number.
      */
     void disablePulls(uint pin);
+    /**
+     * @brief Returns if pin is pulled up.
+     * @param pin The pin number.
+     * @return True if pin is pulled up (pullup enabled).
+     *  False otherwise.
+     */
+    bool isPulledUp(uint pin);
+    /**
+     * @brief Returns if pin is pulled down.
+     * @param pin The pin number.
+     * @return True if pin is pulled down (pulldown enabled).
+     *  False otherwise.
+     */
+    bool isPulledDown(uint pin);
 
  private:
     /** @brief Set of initialized pins. */
-    std::set<uint> _initPins;
+    std::set<uint> initPins_;
     /**
      * @brief Initializes the pin.
      * @param pin The pin number.
      */
-    void _initPin(uint pin);
+    void initPin_(uint pin);
 };
 
 #endif  // HAL_GPIO_HPP_

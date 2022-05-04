@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "rm -Rf ${workspaceRoot}/build && cmake -B ${workspaceRoot}/build -S . -DNORMAL_BUILD=ON && cd ${workspaceRoot}/build && make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "rm -Rf ${workspaceRoot}/build && cmake -B ${workspaceRoot}/build -S . -DTEST_BUILD=ON && cd ${workspaceRoot}/build && make",
+            "group": {
+                "kind": "build"
+            }
+        }
+    ]
+}

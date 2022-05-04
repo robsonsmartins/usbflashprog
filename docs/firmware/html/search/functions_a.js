@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['writebyte_56',['writeByte',['../a00836.html#aad76ed55071c5a9bd3e5bb9ec39f76bb',1,'HC595']]],
-  ['writedata_57',['writeData',['../a00836.html#ac7f46f8fed8351e8ae070a39095312d6',1,'HC595']]],
-  ['writedword_58',['writeDWord',['../a00836.html#a9f254227c6dbcb16a202cae31ed1a2fc',1,'HC595']]],
-  ['writeword_59',['writeWord',['../a00836.html#ab5d2ffcf16ac85b0d10c78817ad85775',1,'HC595']]]
+  ['teardown_83',['TearDown',['../a00862.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'HC595Test::TearDown()'],['../a00866.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'GpioTest::TearDown()']]],
+  ['togglebit_84',['toggleBit',['../a00854.html#ad1e527258a4fef33244368bfa4fcb5ec',1,'HC595']]],
+  ['togglepin_85',['togglePin',['../a00858.html#a1c3b9f8756bf4dff69c62b70c5cd3a1e',1,'Gpio']]]
 ];

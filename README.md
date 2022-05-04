@@ -28,7 +28,7 @@ In a future release, programming of some microcontroller families (eg. Microchip
 
 ## Documentation
 
-The most up-to-date project documentation can be accessed here: [Documentation of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/doc/).
+The most up-to-date project documentation can be accessed here: [Documentation of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/docs/).
 
 ## Hardware Design
 

@@ -6,11 +6,11 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 ### Specifications
 
-The most up-to-date project specifications can be accessed here: [Specifications of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/doc/specs.pdf).
+The most up-to-date project specifications can be accessed here: [Specifications of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/docs/specs.pdf).
 
 ### Firmware Documentation
 
-The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](https://htmlpreview.github.io/?https://github.com/robsonsmartins/usbflashprog/blob/main/doc/firmware/html/index.html).
+The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/firmware/html/index.html).
 
 ## Software versions
 

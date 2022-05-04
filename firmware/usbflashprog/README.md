@@ -18,6 +18,11 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 - [Firmware Project](https://github.com/robsonsmartins/usbflashprog/tree/main/firmware)
 
+### Firmware Documentation
+
+The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/firmware/html/index.html).
+
+
 ### Raspberry Pi Pico Platform
 
 - [Raspberry Pi Documentation](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html)

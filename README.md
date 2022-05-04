@@ -1,13 +1,7 @@
 # <img align="left" src="/images/icon.png" alt="usbflashprog" title="usbflashprog">USB Flash/EPROM Programmer
 A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to PC by USB port.
 
-[![Latest Tag][tag-shield]][tag-url]
-[![Latest Commit][commit-shield]][commit-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Open Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
-[![Project Site][site-shield]][site-url]
+[![Latest Tag][tag-shield]][tag-url] [![Latest Commit][commit-shield]][commit-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Open Issues][issues-shield]][issues-url] [![License][license-shield]][license-url] [![Project Site][site-shield]][site-url]
 
 ## Contents
 
@@ -28,7 +22,7 @@ In a future release, programming of some microcontroller families (eg. Microchip
 
 ## Documentation
 
-The most up-to-date project documentation can be accessed here: [Documentation of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/docs/).
+The most up-to-date project documentation can be accessed here: [Documentation of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/).
 
 ## Hardware Design
 
@@ -56,8 +50,7 @@ See [LICENSE](https://github.com/robsonsmartins/usbflashprog/blob/main/LICENSE) 
 
 ## Contact
 
-[![Home Page][contact-site-shield]][contact-site-url]
-[![LinkedIn][contact-linkedin-shield]][contact-linkedin-url]
+[![Home Page][contact-site-shield]][contact-site-url] [![LinkedIn][contact-linkedin-shield]][contact-linkedin-url]
 
 ## Reference
 * [EzoFlash+](http://www.ezoflash.com/)
@@ -66,8 +59,7 @@ See [LICENSE](https://github.com/robsonsmartins/usbflashprog/blob/main/LICENSE) 
 
 ---
 
-This work is licensed under a
-[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
 

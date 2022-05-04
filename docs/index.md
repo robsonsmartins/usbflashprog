@@ -1,4 +1,4 @@
-# <img align="left" src="/images/icon.png" alt="usbflashprog" title="usbflashprog">USB Flash/EPROM Programmer
+# <img align="left" src="https://raw.githubusercontent.com/robsonsmartins/usbflashprog/main/images/icon.png" alt="usbflashprog" title="usbflashprog">USB Flash/EPROM Programmer
 
 A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to PC by USB port.
 
@@ -10,7 +10,7 @@ The most up-to-date project specifications can be accessed here: [Specifications
 
 ### Firmware Documentation
 
-The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/doc/firmware/html/index.html).
+The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](firmware/html/index.html).
 
 ## Software versions
 

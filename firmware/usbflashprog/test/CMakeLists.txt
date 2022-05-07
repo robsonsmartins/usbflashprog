@@ -3,8 +3,10 @@ cmake_minimum_required(VERSION 3.16)
 set(name usbflashprog_test)
 set(sources 
     ../hal/gpio.cpp
+    ../hal/adc.cpp
     ../circuits/74hc595.cpp
     hal/gpio_test.cpp 
+    hal/adc_test.cpp 
     circuits/74hc595_test.cpp
     main.cpp
 )

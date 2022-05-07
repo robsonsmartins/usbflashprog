@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['setbit_31',['setBit',['../a00854.html#a541f3690d6f2a0da8743b0335f216f49',1,'HC595']]],
-  ['setpin_32',['setPin',['../a00858.html#a6cf7db607816ea101fa7629f4731f40e',1,'Gpio']]],
-  ['setup_33',['SetUp',['../a00862.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'HC595Test::SetUp()'],['../a00866.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'GpioTest::SetUp()']]]
+  ['resetbit_39',['resetBit',['../a00869.html#a6c7039212405b09322959a8237c59413',1,'HC595']]],
+  ['resetpin_40',['resetPin',['../a00877.html#ab27c0877384e6c463f77b574f65c5dfe',1,'Gpio']]]
 ];

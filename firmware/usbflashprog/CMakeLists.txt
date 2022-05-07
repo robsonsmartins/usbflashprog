@@ -23,15 +23,15 @@ elseif(NORMAL_BUILD)
   pico_sdk_init()
 
   add_executable(usbflashprog 
-          hal/gpio.cpp
-          circuits/74hc595.cpp
+        hal/gpio.cpp
+        hal/adc.cpp
+        circuits/74hc595.cpp
 #          base/pwm.cpp
-#          base/adc.cpp
 #          base/multicore.cpp
 #          base/flash.cpp
 #          modules/dc2dc.cpp
 #          modules/vgenerator.cpp
-          main.cpp
+        main.cpp
   )
 
   target_include_directories(usbflashprog PUBLIC .)

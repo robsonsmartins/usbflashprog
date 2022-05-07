@@ -139,7 +139,7 @@ class HC595 {
 
  private:
     /** @brief Default value to pulse time, in microseconds. */
-    static const uint DEFAULT_PULSE_TIME_US = 1;
+    static constexpr uint DEFAULT_PULSE_TIME_US = 1;
     /** @brief Pulse time, in microseconds. */
     uint pulseTime_;
     /** @brief ~OE GPIO pin number. */

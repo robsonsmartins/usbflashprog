@@ -16,7 +16,7 @@
 
 #include "74hc595_test.hpp"
 
-#include <chrono>
+#include <chrono> // NOLINT
 
 HC595 HC595Test::hc595_ = HC595();
 

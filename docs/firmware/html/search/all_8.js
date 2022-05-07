@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pulldown_27',['pullDown',['../a00858.html#a3027e8bfc7f2d40daec39f77d84b1625',1,'Gpio']]],
-  ['pullup_28',['pullUp',['../a00858.html#af3666fbbddd420e34894f13aa8ef0df0',1,'Gpio']]]
+  ['outputdisable_35',['outputDisable',['../a00869.html#a365b25c536bf2dd38eb7ff01bde56b03',1,'HC595']]],
+  ['outputenable_36',['outputEnable',['../a00869.html#ae92503e3be76420bb89c1a2108a8cec0',1,'HC595']]]
 ];

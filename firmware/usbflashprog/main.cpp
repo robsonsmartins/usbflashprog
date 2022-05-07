@@ -21,6 +21,7 @@
 #include "pico/stdlib.h"
 
 #include "hal/gpio.hpp"
+#include "hal/adc.hpp"
 #include "circuits/74hc595.hpp"
 
 /**
@@ -36,7 +37,10 @@ int main() {
     hc595.clear();
     hc595.outputEnable();
 
+    Adc adc;
+
     uint8_t bit = 0;
+    float vpp;
     while (true) {
         gpio.togglePin(PICO_DEFAULT_LED_PIN);
         hc595.setBit(bit);
@@ -44,6 +48,10 @@ int main() {
         hc595.resetBit(bit);
         bit++;
         if (bit > 4) bit = 0;
+        vpp = adc.capture(1, 1024);
+        vpp = vpp / 470 * (3900 + 470);
+        vpp *= 0.97173913f;
+        std::cout << "VPP: " << vpp << "V" << std::endl;
     }
 
     return 0;

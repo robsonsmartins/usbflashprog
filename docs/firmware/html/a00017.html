@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: main.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: gpio.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,71 +60,43 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_52c912f73dac9c4c0e442232e1b2bd80.html">hal</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">main.cpp File Reference</div>  </div>
+<div class="title">gpio.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Main Routine.  
+<p>Header of the Pico GPIO Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
+<div class="textblock"><code>#include &lt;set&gt;</code><br />
 <code>#include &quot;pico/stdlib.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00014.html">hal/gpio.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00005.html">circuits/74hc595.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for main.cpp:</div>
+Include dependency graph for gpio.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00018.png" border="0" usemap="#amain_8cpp" alt=""/></div>
-<map name="amain_8cpp" id="amain_8cpp">
-<area shape="rect" title="Implementation of the Main Routine." alt="" coords="219,5,301,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,67,107"/>
-<area shape="rect" title=" " alt="" coords="91,80,157,107"/>
-<area shape="rect" title=" " alt="" coords="181,80,261,107"/>
-<area shape="rect" title=" " alt="" coords="299,229,400,256"/>
-<area shape="rect" href="a00014.html" title="Header of the Pico GPIO Class." alt="" coords="474,155,577,181"/>
-<area shape="rect" href="a00005.html" title="Header of the 74HC595 Class." alt="" coords="337,80,493,107"/>
-<area shape="rect" title=" " alt="" coords="504,229,547,256"/>
-<area shape="rect" title=" " alt="" coords="387,155,450,181"/>
+<div class="center"><img src="a00018.png" border="0" usemap="#agpio_8hpp" alt=""/></div>
+<map name="agpio_8hpp" id="agpio_8hpp">
+<area shape="rect" title="Header of the Pico GPIO Class." alt="" coords="5,5,84,32"/>
+<area shape="rect" title=" " alt="" coords="23,80,66,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main routine.  <a href="a00017.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
-<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00877.html">Gpio</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pico GPIO Class.  <a href="a00877.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Main Routine. </p>
+<div class="textblock"><p>Header of the Pico GPIO Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Main routine. </p>
-<dl class="section return"><dt>Returns</dt><dd>Error code (zero if success). </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

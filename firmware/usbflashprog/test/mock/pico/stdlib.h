@@ -15,6 +15,11 @@
 
 typedef unsigned int uint;
 
+#define __not_in_flash(group) __attribute__((section(".time_critical." group)))
+
+#define __not_in_flash_func(func_name) \
+    __not_in_flash(__STRING(func_name)) func_name
+
 extern "C" inline void sleep_us(uint64_t us) {
     usleep(us);
 }

@@ -16,7 +16,7 @@
 #define GPIO_OUT 0
 #define GPIO_IN  1
 
-std::map<uint, bool> gpioData = {
+static std::map<uint, bool> gpioData = {
   { 0, false}, { 1, false}, { 2, false}, { 3, false},
   { 4, false}, { 5, false}, { 5, false}, { 7, false},
   { 8, false}, { 9, false}, {10, false}, {11, false},
@@ -32,7 +32,7 @@ typedef struct TPull {
     bool down;
 } TPull;
 
-std::map<uint, TPull> gpioPull = {
+static std::map<uint, TPull> gpioPull = {
   { 0, {false, false}}, { 1, {false, false}},
   { 2, {false, false}}, { 3, {false, false}},
   { 4, {false, false}}, { 5, {false, false}},

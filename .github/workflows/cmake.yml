@@ -30,7 +30,7 @@ jobs:
     - name: Build
       working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
       # Build your program with the given configuration
-      run: cmake --build ${{env.FIRMWARE_PROJECT_DIR}}/build --config ${{env.BUILD_TYPE}} -DTEST_BUILD=ON
+      run: cmake --build ${{env.FIRMWARE_PROJECT_DIR}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Test
       working-directory: ${{env.FIRMWARE_PROJECT_DIR}}/build

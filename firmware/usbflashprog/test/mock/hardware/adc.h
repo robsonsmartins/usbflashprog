@@ -12,14 +12,15 @@
 
 #include "pico/stdlib.h"
 
-constexpr uint16_t RAW_ADC_DATA = 0b101011000101;
+constexpr const uint16_t RAW_ADC_DATA[2] = {0x221, 0xDDD};
+static int8_t adcDataIndex = 0;
 
 extern "C" inline void adc_init(void) {}
 
 extern "C" inline void adc_select_input(uint input) {}
 
 extern "C" inline uint16_t adc_read() {
-    return RAW_ADC_DATA;
+    return (RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2;
 }
 
 extern "C" inline void adc_gpio_init(uint gpio) {}
@@ -30,7 +31,8 @@ extern "C" inline void adc_fifo_setup(bool en, bool dreq_en,
 extern "C" inline void adc_run(bool run) {}
 
 extern "C" inline uint16_t adc_fifo_get_blocking() {
-    return RAW_ADC_DATA;
+    if (adcDataIndex > 1) { adcDataIndex = 0; }
+    return RAW_ADC_DATA[adcDataIndex++];
 }
 
 extern "C" inline void adc_fifo_drain() {}

@@ -22,17 +22,19 @@ Adc AdcTest::adc_ = Adc();
 
 TEST_F(AdcTest, capture) {
     float buf[512];
+    static uint16_t meanMockData =
+        (RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2;
     EXPECT_NEAR(adc_.capture(0),
-                AdcTest::calculate_(RAW_ADC_DATA), 1.0f);
+        AdcTest::calculate_(meanMockData), 0.2f);
     EXPECT_NEAR(adc_.capture(0, 1024),
-                AdcTest::calculate_(RAW_ADC_DATA), 1.0f);
+        AdcTest::calculate_(meanMockData), 0.2f);
     EXPECT_NEAR(adc_.capture(0, buf, 512),
-                AdcTest::calculate_(RAW_ADC_DATA), 1.0f);
+        AdcTest::calculate_(meanMockData), 0.2f);
     EXPECT_NEAR(AdcTest::mean_(buf, 512),
-                AdcTest::calculate_(RAW_ADC_DATA), 1.0f);
+        AdcTest::calculate_(meanMockData), 0.2f);
     Adc newAdc = Adc(5.0f);
     EXPECT_NEAR(newAdc.capture(0),
-                AdcTest::calculate_(RAW_ADC_DATA, 5.0f), 1.0f);
+        AdcTest::calculate_(meanMockData, 5.0f), 0.2f);
 }
 
 float AdcTest::calculate_(uint16_t value, float vref) {

@@ -22,6 +22,10 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 
 The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/firmware/html/index.html).
 
+### Code Coverage Report
+
+The code coverage report from unit tests can be accessed here: [Code Coverage Report of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/firmware/lcov/index.html).
+
 
 ### Raspberry Pi Pico Platform
 
@@ -46,6 +50,7 @@ The following software was used to develop the firmware:
 - [GCC](https://packages.ubuntu.com/jammy/gcc), version 4:11.2.0-1ubuntu1.
 - [CMake](https://packages.ubuntu.com/jammy/cmake), version 3.22.1-1ubuntu1.
 - [Google Test](https://packages.ubuntu.com/jammy/googletest), version 1.11.0-3.
+- [LCov](https://packages.ubuntu.com/jammy/lcov), version 1.15-1.
 - [Doxygen](https://packages.ubuntu.com/jammy/doxygen), version 1.9.1-2ubuntu2.
 
 **author** [Robson Martins](https://www.robsonmartins.com)

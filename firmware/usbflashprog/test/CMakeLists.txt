@@ -16,6 +16,9 @@ include(GoogleTest)
 
 add_executable(${name} ${sources})
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
+
 target_include_directories(${name} PUBLIC . .. mock)
 target_link_libraries(${name} gtest)
 gtest_discover_tests(${name})

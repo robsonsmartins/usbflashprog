@@ -96,13 +96,18 @@ TEST_F(HC595Test, data) {
     hc595_.toggleBit(29);
     EXPECT_TRUE(compareData(hc595_.getData(),
                             {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}));
+    HC595 newHc595 = HC595(5, 4, 3, 2, 1, 20);
+    EXPECT_EQ(newHc595.getData().size(), 0);
+    newHc595.setBit(5);
+    EXPECT_EQ(newHc595.getData().size(), 1);
+    newHc595.toggleBit(9);
+    EXPECT_EQ(newHc595.getData().size(), 2);
 }
 
 TEST_F(HC595Test, pulse_time) {
     constexpr uint PULSE_TIME = 10000;
     constexpr uint BYTES_NUM = 8;
     constexpr uint BITS_PER_BYTE = 8;
-    constexpr uint PERCENT_TOLERANCE = 20;
     hc595_.configure(1, 2, 3, 4, 5, PULSE_TIME);
     uint8_t buf[BYTES_NUM] =
         {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
@@ -111,7 +116,8 @@ TEST_F(HC595Test, pulse_time) {
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration =
         std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-    EXPECT_EQ(duration.count() / PERCENT_TOLERANCE,
-        (PULSE_TIME * 2 * BITS_PER_BYTE + PULSE_TIME) * BYTES_NUM / 1000
-         / PERCENT_TOLERANCE);
+    EXPECT_NEAR(
+        duration.count(),
+        (PULSE_TIME * 2 * BITS_PER_BYTE + PULSE_TIME) * BYTES_NUM / 1000,
+        20.0f);
 }

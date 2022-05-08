@@ -24,8 +24,10 @@
 #define GPIO_PIN_ADC_CHANNEL_0 26
 #define ADC_MAX_CHANNEL 3
 
+/** @cond */
 float __not_in_flash_func(adc_capture)(uint channel,
                                        uint16_t *buf, size_t size);
+/** @endcond */
 
 Adc::Adc(): vref_(DEFAULT_VREF) {
     adc_init();
@@ -73,6 +75,7 @@ float Adc::calculate_(uint16_t value) {
     return result;
 }
 
+/** @cond */
 float __not_in_flash_func(adc_capture)(uint channel,
                                        uint16_t *buf, size_t size) {
     adc_fifo_setup(true, false, 0, false, false);
@@ -86,3 +89,4 @@ float __not_in_flash_func(adc_capture)(uint channel,
     adc_fifo_drain();
     return (mbuf / size);
 }
+/** @endcond */

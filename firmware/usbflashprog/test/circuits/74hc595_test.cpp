@@ -119,5 +119,5 @@ TEST_F(HC595Test, pulse_time) {
     EXPECT_NEAR(
         duration.count(),
         (PULSE_TIME * 2 * BITS_PER_BYTE + PULSE_TIME) * BYTES_NUM / 1000,
-        20.0f);
+        100.0f);
 }

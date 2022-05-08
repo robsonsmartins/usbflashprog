@@ -11,6 +11,7 @@ if(TEST_BUILD)
   set(CMAKE_C_STANDARD 11)
   set(CMAKE_CXX_STANDARD 17)
   enable_language(C CXX)
+  enable_testing()
   add_subdirectory(./test)
 
 elseif(NORMAL_BUILD)

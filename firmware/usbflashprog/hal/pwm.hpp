@@ -27,6 +27,8 @@
  */
 class Pwm {
  public:
+    /** @brief PWM default frequency, in Hertz. */
+    static constexpr uint32_t PWM_DEFAULT_FREQ = 40'000UL;
     /**
      * @brief Constructor.
      * @details Creates a Pwm class instance with PWM_DEFAULT_FREQ frequency
@@ -91,8 +93,6 @@ class Pwm {
     bool isRunning();
 
  private:
-    /** @brief PWM default frequency, in Hertz. */
-    static constexpr uint32_t PWM_DEFAULT_FREQ = 40'000UL;
     /** @brief Number of GPIO pin associated with this instance. */
     uint pin_;
     /** @brief Current PWM frequency (Hz). */

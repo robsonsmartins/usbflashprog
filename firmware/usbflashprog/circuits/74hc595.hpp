@@ -32,6 +32,8 @@ class HC595 {
  public:
     /** @brief Type of Data buffer. */
     typedef std::vector<uint8_t> TData;
+    /** @brief Default value to pulse time, in microseconds. */
+    static constexpr uint DEFAULT_PULSE_TIME_US = 1;
     /** @brief Constructor. */
     HC595();
     /**
@@ -138,8 +140,6 @@ class HC595 {
     const bool getOE(void) const;
 
  private:
-    /** @brief Default value to pulse time, in microseconds. */
-    static constexpr uint DEFAULT_PULSE_TIME_US = 1;
     /** @brief Pulse time, in microseconds. */
     uint pulseTime_;
     /** @brief ~OE GPIO pin number. */

@@ -63,24 +63,30 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Pwm Member List</div>  </div>
+<div class="title">HC595 Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00887.html">Pwm</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a00887.html">HC595</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a1c92e032dd67e755ba5da71a2e8a6603">getChannel</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00887.html#adf513edd10d3131982aa3d286e5ee158">getDuty</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a008e36b370a7a44b1aefb34777cace09">getFreq</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00887.html#ac0dc4e67d4605af9413dec5b7fd412b8">getPin</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a1f66c5dc09b1ea16857f5027f23d48be">getSlice</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00887.html#a40e5881f9c001c5cc38554084751adbc">isRunning</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a9bf34255cd90b91a47c5c8a5f0c5fe6c">Pwm</a>(uint pin)</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00887.html#a30aae17e05a05890a47bd3e346d9e84d">setDuty</a>(float duty)</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a3b94395b3dcff3869dd1f0a376d7eb65">setFreq</a>(uint32_t freq)</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00887.html#a60de64d75454385b23995437f1d72669">start</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a8c528baf37154d347366083f0f816846">stop</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00887.html#a5a2f9d4500be3b3e46524921eb6b0360">~Pwm</a>()</td><td class="entry"><a class="el" href="a00887.html">Pwm</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a>()</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#a6cd5937993a8e281880777d6e91876b3">configure</a>(uint sinPin=0xFF, uint clkPin=0xFF, uint clrPin=0xFF, uint rckPin=0xFF, uint oePin=0xFF, uint pulseTime=DEFAULT_PULSE_TIME_US)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a105d6c6ddfafe9380f41e1c4f1215e46">DEFAULT_PULSE_TIME_US</a></td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#ad6ccbdb7d60ce7a61ac4f096e68f1dc2">getBit</a>(uint bit) const</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a0ed18b5903916ec61ea243bff59894df">getData</a>(void) const</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#a04b37423fcf8ac5ea65c567087df45da">getOE</a>(void) const</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a5710a093e9ee47d3979785289350a23e">HC595</a>()</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#a45f3ded286e417eb2a44e3483b6f4294">HC595</a>(uint sinPin, uint clkPin=0xFF, uint clrPin=0xFF, uint rckPin=0xFF, uint oePin=0xFF, uint pulseTime=DEFAULT_PULSE_TIME_US)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a365b25c536bf2dd38eb7ff01bde56b03">outputDisable</a>(void)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#ae92503e3be76420bb89c1a2108a8cec0">outputEnable</a>(bool value=true)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a6c7039212405b09322959a8237c59413">resetBit</a>(uint bit)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#a541f3690d6f2a0da8743b0335f216f49">setBit</a>(uint bit, bool value=true)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a267c476c54a8621ca82d7e8e9c451769">TData</a> typedef</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#ad1e527258a4fef33244368bfa4fcb5ec">toggleBit</a>(uint bit)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#aad76ed55071c5a9bd3e5bb9ec39f76bb">writeByte</a>(uint8_t value)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#ac7f46f8fed8351e8ae070a39095312d6">writeData</a>(const uint8_t *buffer, uint size)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00887.html#a9f254227c6dbcb16a202cae31ed1a2fc">writeDWord</a>(uint32_t value)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a00887.html#ab5d2ffcf16ac85b0d10c78817ad85775">writeWord</a>(uint16_t value)</td><td class="entry"><a class="el" href="a00887.html">HC595</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

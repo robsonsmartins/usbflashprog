@@ -1,4 +1,3 @@
-<map id="GpioTest" name="GpioTest">
-<area shape="rect" id="node1" title="Test class for Pico GPIO." alt="" coords="15,277,130,399"/>
-<area shape="rect" id="node2" href="$a00883.html" title="Pico GPIO Class." alt="" coords="5,5,140,215"/>
+<map id="Pwm" name="Pwm">
+<area shape="rect" id="node1" title="Pico PWM Class." alt="" coords="5,5,181,244"/>
 </map>

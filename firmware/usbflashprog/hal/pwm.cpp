@@ -52,7 +52,9 @@ uint Pwm::getChannel() {
 }
 
 void Pwm::setFreq(uint32_t freq) {
-    if (freq == freq_ || !freq || freq > (PWM_DEFAULT_CLOCK / 2)) { return; }
+    if (!freq) { freq = 1; }
+    if (freq > (PWM_DEFAULT_CLOCK / 2)) { freq = PWM_DEFAULT_CLOCK / 2; }
+    if (freq == freq_) { return; }
     // set frequency
     // determine top given Hz - assumes free-running counter rather than
     // phase-correct
@@ -70,7 +72,7 @@ uint32_t Pwm::getFreq() {
 void Pwm::setDuty(float duty) {
     if (duty < 0.0f) duty = 0.0f;
     if (duty > 100.0f) duty = 100.0f;
-    if (duty == duty_) return;
+    if (duty == duty_) { return; }
     // set duty cycle
     uint32_t top =  PWM_DEFAULT_CLOCK / freq_ -1;
     // calculate channel level from given duty cycle in %

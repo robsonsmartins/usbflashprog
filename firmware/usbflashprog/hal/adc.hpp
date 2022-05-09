@@ -28,6 +28,8 @@
  */
 class Adc {
  public:
+    /** @brief Default reference voltage, in Volts. */
+    static constexpr float DEFAULT_VREF = 3.3f;
     /** 
      * @brief Constructor.
      * @details As default, the reference voltage is set to
@@ -35,7 +37,7 @@ class Adc {
      */
     Adc();
     /**
-     * @brief Alternative constructor.
+     * @brief Constructor.
      * @param vref Reference voltage of the ADC, in Volts.
      */
     explicit Adc(float vref);
@@ -68,8 +70,6 @@ class Adc {
     float capture(uint channel, float* buf, size_t size);
 
  private:
-    /** @brief Default reference voltage, in Volts. */
-    static constexpr float DEFAULT_VREF = 3.3f;
     /** @brief Current reference voltage. */
     float vref_;
     /** @brief Set of initialized channels. */

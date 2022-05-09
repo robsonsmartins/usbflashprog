@@ -78,5 +78,7 @@ jobs:
 
     - name: Autobuild
       run: |
-       echo "Run, Build Application using script"
-       ./firmware/usbflashprog/scripts/test.sh
+       mkdir -p ./firmware/usbflashprog/build
+       cmake -B ./firmware/usbflashprog/build -S ./firmware/usbflashprog -DTEST_BUILD=ON
+       cmake --build ./firmware/usbflashprog/build
+

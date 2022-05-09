@@ -11,9 +11,11 @@ set(name usbflashprog_test)
 set(sources 
     ../hal/gpio.cpp
     ../hal/adc.cpp
+    ../hal/pwm.cpp
     ../circuits/74hc595.cpp
     hal/gpio_test.cpp 
     hal/adc_test.cpp 
+    hal/pwm_test.cpp 
     circuits/74hc595_test.cpp
     main.cpp
 )

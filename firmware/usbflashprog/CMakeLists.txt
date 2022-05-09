@@ -26,8 +26,8 @@ elseif(NORMAL_BUILD)
   add_executable(usbflashprog 
         hal/gpio.cpp
         hal/adc.cpp
+        hal/pwm.cpp
         circuits/74hc595.cpp
-#          base/pwm.cpp
 #          base/multicore.cpp
 #          base/flash.cpp
 #          modules/dc2dc.cpp

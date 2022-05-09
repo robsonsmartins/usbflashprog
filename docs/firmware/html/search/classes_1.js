@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gpio_59',['Gpio',['../a00877.html',1,'']]],
-  ['gpiotest_60',['GpioTest',['../a00889.html',1,'']]]
+  ['gpio_79',['Gpio',['../a00896.html',1,'']]],
+  ['gpiotest_80',['GpioTest',['../a00912.html',1,'']]]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['ispulleddown_92',['isPulledDown',['../a00877.html#ac8ff90dd574b842eacce082d451c0cf5',1,'Gpio']]],
-  ['ispulledup_93',['isPulledUp',['../a00877.html#aa4ff751aefac162f3d52a361a132e444',1,'Gpio']]]
+  ['ispulleddown_122',['isPulledDown',['../a00896.html#ac8ff90dd574b842eacce082d451c0cf5',1,'Gpio']]],
+  ['ispulledup_123',['isPulledUp',['../a00896.html#aa4ff751aefac162f3d52a361a132e444',1,'Gpio']]],
+  ['isrunning_124',['isRunning',['../a00900.html#a40e5881f9c001c5cc38554084751adbc',1,'Pwm']]]
 ];

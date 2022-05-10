@@ -39,15 +39,15 @@ Pwm::~Pwm() {
     stop();
 }
 
-uint Pwm::getPin() {
+uint Pwm::getPin() const {
     return pin_;
 }
 
-uint Pwm::getSlice() {
+uint Pwm::getSlice() const {
     return slice_;
 }
 
-uint Pwm::getChannel() {
+uint Pwm::getChannel() const {
     return channel_;
 }
 
@@ -65,7 +65,7 @@ void Pwm::setFreq(uint32_t freq) {
     freq_ = freq;
 }
 
-uint32_t Pwm::getFreq() {
+uint32_t Pwm::getFreq() const {
     return freq_;
 }
 
@@ -81,7 +81,7 @@ void Pwm::setDuty(float duty) {
     duty_ = duty;
 }
 
-float Pwm::getDuty() {
+float Pwm::getDuty() const {
     return duty_;
 }
 
@@ -106,6 +106,6 @@ void Pwm::stop() {
     running_ = false;
 }
 
-bool Pwm::isRunning() {
+bool Pwm::isRunning() const {
     return running_;
 }

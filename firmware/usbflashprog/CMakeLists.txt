@@ -27,8 +27,8 @@ elseif(NORMAL_BUILD)
         hal/gpio.cpp
         hal/adc.cpp
         hal/pwm.cpp
+        hal/multicore.cpp
         circuits/74hc595.cpp
-#          base/multicore.cpp
 #          base/flash.cpp
 #          modules/dc2dc.cpp
 #          modules/vgenerator.cpp

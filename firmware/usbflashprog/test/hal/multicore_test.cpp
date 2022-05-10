@@ -1,0 +1,57 @@
+// ---------------------------------------------------------------------------
+// USB EPROM/Flash Programmer
+//
+// Copyright (2022) Robson Martins
+//
+// This work is licensed under a Creative Commons Attribution-NonCommercial-
+// ShareAlike 4.0 International License.
+// ---------------------------------------------------------------------------
+/**
+ * @file test/hal/multicore_test.cpp
+ * @brief Implementation of Unit Test for Pico Multi Core Class.
+ * 
+ * @author Robson Martins (https://www.robsonmartins.com)
+ */
+// ---------------------------------------------------------------------------
+
+#include "multicore_test.hpp"
+
+void second_core_entry_(MultiCore& core); // NOLINT
+
+MultiCore MultiCoreTest::multicore_ = MultiCore(second_core_entry_);
+
+#define WAIT_TIME_US 10
+
+TEST_F(MultiCoreTest, launch_stop) {
+    EXPECT_EQ(multicore_.isRunning(), false);
+    EXPECT_EQ(multicore_.getStatus(), csStopped);
+    multicore_.launch();
+    multicore_.usleep(WAIT_TIME_US);
+    EXPECT_EQ(multicore_.isRunning(), true);
+    EXPECT_EQ(multicore_.getStatus(), csRunning);
+    multicore_.putParam(20);
+    multicore_.usleep(WAIT_TIME_US);
+    EXPECT_EQ(multicore_.getParam(), 40);
+    multicore_.putParam(50);
+    multicore_.usleep(WAIT_TIME_US);
+    EXPECT_EQ(multicore_.getParam(), 100);
+    multicore_.putParam(10);
+    multicore_.stop();
+    multicore_.usleep(WAIT_TIME_US);
+    EXPECT_EQ(multicore_.isRunning(), false);
+    EXPECT_EQ(multicore_.getStatus(), csStopped);
+    multicore_.putParam(60);
+    multicore_.usleep(WAIT_TIME_US);
+    EXPECT_EQ(multicore_.getParam(), 0);
+}
+
+void second_core_entry_(MultiCore& core) { // NOLINT
+    uintptr_t p = 0;
+    do {
+        p = core.getParam();
+        core.putParam(p * 2);
+        core.usleep(1);
+        core.lock();
+        core.unlock();
+    } while (p != 0 && !core.isStopRequested());
+}

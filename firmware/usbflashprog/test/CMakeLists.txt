@@ -12,15 +12,19 @@ set(sources
     ../hal/gpio.cpp
     ../hal/adc.cpp
     ../hal/pwm.cpp
+    ../hal/multicore.cpp
     ../circuits/74hc595.cpp
     hal/gpio_test.cpp 
     hal/adc_test.cpp 
     hal/pwm_test.cpp 
+    hal/multicore_test.cpp 
     circuits/74hc595_test.cpp
     main.cpp
 )
 
 include(GoogleTest)
+
+find_package(Threads REQUIRED)
 
 add_executable(${name} ${sources})
 
@@ -28,5 +32,5 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 
 target_include_directories(${name} PUBLIC . .. mock)
-target_link_libraries(${name} gtest)
+target_link_libraries(${name} ${CMAKE_THREAD_LIBS_INIT} gtest)
 gtest_discover_tests(${name})

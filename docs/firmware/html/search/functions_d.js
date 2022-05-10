@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['_7eadctest_150',['~AdcTest',['../a00907.html#a5cdbe190349f5fa6e40fdd9653cb163e',1,'AdcTest']]],
-  ['_7egpiotest_151',['~GpioTest',['../a00911.html#a68b086f6974cb054e285d1866bcf200b',1,'GpioTest']]],
-  ['_7ehc595test_152',['~HC595Test',['../a00903.html#a60159ebe79173aab93bbde082a9a093d',1,'HC595Test']]],
-  ['_7epwm_153',['~Pwm',['../a00899.html#a5a2f9d4500be3b3e46524921eb6b0360',1,'Pwm']]],
-  ['_7epwmtest_154',['~PwmTest',['../a00915.html#a09b4f2ce3ffc22ece3e70f401931f6d3',1,'PwmTest']]]
+  ['unlock_183',['unlock',['../a00917.html#a9278be8203e1c42e2619179882ae4403',1,'MultiCore']]],
+  ['usleep_184',['usleep',['../a00917.html#a02bb4857d31a2f3e40124c462f323154',1,'MultiCore']]]
 ];

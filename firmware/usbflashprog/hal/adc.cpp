@@ -70,7 +70,7 @@ bool Adc::initChannel_(uint channel) {
     return true;
 }
 
-float Adc::calculate_(uint16_t value) {
+float Adc::calculate_(uint16_t value) const {
     float result = value * vref_ / (1 << 12);
     return result;
 }

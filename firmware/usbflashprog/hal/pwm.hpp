@@ -42,17 +42,17 @@ class Pwm {
      * @brief Gets the pin number.
      * @return The pin number. 
      */
-    uint getPin();
+    uint getPin() const;
     /**
      * @brief Gets the slice number of PWM.
      * @return The PWM slice number.
      */
-    uint getSlice();
+    uint getSlice() const;
     /**
      * @brief Gets the PWM channel number.
      * @return The PWM channel number.
      */
-    uint getChannel();
+    uint getChannel() const;
     /**
      * @brief Sets the PWM frequency.
      * @param freq PWM frequency, in Hertz.<br/>
@@ -63,7 +63,7 @@ class Pwm {
      * @brief Gets the PWM frequency.
      * @return The PWM frequency, in Hertz.
      */
-    uint32_t getFreq();
+    uint32_t getFreq() const;
     /**
      * @brief Sets the duty cycle of PWM.
      * @param duty Duty cycle, in percent (%).<br/>
@@ -74,7 +74,7 @@ class Pwm {
      * @brief Gets the duty cycle.
      * @return The duty cycle, in percent (%).
      */
-    float getDuty();
+    float getDuty() const;
     /**
      * @brief Enables the PWM on the pin.
      * @details Starts the output of the PWM signal on the pin.
@@ -90,7 +90,7 @@ class Pwm {
      * @brief Returns if the PWM is enabled on the pin.
      * @return True if the PWM is enabled, false otherwise.
      */
-    bool isRunning();
+    bool isRunning() const;
 
  private:
     /** @brief Number of GPIO pin associated with this instance. */

@@ -85,7 +85,7 @@ class Adc {
      * @param value ADC raw value (12 bits).
      * @return Real value, in Volts. 
      */
-    float calculate_(uint16_t value);
+    float calculate_(uint16_t value) const;
 };
 
 #endif  // HAL_ADC_HPP_

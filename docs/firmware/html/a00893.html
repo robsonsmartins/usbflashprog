@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Member List</title>
+<title>USB EPROM/Flash Programmer: HC595 Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,24 +62,631 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="a00890.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Gpio Member List</div>  </div>
+<div class="title">HC595 Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00896.html">Gpio</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00896.html#a03714ab70ca3ad354b01c7f07c9bc768">disablePulls</a>(uint pin)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00896.html#a1990ef1a3fbaf47cced8f3f3c786242b">getPin</a>(uint pin)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00896.html#a2eec2c90e6a28e3caf6d4f61a17b46f4">Gpio</a>()</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00896.html#ac8ff90dd574b842eacce082d451c0cf5">isPulledDown</a>(uint pin)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00896.html#aa4ff751aefac162f3d52a361a132e444">isPulledUp</a>(uint pin)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00896.html#a3027e8bfc7f2d40daec39f77d84b1625">pullDown</a>(uint pin, bool enable=true)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00896.html#af3666fbbddd420e34894f13aa8ef0df0">pullUp</a>(uint pin, bool enable=true)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00896.html#ab27c0877384e6c463f77b574f65c5dfe">resetPin</a>(uint pin)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00896.html#a6cf7db607816ea101fa7629f4731f40e">setPin</a>(uint pin, bool value=true)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a00896.html#a1c3b9f8756bf4dff69c62b70c5cd3a1e">togglePin</a>(uint pin)</td><td class="entry"><a class="el" href="a00896.html">Gpio</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<p>74xx595 Shift Register Class.  
+ <a href="a00893.html#details">More...</a></p>
+
+<p><code>#include &lt;74hc595.hpp&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for HC595:</div>
+<div class="dyncontent">
+<div class="center"><img src="a00891.png" border="0" usemap="#aHC595_coll__map" alt="Collaboration graph"/></div>
+<map name="aHC595_coll__map" id="aHC595_coll__map">
+<area shape="rect" title="74xx595 Shift Register Class." alt="" coords="5,5,212,229"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a267c476c54a8621ca82d7e8e9c451769"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; uint8_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a267c476c54a8621ca82d7e8e9c451769">TData</a></td></tr>
+<tr class="memdesc:a267c476c54a8621ca82d7e8e9c451769"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of Data buffer.  <a href="a00893.html#a267c476c54a8621ca82d7e8e9c451769">More...</a><br /></td></tr>
+<tr class="separator:a267c476c54a8621ca82d7e8e9c451769"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a5710a093e9ee47d3979785289350a23e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a5710a093e9ee47d3979785289350a23e">HC595</a> ()</td></tr>
+<tr class="memdesc:a5710a093e9ee47d3979785289350a23e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00893.html#a5710a093e9ee47d3979785289350a23e">More...</a><br /></td></tr>
+<tr class="separator:a5710a093e9ee47d3979785289350a23e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45f3ded286e417eb2a44e3483b6f4294"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a45f3ded286e417eb2a44e3483b6f4294">HC595</a> (uint sinPin, uint clkPin=0xFF, uint clrPin=0xFF, uint rckPin=0xFF, uint oePin=0xFF, uint pulseTime=<a class="el" href="a00893.html#a105d6c6ddfafe9380f41e1c4f1215e46">DEFAULT_PULSE_TIME_US</a>)</td></tr>
+<tr class="memdesc:a45f3ded286e417eb2a44e3483b6f4294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00893.html#a45f3ded286e417eb2a44e3483b6f4294">More...</a><br /></td></tr>
+<tr class="separator:a45f3ded286e417eb2a44e3483b6f4294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cd5937993a8e281880777d6e91876b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a6cd5937993a8e281880777d6e91876b3">configure</a> (uint sinPin=0xFF, uint clkPin=0xFF, uint clrPin=0xFF, uint rckPin=0xFF, uint oePin=0xFF, uint pulseTime=<a class="el" href="a00893.html#a105d6c6ddfafe9380f41e1c4f1215e46">DEFAULT_PULSE_TIME_US</a>)</td></tr>
+<tr class="memdesc:a6cd5937993a8e281880777d6e91876b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> class object.  <a href="a00893.html#a6cd5937993a8e281880777d6e91876b3">More...</a><br /></td></tr>
+<tr class="separator:a6cd5937993a8e281880777d6e91876b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8bb3912a3ce86b15842e79d0b421204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#ac8bb3912a3ce86b15842e79d0b421204">clear</a> ()</td></tr>
+<tr class="memdesc:ac8bb3912a3ce86b15842e79d0b421204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clears the output of the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a>.  <a href="a00893.html#ac8bb3912a3ce86b15842e79d0b421204">More...</a><br /></td></tr>
+<tr class="separator:ac8bb3912a3ce86b15842e79d0b421204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae92503e3be76420bb89c1a2108a8cec0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#ae92503e3be76420bb89c1a2108a8cec0">outputEnable</a> (bool value=true)</td></tr>
+<tr class="memdesc:ae92503e3be76420bb89c1a2108a8cec0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the Output Enable pin of the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a>.  <a href="a00893.html#ae92503e3be76420bb89c1a2108a8cec0">More...</a><br /></td></tr>
+<tr class="separator:ae92503e3be76420bb89c1a2108a8cec0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a365b25c536bf2dd38eb7ff01bde56b03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a365b25c536bf2dd38eb7ff01bde56b03">outputDisable</a> (void)</td></tr>
+<tr class="memdesc:a365b25c536bf2dd38eb7ff01bde56b03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the output (put its in tristate).  <a href="a00893.html#a365b25c536bf2dd38eb7ff01bde56b03">More...</a><br /></td></tr>
+<tr class="separator:a365b25c536bf2dd38eb7ff01bde56b03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad76ed55071c5a9bd3e5bb9ec39f76bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#aad76ed55071c5a9bd3e5bb9ec39f76bb">writeByte</a> (uint8_t value)</td></tr>
+<tr class="memdesc:aad76ed55071c5a9bd3e5bb9ec39f76bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a byte to output of the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a>.  <a href="a00893.html#aad76ed55071c5a9bd3e5bb9ec39f76bb">More...</a><br /></td></tr>
+<tr class="separator:aad76ed55071c5a9bd3e5bb9ec39f76bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5d2ffcf16ac85b0d10c78817ad85775"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#ab5d2ffcf16ac85b0d10c78817ad85775">writeWord</a> (uint16_t value)</td></tr>
+<tr class="memdesc:ab5d2ffcf16ac85b0d10c78817ad85775"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a word to outputs of two <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> (in cascade).  <a href="a00893.html#ab5d2ffcf16ac85b0d10c78817ad85775">More...</a><br /></td></tr>
+<tr class="separator:ab5d2ffcf16ac85b0d10c78817ad85775"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f254227c6dbcb16a202cae31ed1a2fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a9f254227c6dbcb16a202cae31ed1a2fc">writeDWord</a> (uint32_t value)</td></tr>
+<tr class="memdesc:a9f254227c6dbcb16a202cae31ed1a2fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a double word to outputs of quad <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> (in cascade).  <a href="a00893.html#a9f254227c6dbcb16a202cae31ed1a2fc">More...</a><br /></td></tr>
+<tr class="separator:a9f254227c6dbcb16a202cae31ed1a2fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f46f8fed8351e8ae070a39095312d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#ac7f46f8fed8351e8ae070a39095312d6">writeData</a> (const uint8_t *buffer, uint size)</td></tr>
+<tr class="memdesc:ac7f46f8fed8351e8ae070a39095312d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes data to outputs of "n" <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> (arbitrary units in cascade).  <a href="a00893.html#ac7f46f8fed8351e8ae070a39095312d6">More...</a><br /></td></tr>
+<tr class="separator:ac7f46f8fed8351e8ae070a39095312d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a541f3690d6f2a0da8743b0335f216f49"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a541f3690d6f2a0da8743b0335f216f49">setBit</a> (uint bit, bool value=true)</td></tr>
+<tr class="memdesc:a541f3690d6f2a0da8743b0335f216f49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a bit of any <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> in cascade.  <a href="a00893.html#a541f3690d6f2a0da8743b0335f216f49">More...</a><br /></td></tr>
+<tr class="separator:a541f3690d6f2a0da8743b0335f216f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c7039212405b09322959a8237c59413"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a6c7039212405b09322959a8237c59413">resetBit</a> (uint bit)</td></tr>
+<tr class="memdesc:a6c7039212405b09322959a8237c59413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets a bit of any <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> in cascade.  <a href="a00893.html#a6c7039212405b09322959a8237c59413">More...</a><br /></td></tr>
+<tr class="separator:a6c7039212405b09322959a8237c59413"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1e527258a4fef33244368bfa4fcb5ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#ad1e527258a4fef33244368bfa4fcb5ec">toggleBit</a> (uint bit)</td></tr>
+<tr class="memdesc:ad1e527258a4fef33244368bfa4fcb5ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles a bit of any <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> in cascade.  <a href="a00893.html#ad1e527258a4fef33244368bfa4fcb5ec">More...</a><br /></td></tr>
+<tr class="separator:ad1e527258a4fef33244368bfa4fcb5ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ed18b5903916ec61ea243bff59894df"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="a00893.html#a267c476c54a8621ca82d7e8e9c451769">TData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a0ed18b5903916ec61ea243bff59894df">getData</a> (void) const</td></tr>
+<tr class="memdesc:a0ed18b5903916ec61ea243bff59894df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the data written in <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> units.  <a href="a00893.html#a0ed18b5903916ec61ea243bff59894df">More...</a><br /></td></tr>
+<tr class="separator:a0ed18b5903916ec61ea243bff59894df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ccbdb7d60ce7a61ac4f096e68f1dc2"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#ad6ccbdb7d60ce7a61ac4f096e68f1dc2">getBit</a> (uint bit) const</td></tr>
+<tr class="memdesc:ad6ccbdb7d60ce7a61ac4f096e68f1dc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a bit of data written in <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> units.  <a href="a00893.html#ad6ccbdb7d60ce7a61ac4f096e68f1dc2">More...</a><br /></td></tr>
+<tr class="separator:ad6ccbdb7d60ce7a61ac4f096e68f1dc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04b37423fcf8ac5ea65c567087df45da"><td class="memItemLeft" align="right" valign="top">const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a04b37423fcf8ac5ea65c567087df45da">getOE</a> (void) const</td></tr>
+<tr class="memdesc:a04b37423fcf8ac5ea65c567087df45da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the Output Enable status.  <a href="a00893.html#a04b37423fcf8ac5ea65c567087df45da">More...</a><br /></td></tr>
+<tr class="separator:a04b37423fcf8ac5ea65c567087df45da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a105d6c6ddfafe9380f41e1c4f1215e46"><td class="memItemLeft" align="right" valign="top">static constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00893.html#a105d6c6ddfafe9380f41e1c4f1215e46">DEFAULT_PULSE_TIME_US</a> = 1</td></tr>
+<tr class="memdesc:a105d6c6ddfafe9380f41e1c4f1215e46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value to pulse time, in microseconds.  <a href="a00893.html#a105d6c6ddfafe9380f41e1c4f1215e46">More...</a><br /></td></tr>
+<tr class="separator:a105d6c6ddfafe9380f41e1c4f1215e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>74xx595 Shift Register Class. </p>
+<p>The purpose of this class is to interface a 74xx595 Shift Register. Datasheet available on: <a href="https://tinyurl.com/5crbkb52">https://tinyurl.com/5crbkb52</a>. </p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a267c476c54a8621ca82d7e8e9c451769"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a267c476c54a8621ca82d7e8e9c451769">&#9670;&nbsp;</a></span>TData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::vector&lt;uint8_t&gt; <a class="el" href="a00893.html#a267c476c54a8621ca82d7e8e9c451769">TData</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type of Data buffer. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a5710a093e9ee47d3979785289350a23e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5710a093e9ee47d3979785289350a23e">&#9670;&nbsp;</a></span>HC595() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00893.html">HC595</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+</div>
+</div>
+<a id="a45f3ded286e417eb2a44e3483b6f4294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f3ded286e417eb2a44e3483b6f4294">&#9670;&nbsp;</a></span>HC595() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00893.html">HC595</a> </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>sinPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>clkPin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>clrPin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>rckPin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>oePin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>pulseTime</em> = <code><a class="el" href="a00893.html#a105d6c6ddfafe9380f41e1c4f1215e46">DEFAULT_PULSE_TIME_US</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Constructs a new <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> class object, and configures it. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sinPin</td><td>GPIO Pin number of Serial Data Input. </td></tr>
+    <tr><td class="paramname">clkPin</td><td>GPIO Pin number of Data Clock (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">clrPin</td><td>GPIO Pin number of ~Clear (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">rckPin</td><td>GPIO Pin number of Latch Clock (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">oePin</td><td>GPIO Pin number of Output Enable (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">pulseTime</td><td>Pulse time, in microseconds (default = DEFAULT_PULSE_TIME_US). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6cd5937993a8e281880777d6e91876b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cd5937993a8e281880777d6e91876b3">&#9670;&nbsp;</a></span>configure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void configure </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>sinPin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>clkPin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>clrPin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>rckPin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>oePin</em> = <code>0xFF</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>pulseTime</em> = <code><a class="el" href="a00893.html#a105d6c6ddfafe9380f41e1c4f1215e46">DEFAULT_PULSE_TIME_US</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configures the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> class object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sinPin</td><td>GPIO Pin number of Serial Data Input (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">clkPin</td><td>GPIO Pin number of Data Clock (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">clrPin</td><td>GPIO Pin number of ~Clear (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">rckPin</td><td>GPIO Pin number of Latch Clock (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">oePin</td><td>GPIO Pin number of Output Enable (default = 0xFF, no pin). </td></tr>
+    <tr><td class="paramname">pulseTime</td><td>Pulse time, in microseconds (default = DEFAULT_PULSE_TIME_US). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac8bb3912a3ce86b15842e79d0b421204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8bb3912a3ce86b15842e79d0b421204">&#9670;&nbsp;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Clears the output of the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a>. </p>
+
+</div>
+</div>
+<a id="ae92503e3be76420bb89c1a2108a8cec0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae92503e3be76420bb89c1a2108a8cec0">&#9670;&nbsp;</a></span>outputEnable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void outputEnable </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Changes the Output Enable pin of the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>If true, activate OE. Else, disables the output (put its in tristate). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a365b25c536bf2dd38eb7ff01bde56b03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a365b25c536bf2dd38eb7ff01bde56b03">&#9670;&nbsp;</a></span>outputDisable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void outputDisable </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Disables the output (put its in tristate). </p>
+
+</div>
+</div>
+<a id="aad76ed55071c5a9bd3e5bb9ec39f76bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad76ed55071c5a9bd3e5bb9ec39f76bb">&#9670;&nbsp;</a></span>writeByte()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeByte </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes a byte to output of the <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Value to write (bits 0..7). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab5d2ffcf16ac85b0d10c78817ad85775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5d2ffcf16ac85b0d10c78817ad85775">&#9670;&nbsp;</a></span>writeWord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeWord </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes a word to outputs of two <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> (in cascade). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Value to write (bits 0..15). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9f254227c6dbcb16a202cae31ed1a2fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f254227c6dbcb16a202cae31ed1a2fc">&#9670;&nbsp;</a></span>writeDWord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeDWord </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes a double word to outputs of quad <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> (in cascade). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Value to write (bits 0..31). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac7f46f8fed8351e8ae070a39095312d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7f46f8fed8351e8ae070a39095312d6">&#9670;&nbsp;</a></span>writeData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void writeData </td>
+          <td>(</td>
+          <td class="paramtype">const uint8_t *&#160;</td>
+          <td class="paramname"><em>buffer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Writes data to outputs of "n" <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> (arbitrary units in cascade). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buffer</td><td>Pointer to values to write. </td></tr>
+    <tr><td class="paramname">size</td><td>Size of buffer. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a541f3690d6f2a0da8743b0335f216f49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a541f3690d6f2a0da8743b0335f216f49">&#9670;&nbsp;</a></span>setBit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setBit </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>bit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets a bit of any <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> in cascade. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bit</td><td>Number of bit (0..n). </td></tr>
+    <tr><td class="paramname">value</td><td>Value to set (default = true). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a6c7039212405b09322959a8237c59413"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7039212405b09322959a8237c59413">&#9670;&nbsp;</a></span>resetBit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void resetBit </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>bit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resets a bit of any <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> in cascade. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bit</td><td>Number of bit (0..n). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad1e527258a4fef33244368bfa4fcb5ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1e527258a4fef33244368bfa4fcb5ec">&#9670;&nbsp;</a></span>toggleBit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void toggleBit </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>bit</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Toggles a bit of any <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> in cascade. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bit</td><td>Number of bit (0..n). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0ed18b5903916ec61ea243bff59894df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ed18b5903916ec61ea243bff59894df">&#9670;&nbsp;</a></span>getData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="a00893.html#a267c476c54a8621ca82d7e8e9c451769">HC595::TData</a> &amp; getData </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the data written in <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> units. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to "software stored" data buffer. </dd></dl>
+
+</div>
+</div>
+<a id="ad6ccbdb7d60ce7a61ac4f096e68f1dc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ccbdb7d60ce7a61ac4f096e68f1dc2">&#9670;&nbsp;</a></span>getBit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const bool getBit </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>bit</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a bit of data written in <a class="el" href="a00893.html" title="74xx595 Shift Register Class.">HC595</a> units. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bit</td><td>Number of bit (0..n). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Value of bit ("software stored"). </dd></dl>
+
+</div>
+</div>
+<a id="a04b37423fcf8ac5ea65c567087df45da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04b37423fcf8ac5ea65c567087df45da">&#9670;&nbsp;</a></span>getOE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const bool getOE </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the Output Enable status. </p>
+<dl class="section return"><dt>Returns</dt><dd>Value of Output Enable ("software stored"). </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a105d6c6ddfafe9380f41e1c4f1215e46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a105d6c6ddfafe9380f41e1c4f1215e46">&#9670;&nbsp;</a></span>DEFAULT_PULSE_TIME_US</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint DEFAULT_PULSE_TIME_US = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value to pulse time, in microseconds. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="a00005.html">74hc595.hpp</a></li>
+<li><a class="el" href="a00002.html">74hc595.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

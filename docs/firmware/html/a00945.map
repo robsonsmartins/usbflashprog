@@ -1,0 +1,5 @@
+<map id="HC595Test" name="HC595Test">
+<area shape="rect" id="node1" title="Test class for 74xx595 Shift Register." alt="" coords="37,696,180,832"/>
+<area shape="rect" id="node2" href="$a00919.html" title="74xx595 Shift Register Class." alt="" coords="5,292,212,633"/>
+<area shape="rect" id="node3" href="$a00935.html" title="Pico GPIO Class." alt="" coords="41,5,176,229"/>
+</map>

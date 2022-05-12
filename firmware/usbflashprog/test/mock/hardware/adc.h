@@ -12,8 +12,12 @@
 
 #include "pico/stdlib.h"
 
+// ---------------------------------------------------------------------------
+
 constexpr const uint16_t RAW_ADC_DATA[2] = {0x221, 0xDDD};
 static int8_t adcDataIndex = 0;
+
+// ---------------------------------------------------------------------------
 
 extern "C" inline void adc_init(void) {}
 

@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup UnitTests
  * @file test/hal/multicore_test.cpp
  * @brief Implementation of Unit Test for Pico Multi Core Class.
  * 
@@ -16,19 +17,23 @@
 
 #include "multicore_test.hpp"
 
+// ---------------------------------------------------------------------------
+
+constexpr uint64_t WAIT_TIME_US = 10;
+
 void second_core_entry_(MultiCore& core); // NOLINT
 
 MultiCore MultiCoreTest::multicore_ = MultiCore(second_core_entry_);
 
-#define WAIT_TIME_US 10
+// ---------------------------------------------------------------------------
 
 TEST_F(MultiCoreTest, launch_stop) {
     EXPECT_EQ(multicore_.isRunning(), false);
-    EXPECT_EQ(multicore_.getStatus(), csStopped);
+    EXPECT_EQ(multicore_.getStatus(), MultiCore::csStopped);
     multicore_.launch();
     multicore_.usleep(WAIT_TIME_US);
     EXPECT_EQ(multicore_.isRunning(), true);
-    EXPECT_EQ(multicore_.getStatus(), csRunning);
+    EXPECT_EQ(multicore_.getStatus(), MultiCore::csRunning);
     multicore_.putParam(20);
     multicore_.usleep(WAIT_TIME_US);
     EXPECT_EQ(multicore_.getParam(), 40);
@@ -39,11 +44,14 @@ TEST_F(MultiCoreTest, launch_stop) {
     multicore_.stop();
     multicore_.usleep(WAIT_TIME_US);
     EXPECT_EQ(multicore_.isRunning(), false);
-    EXPECT_EQ(multicore_.getStatus(), csStopped);
+    EXPECT_EQ(multicore_.getStatus(), MultiCore::csStopped);
     multicore_.putParam(60);
     multicore_.usleep(WAIT_TIME_US);
     EXPECT_EQ(multicore_.getParam(), 0);
+    multicore_.msleep(1);
 }
+
+// ---------------------------------------------------------------------------
 
 void second_core_entry_(MultiCore& core) { // NOLINT
     uintptr_t p = 0;

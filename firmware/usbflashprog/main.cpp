@@ -7,6 +7,12 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @defgroup Firmware Firmware Project
+ * @brief    Firmware project for USB EPROM/Flash Programmer.
+ */
+// ---------------------------------------------------------------------------
+/** 
+ * @ingroup Firmware
  * @file main.cpp
  * @brief Implementation of the Main Routine.
  *  
@@ -17,13 +23,36 @@
 #include <cstdio>
 #include <cstring>
 #include <iostream>
+#include <iomanip>
 
 #include "pico/stdlib.h"
 
 #include "hal/gpio.hpp"
 #include "hal/adc.hpp"
 #include "hal/pwm.hpp"
+#include "hal/multicore.hpp"
+#include "circuits/dc2dc.hpp"
 #include "circuits/74hc595.hpp"
+
+void second_core(MultiCore& core); // NOLINT
+
+MultiCore mcore(second_core);
+Gpio gpio;
+HC595 hc595(12, 14, 15, 13);
+Dc2DcConfig vppConfig(
+    21, 1, ((3900.0f + 470.0f) / 470.0f * 0.922916666f));
+Dc2Dc vppGen(vppConfig);
+uint8_t bit = 0;
+float vpp = 0;
+
+void second_core(MultiCore& core) { // NOLINT
+    while (!core.isStopRequested()) {
+        vppGen.adjust();
+        vpp = vppGen.getV();
+        std::cout << "VPP: " << std::fixed
+            << std::setprecision(2) << vpp << "V" << std::endl;
+    }
+}
 
 /**
  * @brief Main routine.
@@ -32,60 +61,41 @@
 int main() {
     stdio_init_all();
 
-    Gpio gpio;
-    HC595 hc595(12, 14, 15, 13);
-
     hc595.clear();
     hc595.outputEnable();
+    vppGen.start();
 
-    Adc adc;
+    vppGen.setV(12.0f);
 
-    Pwm pwm(20);
+    mcore.launch();
 
-    uint8_t bit = 0;
-    float vpp;
-    float duty = 0;
-    pwm.setFreq(40000);
-    pwm.start();
     while (true) {
         gpio.togglePin(PICO_DEFAULT_LED_PIN);
         hc595.setBit(bit);
-        sleep_ms(200);
+        mcore.msleep(200);
         hc595.resetBit(bit);
         bit++;
         if (bit > 4) bit = 0;
-        vpp = adc.capture(1, 1024);
-        vpp = vpp / 470 * (3900 + 470);
-        vpp *= 0.97173913f;
 
         int opc = getchar_timeout_us(0);
         switch (opc) {
             case '+':
-                duty += 0.5f;
-                if (duty > 100.0f) { duty = 100.0f; }
-                pwm.setDuty(duty);
                 break;
             case '-':
-                duty -= 0.5f;
-                if (duty < 0.0f) { duty = 0.0f; }
-                pwm.setDuty(duty);
                 break;
             case 'a':
-                pwm.setFreq(20000);
                 break;
             case 's':
-                pwm.setFreq(40000);
                 break;
             case '0':
-                pwm.stop();
+                vppGen.stop();
                 break;
             case '1':
-                pwm.start();
+                vppGen.start();
                 break;
             default:
                 break;
         }
-        // std::cout << "VPP: " << vpp << "V" << std::endl;
     }
 
     return 0;

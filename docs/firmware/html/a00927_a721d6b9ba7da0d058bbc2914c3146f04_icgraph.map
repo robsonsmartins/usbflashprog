@@ -1,0 +1,5 @@
+<map id="configure" name="configure">
+<area shape="rect" id="node1" title="Configures the DC to DC converter." alt="" coords="191,31,273,57"/>
+<area shape="rect" id="node2" href="$a00927.html#a1be95bd6ca899cfe8fdf4c282eb1537a" title="Constructor." alt="" coords="42,5,106,32"/>
+<area shape="rect" id="node3" href="$a00951.html#a3a1707f6479611fdc609a3eb8a0cef1b" title="Sets Up the test." alt="" coords="5,56,143,83"/>
+</map>

@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup Firmware
  * @file hal/adc.hpp
  * @brief Header of the Pico ADC Class.
  * 
@@ -21,10 +22,14 @@
 
 #include "pico/stdlib.h"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup Firmware
  * @brief Pico ADC Class
  * @details The purpose of this class is to manipulate the ADC on the 
  *  board.
+ * @nosubgrouping
  */
 class Adc {
  public:
@@ -70,17 +75,17 @@ class Adc {
     float capture(uint channel, float* buf, size_t size);
 
  private:
-    /** @brief Current reference voltage. */
+    /* @brief Current reference voltage. */
     float vref_;
-    /** @brief Set of initialized channels. */
+    /* @brief Set of initialized channels. */
     std::set<uint> initChannels_;
-    /**
+    /*
      * @brief Initializes the channel.
      * @param channel Number of the ADC channel (0 to 3).
      * @return Bool if success. False otherwise.
      */
     bool initChannel_(uint channel);
-    /**
+    /*
      * @brief Calculate the real value, based in VRef. 
      * @param value ADC raw value (12 bits).
      * @return Real value, in Volts. 

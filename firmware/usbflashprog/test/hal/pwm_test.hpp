@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup UnitTests
  * @file test/hal/pwm_test.hpp
  * @brief Header of Unit Test for Pico PWM Class.
  * 
@@ -20,9 +21,13 @@
 #include <gtest/gtest.h>
 #include "hal/pwm.hpp"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup UnitTests
  * @brief Test class for Pico PWM.
  * @details The purpose of this class is to test the Pwm class.
+ * @nosubgrouping
  */
 class PwmTest : public testing::Test {
  protected:
@@ -34,7 +39,7 @@ class PwmTest : public testing::Test {
   void SetUp() override {}
   /** @brief Teardown of the test. */
   void TearDown() override {}
-  /** @brief Pwm class object to test. */
+  /* @brief Pwm class object to test. */
   static Pwm pwm_;
 };
 

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['adc_5f_196',['adc_',['../a00929.html#a1b2ac439de68cb5d0b386960a057de25',1,'AdcTest']]]
+  ['adcchannel_245',['adcChannel',['../a00923.html#a185ec2bed51835a46e7e094ea2cbf429',1,'Dc2DcConfig']]],
+  ['adcvref_246',['adcVref',['../a00923.html#a570efab00f4947e625848fb971906db5',1,'Dc2DcConfig']]]
 ];

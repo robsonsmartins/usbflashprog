@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup UnitTests
  * @file test/hal/gpio_test.hpp
  * @brief Header of Unit Test for Pico GPIO Class.
  * 
@@ -20,9 +21,13 @@
 #include <gtest/gtest.h>
 #include "hal/gpio.hpp"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup UnitTests
  * @brief Test class for Pico GPIO.
  * @details The purpose of this class is to test the Gpio class.
+ * @nosubgrouping
  */
 class GpioTest : public testing::Test {
  protected:
@@ -34,7 +39,7 @@ class GpioTest : public testing::Test {
   void SetUp() override {}
   /** @brief Teardown of the test. */
   void TearDown() override {}
-  /** @brief Gpio class object to test. */
+  /* @brief Gpio class object to test. */
   static Gpio gpio_;
 };
 

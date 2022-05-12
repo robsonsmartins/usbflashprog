@@ -7,6 +7,12 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @defgroup UnitTests Unit Tests
+ * @brief    Unit Tests for USB EPROM/Flash Programmer firmware project.
+ */
+// ---------------------------------------------------------------------------
+/** 
+ * @ingroup UnitTests
  * @file test/main.cpp
  * @brief Implementation of the Unit Tests Main Routine.
  *  
@@ -16,6 +22,15 @@
 
 #include <gtest/gtest.h>
 
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup UnitTests
+ * @brief Main routine for tests.
+ * @param argc Number of arguments.
+ * @param argv Array of arguments.
+ * @return Error code (zero if success).
+ */
 int main(int argc, char **argv) {
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();

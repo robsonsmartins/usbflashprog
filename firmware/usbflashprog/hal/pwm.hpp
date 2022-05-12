@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup Firmware
  * @file hal/pwm.hpp
  * @brief Header of the Pico PWM Class.
  * 
@@ -19,11 +20,15 @@
 
 #include "pico/stdlib.h"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup Firmware
  * @brief Pico PWM Class
  * @details The purpose of this class is to manipulate the PWM on the 
  *  board.<br/>
  *  <b>Note</b>: Each instance of this class controls only one PWM pin.
+ * @nosubgrouping
  */
 class Pwm {
  public:
@@ -93,19 +98,19 @@ class Pwm {
     bool isRunning() const;
 
  private:
-    /** @brief Number of GPIO pin associated with this instance. */
+    /* @brief Number of GPIO pin associated with this instance. */
     uint pin_;
-    /** @brief Current PWM frequency (Hz). */
+    /* @brief Current PWM frequency (Hz). */
     uint32_t freq_;
-    /** @brief Current PWM duty cycle (%). */
+    /* @brief Current PWM duty cycle (%). */
     float duty_;
-    /** @brief Current PWM status flag. */
+    /* @brief Current PWM status flag. */
     bool running_;
-    /** @brief Number of PWM slice associated with this instance. */
+    /* @brief Number of PWM slice associated with this instance. */
     uint slice_;
-    /** @brief Number of PWM channel associated with this instance. */
+    /* @brief Number of PWM channel associated with this instance. */
     uint channel_;
-    /** 
+    /* 
      * @brief Value of frequency divider of this instance.
      * For internal use.
      */

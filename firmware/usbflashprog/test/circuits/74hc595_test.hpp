@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup UnitTests
  * @file test/circuits/74hc595_test.hpp
  * @brief Header of Unit Test for 74xx595 Shift Register Class.
  * 
@@ -20,10 +21,14 @@
 #include <gtest/gtest.h>
 #include "circuits/74hc595.hpp"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup UnitTests
  * @brief Test class for 74xx595 Shift Register.
  * @details The purpose of this class is to test the 74xx595
  *  Shift Register class.
+ * @nosubgrouping
  */
 class HC595Test : public testing::Test {
  protected:
@@ -35,11 +40,15 @@ class HC595Test : public testing::Test {
   void SetUp() override;
   /** @brief Teardown of the test. */
   void TearDown() override;
-
-  bool compareData(const HC595::TData& a,
+  /*
+   * @brief Compares data and return if them are equal.
+   * @param a One data.
+   * @param b Another data.
+   * @return True if both data are equal, false otherwise.
+   */
+  bool compareData_(const HC595::TData& a,
                    const HC595::TData& b);
-
-  /** @brief HC595 class object to test. */
+  /* @brief HC595 class object to test. */
   static HC595 hc595_;
 };
 

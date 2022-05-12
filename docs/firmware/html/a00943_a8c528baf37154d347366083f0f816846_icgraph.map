@@ -1,0 +1,9 @@
+<map id="stop" name="stop">
+<area shape="rect" id="node1" title="Disables the PWM on the pin." alt="" coords="519,81,569,108"/>
+<area shape="rect" id="node2" href="$a00927.html#a68a350717fe6bf9012843e7c977d87b2" title="Stops the DC to DC converter." alt="" coords="371,56,471,83"/>
+<area shape="rect" id="node7" href="$a00943.html#a5a2f9d4500be3b3e46524921eb6b0360" title="Destructor." alt="" coords="388,107,453,133"/>
+<area shape="rect" id="node3" href="$a00927.html#a721d6b9ba7da0d058bbc2914c3146f04" title="Configures the DC to DC converter." alt="" coords="191,31,323,57"/>
+<area shape="rect" id="node6" href="$a00927.html#a813b2b28182ea848c5ec003039b6e9b2" title="Destructor." alt="" coords="194,81,319,108"/>
+<area shape="rect" id="node4" href="$a00927.html#a1be95bd6ca899cfe8fdf4c282eb1537a" title="Constructor." alt="" coords="17,5,131,32"/>
+<area shape="rect" id="node5" href="$a00951.html#a3a1707f6479611fdc609a3eb8a0cef1b" title="Sets Up the test." alt="" coords="5,56,143,83"/>
+</map>

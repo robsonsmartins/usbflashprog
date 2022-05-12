@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['ispulleddown_43',['isPulledDown',['../a00913.html#ac8ff90dd574b842eacce082d451c0cf5',1,'Gpio']]],
-  ['ispulledup_44',['isPulledUp',['../a00913.html#aa4ff751aefac162f3d52a361a132e444',1,'Gpio']]],
-  ['isrunning_45',['isRunning',['../a00917.html#ad619b8b51adc7874204abd71080cd90e',1,'MultiCore::isRunning()'],['../a00921.html#ad619b8b51adc7874204abd71080cd90e',1,'Pwm::isRunning()']]],
-  ['isstoprequested_46',['isStopRequested',['../a00917.html#ade698d03ef3275ee05cb330e957fba3c',1,'MultiCore']]]
+  ['hc595_53',['HC595',['../a00919.html',1,'HC595'],['../a00919.html#a5710a093e9ee47d3979785289350a23e',1,'HC595::HC595()'],['../a00919.html#a45f3ded286e417eb2a44e3483b6f4294',1,'HC595::HC595(uint sinPin, uint clkPin=0xFF, uint clrPin=0xFF, uint rckPin=0xFF, uint oePin=0xFF, uint pulseTime=DEFAULT_PULSE_TIME_US)']]],
+  ['hc595test_54',['HC595Test',['../a00947.html',1,'HC595Test'],['../a00947.html#a45ff84c762f66cbf7774eddc55f615ae',1,'HC595Test::HC595Test()']]]
 ];

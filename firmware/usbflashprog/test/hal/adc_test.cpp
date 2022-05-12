@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup UnitTests
  * @file test/hal/adc_test.cpp
  * @brief Implementation of Unit Test for Pico ADC Class.
  * 
@@ -18,7 +19,26 @@
 
 #include "mock/hardware/adc.h"
 
+// ---------------------------------------------------------------------------
+
 Adc AdcTest::adc_ = Adc();
+
+// ---------------------------------------------------------------------------
+
+float AdcTest::calculate_(uint16_t value, float vref) {
+    float result = value * vref / (1 << 12);
+    return result;
+}
+
+float AdcTest::mean_(const float* buf, size_t size) {
+    float result = 0.0f;
+    for (size_t i = 0; i < size; i++) {
+        result += buf[i];
+    }
+    return result / size;
+}
+
+// ---------------------------------------------------------------------------
 
 TEST_F(AdcTest, capture) {
     float buf[512];
@@ -35,17 +55,4 @@ TEST_F(AdcTest, capture) {
     Adc newAdc = Adc(5.0f);
     EXPECT_NEAR(newAdc.capture(0),
         AdcTest::calculate_(meanMockData, 5.0f), 0.2f);
-}
-
-float AdcTest::calculate_(uint16_t value, float vref) {
-    float result = value * vref / (1 << 12);
-    return result;
-}
-
-float AdcTest::mean_(const float* buf, size_t size) {
-    float result = 0.0f;
-    for (size_t i = 0; i < size; i++) {
-        result += buf[i];
-    }
-    return result / size;
 }

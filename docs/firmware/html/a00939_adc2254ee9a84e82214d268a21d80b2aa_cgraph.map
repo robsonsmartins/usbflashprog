@@ -1,0 +1,6 @@
+<map id="~MultiCore" name="~MultiCore">
+<area shape="rect" id="node1" title="Destructor." alt="" coords="5,31,101,57"/>
+<area shape="rect" id="node2" href="$a00939.html#a8c528baf37154d347366083f0f816846" title="Stops the execution of second CPU core." alt="" coords="149,31,200,57"/>
+<area shape="rect" id="node3" href="$a00939.html#aa81aed607133209dade63a226818224d" title="Locks execution line (using mutex)." alt="" coords="256,5,305,32"/>
+<area shape="rect" id="node4" href="$a00939.html#a9278be8203e1c42e2619179882ae4403" title="Unlocks execution line (using mutex)." alt="" coords="248,56,313,83"/>
+</map>

@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup UnitTests
  * @file test/hal/adc_test.hpp
  * @brief Header of Unit Test for Pico ADC Class.
  * 
@@ -20,9 +21,13 @@
 #include <gtest/gtest.h>
 #include "hal/adc.hpp"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup UnitTests
  * @brief Test class for Pico ADC.
  * @details The purpose of this class is to test the Adc class.
+ * @nosubgrouping
  */
 class AdcTest : public testing::Test {
  protected:
@@ -34,16 +39,16 @@ class AdcTest : public testing::Test {
   void SetUp() override {}
   /** @brief Teardown of the test. */
   void TearDown() override {}
-  /** @brief Adc class object to test. */
+  /* @brief Adc class object to test. */
   static Adc adc_;
-  /**
+  /*
    * @brief Calculates the real value, based in VRef. 
    * @param value ADC raw value (12 bits).
    * @param vref Reference Voltage, in Volts (default = 3.3).
    * @return Real value, in Volts. 
    */
   static float calculate_(uint16_t value, float vref = 3.3f);
-  /**
+  /*
    * @brief Calculates the mean of samples into buffer.
    * @param buf Pointer to buffer of samples.
    * @param size Size of buffer.

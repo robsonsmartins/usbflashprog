@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pwm_109',['Pwm',['../a00921.html',1,'']]],
-  ['pwmtest_110',['PwmTest',['../a00941.html',1,'']]]
+  ['multicore_140',['MultiCore',['../a00939.html',1,'']]],
+  ['multicoretest_141',['MultiCoreTest',['../a00963.html',1,'']]]
 ];

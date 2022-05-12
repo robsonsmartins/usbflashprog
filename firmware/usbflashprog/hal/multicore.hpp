@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup Firmware
  * @file hal/multicore.hpp
  * @brief Header of the Pico Multi Core Class.
  * 
@@ -22,40 +23,42 @@
 // forward
 class MultiCore;
 
-/**
- * @brief Entry point to second core routine.
- * @details A valid routine to be used as an entry point for the second CPU 
- *  core must be of this type.<br/>
- *  <p><b>For example</b>:<br/>
- *  <code>
- *   void second_core_my_entry(MultiCore& core) {
- *     ...
- *   }
- *  </code></p>
- */
-typedef void (*MultiCoreEntry) (MultiCore&);
+// ---------------------------------------------------------------------------
 
 /**
- * @brief Defines possible values for CPU core status.
- */
-enum CoreStatus {
-    /** @brief Core is stopped. */
-    csStopped,
-    /** @brief Core is running. */
-    csRunning,
-    /** @brief Core is starting (initialization). */
-    csStarting,
-    /** @brief Core is stopping (finalization). */
-    csStopping
-};
-
-/**
+ * @ingroup Firmware
  * @brief Pico Multi Core Class
  * @details The purpose of this class is to allow processing on the
  *   second CPU core on the board.
+ * @nosubgrouping
  */
 class MultiCore {
  public:
+    /**
+     * @brief Entry point to second core routine.
+     * @details A valid routine to be used as an entry point for the second CPU 
+     *  core must be of this type.<br/>
+     *  <p><b>For example</b>:<br/>
+     *  <code>
+     *   void second_core_my_entry(MultiCore& core) {
+     *     ...
+     *   }
+     *  </code></p>
+     */
+    typedef void (*MultiCoreEntry) (MultiCore&);
+    /**
+     * @brief Defines possible values for CPU core status.
+     */
+    enum CoreStatus {
+       /** @brief Core is stopped. */
+       csStopped,
+       /** @brief Core is running. */
+       csRunning,
+       /** @brief Core is starting (initialization). */
+       csStarting,
+       /** @brief Core is stopping (finalization). */
+       csStopping
+    };
     /**
      * @brief Constructor.
      * @param entry Entry point (function) for second CPU core.
@@ -113,20 +116,25 @@ class MultiCore {
      * @param us Number of microseconds to sleep.
      */
     void usleep(uint64_t us) const;
+    /**
+     * @brief Sleeps the execution of current CPU core for a number of milliseconds.
+     * @param ms Number of milliseconds to sleep.
+     */
+    void msleep(uint32_t ms) const;
 
  private:
-    /** 
+    /* 
      * @brief Entry point (pointer to function) of the second CPU 
      *  core routine.
      */
     MultiCoreEntry entry_;
-    /** @brief Current second core status flag. */
+    /* @brief Current second core status flag. */
     CoreStatus status_;
-    /** @brief Pointer to mutex object (for synchronization). */
+    /* @brief Pointer to mutex object (for synchronization). */
     void *mutex_;
 
   /** @cond */
-  /**
+  /*
    * @brief Internal function used as entry point for the 
    *  second core routine.
    */

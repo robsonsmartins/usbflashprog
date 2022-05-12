@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['pwm_5f_202',['pwm_',['../a00941.html#a2639799584fdcef9da8e2649d999269c',1,'PwmTest']]],
-  ['pwm_5fdefault_5ffreq_203',['PWM_DEFAULT_FREQ',['../a00921.html#a055a68e3ccbd2fc9f165070b73ad0c9e',1,'Pwm']]]
+  ['freq_5f_297',['freq_',['../a00943.html#a9b603981a8b92ed4b79c10e094ed16a9',1,'Pwm']]]
 ];

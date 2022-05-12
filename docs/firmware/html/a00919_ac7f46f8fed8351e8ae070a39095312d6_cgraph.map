@@ -1,0 +1,5 @@
+<map id="writeData" name="writeData">
+<area shape="rect" id="node1" title="Writes data to outputs of &quot;n&quot; HC595 (arbitrary units in cascade)." alt="" coords="5,5,92,32"/>
+<area shape="rect" id="node2" href="$a00935.html#ab27c0877384e6c463f77b574f65c5dfe" title="Resets the pin value." alt="" coords="140,5,253,32"/>
+<area shape="rect" id="node3" href="$a00935.html#a6cf7db607816ea101fa7629f4731f40e" title="Sets the pin value." alt="" coords="301,5,401,32"/>
+</map>

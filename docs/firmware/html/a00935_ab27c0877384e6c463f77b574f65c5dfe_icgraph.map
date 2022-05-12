@@ -1,0 +1,8 @@
+<map id="resetPin" name="resetPin">
+<area shape="rect" id="node1" title="Resets the pin value." alt="" coords="388,31,463,57"/>
+<area shape="rect" id="node2" href="$a00919.html#ac8bb3912a3ce86b15842e79d0b421204" title="Clears the output of the HC595." alt="" coords="219,5,324,32"/>
+<area shape="rect" id="node3" href="$a00919.html#ac7f46f8fed8351e8ae070a39095312d6" title="Writes data to outputs of &quot;n&quot; HC595 (arbitrary units in cascade)." alt="" coords="203,56,340,83"/>
+<area shape="rect" id="node4" href="$a00919.html#aad76ed55071c5a9bd3e5bb9ec39f76bb" title="Writes a byte to output of the HC595." alt="" coords="12,5,148,32"/>
+<area shape="rect" id="node5" href="$a00919.html#a9f254227c6dbcb16a202cae31ed1a2fc" title="Writes a double word to outputs of quad HC595 (in cascade)." alt="" coords="5,56,155,83"/>
+<area shape="rect" id="node6" href="$a00919.html#ab5d2ffcf16ac85b0d10c78817ad85775" title="Writes a word to outputs of two HC595 (in cascade)." alt="" coords="11,107,149,133"/>
+</map>

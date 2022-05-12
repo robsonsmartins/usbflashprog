@@ -13,6 +13,8 @@
 #include <unistd.h>
 #include <cstdint>
 
+// ---------------------------------------------------------------------------
+
 typedef unsigned int uint;
 
 #define __not_in_flash(group) __attribute__((section(".time_critical." group)))
@@ -20,8 +22,14 @@ typedef unsigned int uint;
 #define __not_in_flash_func(func_name) \
     __not_in_flash(__STRING(func_name)) func_name
 
+// ---------------------------------------------------------------------------
+
 extern "C" inline void sleep_us(uint64_t us) {
     usleep(us);
+}
+
+extern "C" inline void sleep_ms(uint32_t ms) {
+    usleep(static_cast<uint64_t>(ms) * 1000);
 }
 
 #endif  // TEST_MOCK_PICO_STDLIB_H_

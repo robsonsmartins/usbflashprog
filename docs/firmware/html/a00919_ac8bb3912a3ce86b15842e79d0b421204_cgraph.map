@@ -1,0 +1,5 @@
+<map id="clear" name="clear">
+<area shape="rect" id="node1" title="Clears the output of the HC595." alt="" coords="5,31,60,57"/>
+<area shape="rect" id="node2" href="$a00935.html#ab27c0877384e6c463f77b574f65c5dfe" title="Resets the pin value." alt="" coords="108,5,221,32"/>
+<area shape="rect" id="node3" href="$a00935.html#a6cf7db607816ea101fa7629f4731f40e" title="Sets the pin value." alt="" coords="269,31,369,57"/>
+</map>

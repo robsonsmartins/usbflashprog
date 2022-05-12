@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Member List</title>
+<title>USB EPROM/Flash Programmer: Adc Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,19 +62,251 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="a00927.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GpioTest Member List</div>  </div>
+<div class="title">Adc Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00933.html">GpioTest</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00933.html#af96c90f34eabe9e47a4bf62a6ca54aef">gpio_</a></td><td class="entry"><a class="el" href="a00933.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00933.html#ac3d06930da833a756ef2b3c9de213ca3">GpioTest</a>()</td><td class="entry"><a class="el" href="a00933.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00933.html#a3a1707f6479611fdc609a3eb8a0cef1b">SetUp</a>() override</td><td class="entry"><a class="el" href="a00933.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a00933.html#ac4fca95dc3b93372ce7f2078baf8e8b6">TearDown</a>() override</td><td class="entry"><a class="el" href="a00933.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00933.html#a68b086f6974cb054e285d1866bcf200b">~GpioTest</a>() override</td><td class="entry"><a class="el" href="a00933.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-</table></div><!-- contents -->
+<p>Pico ADC Class.  
+ <a href="a00930.html#details">More...</a></p>
+
+<p><code>#include &lt;adc.hpp&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Adc:</div>
+<div class="dyncontent">
+<div class="center"><img src="a00928.png" border="0" usemap="#aAdc_coll__map" alt="Collaboration graph"/></div>
+<map name="aAdc_coll__map" id="aAdc_coll__map">
+<area shape="rect" title="Pico ADC Class." alt="" coords="5,5,140,141"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a7c4e2629c00b0fea937d59c534f6b417"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00930.html#a7c4e2629c00b0fea937d59c534f6b417">Adc</a> ()</td></tr>
+<tr class="memdesc:a7c4e2629c00b0fea937d59c534f6b417"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00930.html#a7c4e2629c00b0fea937d59c534f6b417">More...</a><br /></td></tr>
+<tr class="separator:a7c4e2629c00b0fea937d59c534f6b417"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acff8a98d5172337d124dd51d05360a67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00930.html#acff8a98d5172337d124dd51d05360a67">Adc</a> (float vref)</td></tr>
+<tr class="memdesc:acff8a98d5172337d124dd51d05360a67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00930.html#acff8a98d5172337d124dd51d05360a67">More...</a><br /></td></tr>
+<tr class="separator:acff8a98d5172337d124dd51d05360a67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b9fe06a6f7c9af4f3b6665c3a84dc93"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00930.html#a8b9fe06a6f7c9af4f3b6665c3a84dc93">capture</a> (uint channel)</td></tr>
+<tr class="memdesc:a8b9fe06a6f7c9af4f3b6665c3a84dc93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures one sample from the ADC.  <a href="a00930.html#a8b9fe06a6f7c9af4f3b6665c3a84dc93">More...</a><br /></td></tr>
+<tr class="separator:a8b9fe06a6f7c9af4f3b6665c3a84dc93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66fa0dca2384481afef5a63b64abd9c1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00930.html#a66fa0dca2384481afef5a63b64abd9c1">capture</a> (uint channel, size_t size)</td></tr>
+<tr class="memdesc:a66fa0dca2384481afef5a63b64abd9c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures multiple samples from the ADC.  <a href="a00930.html#a66fa0dca2384481afef5a63b64abd9c1">More...</a><br /></td></tr>
+<tr class="separator:a66fa0dca2384481afef5a63b64abd9c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76b3d0b2981bafd179a73ece4499a3a1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00930.html#a76b3d0b2981bafd179a73ece4499a3a1">capture</a> (uint channel, float *buf, size_t size)</td></tr>
+<tr class="memdesc:a76b3d0b2981bafd179a73ece4499a3a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Captures multiple samples from the ADC.  <a href="a00930.html#a76b3d0b2981bafd179a73ece4499a3a1">More...</a><br /></td></tr>
+<tr class="separator:a76b3d0b2981bafd179a73ece4499a3a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:aeb8e08276ace83b175d190940da6cffb"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00930.html#aeb8e08276ace83b175d190940da6cffb">DEFAULT_VREF</a> = 3.3f</td></tr>
+<tr class="memdesc:aeb8e08276ace83b175d190940da6cffb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default reference voltage, in Volts.  <a href="a00930.html#aeb8e08276ace83b175d190940da6cffb">More...</a><br /></td></tr>
+<tr class="separator:aeb8e08276ace83b175d190940da6cffb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Pico ADC Class. </p>
+<p>The purpose of this class is to manipulate the ADC on the board. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7c4e2629c00b0fea937d59c534f6b417"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c4e2629c00b0fea937d59c534f6b417">&#9670;&nbsp;</a></span>Adc() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00930.html">Adc</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>As default, the reference voltage is set to DEFAULT_VREF value. </p>
+
+</div>
+</div>
+<a id="acff8a98d5172337d124dd51d05360a67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acff8a98d5172337d124dd51d05360a67">&#9670;&nbsp;</a></span>Adc() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00930.html">Adc</a> </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>vref</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">vref</td><td>Reference voltage of the ADC, in Volts. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8b9fe06a6f7c9af4f3b6665c3a84dc93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b9fe06a6f7c9af4f3b6665c3a84dc93">&#9670;&nbsp;</a></span>capture() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float capture </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>channel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Captures one sample from the ADC. </p>
+<p>Captures and returns one sample. The valid channels are 0 to 3. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel</td><td>Number of the ADC channel (0 to 3). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Value of the sample, in Volts. </dd></dl>
+
+</div>
+</div>
+<a id="a66fa0dca2384481afef5a63b64abd9c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66fa0dca2384481afef5a63b64abd9c1">&#9670;&nbsp;</a></span>capture() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float capture </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Captures multiple samples from the ADC. </p>
+<p>Uses FIFO to capture samples from ADC. The valid channels are 0 to 3. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel</td><td>Number of the ADC channel (0 to 3). </td></tr>
+    <tr><td class="paramname">size</td><td>Number of samples to capture. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Mean of all sample values, in Volts. </dd></dl>
+
+</div>
+</div>
+<a id="a76b3d0b2981bafd179a73ece4499a3a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76b3d0b2981bafd179a73ece4499a3a1">&#9670;&nbsp;</a></span>capture() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float capture </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>channel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Captures multiple samples from the ADC. </p>
+<p>Uses FIFO to capture samples from ADC. The valid channels are 0 to 3. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">channel</td><td>Number of the ADC channel (0 to 3). </td></tr>
+    <tr><td class="paramname">buf</td><td>Pointer to buffer that receive the captured samples. </td></tr>
+    <tr><td class="paramname">size</td><td>Number of samples to capture. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Mean of all sample values, in Volts. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="aeb8e08276ace83b175d190940da6cffb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb8e08276ace83b175d190940da6cffb">&#9670;&nbsp;</a></span>DEFAULT_VREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float DEFAULT_VREF = 3.3f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default reference voltage, in Volts. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="a00017.html">adc.hpp</a></li>
+<li><a class="el" href="a00014.html">adc.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

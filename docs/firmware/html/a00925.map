@@ -1,0 +1,6 @@
+<map id="Dc2Dc" name="Dc2Dc">
+<area shape="rect" id="node1" title="DC To DC Converter Class." alt="" coords="249,497,381,809"/>
+<area shape="rect" id="node2" href="$a00943.html" title="Pico PWM Class." alt="" coords="5,49,181,391"/>
+<area shape="rect" id="node3" href="$a00923.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="205,5,424,435"/>
+<area shape="rect" id="node4" href="$a00931.html" title="Pico ADC Class." alt="" coords="449,123,583,317"/>
+</map>

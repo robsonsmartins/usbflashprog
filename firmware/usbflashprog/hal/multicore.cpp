@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup Firmware
  * @file hal/multicore.cpp
  * @brief Implementation of the Pico Multi Core Class.
  * 
@@ -20,6 +21,8 @@
 #include "pico/mutex.h"
 
 void multicore_core_1_entry_(void);
+
+// ---------------------------------------------------------------------------
 
 MultiCore::MultiCore(MultiCoreEntry entry):
                         entry_(entry), status_(csStopped) {
@@ -58,7 +61,7 @@ bool MultiCore::isStopRequested() const {
     return (status_ == csStopping);
 }
 
-CoreStatus MultiCore::getStatus() const {
+MultiCore::CoreStatus MultiCore::getStatus() const {
     return status_;
 }
 
@@ -86,14 +89,20 @@ void MultiCore::usleep(uint64_t us) const {
     sleep_us(us);
 }
 
+void MultiCore::msleep(uint32_t ms) const {
+    sleep_ms(ms);
+}
+
+// ---------------------------------------------------------------------------
+
 void multicore_core_1_entry_(void) {
     uintptr_t p = multicore_fifo_pop_blocking();
     MultiCore *core = reinterpret_cast<MultiCore*>(p);
     core->lock();
-    core->status_ = csRunning;
+    core->status_ = MultiCore::csRunning;
     core->unlock();
     core->entry_(*core);
     core->lock();
-    core->status_ = csStopped;
+    core->status_ = MultiCore::csStopped;
     core->unlock();
 }

@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup UnitTests
  * @file test/hal/pwm_test.cpp
  * @brief Implementation of Unit Test for Pico PWM Class.
  * 
@@ -16,9 +17,13 @@
 
 #include "pwm_test.hpp"
 
-#define SELECTED_GPIO_PWM_PIN 1
+// ---------------------------------------------------------------------------
+
+constexpr uint SELECTED_GPIO_PWM_PIN = 1;
 
 Pwm PwmTest::pwm_ = Pwm(SELECTED_GPIO_PWM_PIN);
+
+// ---------------------------------------------------------------------------
 
 TEST_F(PwmTest, default_new) {
     EXPECT_EQ(pwm_.getPin(), SELECTED_GPIO_PWM_PIN);

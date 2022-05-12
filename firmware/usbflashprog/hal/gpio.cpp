@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup Firmware
  * @file hal/gpio.cpp
  * @brief Implementation of the Pico GPIO Class.
  * 
@@ -17,6 +18,8 @@
 #include "hal/gpio.hpp"
 
 #include "hardware/gpio.h"
+
+// ---------------------------------------------------------------------------
 
 Gpio::Gpio() {}
 

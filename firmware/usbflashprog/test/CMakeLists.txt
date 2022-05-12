@@ -14,11 +14,13 @@ set(sources
     ../hal/pwm.cpp
     ../hal/multicore.cpp
     ../circuits/74hc595.cpp
+    ../circuits/dc2dc.cpp
     hal/gpio_test.cpp 
     hal/adc_test.cpp 
     hal/pwm_test.cpp 
     hal/multicore_test.cpp 
     circuits/74hc595_test.cpp
+    circuits/dc2dc_test.cpp
     main.cpp
 )
 

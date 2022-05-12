@@ -1,0 +1,7 @@
+<map id="~Dc2Dc" name="~Dc2Dc">
+<area shape="rect" id="node1" title="Destructor." alt="" coords="5,31,80,57"/>
+<area shape="rect" id="node2" href="$a00927.html#a68a350717fe6bf9012843e7c977d87b2" title="Stops the DC to DC converter." alt="" coords="128,31,179,57"/>
+<area shape="rect" id="node3" href="$a00927.html#ad619b8b51adc7874204abd71080cd90e" title="Returns if the converter is running." alt="" coords="229,5,315,32"/>
+<area shape="rect" id="node5" href="$a00943.html#a8c528baf37154d347366083f0f816846" title="Disables the PWM on the pin." alt="" coords="227,56,317,83"/>
+<area shape="rect" id="node4" href="$a00943.html#ad619b8b51adc7874204abd71080cd90e" title="Returns if the PWM is enabled on the pin." alt="" coords="365,5,492,32"/>
+</map>

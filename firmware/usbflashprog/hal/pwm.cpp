@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup Firmware
  * @file hal/pwm.cpp
  * @brief Implementation of the Pico PWM Class.
  * 
@@ -22,12 +23,16 @@
 #include "hardware/clocks.h"
 #include "hardware/pwm.h"
 
+// ---------------------------------------------------------------------------
+
 // typical choose for RP PWM module clock: 12.5 MHz
-#define PWM_DEFAULT_CLOCK 12'500'000UL
+constexpr uint32_t PWM_DEFAULT_CLOCK = 12'500'000UL;
 
 // clksys: typically 125 MHz
 // let's arbitrarily choose to run pwm clock at PWM_DEFAULT_CLOCK
 float Pwm::divider_ = clock_get_hz(clk_sys) / PWM_DEFAULT_CLOCK;
+
+// ---------------------------------------------------------------------------
 
 Pwm::Pwm(uint pin): pin_(pin), freq_(0), duty_(0.0f), running_(false) {
     slice_ = pwm_gpio_to_slice_num(pin);

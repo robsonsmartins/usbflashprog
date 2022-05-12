@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup UnitTests
  * @file test/hal/gpio_test.cpp
  * @brief Implementation of Unit Test for Pico GPIO Class.
  * 
@@ -16,7 +17,11 @@
 
 #include "gpio_test.hpp"
 
+// ---------------------------------------------------------------------------
+
 Gpio GpioTest::gpio_ = Gpio();
+
+// ---------------------------------------------------------------------------
 
 TEST_F(GpioTest, get_set_reset_toggle_pin) {
     EXPECT_EQ(gpio_.getPin(1), false);

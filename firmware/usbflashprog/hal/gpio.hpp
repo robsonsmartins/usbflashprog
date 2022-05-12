@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup Firmware
  * @file hal/gpio.hpp
  * @brief Header of the Pico GPIO Class.
  * 
@@ -21,10 +22,14 @@
 
 #include "pico/stdlib.h"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup Firmware
  * @brief Pico GPIO Class
  * @details The purpose of this class is to manipulate the GPIO pins on the 
  *  board.
+ * @nosubgrouping
  */
 class Gpio {
  public:
@@ -85,9 +90,9 @@ class Gpio {
     bool isPulledDown(uint pin);
 
  private:
-    /** @brief Set of initialized pins. */
+    /* @brief Set of initialized pins. */
     std::set<uint> initPins_;
-    /**
+    /*
      * @brief Initializes the pin.
      * @param pin The pin number.
      */

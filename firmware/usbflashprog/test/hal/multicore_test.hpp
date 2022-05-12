@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup UnitTests
  * @file test/hal/multicore_test.hpp
  * @brief Header of Unit Test for Pico Multi Core Class.
  * 
@@ -20,9 +21,13 @@
 #include <gtest/gtest.h>
 #include "hal/multicore.hpp"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup UnitTests
  * @brief Test class for Pico Multi Core.
  * @details The purpose of this class is to test the MultiCore class.
+ * @nosubgrouping
  */
 class MultiCoreTest : public testing::Test {
  protected:
@@ -34,7 +39,7 @@ class MultiCoreTest : public testing::Test {
   void SetUp() override {}
   /** @brief Teardown of the test. */
   void TearDown() override {}
-  /** @brief MultiCore class object to test. */
+  /* @brief MultiCore class object to test. */
   static MultiCore multicore_;
 };
 

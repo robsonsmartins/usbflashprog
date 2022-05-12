@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /** 
+ * @ingroup Firmware
  * @file circuits/74hc595.hpp
  * @brief Header of the 74HC595 Class.
  * 
@@ -22,11 +23,15 @@
 #include "pico/stdlib.h"
 #include "hal/gpio.hpp"
 
+// ---------------------------------------------------------------------------
+
 /**
+ * @ingroup Firmware
  * @brief 74xx595 Shift Register Class.
  * @details The purpose of this class is to interface a 74xx595 
  *  Shift Register. 
  *  Datasheet available on: https://tinyurl.com/5crbkb52.
+ * @nosubgrouping
  */
 class HC595 {
  public:
@@ -140,23 +145,23 @@ class HC595 {
     const bool getOE(void) const;
 
  private:
-    /** @brief Pulse time, in microseconds. */
+    /* @brief Pulse time, in microseconds. */
     uint pulseTime_;
-    /** @brief ~OE GPIO pin number. */
+    /* @brief ~OE GPIO pin number. */
     uint oePin_;
-    /** @brief SIN GPIO pin number. */
+    /* @brief SIN GPIO pin number. */
     uint sinPin_;
-    /** @brief CLK GPIO pin number. */
+    /* @brief CLK GPIO pin number. */
     uint clkPin_;
-    /** @brief ~CLR GPIO pin number. */
+    /* @brief ~CLR GPIO pin number. */
     uint clrPin_;
-    /** @brief RCK GPIO pin number. */
+    /* @brief RCK GPIO pin number. */
     uint rckPin_;
-    /** @brief GPIO handler. */
+    /* @brief GPIO handler. */
     Gpio gpio_;
-    /** @brief Current data buffer. */
+    /* @brief Current data buffer. */
     TData buffer_;
-    /** @brief Current OE pin status. */
+    /* @brief Current OE pin status. */
     bool oe_;
 };
 

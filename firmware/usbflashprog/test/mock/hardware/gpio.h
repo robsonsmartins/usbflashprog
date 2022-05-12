@@ -13,6 +13,8 @@
 #include <map>
 #include "pico/stdlib.h"
 
+// ---------------------------------------------------------------------------
+
 #define GPIO_OUT 0
 #define GPIO_IN  1
 
@@ -29,6 +31,8 @@ enum gpio_function {
     GPIO_FUNC_USB = 9,
     GPIO_FUNC_NULL = 0x1f,
 };
+
+// ---------------------------------------------------------------------------
 
 static std::map<uint, bool> gpioData = {
   { 0, false}, { 1, false}, { 2, false}, { 3, false},
@@ -64,6 +68,8 @@ static std::map<uint, TPull> gpioPull = {
   {28, {false, false}}, {29, {false, false}},
   {30, {false, false}}, {31, {false, false}}
 };
+
+// ---------------------------------------------------------------------------
 
 extern "C" inline void gpio_init(uint gpio) {}
 

@@ -12,6 +12,8 @@
 
 #include "pico/stdlib.h"
 
+// ---------------------------------------------------------------------------
+
 enum clock_index {
     clk_gpout0 = 0,
     clk_gpout1,
@@ -25,6 +27,8 @@ enum clock_index {
     clk_rtc,
     CLK_COUNT
 };
+
+// ---------------------------------------------------------------------------
 
 extern "C" inline uint32_t clock_get_hz(clock_index clk_index) {
     return 125'000'000UL;

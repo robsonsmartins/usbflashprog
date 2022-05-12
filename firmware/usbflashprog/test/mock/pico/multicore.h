@@ -17,6 +17,8 @@
 
 #include "pico/stdlib.h"
 
+// ---------------------------------------------------------------------------
+
 static std::thread _thread;
 static std::queue<uintptr_t> _fifo[2];
 static std::thread::id _id[2];
@@ -26,6 +28,8 @@ static bool _stopreq;
 typedef void (*TThreadEntryPoint)();
 
 void _internal_entry_point(TThreadEntryPoint entry);
+
+// ---------------------------------------------------------------------------
 
 extern "C" inline void multicore_launch_core1(TThreadEntryPoint entry) {
     _id[0] = std::this_thread::get_id();
@@ -60,6 +64,8 @@ extern "C" inline void multicore_reset_core1() {
     _thread.join();
     _stopreq = false;
 }
+
+// ---------------------------------------------------------------------------
 
 void _internal_entry_point(TThreadEntryPoint entry) {
     entry();

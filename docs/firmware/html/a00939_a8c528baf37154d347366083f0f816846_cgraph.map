@@ -1,0 +1,5 @@
+<map id="stop" name="stop">
+<area shape="rect" id="node1" title="Stops the execution of second CPU core." alt="" coords="5,31,56,57"/>
+<area shape="rect" id="node2" href="$a00939.html#aa81aed607133209dade63a226818224d" title="Locks execution line (using mutex)." alt="" coords="112,5,161,32"/>
+<area shape="rect" id="node3" href="$a00939.html#a9278be8203e1c42e2619179882ae4403" title="Unlocks execution line (using mutex)." alt="" coords="104,56,169,83"/>
+</map>

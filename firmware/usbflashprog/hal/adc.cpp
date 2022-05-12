@@ -7,6 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
+ * @ingroup Firmware
  * @file hal/adc.cpp
  * @brief Implementation of the Pico ADC Class.
  * 
@@ -21,13 +22,17 @@
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
 
-#define GPIO_PIN_ADC_CHANNEL_0 26
-#define ADC_MAX_CHANNEL 3
+// ---------------------------------------------------------------------------
+
+constexpr uint GPIO_PIN_ADC_CHANNEL_0 = 26;
+constexpr uint ADC_MAX_CHANNEL = 3;
 
 /** @cond */
 float __not_in_flash_func(adc_capture)(uint channel,
                                        uint16_t *buf, size_t size);
 /** @endcond */
+
+// ---------------------------------------------------------------------------
 
 Adc::Adc(): vref_(DEFAULT_VREF) {
     adc_init();
@@ -74,6 +79,8 @@ float Adc::calculate_(uint16_t value) const {
     float result = value * vref_ / (1 << 12);
     return result;
 }
+
+// ---------------------------------------------------------------------------
 
 /** @cond */
 float __not_in_flash_func(adc_capture)(uint channel,

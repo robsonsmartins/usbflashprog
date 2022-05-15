@@ -31,7 +31,8 @@ elseif(NORMAL_BUILD)
         circuits/74hc595.cpp
         circuits/dc2dc.cpp
 #          base/flash.cpp
-#          modules/vgenerator.cpp
+        modules/vgenerator.cpp
+        usbflashprog.cpp
         main.cpp
   )
 

@@ -24,12 +24,23 @@ typedef unsigned int uint;
 
 // ---------------------------------------------------------------------------
 
+#define PICO_DEFAULT_LED_PIN 25
+
+// ---------------------------------------------------------------------------
+
 extern "C" inline void sleep_us(uint64_t us) {
     usleep(us);
 }
 
 extern "C" inline void sleep_ms(uint32_t ms) {
     usleep(static_cast<uint64_t>(ms) * 1000);
+}
+
+extern "C" inline void stdio_init_all(void) {}
+
+extern "C" inline int getchar_timeout_us(uint32_t timeout_us) {
+    usleep(timeout_us);
+    return -1;
 }
 
 #endif  // TEST_MOCK_PICO_STDLIB_H_

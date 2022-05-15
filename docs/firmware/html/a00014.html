@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: adc.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: config.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,38 +60,1072 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_52c912f73dac9c4c0e442232e1b2bd80.html">hal</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">adc.cpp File Reference<div class="ingroups"><a class="el" href="a00101.html">Firmware Project</a></div></div>  </div>
+<div class="title">config.hpp File Reference<div class="ingroups"><a class="el" href="a00116.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Pico ADC Class.  
+<p>Configuration of <a class="el" href="a01018.html" title="Main class of system.">UsbFlashProg</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00017.html">hal/adc.hpp</a>&quot;</code><br />
-<code>#include &quot;hardware/gpio.h&quot;</code><br />
-<code>#include &quot;hardware/adc.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;pico/stdlib.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00020.html">hal/adc.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00038.html">hal/pwm.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00047.html">modules/vgenerator.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for adc.cpp:</div>
+Include dependency graph for config.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00015.png" border="0" usemap="#aadc_8cpp" alt=""/></div>
-<map name="aadc_8cpp" id="aadc_8cpp">
-<area shape="rect" title="Implementation of the Pico ADC Class." alt="" coords="53,5,125,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,68,107"/>
-<area shape="rect" href="a00017.html" title="Header of the Pico ADC Class." alt="" coords="92,80,189,107"/>
-<area shape="rect" title=" " alt="" coords="119,155,162,181"/>
+<div class="center"><img src="a00015.png" border="0" usemap="#aconfig_8hpp" alt=""/></div>
+<map name="aconfig_8hpp" id="aconfig_8hpp">
+<area shape="rect" title="Configuration of UsbFlashProg." alt="" coords="368,5,457,32"/>
+<area shape="rect" href="a00020.html" title="Header of the Pico ADC Class." alt="" coords="269,229,367,256"/>
+<area shape="rect" href="a00038.html" title="Header of the Pico PWM Class." alt="" coords="401,229,507,256"/>
+<area shape="rect" href="a00047.html" title="Header of the Votage Generator Classes." alt="" coords="152,80,332,107"/>
+<area shape="rect" title=" " alt="" coords="234,304,277,331"/>
+<area shape="rect" href="a00026.html" title="Header of the Pico GPIO Class." alt="" coords="143,229,245,256"/>
+<area shape="rect" href="a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="237,155,375,181"/>
+<area shape="rect" href="a00005.html" title="Header of the 74HC595 Class." alt="" coords="5,155,161,181"/>
+<area shape="rect" title=" " alt="" coords="52,229,115,256"/>
 </map>
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Pico ADC Class. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad6e49268b9ad8e45c14dd9ceb03677a7"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ad6e49268b9ad8e45c14dd9ceb03677a7">VDD_PWM_PIN</a> = 20</td></tr>
+<tr class="memdesc:ad6e49268b9ad8e45c14dd9ceb03677a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : Assigned PWM GPIO pin.  <a href="a00014.html#ad6e49268b9ad8e45c14dd9ceb03677a7">More...</a><br /></td></tr>
+<tr class="separator:ad6e49268b9ad8e45c14dd9ceb03677a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefd0586cb529b76ba5ac096132292779"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aefd0586cb529b76ba5ac096132292779">VDD_PWM_FREQ</a> = <a class="el" href="a00958.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a></td></tr>
+<tr class="memdesc:aefd0586cb529b76ba5ac096132292779"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Frequency, in Hertz.  <a href="a00014.html#aefd0586cb529b76ba5ac096132292779">More...</a><br /></td></tr>
+<tr class="separator:aefd0586cb529b76ba5ac096132292779"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81e88c2c9ac5fbd26c72089aa8329d9e"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a81e88c2c9ac5fbd26c72089aa8329d9e">VDD_PWM_MIN_DUTY</a> = <a class="el" href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">VddConfig::PWM_MIN_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:a81e88c2c9ac5fbd26c72089aa8329d9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Min Duty Cycle, in Percent.  <a href="a00014.html#a81e88c2c9ac5fbd26c72089aa8329d9e">More...</a><br /></td></tr>
+<tr class="separator:a81e88c2c9ac5fbd26c72089aa8329d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa01688bb7985dd3ec89cc0125bcde84f"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aa01688bb7985dd3ec89cc0125bcde84f">VDD_PWM_MAX_DUTY</a> = <a class="el" href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">VddConfig::PWM_MAX_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:aa01688bb7985dd3ec89cc0125bcde84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Max Duty Cycle, in Percent.  <a href="a00014.html#aa01688bb7985dd3ec89cc0125bcde84f">More...</a><br /></td></tr>
+<tr class="separator:aa01688bb7985dd3ec89cc0125bcde84f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96c99a42a9e6b0099224bbf7bf2ba2a7"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a96c99a42a9e6b0099224bbf7bf2ba2a7">VDD_PWM_SLOW_STEP_DUTY</a> = <a class="el" href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">VddConfig::PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:a96c99a42a9e6b0099224bbf7bf2ba2a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Slow Step Duty Cycle, in Percent.  <a href="a00014.html#a96c99a42a9e6b0099224bbf7bf2ba2a7">More...</a><br /></td></tr>
+<tr class="separator:a96c99a42a9e6b0099224bbf7bf2ba2a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab80940e935ff8cc67852063edc6a694"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aab80940e935ff8cc67852063edc6a694">VDD_PWM_FAST_STEP_DUTY</a> = <a class="el" href="a00938.html#a503785cac57157bec3749816c0e3ad8c">VddConfig::PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:aab80940e935ff8cc67852063edc6a694"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Fast Step Duty Cycle, in Percent.  <a href="a00014.html#aab80940e935ff8cc67852063edc6a694">More...</a><br /></td></tr>
+<tr class="separator:aab80940e935ff8cc67852063edc6a694"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a550d0660724f9f90ea432f508595ae39"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a550d0660724f9f90ea432f508595ae39">VDD_PWM_TOLERANCE_TO_FAST</a> = <a class="el" href="a00938.html#a63ee32a00c45831b569164428c021d24">VddConfig::PWM_TOLERANCE_TO_FAST_DEFAULT</a></td></tr>
+<tr class="memdesc:a550d0660724f9f90ea432f508595ae39"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Voltage Tolerance to use Fast Step, in Percent.  <a href="a00014.html#a550d0660724f9f90ea432f508595ae39">More...</a><br /></td></tr>
+<tr class="separator:a550d0660724f9f90ea432f508595ae39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e29927de40cc7a34df1facc833e0811"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a2e29927de40cc7a34df1facc833e0811">VDD_ADC_CHANNEL</a> = 0</td></tr>
+<tr class="memdesc:a2e29927de40cc7a34df1facc833e0811"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/ADC : Assigned ADC channel.  <a href="a00014.html#a2e29927de40cc7a34df1facc833e0811">More...</a><br /></td></tr>
+<tr class="separator:a2e29927de40cc7a34df1facc833e0811"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1a27d85e1a8cf926941601338823e84"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ab1a27d85e1a8cf926941601338823e84">VDD_ADC_VREF</a> = <a class="el" href="a00946.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a></td></tr>
+<tr class="memdesc:ab1a27d85e1a8cf926941601338823e84"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/ADC : ADC Reference Voltage, in Volts.  <a href="a00014.html#ab1a27d85e1a8cf926941601338823e84">More...</a><br /></td></tr>
+<tr class="separator:ab1a27d85e1a8cf926941601338823e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e0e69f55ead4bab1ac834af8d6188ec"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a6e0e69f55ead4bab1ac834af8d6188ec">VDD_FB_R1</a> = 470.0f</td></tr>
+<tr class="memdesc:a6e0e69f55ead4bab1ac834af8d6188ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/VC : Voltage Converter Feedback R1 resistor, in Ohms.  <a href="a00014.html#a6e0e69f55ead4bab1ac834af8d6188ec">More...</a><br /></td></tr>
+<tr class="separator:a6e0e69f55ead4bab1ac834af8d6188ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86cc0c3c683fede84fa8dd5bc9f03714"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a86cc0c3c683fede84fa8dd5bc9f03714">VDD_FB_R2</a> = 330.0f</td></tr>
+<tr class="memdesc:a86cc0c3c683fede84fa8dd5bc9f03714"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/VC : Voltage Converter Feedback R2 resistor, in Ohms.  <a href="a00014.html#a86cc0c3c683fede84fa8dd5bc9f03714">More...</a><br /></td></tr>
+<tr class="separator:a86cc0c3c683fede84fa8dd5bc9f03714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a5f9d12d0d7cee3a311f8f9e05950ae"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a4a5f9d12d0d7cee3a311f8f9e05950ae">VDD_DIVIDER</a> = (<a class="el" href="a00014.html#a6e0e69f55ead4bab1ac834af8d6188ec">VDD_FB_R1</a> + <a class="el" href="a00014.html#a86cc0c3c683fede84fa8dd5bc9f03714">VDD_FB_R2</a>) / <a class="el" href="a00014.html#a86cc0c3c683fede84fa8dd5bc9f03714">VDD_FB_R2</a></td></tr>
+<tr class="memdesc:a4a5f9d12d0d7cee3a311f8f9e05950ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0.  <a href="a00014.html#a4a5f9d12d0d7cee3a311f8f9e05950ae">More...</a><br /></td></tr>
+<tr class="separator:a4a5f9d12d0d7cee3a311f8f9e05950ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca972a73a2e5023bb7bf9cc4c5b2c27d"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aca972a73a2e5023bb7bf9cc4c5b2c27d">VDD_VOUT_TOLERANCE</a> = <a class="el" href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">VddConfig::DC2DC_VOUT_TOLERANCE_DEFAULT</a></td></tr>
+<tr class="memdesc:aca972a73a2e5023bb7bf9cc4c5b2c27d"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/VC : Output Voltage Tolerance, in percent.  <a href="a00014.html#aca972a73a2e5023bb7bf9cc4c5b2c27d">More...</a><br /></td></tr>
+<tr class="separator:aca972a73a2e5023bb7bf9cc4c5b2c27d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a829b326d15a1c83d311f3160e800e97c"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a829b326d15a1c83d311f3160e800e97c">VDD_CTRL_PIN</a> = 22</td></tr>
+<tr class="memdesc:a829b326d15a1c83d311f3160e800e97c"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/CTRL : Assigned Voltage Control GPIO pin.  <a href="a00014.html#a829b326d15a1c83d311f3160e800e97c">More...</a><br /></td></tr>
+<tr class="separator:a829b326d15a1c83d311f3160e800e97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf55785c611cd09a4b2d5e7f81b2e979"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aaf55785c611cd09a4b2d5e7f81b2e979">VDD_ON_VPP_PIN</a> = 17</td></tr>
+<tr class="memdesc:aaf55785c611cd09a4b2d5e7f81b2e979"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/CTRL : Assigned VDD on VPP GPIO pin.  <a href="a00014.html#aaf55785c611cd09a4b2d5e7f81b2e979">More...</a><br /></td></tr>
+<tr class="separator:aaf55785c611cd09a4b2d5e7f81b2e979"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87103490d6c5cce4d90a112b96613f75"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a87103490d6c5cce4d90a112b96613f75">VPP_PWM_PIN</a> = 21</td></tr>
+<tr class="memdesc:a87103490d6c5cce4d90a112b96613f75"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : Assigned PWM GPIO pin.  <a href="a00014.html#a87103490d6c5cce4d90a112b96613f75">More...</a><br /></td></tr>
+<tr class="separator:a87103490d6c5cce4d90a112b96613f75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b6ce63c32dd3c04608ce26eca8a1a6e"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a9b6ce63c32dd3c04608ce26eca8a1a6e">VPP_PWM_FREQ</a> = <a class="el" href="a00958.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a></td></tr>
+<tr class="memdesc:a9b6ce63c32dd3c04608ce26eca8a1a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Frequency, in Hertz.  <a href="a00014.html#a9b6ce63c32dd3c04608ce26eca8a1a6e">More...</a><br /></td></tr>
+<tr class="separator:a9b6ce63c32dd3c04608ce26eca8a1a6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee4fd364f3b8aef6e5ac25848638155d"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aee4fd364f3b8aef6e5ac25848638155d">VPP_PWM_MIN_DUTY</a> = <a class="el" href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">VddConfig::PWM_MIN_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:aee4fd364f3b8aef6e5ac25848638155d"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Min Duty Cycle, in Percent.  <a href="a00014.html#aee4fd364f3b8aef6e5ac25848638155d">More...</a><br /></td></tr>
+<tr class="separator:aee4fd364f3b8aef6e5ac25848638155d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad9b5e6ba713b50e7efd0519f403cc917"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ad9b5e6ba713b50e7efd0519f403cc917">VPP_PWM_MAX_DUTY</a> = <a class="el" href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">VddConfig::PWM_MAX_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:ad9b5e6ba713b50e7efd0519f403cc917"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Max Duty Cycle, in Percent.  <a href="a00014.html#ad9b5e6ba713b50e7efd0519f403cc917">More...</a><br /></td></tr>
+<tr class="separator:ad9b5e6ba713b50e7efd0519f403cc917"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada734737e8882f3f2e30dc9211345fc2"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ada734737e8882f3f2e30dc9211345fc2">VPP_PWM_SLOW_STEP_DUTY</a> = <a class="el" href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">VddConfig::PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:ada734737e8882f3f2e30dc9211345fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Slow Step Duty Cycle, in Percent.  <a href="a00014.html#ada734737e8882f3f2e30dc9211345fc2">More...</a><br /></td></tr>
+<tr class="separator:ada734737e8882f3f2e30dc9211345fc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7981992a93a401d45c26b13d356b100b"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a7981992a93a401d45c26b13d356b100b">VPP_PWM_FAST_STEP_DUTY</a> = <a class="el" href="a00938.html#a503785cac57157bec3749816c0e3ad8c">VddConfig::PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a></td></tr>
+<tr class="memdesc:a7981992a93a401d45c26b13d356b100b"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Fast Step Duty Cycle, in Percent.  <a href="a00014.html#a7981992a93a401d45c26b13d356b100b">More...</a><br /></td></tr>
+<tr class="separator:a7981992a93a401d45c26b13d356b100b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa651f98f880db3d46fe5595758dab303"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aa651f98f880db3d46fe5595758dab303">VPP_PWM_TOLERANCE_TO_FAST</a> = <a class="el" href="a00938.html#a63ee32a00c45831b569164428c021d24">VddConfig::PWM_TOLERANCE_TO_FAST_DEFAULT</a></td></tr>
+<tr class="memdesc:aa651f98f880db3d46fe5595758dab303"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Voltage Tolerance to use Fast Step, in Percent.  <a href="a00014.html#aa651f98f880db3d46fe5595758dab303">More...</a><br /></td></tr>
+<tr class="separator:aa651f98f880db3d46fe5595758dab303"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac760243821033ad63f15c5e23a513d15"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ac760243821033ad63f15c5e23a513d15">VPP_ADC_CHANNEL</a> = 1</td></tr>
+<tr class="memdesc:ac760243821033ad63f15c5e23a513d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/ADC : Assigned ADC channel.  <a href="a00014.html#ac760243821033ad63f15c5e23a513d15">More...</a><br /></td></tr>
+<tr class="separator:ac760243821033ad63f15c5e23a513d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae30c9fbfb792cc1715a5b030d3edf4e4"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ae30c9fbfb792cc1715a5b030d3edf4e4">VPP_ADC_VREF</a> = <a class="el" href="a00946.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a></td></tr>
+<tr class="memdesc:ae30c9fbfb792cc1715a5b030d3edf4e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/ADC : ADC Reference Voltage, in Volts.  <a href="a00014.html#ae30c9fbfb792cc1715a5b030d3edf4e4">More...</a><br /></td></tr>
+<tr class="separator:ae30c9fbfb792cc1715a5b030d3edf4e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b78a9864ec5e65f449dde14499ffa65"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a1b78a9864ec5e65f449dde14499ffa65">VPP_FB_R1</a> = 3900.0f</td></tr>
+<tr class="memdesc:a1b78a9864ec5e65f449dde14499ffa65"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/VC : Voltage Converter Feedback R1 resistor, in Ohms.  <a href="a00014.html#a1b78a9864ec5e65f449dde14499ffa65">More...</a><br /></td></tr>
+<tr class="separator:a1b78a9864ec5e65f449dde14499ffa65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a814d78faf02145932125df43024160ac"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a814d78faf02145932125df43024160ac">VPP_FB_R2</a> = 470.0f</td></tr>
+<tr class="memdesc:a814d78faf02145932125df43024160ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/VC : Voltage Converter Feedback R2 resistor, in Ohms.  <a href="a00014.html#a814d78faf02145932125df43024160ac">More...</a><br /></td></tr>
+<tr class="separator:a814d78faf02145932125df43024160ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39fc0dd85ca39ab6107aa891c88d5e8c"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a39fc0dd85ca39ab6107aa891c88d5e8c">VPP_DIVIDER</a> = (<a class="el" href="a00014.html#a1b78a9864ec5e65f449dde14499ffa65">VPP_FB_R1</a> + <a class="el" href="a00014.html#a814d78faf02145932125df43024160ac">VPP_FB_R2</a>) / <a class="el" href="a00014.html#a814d78faf02145932125df43024160ac">VPP_FB_R2</a></td></tr>
+<tr class="memdesc:a39fc0dd85ca39ab6107aa891c88d5e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0.  <a href="a00014.html#a39fc0dd85ca39ab6107aa891c88d5e8c">More...</a><br /></td></tr>
+<tr class="separator:a39fc0dd85ca39ab6107aa891c88d5e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde6b9b705abb482375899b8225140b4"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#abde6b9b705abb482375899b8225140b4">VPP_VOUT_TOLERANCE</a> = <a class="el" href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">VddConfig::DC2DC_VOUT_TOLERANCE_DEFAULT</a></td></tr>
+<tr class="memdesc:abde6b9b705abb482375899b8225140b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/VC : Output Voltage Tolerance, in percent.  <a href="a00014.html#abde6b9b705abb482375899b8225140b4">More...</a><br /></td></tr>
+<tr class="separator:abde6b9b705abb482375899b8225140b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6238eeda4d3591ba25b3f737567ee898"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a6238eeda4d3591ba25b3f737567ee898">VPP_CTRL_PIN</a> = 28</td></tr>
+<tr class="memdesc:a6238eeda4d3591ba25b3f737567ee898"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : Assigned Voltage Control GPIO pin.  <a href="a00014.html#a6238eeda4d3591ba25b3f737567ee898">More...</a><br /></td></tr>
+<tr class="separator:a6238eeda4d3591ba25b3f737567ee898"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63096fb632386e676d1beef4118b6dda"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a63096fb632386e676d1beef4118b6dda">VPP_VC_SIN_PIN</a> = 12</td></tr>
+<tr class="memdesc:a63096fb632386e676d1beef4118b6dda"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : Assigned Voltage Control, Shift Register SIN, GPIO pin.  <a href="a00014.html#a63096fb632386e676d1beef4118b6dda">More...</a><br /></td></tr>
+<tr class="separator:a63096fb632386e676d1beef4118b6dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa85228a4f0ab854a8fb6c260b697e232"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aa85228a4f0ab854a8fb6c260b697e232">VPP_VC_CLK_PIN</a> = 14</td></tr>
+<tr class="memdesc:aa85228a4f0ab854a8fb6c260b697e232"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : Assigned Voltage Control, Shift Register CLK, GPIO pin.  <a href="a00014.html#aa85228a4f0ab854a8fb6c260b697e232">More...</a><br /></td></tr>
+<tr class="separator:aa85228a4f0ab854a8fb6c260b697e232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac43267700f98659dd3ce33fbd9a61d5f"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ac43267700f98659dd3ce33fbd9a61d5f">VPP_VC_CLR_PIN</a> = 15</td></tr>
+<tr class="memdesc:ac43267700f98659dd3ce33fbd9a61d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : Assigned Voltage Control, Shift Register CLR, GPIO pin.  <a href="a00014.html#ac43267700f98659dd3ce33fbd9a61d5f">More...</a><br /></td></tr>
+<tr class="separator:ac43267700f98659dd3ce33fbd9a61d5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0318f98b4c9b7bf6fa3988aab6ba863e"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a0318f98b4c9b7bf6fa3988aab6ba863e">VPP_VC_RCK_PIN</a> = 13</td></tr>
+<tr class="memdesc:a0318f98b4c9b7bf6fa3988aab6ba863e"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : Assigned Voltage Control, Shift Register RCK, GPIO pin.  <a href="a00014.html#a0318f98b4c9b7bf6fa3988aab6ba863e">More...</a><br /></td></tr>
+<tr class="separator:a0318f98b4c9b7bf6fa3988aab6ba863e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3edabd7fb88fccd583fe8b76645459f"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ab3edabd7fb88fccd583fe8b76645459f">VPP_ON_A18_VC_REGISTER_BIT</a> = 0</td></tr>
+<tr class="memdesc:ab3edabd7fb88fccd583fe8b76645459f"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : VC Shift Register, VPP on A18 bit.  <a href="a00014.html#ab3edabd7fb88fccd583fe8b76645459f">More...</a><br /></td></tr>
+<tr class="separator:ab3edabd7fb88fccd583fe8b76645459f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9700847fe3b5977f2de1c78800caae96"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a9700847fe3b5977f2de1c78800caae96">VPP_ON_A9_VC_REGISTER_BIT</a> = 1</td></tr>
+<tr class="memdesc:a9700847fe3b5977f2de1c78800caae96"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : VC Shift Register, VPP on A9 bit.  <a href="a00014.html#a9700847fe3b5977f2de1c78800caae96">More...</a><br /></td></tr>
+<tr class="separator:a9700847fe3b5977f2de1c78800caae96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38cab33cc7001af29885dbdbae119ea7"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#a38cab33cc7001af29885dbdbae119ea7">VPP_ON_CE_VC_REGISTER_BIT</a> = 2</td></tr>
+<tr class="memdesc:a38cab33cc7001af29885dbdbae119ea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : VC Shift Register, VPP on CE bit.  <a href="a00014.html#a38cab33cc7001af29885dbdbae119ea7">More...</a><br /></td></tr>
+<tr class="separator:a38cab33cc7001af29885dbdbae119ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3982031f82b2699878e3a15539e2569"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#aa3982031f82b2699878e3a15539e2569">VPP_ON_OE_VC_REGISTER_BIT</a> = 3</td></tr>
+<tr class="memdesc:aa3982031f82b2699878e3a15539e2569"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : VC Shift Register, VPP on OE bit.  <a href="a00014.html#aa3982031f82b2699878e3a15539e2569">More...</a><br /></td></tr>
+<tr class="separator:aa3982031f82b2699878e3a15539e2569"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6eef1a18b6da2d5f1eb32ad670c740b"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html#ac6eef1a18b6da2d5f1eb32ad670c740b">VPP_ON_WE_VC_REGISTER_BIT</a> = 4</td></tr>
+<tr class="memdesc:ac6eef1a18b6da2d5f1eb32ad670c740b"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/CTRL : VC Shift Register, VPP on WE bit.  <a href="a00014.html#ac6eef1a18b6da2d5f1eb32ad670c740b">More...</a><br /></td></tr>
+<tr class="separator:ac6eef1a18b6da2d5f1eb32ad670c740b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Configuration of <a class="el" href="a01018.html" title="Main class of system.">UsbFlashProg</a>. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="ad6e49268b9ad8e45c14dd9ceb03677a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6e49268b9ad8e45c14dd9ceb03677a7">&#9670;&nbsp;</a></span>VDD_PWM_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VDD_PWM_PIN = 20</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/PWM : Assigned PWM GPIO pin. </p>
+
+</div>
+</div>
+<a id="aefd0586cb529b76ba5ac096132292779"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefd0586cb529b76ba5ac096132292779">&#9670;&nbsp;</a></span>VDD_PWM_FREQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint32_t VDD_PWM_FREQ = <a class="el" href="a00958.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/PWM : PWM Frequency, in Hertz. </p>
+
+</div>
+</div>
+<a id="a81e88c2c9ac5fbd26c72089aa8329d9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e88c2c9ac5fbd26c72089aa8329d9e">&#9670;&nbsp;</a></span>VDD_PWM_MIN_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_PWM_MIN_DUTY = <a class="el" href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">VddConfig::PWM_MIN_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/PWM : PWM Min Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="aa01688bb7985dd3ec89cc0125bcde84f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa01688bb7985dd3ec89cc0125bcde84f">&#9670;&nbsp;</a></span>VDD_PWM_MAX_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_PWM_MAX_DUTY = <a class="el" href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">VddConfig::PWM_MAX_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/PWM : PWM Max Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="a96c99a42a9e6b0099224bbf7bf2ba2a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96c99a42a9e6b0099224bbf7bf2ba2a7">&#9670;&nbsp;</a></span>VDD_PWM_SLOW_STEP_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_PWM_SLOW_STEP_DUTY = <a class="el" href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">VddConfig::PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/PWM : PWM Slow Step Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="aab80940e935ff8cc67852063edc6a694"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab80940e935ff8cc67852063edc6a694">&#9670;&nbsp;</a></span>VDD_PWM_FAST_STEP_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_PWM_FAST_STEP_DUTY = <a class="el" href="a00938.html#a503785cac57157bec3749816c0e3ad8c">VddConfig::PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/PWM : PWM Fast Step Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="a550d0660724f9f90ea432f508595ae39"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a550d0660724f9f90ea432f508595ae39">&#9670;&nbsp;</a></span>VDD_PWM_TOLERANCE_TO_FAST</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_PWM_TOLERANCE_TO_FAST = <a class="el" href="a00938.html#a63ee32a00c45831b569164428c021d24">VddConfig::PWM_TOLERANCE_TO_FAST_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/PWM : PWM Voltage Tolerance to use Fast Step, in Percent. </p>
+
+</div>
+</div>
+<a id="a2e29927de40cc7a34df1facc833e0811"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e29927de40cc7a34df1facc833e0811">&#9670;&nbsp;</a></span>VDD_ADC_CHANNEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VDD_ADC_CHANNEL = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/ADC : Assigned ADC channel. </p>
+
+</div>
+</div>
+<a id="ab1a27d85e1a8cf926941601338823e84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1a27d85e1a8cf926941601338823e84">&#9670;&nbsp;</a></span>VDD_ADC_VREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_ADC_VREF = <a class="el" href="a00946.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/ADC : ADC Reference Voltage, in Volts. </p>
+
+</div>
+</div>
+<a id="a6e0e69f55ead4bab1ac834af8d6188ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e0e69f55ead4bab1ac834af8d6188ec">&#9670;&nbsp;</a></span>VDD_FB_R1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_FB_R1 = 470.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/VC : Voltage Converter Feedback R1 resistor, in Ohms. </p>
+
+</div>
+</div>
+<a id="a86cc0c3c683fede84fa8dd5bc9f03714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a86cc0c3c683fede84fa8dd5bc9f03714">&#9670;&nbsp;</a></span>VDD_FB_R2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_FB_R2 = 330.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/VC : Voltage Converter Feedback R2 resistor, in Ohms. </p>
+
+</div>
+</div>
+<a id="a4a5f9d12d0d7cee3a311f8f9e05950ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a5f9d12d0d7cee3a311f8f9e05950ae">&#9670;&nbsp;</a></span>VDD_DIVIDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_DIVIDER = (<a class="el" href="a00014.html#a6e0e69f55ead4bab1ac834af8d6188ec">VDD_FB_R1</a> + <a class="el" href="a00014.html#a86cc0c3c683fede84fa8dd5bc9f03714">VDD_FB_R2</a>) / <a class="el" href="a00014.html#a86cc0c3c683fede84fa8dd5bc9f03714">VDD_FB_R2</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0. </p>
+
+</div>
+</div>
+<a id="aca972a73a2e5023bb7bf9cc4c5b2c27d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca972a73a2e5023bb7bf9cc4c5b2c27d">&#9670;&nbsp;</a></span>VDD_VOUT_TOLERANCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VDD_VOUT_TOLERANCE = <a class="el" href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">VddConfig::DC2DC_VOUT_TOLERANCE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/VC : Output Voltage Tolerance, in percent. </p>
+
+</div>
+</div>
+<a id="a829b326d15a1c83d311f3160e800e97c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a829b326d15a1c83d311f3160e800e97c">&#9670;&nbsp;</a></span>VDD_CTRL_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VDD_CTRL_PIN = 22</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/CTRL : Assigned Voltage Control GPIO pin. </p>
+
+</div>
+</div>
+<a id="aaf55785c611cd09a4b2d5e7f81b2e979"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf55785c611cd09a4b2d5e7f81b2e979">&#9670;&nbsp;</a></span>VDD_ON_VPP_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VDD_ON_VPP_PIN = 17</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VDD/CTRL : Assigned VDD on VPP GPIO pin. </p>
+
+</div>
+</div>
+<a id="a87103490d6c5cce4d90a112b96613f75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87103490d6c5cce4d90a112b96613f75">&#9670;&nbsp;</a></span>VPP_PWM_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VPP_PWM_PIN = 21</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/PWM : Assigned PWM GPIO pin. </p>
+
+</div>
+</div>
+<a id="a9b6ce63c32dd3c04608ce26eca8a1a6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b6ce63c32dd3c04608ce26eca8a1a6e">&#9670;&nbsp;</a></span>VPP_PWM_FREQ</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint32_t VPP_PWM_FREQ = <a class="el" href="a00958.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/PWM : PWM Frequency, in Hertz. </p>
+
+</div>
+</div>
+<a id="aee4fd364f3b8aef6e5ac25848638155d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee4fd364f3b8aef6e5ac25848638155d">&#9670;&nbsp;</a></span>VPP_PWM_MIN_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_PWM_MIN_DUTY = <a class="el" href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">VddConfig::PWM_MIN_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/PWM : PWM Min Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="ad9b5e6ba713b50e7efd0519f403cc917"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9b5e6ba713b50e7efd0519f403cc917">&#9670;&nbsp;</a></span>VPP_PWM_MAX_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_PWM_MAX_DUTY = <a class="el" href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">VddConfig::PWM_MAX_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/PWM : PWM Max Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="ada734737e8882f3f2e30dc9211345fc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada734737e8882f3f2e30dc9211345fc2">&#9670;&nbsp;</a></span>VPP_PWM_SLOW_STEP_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_PWM_SLOW_STEP_DUTY = <a class="el" href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">VddConfig::PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/PWM : PWM Slow Step Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="a7981992a93a401d45c26b13d356b100b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7981992a93a401d45c26b13d356b100b">&#9670;&nbsp;</a></span>VPP_PWM_FAST_STEP_DUTY</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_PWM_FAST_STEP_DUTY = <a class="el" href="a00938.html#a503785cac57157bec3749816c0e3ad8c">VddConfig::PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/PWM : PWM Fast Step Duty Cycle, in Percent. </p>
+
+</div>
+</div>
+<a id="aa651f98f880db3d46fe5595758dab303"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa651f98f880db3d46fe5595758dab303">&#9670;&nbsp;</a></span>VPP_PWM_TOLERANCE_TO_FAST</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_PWM_TOLERANCE_TO_FAST = <a class="el" href="a00938.html#a63ee32a00c45831b569164428c021d24">VddConfig::PWM_TOLERANCE_TO_FAST_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/PWM : PWM Voltage Tolerance to use Fast Step, in Percent. </p>
+
+</div>
+</div>
+<a id="ac760243821033ad63f15c5e23a513d15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac760243821033ad63f15c5e23a513d15">&#9670;&nbsp;</a></span>VPP_ADC_CHANNEL</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VPP_ADC_CHANNEL = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/ADC : Assigned ADC channel. </p>
+
+</div>
+</div>
+<a id="ae30c9fbfb792cc1715a5b030d3edf4e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae30c9fbfb792cc1715a5b030d3edf4e4">&#9670;&nbsp;</a></span>VPP_ADC_VREF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_ADC_VREF = <a class="el" href="a00946.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/ADC : ADC Reference Voltage, in Volts. </p>
+
+</div>
+</div>
+<a id="a1b78a9864ec5e65f449dde14499ffa65"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b78a9864ec5e65f449dde14499ffa65">&#9670;&nbsp;</a></span>VPP_FB_R1</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_FB_R1 = 3900.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/VC : Voltage Converter Feedback R1 resistor, in Ohms. </p>
+
+</div>
+</div>
+<a id="a814d78faf02145932125df43024160ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a814d78faf02145932125df43024160ac">&#9670;&nbsp;</a></span>VPP_FB_R2</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_FB_R2 = 470.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/VC : Voltage Converter Feedback R2 resistor, in Ohms. </p>
+
+</div>
+</div>
+<a id="a39fc0dd85ca39ab6107aa891c88d5e8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39fc0dd85ca39ab6107aa891c88d5e8c">&#9670;&nbsp;</a></span>VPP_DIVIDER</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_DIVIDER = (<a class="el" href="a00014.html#a1b78a9864ec5e65f449dde14499ffa65">VPP_FB_R1</a> + <a class="el" href="a00014.html#a814d78faf02145932125df43024160ac">VPP_FB_R2</a>) / <a class="el" href="a00014.html#a814d78faf02145932125df43024160ac">VPP_FB_R2</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0. </p>
+
+</div>
+</div>
+<a id="abde6b9b705abb482375899b8225140b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde6b9b705abb482375899b8225140b4">&#9670;&nbsp;</a></span>VPP_VOUT_TOLERANCE</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float VPP_VOUT_TOLERANCE = <a class="el" href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">VddConfig::DC2DC_VOUT_TOLERANCE_DEFAULT</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/VC : Output Voltage Tolerance, in percent. </p>
+
+</div>
+</div>
+<a id="a6238eeda4d3591ba25b3f737567ee898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6238eeda4d3591ba25b3f737567ee898">&#9670;&nbsp;</a></span>VPP_CTRL_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VPP_CTRL_PIN = 28</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : Assigned Voltage Control GPIO pin. </p>
+
+</div>
+</div>
+<a id="a63096fb632386e676d1beef4118b6dda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63096fb632386e676d1beef4118b6dda">&#9670;&nbsp;</a></span>VPP_VC_SIN_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VPP_VC_SIN_PIN = 12</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : Assigned Voltage Control, Shift Register SIN, GPIO pin. </p>
+
+</div>
+</div>
+<a id="aa85228a4f0ab854a8fb6c260b697e232"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa85228a4f0ab854a8fb6c260b697e232">&#9670;&nbsp;</a></span>VPP_VC_CLK_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VPP_VC_CLK_PIN = 14</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : Assigned Voltage Control, Shift Register CLK, GPIO pin. </p>
+
+</div>
+</div>
+<a id="ac43267700f98659dd3ce33fbd9a61d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac43267700f98659dd3ce33fbd9a61d5f">&#9670;&nbsp;</a></span>VPP_VC_CLR_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VPP_VC_CLR_PIN = 15</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : Assigned Voltage Control, Shift Register CLR, GPIO pin. </p>
+
+</div>
+</div>
+<a id="a0318f98b4c9b7bf6fa3988aab6ba863e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0318f98b4c9b7bf6fa3988aab6ba863e">&#9670;&nbsp;</a></span>VPP_VC_RCK_PIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint VPP_VC_RCK_PIN = 13</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : Assigned Voltage Control, Shift Register RCK, GPIO pin. </p>
+
+</div>
+</div>
+<a id="ab3edabd7fb88fccd583fe8b76645459f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3edabd7fb88fccd583fe8b76645459f">&#9670;&nbsp;</a></span>VPP_ON_A18_VC_REGISTER_BIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t VPP_ON_A18_VC_REGISTER_BIT = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : VC Shift Register, VPP on A18 bit. </p>
+
+</div>
+</div>
+<a id="a9700847fe3b5977f2de1c78800caae96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9700847fe3b5977f2de1c78800caae96">&#9670;&nbsp;</a></span>VPP_ON_A9_VC_REGISTER_BIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t VPP_ON_A9_VC_REGISTER_BIT = 1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : VC Shift Register, VPP on A9 bit. </p>
+
+</div>
+</div>
+<a id="a38cab33cc7001af29885dbdbae119ea7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38cab33cc7001af29885dbdbae119ea7">&#9670;&nbsp;</a></span>VPP_ON_CE_VC_REGISTER_BIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t VPP_ON_CE_VC_REGISTER_BIT = 2</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : VC Shift Register, VPP on CE bit. </p>
+
+</div>
+</div>
+<a id="aa3982031f82b2699878e3a15539e2569"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3982031f82b2699878e3a15539e2569">&#9670;&nbsp;</a></span>VPP_ON_OE_VC_REGISTER_BIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t VPP_ON_OE_VC_REGISTER_BIT = 3</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : VC Shift Register, VPP on OE bit. </p>
+
+</div>
+</div>
+<a id="ac6eef1a18b6da2d5f1eb32ad670c740b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6eef1a18b6da2d5f1eb32ad670c740b">&#9670;&nbsp;</a></span>VPP_ON_WE_VC_REGISTER_BIT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t VPP_ON_WE_VC_REGISTER_BIT = 4</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>VPP/CTRL : VC Shift Register, VPP on WE bit. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

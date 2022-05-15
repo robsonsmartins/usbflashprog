@@ -124,7 +124,7 @@ typedef struct Dc2DcConfig {
     /**
      * @brief Assign Operator.
      * @param src Dc2DcConfig source object.
-     * @return Dc2DcConfig& Reference for this.
+     * @return Reference for this.
      */
     Dc2DcConfig& operator=(const Dc2DcConfig& src);
     /** @brief Default value for minimal duty cycle value for the PWM, in %. */

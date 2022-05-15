@@ -1,3 +1,3 @@
-<map id="Dc2DcTest" name="Dc2DcTest">
-<area shape="rect" id="node1" title="Test class for DC To DC Converter." alt="" coords="5,5,132,156"/>
+<map id="Gpio" name="Gpio">
+<area shape="rect" id="node1" title="Pico GPIO Class." alt="" coords="5,5,140,229"/>
 </map>

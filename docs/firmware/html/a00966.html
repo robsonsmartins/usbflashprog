@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: PwmTest Class Reference</title>
+<title>USB EPROM/Flash Programmer: VddConfig Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,57 +63,150 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="a00963.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">PwmTest Class Reference<div class="ingroups"><a class="el" href="a00101.html">Unit Tests</a></div></div>  </div>
+<div class="title">VddConfig Struct Reference<div class="ingroups"><a class="el" href="a00116.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Test class for Pico PWM.  
+<p>Defines the configuration fields for a <a class="el" href="a00978.html" title="Voltage (VDD) Generator Class.">VddGenerator</a> class.  
  <a href="a00966.html#details">More...</a></p>
 
-<p><code>#include &lt;pwm_test.hpp&gt;</code></p>
-
-<p>Inherits Test.</p>
+<p><code>#include &lt;vgenerator.hpp&gt;</code></p>
 <div class="dynheader">
-Collaboration diagram for PwmTest:</div>
+Inheritance diagram for VddConfig:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00964.png" border="0" usemap="#aPwmTest_coll__map" alt="Collaboration graph"/></div>
-<map name="aPwmTest_coll__map" id="aPwmTest_coll__map">
-<area shape="rect" title="Test class for Pico PWM." alt="" coords="35,307,151,428"/>
-<area shape="rect" href="a00942.html" title="Pico PWM Class." alt="" coords="5,5,181,244"/>
+<div class="center"><img src="a00965.png" border="0" usemap="#aVddConfig_inherit__map" alt="Inheritance graph"/></div>
+<map name="aVddConfig_inherit__map" id="aVddConfig_inherit__map">
+<area shape="rect" title="Defines the configuration fields for a VddGenerator class." alt="" coords="58,637,171,744"/>
+<area shape="rect" href="a00962.html" title="Defines the configuration fields for a VGenerator class." alt="" coords="53,483,176,589"/>
+<area shape="rect" href="a00938.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="5,5,224,435"/>
+</map>
+</div>
+<div class="dynheader">
+Collaboration diagram for VddConfig:</div>
+<div class="dyncontent">
+<div class="center"><img src="a00964.png" border="0" usemap="#aVddConfig_coll__map" alt="Collaboration graph"/></div>
+<map name="aVddConfig_coll__map" id="aVddConfig_coll__map">
+<area shape="rect" title="Defines the configuration fields for a VddGenerator class." alt="" coords="58,637,171,744"/>
+<area shape="rect" href="a00962.html" title="Defines the configuration fields for a VGenerator class." alt="" coords="53,483,176,589"/>
+<area shape="rect" href="a00938.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="5,5,224,435"/>
 </map>
 </div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a2aa2494287f5466eda0a7f41ccad4aa9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a2aa2494287f5466eda0a7f41ccad4aa9">PwmTest</a> ()</td></tr>
-<tr class="memdesc:a2aa2494287f5466eda0a7f41ccad4aa9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00966.html#a2aa2494287f5466eda0a7f41ccad4aa9">More...</a><br /></td></tr>
-<tr class="separator:a2aa2494287f5466eda0a7f41ccad4aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09b4f2ce3ffc22ece3e70f401931f6d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a09b4f2ce3ffc22ece3e70f401931f6d3">~PwmTest</a> () override</td></tr>
-<tr class="memdesc:a09b4f2ce3ffc22ece3e70f401931f6d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="a00966.html#a09b4f2ce3ffc22ece3e70f401931f6d3">More...</a><br /></td></tr>
-<tr class="separator:a09b4f2ce3ffc22ece3e70f401931f6d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a1707f6479611fdc609a3eb8a0cef1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a3a1707f6479611fdc609a3eb8a0cef1b">SetUp</a> () override</td></tr>
-<tr class="memdesc:a3a1707f6479611fdc609a3eb8a0cef1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets Up the test.  <a href="a00966.html#a3a1707f6479611fdc609a3eb8a0cef1b">More...</a><br /></td></tr>
-<tr class="separator:a3a1707f6479611fdc609a3eb8a0cef1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac4fca95dc3b93372ce7f2078baf8e8b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#ac4fca95dc3b93372ce7f2078baf8e8b6">TearDown</a> () override</td></tr>
-<tr class="memdesc:ac4fca95dc3b93372ce7f2078baf8e8b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Teardown of the test.  <a href="a00966.html#ac4fca95dc3b93372ce7f2078baf8e8b6">More...</a><br /></td></tr>
-<tr class="separator:ac4fca95dc3b93372ce7f2078baf8e8b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a22aeee40927a916d7f5792e7c0a3438a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a22aeee40927a916d7f5792e7c0a3438a">VddConfig</a> ()</td></tr>
+<tr class="memdesc:a22aeee40927a916d7f5792e7c0a3438a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00966.html#a22aeee40927a916d7f5792e7c0a3438a">More...</a><br /></td></tr>
+<tr class="separator:a22aeee40927a916d7f5792e7c0a3438a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a622745f04dee2883435aef6aee7ed6af"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a622745f04dee2883435aef6aee7ed6af">VddConfig</a> (uint <a class="el" href="a00938.html#af3ce447000148bcbe2b8286a616f2b74">pwmPin</a>, uint <a class="el" href="a00938.html#a185ec2bed51835a46e7e094ea2cbf429">adcChannel</a>, uint <a class="el" href="a00962.html#a295669aa6d869a6ef99466f9ea5f41a4">ctrlPin</a>, uint <a class="el" href="a00966.html#a61bed480c9613c5ca1fc696e17f01dd0">onVppPin</a>, float <a class="el" href="a00938.html#a4378ab152bbfb4c39a892975be807600">divider</a>=1.0f, uint32_t <a class="el" href="a00938.html#a64365cdbb645b67255b681020ced5fc7">pwmFreq</a>=<a class="el" href="a00958.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a>, float <a class="el" href="a00938.html#a570efab00f4947e625848fb971906db5">adcVref</a>=<a class="el" href="a00946.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a>, float <a class="el" href="a00938.html#aeecaca1a800c10860c408fceefac71cc">pwmMinDuty</a>=<a class="el" href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">PWM_MIN_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00938.html#acaaf6af9f3de5eb3751db1246a2c2801">pwmMaxDuty</a>=<a class="el" href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">PWM_MAX_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00938.html#a031737551e954696de687d63f2af8eb7">pwmSlowStepDuty</a>=<a class="el" href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00938.html#a027e662a047eb0ef4449fd7007c82d3c">pwmFastStepDuty</a>=<a class="el" href="a00938.html#a503785cac57157bec3749816c0e3ad8c">PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00938.html#a92c5e75794f37affaa9286c2d4df0e97">pwmToleranceToFast</a>=<a class="el" href="a00938.html#a63ee32a00c45831b569164428c021d24">PWM_TOLERANCE_TO_FAST_DEFAULT</a>, float <a class="el" href="a00938.html#aa8a9fc0adbdb25db7fa9fa48d24e4bb4">vTolerance</a>=<a class="el" href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">DC2DC_VOUT_TOLERANCE_DEFAULT</a>)</td></tr>
+<tr class="memdesc:a622745f04dee2883435aef6aee7ed6af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00966.html#a622745f04dee2883435aef6aee7ed6af">More...</a><br /></td></tr>
+<tr class="separator:a622745f04dee2883435aef6aee7ed6af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75098bed6f93dd2703e51812e32b23e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00966.html">VddConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a75098bed6f93dd2703e51812e32b23e7">operator=</a> (const <a class="el" href="a00966.html">VddConfig</a> &amp;src)</td></tr>
+<tr class="memdesc:a75098bed6f93dd2703e51812e32b23e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign Operator.  <a href="a00966.html#a75098bed6f93dd2703e51812e32b23e7">More...</a><br /></td></tr>
+<tr class="separator:a75098bed6f93dd2703e51812e32b23e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
-<tr class="memitem:a2639799584fdcef9da8e2649d999269c"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a00942.html">Pwm</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a2639799584fdcef9da8e2649d999269c">pwm_</a> = <a class="el" href="a00942.html">Pwm</a>(SELECTED_GPIO_PWM_PIN)</td></tr>
-<tr class="memdesc:a2639799584fdcef9da8e2649d999269c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00942.html" title="Pico PWM Class.">Pwm</a> class object to test.  <a href="a00966.html#a2639799584fdcef9da8e2649d999269c">More...</a><br /></td></tr>
-<tr class="separator:a2639799584fdcef9da8e2649d999269c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a61bed480c9613c5ca1fc696e17f01dd0"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a61bed480c9613c5ca1fc696e17f01dd0">onVppPin</a></td></tr>
+<tr class="memdesc:a61bed480c9613c5ca1fc696e17f01dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin number of the VDD on VPP signal.  <a href="a00966.html#a61bed480c9613c5ca1fc696e17f01dd0">More...</a><br /></td></tr>
+<tr class="separator:a61bed480c9613c5ca1fc696e17f01dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a295669aa6d869a6ef99466f9ea5f41a4"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a295669aa6d869a6ef99466f9ea5f41a4">ctrlPin</a></td></tr>
+<tr class="memdesc:a295669aa6d869a6ef99466f9ea5f41a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin number of the Control Voltage.  <a href="a00962.html#a295669aa6d869a6ef99466f9ea5f41a4">More...</a><br /></td></tr>
+<tr class="separator:a295669aa6d869a6ef99466f9ea5f41a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3ce447000148bcbe2b8286a616f2b74"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#af3ce447000148bcbe2b8286a616f2b74">pwmPin</a></td></tr>
+<tr class="memdesc:af3ce447000148bcbe2b8286a616f2b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin number of the PWM.  <a href="a00938.html#af3ce447000148bcbe2b8286a616f2b74">More...</a><br /></td></tr>
+<tr class="separator:af3ce447000148bcbe2b8286a616f2b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64365cdbb645b67255b681020ced5fc7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a64365cdbb645b67255b681020ced5fc7">pwmFreq</a></td></tr>
+<tr class="memdesc:a64365cdbb645b67255b681020ced5fc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frequency of the PWM, in Hertz.  <a href="a00938.html#a64365cdbb645b67255b681020ced5fc7">More...</a><br /></td></tr>
+<tr class="separator:a64365cdbb645b67255b681020ced5fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a570efab00f4947e625848fb971906db5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a570efab00f4947e625848fb971906db5">adcVref</a></td></tr>
+<tr class="memdesc:a570efab00f4947e625848fb971906db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference voltage of the ADC, in Volts.  <a href="a00938.html#a570efab00f4947e625848fb971906db5">More...</a><br /></td></tr>
+<tr class="separator:a570efab00f4947e625848fb971906db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a185ec2bed51835a46e7e094ea2cbf429"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a185ec2bed51835a46e7e094ea2cbf429">adcChannel</a></td></tr>
+<tr class="memdesc:a185ec2bed51835a46e7e094ea2cbf429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of the ADC channel (0 to 3).  <a href="a00938.html#a185ec2bed51835a46e7e094ea2cbf429">More...</a><br /></td></tr>
+<tr class="separator:a185ec2bed51835a46e7e094ea2cbf429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4378ab152bbfb4c39a892975be807600"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a4378ab152bbfb4c39a892975be807600">divider</a></td></tr>
+<tr class="memdesc:a4378ab152bbfb4c39a892975be807600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feedback divider in output of DC2DC converter.  <a href="a00938.html#a4378ab152bbfb4c39a892975be807600">More...</a><br /></td></tr>
+<tr class="separator:a4378ab152bbfb4c39a892975be807600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeecaca1a800c10860c408fceefac71cc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#aeecaca1a800c10860c408fceefac71cc">pwmMinDuty</a></td></tr>
+<tr class="memdesc:aeecaca1a800c10860c408fceefac71cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal duty cycle value for the PWM, in %.  <a href="a00938.html#aeecaca1a800c10860c408fceefac71cc">More...</a><br /></td></tr>
+<tr class="separator:aeecaca1a800c10860c408fceefac71cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acaaf6af9f3de5eb3751db1246a2c2801"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#acaaf6af9f3de5eb3751db1246a2c2801">pwmMaxDuty</a></td></tr>
+<tr class="memdesc:acaaf6af9f3de5eb3751db1246a2c2801"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum duty cycle value for the PWM, in %.  <a href="a00938.html#acaaf6af9f3de5eb3751db1246a2c2801">More...</a><br /></td></tr>
+<tr class="separator:acaaf6af9f3de5eb3751db1246a2c2801"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a031737551e954696de687d63f2af8eb7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a031737551e954696de687d63f2af8eb7">pwmSlowStepDuty</a></td></tr>
+<tr class="memdesc:a031737551e954696de687d63f2af8eb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Step of slow increment/decrement for the PWM duty cycle.  <a href="a00938.html#a031737551e954696de687d63f2af8eb7">More...</a><br /></td></tr>
+<tr class="separator:a031737551e954696de687d63f2af8eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a027e662a047eb0ef4449fd7007c82d3c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a027e662a047eb0ef4449fd7007c82d3c">pwmFastStepDuty</a></td></tr>
+<tr class="memdesc:a027e662a047eb0ef4449fd7007c82d3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Step of fast increment/decrement for the PWM duty cycle.  <a href="a00938.html#a027e662a047eb0ef4449fd7007c82d3c">More...</a><br /></td></tr>
+<tr class="separator:a027e662a047eb0ef4449fd7007c82d3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92c5e75794f37affaa9286c2d4df0e97"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a92c5e75794f37affaa9286c2d4df0e97">pwmToleranceToFast</a></td></tr>
+<tr class="memdesc:a92c5e75794f37affaa9286c2d4df0e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerance between actual and target voltages to consider them far.  <a href="a00938.html#a92c5e75794f37affaa9286c2d4df0e97">More...</a><br /></td></tr>
+<tr class="separator:a92c5e75794f37affaa9286c2d4df0e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a9fc0adbdb25db7fa9fa48d24e4bb4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#aa8a9fc0adbdb25db7fa9fa48d24e4bb4">vTolerance</a></td></tr>
+<tr class="memdesc:aa8a9fc0adbdb25db7fa9fa48d24e4bb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tolerance voltage for DC2DC output.  <a href="a00938.html#aa8a9fc0adbdb25db7fa9fa48d24e4bb4">More...</a><br /></td></tr>
+<tr class="separator:aa8a9fc0adbdb25db7fa9fa48d24e4bb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a3c73759fa0fb2d46d730bc4287a86472"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">PWM_MIN_DUTY_CYCLE_DEFAULT</a> = 0.0f</td></tr>
+<tr class="memdesc:a3c73759fa0fb2d46d730bc4287a86472"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for minimal duty cycle value for the PWM, in %.  <a href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">More...</a><br /></td></tr>
+<tr class="separator:a3c73759fa0fb2d46d730bc4287a86472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f369c821dc166e391ca93079b2eff5f"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">PWM_MAX_DUTY_CYCLE_DEFAULT</a> = 95.0f</td></tr>
+<tr class="memdesc:a2f369c821dc166e391ca93079b2eff5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for maximum duty cycle value for the PWM, in %.  <a href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">More...</a><br /></td></tr>
+<tr class="separator:a2f369c821dc166e391ca93079b2eff5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad51e480b4e72db9c7b399eaf0e483cfa"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a> = 0.1f</td></tr>
+<tr class="memdesc:ad51e480b4e72db9c7b399eaf0e483cfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for step of slow increment/decrement for the PWM duty cycle.  <a href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">More...</a><br /></td></tr>
+<tr class="separator:ad51e480b4e72db9c7b399eaf0e483cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a503785cac57157bec3749816c0e3ad8c"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a503785cac57157bec3749816c0e3ad8c">PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a> = 1.0f</td></tr>
+<tr class="memdesc:a503785cac57157bec3749816c0e3ad8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for step of fast increment/decrement for the PWM duty cycle.  <a href="a00938.html#a503785cac57157bec3749816c0e3ad8c">More...</a><br /></td></tr>
+<tr class="separator:a503785cac57157bec3749816c0e3ad8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63ee32a00c45831b569164428c021d24"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a63ee32a00c45831b569164428c021d24">PWM_TOLERANCE_TO_FAST_DEFAULT</a> = 0.1f</td></tr>
+<tr class="memdesc:a63ee32a00c45831b569164428c021d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for Tolerance between actual and target voltages to consider them far.  <a href="a00938.html#a63ee32a00c45831b569164428c021d24">More...</a><br /></td></tr>
+<tr class="separator:a63ee32a00c45831b569164428c021d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16253343c5fc7437ef08acbe9d289a41"><td class="memItemLeft" align="right" valign="top">static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">DC2DC_VOUT_TOLERANCE_DEFAULT</a> = 0.05f</td></tr>
+<tr class="memdesc:a16253343c5fc7437ef08acbe9d289a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default value for tolerance voltage for DC2DC output.  <a href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">More...</a><br /></td></tr>
+<tr class="separator:a16253343c5fc7437ef08acbe9d289a41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a1ef4d29741a6b44c5c9a56e29e09fbf5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a1ef4d29741a6b44c5c9a56e29e09fbf5">operator==</a> (const <a class="el" href="a00966.html">VddConfig</a> &amp;a, const <a class="el" href="a00966.html">VddConfig</a> &amp;b)</td></tr>
+<tr class="memdesc:a1ef4d29741a6b44c5c9a56e29e09fbf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality Operator.  <a href="a00966.html#a1ef4d29741a6b44c5c9a56e29e09fbf5">More...</a><br /></td></tr>
+<tr class="separator:a1ef4d29741a6b44c5c9a56e29e09fbf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a723f1a7a164aefae460e2b248e31d6c6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a723f1a7a164aefae460e2b248e31d6c6">operator!=</a> (const <a class="el" href="a00966.html">VddConfig</a> &amp;a, const <a class="el" href="a00966.html">VddConfig</a> &amp;b)</td></tr>
+<tr class="memdesc:a723f1a7a164aefae460e2b248e31d6c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unequality Operator.  <a href="a00966.html#a723f1a7a164aefae460e2b248e31d6c6">More...</a><br /></td></tr>
+<tr class="separator:a723f1a7a164aefae460e2b248e31d6c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Test class for Pico PWM. </p>
-<p>The purpose of this class is to test the <a class="el" href="a00942.html" title="Pico PWM Class.">Pwm</a> class. </p>
+<div class="textblock"><p>Defines the configuration fields for a <a class="el" href="a00978.html" title="Voltage (VDD) Generator Class.">VddGenerator</a> class. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a2aa2494287f5466eda0a7f41ccad4aa9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2aa2494287f5466eda0a7f41ccad4aa9">&#9670;&nbsp;</a></span>PwmTest()</h2>
+<a id="a22aeee40927a916d7f5792e7c0a3438a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22aeee40927a916d7f5792e7c0a3438a">&#9670;&nbsp;</a></span>VddConfig() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00966.html">VddConfig</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Assumes defaults for all fields. </p>
+
+</div>
+</div>
+<a id="a622745f04dee2883435aef6aee7ed6af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a622745f04dee2883435aef6aee7ed6af">&#9670;&nbsp;</a></span>VddConfig() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -122,53 +215,149 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00966.html">PwmTest</a> </td>
+          <td class="memname"><a class="el" href="a00966.html">VddConfig</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>pwmPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>adcChannel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>ctrlPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>onVppPin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>divider</em> = <code>1.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>pwmFreq</em> = <code><a class="el" href="a00958.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>adcVref</em> = <code><a class="el" href="a00946.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pwmMinDuty</em> = <code><a class="el" href="a00938.html#a3c73759fa0fb2d46d730bc4287a86472">PWM_MIN_DUTY_CYCLE_DEFAULT</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pwmMaxDuty</em> = <code><a class="el" href="a00938.html#a2f369c821dc166e391ca93079b2eff5f">PWM_MAX_DUTY_CYCLE_DEFAULT</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pwmSlowStepDuty</em> = <code><a class="el" href="a00938.html#ad51e480b4e72db9c7b399eaf0e483cfa">PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pwmFastStepDuty</em> = <code><a class="el" href="a00938.html#a503785cac57157bec3749816c0e3ad8c">PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>pwmToleranceToFast</em> = <code><a class="el" href="a00938.html#a63ee32a00c45831b569164428c021d24">PWM_TOLERANCE_TO_FAST_DEFAULT</a></code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>vTolerance</em> = <code><a class="el" href="a00938.html#a16253343c5fc7437ef08acbe9d289a41">DC2DC_VOUT_TOLERANCE_DEFAULT</a></code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-
-</div>
-</div>
-<a id="a09b4f2ce3ffc22ece3e70f401931f6d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09b4f2ce3ffc22ece3e70f401931f6d3">&#9670;&nbsp;</a></span>~PwmTest()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">~<a class="el" href="a00966.html">PwmTest</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Destructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pwmPin</td><td>Pin number of the PWM. </td></tr>
+    <tr><td class="paramname">adcChannel</td><td>Number of the ADC channel (0 to 3). </td></tr>
+    <tr><td class="paramname">ctrlPin</td><td>Pin number of the Control Voltage. </td></tr>
+    <tr><td class="paramname">onVppPin</td><td>Pin number of the VDD on VPP signal. </td></tr>
+    <tr><td class="paramname">divider</td><td>Feedback divider in output of DC2DC converter. </td></tr>
+    <tr><td class="paramname">pwmFreq</td><td>Frequency of the PWM, in Hertz. </td></tr>
+    <tr><td class="paramname">adcVref</td><td>Reference voltage of the ADC, in Volts. </td></tr>
+    <tr><td class="paramname">pwmMinDuty</td><td>Minimal duty cycle value for the PWM, in %. </td></tr>
+    <tr><td class="paramname">pwmMaxDuty</td><td>Maximum duty cycle value for the PWM, in %. </td></tr>
+    <tr><td class="paramname">pwmSlowStepDuty</td><td>Step of slow increment/decrement for the PWM duty cycle. </td></tr>
+    <tr><td class="paramname">pwmFastStepDuty</td><td>Step of fast increment/decrement for the PWM duty cycle. </td></tr>
+    <tr><td class="paramname">pwmToleranceToFast</td><td>Tolerance between actual and target voltages to consider them far. </td></tr>
+    <tr><td class="paramname">vTolerance</td><td>Tolerance voltage for DC2DC output. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3a1707f6479611fdc609a3eb8a0cef1b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a1707f6479611fdc609a3eb8a0cef1b">&#9670;&nbsp;</a></span>SetUp()</h2>
+<a id="a75098bed6f93dd2703e51812e32b23e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75098bed6f93dd2703e51812e32b23e7">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00966.html">VddConfig</a> &amp; operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a00966.html">VddConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>src</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Assign Operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td><a class="el" href="a00966.html" title="Defines the configuration fields for a VddGenerator class.">VddConfig</a> source object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Reference for this. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a1ef4d29741a6b44c5c9a56e29e09fbf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ef4d29741a6b44c5c9a56e29e09fbf5">&#9670;&nbsp;</a></span>operator==</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,25 +366,44 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void SetUp </td>
+          <td class="memname">bool operator== </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="a00966.html">VddConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="a00966.html">VddConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Sets Up the test. </p>
+<p>Equality Operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>One object. </td></tr>
+    <tr><td class="paramname">b</td><td>Another object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the objects contain equal values, false otherwise. </dd></dl>
 
 </div>
 </div>
-<a id="ac4fca95dc3b93372ce7f2078baf8e8b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac4fca95dc3b93372ce7f2078baf8e8b6">&#9670;&nbsp;</a></span>TearDown()</h2>
+<a id="a723f1a7a164aefae460e2b248e31d6c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a723f1a7a164aefae460e2b248e31d6c6">&#9670;&nbsp;</a></span>operator!=</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,26 +412,62 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void TearDown </td>
+          <td class="memname">bool operator!= </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="a00966.html">VddConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const <a class="el" href="a00966.html">VddConfig</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Teardown of the test. </p>
+<p>Unequality Operator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>One object. </td></tr>
+    <tr><td class="paramname">b</td><td>Another object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the objects contain different values, false otherwise. </dd></dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a2639799584fdcef9da8e2649d999269c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2639799584fdcef9da8e2649d999269c">&#9670;&nbsp;</a></span>pwm_</h2>
+<a id="a61bed480c9613c5ca1fc696e17f01dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61bed480c9613c5ca1fc696e17f01dd0">&#9670;&nbsp;</a></span>onVppPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint onVppPin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pin number of the VDD on VPP signal. </p>
+<p>Default: 0xFF (not assigned). </p>
+
+</div>
+</div>
+<a id="a295669aa6d869a6ef99466f9ea5f41a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a295669aa6d869a6ef99466f9ea5f41a4">&#9670;&nbsp;</a></span>ctrlPin</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -232,23 +476,448 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00942.html">Pwm</a> pwm_ = <a class="el" href="a00942.html">Pwm</a>(SELECTED_GPIO_PWM_PIN)</td>
+          <td class="memname">uint ctrlPin</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="a00942.html" title="Pico PWM Class.">Pwm</a> class object to test. </p>
+<p>Pin number of the Control Voltage. </p>
+<p>Default: 0xFF (not assigned). </p>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="a00077.html">pwm_test.hpp</a></li>
-<li><a class="el" href="a00074.html">pwm_test.cpp</a></li>
+<a id="af3ce447000148bcbe2b8286a616f2b74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3ce447000148bcbe2b8286a616f2b74">&#9670;&nbsp;</a></span>pwmPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint pwmPin</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pin number of the PWM. </p>
+<p>Default: 0xFF (not assigned). </p>
+
+</div>
+</div>
+<a id="a64365cdbb645b67255b681020ced5fc7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64365cdbb645b67255b681020ced5fc7">&#9670;&nbsp;</a></span>pwmFreq</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t pwmFreq</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Frequency of the PWM, in Hertz. </p>
+<p>Default: <a class="el" href="a00958.html#a055a68e3ccbd2fc9f165070b73ad0c9e" title="PWM default frequency, in Hertz.">Pwm::PWM_DEFAULT_FREQ</a>. </p>
+
+</div>
+</div>
+<a id="a570efab00f4947e625848fb971906db5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a570efab00f4947e625848fb971906db5">&#9670;&nbsp;</a></span>adcVref</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float adcVref</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reference voltage of the ADC, in Volts. </p>
+<p>Default: <a class="el" href="a00946.html#aeb8e08276ace83b175d190940da6cffb" title="Default reference voltage, in Volts.">Adc::DEFAULT_VREF</a>. </p>
+
+</div>
+</div>
+<a id="a185ec2bed51835a46e7e094ea2cbf429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a185ec2bed51835a46e7e094ea2cbf429">&#9670;&nbsp;</a></span>adcChannel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint adcChannel</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Number of the ADC channel (0 to 3). </p>
+<p>Default: 0xFF (not assigned). </p>
+
+</div>
+</div>
+<a id="a4378ab152bbfb4c39a892975be807600"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4378ab152bbfb4c39a892975be807600">&#9670;&nbsp;</a></span>divider</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float divider</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Feedback divider in output of DC2DC converter. </p>
+<p>Typical formula: Divider = (R1 + R2) / R2.<br  />
+ Default: 1.0. </p>
+
+</div>
+</div>
+<a id="aeecaca1a800c10860c408fceefac71cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeecaca1a800c10860c408fceefac71cc">&#9670;&nbsp;</a></span>pwmMinDuty</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float pwmMinDuty</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Minimal duty cycle value for the PWM, in %. </p>
+<p>Default: PWM_MIN_DUTY_CYCLE_DEFAULT. </p>
+
+</div>
+</div>
+<a id="acaaf6af9f3de5eb3751db1246a2c2801"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acaaf6af9f3de5eb3751db1246a2c2801">&#9670;&nbsp;</a></span>pwmMaxDuty</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float pwmMaxDuty</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Maximum duty cycle value for the PWM, in %. </p>
+<p>Default: PWM_MAX_DUTY_CYCLE_DEFAULT. </p>
+
+</div>
+</div>
+<a id="a031737551e954696de687d63f2af8eb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a031737551e954696de687d63f2af8eb7">&#9670;&nbsp;</a></span>pwmSlowStepDuty</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float pwmSlowStepDuty</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Step of slow increment/decrement for the PWM duty cycle. </p>
+<p>Used when actual voltage is near to the target voltage.<br  />
+ Default: PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT. </p>
+
+</div>
+</div>
+<a id="a027e662a047eb0ef4449fd7007c82d3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a027e662a047eb0ef4449fd7007c82d3c">&#9670;&nbsp;</a></span>pwmFastStepDuty</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float pwmFastStepDuty</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Step of fast increment/decrement for the PWM duty cycle. </p>
+<p>Used when actual voltage is far to the target voltage.<br  />
+ Default: PWM_FAST_STEP_DUTY_CYCLE_DEFAULT. </p>
+
+</div>
+</div>
+<a id="a92c5e75794f37affaa9286c2d4df0e97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92c5e75794f37affaa9286c2d4df0e97">&#9670;&nbsp;</a></span>pwmToleranceToFast</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float pwmToleranceToFast</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tolerance between actual and target voltages to consider them far. </p>
+<p>Used formula: <code>distance = |actual - targetV * (1.0 +- vTolerance) * (1.0 +- pwmToleranceToFast)|</code><br  />
+ Default: PWM_TOLERANCE_TO_FAST_DEFAULT. </p>
+
+</div>
+</div>
+<a id="aa8a9fc0adbdb25db7fa9fa48d24e4bb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8a9fc0adbdb25db7fa9fa48d24e4bb4">&#9670;&nbsp;</a></span>vTolerance</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float vTolerance</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Tolerance voltage for DC2DC output. </p>
+<p>The output voltage will vary within tolerance limits.<br  />
+ Default: DC2DC_VOUT_TOLERANCE_DEFAULT. </p>
+
+</div>
+</div>
+<a id="a3c73759fa0fb2d46d730bc4287a86472"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c73759fa0fb2d46d730bc4287a86472">&#9670;&nbsp;</a></span>PWM_MIN_DUTY_CYCLE_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float PWM_MIN_DUTY_CYCLE_DEFAULT = 0.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for minimal duty cycle value for the PWM, in %. </p>
+
+</div>
+</div>
+<a id="a2f369c821dc166e391ca93079b2eff5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f369c821dc166e391ca93079b2eff5f">&#9670;&nbsp;</a></span>PWM_MAX_DUTY_CYCLE_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float PWM_MAX_DUTY_CYCLE_DEFAULT = 95.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for maximum duty cycle value for the PWM, in %. </p>
+
+</div>
+</div>
+<a id="ad51e480b4e72db9c7b399eaf0e483cfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad51e480b4e72db9c7b399eaf0e483cfa">&#9670;&nbsp;</a></span>PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT = 0.1f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for step of slow increment/decrement for the PWM duty cycle. </p>
+
+</div>
+</div>
+<a id="a503785cac57157bec3749816c0e3ad8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a503785cac57157bec3749816c0e3ad8c">&#9670;&nbsp;</a></span>PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float PWM_FAST_STEP_DUTY_CYCLE_DEFAULT = 1.0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for step of fast increment/decrement for the PWM duty cycle. </p>
+
+</div>
+</div>
+<a id="a63ee32a00c45831b569164428c021d24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63ee32a00c45831b569164428c021d24">&#9670;&nbsp;</a></span>PWM_TOLERANCE_TO_FAST_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float PWM_TOLERANCE_TO_FAST_DEFAULT = 0.1f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for Tolerance between actual and target voltages to consider them far. </p>
+
+</div>
+</div>
+<a id="a16253343c5fc7437ef08acbe9d289a41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16253343c5fc7437ef08acbe9d289a41">&#9670;&nbsp;</a></span>DC2DC_VOUT_TOLERANCE_DEFAULT</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr float DC2DC_VOUT_TOLERANCE_DEFAULT = 0.05f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">constexpr</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Default value for tolerance voltage for DC2DC output. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following files:<ul>
+<li><a class="el" href="a00047.html">vgenerator.hpp</a></li>
+<li><a class="el" href="a00044.html">vgenerator.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

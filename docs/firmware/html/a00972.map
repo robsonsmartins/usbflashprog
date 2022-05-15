@@ -1,0 +1,9 @@
+<map id="VGenerator" name="VGenerator">
+<area shape="rect" id="node1" title="Voltage Generator Class." alt="" coords="259,872,397,1140"/>
+<area shape="rect" id="node2" href="$a00962.html" title="Defines the configuration fields for a VGenerator class." alt="" coords="97,600,220,707"/>
+<area shape="rect" id="node3" href="$a00938.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="5,5,224,435"/>
+<area shape="rect" id="node5" href="$a00942.html" title="DC To DC Converter Class." alt="" coords="262,497,394,809"/>
+<area shape="rect" id="node4" href="$a00950.html" title="Pico GPIO Class." alt="" coords="418,541,553,765"/>
+<area shape="rect" id="node6" href="$a00958.html" title="Pico PWM Class." alt="" coords="248,49,424,391"/>
+<area shape="rect" id="node7" href="$a00946.html" title="Pico ADC Class." alt="" coords="449,123,583,317"/>
+</map>

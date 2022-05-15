@@ -1,4 +1,4 @@
-<map id="MultiCoreTest" name="MultiCoreTest">
-<area shape="rect" id="node1" title="Test class for Pico Multi Core." alt="" coords="10,321,157,443"/>
-<area shape="rect" id="node2" href="$a00938.html" title="Pico Multi Core Class." alt="" coords="5,5,161,259"/>
+<map id="VGenConfig" name="VGenConfig">
+<area shape="rect" id="node1" title="Defines the configuration fields for a VGenerator class." alt="" coords="53,483,176,589"/>
+<area shape="rect" id="node2" href="$a00938.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="5,5,224,435"/>
 </map>

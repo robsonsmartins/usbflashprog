@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vtolerance_264',['vTolerance',['../a00923.html#aa8a9fc0adbdb25db7fa9fa48d24e4bb4',1,'Dc2DcConfig']]]
+  ['onvpppin_378',['onVppPin',['../a00966.html#a61bed480c9613c5ca1fc696e17f01dd0',1,'VddConfig']]]
 ];

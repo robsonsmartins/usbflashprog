@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['dc2dc_176',['Dc2Dc',['../a00927.html#a1be95bd6ca899cfe8fdf4c282eb1537a',1,'Dc2Dc::Dc2Dc()'],['../a00927.html#a1089e51ea4705a0cf18f81a49c3bfcab',1,'Dc2Dc::Dc2Dc(const Dc2DcConfig &amp;config)']]],
-  ['dc2dcconfig_177',['Dc2DcConfig',['../a00923.html#a517e36c2387ed0aceb942e088f959fbd',1,'Dc2DcConfig::Dc2DcConfig()'],['../a00923.html#ab51da806b3cfd271d0c8830ab6f54f2e',1,'Dc2DcConfig::Dc2DcConfig(uint pwmPin, uint adcChannel, float divider=1.0f, uint32_t pwmFreq=Pwm::PWM_DEFAULT_FREQ, float adcVref=Adc::DEFAULT_VREF, float pwmMinDuty=PWM_MIN_DUTY_CYCLE_DEFAULT, float pwmMaxDuty=PWM_MAX_DUTY_CYCLE_DEFAULT, float pwmSlowStepDuty=PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT, float pwmFastStepDuty=PWM_FAST_STEP_DUTY_CYCLE_DEFAULT, float pwmToleranceToFast=PWM_TOLERANCE_TO_FAST_DEFAULT, float vTolerance=DC2DC_VOUT_TOLERANCE_DEFAULT)']]],
-  ['dc2dctest_178',['Dc2DcTest',['../a00951.html#a8e7652810f10bb0e6446cdb74791da93',1,'Dc2DcTest']]],
-  ['disablepulls_179',['disablePulls',['../a00935.html#a03714ab70ca3ad354b01c7f07c9bc768',1,'Gpio']]]
+  ['dc2dc_272',['Dc2Dc',['../a00942.html#a1be95bd6ca899cfe8fdf4c282eb1537a',1,'Dc2Dc::Dc2Dc()'],['../a00942.html#a1089e51ea4705a0cf18f81a49c3bfcab',1,'Dc2Dc::Dc2Dc(const Dc2DcConfig &amp;config)']]],
+  ['dc2dcconfig_273',['Dc2DcConfig',['../a00938.html#a517e36c2387ed0aceb942e088f959fbd',1,'Dc2DcConfig::Dc2DcConfig()'],['../a00938.html#ab51da806b3cfd271d0c8830ab6f54f2e',1,'Dc2DcConfig::Dc2DcConfig(uint pwmPin, uint adcChannel, float divider=1.0f, uint32_t pwmFreq=Pwm::PWM_DEFAULT_FREQ, float adcVref=Adc::DEFAULT_VREF, float pwmMinDuty=PWM_MIN_DUTY_CYCLE_DEFAULT, float pwmMaxDuty=PWM_MAX_DUTY_CYCLE_DEFAULT, float pwmSlowStepDuty=PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT, float pwmFastStepDuty=PWM_FAST_STEP_DUTY_CYCLE_DEFAULT, float pwmToleranceToFast=PWM_TOLERANCE_TO_FAST_DEFAULT, float vTolerance=DC2DC_VOUT_TOLERANCE_DEFAULT)']]],
+  ['dc2dctest_274',['Dc2DcTest',['../a00990.html#a8e7652810f10bb0e6446cdb74791da93',1,'Dc2DcTest']]],
+  ['disablepulls_275',['disablePulls',['../a00950.html#a03714ab70ca3ad354b01c7f07c9bc768',1,'Gpio']]]
 ];

@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['_7eadctest_236',['~AdcTest',['../a00955.html#a5cdbe190349f5fa6e40fdd9653cb163e',1,'AdcTest']]],
-  ['_7edc2dc_237',['~Dc2Dc',['../a00927.html#a813b2b28182ea848c5ec003039b6e9b2',1,'Dc2Dc']]],
-  ['_7edc2dctest_238',['~Dc2DcTest',['../a00951.html#afa34986d584f52e59df3133d1bca9506',1,'Dc2DcTest']]],
-  ['_7egpiotest_239',['~GpioTest',['../a00959.html#a68b086f6974cb054e285d1866bcf200b',1,'GpioTest']]],
-  ['_7ehc595test_240',['~HC595Test',['../a00947.html#a60159ebe79173aab93bbde082a9a093d',1,'HC595Test']]],
-  ['_7emulticore_241',['~MultiCore',['../a00939.html#adc2254ee9a84e82214d268a21d80b2aa',1,'MultiCore']]],
-  ['_7emulticoretest_242',['~MultiCoreTest',['../a00963.html#a350b8b805d7f72840b274846939ed278',1,'MultiCoreTest']]],
-  ['_7epwm_243',['~Pwm',['../a00943.html#a5a2f9d4500be3b3e46524921eb6b0360',1,'Pwm']]],
-  ['_7epwmtest_244',['~PwmTest',['../a00967.html#a09b4f2ce3ffc22ece3e70f401931f6d3',1,'PwmTest']]]
+  ['vddconfig_348',['VddConfig',['../a00966.html#a22aeee40927a916d7f5792e7c0a3438a',1,'VddConfig::VddConfig()'],['../a00966.html#a622745f04dee2883435aef6aee7ed6af',1,'VddConfig::VddConfig(uint pwmPin, uint adcChannel, uint ctrlPin, uint onVppPin, float divider=1.0f, uint32_t pwmFreq=Pwm::PWM_DEFAULT_FREQ, float adcVref=Adc::DEFAULT_VREF, float pwmMinDuty=PWM_MIN_DUTY_CYCLE_DEFAULT, float pwmMaxDuty=PWM_MAX_DUTY_CYCLE_DEFAULT, float pwmSlowStepDuty=PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT, float pwmFastStepDuty=PWM_FAST_STEP_DUTY_CYCLE_DEFAULT, float pwmToleranceToFast=PWM_TOLERANCE_TO_FAST_DEFAULT, float vTolerance=DC2DC_VOUT_TOLERANCE_DEFAULT)']]],
+  ['vddgenerator_349',['VddGenerator',['../a00978.html#a277b273d286bd55048d014ba4ea5a70f',1,'VddGenerator::VddGenerator()'],['../a00978.html#a3e916f352b067864f7888e5140c1bcec',1,'VddGenerator::VddGenerator(const VddConfig &amp;config)']]],
+  ['vgenconfig_350',['VGenConfig',['../a00962.html#ae548ee6403887fe100b5e3f1d8f659e1',1,'VGenConfig::VGenConfig()'],['../a00962.html#a33dd2e85017bb00878d0eb35ab0d1c7f',1,'VGenConfig::VGenConfig(uint pwmPin, uint adcChannel, uint ctrlPin, float divider=1.0f, uint32_t pwmFreq=Pwm::PWM_DEFAULT_FREQ, float adcVref=Adc::DEFAULT_VREF, float pwmMinDuty=PWM_MIN_DUTY_CYCLE_DEFAULT, float pwmMaxDuty=PWM_MAX_DUTY_CYCLE_DEFAULT, float pwmSlowStepDuty=PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT, float pwmFastStepDuty=PWM_FAST_STEP_DUTY_CYCLE_DEFAULT, float pwmToleranceToFast=PWM_TOLERANCE_TO_FAST_DEFAULT, float vTolerance=DC2DC_VOUT_TOLERANCE_DEFAULT)']]],
+  ['vgenerator_351',['VGenerator',['../a00974.html#a62608866034034c985925e396efde439',1,'VGenerator']]],
+  ['vppconfig_352',['VppConfig',['../a00970.html#acad3579e404220d7b93294eaa37f6729',1,'VppConfig::VppConfig()'],['../a00970.html#a2e79b77535ab8d7dab1ab1e180cd98ea',1,'VppConfig::VppConfig(uint pwmPin, uint adcChannel, uint ctrlPin, uint vcSinPin, uint vcClkPin, uint vcClrPin, uint vcRckPin, float divider=1.0f, uint32_t pwmFreq=Pwm::PWM_DEFAULT_FREQ, float adcVref=Adc::DEFAULT_VREF, float pwmMinDuty=PWM_MIN_DUTY_CYCLE_DEFAULT, float pwmMaxDuty=PWM_MAX_DUTY_CYCLE_DEFAULT, float pwmSlowStepDuty=PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT, float pwmFastStepDuty=PWM_FAST_STEP_DUTY_CYCLE_DEFAULT, float pwmToleranceToFast=PWM_TOLERANCE_TO_FAST_DEFAULT, float vTolerance=DC2DC_VOUT_TOLERANCE_DEFAULT)']]],
+  ['vppgenerator_353',['VppGenerator',['../a00982.html#ab39605dc28af48f8df6d377fed631966',1,'VppGenerator::VppGenerator()'],['../a00982.html#a812a9271f6e08ecffd31c73f7746b6f0',1,'VppGenerator::VppGenerator(const VppConfig &amp;config)']]]
 ];

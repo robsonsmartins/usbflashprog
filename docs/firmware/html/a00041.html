@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: README.md File Reference</title>
+<title>USB EPROM/Flash Programmer: main.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,10 +62,122 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">README.md File Reference</div>  </div>
+<div class="title">main.cpp File Reference<div class="ingroups"><a class="el" href="a00116.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implementation of the Main Routine.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="a00113.html">usbflashprog.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for main.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="a00042.png" border="0" usemap="#amain_8cpp" alt=""/></div>
+<map name="amain_8cpp" id="amain_8cpp">
+<area shape="rect" title="Implementation of the Main Routine." alt="" coords="161,5,243,32"/>
+<area shape="rect" href="a00113.html" title="Header of the UsbFlashProg Main Class." alt="" coords="135,80,269,107"/>
+<area shape="rect" href="a00032.html" title="Header of the Pico Multi Core Class." alt="" coords="43,155,179,181"/>
+<area shape="rect" href="a00047.html" title="Header of the Votage Generator Classes." alt="" coords="204,155,384,181"/>
+<area shape="rect" href="a00026.html" title="Header of the Pico GPIO Class." alt="" coords="259,304,361,331"/>
+<area shape="rect" href="a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="111,229,250,256"/>
+<area shape="rect" href="a00005.html" title="Header of the 74HC595 Class." alt="" coords="332,229,488,256"/>
+<area shape="rect" title=" " alt="" coords="161,379,203,405"/>
+<area shape="rect" href="a00020.html" title="Header of the Pico ADC Class." alt="" coords="5,304,103,331"/>
+<area shape="rect" href="a00038.html" title="Header of the Pico PWM Class." alt="" coords="127,304,234,331"/>
+<area shape="rect" title=" " alt="" coords="385,304,448,331"/>
+</map>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00041.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main routine.  <a href="a00041.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af661380bee36b878b48381e988ae8754"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00041.html#af661380bee36b878b48381e988ae8754">second_core</a> (<a class="el" href="a00954.html">MultiCore</a> &amp;core)</td></tr>
+<tr class="memdesc:af661380bee36b878b48381e988ae8754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second core entry point.  <a href="a00041.html#af661380bee36b878b48381e988ae8754">More...</a><br /></td></tr>
+<tr class="separator:af661380bee36b878b48381e988ae8754"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a384a652061655f3454b3cd2014585ad8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01018.html">UsbFlashProg</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00041.html#a384a652061655f3454b3cd2014585ad8">ufp</a> (<a class="el" href="a00041.html#af661380bee36b878b48381e988ae8754">second_core</a>)</td></tr>
+<tr class="memdesc:a384a652061655f3454b3cd2014585ad8"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a01018.html" title="Main class of system.">UsbFlashProg</a> instance.  <a href="a00041.html#a384a652061655f3454b3cd2014585ad8">More...</a><br /></td></tr>
+<tr class="separator:a384a652061655f3454b3cd2014585ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of the Main Routine. </p>
+<dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main routine. </p>
+<dl class="section return"><dt>Returns</dt><dd>Error code (zero if success). </dd></dl>
+
+</div>
+</div>
+<a id="af661380bee36b878b48381e988ae8754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af661380bee36b878b48381e988ae8754">&#9670;&nbsp;</a></span>second_core()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void second_core </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00954.html">MultiCore</a> &amp;&#160;</td>
+          <td class="paramname"><em>core</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Second core entry point. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">core</td><td>Reference to <a class="el" href="a00954.html" title="Pico Multi Core Class.">MultiCore</a> object. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a384a652061655f3454b3cd2014585ad8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384a652061655f3454b3cd2014585ad8">&#9670;&nbsp;</a></span>ufp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01018.html">UsbFlashProg</a> ufp(<a class="el" href="a00041.html#af661380bee36b878b48381e988ae8754">second_core</a>) </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00041.html#af661380bee36b878b48381e988ae8754">second_core</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="a01018.html" title="Main class of system.">UsbFlashProg</a> instance. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

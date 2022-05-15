@@ -15,6 +15,7 @@ set(sources
     ../hal/multicore.cpp
     ../circuits/74hc595.cpp
     ../circuits/dc2dc.cpp
+    ../modules/vgenerator.cpp
     hal/gpio_test.cpp 
     hal/adc_test.cpp 
     hal/pwm_test.cpp 

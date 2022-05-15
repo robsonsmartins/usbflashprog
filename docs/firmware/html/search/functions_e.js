@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['writebyte_232',['writeByte',['../a00919.html#aad76ed55071c5a9bd3e5bb9ec39f76bb',1,'HC595']]],
-  ['writedata_233',['writeData',['../a00919.html#ac7f46f8fed8351e8ae070a39095312d6',1,'HC595']]],
-  ['writedword_234',['writeDWord',['../a00919.html#a9f254227c6dbcb16a202cae31ed1a2fc',1,'HC595']]],
-  ['writeword_235',['writeWord',['../a00919.html#ab5d2ffcf16ac85b0d10c78817ad85775',1,'HC595']]]
+  ['unlock_345',['unlock',['../a00954.html#a9278be8203e1c42e2619179882ae4403',1,'MultiCore']]],
+  ['usbflashprog_346',['UsbFlashProg',['../a01018.html#a922af62bca7cce9496206e18311b11c6',1,'UsbFlashProg']]],
+  ['usleep_347',['usleep',['../a00954.html#a02bb4857d31a2f3e40124c462f323154',1,'MultiCore']]]
 ];

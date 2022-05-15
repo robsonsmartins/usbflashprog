@@ -1,6 +1,6 @@
 <map id="dc2dc.hpp" name="dc2dc.hpp">
 <area shape="rect" id="node1" title="Header of the DC To DC Converter Class." alt="" coords="73,5,161,32"/>
-<area shape="rect" id="node2" href="$a00017.html" title="Header of the Pico ADC Class." alt="" coords="5,80,103,107"/>
-<area shape="rect" id="node4" href="$a00035.html" title="Header of the Pico PWM Class." alt="" coords="127,80,234,107"/>
+<area shape="rect" id="node2" href="$a00020.html" title="Header of the Pico ADC Class." alt="" coords="5,80,103,107"/>
+<area shape="rect" id="node4" href="$a00038.html" title="Header of the Pico PWM Class." alt="" coords="127,80,234,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="33,155,75,181"/>
 </map>

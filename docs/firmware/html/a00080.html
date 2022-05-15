@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: adc.h File Reference</title>
+<title>USB EPROM/Flash Programmer: multicore_test.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,248 +62,42 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_3e549de7bf04e327a3b7c3be8c49a8c1.html">mock</a></li><li class="navelem"><a class="el" href="dir_c71c9f706d5b467e1100a6290b514572.html">hardware</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_73c31730a899c84a7a5c88cb9143c198.html">hal</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">adc.h File Reference</div>  </div>
+<div class="title">multicore_test.hpp File Reference<div class="ingroups"><a class="el" href="a00117.html">Unit Tests</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;<a class="el" href="a00098.html">pico/stdlib.h</a>&quot;</code><br />
+
+<p>Header of Unit Test for Pico Multi Core Class.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;gtest/gtest.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00032.html">hal/multicore.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for adc.h:</div>
+Include dependency graph for multicore_test.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00081.png" border="0" usemap="#aadc_8h" alt=""/></div>
-<map name="aadc_8h" id="aadc_8h">
-<area shape="rect" title=" " alt="" coords="61,5,118,32"/>
-<area shape="rect" href="a00098.html" title=" " alt="" coords="39,80,140,107"/>
-<area shape="rect" title=" " alt="" coords="5,155,80,181"/>
-<area shape="rect" title=" " alt="" coords="104,155,171,181"/>
+<div class="center"><img src="a00081.png" border="0" usemap="#amulticore__test_8hpp" alt=""/></div>
+<map name="amulticore__test_8hpp" id="amulticore__test_8hpp">
+<area shape="rect" title="Header of Unit Test for Pico Multi Core Class." alt="" coords="57,5,201,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,109,107"/>
+<area shape="rect" href="a00032.html" title="Header of the Pico Multi Core Class." alt="" coords="133,80,269,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a2b815e6730e8723a6d1d06d9ef8f31c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a2b815e6730e8723a6d1d06d9ef8f31c0">adc_init</a> (void)</td></tr>
-<tr class="separator:a2b815e6730e8723a6d1d06d9ef8f31c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8de13d5b01954350f9f23f985eb2356"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ab8de13d5b01954350f9f23f985eb2356">adc_select_input</a> (<a class="el" href="a00098.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> input)</td></tr>
-<tr class="separator:ab8de13d5b01954350f9f23f985eb2356"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1780a2a12aeb6ba6d00d18c528205159"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a1780a2a12aeb6ba6d00d18c528205159">adc_read</a> ()</td></tr>
-<tr class="separator:a1780a2a12aeb6ba6d00d18c528205159"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d4949fd47e026cee018c32478b9f4eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a3d4949fd47e026cee018c32478b9f4eb">adc_gpio_init</a> (<a class="el" href="a00098.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a> <a class="el" href="a00038.html#ab3adb8e787a8031df8f0ecf29a98be3c">gpio</a>)</td></tr>
-<tr class="separator:a3d4949fd47e026cee018c32478b9f4eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a802039af981f34991e916c07af053918"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a802039af981f34991e916c07af053918">adc_fifo_setup</a> (bool en, bool dreq_en, uint16_t dreq_thresh, bool err_in_fifo, bool byte_shift)</td></tr>
-<tr class="separator:a802039af981f34991e916c07af053918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a996ba3ecb9e4be9e02453f646fbba5e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a996ba3ecb9e4be9e02453f646fbba5e1">adc_run</a> (bool run)</td></tr>
-<tr class="separator:a996ba3ecb9e4be9e02453f646fbba5e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52102fdfeaf54fc31aac6fac97da55b4"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a52102fdfeaf54fc31aac6fac97da55b4">adc_fifo_get_blocking</a> ()</td></tr>
-<tr class="separator:a52102fdfeaf54fc31aac6fac97da55b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfa6a9666c85f7d6582b887d815f9156"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#acfa6a9666c85f7d6582b887d815f9156">adc_fifo_drain</a> ()</td></tr>
-<tr class="separator:acfa6a9666c85f7d6582b887d815f9156"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:adfe119071030ce3836490fd869d64dd1"><td class="memItemLeft" align="right" valign="top">constexpr const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#adfe119071030ce3836490fd869d64dd1">RAW_ADC_DATA</a> [2] = {0x221, 0xDDD}</td></tr>
-<tr class="separator:adfe119071030ce3836490fd869d64dd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01002.html">MultiCoreTest</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test class for Pico Multi Core.  <a href="a01002.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
-<a id="a2b815e6730e8723a6d1d06d9ef8f31c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b815e6730e8723a6d1d06d9ef8f31c0">&#9670;&nbsp;</a></span>adc_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adc_init </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab8de13d5b01954350f9f23f985eb2356"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8de13d5b01954350f9f23f985eb2356">&#9670;&nbsp;</a></span>adc_select_input()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adc_select_input </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00098.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
-          <td class="paramname"><em>input</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1780a2a12aeb6ba6d00d18c528205159"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1780a2a12aeb6ba6d00d18c528205159">&#9670;&nbsp;</a></span>adc_read()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t adc_read </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a3d4949fd47e026cee018c32478b9f4eb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3d4949fd47e026cee018c32478b9f4eb">&#9670;&nbsp;</a></span>adc_gpio_init()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adc_gpio_init </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a00098.html#a91ad9478d81a7aaf2593e8d9c3d06a14">uint</a>&#160;</td>
-          <td class="paramname"><em>gpio</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a802039af981f34991e916c07af053918"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a802039af981f34991e916c07af053918">&#9670;&nbsp;</a></span>adc_fifo_setup()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adc_fifo_setup </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>en</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>dreq_en</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint16_t&#160;</td>
-          <td class="paramname"><em>dreq_thresh</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>err_in_fifo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>byte_shift</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a996ba3ecb9e4be9e02453f646fbba5e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a996ba3ecb9e4be9e02453f646fbba5e1">&#9670;&nbsp;</a></span>adc_run()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adc_run </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>run</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a52102fdfeaf54fc31aac6fac97da55b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52102fdfeaf54fc31aac6fac97da55b4">&#9670;&nbsp;</a></span>adc_fifo_get_blocking()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint16_t adc_fifo_get_blocking </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="acfa6a9666c85f7d6582b887d815f9156"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfa6a9666c85f7d6582b887d815f9156">&#9670;&nbsp;</a></span>adc_fifo_drain()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void adc_fifo_drain </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="adfe119071030ce3836490fd869d64dd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adfe119071030ce3836490fd869d64dd1">&#9670;&nbsp;</a></span>RAW_ADC_DATA</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const uint16_t RAW_ADC_DATA[2] = {0x221, 0xDDD}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header of Unit Test for Pico Multi Core Class. </p>
+<dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

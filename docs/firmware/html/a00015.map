@@ -1,6 +1,11 @@
-<map id="adc.cpp" name="adc.cpp">
-<area shape="rect" id="node1" title="Implementation of the Pico ADC Class." alt="" coords="53,5,125,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,68,107"/>
-<area shape="rect" id="node3" href="$a00017.html" title="Header of the Pico ADC Class." alt="" coords="92,80,189,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="119,155,162,181"/>
+<map id="config.hpp" name="config.hpp">
+<area shape="rect" id="node1" title="Configuration of UsbFlashProg." alt="" coords="368,5,457,32"/>
+<area shape="rect" id="node2" href="$a00020.html" title="Header of the Pico ADC Class." alt="" coords="269,229,367,256"/>
+<area shape="rect" id="node4" href="$a00038.html" title="Header of the Pico PWM Class." alt="" coords="401,229,507,256"/>
+<area shape="rect" id="node5" href="$a00047.html" title="Header of the Votage Generator Classes." alt="" coords="152,80,332,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="234,304,277,331"/>
+<area shape="rect" id="node6" href="$a00026.html" title="Header of the Pico GPIO Class." alt="" coords="143,229,245,256"/>
+<area shape="rect" id="node7" href="$a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="237,155,375,181"/>
+<area shape="rect" id="node8" href="$a00005.html" title="Header of the 74HC595 Class." alt="" coords="5,155,161,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="52,229,115,256"/>
 </map>

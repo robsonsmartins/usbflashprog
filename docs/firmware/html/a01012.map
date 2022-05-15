@@ -1,0 +1,7 @@
+<map id="UsbFlashProgConfig" name="UsbFlashProgConfig">
+<area shape="rect" id="node1" title="Defines the configuration fields for a UsbFlashProg class." alt="" coords="54,853,206,931"/>
+<area shape="rect" id="node2" href="$a00966.html" title="Defines the configuration fields for a VddGenerator class." alt="" coords="5,662,119,769"/>
+<area shape="rect" id="node3" href="$a00962.html" title="Defines the configuration fields for a VGenerator class." alt="" coords="69,484,191,591"/>
+<area shape="rect" id="node5" href="$a00970.html" title="Defines the configuration fields for a VppGenerator class." alt="" coords="143,640,256,791"/>
+<area shape="rect" id="node4" href="$a00938.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="21,5,239,435"/>
+</map>

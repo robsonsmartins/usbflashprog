@@ -4752,6 +4752,9 @@
     (path "/00000000-0000-0000-0000-0000627eb794/2cca9c68-ccd3-463b-b30b-f3e78e8e711d"
       (reference "#PWR079") (unit 1) (value "GND") (footprint "")
     )
+    (path "/00000000-0000-0000-0000-0000626cc8f1/fd4fd6ac-9dcc-40ff-8ac3-ff49297c34dc"
+      (reference "#PWR080") (unit 1) (value "GND") (footprint "")
+    )
     (path "/00000000-0000-0000-0000-0000626516aa/00000000-0000-0000-0000-0000626605d1"
       (reference "#PWR0101") (unit 1) (value "GND") (footprint "")
     )
@@ -5117,6 +5120,15 @@
     )
     (path "/00000000-0000-0000-0000-0000627eb794/3cd54b60-8f9b-46d2-82ca-584e18d4e3bd"
       (reference "R52") (unit 1) (value "560R") (footprint "Resistor_THT:R_Axial_DIN0309_L9.0mm_D3.2mm_P15.24mm_Horizontal")
+    )
+    (path "/00000000-0000-0000-0000-0000626cc8f1/9e5c2ba6-2b2b-4264-aa55-d024c8f9da4e"
+      (reference "TP1") (unit 1) (value "VDD") (footprint "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm")
+    )
+    (path "/00000000-0000-0000-0000-0000626cc8f1/e839852a-3788-44f7-b5f7-ea5c760b2da4"
+      (reference "TP2") (unit 1) (value "GND") (footprint "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm")
+    )
+    (path "/00000000-0000-0000-0000-00006268ec8d/10c48426-3089-4dad-884d-28c2ece73588"
+      (reference "TP3") (unit 1) (value "VPP") (footprint "TestPoint:TestPoint_THTPad_2.5x2.5mm_Drill1.2mm")
     )
     (path "/00000000-0000-0000-0000-000062654db0"
       (reference "U1") (unit 1) (value "7809") (footprint "Package_TO_SOT_THT:TO-220-3_Vertical")

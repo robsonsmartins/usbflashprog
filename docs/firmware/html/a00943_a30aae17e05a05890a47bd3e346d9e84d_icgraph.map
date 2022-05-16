@@ -1,5 +1,0 @@
-<map id="setDuty" name="setDuty">
-<area shape="rect" id="node1" title="Sets the duty cycle of PWM." alt="" coords="165,31,239,57"/>
-<area shape="rect" id="node2" href="$a00927.html#a70c18eca95b2b0ba60c4b8368867216c" title="Adjusts the PWM duty cycle value to the output reaches the target voltage." alt="" coords="5,5,117,32"/>
-<area shape="rect" id="node3" href="$a00927.html#aad5997aaaa2d622f0ca57f8b24a51a7b" title="Starts the DC to DC converter." alt="" coords="10,56,113,83"/>
-</map>

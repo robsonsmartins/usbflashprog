@@ -9,7 +9,7 @@
 /** 
  * @ingroup Firmware
  * @file modules/vgenerator.hpp
- * @brief Header of the Votage Generator Classes.
+ * @brief Header of the Voltage Generator Classes.
  * 
  * @author Robson Martins (https://www.robsonmartins.com)
  */
@@ -45,6 +45,7 @@ typedef struct VGenConfig: Dc2DcConfig {
      * @param adcChannel Number of the ADC channel (0 to 3).
      * @param ctrlPin Pin number of the Control Voltage.
      * @param divider Feedback divider in output of DC2DC converter.
+     * @param calibration Calibration value (offset) in output of DC2DC converter.
      * @param pwmFreq Frequency of the PWM, in Hertz.
      * @param adcVref Reference voltage of the ADC, in Volts.
      * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
@@ -57,6 +58,7 @@ typedef struct VGenConfig: Dc2DcConfig {
      */
     explicit VGenConfig(uint pwmPin, uint adcChannel, uint ctrlPin,
                        float divider = 1.0f,
+                       float calibration = 0.0f,
                        uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
                        float adcVref = Adc::DEFAULT_VREF,
                        float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
@@ -104,6 +106,7 @@ typedef struct VddConfig: VGenConfig {
      * @param ctrlPin Pin number of the Control Voltage.
      * @param onVppPin Pin number of the VDD on VPP signal.
      * @param divider Feedback divider in output of DC2DC converter.
+     * @param calibration Calibration value (offset) in output of DC2DC converter.
      * @param pwmFreq Frequency of the PWM, in Hertz.
      * @param adcVref Reference voltage of the ADC, in Volts.
      * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
@@ -117,6 +120,7 @@ typedef struct VddConfig: VGenConfig {
     explicit VddConfig(uint pwmPin, uint adcChannel,
                        uint ctrlPin, uint onVppPin,
                        float divider = 1.0f,
+                       float calibration = 0.0f,
                        uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
                        float adcVref = Adc::DEFAULT_VREF,
                        float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
@@ -189,6 +193,7 @@ typedef struct VppConfig: VGenConfig {
      * @param vcClrPin Pin number of the VControl Shift Register CLR signal.
      * @param vcRckPin Pin number of the VControl Shift Register RCK signal.
      * @param divider Feedback divider in output of DC2DC converter.
+     * @param calibration Calibration value (offset) in output of DC2DC converter.
      * @param pwmFreq Frequency of the PWM, in Hertz.
      * @param adcVref Reference voltage of the ADC, in Volts.
      * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
@@ -203,6 +208,7 @@ typedef struct VppConfig: VGenConfig {
                        uint ctrlPin, uint vcSinPin, uint vcClkPin,
                        uint vcClrPin, uint vcRckPin,
                        float divider = 1.0f,
+                       float calibration = 0.0f,
                        uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
                        float adcVref = Adc::DEFAULT_VREF,
                        float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
@@ -311,6 +317,21 @@ class VGenerator {
      * @return Current duty cycle value, in percent.
      */
     virtual float getDuty() const;
+    /**
+     * @brief Starts the calibration process.
+     * @details Sets the calibration value to zero, and sets the output voltage
+     *  to value of the <i>voltage</i> parameter.
+     * @param voltage Calibration target voltage, in Volts.
+     * @return True if success, false otherwise.
+     */
+    virtual bool initCalibration(float voltage);
+    /**
+     * @brief Finishes the calibration process.
+     * @details Calculates the calibration value.
+     * @param measure Measured voltage, in Volts.
+     * @return True if success, false otherwise.
+     */
+    virtual bool finishCalibration(float measure);
 
  protected:
     /* @brief Configuration data. */
@@ -374,6 +395,21 @@ class VddGenerator: public VGenerator {
      * @return True if VDD on VPP is enabled, false otherwise.
      */
     bool isOnVpp() const;
+    /**
+     * @brief Starts the calibration process.
+     * @details Sets the calibration value to zero, and sets the output voltage
+     *  to value of the <i>voltage</i> parameter.
+     * @param voltage Calibration target voltage, in Volts.
+     * @return True if success, false otherwise.
+     */
+    bool initCalibration(float voltage = 5.0f);
+    /**
+     * @brief Finishes the calibration process.
+     * @details Calculates the calibration value and stops the Voltage Generator.
+     * @param measure Measured voltage, in Volts.
+     * @return True if success, false otherwise.
+     */
+    bool finishCalibration(float measure);
 
  private:
     /* @brief Configuration data. */
@@ -477,6 +513,21 @@ class VppGenerator: public VGenerator {
      * @return True if VPP on WE is enabled, false otherwise.
      */
     bool isOnWE() const;
+    /**
+     * @brief Starts the calibration process.
+     * @details Sets the calibration value to zero, and sets the output voltage
+     *  to value of the <i>voltage</i> parameter.
+     * @param voltage Calibration target voltage, in Volts.
+     * @return True if success, false otherwise.
+     */
+    bool initCalibration(float voltage = 12.0f);
+    /**
+     * @brief Finishes the calibration process.
+     * @details Calculates the calibration value and stops the Voltage Generator.
+     * @param measure Measured voltage, in Volts.
+     * @return True if success, false otherwise.
+     */
+    bool finishCalibration(float measure);
 
  private:
     /* @brief Configuration data. */

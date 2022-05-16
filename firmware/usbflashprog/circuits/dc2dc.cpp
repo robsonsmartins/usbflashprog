@@ -27,6 +27,7 @@ Dc2DcConfig::Dc2DcConfig():
         adcVref(Adc::DEFAULT_VREF),
         adcChannel(0xFF),
         divider(1.0f),
+        calibration(0.0f),
         pwmMinDuty(PWM_MIN_DUTY_CYCLE_DEFAULT),
         pwmMaxDuty(PWM_MAX_DUTY_CYCLE_DEFAULT),
         pwmSlowStepDuty(PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT),
@@ -35,15 +36,16 @@ Dc2DcConfig::Dc2DcConfig():
         vTolerance(DC2DC_VOUT_TOLERANCE_DEFAULT) {}
 
 Dc2DcConfig::Dc2DcConfig(uint pwmPin, uint adcChannel, float divider,
-                         uint32_t pwmFreq, float adcVref, float pwmMinDuty,
-                         float pwmMaxDuty, float pwmSlowStepDuty,
-                         float pwmFastStepDuty, float pwmToleranceToFast,
-                         float vTolerance):
+                         float calibration, uint32_t pwmFreq, float adcVref,
+                         float pwmMinDuty, float pwmMaxDuty,
+                         float pwmSlowStepDuty, float pwmFastStepDuty,
+                         float pwmToleranceToFast, float vTolerance):
         pwmPin(pwmPin),
         pwmFreq(pwmFreq),
         adcVref(adcVref),
         adcChannel(adcChannel),
         divider(divider),
+        calibration(calibration),
         pwmMinDuty(pwmMinDuty),
         pwmMaxDuty(pwmMaxDuty),
         pwmSlowStepDuty(pwmSlowStepDuty),
@@ -57,6 +59,7 @@ Dc2DcConfig& Dc2DcConfig::operator=(const Dc2DcConfig& src) {
     this->adcVref            =            src.adcVref;
     this->adcChannel         =         src.adcChannel;
     this->divider            =            src.divider;
+    this->calibration        =        src.calibration;
     this->pwmMinDuty         =         src.pwmMinDuty;
     this->pwmMaxDuty         =         src.pwmMaxDuty;
     this->pwmSlowStepDuty    =    src.pwmSlowStepDuty;
@@ -72,6 +75,7 @@ bool operator==(const Dc2DcConfig& a, const Dc2DcConfig& b) {
             a.adcVref            ==            b.adcVref &&
             a.adcChannel         ==         b.adcChannel &&
             a.divider            ==            b.divider &&
+            a.calibration        ==        b.calibration &&
             a.pwmMinDuty         ==         b.pwmMinDuty &&
             a.pwmMaxDuty         ==         b.pwmMaxDuty &&
             a.pwmSlowStepDuty    ==    b.pwmSlowStepDuty &&
@@ -87,9 +91,7 @@ bool operator!=(const Dc2DcConfig& a, const Dc2DcConfig& b) {
 // ---------------------------------------------------------------------------
 
 Dc2Dc::Dc2Dc(): adc_(nullptr), pwm_(nullptr),
-                vTarget_(0.0f), vActual_(0.0f), dutyActual_(0.0f) {
-    configure(config_);
-}
+                vTarget_(0.0f), vActual_(0.0f), dutyActual_(0.0f) {}
 
 Dc2Dc::Dc2Dc(const Dc2DcConfig& config): Dc2Dc() {
     configure(config);
@@ -102,12 +104,20 @@ Dc2Dc::~Dc2Dc() {
 }
 
 void Dc2Dc::configure(const Dc2DcConfig& config) {
-    stop();
-    if (adc_) { delete adc_; }
-    if (pwm_) { delete pwm_; }
+    bool configPwmPinEq  = (config.pwmPin  ==  config_.pwmPin);
+    bool configAdcVrefEq = (config.adcVref == config_.adcVref);
+    if (!configPwmPinEq || !configAdcVrefEq) { stop(); }
+    if (!configAdcVrefEq && adc_) {
+        delete adc_;
+        adc_ = nullptr;
+    }
+    if (!configPwmPinEq  && pwm_) {
+        delete pwm_;
+        pwm_ = nullptr;
+    }
     config_ = config;
-    adc_ = new Adc(config_.adcVref);
-    pwm_ = new Pwm(config_.pwmPin);
+    if (!adc_) { adc_ = new Adc(config_.adcVref); }
+    if (!pwm_) { pwm_ = new Pwm(config_.pwmPin);  }
     pwm_->setFreq(config_.pwmFreq);
 }
 
@@ -132,7 +142,11 @@ bool Dc2Dc::isRunning() const {
 }
 
 void Dc2Dc::adjust() {
-    if (!isRunning()) { return; }
+    if (!isRunning()) {
+        vActual_ = 0.0f;
+        dutyActual_ = 0.0f;
+        return;
+    }
     vActual_ = measureV_();
     float duty = dutyActual_;
     float vTargetMin = vTarget_ * (1.0f - config_.vTolerance);
@@ -183,6 +197,6 @@ bool Dc2Dc::isValidConfig_() const {
 }
 
 float Dc2Dc::measureV_() const {
-    return (adc_->capture(config_.adcChannel,
-        DC2DC_DEFAULT_ADC_BUFFER_SIZE) * config_.divider);
+    return (adc_->capture(config_.adcChannel, DC2DC_DEFAULT_ADC_BUFFER_SIZE)
+        * config_.divider + config_.calibration);
 }

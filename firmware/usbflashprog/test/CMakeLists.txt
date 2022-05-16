@@ -22,6 +22,7 @@ set(sources
     hal/multicore_test.cpp 
     circuits/74hc595_test.cpp
     circuits/dc2dc_test.cpp
+    modules/vgenerator_test.cpp
     main.cpp
 )
 

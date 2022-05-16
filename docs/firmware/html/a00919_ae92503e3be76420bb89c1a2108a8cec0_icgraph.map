@@ -1,4 +1,0 @@
-<map id="outputEnable" name="outputEnable">
-<area shape="rect" id="node1" title="Changes the Output Enable pin of the HC595." alt="" coords="167,5,275,32"/>
-<area shape="rect" id="node2" href="$a00919.html#a365b25c536bf2dd38eb7ff01bde56b03" title="Disables the output (put its in tristate)." alt="" coords="5,5,119,32"/>
-</map>

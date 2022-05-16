@@ -57,6 +57,7 @@ TEST_F(Dc2DcTest, start_stop) {
 
 TEST_F(Dc2DcTest, set_get_v_duty) {
     EXPECT_EQ(dc2dc_.isRunning(), false);
+    dc2dc_.adjust();
     EXPECT_EQ(dc2dc_.start(), true);
     EXPECT_EQ(dc2dc_.isRunning(), true);
     EXPECT_EQ(dc2dc_.getVTarget(), 0.0f);
@@ -81,7 +82,7 @@ TEST_F(Dc2DcTest, set_get_v_duty) {
 
 TEST_F(Dc2DcTest, constructor_config) {
     EXPECT_EQ(dc2dc_.getConfig(), config_);
-    Dc2DcConfig newConfig(2, 3, 2.0f);
+    Dc2DcConfig newConfig(2, 3, 2.0f, 1.0f, 20000, 2.5f);
     dc2dc_.configure(newConfig);
     EXPECT_NE(dc2dc_.getConfig(), config_);
     EXPECT_EQ(dc2dc_.getConfig(), newConfig);

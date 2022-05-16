@@ -1,4 +1,0 @@
-<map id="isRunning" name="isRunning">
-<area shape="rect" id="node1" title="Returns if the converter is running." alt="" coords="5,5,92,32"/>
-<area shape="rect" id="node2" href="$a00943.html#ad619b8b51adc7874204abd71080cd90e" title="Returns if the PWM is enabled on the pin." alt="" coords="140,5,267,32"/>
-</map>

@@ -1,8 +1,8 @@
 <map id="main.cpp" name="main.cpp">
 <area shape="rect" id="node1" title="Implementation of the Main Routine." alt="" coords="161,5,243,32"/>
-<area shape="rect" id="node2" href="$a00113.html" title="Header of the UsbFlashProg Main Class." alt="" coords="135,80,269,107"/>
+<area shape="rect" id="node2" href="$a00119.html" title="Header of the UsbFlashProg Main Class." alt="" coords="135,80,269,107"/>
 <area shape="rect" id="node3" href="$a00032.html" title="Header of the Pico Multi Core Class." alt="" coords="43,155,179,181"/>
-<area shape="rect" id="node4" href="$a00047.html" title="Header of the Votage Generator Classes." alt="" coords="204,155,384,181"/>
+<area shape="rect" id="node4" href="$a00047.html" title="Header of the Voltage Generator Classes." alt="" coords="204,155,384,181"/>
 <area shape="rect" id="node5" href="$a00026.html" title="Header of the Pico GPIO Class." alt="" coords="259,304,361,331"/>
 <area shape="rect" id="node7" href="$a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="111,229,250,256"/>
 <area shape="rect" id="node10" href="$a00005.html" title="Header of the 74HC595 Class." alt="" coords="332,229,488,256"/>

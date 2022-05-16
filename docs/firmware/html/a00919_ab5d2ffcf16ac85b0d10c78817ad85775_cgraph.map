@@ -1,6 +1,0 @@
-<map id="writeWord" name="writeWord">
-<area shape="rect" id="node1" title="Writes a word to outputs of two HC595 (in cascade)." alt="" coords="5,5,93,32"/>
-<area shape="rect" id="node2" href="$a00919.html#ac7f46f8fed8351e8ae070a39095312d6" title="Writes data to outputs of &quot;n&quot; HC595 (arbitrary units in cascade)." alt="" coords="141,5,228,32"/>
-<area shape="rect" id="node3" href="$a00935.html#ab27c0877384e6c463f77b574f65c5dfe" title="Resets the pin value." alt="" coords="276,5,389,32"/>
-<area shape="rect" id="node4" href="$a00935.html#a6cf7db607816ea101fa7629f4731f40e" title="Sets the pin value." alt="" coords="437,5,537,32"/>
-</map>

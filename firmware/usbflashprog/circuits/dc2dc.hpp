@@ -55,6 +55,11 @@ typedef struct Dc2DcConfig {
      */ 
     float divider;
     /** 
+     * @brief Calibration value (offset) in output of DC2DC converter.
+     * @details Default: 0.0.
+     */ 
+    float calibration;
+    /** 
      * @brief Minimal duty cycle value for the PWM, in %.
      * @details Default: PWM_MIN_DUTY_CYCLE_DEFAULT.
      */
@@ -101,6 +106,7 @@ typedef struct Dc2DcConfig {
      * @param pwmPin Pin number of the PWM.
      * @param adcChannel Number of the ADC channel (0 to 3).
      * @param divider Feedback divider in output of DC2DC converter.
+     * @param calibration Calibration value (offset) in output of DC2DC converter.
      * @param pwmFreq Frequency of the PWM, in Hertz.
      * @param adcVref Reference voltage of the ADC, in Volts.
      * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
@@ -113,6 +119,7 @@ typedef struct Dc2DcConfig {
      */
     explicit Dc2DcConfig(uint pwmPin, uint adcChannel,
                 float divider = 1.0f,
+                float calibration = 0.0f,
                 uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
                 float adcVref = Adc::DEFAULT_VREF,
                 float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,

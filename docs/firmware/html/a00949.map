@@ -1,7 +1,0 @@
-<map id="Dc2DcTest" name="Dc2DcTest">
-<area shape="rect" id="node1" title="Test class for DC To DC Converter." alt="" coords="90,872,217,1008"/>
-<area shape="rect" id="node2" href="$a00923.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="5,5,224,435"/>
-<area shape="rect" id="node3" href="$a00927.html" title="DC To DC Converter Class." alt="" coords="253,497,385,809"/>
-<area shape="rect" id="node4" href="$a00943.html" title="Pico PWM Class." alt="" coords="248,49,424,391"/>
-<area shape="rect" id="node5" href="$a00931.html" title="Pico ADC Class." alt="" coords="449,123,583,317"/>
-</map>

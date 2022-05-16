@@ -1,7 +1,7 @@
-<map id="usbflashprog.hpp" name="usbflashprog.hpp">
-<area shape="rect" id="node1" title="Header of the UsbFlashProg Main Class." alt="" coords="135,5,269,32"/>
-<area shape="rect" id="node2" href="$a00032.html" title="Header of the Pico Multi Core Class." alt="" coords="43,80,179,107"/>
-<area shape="rect" id="node3" href="$a00047.html" title="Header of the Votage Generator Classes." alt="" coords="204,80,384,107"/>
+<map id="vgenerator_test.hpp" name="vgenerator_test.hpp">
+<area shape="rect" id="node1" title="Header of Unit Test for Voltage Generator Classes." alt="" coords="133,5,287,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="75,80,179,107"/>
+<area shape="rect" id="node3" href="$a00047.html" title="Header of the Voltage Generator Classes." alt="" coords="204,80,384,107"/>
 <area shape="rect" id="node4" href="$a00026.html" title="Header of the Pico GPIO Class." alt="" coords="259,229,361,256"/>
 <area shape="rect" id="node6" href="$a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="111,155,250,181"/>
 <area shape="rect" id="node9" href="$a00005.html" title="Header of the 74HC595 Class." alt="" coords="332,155,488,181"/>

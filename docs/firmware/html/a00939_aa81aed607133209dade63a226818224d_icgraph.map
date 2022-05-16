@@ -1,5 +1,0 @@
-<map id="lock" name="lock">
-<area shape="rect" id="node1" title="Locks execution line (using mutex)." alt="" coords="248,5,297,32"/>
-<area shape="rect" id="node2" href="$a00939.html#a8c528baf37154d347366083f0f816846" title="Stops the execution of second CPU core." alt="" coords="149,5,200,32"/>
-<area shape="rect" id="node3" href="$a00939.html#adc2254ee9a84e82214d268a21d80b2aa" title="Destructor." alt="" coords="5,5,101,32"/>
-</map>

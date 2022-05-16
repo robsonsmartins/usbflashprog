@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: usbflashprog.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: vgenerator_test.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,44 +60,41 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_fb26c1e57a9d2d92e8844fee7346a524.html">modules</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">usbflashprog.cpp File Reference<div class="ingroups"><a class="el" href="a00116.html">Firmware Project</a></div></div>  </div>
+<div class="title">vgenerator_test.cpp File Reference<div class="ingroups"><a class="el" href="a00124.html">Unit Tests</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the <a class="el" href="a01018.html" title="Main class of system.">UsbFlashProg</a> Main Class.  
+<p>Implementation of Unit Test for Voltage Generator Classes.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00113.html">usbflashprog.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00014.html">config.hpp</a>&quot;</code><br />
-<code>#include &lt;iostream&gt;</code><br />
-<code>#include &lt;iomanip&gt;</code><br />
-<code>#include &quot;pico/stdlib.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00026.html">hal/gpio.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="a00113.html">vgenerator_test.hpp</a>&quot;</code><br />
+<code>#include &quot;mock/hardware/adc.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for usbflashprog.cpp:</div>
+Include dependency graph for vgenerator_test.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00111.png" border="0" usemap="#ausbflashprog_8cpp" alt=""/></div>
-<map name="ausbflashprog_8cpp" id="ausbflashprog_8cpp">
-<area shape="rect" title="Implementation of the UsbFlashProg Main Class." alt="" coords="305,5,437,32"/>
-<area shape="rect" href="a00113.html" title="Header of the UsbFlashProg Main Class." alt="" coords="169,80,302,107"/>
-<area shape="rect" href="a00026.html" title="Header of the Pico GPIO Class." alt="" coords="5,304,108,331"/>
-<area shape="rect" href="a00014.html" title="Configuration of UsbFlashProg." alt="" coords="327,80,416,107"/>
-<area shape="rect" title=" " alt="" coords="441,80,521,107"/>
-<area shape="rect" title=" " alt="" coords="545,80,619,107"/>
-<area shape="rect" href="a00032.html" title="Header of the Pico Multi Core Class." alt="" coords="53,155,189,181"/>
-<area shape="rect" href="a00047.html" title="Header of the Votage Generator Classes." alt="" coords="213,155,393,181"/>
-<area shape="rect" href="a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="270,229,409,256"/>
-<area shape="rect" href="a00005.html" title="Header of the 74HC595 Class." alt="" coords="89,229,245,256"/>
-<area shape="rect" title=" " alt="" coords="238,379,281,405"/>
-<area shape="rect" href="a00020.html" title="Header of the Pico ADC Class." alt="" coords="417,304,515,331"/>
-<area shape="rect" href="a00038.html" title="Header of the Pico PWM Class." alt="" coords="286,304,393,331"/>
-<area shape="rect" title=" " alt="" coords="136,304,199,331"/>
+<div class="center"><img src="a00111.png" border="0" usemap="#avgenerator__test_8cpp" alt=""/></div>
+<map name="avgenerator__test_8cpp" id="avgenerator__test_8cpp">
+<area shape="rect" title="Implementation of Unit Test for Voltage Generator Classes." alt="" coords="134,5,286,32"/>
+<area shape="rect" href="a00113.html" title="Header of Unit Test for Voltage Generator Classes." alt="" coords="133,80,287,107"/>
+<area shape="rect" title=" " alt="" coords="75,155,179,181"/>
+<area shape="rect" href="a00047.html" title="Header of the Voltage Generator Classes." alt="" coords="204,155,384,181"/>
+<area shape="rect" href="a00026.html" title="Header of the Pico GPIO Class." alt="" coords="259,304,361,331"/>
+<area shape="rect" href="a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="111,229,250,256"/>
+<area shape="rect" href="a00005.html" title="Header of the 74HC595 Class." alt="" coords="332,229,488,256"/>
+<area shape="rect" title=" " alt="" coords="161,379,203,405"/>
+<area shape="rect" href="a00020.html" title="Header of the Pico ADC Class." alt="" coords="5,304,103,331"/>
+<area shape="rect" href="a00038.html" title="Header of the Pico PWM Class." alt="" coords="127,304,234,331"/>
+<area shape="rect" title=" " alt="" coords="385,304,448,331"/>
 </map>
 </div>
 </div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the <a class="el" href="a01018.html" title="Main class of system.">UsbFlashProg</a> Main Class. </p>
+<div class="textblock"><p>Implementation of Unit Test for Voltage Generator Classes. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

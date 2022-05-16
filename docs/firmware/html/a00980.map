@@ -1,12 +1,5 @@
-<map id="VppGenerator" name="VppGenerator">
-<area shape="rect" id="node1" title="Voltage (VPP) Generator Class." alt="" coords="241,1276,389,1573"/>
-<area shape="rect" id="node2" href="$a00974.html" title="Voltage Generator Class." alt="" coords="245,909,384,1177"/>
-<area shape="rect" id="node3" href="$a00962.html" title="Defines the configuration fields for a VGenerator class." alt="" coords="103,600,225,707"/>
-<area shape="rect" id="node10" href="$a00970.html" title="Defines the configuration fields for a VppGenerator class." alt="" coords="107,967,221,1118"/>
-<area shape="rect" id="node4" href="$a00938.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="5,5,224,435"/>
-<area shape="rect" id="node6" href="$a00942.html" title="DC To DC Converter Class." alt="" coords="257,497,389,809"/>
-<area shape="rect" id="node5" href="$a00950.html" title="Pico GPIO Class." alt="" coords="417,541,551,765"/>
-<area shape="rect" id="node9" href="$a00934.html" title="74xx595 Shift Register Class." alt="" coords="409,872,615,1213"/>
-<area shape="rect" id="node7" href="$a00958.html" title="Pico PWM Class." alt="" coords="248,49,424,391"/>
-<area shape="rect" id="node8" href="$a00946.html" title="Pico ADC Class." alt="" coords="449,123,583,317"/>
+<map id="VGenerator" name="VGenerator">
+<area shape="rect" id="node1" title="Voltage Generator Class." alt="" coords="92,5,245,347"/>
+<area shape="rect" id="node2" href="$a00985.html" title="Voltage (VDD) Generator Class." alt="" coords="5,409,159,633"/>
+<area shape="rect" id="node3" href="$a00989.html" title="Voltage (VPP) Generator Class." alt="" coords="183,395,331,648"/>
 </map>

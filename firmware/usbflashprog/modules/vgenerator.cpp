@@ -9,7 +9,7 @@
 /**
  * @ingroup Firmware
  * @file modules/vgenerator.cpp
- * @brief Implementation of the Votage Generator Classes.
+ * @brief Implementation of the Voltage Generator Classes.
  * 
  * @author Robson Martins (https://www.robsonmartins.com)
  */
@@ -23,12 +23,12 @@
 VGenConfig::VGenConfig(): Dc2DcConfig(), ctrlPin(0xFF) {}
 
 VGenConfig::VGenConfig(uint pwmPin, uint adcChannel, uint ctrlPin,
-                       float divider, uint32_t pwmFreq,
+                       float divider, float calibration, uint32_t pwmFreq,
                        float adcVref, float pwmMinDuty, float pwmMaxDuty,
                        float pwmSlowStepDuty, float pwmFastStepDuty,
                        float pwmToleranceToFast, float vTolerance):
-        Dc2DcConfig(pwmPin, adcChannel, divider, pwmFreq, adcVref,
-                    pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty,
+        Dc2DcConfig(pwmPin, adcChannel, divider, calibration, pwmFreq,
+                    adcVref, pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty,
                     pwmFastStepDuty, pwmToleranceToFast, vTolerance),
         ctrlPin(ctrlPin) {}
 
@@ -48,13 +48,13 @@ bool operator==(const VGenConfig& a, const VGenConfig& b) {
 VddConfig::VddConfig(): VGenConfig(), onVppPin(0xFF) {}
 
 VddConfig::VddConfig(uint pwmPin, uint adcChannel, uint ctrlPin, uint onVppPin,
-                     float divider, uint32_t pwmFreq, float adcVref,
-                     float pwmMinDuty, float pwmMaxDuty, float pwmSlowStepDuty,
-                     float pwmFastStepDuty, float pwmToleranceToFast,
-                     float vTolerance):
-        VGenConfig(pwmPin, adcChannel, ctrlPin, divider, pwmFreq, adcVref,
-                   pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty, pwmFastStepDuty,
-                   pwmToleranceToFast, vTolerance),
+                     float divider, float calibration, uint32_t pwmFreq,
+                     float adcVref, float pwmMinDuty, float pwmMaxDuty,
+                     float pwmSlowStepDuty, float pwmFastStepDuty,
+                     float pwmToleranceToFast, float vTolerance):
+        VGenConfig(pwmPin, adcChannel, ctrlPin, divider, calibration, pwmFreq,
+                   adcVref, pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty,
+                   pwmFastStepDuty, pwmToleranceToFast, vTolerance),
         onVppPin(onVppPin) {}
 
 VddConfig& VddConfig::operator=(const VddConfig& src) {
@@ -82,13 +82,13 @@ VppConfig::VppConfig(): VGenConfig(),
 
 VppConfig::VppConfig(uint pwmPin, uint adcChannel, uint ctrlPin, uint vcSinPin,
                      uint vcClkPin, uint vcClrPin, uint vcRckPin, float divider,
-                     uint32_t pwmFreq, float adcVref, float pwmMinDuty,
-                     float pwmMaxDuty, float pwmSlowStepDuty,
+                     float calibration, uint32_t pwmFreq, float adcVref,
+                     float pwmMinDuty, float pwmMaxDuty, float pwmSlowStepDuty,
                      float pwmFastStepDuty, float pwmToleranceToFast,
                      float vTolerance):
-        VGenConfig(pwmPin, adcChannel, ctrlPin, divider, pwmFreq, adcVref,
-                   pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty, pwmFastStepDuty,
-                   pwmToleranceToFast, vTolerance),
+        VGenConfig(pwmPin, adcChannel, ctrlPin, divider, calibration, pwmFreq,
+                   adcVref, pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty,
+                   pwmFastStepDuty, pwmToleranceToFast, vTolerance),
         vcSinPin(vcSinPin),
         vcClkPin(vcClkPin),
         vcClrPin(vcClrPin),
@@ -126,6 +126,7 @@ VGenerator::~VGenerator() {
 
 bool VGenerator::start() {
     if (!isValidConfig_()) { return false; }
+    /** @todo Reads the calibration. */
     return dc2dc_.start();
 }
 
@@ -175,6 +176,24 @@ float VGenerator::getDuty() const {
     return dc2dc_.getDuty();
 }
 
+bool VGenerator::initCalibration(float voltage) {
+    if (!isValidConfig_()) { return false; }
+    config_.calibration = 0.0f;
+    dc2dc_.configure(config_);
+    dc2dc_.setV(voltage);
+    if (!dc2dc_.start()) { return false; }
+    return on();
+}
+
+bool VGenerator::finishCalibration(float measure) {
+    if (!isValidConfig_()) { return false; }
+    config_.calibration = dc2dc_.getV() - measure;
+    off();
+    dc2dc_.configure(config_);
+    /** @todo Saves the calibration. */
+    return true;
+}
+
 bool VGenerator::isValidConfig_() const {
     return (config_.pwmPin     != 0xFF &&
             config_.pwmFreq    != 0.0f &&
@@ -216,6 +235,16 @@ bool VddGenerator::isOnVpp() const {
     return onVpp_;
 }
 
+bool VddGenerator::initCalibration(float voltage) {
+    return VGenerator::initCalibration(voltage);
+}
+
+bool VddGenerator::finishCalibration(float measure) {
+    if (!VGenerator::finishCalibration(measure)) { return false; }
+    /** @todo Saves the calibration. */
+    return true;
+}
+
 bool VddGenerator::isValidConfig_() const {
     return (VGenerator::isValidConfig_() &&
             config_.onVppPin != 0xFF);
@@ -242,6 +271,7 @@ void VppGenerator::configure(const VppConfig& config) {
     VGenerator::config_ = config;
     if (isValidConfig_()) {
         vcRegister_.clear();
+        vcRegister_.outputEnable();
     }
 }
 
@@ -302,6 +332,16 @@ bool VppGenerator::isOnOE() const {
 bool VppGenerator::isOnWE() const {
     if (!isValidConfig_()) { return false; }
     return vcRegister_.getBit(VPP_ON_WE_VC_REGISTER_BIT);
+}
+
+bool VppGenerator::initCalibration(float voltage) {
+    return VGenerator::initCalibration(voltage);
+}
+
+bool VppGenerator::finishCalibration(float measure) {
+    if (!VGenerator::finishCalibration(measure)) { return false; }
+    /** @todo Saves the calibration. */
+    return true;
 }
 
 bool VppGenerator::isValidConfig_() const {

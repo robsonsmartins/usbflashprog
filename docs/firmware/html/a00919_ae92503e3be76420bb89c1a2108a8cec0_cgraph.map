@@ -1,4 +1,0 @@
-<map id="outputEnable" name="outputEnable">
-<area shape="rect" id="node1" title="Changes the Output Enable pin of the HC595." alt="" coords="5,5,113,32"/>
-<area shape="rect" id="node2" href="$a00935.html#a6cf7db607816ea101fa7629f4731f40e" title="Sets the pin value." alt="" coords="161,5,261,32"/>
-</map>

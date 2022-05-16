@@ -1,4 +1,0 @@
-<map id="start" name="start">
-<area shape="rect" id="node1" title="Enables the PWM on the pin." alt="" coords="156,5,208,32"/>
-<area shape="rect" id="node2" href="$a00927.html#aad5997aaaa2d622f0ca57f8b24a51a7b" title="Starts the DC to DC converter." alt="" coords="5,5,108,32"/>
-</map>

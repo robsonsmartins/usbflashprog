@@ -129,10 +129,6 @@ TEST_F(VGeneratorTest, set_get_v_duty) {
 
 TEST_F(VGeneratorTest, constructor_config) {
     {
-        VGenerator *newVGenerator2 = new VGenerator();
-        delete newVGenerator2;
-    }
-    {
         EXPECT_EQ(vdd_.getConfig(), vddConfig_);
         VddConfig newConfig(2, 3, 4, 5, 2.0f);
         vdd_.configure(newConfig);
@@ -179,6 +175,10 @@ TEST_F(VGeneratorTest, on_off) {
         vdd_.adjust();
         EXPECT_NEAR(vdd_.getV(), vActual, 0.2f);
 
+        vdd_.stop();
+        EXPECT_EQ(vdd_.start(), true);
+        EXPECT_EQ(vdd_.isRunning(), true);
+
         EXPECT_EQ(vdd_.isOn(), false);
         EXPECT_EQ(vdd_.on(), true);
         EXPECT_EQ(vdd_.isOn(), true);
@@ -206,6 +206,10 @@ TEST_F(VGeneratorTest, on_off) {
         EXPECT_EQ(vpp_.finishCalibration(vActual), true);
         vpp_.adjust();
         EXPECT_NEAR(vpp_.getV(), vActual, 0.2f);
+
+        vpp_.stop();
+        EXPECT_EQ(vpp_.start(), true);
+        EXPECT_EQ(vpp_.isRunning(), true);
 
         EXPECT_EQ(vpp_.isOn(), false);
         EXPECT_EQ(vpp_.on(), true);

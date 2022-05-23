@@ -126,9 +126,27 @@ void UsbFlashProg::firstCore(void) {
             break;
         case '0':
             std::cout << "pressed 0" << std::endl;
+            vpp_.off();
             break;
         case '1':
             std::cout << "pressed 1" << std::endl;
+            vpp_.on();
+            break;
+        case '2':
+            std::cout << "pressed 2" << std::endl;
+            vdd_.off();
+            break;
+        case '3':
+            std::cout << "pressed 3" << std::endl;
+            vdd_.on();
+            break;
+        case '4':
+            std::cout << "pressed 4" << std::endl;
+            vdd_.onVpp();
+            break;
+        case '5':
+            std::cout << "pressed 5" << std::endl;
+            vdd_.onVpp(false);
             break;
         default:
             break;

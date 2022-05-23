@@ -1,0 +1,5 @@
+<map id="VGenerator" name="VGenerator">
+<area shape="rect" id="node1" title="Voltage Generator Class." alt="" coords="89,5,248,391"/>
+<area shape="rect" id="node2" href="$a01010.html" title="Voltage (VDD) Generator Class." alt="" coords="5,439,159,692"/>
+<area shape="rect" id="node3" href="$a01014.html" title="Voltage (VPP) Generator Class." alt="" coords="183,439,331,692"/>
+</map>

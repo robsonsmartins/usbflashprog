@@ -17,6 +17,7 @@
 
 #include "modules/vgenerator.hpp"
 #include "config.hpp"
+#include "hal/flash.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -119,21 +120,7 @@ bool operator!=(const VppConfig& a, const VppConfig& b) {
 
 VGenerator::VGenerator(): on_(false) {}
 
-VGenerator::~VGenerator() {
-    off();
-    stop();
-}
-
-bool VGenerator::start() {
-    if (!isValidConfig_()) { return false; }
-    /** @todo Reads the calibration. */
-    return dc2dc_.start();
-}
-
-void VGenerator::stop() {
-    if (!isValidConfig_()) { return; }
-    dc2dc_.stop();
-}
+VGenerator::~VGenerator() {}
 
 bool VGenerator::isRunning() const {
     return dc2dc_.isRunning();
@@ -176,29 +163,40 @@ float VGenerator::getDuty() const {
     return dc2dc_.getDuty();
 }
 
-bool VGenerator::initCalibration(float voltage) {
-    if (!isValidConfig_()) { return false; }
-    config_.calibration = 0.0f;
-    dc2dc_.configure(config_);
-    dc2dc_.setV(voltage);
-    if (!dc2dc_.start()) { return false; }
-    return on();
-}
-
-bool VGenerator::finishCalibration(float measure) {
-    if (!isValidConfig_()) { return false; }
-    config_.calibration = dc2dc_.getV() - measure;
-    off();
-    dc2dc_.configure(config_);
-    /** @todo Saves the calibration. */
-    return true;
-}
-
 bool VGenerator::isValidConfig_() const {
     return (config_.pwmPin     != 0xFF &&
             config_.pwmFreq    != 0.0f &&
             config_.adcChannel != 0xFF &&
             config_.ctrlPin    != 0xFF);
+}
+
+bool VGenerator::readCalibration_() {
+    uint8_t *pData = reinterpret_cast<uint8_t*>(&calibration_);
+    size_t len = sizeof(CalibrationData);
+    Flash::read(pData, len);
+    uint32_t cs = 0;
+    for (size_t i = 0; i < len - sizeof(uint32_t); i++) {
+        cs += pData[i];
+    }
+    if (cs != calibration_.checksum) {
+        calibration_.vdd = 0.0f;
+        calibration_.vpp = 0.0f;
+        calibration_.checksum = 0;
+        return false;
+    }
+    return true;
+}
+
+bool VGenerator::writeCalibration_() {
+    uint8_t *pData = reinterpret_cast<uint8_t*>(&calibration_);
+    size_t len = sizeof(CalibrationData);
+    uint32_t cs = 0;
+    for (size_t i = 0; i < len - sizeof(uint32_t); i++) {
+        cs += pData[i];
+    }
+    calibration_.checksum = cs;
+    Flash::write(pData, len);
+    return Flash::verify(pData, len);
 }
 
 // ---------------------------------------------------------------------------
@@ -211,6 +209,8 @@ VddGenerator::VddGenerator(const VddConfig& config): VddGenerator() {
 
 VddGenerator::~VddGenerator() {
     onVpp(false);
+    off();
+    stop();
 }
 
 void VddGenerator::configure(const VddConfig& config) {
@@ -222,6 +222,20 @@ void VddGenerator::configure(const VddConfig& config) {
 
 VddConfig VddGenerator::getConfig() const {
     return config_;
+}
+
+bool VddGenerator::start() {
+    if (!isValidConfig_()) { return false; }
+    if (readCalibration_()) {
+        config_.calibration = calibration_.vdd;
+        VGenerator::config_.calibration = calibration_.vdd;
+    }
+    return dc2dc_.start();
+}
+
+void VddGenerator::stop() {
+    if (!isValidConfig_()) { return; }
+    dc2dc_.stop();
 }
 
 bool VddGenerator::onVpp(bool status) {
@@ -236,13 +250,23 @@ bool VddGenerator::isOnVpp() const {
 }
 
 bool VddGenerator::initCalibration(float voltage) {
-    return VGenerator::initCalibration(voltage);
+    if (!isValidConfig_()) { return false; }
+    config_.calibration = 0.0f;
+    VGenerator::config_.calibration = 0.0f;
+    dc2dc_.configure(config_);
+    dc2dc_.setV(voltage);
+    if (!dc2dc_.start()) { return false; }
+    return on();
 }
 
 bool VddGenerator::finishCalibration(float measure) {
-    if (!VGenerator::finishCalibration(measure)) { return false; }
-    /** @todo Saves the calibration. */
-    return true;
+    if (!isValidConfig_()) { return false; }
+    calibration_.vdd = dc2dc_.getV() - measure;
+    config_.calibration = calibration_.vdd;
+    VGenerator::config_.calibration = calibration_.vdd;
+    off();
+    dc2dc_.configure(config_);
+    return writeCalibration_();
 }
 
 bool VddGenerator::isValidConfig_() const {
@@ -262,6 +286,8 @@ VppGenerator::~VppGenerator() {
     if (isValidConfig_()) {
         vcRegister_.clear();
     }
+    off();
+    stop();
 }
 
 void VppGenerator::configure(const VppConfig& config) {
@@ -277,6 +303,20 @@ void VppGenerator::configure(const VppConfig& config) {
 
 VppConfig VppGenerator::getConfig() const {
     return config_;
+}
+
+bool VppGenerator::start() {
+    if (!isValidConfig_()) { return false; }
+    if (readCalibration_()) {
+        config_.calibration = calibration_.vpp;
+        VGenerator::config_.calibration = calibration_.vpp;
+    }
+    return dc2dc_.start();
+}
+
+void VppGenerator::stop() {
+    if (!isValidConfig_()) { return; }
+    dc2dc_.stop();
 }
 
 bool VppGenerator::onA9(bool status) {
@@ -335,13 +375,23 @@ bool VppGenerator::isOnWE() const {
 }
 
 bool VppGenerator::initCalibration(float voltage) {
-    return VGenerator::initCalibration(voltage);
+    if (!isValidConfig_()) { return false; }
+    config_.calibration = 0.0f;
+    VGenerator::config_.calibration = 0.0f;
+    dc2dc_.configure(config_);
+    dc2dc_.setV(voltage);
+    if (!dc2dc_.start()) { return false; }
+    return on();
 }
 
 bool VppGenerator::finishCalibration(float measure) {
-    if (!VGenerator::finishCalibration(measure)) { return false; }
-    /** @todo Saves the calibration. */
-    return true;
+    if (!isValidConfig_()) { return false; }
+    calibration_.vpp = dc2dc_.getV() - measure;
+    config_.calibration = calibration_.vpp;
+    VGenerator::config_.calibration = calibration_.vpp;
+    off();
+    dc2dc_.configure(config_);
+    return writeCalibration_();
 }
 
 bool VppGenerator::isValidConfig_() const {

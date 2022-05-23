@@ -27,7 +27,7 @@ static bool _stopreq;
 
 typedef void (*TThreadEntryPoint)();
 
-void _internal_entry_point(TThreadEntryPoint entry);
+static void _internal_entry_point(TThreadEntryPoint entry);
 
 // ---------------------------------------------------------------------------
 
@@ -60,14 +60,16 @@ extern "C" inline uintptr_t multicore_fifo_pop_blocking() {
 }
 
 extern "C" inline void multicore_reset_core1() {
-    _stopreq = true;
-    _thread.join();
-    _stopreq = false;
+    if (_thread.joinable()) {
+        _stopreq = true;
+        _thread.join();
+        _stopreq = false;
+    }
 }
 
 // ---------------------------------------------------------------------------
 
-void _internal_entry_point(TThreadEntryPoint entry) {
+static void _internal_entry_point(TThreadEntryPoint entry) {
     entry();
 }
 

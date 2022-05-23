@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['resetbit_121',['resetBit',['../a00941.html#a6c7039212405b09322959a8237c59413',1,'HC595']]],
-  ['resetpin_122',['resetPin',['../a00957.html#ab27c0877384e6c463f77b574f65c5dfe',1,'Gpio']]]
+  ['read_129',['read',['../a00974.html#a88ae7eb101fddc5b4deaa847db4c6d8b',1,'Flash']]],
+  ['resetbit_130',['resetBit',['../a00958.html#a6c7039212405b09322959a8237c59413',1,'HC595']]],
+  ['resetpin_131',['resetPin',['../a00978.html#ab27c0877384e6c463f77b574f65c5dfe',1,'Gpio']]]
 ];

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Member List</title>
+<title>USB EPROM/Flash Programmer: VGenerator Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,18 +62,527 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a01003.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MultiCoreTest Member List</div>  </div>
+<div class="title">VGenerator Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="a00140.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01009.html">MultiCoreTest</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01009.html#a3aa620a4afd230b0857154bfed655c47">MultiCoreTest</a>()</td><td class="entry"><a class="el" href="a01009.html">MultiCoreTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01009.html#a3a1707f6479611fdc609a3eb8a0cef1b">SetUp</a>() override</td><td class="entry"><a class="el" href="a01009.html">MultiCoreTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01009.html#ac4fca95dc3b93372ce7f2078baf8e8b6">TearDown</a>() override</td><td class="entry"><a class="el" href="a01009.html">MultiCoreTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01009.html#a350b8b805d7f72840b274846939ed278">~MultiCoreTest</a>() override</td><td class="entry"><a class="el" href="a01009.html">MultiCoreTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-</table></div><!-- contents -->
+<p>Voltage Generator Class.  
+ <a href="a01006.html#details">More...</a></p>
+
+<p><code>#include &lt;vgenerator.hpp&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for VGenerator:</div>
+<div class="dyncontent">
+<div class="center"><img src="a01005.png" border="0" usemap="#aVGenerator_inherit__map" alt="Inheritance graph"/></div>
+<map name="aVGenerator_inherit__map" id="aVGenerator_inherit__map">
+<area shape="rect" title="Voltage Generator Class." alt="" coords="89,5,248,391"/>
+<area shape="rect" href="a01010.html" title="Voltage (VDD) Generator Class." alt="" coords="5,439,159,692"/>
+<area shape="rect" href="a01014.html" title="Voltage (VPP) Generator Class." alt="" coords="183,439,331,692"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a62608866034034c985925e396efde439"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a62608866034034c985925e396efde439">VGenerator</a> ()</td></tr>
+<tr class="memdesc:a62608866034034c985925e396efde439"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01006.html#a62608866034034c985925e396efde439">More...</a><br /></td></tr>
+<tr class="separator:a62608866034034c985925e396efde439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb322241b771cf9052dc5e19f3a3c186"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#aeb322241b771cf9052dc5e19f3a3c186">~VGenerator</a> ()</td></tr>
+<tr class="memdesc:aeb322241b771cf9052dc5e19f3a3c186"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="a01006.html#aeb322241b771cf9052dc5e19f3a3c186">More...</a><br /></td></tr>
+<tr class="separator:aeb322241b771cf9052dc5e19f3a3c186"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64c54ab3191981b2443c47007f38516"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#ad64c54ab3191981b2443c47007f38516">start</a> ()=0</td></tr>
+<tr class="memdesc:ad64c54ab3191981b2443c47007f38516"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the Voltage Generator.  <a href="a01006.html#ad64c54ab3191981b2443c47007f38516">More...</a><br /></td></tr>
+<tr class="separator:ad64c54ab3191981b2443c47007f38516"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0efff8623a2fb79dad94a96dcf16d966"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a0efff8623a2fb79dad94a96dcf16d966">stop</a> ()=0</td></tr>
+<tr class="memdesc:a0efff8623a2fb79dad94a96dcf16d966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the Voltage Generator.  <a href="a01006.html#a0efff8623a2fb79dad94a96dcf16d966">More...</a><br /></td></tr>
+<tr class="separator:a0efff8623a2fb79dad94a96dcf16d966"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad619b8b51adc7874204abd71080cd90e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#ad619b8b51adc7874204abd71080cd90e">isRunning</a> () const</td></tr>
+<tr class="memdesc:ad619b8b51adc7874204abd71080cd90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if the Voltage Generator is running.  <a href="a01006.html#ad619b8b51adc7874204abd71080cd90e">More...</a><br /></td></tr>
+<tr class="separator:ad619b8b51adc7874204abd71080cd90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af872a38a463ca03d40b40d3b4df7bde7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#af872a38a463ca03d40b40d3b4df7bde7">on</a> ()</td></tr>
+<tr class="memdesc:af872a38a463ca03d40b40d3b4df7bde7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the output of the Voltage Generator.  <a href="a01006.html#af872a38a463ca03d40b40d3b4df7bde7">More...</a><br /></td></tr>
+<tr class="separator:af872a38a463ca03d40b40d3b4df7bde7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f241b422ebdbd7a570178ceaebdd2fa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a2f241b422ebdbd7a570178ceaebdd2fa">off</a> ()</td></tr>
+<tr class="memdesc:a2f241b422ebdbd7a570178ceaebdd2fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the output of the Voltage Generator.  <a href="a01006.html#a2f241b422ebdbd7a570178ceaebdd2fa">More...</a><br /></td></tr>
+<tr class="separator:a2f241b422ebdbd7a570178ceaebdd2fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af887dcf7959d81b473d9251b3573a303"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#af887dcf7959d81b473d9251b3573a303">isOn</a> () const</td></tr>
+<tr class="memdesc:af887dcf7959d81b473d9251b3573a303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if output of the Voltage Generator is enabled.  <a href="a01006.html#af887dcf7959d81b473d9251b3573a303">More...</a><br /></td></tr>
+<tr class="separator:af887dcf7959d81b473d9251b3573a303"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70c18eca95b2b0ba60c4b8368867216c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a70c18eca95b2b0ba60c4b8368867216c">adjust</a> ()</td></tr>
+<tr class="memdesc:a70c18eca95b2b0ba60c4b8368867216c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adjusts the PWM duty cycle value to the output reaches the target voltage.  <a href="a01006.html#a70c18eca95b2b0ba60c4b8368867216c">More...</a><br /></td></tr>
+<tr class="separator:a70c18eca95b2b0ba60c4b8368867216c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16b1b73e4a129ac9a923989586bda307"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a16b1b73e4a129ac9a923989586bda307">setV</a> (float v)</td></tr>
+<tr class="memdesc:a16b1b73e4a129ac9a923989586bda307"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the target output voltage of the Voltage Generator.  <a href="a01006.html#a16b1b73e4a129ac9a923989586bda307">More...</a><br /></td></tr>
+<tr class="separator:a16b1b73e4a129ac9a923989586bda307"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4d92e8523757ad9e77e007d7a34003"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a0f4d92e8523757ad9e77e007d7a34003">getV</a> () const</td></tr>
+<tr class="memdesc:a0f4d92e8523757ad9e77e007d7a34003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current output voltage of the Voltage Generator.  <a href="a01006.html#a0f4d92e8523757ad9e77e007d7a34003">More...</a><br /></td></tr>
+<tr class="separator:a0f4d92e8523757ad9e77e007d7a34003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2181b2c848122897be4f31c3db7a9ac7"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a2181b2c848122897be4f31c3db7a9ac7">getVTarget</a> () const</td></tr>
+<tr class="memdesc:a2181b2c848122897be4f31c3db7a9ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the target output voltage of the Voltage Generator.  <a href="a01006.html#a2181b2c848122897be4f31c3db7a9ac7">More...</a><br /></td></tr>
+<tr class="separator:a2181b2c848122897be4f31c3db7a9ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad50ed60a1a9207565841af074c67232c"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#ad50ed60a1a9207565841af074c67232c">getDuty</a> () const</td></tr>
+<tr class="memdesc:ad50ed60a1a9207565841af074c67232c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current duty cycle of the PWM.  <a href="a01006.html#ad50ed60a1a9207565841af074c67232c">More...</a><br /></td></tr>
+<tr class="separator:ad50ed60a1a9207565841af074c67232c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a090684bdd46c0a6650f5796fa5e3c6b4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a090684bdd46c0a6650f5796fa5e3c6b4">initCalibration</a> (float voltage)=0</td></tr>
+<tr class="memdesc:a090684bdd46c0a6650f5796fa5e3c6b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the calibration process.  <a href="a01006.html#a090684bdd46c0a6650f5796fa5e3c6b4">More...</a><br /></td></tr>
+<tr class="separator:a090684bdd46c0a6650f5796fa5e3c6b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d2cb0d9c0657cd7af553b702fdfbad0"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a2d2cb0d9c0657cd7af553b702fdfbad0">finishCalibration</a> (float measure)=0</td></tr>
+<tr class="memdesc:a2d2cb0d9c0657cd7af553b702fdfbad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finishes the calibration process.  <a href="a01006.html#a2d2cb0d9c0657cd7af553b702fdfbad0">More...</a><br /></td></tr>
+<tr class="separator:a2d2cb0d9c0657cd7af553b702fdfbad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Voltage Generator Class. </p>
+<p>The purpose of this class is to provide the methods to manipulate a Voltage Generator (based in a DC2DC converter and GPIO pins to control</p><ul>
+<li>on/off - the output). </li>
+</ul>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a62608866034034c985925e396efde439"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62608866034034c985925e396efde439">&#9670;&nbsp;</a></span>VGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01006.html">VGenerator</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<p>Assumes a default value for the configuration. </p>
+
+</div>
+</div>
+<a id="aeb322241b771cf9052dc5e19f3a3c186"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb322241b771cf9052dc5e19f3a3c186">&#9670;&nbsp;</a></span>~VGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">~<a class="el" href="a01006.html">VGenerator</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad64c54ab3191981b2443c47007f38516"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64c54ab3191981b2443c47007f38516">&#9670;&nbsp;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Starts the Voltage Generator. </p>
+<p>If the configuration is invalid, then fails. </p><dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+<p>Implemented in <a class="el" href="a01014.html#aad5997aaaa2d622f0ca57f8b24a51a7b">VppGenerator</a>, and <a class="el" href="a01010.html#aad5997aaaa2d622f0ca57f8b24a51a7b">VddGenerator</a>.</p>
+
+</div>
+</div>
+<a id="a0efff8623a2fb79dad94a96dcf16d966"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0efff8623a2fb79dad94a96dcf16d966">&#9670;&nbsp;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Stops the Voltage Generator. </p>
+<p>If the configuration is invalid, then fails. </p><dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+<p>Implemented in <a class="el" href="a01014.html#a8c528baf37154d347366083f0f816846">VppGenerator</a>, and <a class="el" href="a01010.html#a8c528baf37154d347366083f0f816846">VddGenerator</a>.</p>
+
+</div>
+</div>
+<a id="ad619b8b51adc7874204abd71080cd90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad619b8b51adc7874204abd71080cd90e">&#9670;&nbsp;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns if the Voltage Generator is running. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if Voltage Generator is running, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="af872a38a463ca03d40b40d3b4df7bde7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af872a38a463ca03d40b40d3b4df7bde7">&#9670;&nbsp;</a></span>on()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool on </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables the output of the Voltage Generator. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a2f241b422ebdbd7a570178ceaebdd2fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f241b422ebdbd7a570178ceaebdd2fa">&#9670;&nbsp;</a></span>off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void off </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the output of the Voltage Generator. </p>
+
+</div>
+</div>
+<a id="af887dcf7959d81b473d9251b3573a303"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af887dcf7959d81b473d9251b3573a303">&#9670;&nbsp;</a></span>isOn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOn </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns if output of the Voltage Generator is enabled. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if output of the Voltage Generator is enabled, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a70c18eca95b2b0ba60c4b8368867216c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70c18eca95b2b0ba60c4b8368867216c">&#9670;&nbsp;</a></span>adjust()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void adjust </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adjusts the PWM duty cycle value to the output reaches the target voltage. </p>
+<p>This method must be called periodically in a loop, so that the Voltage Generator works properly. </p>
+
+</div>
+</div>
+<a id="a16b1b73e4a129ac9a923989586bda307"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16b1b73e4a129ac9a923989586bda307">&#9670;&nbsp;</a></span>setV()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setV </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the target output voltage of the Voltage Generator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>Target output voltage, in Volts. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a0f4d92e8523757ad9e77e007d7a34003"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4d92e8523757ad9e77e007d7a34003">&#9670;&nbsp;</a></span>getV()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getV </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current output voltage of the Voltage Generator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current output voltage, in Volts. </dd></dl>
+
+</div>
+</div>
+<a id="a2181b2c848122897be4f31c3db7a9ac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2181b2c848122897be4f31c3db7a9ac7">&#9670;&nbsp;</a></span>getVTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getVTarget </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the target output voltage of the Voltage Generator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Target output voltage, in Volts. </dd></dl>
+
+</div>
+</div>
+<a id="ad50ed60a1a9207565841af074c67232c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50ed60a1a9207565841af074c67232c">&#9670;&nbsp;</a></span>getDuty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getDuty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current duty cycle of the PWM. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current duty cycle value, in percent. </dd></dl>
+
+</div>
+</div>
+<a id="a090684bdd46c0a6650f5796fa5e3c6b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a090684bdd46c0a6650f5796fa5e3c6b4">&#9670;&nbsp;</a></span>initCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool initCalibration </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>voltage</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Starts the calibration process. </p>
+<p>Sets the calibration value to zero, and sets the output voltage to value of the <em>voltage</em> parameter. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">voltage</td><td>Calibration target voltage, in Volts. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+<p>Implemented in <a class="el" href="a01010.html#af8cc4a44e21c6a3249f2134cbba2f4c2">VddGenerator</a>, and <a class="el" href="a01014.html#a4e8a10947272c1fc544a64f89a12266f">VppGenerator</a>.</p>
+
+</div>
+</div>
+<a id="a2d2cb0d9c0657cd7af553b702fdfbad0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d2cb0d9c0657cd7af553b702fdfbad0">&#9670;&nbsp;</a></span>finishCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool finishCalibration </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>measure</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finishes the calibration process. </p>
+<p>Calculates the calibration value. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">measure</td><td>Measured voltage, in Volts. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+<p>Implemented in <a class="el" href="a01014.html#acf0dd0d8db61bd6eb2db1816218c8a35">VppGenerator</a>, and <a class="el" href="a01010.html#acf0dd0d8db61bd6eb2db1816218c8a35">VddGenerator</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="a00053.html">vgenerator.hpp</a></li>
+<li><a class="el" href="a00050.html">vgenerator.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

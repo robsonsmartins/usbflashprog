@@ -243,6 +243,21 @@ typedef struct VppConfig: VGenConfig {
 
 /**
  * @ingroup Firmware
+ * @brief Stores the calibration data.
+ */
+typedef struct CalibrationData {
+    /** @brief VDD calibration (offset). */
+    float vdd;
+    /** @brief VPP calibration (offset). */
+    float vpp;
+    /** @brief Checksum of data. */
+    uint32_t checksum;
+} CalibrationData;
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Firmware
  * @brief Voltage Generator Class.
  * @details The purpose of this class is to provide the methods to manipulate
  *  a Voltage Generator (based in a DC2DC converter and GPIO pins to control
@@ -263,13 +278,13 @@ class VGenerator {
      * @details If the configuration is invalid, then fails.
      * @return True if success, false otherwise.
      */
-    virtual bool start();
+    virtual bool start() = 0;
     /**
      * @brief Stops the Voltage Generator.
      * @details If the configuration is invalid, then fails.
      * @return True if success, false otherwise.
      */
-    virtual void stop();
+    virtual void stop() = 0;
     /**
      * @brief Returns if the Voltage Generator is running.
      * @return True if Voltage Generator is running, false otherwise.
@@ -324,14 +339,14 @@ class VGenerator {
      * @param voltage Calibration target voltage, in Volts.
      * @return True if success, false otherwise.
      */
-    virtual bool initCalibration(float voltage);
+    virtual bool initCalibration(float voltage) = 0;
     /**
      * @brief Finishes the calibration process.
      * @details Calculates the calibration value.
      * @param measure Measured voltage, in Volts.
      * @return True if success, false otherwise.
      */
-    virtual bool finishCalibration(float measure);
+    virtual bool finishCalibration(float measure) = 0;
 
  protected:
     /* @brief Configuration data. */
@@ -342,11 +357,23 @@ class VGenerator {
     Gpio gpio_;
     /* @brief Output status flag (On/Off). */
     bool on_;
+    /* @brief Calibration data. */
+    CalibrationData calibration_;
     /*
      * @brief Returns if configuration data is valid.
      * @return True if configuration data is valid, false otherwise.
      */
     virtual bool isValidConfig_() const;
+    /*
+     * @brief Reads the calibration data from the flash space.
+     * @return True if success, false otherwise.
+     */
+    virtual bool readCalibration_();
+    /*
+     * @brief Writes the calibration data to the flash space.
+     * @return True if success, false otherwise.
+     */
+    virtual bool writeCalibration_();
 };
 
 // ---------------------------------------------------------------------------
@@ -384,6 +411,18 @@ class VddGenerator: public VGenerator {
      * @return Copy of the current configuration data.
      */
     VddConfig getConfig() const;
+    /**
+     * @brief Starts the Voltage Generator.
+     * @details If the configuration is invalid, then fails.
+     * @return True if success, false otherwise.
+     */
+    bool start();
+    /**
+     * @brief Stops the Voltage Generator.
+     * @details If the configuration is invalid, then fails.
+     * @return True if success, false otherwise.
+     */
+    void stop();
     /**
      * @brief Enables/Disables VDD on VPP.
      * @param status If true enables VDD on VPP. False otherwise.
@@ -458,6 +497,18 @@ class VppGenerator: public VGenerator {
      * @return Copy of the current configuration data.
      */
     VppConfig getConfig() const;
+    /**
+     * @brief Starts the Voltage Generator.
+     * @details If the configuration is invalid, then fails.
+     * @return True if success, false otherwise.
+     */
+    bool start();
+    /**
+     * @brief Stops the Voltage Generator.
+     * @details If the configuration is invalid, then fails.
+     * @return True if success, false otherwise.
+     */
+    void stop();
     /**
      * @brief Enables/Disables VPP on A9.
      * @param status If true enables VPP on A9. False otherwise.

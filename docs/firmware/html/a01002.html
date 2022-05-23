@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Member List</title>
+<title>USB EPROM/Flash Programmer: CalibrationData Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,18 +62,86 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00999.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GpioTest Member List</div>  </div>
+<div class="title">CalibrationData Struct Reference<div class="ingroups"><a class="el" href="a00140.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01005.html">GpioTest</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#ac3d06930da833a756ef2b3c9de213ca3">GpioTest</a>()</td><td class="entry"><a class="el" href="a01005.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#a3a1707f6479611fdc609a3eb8a0cef1b">SetUp</a>() override</td><td class="entry"><a class="el" href="a01005.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#ac4fca95dc3b93372ce7f2078baf8e8b6">TearDown</a>() override</td><td class="entry"><a class="el" href="a01005.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#a68b086f6974cb054e285d1866bcf200b">~GpioTest</a>() override</td><td class="entry"><a class="el" href="a01005.html">GpioTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-</table></div><!-- contents -->
+<p>Stores the calibration data.  
+ <a href="a01002.html#details">More...</a></p>
+
+<p><code>#include &lt;vgenerator.hpp&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ab8252f8dd4df8faeb96a7133804f002c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01002.html#ab8252f8dd4df8faeb96a7133804f002c">vdd</a></td></tr>
+<tr class="memdesc:ab8252f8dd4df8faeb96a7133804f002c"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD calibration (offset).  <a href="a01002.html#ab8252f8dd4df8faeb96a7133804f002c">More...</a><br /></td></tr>
+<tr class="separator:ab8252f8dd4df8faeb96a7133804f002c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee3ce01d3fbfdad6267010ae443bba98"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01002.html#aee3ce01d3fbfdad6267010ae443bba98">vpp</a></td></tr>
+<tr class="memdesc:aee3ce01d3fbfdad6267010ae443bba98"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP calibration (offset).  <a href="a01002.html#aee3ce01d3fbfdad6267010ae443bba98">More...</a><br /></td></tr>
+<tr class="separator:aee3ce01d3fbfdad6267010ae443bba98"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa482bc33779a87f57ab8efc2c1680c48"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01002.html#aa482bc33779a87f57ab8efc2c1680c48">checksum</a></td></tr>
+<tr class="memdesc:aa482bc33779a87f57ab8efc2c1680c48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checksum of data.  <a href="a01002.html#aa482bc33779a87f57ab8efc2c1680c48">More...</a><br /></td></tr>
+<tr class="separator:aa482bc33779a87f57ab8efc2c1680c48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Stores the calibration data. </p>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab8252f8dd4df8faeb96a7133804f002c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8252f8dd4df8faeb96a7133804f002c">&#9670;&nbsp;</a></span>vdd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float vdd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>VDD calibration (offset). </p>
+
+</div>
+</div>
+<a id="aee3ce01d3fbfdad6267010ae443bba98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee3ce01d3fbfdad6267010ae443bba98">&#9670;&nbsp;</a></span>vpp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float vpp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>VPP calibration (offset). </p>
+
+</div>
+</div>
+<a id="aa482bc33779a87f57ab8efc2c1680c48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa482bc33779a87f57ab8efc2c1680c48">&#9670;&nbsp;</a></span>checksum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t checksum</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Checksum of data. </p>
+
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li><a class="el" href="a00053.html">vgenerator.hpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

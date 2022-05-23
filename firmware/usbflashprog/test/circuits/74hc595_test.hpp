@@ -47,7 +47,7 @@ class HC595Test : public testing::Test {
    * @return True if both data are equal, false otherwise.
    */
   bool compareData_(const HC595::TData& a,
-                   const HC595::TData& b);
+                    const HC595::TData& b);
   /* @brief HC595 class object to test. */
   static HC595 hc595_;
 };

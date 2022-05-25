@@ -7,6 +7,7 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 * [About the Project](#about-the-project)
 * [Current Status](#current-status)
+* [Releases](#releases)
 * [Documentation](#documentation)
 * [Hardware Design](#hardware-design)
 * [Firmware Project](#firmware-project)
@@ -23,14 +24,17 @@ In a future release, programming of some microcontroller families (eg. Microchip
 
 ## Current Status
 
-[![Project Status][status-shield]][site-url]
+The current status of this project is:
 
-The current status of this project is (v0.1.0-rev.E):
+![Current Revision](https://img.shields.io/badge/Current%20Version-v0.1.0--rev.E-blue?style=plastic)
+![Specifications](https://img.shields.io/badge/Specifications-almost%20stable-green?style=plastic)
+![Hardware Design SCH](https://img.shields.io/badge/Hardware%20Design%20(Schematics)-almost%20stable-yellowgreen?style=plastic) ![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-not%20started%20yet-red?style=plastic)
+![Firmware](https://img.shields.io/badge/Firmware-unstable-yellow?style=plastic) ![PC Software](https://img.shields.io/badge/PC%20Software-not%20started%20yet-red?style=plastic)
+![User Documentation](https://img.shields.io/badge/User%20Documentation-not%20started%20yet-red?style=plastic) ![Developer/Engineer Documentation](https://img.shields.io/badge/Developer%20and%20Engineer%20Documentation-almost%20stable-green?style=plastic)
 
-* ![Specifications](https://img.shields.io/badge/Specifications-almost%20stable-green?style=plastic)
-* ![Hardware Design SCH](https://img.shields.io/badge/Hardware%20Design%20(Schematics)-almost%20stable-yellowgreen?style=plastic) ![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-not%20started%20yet-red?style=plastic)
-* ![Firmware](https://img.shields.io/badge/Firmware-unstable-yellow?style=plastic) ![PC Software](https://img.shields.io/badge/PC%20Software-not%20started%20yet-red?style=plastic)
-* ![User Documentation](https://img.shields.io/badge/User%20Documentation-not%20started%20yet-red?style=plastic) ![Developer/Engineer Documentation](https://img.shields.io/badge/Developer%20and%20Engineer%20Documentation-almost%20stable-green?style=plastic)
+## Releases
+
+The releases of this project are here: [Releases of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/releases).
 
 ## Documentation
 
@@ -53,6 +57,9 @@ Please read [CONTRIBUTING](https://github.com/robsonsmartins/usbflashprog/blob/m
 Distributed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa]. 
 
 See [LICENSE](https://github.com/robsonsmartins/usbflashprog/blob/main/LICENSE) for more information.
+
+- [Terms and Conditions](https://www.robsonmartins.com/content/policy/terms.php#googtrans(pt|en))
+- [Privacy Policy](https://www.robsonmartins.com/content/policy/privacy.php#googtrans(pt|en))
 
 ## Contact
 
@@ -86,7 +93,6 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 [license-url]: https://github.com/robsonsmartins/usbflashprog/blob/master/LICENSE
 [site-shield]: https://img.shields.io/badge/project%20site-usbflashprog-orange?style=plastic
 [site-url]: https://usbflashprog.robsonmartins.com
-[status-shield]: https://img.shields.io/badge/project%20status-in%20development-orange?style=plastic
 
 [contact-site-shield]: https://img.shields.io/badge/Home%20Page-robsonmartins.com-green?style=plastic
 [contact-site-url]: https://www.robsonmartins.com

@@ -73,7 +73,6 @@ $(function() {
 </li>
 <li>adjust()
 : <a class="el" href="a00966.html#a70c18eca95b2b0ba60c4b8368867216c">Dc2Dc</a>
-, <a class="el" href="a01006.html#a70c18eca95b2b0ba60c4b8368867216c">VGenerator</a>
 </li>
 </ul>
 
@@ -88,8 +87,7 @@ $(function() {
 <li>configure()
 : <a class="el" href="a00966.html#a721d6b9ba7da0d058bbc2914c3146f04">Dc2Dc</a>
 , <a class="el" href="a00958.html#a6cd5937993a8e281880777d6e91876b3">HC595</a>
-, <a class="el" href="a01010.html#a7f104732b38f3ac2a2e52435ad691a11">VddGenerator</a>
-, <a class="el" href="a01014.html#a90eb5177dcc8365689c9063f9568f68b">VppGenerator</a>
+, <a class="el" href="a01014.html#a280f0e719ee76df0311395cec2fb9885">VGenerator</a>
 </li>
 </ul>
 
@@ -111,13 +109,8 @@ $(function() {
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
-<li>finishCalibration()
-: <a class="el" href="a01010.html#acf0dd0d8db61bd6eb2db1816218c8a35">VddGenerator</a>
-, <a class="el" href="a01006.html#a2d2cb0d9c0657cd7af553b702fdfbad0">VGenerator</a>
-, <a class="el" href="a01014.html#acf0dd0d8db61bd6eb2db1816218c8a35">VppGenerator</a>
-</li>
 <li>firstCore()
-: <a class="el" href="a01058.html#a7ab05a55e2197c445e89655b6a215f53">UsbFlashProg</a>
+: <a class="el" href="a01054.html#a7ab05a55e2197c445e89655b6a215f53">UsbFlashProg</a>
 </li>
 <li>FlashTest()
 : <a class="el" href="a01030.html#a87212fa30e60f8a5c7c394615385b114">FlashTest</a>
@@ -126,25 +119,30 @@ $(function() {
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>GenericGenerator()
+: <a class="el" href="a01002.html#a1727d3eeae9e245d1cf9c2c99f049c39">GenericGenerator</a>
+</li>
 <li>getBit()
 : <a class="el" href="a00958.html#ad6ccbdb7d60ce7a61ac4f096e68f1dc2">HC595</a>
+</li>
+<li>getCalibration()
+: <a class="el" href="a00966.html#a21c65632b0597b0010f56fffc7fd3db5">Dc2Dc</a>
+, <a class="el" href="a01002.html#a21c65632b0597b0010f56fffc7fd3db5">GenericGenerator</a>
 </li>
 <li>getChannel()
 : <a class="el" href="a00986.html#ad228e2df8bd0f5cef831d8f7ab345d86">Pwm</a>
 </li>
 <li>getConfig()
 : <a class="el" href="a00966.html#a7ac78cc79ff86c259c64464cc727f542">Dc2Dc</a>
-, <a class="el" href="a01058.html#ac8d52370c4e43af8e1793fbea2f4fe6e">UsbFlashProg</a>
-, <a class="el" href="a01010.html#a4a0e13da6f29d839851509bc48bd13cf">VddGenerator</a>
-, <a class="el" href="a01014.html#a94e7c09685148384501c8fed47e28f4f">VppGenerator</a>
+, <a class="el" href="a01014.html#a84826e3668e497bb746940b73e9cb70b">VGenerator</a>
 </li>
 <li>getData()
 : <a class="el" href="a00958.html#a0ed18b5903916ec61ea243bff59894df">HC595</a>
 </li>
 <li>getDuty()
 : <a class="el" href="a00966.html#ad50ed60a1a9207565841af074c67232c">Dc2Dc</a>
+, <a class="el" href="a01002.html#ad50ed60a1a9207565841af074c67232c">GenericGenerator</a>
 , <a class="el" href="a00986.html#ad50ed60a1a9207565841af074c67232c">Pwm</a>
-, <a class="el" href="a01006.html#ad50ed60a1a9207565841af074c67232c">VGenerator</a>
 </li>
 <li>getFreq()
 : <a class="el" href="a00986.html#a09da5b817036360c10b8d109e90db123">Pwm</a>
@@ -167,11 +165,11 @@ $(function() {
 </li>
 <li>getV()
 : <a class="el" href="a00966.html#a0f4d92e8523757ad9e77e007d7a34003">Dc2Dc</a>
-, <a class="el" href="a01006.html#a0f4d92e8523757ad9e77e007d7a34003">VGenerator</a>
+, <a class="el" href="a01002.html#a0f4d92e8523757ad9e77e007d7a34003">GenericGenerator</a>
 </li>
 <li>getVTarget()
 : <a class="el" href="a00966.html#a2181b2c848122897be4f31c3db7a9ac7">Dc2Dc</a>
-, <a class="el" href="a01006.html#a2181b2c848122897be4f31c3db7a9ac7">VGenerator</a>
+, <a class="el" href="a01002.html#a2181b2c848122897be4f31c3db7a9ac7">GenericGenerator</a>
 </li>
 <li>Gpio()
 : <a class="el" href="a00978.html#a2eec2c90e6a28e3caf6d4f61a17b46f4">Gpio</a>
@@ -194,33 +192,33 @@ $(function() {
 
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>init()
-: <a class="el" href="a01058.html#a02fd73d861ef2e4aabb38c0c9ff82947">UsbFlashProg</a>
+: <a class="el" href="a01054.html#a02fd73d861ef2e4aabb38c0c9ff82947">UsbFlashProg</a>
 </li>
 <li>initCalibration()
-: <a class="el" href="a01010.html#af8cc4a44e21c6a3249f2134cbba2f4c2">VddGenerator</a>
-, <a class="el" href="a01006.html#a090684bdd46c0a6650f5796fa5e3c6b4">VGenerator</a>
-, <a class="el" href="a01014.html#a4e8a10947272c1fc544a64f89a12266f">VppGenerator</a>
+: <a class="el" href="a01002.html#a48dac7612fb489714e244837a522ad85">GenericGenerator</a>
+, <a class="el" href="a01006.html#a9134427109d330564403ecba5c2810f2">VddGenerator</a>
+, <a class="el" href="a01010.html#a8afe01f8cab3c3cb766807f721dcb4f5">VppGenerator</a>
 </li>
 <li>isOn()
-: <a class="el" href="a01006.html#af887dcf7959d81b473d9251b3573a303">VGenerator</a>
+: <a class="el" href="a01002.html#af887dcf7959d81b473d9251b3573a303">GenericGenerator</a>
 </li>
 <li>isOnA18()
-: <a class="el" href="a01014.html#abe4e6d719c5bfe69d3e3522de8d94f8d">VppGenerator</a>
+: <a class="el" href="a01010.html#abe4e6d719c5bfe69d3e3522de8d94f8d">VppGenerator</a>
 </li>
 <li>isOnA9()
-: <a class="el" href="a01014.html#a69c2d09ed2717ed40188debcb5aded24">VppGenerator</a>
+: <a class="el" href="a01010.html#a69c2d09ed2717ed40188debcb5aded24">VppGenerator</a>
 </li>
 <li>isOnCE()
-: <a class="el" href="a01014.html#a113860fa6ce46d16948aaf61848a4cd5">VppGenerator</a>
+: <a class="el" href="a01010.html#a113860fa6ce46d16948aaf61848a4cd5">VppGenerator</a>
 </li>
 <li>isOnOE()
-: <a class="el" href="a01014.html#a596bf3f0b512d477965f27048e093f8d">VppGenerator</a>
+: <a class="el" href="a01010.html#a596bf3f0b512d477965f27048e093f8d">VppGenerator</a>
 </li>
 <li>isOnVpp()
-: <a class="el" href="a01010.html#a68fd07a166f0ad78d122707438e2aaab">VddGenerator</a>
+: <a class="el" href="a01006.html#a68fd07a166f0ad78d122707438e2aaab">VddGenerator</a>
 </li>
 <li>isOnWE()
-: <a class="el" href="a01014.html#a28ed60d03735648c6941ed5d5b7ff87c">VppGenerator</a>
+: <a class="el" href="a01010.html#a28ed60d03735648c6941ed5d5b7ff87c">VppGenerator</a>
 </li>
 <li>isPulledDown()
 : <a class="el" href="a00978.html#ac8ff90dd574b842eacce082d451c0cf5">Gpio</a>
@@ -230,9 +228,10 @@ $(function() {
 </li>
 <li>isRunning()
 : <a class="el" href="a00966.html#ad619b8b51adc7874204abd71080cd90e">Dc2Dc</a>
+, <a class="el" href="a01002.html#ad619b8b51adc7874204abd71080cd90e">GenericGenerator</a>
 , <a class="el" href="a00982.html#ad619b8b51adc7874204abd71080cd90e">MultiCore</a>
 , <a class="el" href="a00986.html#ad619b8b51adc7874204abd71080cd90e">Pwm</a>
-, <a class="el" href="a01006.html#ad619b8b51adc7874204abd71080cd90e">VGenerator</a>
+, <a class="el" href="a01014.html#ad619b8b51adc7874204abd71080cd90e">VGenerator</a>
 </li>
 <li>isStopRequested()
 : <a class="el" href="a00982.html#ade698d03ef3275ee05cb330e957fba3c">MultiCore</a>
@@ -252,7 +251,7 @@ $(function() {
 
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>msleep()
-: <a class="el" href="a00982.html#a0435a21d2e4d199306a1e989a3f71efb">MultiCore</a>
+: <a class="el" href="a00982.html#acdc34726cf3d3983ac10dddfae06c54b">MultiCore</a>
 </li>
 <li>MultiCore()
 : <a class="el" href="a00982.html#a4a5b128f369424d9b4b4cfe064cd991d">MultiCore</a>
@@ -265,34 +264,38 @@ $(function() {
 
 <h3><a id="index_o"></a>- o -</h3><ul>
 <li>off()
-: <a class="el" href="a01006.html#a2f241b422ebdbd7a570178ceaebdd2fa">VGenerator</a>
+: <a class="el" href="a01002.html#a10d0d33911efa143d2149202dff20c92">GenericGenerator</a>
+, <a class="el" href="a01006.html#a2f241b422ebdbd7a570178ceaebdd2fa">VddGenerator</a>
+, <a class="el" href="a01010.html#a2f241b422ebdbd7a570178ceaebdd2fa">VppGenerator</a>
 </li>
 <li>on()
-: <a class="el" href="a01006.html#af872a38a463ca03d40b40d3b4df7bde7">VGenerator</a>
+: <a class="el" href="a01002.html#a1a086ac302551c491a2a1acc23b77a6e">GenericGenerator</a>
+, <a class="el" href="a01006.html#af5a2f93105e0a24634af5793d2c5c5b8">VddGenerator</a>
+, <a class="el" href="a01010.html#af5a2f93105e0a24634af5793d2c5c5b8">VppGenerator</a>
 </li>
 <li>onA18()
-: <a class="el" href="a01014.html#ad4a0efb39943110529b84314f7fb28f7">VppGenerator</a>
+: <a class="el" href="a01010.html#a9d8a0eb4bbad7bb792d743b0d2cc871c">VppGenerator</a>
 </li>
 <li>onA9()
-: <a class="el" href="a01014.html#a648315322f0352ebf5b73019db161bf2">VppGenerator</a>
+: <a class="el" href="a01010.html#a0f06afd56ae85b5b1e4ebfafad88210e">VppGenerator</a>
 </li>
 <li>onCE()
-: <a class="el" href="a01014.html#a4c507a2e2dae774320e09cb4560ab506">VppGenerator</a>
+: <a class="el" href="a01010.html#a3dffd3e2fd8d5a4adf46a2324c760fe5">VppGenerator</a>
 </li>
 <li>onOE()
-: <a class="el" href="a01014.html#a25bc79ea63bce85120e19aa6756b2f8c">VppGenerator</a>
+: <a class="el" href="a01010.html#adb02f248196d9a140cdee7a50d960586">VppGenerator</a>
 </li>
 <li>onVpp()
-: <a class="el" href="a01010.html#a698bda391187d37222ddf22cf918d88d">VddGenerator</a>
+: <a class="el" href="a01006.html#af19e5246f591ce26b80bf5449957c065">VddGenerator</a>
 </li>
 <li>onWE()
-: <a class="el" href="a01014.html#abeef0d923371a4d03f6a448b99236d5e">VppGenerator</a>
+: <a class="el" href="a01010.html#a1ab7a0faad72e096d08a867f450a32e0">VppGenerator</a>
 </li>
 <li>operator=()
 : <a class="el" href="a00962.html#afd85b41ef3892a3db170a8ff22f036f3">Dc2DcConfig</a>
-, <a class="el" href="a00994.html#a75098bed6f93dd2703e51812e32b23e7">VddConfig</a>
-, <a class="el" href="a00990.html#a6b60c1e909e8ce3ddcabcd671691e5c7">VGenConfig</a>
-, <a class="el" href="a00998.html#a02c796bd026a0e4e6283b55160687d7a">VppConfig</a>
+, <a class="el" href="a00990.html#a75098bed6f93dd2703e51812e32b23e7">VddConfig</a>
+, <a class="el" href="a00998.html#a6b60c1e909e8ce3ddcabcd671691e5c7">VGenConfig</a>
+, <a class="el" href="a00994.html#a02c796bd026a0e4e6283b55160687d7a">VppConfig</a>
 </li>
 <li>outputDisable()
 : <a class="el" href="a00958.html#a365b25c536bf2dd38eb7ff01bde56b03">HC595</a>
@@ -336,11 +339,14 @@ $(function() {
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
-<li>secondCore()
-: <a class="el" href="a01058.html#a35dcf9e2f9bc9da72defcd6e034dd57f">UsbFlashProg</a>
+<li>saveCalibration()
+: <a class="el" href="a01002.html#afe384df618d5cf4af2c0aaba94e8a71e">GenericGenerator</a>
 </li>
 <li>setBit()
 : <a class="el" href="a00958.html#a541f3690d6f2a0da8743b0335f216f49">HC595</a>
+</li>
+<li>setCalibration()
+: <a class="el" href="a00966.html#ab2184b6cd48866d49f5a0538986fe540">Dc2Dc</a>
 </li>
 <li>setDuty()
 : <a class="el" href="a00986.html#a30aae17e05a05890a47bd3e346d9e84d">Pwm</a>
@@ -363,22 +369,18 @@ $(function() {
 </li>
 <li>setV()
 : <a class="el" href="a00966.html#a16b1b73e4a129ac9a923989586bda307">Dc2Dc</a>
-, <a class="el" href="a01006.html#a16b1b73e4a129ac9a923989586bda307">VGenerator</a>
+, <a class="el" href="a01002.html#a69d4e1d6d89ed7be0fd7bd645ea85240">GenericGenerator</a>
 </li>
 <li>start()
 : <a class="el" href="a00966.html#aad5997aaaa2d622f0ca57f8b24a51a7b">Dc2Dc</a>
 , <a class="el" href="a00986.html#a60de64d75454385b23995437f1d72669">Pwm</a>
-, <a class="el" href="a01010.html#aad5997aaaa2d622f0ca57f8b24a51a7b">VddGenerator</a>
-, <a class="el" href="a01006.html#ad64c54ab3191981b2443c47007f38516">VGenerator</a>
-, <a class="el" href="a01014.html#aad5997aaaa2d622f0ca57f8b24a51a7b">VppGenerator</a>
+, <a class="el" href="a01014.html#aad5997aaaa2d622f0ca57f8b24a51a7b">VGenerator</a>
 </li>
 <li>stop()
 : <a class="el" href="a00966.html#a68a350717fe6bf9012843e7c977d87b2">Dc2Dc</a>
 , <a class="el" href="a00982.html#a8c528baf37154d347366083f0f816846">MultiCore</a>
 , <a class="el" href="a00986.html#a8c528baf37154d347366083f0f816846">Pwm</a>
-, <a class="el" href="a01010.html#a8c528baf37154d347366083f0f816846">VddGenerator</a>
-, <a class="el" href="a01006.html#a0efff8623a2fb79dad94a96dcf16d966">VGenerator</a>
-, <a class="el" href="a01014.html#a8c528baf37154d347366083f0f816846">VppGenerator</a>
+, <a class="el" href="a01014.html#a8c528baf37154d347366083f0f816846">VGenerator</a>
 </li>
 </ul>
 
@@ -394,6 +396,9 @@ $(function() {
 , <a class="el" href="a01042.html#ac4fca95dc3b93372ce7f2078baf8e8b6">PwmTest</a>
 , <a class="el" href="a01050.html#ac4fca95dc3b93372ce7f2078baf8e8b6">VGeneratorTest</a>
 </li>
+<li>toggle()
+: <a class="el" href="a01002.html#ad277193b2dca0bab1e0ad24d45407dc3">GenericGenerator</a>
+</li>
 <li>toggleBit()
 : <a class="el" href="a00958.html#ad1e527258a4fef33244368bfa4fcb5ec">HC595</a>
 </li>
@@ -408,38 +413,35 @@ $(function() {
 : <a class="el" href="a00982.html#a9278be8203e1c42e2619179882ae4403">MultiCore</a>
 </li>
 <li>UsbFlashProg()
-: <a class="el" href="a01058.html#a922af62bca7cce9496206e18311b11c6">UsbFlashProg</a>
+: <a class="el" href="a01054.html#a05c88064df46d0255c5e8bd9e93c378a">UsbFlashProg</a>
 </li>
 <li>usleep()
-: <a class="el" href="a00982.html#a02bb4857d31a2f3e40124c462f323154">MultiCore</a>
+: <a class="el" href="a00982.html#a5df1456e1b3afb7af60ea51a799b2365">MultiCore</a>
 </li>
 </ul>
 
 
 <h3><a id="index_v"></a>- v -</h3><ul>
 <li>VddConfig()
-: <a class="el" href="a00994.html#a22aeee40927a916d7f5792e7c0a3438a">VddConfig</a>
+: <a class="el" href="a00990.html#a22aeee40927a916d7f5792e7c0a3438a">VddConfig</a>
 </li>
 <li>VddGenerator()
-: <a class="el" href="a01010.html#a277b273d286bd55048d014ba4ea5a70f">VddGenerator</a>
+: <a class="el" href="a01006.html#aee45c95b29855d2a502edc42a17def53">VddGenerator</a>
 </li>
 <li>verify()
 : <a class="el" href="a00974.html#a28fb8d447eeb383d2ce9df7ee474c210">Flash</a>
 </li>
-<li>VGenConfig()
-: <a class="el" href="a00990.html#ae548ee6403887fe100b5e3f1d8f659e1">VGenConfig</a>
-</li>
 <li>VGenerator()
-: <a class="el" href="a01006.html#a62608866034034c985925e396efde439">VGenerator</a>
+: <a class="el" href="a01014.html#a62608866034034c985925e396efde439">VGenerator</a>
 </li>
 <li>VGeneratorTest()
 : <a class="el" href="a01050.html#a7325b7034f677dace90f50ec718df38f">VGeneratorTest</a>
 </li>
 <li>VppConfig()
-: <a class="el" href="a00998.html#acad3579e404220d7b93294eaa37f6729">VppConfig</a>
+: <a class="el" href="a00994.html#acad3579e404220d7b93294eaa37f6729">VppConfig</a>
 </li>
 <li>VppGenerator()
-: <a class="el" href="a01014.html#ab39605dc28af48f8df6d377fed631966">VppGenerator</a>
+: <a class="el" href="a01010.html#aebeff918a4d61d84ceffd739df464b6b">VppGenerator</a>
 </li>
 </ul>
 
@@ -476,6 +478,9 @@ $(function() {
 <li>~FlashTest()
 : <a class="el" href="a01030.html#acbee7a3b90ddd657e61e7ec297caab90">FlashTest</a>
 </li>
+<li>~GenericGenerator()
+: <a class="el" href="a01002.html#a31fd4c83f0997bf6581842725da8a0f9">GenericGenerator</a>
+</li>
 <li>~GpioTest()
 : <a class="el" href="a01034.html#a68b086f6974cb054e285d1866bcf200b">GpioTest</a>
 </li>
@@ -495,19 +500,19 @@ $(function() {
 : <a class="el" href="a01042.html#a09b4f2ce3ffc22ece3e70f401931f6d3">PwmTest</a>
 </li>
 <li>~UsbFlashProg()
-: <a class="el" href="a01058.html#abfc3c43c438ea98e33e1737c112a695e">UsbFlashProg</a>
+: <a class="el" href="a01054.html#abfc3c43c438ea98e33e1737c112a695e">UsbFlashProg</a>
 </li>
 <li>~VddGenerator()
-: <a class="el" href="a01010.html#aa8097c06975e91de10f80f691c71a394">VddGenerator</a>
+: <a class="el" href="a01006.html#aa8097c06975e91de10f80f691c71a394">VddGenerator</a>
 </li>
 <li>~VGenerator()
-: <a class="el" href="a01006.html#aeb322241b771cf9052dc5e19f3a3c186">VGenerator</a>
+: <a class="el" href="a01014.html#aeb322241b771cf9052dc5e19f3a3c186">VGenerator</a>
 </li>
 <li>~VGeneratorTest()
 : <a class="el" href="a01050.html#ac6c7b6815d544d6eaa2a291e4bd90684">VGeneratorTest</a>
 </li>
 <li>~VppGenerator()
-: <a class="el" href="a01014.html#a8fdb48a35b55b298e6a37ea8bf49ae94">VppGenerator</a>
+: <a class="el" href="a01010.html#a8fdb48a35b55b298e6a37ea8bf49ae94">VppGenerator</a>
 </li>
 </ul>
 </div><!-- contents -->

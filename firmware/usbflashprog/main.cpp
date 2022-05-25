@@ -30,14 +30,8 @@
  */
 int main();
 
-/**
- * @brief Second core entry point.
- * @param core Reference to MultiCore object.
- */
-void second_core(MultiCore& core); // NOLINT
-
 /** @brief UsbFlashProg instance. */
-UsbFlashProg ufp(second_core);
+UsbFlashProg ufp;
 
 // ---------------------------------------------------------------------------
 
@@ -47,10 +41,4 @@ int main() {
         ufp.firstCore();
     }
     return 0;
-}
-
-void second_core(MultiCore& core) { // NOLINT
-    while (!core.isStopRequested()) {
-        ufp.secondCore(core);
-    }
 }

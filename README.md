@@ -3,9 +3,12 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 [![Latest Tag][tag-shield]][tag-url] [![Latest Commit][commit-shield]][commit-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Open Issues][issues-shield]][issues-url] [![License][license-shield]][license-url] [![Project Site][site-shield]][site-url]
 
+[![Project Status][status-shield]][site-url]
+
 ## Contents
 
 * [About the Project](#about-the-project)
+* [Current Status](#current-status)
 * [Documentation](#documentation)
 * [Hardware Design](#hardware-design)
 * [Firmware Project](#firmware-project)
@@ -19,6 +22,17 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 The purpose of this board is to allow the programming, reading and verification of writable/rewritable memory devices, such as EPROM, EEPROM, Flash, SRAM, NVRAM – those with parallel bus as well as serial ones (I2C, SPI, Microwire, LPC).
 
 In a future release, programming of some microcontroller families (eg. Microchip PIC, or 8051) may also be supported, via firmware and software upgrade.
+
+## Current Status
+
+The current status of this project is (v0.1.0-rev.E):
+
+ - **Specifications**: Almost stable.
+ - **Hardware Design**: Schematic diagram almost stable. PCB in immature state.
+ - **Firmware**: Unstable. Under development. Just a few finished modules.
+ - **PC Software**: Development not started yet.
+ - **User Documentation**: Not started yet.
+ - **Developer/Engineer Documentation**: A lot of hardware and firmware documentation available.
 
 ## Documentation
 
@@ -34,13 +48,7 @@ The most up-to-date firmware project can be accessed here: [Firmware Project of 
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Please read [CONTRIBUTING](https://github.com/robsonsmartins/usbflashprog/blob/main/CONTRIBUTING.md) for more information.
 
 ## License
 
@@ -80,6 +88,7 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 [license-url]: https://github.com/robsonsmartins/usbflashprog/blob/master/LICENSE
 [site-shield]: https://img.shields.io/badge/project%20site-usbflashprog-orange?style=plastic
 [site-url]: https://usbflashprog.robsonmartins.com
+[status-shield]: https://img.shields.io/badge/project%20status-in%20development-orange
 
 [contact-site-shield]: https://img.shields.io/badge/Home%20Page-robsonmartins.com-green?style=plastic
 [contact-site-url]: https://www.robsonmartins.com

@@ -18,21 +18,7 @@
 #ifndef USBFLASHPROG_HPP_
 #define USBFLASHPROG_HPP_
 
-#include "hal/multicore.hpp"
 #include "modules/vgenerator.hpp"
-
-// ---------------------------------------------------------------------------
-
-/**
- * @ingroup Firmware
- * @brief Defines the configuration fields for a UsbFlashProg class.
- */
-typedef struct UsbFlashProgConfig {
-    /** @brief VppGenerator configuration. */
-    VppConfig vpp;
-    /** @brief VddGenerator configuration. */
-    VddConfig vdd;
-} UsbFlashProgConfig;
 
 // ---------------------------------------------------------------------------
 
@@ -45,11 +31,8 @@ typedef struct UsbFlashProgConfig {
  */
 class UsbFlashProg {
  public:
-    /**
-     * @brief Constructor.
-     * @param entry Second CPU core entry point routine.
-     */
-    explicit UsbFlashProg(MultiCore::MultiCoreEntry entry);
+    /** @brief Constructor. */
+    UsbFlashProg();
     /** @brief Destructor. */
     ~UsbFlashProg();
     /**
@@ -59,33 +42,17 @@ class UsbFlashProg {
      */
     void init();
     /**
-     * @brief Gets the current configuration data.
-     * @return Copy of the current configuration data.
-     */
-    UsbFlashProgConfig getConfig() const;
-    /**
      * @brief Routine to be called by first CPU core.
      * @details This method must be called periodically in a loop,
      *  by first CPU core.
      */
     void firstCore(void);
-    /**
-     * @brief Routine to be called by second CPU core.
-     * @details This method must be called periodically in a loop,
-     *  by second CPU core.
-     * @param core Reference to MultiCore object.
-     */
-    void secondCore(MultiCore& core); // NOLINT
 
  private:
-    /* @brief Multicore manager. */
-    MultiCore multicore_;
-    /* @brief VppGenerator instance. */
-    VppGenerator vpp_;
-    /* @brief VddGenerator instance. */
-    VddGenerator vdd_;
-    /* @brief Configuration data. */
-    UsbFlashProgConfig config_;
+    /* @brief VGenerator instance. */
+    VGenerator vgen_;
+    /* @brief VGenerator configuration. */
+    VGenConfig config_;
 };
 
 #endif  // USBFLASHPROG_HPP_

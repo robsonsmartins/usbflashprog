@@ -51,6 +51,11 @@ void MultiCore::stop() {
     status_ = csStopping;
     unlock();
     multicore_reset_core1();
+#ifdef __arm__
+    lock();
+    status_ = csStopped;
+    unlock();
+#endif
 }
 
 bool MultiCore::isRunning() const {
@@ -85,11 +90,11 @@ void MultiCore::unlock() {
     mutex_exit(mutex);
 }
 
-void MultiCore::usleep(uint64_t us) const {
+void MultiCore::usleep(uint64_t us) {
     sleep_us(us);
 }
 
-void MultiCore::msleep(uint32_t ms) const {
+void MultiCore::msleep(uint32_t ms) {
     sleep_ms(ms);
 }
 

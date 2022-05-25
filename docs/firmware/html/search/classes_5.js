@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hc595_243',['HC595',['../a00958.html',1,'']]],
-  ['hc595test_244',['HC595Test',['../a01018.html',1,'']]]
+  ['multicore_244',['MultiCore',['../a00982.html',1,'']]],
+  ['multicoretest_245',['MultiCoreTest',['../a01038.html',1,'']]]
 ];

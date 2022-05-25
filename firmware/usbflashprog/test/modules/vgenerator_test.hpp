@@ -40,14 +40,10 @@ class VGeneratorTest : public testing::Test {
   void SetUp() override;
   /** @brief Teardown of the test. */
   void TearDown() override;
-  /* @brief VddGenerator class object to test. */
-  static VddGenerator vdd_;
-  /* @brief VppGenerator class object to test. */
-  static VppGenerator vpp_;
-  /* @brief VddConfig configuration used to test. */
-  static VddConfig vddConfig_;
-  /* @brief VppConfig configuration used to test. */
-  static VppConfig vppConfig_;
+  /* @brief VGenerator class object to test. */
+  static VGenerator vGenerator_;
+  /* @brief VGenConfig configuration used to test. */
+  static VGenConfig vGenConfig_;
   /*
    * @brief Calculates the real value, based in VRef. 
    * @param value ADC raw value (12 bits).

@@ -8,5 +8,5 @@ var searchData=
   ['adcchannel_9',['adcChannel',['../a00962.html#a185ec2bed51835a46e7e094ea2cbf429',1,'Dc2DcConfig']]],
   ['adctest_10',['AdcTest',['../a01026.html',1,'AdcTest'],['../a01026.html#a55723096fa6b29c5bd45c90ed243605a',1,'AdcTest::AdcTest()']]],
   ['adcvref_11',['adcVref',['../a00962.html#a570efab00f4947e625848fb971906db5',1,'Dc2DcConfig']]],
-  ['adjust_12',['adjust',['../a00966.html#a70c18eca95b2b0ba60c4b8368867216c',1,'Dc2Dc::adjust()'],['../a01006.html#a70c18eca95b2b0ba60c4b8368867216c',1,'VGenerator::adjust()']]]
+  ['adjust_12',['adjust',['../a00966.html#a70c18eca95b2b0ba60c4b8368867216c',1,'Dc2Dc']]]
 ];

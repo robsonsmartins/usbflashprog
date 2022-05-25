@@ -55,11 +55,6 @@ typedef struct Dc2DcConfig {
      */ 
     float divider;
     /** 
-     * @brief Calibration value (offset) in output of DC2DC converter.
-     * @details Default: 0.0.
-     */ 
-    float calibration;
-    /** 
      * @brief Minimal duty cycle value for the PWM, in %.
      * @details Default: PWM_MIN_DUTY_CYCLE_DEFAULT.
      */
@@ -106,7 +101,6 @@ typedef struct Dc2DcConfig {
      * @param pwmPin Pin number of the PWM.
      * @param adcChannel Number of the ADC channel (0 to 3).
      * @param divider Feedback divider in output of DC2DC converter.
-     * @param calibration Calibration value (offset) in output of DC2DC converter.
      * @param pwmFreq Frequency of the PWM, in Hertz.
      * @param adcVref Reference voltage of the ADC, in Volts.
      * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
@@ -119,7 +113,6 @@ typedef struct Dc2DcConfig {
      */
     explicit Dc2DcConfig(uint pwmPin, uint adcChannel,
                 float divider = 1.0f,
-                float calibration = 0.0f,
                 uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
                 float adcVref = Adc::DEFAULT_VREF,
                 float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
@@ -201,6 +194,23 @@ class Dc2Dc {
      */
     void configure(const Dc2DcConfig& config);
     /**
+     * @brief Gets the current configuration data.
+     * @return Copy of the current configuration data.
+     */
+    Dc2DcConfig getConfig() const;
+    /**
+     * @brief Sets the calibration value (offset) of the output
+     *  of DC2DC converter.
+     * @param value Calibration value.
+     */
+    void setCalibration(float value);
+    /**
+     * @brief Returns the calibration value of the output
+     *  of DC2DC converter.
+     * @return Calibration value.
+     */
+    float getCalibration() const;
+    /**
      * @brief Starts the DC to DC converter.
      * @details If the configuration is invalid, then fails.
      * @return True if success, false otherwise.
@@ -244,11 +254,6 @@ class Dc2Dc {
      * @return Current duty cycle value, in percent.
      */
     float getDuty() const;
-    /**
-     * @brief Gets the current configuration data.
-     * @return Copy of the current configuration data.
-     */
-    Dc2DcConfig getConfig() const;
 
  private:
     /* @brief Configuration data. */
@@ -263,6 +268,8 @@ class Dc2Dc {
     float vActual_;
     /* @brief Actual duty cycle. */
     float dutyActual_;
+    /* @brief Calibration value (offset) in output of DC2DC converter. */
+    float calibration_;
     /*
      * @brief Returns if configuration data is valid.
      * @return True if configuration data is valid, false otherwise.

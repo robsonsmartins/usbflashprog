@@ -15,88 +15,42 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <cstring>
+
 #include "modules/vgenerator.hpp"
 #include "config.hpp"
 #include "hal/flash.hpp"
 
 // ---------------------------------------------------------------------------
 
-VGenConfig::VGenConfig(): Dc2DcConfig(), ctrlPin(0xFF) {}
-
-VGenConfig::VGenConfig(uint pwmPin, uint adcChannel, uint ctrlPin,
-                       float divider, float calibration, uint32_t pwmFreq,
-                       float adcVref, float pwmMinDuty, float pwmMaxDuty,
-                       float pwmSlowStepDuty, float pwmFastStepDuty,
-                       float pwmToleranceToFast, float vTolerance):
-        Dc2DcConfig(pwmPin, adcChannel, divider, calibration, pwmFreq,
-                    adcVref, pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty,
-                    pwmFastStepDuty, pwmToleranceToFast, vTolerance),
-        ctrlPin(ctrlPin) {}
-
-VGenConfig& VGenConfig::operator=(const VGenConfig& src) {
-    Dc2DcConfig::operator=(src);
-    this->ctrlPin = src.ctrlPin;
-    return *this;
-}
-
-bool operator==(const VGenConfig& a, const VGenConfig& b) {
-    return (operator==((Dc2DcConfig&)a, (Dc2DcConfig&)b) &&
-            a.ctrlPin == b.ctrlPin);
-}
+void second_core(MultiCore& core); // NOLINT
 
 // ---------------------------------------------------------------------------
 
-VddConfig::VddConfig(): VGenConfig(), onVppPin(0xFF) {}
-
-VddConfig::VddConfig(uint pwmPin, uint adcChannel, uint ctrlPin, uint onVppPin,
-                     float divider, float calibration, uint32_t pwmFreq,
-                     float adcVref, float pwmMinDuty, float pwmMaxDuty,
-                     float pwmSlowStepDuty, float pwmFastStepDuty,
-                     float pwmToleranceToFast, float vTolerance):
-        VGenConfig(pwmPin, adcChannel, ctrlPin, divider, calibration, pwmFreq,
-                   adcVref, pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty,
-                   pwmFastStepDuty, pwmToleranceToFast, vTolerance),
-        onVppPin(onVppPin) {}
+VddConfig::VddConfig(): Dc2DcConfig(), ctrlPin(0xFF), onVppPin(0xFF) {}
 
 VddConfig& VddConfig::operator=(const VddConfig& src) {
-    VGenConfig::operator=(src);
+    Dc2DcConfig::operator=(src);
+    this->ctrlPin  =  src.ctrlPin;
     this->onVppPin = src.onVppPin;
     return *this;
 }
 
 bool operator==(const VddConfig& a, const VddConfig& b) {
-    return (operator==((VGenConfig&)a, (VGenConfig&)b) &&
+    return (operator==((Dc2DcConfig&)a, (Dc2DcConfig&)b) &&
+            a.ctrlPin  == b.ctrlPin &&
             a.onVppPin == b.onVppPin);
-}
-
-bool operator!=(const VddConfig& a, const VddConfig& b) {
-    return !operator==(a, b);
 }
 
 // ---------------------------------------------------------------------------
 
-VppConfig::VppConfig(): VGenConfig(),
-        vcSinPin(0xFF),
-        vcClkPin(0xFF),
-        vcClrPin(0xFF),
-        vcRckPin(0xFF) {}
-
-VppConfig::VppConfig(uint pwmPin, uint adcChannel, uint ctrlPin, uint vcSinPin,
-                     uint vcClkPin, uint vcClrPin, uint vcRckPin, float divider,
-                     float calibration, uint32_t pwmFreq, float adcVref,
-                     float pwmMinDuty, float pwmMaxDuty, float pwmSlowStepDuty,
-                     float pwmFastStepDuty, float pwmToleranceToFast,
-                     float vTolerance):
-        VGenConfig(pwmPin, adcChannel, ctrlPin, divider, calibration, pwmFreq,
-                   adcVref, pwmMinDuty, pwmMaxDuty, pwmSlowStepDuty,
-                   pwmFastStepDuty, pwmToleranceToFast, vTolerance),
-        vcSinPin(vcSinPin),
-        vcClkPin(vcClkPin),
-        vcClrPin(vcClrPin),
-        vcRckPin(vcRckPin) {}
+VppConfig::VppConfig(): Dc2DcConfig(),
+        ctrlPin(0xFF), vcSinPin(0xFF), vcClkPin(0xFF),
+        vcClrPin(0xFF), vcRckPin(0xFF) {}
 
 VppConfig& VppConfig::operator=(const VppConfig& src) {
-    VGenConfig::operator=(src);
+    Dc2DcConfig::operator=(src);
+    this->ctrlPin  =  src.ctrlPin;
     this->vcSinPin = src.vcSinPin;
     this->vcClkPin = src.vcClkPin;
     this->vcClrPin = src.vcClrPin;
@@ -105,299 +59,317 @@ VppConfig& VppConfig::operator=(const VppConfig& src) {
 }
 
 bool operator==(const VppConfig& a, const VppConfig& b) {
-    return (operator==((VGenConfig&)a, (VGenConfig&)b) &&
+    return (operator==((Dc2DcConfig&)a, (Dc2DcConfig&)b) &&
+            a.ctrlPin  == b.ctrlPin  &&
             a.vcSinPin == b.vcSinPin &&
             a.vcClkPin == b.vcClkPin &&
             a.vcClrPin == b.vcClrPin &&
             a.vcRckPin == b.vcRckPin);
 }
 
-bool operator!=(const VppConfig& a, const VppConfig& b) {
-    return !operator==(a, b);
+// ---------------------------------------------------------------------------
+
+VGenConfig& VGenConfig::operator=(const VGenConfig& src) {
+    this->vpp = src.vpp;
+    this->vdd = src.vdd;
+    return *this;
+}
+
+bool operator==(const VGenConfig& a, const VGenConfig& b) {
+    return (a.vpp == b.vpp && a.vdd == b.vdd);
+}
+
+bool operator!=(const VGenConfig& a, const VGenConfig& b) {
+    return (!(a.vpp == b.vpp) || !(a.vdd == b.vdd));
 }
 
 // ---------------------------------------------------------------------------
 
-VGenerator::VGenerator(): on_(false) {}
+GenericGenerator::GenericGenerator(const VGenerator *owner):
+        owner_(const_cast<VGenerator*>(owner)), on_(false) {}
 
-VGenerator::~VGenerator() {}
+GenericGenerator::~GenericGenerator() {
+    stop_();
+}
 
-bool VGenerator::isRunning() const {
+bool GenericGenerator::isRunning() const {
     return dc2dc_.isRunning();
 }
 
-bool VGenerator::on() {
-    if (!isValidConfig_()) { return false; }
-    gpio_.setPin(config_.ctrlPin);
-    on_ = true;
-    return true;
+void GenericGenerator::setV(float value) {
+    dc2dc_.setV(value);
 }
 
-void VGenerator::off() {
-    if (!isValidConfig_()) { return; }
-    gpio_.resetPin(config_.ctrlPin);
-    on_ = false;
-}
-
-bool VGenerator::isOn() const {
-    return on_;
-}
-
-void VGenerator::adjust() {
-    dc2dc_.adjust();
-}
-
-void VGenerator::setV(float v) {
-    dc2dc_.setV(v);
-}
-
-float VGenerator::getV() const {
-    return dc2dc_.getV();
-}
-
-float VGenerator::getVTarget() const {
+float GenericGenerator::getVTarget() const {
     return dc2dc_.getVTarget();
 }
 
-float VGenerator::getDuty() const {
+float GenericGenerator::getV() const {
+    if (!owner_->isRunning() || !isOn() ||
+         dc2dc_.getV() < 0.0f) { return 0.0f; }
+    return dc2dc_.getV();
+}
+
+float GenericGenerator::getCalibration() const {
+    return dc2dc_.getCalibration();
+}
+
+float GenericGenerator::getDuty() const {
     return dc2dc_.getDuty();
 }
 
-bool VGenerator::isValidConfig_() const {
-    return (config_.pwmPin     != 0xFF &&
-            config_.pwmFreq    != 0.0f &&
-            config_.adcChannel != 0xFF &&
-            config_.ctrlPin    != 0xFF);
+void GenericGenerator::initCalibration(float reference) {
+    if (!owner_->isRunning()) { return; }
+    if (reference <= 0.0f) { return; }
+    dc2dc_.setCalibration(0.0f);
+    setV(reference);
+    on();
 }
 
-bool VGenerator::readCalibration_() {
-    uint8_t *pData = reinterpret_cast<uint8_t*>(&calibration_);
-    size_t len = sizeof(CalibrationData);
-    Flash::read(pData, len);
-    uint32_t cs = 0;
-    for (size_t i = 0; i < len - sizeof(uint32_t); i++) {
-        cs += pData[i];
+void GenericGenerator::saveCalibration(float measure) {
+    if (!owner_->isRunning()) { return; }
+    float v = dc2dc_.getV();
+    if (measure <= 0.0f || v <= 0.0f) {
+        dc2dc_.setCalibration(0.0f);
+    } else {
+        dc2dc_.setCalibration(measure - v);
     }
-    if (cs != calibration_.checksum) {
-        calibration_.vdd = 0.0f;
-        calibration_.vpp = 0.0f;
-        calibration_.checksum = 0;
-        return false;
-    }
-    return true;
+#ifdef __arm__
+    owner_->stop();
+#endif
+    owner_->writeCalData_();
+    setV(0.0f);
+    off();
+#ifdef __arm__
+    owner_->start();
+#endif
 }
 
-bool VGenerator::writeCalibration_() {
-    uint8_t *pData = reinterpret_cast<uint8_t*>(&calibration_);
-    size_t len = sizeof(CalibrationData);
-    uint32_t cs = 0;
-    for (size_t i = 0; i < len - sizeof(uint32_t); i++) {
-        cs += pData[i];
+void GenericGenerator::toggle() {
+    if (isOn()) {
+        off();
+    } else {
+        on();
     }
-    calibration_.checksum = cs;
-    Flash::write(pData, len);
-    return Flash::verify(pData, len);
+}
+
+bool GenericGenerator::isOn() const {
+    return on_;
+}
+
+bool GenericGenerator::start_() {
+    return dc2dc_.start();
+}
+
+void GenericGenerator::stop_() {
+    dc2dc_.stop();
+}
+
+void GenericGenerator::adjust_() {
+    dc2dc_.adjust();
 }
 
 // ---------------------------------------------------------------------------
 
-VddGenerator::VddGenerator(): VGenerator(), onVpp_(false) {}
+VddGenerator::VddGenerator(const VGenerator *owner): GenericGenerator(owner),
+        onVpp_(false) {}
 
-VddGenerator::VddGenerator(const VddConfig& config): VddGenerator() {
-    configure(config);
+VddGenerator::~VddGenerator() {}
+
+void VddGenerator::on() {
+    gpio_.setPin(owner_->config_.vdd.ctrlPin);
+    on_ = true;
 }
 
-VddGenerator::~VddGenerator() {
-    onVpp(false);
-    off();
-    stop();
+void VddGenerator::off() {
+    gpio_.resetPin(owner_->config_.vdd.ctrlPin);
+    on_ = false;
 }
 
-void VddGenerator::configure(const VddConfig& config) {
-    off();
-    dc2dc_.configure(config);
-    config_ = config;
-    VGenerator::config_ = config;
+void VddGenerator::initCalibration(float reference) {
+    GenericGenerator::initCalibration(reference);
 }
 
-VddConfig VddGenerator::getConfig() const {
-    return config_;
-}
-
-bool VddGenerator::start() {
-    if (!isValidConfig_()) { return false; }
-    if (readCalibration_()) {
-        config_.calibration = calibration_.vdd;
-        VGenerator::config_.calibration = calibration_.vdd;
-    }
-    return dc2dc_.start();
-}
-
-void VddGenerator::stop() {
-    if (!isValidConfig_()) { return; }
-    dc2dc_.stop();
-}
-
-bool VddGenerator::onVpp(bool status) {
-    if (!isValidConfig_()) { return false; }
-    gpio_.setPin(config_.onVppPin, status);
+void VddGenerator::onVpp(bool status) {
+    gpio_.setPin(owner_->config_.vdd.onVppPin, status);
     onVpp_ = status;
-    return true;
 }
 
 bool VddGenerator::isOnVpp() const {
     return onVpp_;
 }
 
-bool VddGenerator::initCalibration(float voltage) {
-    if (!isValidConfig_()) { return false; }
-    config_.calibration = 0.0f;
-    VGenerator::config_.calibration = 0.0f;
-    dc2dc_.configure(config_);
-    dc2dc_.setV(voltage);
-    if (!dc2dc_.start()) { return false; }
-    return on();
-}
-
-bool VddGenerator::finishCalibration(float measure) {
-    if (!isValidConfig_()) { return false; }
-    calibration_.vdd = dc2dc_.getV() - measure;
-    config_.calibration = calibration_.vdd;
-    VGenerator::config_.calibration = calibration_.vdd;
-    off();
-    dc2dc_.configure(config_);
-    return writeCalibration_();
-}
-
-bool VddGenerator::isValidConfig_() const {
-    return (VGenerator::isValidConfig_() &&
-            config_.onVppPin != 0xFF);
-}
-
 // ---------------------------------------------------------------------------
 
-VppGenerator::VppGenerator(): VGenerator() {}
+VppGenerator::VppGenerator(const VGenerator *owner):
+        GenericGenerator(owner) {}
 
-VppGenerator::VppGenerator(const VppConfig& config): VppGenerator() {
-    configure(config);
+VppGenerator::~VppGenerator() {}
+
+void VppGenerator::on() {
+    gpio_.setPin(owner_->config_.vpp.ctrlPin);
+    on_ = true;
 }
 
-VppGenerator::~VppGenerator() {
-    if (isValidConfig_()) {
-        vcRegister_.clear();
-    }
-    off();
-    stop();
+void VppGenerator::off() {
+    gpio_.resetPin(owner_->config_.vpp.ctrlPin);
+    on_ = false;
 }
 
-void VppGenerator::configure(const VppConfig& config) {
-    off();
-    dc2dc_.configure(config);
-    config_ = config;
-    VGenerator::config_ = config;
-    if (isValidConfig_()) {
-        vcRegister_.clear();
-        vcRegister_.outputEnable();
-    }
+void VppGenerator::initCalibration(float reference) {
+    GenericGenerator::initCalibration(reference);
 }
 
-VppConfig VppGenerator::getConfig() const {
-    return config_;
-}
-
-bool VppGenerator::start() {
-    if (!isValidConfig_()) { return false; }
-    if (readCalibration_()) {
-        config_.calibration = calibration_.vpp;
-        VGenerator::config_.calibration = calibration_.vpp;
-    }
-    return dc2dc_.start();
-}
-
-void VppGenerator::stop() {
-    if (!isValidConfig_()) { return; }
-    dc2dc_.stop();
-}
-
-bool VppGenerator::onA9(bool status) {
-    if (!isValidConfig_()) { return false; }
+void VppGenerator::onA9(bool status) {
     vcRegister_.setBit(VPP_ON_A9_VC_REGISTER_BIT, status);
-    return true;
 }
 
-bool VppGenerator::onA18(bool status) {
-    if (!isValidConfig_()) { return false; }
+void VppGenerator::onA18(bool status) {
     vcRegister_.setBit(VPP_ON_A18_VC_REGISTER_BIT, status);
-    return true;
 }
 
-bool VppGenerator::onCE(bool status) {
-    if (!isValidConfig_()) { return false; }
+void VppGenerator::onCE(bool status) {
     vcRegister_.setBit(VPP_ON_CE_VC_REGISTER_BIT, status);
-    return true;
 }
 
-bool VppGenerator::onOE(bool status) {
-    if (!isValidConfig_()) { return false; }
+void VppGenerator::onOE(bool status) {
     vcRegister_.setBit(VPP_ON_OE_VC_REGISTER_BIT, status);
-    return true;
 }
 
-bool VppGenerator::onWE(bool status) {
-    if (!isValidConfig_()) { return false; }
+void VppGenerator::onWE(bool status) {
     vcRegister_.setBit(VPP_ON_WE_VC_REGISTER_BIT, status);
-    return true;
 }
 
 bool VppGenerator::isOnA9() const {
-    if (!isValidConfig_()) { return false; }
     return vcRegister_.getBit(VPP_ON_A9_VC_REGISTER_BIT);
 }
 
 bool VppGenerator::isOnA18() const {
-    if (!isValidConfig_()) { return false; }
     return vcRegister_.getBit(VPP_ON_A18_VC_REGISTER_BIT);
 }
 
 bool VppGenerator::isOnCE() const {
-    if (!isValidConfig_()) { return false; }
     return vcRegister_.getBit(VPP_ON_CE_VC_REGISTER_BIT);
 }
 
 bool VppGenerator::isOnOE() const {
-    if (!isValidConfig_()) { return false; }
     return vcRegister_.getBit(VPP_ON_OE_VC_REGISTER_BIT);
 }
 
 bool VppGenerator::isOnWE() const {
-    if (!isValidConfig_()) { return false; }
     return vcRegister_.getBit(VPP_ON_WE_VC_REGISTER_BIT);
 }
 
-bool VppGenerator::initCalibration(float voltage) {
-    if (!isValidConfig_()) { return false; }
-    config_.calibration = 0.0f;
-    VGenerator::config_.calibration = 0.0f;
-    dc2dc_.configure(config_);
-    dc2dc_.setV(voltage);
-    if (!dc2dc_.start()) { return false; }
-    return on();
+// ---------------------------------------------------------------------------
+
+VGenerator::VGenerator(): vpp(this), vdd(this), multicore_(second_core) {
+    readCalData_();
 }
 
-bool VppGenerator::finishCalibration(float measure) {
-    if (!isValidConfig_()) { return false; }
-    calibration_.vpp = dc2dc_.getV() - measure;
-    config_.calibration = calibration_.vpp;
-    VGenerator::config_.calibration = calibration_.vpp;
-    off();
-    dc2dc_.configure(config_);
-    return writeCalibration_();
+VGenerator::VGenerator(const VGenConfig& config): VGenerator() {
+    configure(config);
 }
 
-bool VppGenerator::isValidConfig_() const {
-    return (VGenerator::isValidConfig_() &&
-            config_.vcSinPin != 0xFF &&
-            config_.vcClkPin != 0xFF &&
-            config_.vcClrPin != 0xFF &&
-            config_.vcRckPin != 0xFF);
+VGenerator::~VGenerator() {
+    stop();
+}
+
+void VGenerator::configure(const VGenConfig& config) {
+    if (isRunning()) { stop(); }
+    config_ = config;
+    vpp.dc2dc_.configure(config_.vpp);
+    vdd.dc2dc_.configure(config_.vdd);
+}
+
+VGenConfig VGenerator::getConfig() const {
+    return config_;
+}
+
+bool VGenerator::start() {
+    if (isRunning()) { return true; }
+    if (!isValidConfig_()) { return false; }
+    bool vppRes = vpp.start_();
+    bool vddRes = vdd.start_();
+    multicore_.launch();
+    multicore_.putParam(reinterpret_cast<uintptr_t>(&vpp));
+    multicore_.putParam(reinterpret_cast<uintptr_t>(&vdd));
+    return (vppRes && vddRes);
+}
+
+void VGenerator::stop() {
+    if (!isRunning()) { return; }
+    vpp.off();
+    vdd.off();
+    vpp.stop_();
+    vdd.stop_();
+    multicore_.stop();
+}
+
+bool VGenerator::isRunning() const {
+    return multicore_.isRunning();
+}
+
+bool VGenerator::isValidConfig_() const {
+    return (config_.vdd.pwmPin     != 0xFF &&
+            config_.vdd.pwmFreq    != 0.0f &&
+            config_.vdd.adcChannel != 0xFF &&
+            config_.vdd.ctrlPin    != 0xFF &&
+            config_.vdd.onVppPin   != 0xFF &&
+            config_.vpp.pwmPin     != 0xFF &&
+            config_.vpp.pwmFreq    != 0.0f &&
+            config_.vpp.adcChannel != 0xFF &&
+            config_.vpp.ctrlPin    != 0xFF &&
+            config_.vpp.vcSinPin   != 0xFF &&
+            config_.vpp.vcClkPin   != 0xFF &&
+            config_.vpp.vcClrPin   != 0xFF &&
+            config_.vpp.vcRckPin   != 0xFF);
+}
+
+void VGenerator::readCalData_() {
+    size_t len = sizeof(float) * 2;
+    uint8_t *buf = new uint8_t[len + 1]();
+    Flash::read(buf, len + 1);
+    float vddCal, vppCal;
+    if (checksum_(buf, len) == buf[len]) {
+        vddCal = *(reinterpret_cast<float*>(buf));
+        vppCal = *(reinterpret_cast<float*>(buf + sizeof(float)));
+    } else {
+        vddCal = 0.0f;
+        vppCal = 0.0f;
+    }
+    vdd.dc2dc_.setCalibration(vddCal);
+    vpp.dc2dc_.setCalibration(vppCal);
+    delete[] buf;
+}
+
+void VGenerator::writeCalData_() {
+    size_t len = sizeof(float) * 2;
+    uint8_t *buf = new uint8_t[len + 1]();
+    float vddCal = vdd.getCalibration();
+    float vppCal = vpp.getCalibration();
+    std::memcpy(buf, &vddCal, sizeof(float));
+    std::memcpy(buf + sizeof(float), &vppCal, sizeof(float));
+    buf[len] = checksum_(buf, len);
+    Flash::write(buf, len + 1);
+    delete[] buf;
+}
+
+uint8_t VGenerator::checksum_(const uint8_t *buf, size_t len) {
+    uint8_t cs = 0;
+    for (size_t i = 0; i < len; i++) { cs += buf[i]; }
+    return cs;
+}
+
+// ---------------------------------------------------------------------------
+
+void second_core(MultiCore& core) { // NOLINT
+    VppGenerator *vpp = reinterpret_cast<VppGenerator*>(core.getParam());
+    VddGenerator *vdd = reinterpret_cast<VddGenerator*>(core.getParam());
+    while (!core.isStopRequested()) {
+        vpp->adjust_();
+        vdd->adjust_();
+#ifndef __arm__
+        core.msleep(1);
+#endif
+    }
 }

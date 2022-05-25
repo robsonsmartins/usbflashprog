@@ -19,11 +19,11 @@
 
 // ---------------------------------------------------------------------------
 
-static std::thread _thread;
+static std::thread *_thread = nullptr;
 static std::queue<uintptr_t> _fifo[2];
 static std::thread::id _id[2];
 static std::mutex _mutex;
-static bool _stopreq;
+static bool _stopreq = false;
 
 typedef void (*TThreadEntryPoint)();
 
@@ -32,9 +32,10 @@ static void _internal_entry_point(TThreadEntryPoint entry);
 // ---------------------------------------------------------------------------
 
 extern "C" inline void multicore_launch_core1(TThreadEntryPoint entry) {
+    if (_thread) { return; }
     _id[0] = std::this_thread::get_id();
-    _thread = std::thread(_internal_entry_point, entry);
-    _id[1] = _thread.get_id();
+    _thread = new std::thread(_internal_entry_point, entry);
+    _id[1] = _thread->get_id();
     _stopreq = false;
 }
 
@@ -60,10 +61,13 @@ extern "C" inline uintptr_t multicore_fifo_pop_blocking() {
 }
 
 extern "C" inline void multicore_reset_core1() {
-    if (_thread.joinable()) {
+    if (!_thread) { return; }
+    if (_thread->joinable()) {
         _stopreq = true;
-        _thread.join();
+        _thread->join();
         _stopreq = false;
+        delete _thread;
+        _thread = nullptr;
     }
 }
 

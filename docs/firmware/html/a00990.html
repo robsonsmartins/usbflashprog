@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: VGenConfig Struct Reference</title>
+<title>USB EPROM/Flash Programmer: VddConfig Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,43 +69,41 @@ $(function() {
 <a href="#friends">Friends</a> &#124;
 <a href="a00987.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">VGenConfig Struct Reference<div class="ingroups"><a class="el" href="a00140.html">Firmware Project</a></div></div>  </div>
+<div class="title">VddConfig Struct Reference<div class="ingroups"><a class="el" href="a00140.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Defines the configuration fields for a <a class="el" href="a01006.html" title="Voltage Generator Class.">VGenerator</a> class.  
+<p>Defines the configuration fields for a <a class="el" href="a01006.html" title="Voltage (VDD) Generator Class.">VddGenerator</a> class.  
  <a href="a00990.html#details">More...</a></p>
 
 <p><code>#include &lt;vgenerator.hpp&gt;</code></p>
 <div class="dynheader">
-Inheritance diagram for VGenConfig:</div>
+Inheritance diagram for VddConfig:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00989.png" border="0" usemap="#aVGenConfig_inherit__map" alt="Inheritance graph"/></div>
-<map name="aVGenConfig_inherit__map" id="aVGenConfig_inherit__map">
-<area shape="rect" title="Defines the configuration fields for a VGenerator class." alt="" coords="69,497,191,604"/>
-<area shape="rect" href="a00994.html" title="Defines the configuration fields for a VddGenerator class." alt="" coords="5,674,119,781"/>
-<area shape="rect" href="a00998.html" title="Defines the configuration fields for a VppGenerator class." alt="" coords="143,652,256,803"/>
-<area shape="rect" href="a00962.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="21,5,239,449"/>
+<div class="center"><img src="a00989.png" border="0" usemap="#aVddConfig_inherit__map" alt="Inheritance graph"/></div>
+<map name="aVddConfig_inherit__map" id="aVddConfig_inherit__map">
+<area shape="rect" title="Defines the configuration fields for a VddGenerator class." alt="" coords="58,483,171,589"/>
+<area shape="rect" href="a00962.html" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="5,5,224,435"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae548ee6403887fe100b5e3f1d8f659e1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#ae548ee6403887fe100b5e3f1d8f659e1">VGenConfig</a> ()</td></tr>
-<tr class="memdesc:ae548ee6403887fe100b5e3f1d8f659e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00990.html#ae548ee6403887fe100b5e3f1d8f659e1">More...</a><br /></td></tr>
-<tr class="separator:ae548ee6403887fe100b5e3f1d8f659e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aed8c2a5bb4a93ebd53585de3fa183b74"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#aed8c2a5bb4a93ebd53585de3fa183b74">VGenConfig</a> (uint <a class="el" href="a00962.html#af3ce447000148bcbe2b8286a616f2b74">pwmPin</a>, uint <a class="el" href="a00962.html#a185ec2bed51835a46e7e094ea2cbf429">adcChannel</a>, uint <a class="el" href="a00990.html#a295669aa6d869a6ef99466f9ea5f41a4">ctrlPin</a>, float <a class="el" href="a00962.html#a4378ab152bbfb4c39a892975be807600">divider</a>=1.0f, float <a class="el" href="a00962.html#ad33b597598af6fc053b4b643121d42a7">calibration</a>=0.0f, uint32_t <a class="el" href="a00962.html#a64365cdbb645b67255b681020ced5fc7">pwmFreq</a>=<a class="el" href="a00986.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a>, float <a class="el" href="a00962.html#a570efab00f4947e625848fb971906db5">adcVref</a>=<a class="el" href="a00970.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a>, float <a class="el" href="a00962.html#aeecaca1a800c10860c408fceefac71cc">pwmMinDuty</a>=<a class="el" href="a00962.html#a3c73759fa0fb2d46d730bc4287a86472">PWM_MIN_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00962.html#acaaf6af9f3de5eb3751db1246a2c2801">pwmMaxDuty</a>=<a class="el" href="a00962.html#a2f369c821dc166e391ca93079b2eff5f">PWM_MAX_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00962.html#a031737551e954696de687d63f2af8eb7">pwmSlowStepDuty</a>=<a class="el" href="a00962.html#ad51e480b4e72db9c7b399eaf0e483cfa">PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00962.html#a027e662a047eb0ef4449fd7007c82d3c">pwmFastStepDuty</a>=<a class="el" href="a00962.html#a503785cac57157bec3749816c0e3ad8c">PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a>, float <a class="el" href="a00962.html#a92c5e75794f37affaa9286c2d4df0e97">pwmToleranceToFast</a>=<a class="el" href="a00962.html#a63ee32a00c45831b569164428c021d24">PWM_TOLERANCE_TO_FAST_DEFAULT</a>, float <a class="el" href="a00962.html#aa8a9fc0adbdb25db7fa9fa48d24e4bb4">vTolerance</a>=<a class="el" href="a00962.html#a16253343c5fc7437ef08acbe9d289a41">DC2DC_VOUT_TOLERANCE_DEFAULT</a>)</td></tr>
-<tr class="memdesc:aed8c2a5bb4a93ebd53585de3fa183b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00990.html#aed8c2a5bb4a93ebd53585de3fa183b74">More...</a><br /></td></tr>
-<tr class="separator:aed8c2a5bb4a93ebd53585de3fa183b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b60c1e909e8ce3ddcabcd671691e5c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00990.html">VGenConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#a6b60c1e909e8ce3ddcabcd671691e5c7">operator=</a> (const <a class="el" href="a00990.html">VGenConfig</a> &amp;src)</td></tr>
-<tr class="memdesc:a6b60c1e909e8ce3ddcabcd671691e5c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign Operator.  <a href="a00990.html#a6b60c1e909e8ce3ddcabcd671691e5c7">More...</a><br /></td></tr>
-<tr class="separator:a6b60c1e909e8ce3ddcabcd671691e5c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22aeee40927a916d7f5792e7c0a3438a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#a22aeee40927a916d7f5792e7c0a3438a">VddConfig</a> ()</td></tr>
+<tr class="memdesc:a22aeee40927a916d7f5792e7c0a3438a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a00990.html#a22aeee40927a916d7f5792e7c0a3438a">More...</a><br /></td></tr>
+<tr class="separator:a22aeee40927a916d7f5792e7c0a3438a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75098bed6f93dd2703e51812e32b23e7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00990.html">VddConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#a75098bed6f93dd2703e51812e32b23e7">operator=</a> (const <a class="el" href="a00990.html">VddConfig</a> &amp;src)</td></tr>
+<tr class="memdesc:a75098bed6f93dd2703e51812e32b23e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign Operator.  <a href="a00990.html#a75098bed6f93dd2703e51812e32b23e7">More...</a><br /></td></tr>
+<tr class="separator:a75098bed6f93dd2703e51812e32b23e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a295669aa6d869a6ef99466f9ea5f41a4"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#a295669aa6d869a6ef99466f9ea5f41a4">ctrlPin</a></td></tr>
 <tr class="memdesc:a295669aa6d869a6ef99466f9ea5f41a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin number of the Control Voltage.  <a href="a00990.html#a295669aa6d869a6ef99466f9ea5f41a4">More...</a><br /></td></tr>
 <tr class="separator:a295669aa6d869a6ef99466f9ea5f41a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61bed480c9613c5ca1fc696e17f01dd0"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#a61bed480c9613c5ca1fc696e17f01dd0">onVppPin</a></td></tr>
+<tr class="memdesc:a61bed480c9613c5ca1fc696e17f01dd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin number of the VDD on VPP signal.  <a href="a00990.html#a61bed480c9613c5ca1fc696e17f01dd0">More...</a><br /></td></tr>
+<tr class="separator:a61bed480c9613c5ca1fc696e17f01dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3ce447000148bcbe2b8286a616f2b74"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#af3ce447000148bcbe2b8286a616f2b74">pwmPin</a></td></tr>
 <tr class="memdesc:af3ce447000148bcbe2b8286a616f2b74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pin number of the PWM.  <a href="a00962.html#af3ce447000148bcbe2b8286a616f2b74">More...</a><br /></td></tr>
 <tr class="separator:af3ce447000148bcbe2b8286a616f2b74"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -121,9 +119,6 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a4378ab152bbfb4c39a892975be807600"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#a4378ab152bbfb4c39a892975be807600">divider</a></td></tr>
 <tr class="memdesc:a4378ab152bbfb4c39a892975be807600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feedback divider in output of DC2DC converter.  <a href="a00962.html#a4378ab152bbfb4c39a892975be807600">More...</a><br /></td></tr>
 <tr class="separator:a4378ab152bbfb4c39a892975be807600"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad33b597598af6fc053b4b643121d42a7"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#ad33b597598af6fc053b4b643121d42a7">calibration</a></td></tr>
-<tr class="memdesc:ad33b597598af6fc053b4b643121d42a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calibration value (offset) in output of DC2DC converter.  <a href="a00962.html#ad33b597598af6fc053b4b643121d42a7">More...</a><br /></td></tr>
-<tr class="separator:ad33b597598af6fc053b4b643121d42a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeecaca1a800c10860c408fceefac71cc"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00962.html#aeecaca1a800c10860c408fceefac71cc">pwmMinDuty</a></td></tr>
 <tr class="memdesc:aeecaca1a800c10860c408fceefac71cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Minimal duty cycle value for the PWM, in %.  <a href="a00962.html#aeecaca1a800c10860c408fceefac71cc">More...</a><br /></td></tr>
 <tr class="separator:aeecaca1a800c10860c408fceefac71cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,21 +161,21 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:aac6a27ed62dd2adf18c1fb49781a5700"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#aac6a27ed62dd2adf18c1fb49781a5700">operator==</a> (const <a class="el" href="a00990.html">VGenConfig</a> &amp;a, const <a class="el" href="a00990.html">VGenConfig</a> &amp;b)</td></tr>
-<tr class="memdesc:aac6a27ed62dd2adf18c1fb49781a5700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality Operator.  <a href="a00990.html#aac6a27ed62dd2adf18c1fb49781a5700">More...</a><br /></td></tr>
-<tr class="separator:aac6a27ed62dd2adf18c1fb49781a5700"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ef4d29741a6b44c5c9a56e29e09fbf5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html#a1ef4d29741a6b44c5c9a56e29e09fbf5">operator==</a> (const <a class="el" href="a00990.html">VddConfig</a> &amp;a, const <a class="el" href="a00990.html">VddConfig</a> &amp;b)</td></tr>
+<tr class="memdesc:a1ef4d29741a6b44c5c9a56e29e09fbf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Equality Operator.  <a href="a00990.html#a1ef4d29741a6b44c5c9a56e29e09fbf5">More...</a><br /></td></tr>
+<tr class="separator:a1ef4d29741a6b44c5c9a56e29e09fbf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Defines the configuration fields for a <a class="el" href="a01006.html" title="Voltage Generator Class.">VGenerator</a> class. </p>
+<div class="textblock"><p>Defines the configuration fields for a <a class="el" href="a01006.html" title="Voltage (VDD) Generator Class.">VddGenerator</a> class. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae548ee6403887fe100b5e3f1d8f659e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae548ee6403887fe100b5e3f1d8f659e1">&#9670;&nbsp;</a></span>VGenConfig() <span class="overload">[1/2]</span></h2>
+<a id="a22aeee40927a916d7f5792e7c0a3438a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22aeee40927a916d7f5792e7c0a3438a">&#9670;&nbsp;</a></span>VddConfig()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00990.html">VGenConfig</a> </td>
+          <td class="memname"><a class="el" href="a00990.html">VddConfig</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -193,139 +188,17 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="aed8c2a5bb4a93ebd53585de3fa183b74"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed8c2a5bb4a93ebd53585de3fa183b74">&#9670;&nbsp;</a></span>VGenConfig() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00990.html">VGenConfig</a> </td>
-          <td>(</td>
-          <td class="paramtype">uint&#160;</td>
-          <td class="paramname"><em>pwmPin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint&#160;</td>
-          <td class="paramname"><em>adcChannel</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint&#160;</td>
-          <td class="paramname"><em>ctrlPin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>divider</em> = <code>1.0f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>calibration</em> = <code>0.0f</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>pwmFreq</em> = <code><a class="el" href="a00986.html#a055a68e3ccbd2fc9f165070b73ad0c9e">Pwm::PWM_DEFAULT_FREQ</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>adcVref</em> = <code><a class="el" href="a00970.html#aeb8e08276ace83b175d190940da6cffb">Adc::DEFAULT_VREF</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pwmMinDuty</em> = <code><a class="el" href="a00962.html#a3c73759fa0fb2d46d730bc4287a86472">PWM_MIN_DUTY_CYCLE_DEFAULT</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pwmMaxDuty</em> = <code><a class="el" href="a00962.html#a2f369c821dc166e391ca93079b2eff5f">PWM_MAX_DUTY_CYCLE_DEFAULT</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pwmSlowStepDuty</em> = <code><a class="el" href="a00962.html#ad51e480b4e72db9c7b399eaf0e483cfa">PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pwmFastStepDuty</em> = <code><a class="el" href="a00962.html#a503785cac57157bec3749816c0e3ad8c">PWM_FAST_STEP_DUTY_CYCLE_DEFAULT</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>pwmToleranceToFast</em> = <code><a class="el" href="a00962.html#a63ee32a00c45831b569164428c021d24">PWM_TOLERANCE_TO_FAST_DEFAULT</a></code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>vTolerance</em> = <code><a class="el" href="a00962.html#a16253343c5fc7437ef08acbe9d289a41">DC2DC_VOUT_TOLERANCE_DEFAULT</a></code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructor. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pwmPin</td><td>Pin number of the PWM. </td></tr>
-    <tr><td class="paramname">adcChannel</td><td>Number of the ADC channel (0 to 3). </td></tr>
-    <tr><td class="paramname">ctrlPin</td><td>Pin number of the Control Voltage. </td></tr>
-    <tr><td class="paramname">divider</td><td>Feedback divider in output of DC2DC converter. </td></tr>
-    <tr><td class="paramname">calibration</td><td>Calibration value (offset) in output of DC2DC converter. </td></tr>
-    <tr><td class="paramname">pwmFreq</td><td>Frequency of the PWM, in Hertz. </td></tr>
-    <tr><td class="paramname">adcVref</td><td>Reference voltage of the ADC, in Volts. </td></tr>
-    <tr><td class="paramname">pwmMinDuty</td><td>Minimal duty cycle value for the PWM, in %. </td></tr>
-    <tr><td class="paramname">pwmMaxDuty</td><td>Maximum duty cycle value for the PWM, in %. </td></tr>
-    <tr><td class="paramname">pwmSlowStepDuty</td><td>Step of slow increment/decrement for the PWM duty cycle. </td></tr>
-    <tr><td class="paramname">pwmFastStepDuty</td><td>Step of fast increment/decrement for the PWM duty cycle. </td></tr>
-    <tr><td class="paramname">pwmToleranceToFast</td><td>Tolerance between actual and target voltages to consider them far. </td></tr>
-    <tr><td class="paramname">vTolerance</td><td>Tolerance voltage for DC2DC output. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6b60c1e909e8ce3ddcabcd671691e5c7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b60c1e909e8ce3ddcabcd671691e5c7">&#9670;&nbsp;</a></span>operator=()</h2>
+<a id="a75098bed6f93dd2703e51812e32b23e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75098bed6f93dd2703e51812e32b23e7">&#9670;&nbsp;</a></span>operator=()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a00990.html">VGenConfig</a> &amp; operator= </td>
+          <td class="memname"><a class="el" href="a00990.html">VddConfig</a> &amp; operator= </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="a00990.html">VGenConfig</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="a00990.html">VddConfig</a> &amp;&#160;</td>
           <td class="paramname"><em>src</em></td><td>)</td>
           <td></td>
         </tr>
@@ -335,7 +208,7 @@ Friends</h2></td></tr>
 <p>Assign Operator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src</td><td><a class="el" href="a00990.html" title="Defines the configuration fields for a VGenerator class.">VGenConfig</a> source object. </td></tr>
+    <tr><td class="paramname">src</td><td><a class="el" href="a00990.html" title="Defines the configuration fields for a VddGenerator class.">VddConfig</a> source object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -344,8 +217,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Friends And Related Function Documentation</h2>
-<a id="aac6a27ed62dd2adf18c1fb49781a5700"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac6a27ed62dd2adf18c1fb49781a5700">&#9670;&nbsp;</a></span>operator==</h2>
+<a id="a1ef4d29741a6b44c5c9a56e29e09fbf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ef4d29741a6b44c5c9a56e29e09fbf5">&#9670;&nbsp;</a></span>operator==</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -356,13 +229,13 @@ Friends</h2></td></tr>
         <tr>
           <td class="memname">bool operator== </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="a00990.html">VGenConfig</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="a00990.html">VddConfig</a> &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="a00990.html">VGenConfig</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="a00990.html">VddConfig</a> &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>
@@ -404,6 +277,23 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Pin number of the Control Voltage. </p>
+<p>Default: 0xFF (not assigned). </p>
+
+</div>
+</div>
+<a id="a61bed480c9613c5ca1fc696e17f01dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61bed480c9613c5ca1fc696e17f01dd0">&#9670;&nbsp;</a></span>onVppPin</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint onVppPin</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pin number of the VDD on VPP signal. </p>
 <p>Default: 0xFF (not assigned). </p>
 
 </div>
@@ -531,31 +421,6 @@ Friends</h2></td></tr>
 <p>Feedback divider in output of DC2DC converter. </p>
 <p>Typical formula: Divider = (R1 + R2) / R2.<br  />
  Default: 1.0. </p>
-
-</div>
-</div>
-<a id="ad33b597598af6fc053b4b643121d42a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad33b597598af6fc053b4b643121d42a7">&#9670;&nbsp;</a></span>calibration</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float calibration</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Calibration value (offset) in output of DC2DC converter. </p>
-<p>Default: 0.0. </p>
 
 </div>
 </div>

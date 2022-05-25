@@ -18,13 +18,12 @@
 #include "vgenerator_test.hpp"
 
 #include "mock/hardware/adc.h"
+#include "hal/multicore.hpp"
 
 // ---------------------------------------------------------------------------
 
-VddGenerator VGeneratorTest::vdd_ = VddGenerator();
-VppGenerator VGeneratorTest::vpp_ = VppGenerator();
-VddConfig VGeneratorTest::vddConfig_ = VddConfig();
-VppConfig VGeneratorTest::vppConfig_ = VppConfig();
+VGenerator VGeneratorTest::vGenerator_ = VGenerator();
+VGenConfig VGeneratorTest::vGenConfig_ = VGenConfig();
 
 // ---------------------------------------------------------------------------
 
@@ -33,19 +32,18 @@ VGeneratorTest::VGeneratorTest() {}
 VGeneratorTest::~VGeneratorTest() {}
 
 void VGeneratorTest::SetUp() {
-    vddConfig_.pwmPin = 0;
-    vddConfig_.adcChannel = 0;
-    vddConfig_.ctrlPin = 1;
-    vddConfig_.onVppPin = 2;
-    vdd_.configure(vddConfig_);
-    vppConfig_.pwmPin = 3;
-    vppConfig_.adcChannel = 1;
-    vppConfig_.ctrlPin = 4;
-    vppConfig_.vcSinPin = 5;
-    vppConfig_.vcClkPin = 6;
-    vppConfig_.vcClrPin = 7;
-    vppConfig_.vcRckPin = 8;
-    vpp_.configure(vppConfig_);
+    vGenConfig_.vdd.pwmPin = 0;
+    vGenConfig_.vdd.adcChannel = 0;
+    vGenConfig_.vdd.ctrlPin = 1;
+    vGenConfig_.vdd.onVppPin = 2;
+    vGenConfig_.vpp.pwmPin = 3;
+    vGenConfig_.vpp.adcChannel = 1;
+    vGenConfig_.vpp.ctrlPin = 4;
+    vGenConfig_.vpp.vcSinPin = 5;
+    vGenConfig_.vpp.vcClkPin = 6;
+    vGenConfig_.vpp.vcClrPin = 7;
+    vGenConfig_.vpp.vcRckPin = 8;
+    vGenerator_.configure(vGenConfig_);
 }
 
 void VGeneratorTest::TearDown() {}
@@ -60,189 +58,159 @@ float VGeneratorTest::calculate_(uint16_t value, float vref) {
 // ---------------------------------------------------------------------------
 
 TEST_F(VGeneratorTest, start_stop) {
-    {
-        EXPECT_EQ(vdd_.isRunning(), false);
-        EXPECT_EQ(vdd_.start(), true);
-        EXPECT_EQ(vdd_.isRunning(), true);
-        vdd_.stop();
-        EXPECT_EQ(vdd_.isRunning(), false);
-    }
-    {
-        EXPECT_EQ(vpp_.isRunning(), false);
-        EXPECT_EQ(vpp_.start(), true);
-        EXPECT_EQ(vpp_.isRunning(), true);
-        vpp_.stop();
-        EXPECT_EQ(vpp_.isRunning(), false);
-    }
+    EXPECT_EQ(vGenerator_.isRunning(), false);
+    EXPECT_EQ(vGenerator_.vdd.isRunning(), false);
+    EXPECT_EQ(vGenerator_.vpp.isRunning(), false);
+    EXPECT_EQ(vGenerator_.start(), true);
+    EXPECT_EQ(vGenerator_.isRunning(), true);
+    EXPECT_EQ(vGenerator_.vdd.isRunning(), true);
+    EXPECT_EQ(vGenerator_.vpp.isRunning(), true);
+    vGenerator_.stop();
+    EXPECT_EQ(vGenerator_.isRunning(), false);
+    EXPECT_EQ(vGenerator_.vdd.isRunning(), false);
+    EXPECT_EQ(vGenerator_.vpp.isRunning(), false);
 }
 
 TEST_F(VGeneratorTest, set_get_v_duty) {
-    {
-        EXPECT_EQ(vdd_.isRunning(), false);
-        EXPECT_EQ(vdd_.start(), true);
-        EXPECT_EQ(vdd_.isRunning(), true);
-        EXPECT_EQ(vdd_.getVTarget(), 0.0f);
-        EXPECT_EQ(vdd_.getDuty(), 0.0f);
-        EXPECT_EQ(vdd_.getV(), 0.0f);
-        vdd_.setV(5.0f);
-        EXPECT_EQ(vdd_.getVTarget(), 5.0f);
-        float vActual =
-            calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
-                       vddConfig_.adcVref);
-        vdd_.adjust();
-        EXPECT_NEAR(vdd_.getV(), vActual, 0.2f);
-        vdd_.setV(vActual * 1.06f);
-        vdd_.adjust();
-        EXPECT_NEAR(vdd_.getV(), vActual * 1.06f, 0.2f);
-        vdd_.setV(vActual * 0.94f);
-        vdd_.adjust();
-        EXPECT_NEAR(vdd_.getV(), vActual * 0.94f, 0.2f);
-        vdd_.setV(0.1f);
-        vdd_.adjust();
-        EXPECT_NEAR(vdd_.getV(), vActual, 0.2f);
-    }
-    {
-        EXPECT_EQ(vpp_.isRunning(), false);
-        EXPECT_EQ(vpp_.start(), true);
-        EXPECT_EQ(vpp_.isRunning(), true);
-        EXPECT_EQ(vpp_.getVTarget(), 0.0f);
-        EXPECT_EQ(vpp_.getDuty(), 0.0f);
-        EXPECT_EQ(vpp_.getV(), 0.0f);
-        vpp_.setV(12.0f);
-        EXPECT_EQ(vpp_.getVTarget(), 12.0f);
-        float vActual =
-            calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
-                       vppConfig_.adcVref);
-        vpp_.adjust();
-        EXPECT_NEAR(vpp_.getV(), vActual, 0.2f);
-        vpp_.setV(vActual * 1.06f);
-        vpp_.adjust();
-        EXPECT_NEAR(vpp_.getV(), vActual * 1.06f, 0.2f);
-        vpp_.setV(vActual * 0.94f);
-        vpp_.adjust();
-        EXPECT_NEAR(vpp_.getV(), vActual * 0.94f, 0.2f);
-        vpp_.setV(0.1f);
-        vpp_.adjust();
-        EXPECT_NEAR(vpp_.getV(), vActual, 0.2f);
-    }
+    EXPECT_EQ(vGenerator_.isRunning(), false);
+    EXPECT_EQ(vGenerator_.start(), true);
+    EXPECT_EQ(vGenerator_.isRunning(), true);
+    EXPECT_EQ(vGenerator_.vdd.getVTarget(), 0.0f);
+    EXPECT_EQ(vGenerator_.vdd.getDuty(), 0.0f);
+    EXPECT_EQ(vGenerator_.vdd.getV(), 0.0f);
+    vGenerator_.vdd.on();
+    vGenerator_.vdd.setV(5.0f);
+    EXPECT_EQ(vGenerator_.vdd.getVTarget(), 5.0f);
+    float vActual =
+        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+                    vGenConfig_.vdd.adcVref);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vdd.getV(), vActual, 0.2f);
+    vGenerator_.vdd.setV(vActual * 1.06f);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vdd.getV(), vActual * 1.06f, 0.2f);
+    vGenerator_.vdd.setV(vActual * 0.94f);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vdd.getV(), vActual * 0.94f, 0.2f);
+    vGenerator_.vdd.setV(0.1f);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vdd.getV(), vActual, 0.2f);
+
+    EXPECT_EQ(vGenerator_.vpp.getVTarget(), 0.0f);
+    EXPECT_EQ(vGenerator_.vpp.getDuty(), 0.0f);
+    EXPECT_EQ(vGenerator_.vpp.getV(), 0.0f);
+    vGenerator_.vpp.on();
+    vGenerator_.vpp.setV(12.0f);
+    EXPECT_EQ(vGenerator_.vpp.getVTarget(), 12.0f);
+    vActual =
+        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+                    vGenConfig_.vpp.adcVref);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vpp.getV(), vActual, 0.2f);
+    vGenerator_.vpp.setV(vActual * 1.06f);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vpp.getV(), vActual * 1.06f, 0.2f);
+    vGenerator_.vpp.setV(vActual * 0.94f);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vpp.getV(), vActual * 0.94f, 0.2f);
+    vGenerator_.vpp.setV(0.1f);
+    MultiCore::msleep(10);
+    EXPECT_NEAR(vGenerator_.vpp.getV(), vActual, 0.2f);
 }
 
 TEST_F(VGeneratorTest, constructor_config) {
-    {
-        EXPECT_EQ(vdd_.getConfig(), vddConfig_);
-        VddConfig newConfig(2, 3, 4, 5, 2.0f);
-        vdd_.configure(newConfig);
-        EXPECT_NE(vdd_.getConfig(), vddConfig_);
-        EXPECT_EQ(vdd_.getConfig(), newConfig);
-        VddConfig newConfig2(vddConfig_);
-        VddGenerator newVddGenerator(newConfig2);
-        EXPECT_EQ(newVddGenerator.getConfig(), newConfig2);
-        VddGenerator *newVddGenerator2 = new VddGenerator();
-        EXPECT_NE(newVddGenerator2->getConfig(), vddConfig_);
-        delete newVddGenerator2;
-    }
-    {
-        EXPECT_EQ(vpp_.getConfig(), vppConfig_);
-        VppConfig newConfig(2, 3, 4, 5 , 6, 7, 2.0f);
-        vpp_.configure(newConfig);
-        EXPECT_NE(vpp_.getConfig(), vppConfig_);
-        EXPECT_EQ(vpp_.getConfig(), newConfig);
-        VppConfig newConfig2(vppConfig_);
-        VppGenerator newVppGenerator(newConfig2);
-        EXPECT_EQ(newVppGenerator.getConfig(), newConfig2);
-        VppGenerator *newVppGenerator2 = new VppGenerator();
-        EXPECT_NE(newVppGenerator2->getConfig(), vppConfig_);
-        delete newVppGenerator2;
-    }
+    EXPECT_EQ(vGenerator_.getConfig(), vGenConfig_);
+    VGenConfig newConfig;
+    newConfig.vdd.ctrlPin = 20;
+    newConfig.vpp.ctrlPin = 21;
+    vGenerator_.configure(newConfig);
+    EXPECT_NE(vGenerator_.getConfig(), vGenConfig_);
+    EXPECT_EQ(vGenerator_.getConfig(), newConfig);
+    VGenConfig newConfig2;
+    newConfig2 = vGenConfig_;
+    VGenerator newVGenerator(newConfig2);
+    EXPECT_EQ(newVGenerator.getConfig(), newConfig2);
+    VGenerator *newVGenerator2 = new VGenerator();
+    EXPECT_NE(newVGenerator2->getConfig(), vGenConfig_);
+    delete newVGenerator2;
 }
 
 TEST_F(VGeneratorTest, on_off) {
-    {
-        vdd_.stop();
-        EXPECT_EQ(vdd_.start(), true);
-        EXPECT_EQ(vdd_.isRunning(), true);
-        EXPECT_EQ(vdd_.isOn(), false);
-        EXPECT_EQ(vdd_.on(), true);
-        EXPECT_EQ(vdd_.isOn(), true);
-        vdd_.off();
-        EXPECT_EQ(vdd_.isOn(), false);
-        float vActual =
-            calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
-                       vddConfig_.adcVref);
-        EXPECT_EQ(vdd_.initCalibration(vActual), true);
-        vdd_.adjust();
-        EXPECT_EQ(vdd_.finishCalibration(vActual), true);
-        vdd_.adjust();
-        EXPECT_NEAR(vdd_.getV(), vActual, 0.2f);
+    EXPECT_EQ(vGenerator_.start(), true);
+    EXPECT_EQ(vGenerator_.isRunning(), true);
+    EXPECT_EQ(vGenerator_.vdd.isOn(), false);
+    vGenerator_.vdd.on();
+    EXPECT_EQ(vGenerator_.vdd.isOn(), true);
+    vGenerator_.vdd.off();
+    EXPECT_EQ(vGenerator_.vdd.isOn(), false);
+    vGenerator_.vdd.toggle();
+    EXPECT_EQ(vGenerator_.vdd.isOn(), true);
+    vGenerator_.vdd.toggle();
+    EXPECT_EQ(vGenerator_.vdd.isOn(), false);
 
-        vdd_.stop();
-        EXPECT_EQ(vdd_.start(), true);
-        EXPECT_EQ(vdd_.isRunning(), true);
+    EXPECT_EQ(vGenerator_.vdd.isOnVpp(), false);
+    vGenerator_.vdd.onVpp();
+    EXPECT_EQ(vGenerator_.vdd.isOnVpp(), true);
+    vGenerator_.vdd.onVpp(false);
+    EXPECT_EQ(vGenerator_.vdd.isOnVpp(), false);
 
-        EXPECT_EQ(vdd_.isOn(), false);
-        EXPECT_EQ(vdd_.on(), true);
-        EXPECT_EQ(vdd_.isOn(), true);
+    EXPECT_EQ(vGenerator_.vpp.isOn(), false);
+    vGenerator_.vpp.on();
+    EXPECT_EQ(vGenerator_.vpp.isOn(), true);
+    vGenerator_.vpp.off();
+    EXPECT_EQ(vGenerator_.vpp.isOn(), false);
+    vGenerator_.vpp.toggle();
+    EXPECT_EQ(vGenerator_.vpp.isOn(), true);
+    vGenerator_.vpp.toggle();
+    EXPECT_EQ(vGenerator_.vpp.isOn(), false);
 
-        EXPECT_EQ(vdd_.isOnVpp(), false);
-        EXPECT_EQ(vdd_.onVpp(), true);
-        EXPECT_EQ(vdd_.isOnVpp(), true);
-        EXPECT_EQ(vdd_.onVpp(false), true);
-        EXPECT_EQ(vdd_.isOnVpp(), false);
-    }
-    {
-        vpp_.stop();
-        EXPECT_EQ(vpp_.start(), true);
-        EXPECT_EQ(vpp_.isRunning(), true);
-        EXPECT_EQ(vpp_.isOn(), false);
-        EXPECT_EQ(vpp_.on(), true);
-        EXPECT_EQ(vpp_.isOn(), true);
-        vpp_.off();
-        EXPECT_EQ(vpp_.isOn(), false);
-        float vActual =
-            calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
-                       vppConfig_.adcVref);
-        EXPECT_EQ(vpp_.initCalibration(vActual), true);
-        vpp_.adjust();
-        EXPECT_EQ(vpp_.finishCalibration(vActual), true);
-        vpp_.adjust();
-        EXPECT_NEAR(vpp_.getV(), vActual, 0.2f);
+    EXPECT_EQ(vGenerator_.vpp.isOnA9(), false);
+    vGenerator_.vpp.onA9();
+    EXPECT_EQ(vGenerator_.vpp.isOnA9(), true);
+    vGenerator_.vpp.onA9(false);
+    EXPECT_EQ(vGenerator_.vpp.isOnA9(), false);
 
-        vpp_.stop();
-        EXPECT_EQ(vpp_.start(), true);
-        EXPECT_EQ(vpp_.isRunning(), true);
+    EXPECT_EQ(vGenerator_.vpp.isOnA18(), false);
+    vGenerator_.vpp.onA18();
+    EXPECT_EQ(vGenerator_.vpp.isOnA18(), true);
+    vGenerator_.vpp.onA18(false);
+    EXPECT_EQ(vGenerator_.vpp.isOnA18(), false);
 
-        EXPECT_EQ(vpp_.isOn(), false);
-        EXPECT_EQ(vpp_.on(), true);
-        EXPECT_EQ(vpp_.isOn(), true);
+    EXPECT_EQ(vGenerator_.vpp.isOnCE(), false);
+    vGenerator_.vpp.onCE();
+    EXPECT_EQ(vGenerator_.vpp.isOnCE(), true);
+    vGenerator_.vpp.onCE(false);
+    EXPECT_EQ(vGenerator_.vpp.isOnCE(), false);
 
-        EXPECT_EQ(vpp_.isOnA9(), false);
-        EXPECT_EQ(vpp_.onA9(), true);
-        EXPECT_EQ(vpp_.isOnA9(), true);
-        EXPECT_EQ(vpp_.onA9(false), true);
-        EXPECT_EQ(vpp_.isOnA9(), false);
+    EXPECT_EQ(vGenerator_.vpp.isOnOE(), false);
+    vGenerator_.vpp.onOE();
+    EXPECT_EQ(vGenerator_.vpp.isOnOE(), true);
+    vGenerator_.vpp.onOE(false);
+    EXPECT_EQ(vGenerator_.vpp.isOnOE(), false);
 
-        EXPECT_EQ(vpp_.isOnA18(), false);
-        EXPECT_EQ(vpp_.onA18(), true);
-        EXPECT_EQ(vpp_.isOnA18(), true);
-        EXPECT_EQ(vpp_.onA18(false), true);
-        EXPECT_EQ(vpp_.isOnA18(), false);
+    EXPECT_EQ(vGenerator_.vpp.isOnWE(), false);
+    vGenerator_.vpp.onWE();
+    EXPECT_EQ(vGenerator_.vpp.isOnWE(), true);
+    vGenerator_.vpp.onWE(false);
+    EXPECT_EQ(vGenerator_.vpp.isOnWE(), false);
+}
 
-        EXPECT_EQ(vpp_.isOnCE(), false);
-        EXPECT_EQ(vpp_.onCE(), true);
-        EXPECT_EQ(vpp_.isOnCE(), true);
-        EXPECT_EQ(vpp_.onCE(false), true);
-        EXPECT_EQ(vpp_.isOnCE(), false);
+TEST_F(VGeneratorTest, vdd_calibration) {
+    vGenerator_.start();
+    float vActual =
+        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+                    vGenConfig_.vdd.adcVref);
+    vGenerator_.vdd.initCalibration(vActual);
+    vGenerator_.vdd.saveCalibration(vActual);
+    VGenerator newVGen;
+}
 
-        EXPECT_EQ(vpp_.isOnOE(), false);
-        EXPECT_EQ(vpp_.onOE(), true);
-        EXPECT_EQ(vpp_.isOnOE(), true);
-        EXPECT_EQ(vpp_.onOE(false), true);
-        EXPECT_EQ(vpp_.isOnOE(), false);
-
-        EXPECT_EQ(vpp_.isOnWE(), false);
-        EXPECT_EQ(vpp_.onWE(), true);
-        EXPECT_EQ(vpp_.isOnWE(), true);
-        EXPECT_EQ(vpp_.onWE(false), true);
-        EXPECT_EQ(vpp_.isOnWE(), false);
-    }
+TEST_F(VGeneratorTest, vpp_calibration) {
+    vGenerator_.start();
+    float vActual =
+        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+                    vGenConfig_.vpp.adcVref);
+    vGenerator_.vpp.initCalibration(vActual);
+    vGenerator_.vpp.saveCalibration(vActual);
+    VGenerator newVGen;
 }

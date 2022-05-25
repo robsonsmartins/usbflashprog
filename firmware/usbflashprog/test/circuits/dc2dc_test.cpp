@@ -78,6 +78,9 @@ TEST_F(Dc2DcTest, set_get_v_duty) {
     dc2dc_.setV(0.1f);
     dc2dc_.adjust();
     EXPECT_NEAR(dc2dc_.getV(), vActual, 0.2f);
+    EXPECT_EQ(dc2dc_.getCalibration(), 0.0f);
+    dc2dc_.setCalibration(1.0f);
+    EXPECT_EQ(dc2dc_.getCalibration(), 1.0f);
 }
 
 TEST_F(Dc2DcTest, constructor_config) {

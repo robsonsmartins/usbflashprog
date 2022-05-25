@@ -19,6 +19,7 @@
 #define MODULES_VGENERATOR_HPP_
 
 #include "hal/gpio.hpp"
+#include "hal/multicore.hpp"
 #include "circuits/dc2dc.hpp"
 #include "circuits/74hc595.hpp"
 
@@ -26,69 +27,14 @@
 
 /**
  * @ingroup Firmware
- * @brief Defines the configuration fields for a VGenerator class.
+ * @brief Defines the configuration fields for a VddGenerator class.
  */
-typedef struct VGenConfig: Dc2DcConfig {
+typedef struct VddConfig: Dc2DcConfig {
     /** 
      * @brief Pin number of the Control Voltage.
      * @details Default: 0xFF (not assigned).
      */
     uint ctrlPin;
-    /**
-     * @brief Constructor.
-     * @details Assumes defaults for all fields.
-     */
-    VGenConfig();
-    /**
-     * @brief Constructor.
-     * @param pwmPin Pin number of the PWM.
-     * @param adcChannel Number of the ADC channel (0 to 3).
-     * @param ctrlPin Pin number of the Control Voltage.
-     * @param divider Feedback divider in output of DC2DC converter.
-     * @param calibration Calibration value (offset) in output of DC2DC converter.
-     * @param pwmFreq Frequency of the PWM, in Hertz.
-     * @param adcVref Reference voltage of the ADC, in Volts.
-     * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
-     * @param pwmMaxDuty Maximum duty cycle value for the PWM, in %.
-     * @param pwmSlowStepDuty Step of slow increment/decrement for the PWM duty cycle.
-     * @param pwmFastStepDuty Step of fast increment/decrement for the PWM duty cycle.
-     * @param pwmToleranceToFast Tolerance between actual and target voltages to consider
-     *  them far.
-     * @param vTolerance Tolerance voltage for DC2DC output.
-     */
-    explicit VGenConfig(uint pwmPin, uint adcChannel, uint ctrlPin,
-                       float divider = 1.0f,
-                       float calibration = 0.0f,
-                       uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
-                       float adcVref = Adc::DEFAULT_VREF,
-                       float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
-                       float pwmMaxDuty = PWM_MAX_DUTY_CYCLE_DEFAULT,
-                       float pwmSlowStepDuty = PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT,
-                       float pwmFastStepDuty = PWM_FAST_STEP_DUTY_CYCLE_DEFAULT,
-                       float pwmToleranceToFast = PWM_TOLERANCE_TO_FAST_DEFAULT,
-                       float vTolerance = DC2DC_VOUT_TOLERANCE_DEFAULT);
-    /**
-     * @brief Assign Operator.
-     * @param src VGenConfig source object.
-     * @return Reference for this.
-     */
-    VGenConfig& operator=(const VGenConfig& src);
-    /**
-     * @brief Equality Operator.
-     * @param a One object.
-     * @param b Another object.
-     * @return True if the objects contain equal values, false otherwise.
-     */
-    friend bool operator==(const VGenConfig& a, const VGenConfig& b);
-} VGenConfig;
-
-// ---------------------------------------------------------------------------
-
-/**
- * @ingroup Firmware
- * @brief Defines the configuration fields for a VddGenerator class.
- */
-typedef struct VddConfig: VGenConfig {
     /** 
      * @brief Pin number of the VDD on VPP signal.
      * @details Default: 0xFF (not assigned).
@@ -99,36 +45,6 @@ typedef struct VddConfig: VGenConfig {
      * @details Assumes defaults for all fields.
      */
     VddConfig();
-    /**
-     * @brief Constructor.
-     * @param pwmPin Pin number of the PWM.
-     * @param adcChannel Number of the ADC channel (0 to 3).
-     * @param ctrlPin Pin number of the Control Voltage.
-     * @param onVppPin Pin number of the VDD on VPP signal.
-     * @param divider Feedback divider in output of DC2DC converter.
-     * @param calibration Calibration value (offset) in output of DC2DC converter.
-     * @param pwmFreq Frequency of the PWM, in Hertz.
-     * @param adcVref Reference voltage of the ADC, in Volts.
-     * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
-     * @param pwmMaxDuty Maximum duty cycle value for the PWM, in %.
-     * @param pwmSlowStepDuty Step of slow increment/decrement for the PWM duty cycle.
-     * @param pwmFastStepDuty Step of fast increment/decrement for the PWM duty cycle.
-     * @param pwmToleranceToFast Tolerance between actual and target voltages to consider
-     *  them far.
-     * @param vTolerance Tolerance voltage for DC2DC output.
-     */
-    explicit VddConfig(uint pwmPin, uint adcChannel,
-                       uint ctrlPin, uint onVppPin,
-                       float divider = 1.0f,
-                       float calibration = 0.0f,
-                       uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
-                       float adcVref = Adc::DEFAULT_VREF,
-                       float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
-                       float pwmMaxDuty = PWM_MAX_DUTY_CYCLE_DEFAULT,
-                       float pwmSlowStepDuty = PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT,
-                       float pwmFastStepDuty = PWM_FAST_STEP_DUTY_CYCLE_DEFAULT,
-                       float pwmToleranceToFast = PWM_TOLERANCE_TO_FAST_DEFAULT,
-                       float vTolerance = DC2DC_VOUT_TOLERANCE_DEFAULT);
     /**
      * @brief Assign Operator.
      * @param src VddConfig source object.
@@ -142,13 +58,6 @@ typedef struct VddConfig: VGenConfig {
      * @return True if the objects contain equal values, false otherwise.
      */
     friend bool operator==(const VddConfig& a, const VddConfig& b);
-    /**
-     * @brief Unequality Operator.
-     * @param a One object.
-     * @param b Another object.
-     * @return True if the objects contain different values, false otherwise.
-     */
-    friend bool operator!=(const VddConfig& a, const VddConfig& b);
 } VddConfig;
 
 // ---------------------------------------------------------------------------
@@ -157,7 +66,12 @@ typedef struct VddConfig: VGenConfig {
  * @ingroup Firmware
  * @brief Defines the configuration fields for a VppGenerator class.
  */
-typedef struct VppConfig: VGenConfig {
+typedef struct VppConfig: Dc2DcConfig {
+    /** 
+     * @brief Pin number of the Control Voltage.
+     * @details Default: 0xFF (not assigned).
+     */
+    uint ctrlPin;
     /** 
      * @brief Pin number of the VControl Shift Register SIN signal.
      * @details Default: 0xFF (not assigned).
@@ -184,40 +98,6 @@ typedef struct VppConfig: VGenConfig {
      */
     VppConfig();
     /**
-     * @brief Constructor.
-     * @param pwmPin Pin number of the PWM.
-     * @param adcChannel Number of the ADC channel (0 to 3).
-     * @param ctrlPin Pin number of the Control Voltage.
-     * @param vcSinPin Pin number of the VControl Shift Register SIN signal.
-     * @param vcClkPin Pin number of the VControl Shift Register CLK signal.
-     * @param vcClrPin Pin number of the VControl Shift Register CLR signal.
-     * @param vcRckPin Pin number of the VControl Shift Register RCK signal.
-     * @param divider Feedback divider in output of DC2DC converter.
-     * @param calibration Calibration value (offset) in output of DC2DC converter.
-     * @param pwmFreq Frequency of the PWM, in Hertz.
-     * @param adcVref Reference voltage of the ADC, in Volts.
-     * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
-     * @param pwmMaxDuty Maximum duty cycle value for the PWM, in %.
-     * @param pwmSlowStepDuty Step of slow increment/decrement for the PWM duty cycle.
-     * @param pwmFastStepDuty Step of fast increment/decrement for the PWM duty cycle.
-     * @param pwmToleranceToFast Tolerance between actual and target voltages to consider
-     *  them far.
-     * @param vTolerance Tolerance voltage for DC2DC output.
-     */
-    explicit VppConfig(uint pwmPin, uint adcChannel,
-                       uint ctrlPin, uint vcSinPin, uint vcClkPin,
-                       uint vcClrPin, uint vcRckPin,
-                       float divider = 1.0f,
-                       float calibration = 0.0f,
-                       uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
-                       float adcVref = Adc::DEFAULT_VREF,
-                       float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
-                       float pwmMaxDuty = PWM_MAX_DUTY_CYCLE_DEFAULT,
-                       float pwmSlowStepDuty = PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT,
-                       float pwmFastStepDuty = PWM_FAST_STEP_DUTY_CYCLE_DEFAULT,
-                       float pwmToleranceToFast = PWM_TOLERANCE_TO_FAST_DEFAULT,
-                       float vTolerance = DC2DC_VOUT_TOLERANCE_DEFAULT);
-    /**
      * @brief Assign Operator.
      * @param src VppConfig source object.
      * @return Reference for this.
@@ -230,103 +110,91 @@ typedef struct VppConfig: VGenConfig {
      * @return True if the objects contain equal values, false otherwise.
      */
     friend bool operator==(const VppConfig& a, const VppConfig& b);
-    /**
-     * @brief Unequality Operator.
-     * @param a One object.
-     * @param b Another object.
-     * @return True if the objects contain different values, false otherwise.
-     */
-    friend bool operator!=(const VppConfig& a, const VppConfig& b);
 } VppConfig;
 
 // ---------------------------------------------------------------------------
 
 /**
  * @ingroup Firmware
- * @brief Stores the calibration data.
+ * @brief Defines the configuration fields for a VGenerator class.
  */
-typedef struct CalibrationData {
-    /** @brief VDD calibration (offset). */
-    float vdd;
-    /** @brief VPP calibration (offset). */
-    float vpp;
-    /** @brief Checksum of data. */
-    uint32_t checksum;
-} CalibrationData;
+typedef struct VGenConfig {
+    /** @brief VddGenerator configuration. */
+    VddConfig vdd;
+    /** @brief VppGenerator configuration. */
+    VppConfig vpp;
+    /**
+     * @brief Assign Operator.
+     * @param src VGenConfig source object.
+     * @return Reference for this.
+     */
+    VGenConfig& operator=(const VGenConfig& src);
+    /**
+     * @brief Equality Operator.
+     * @param a One object.
+     * @param b Another object.
+     * @return True if the objects contain equal values, false otherwise.
+     */
+    friend bool operator==(const VGenConfig& a, const VGenConfig& b);
+    /**
+     * @brief Unequality Operator.
+     * @param a One object.
+     * @param b Another object.
+     * @return True if the objects contain different values, false otherwise.
+     */
+    friend bool operator!=(const VGenConfig& a, const VGenConfig& b);
+} VGenConfig;
+
+// ---------------------------------------------------------------------------
+
+// Forward
+class VGenerator;
 
 // ---------------------------------------------------------------------------
 
 /**
  * @ingroup Firmware
- * @brief Voltage Generator Class.
+ * @brief Generic Voltage Generator Class.
  * @details The purpose of this class is to provide the methods to manipulate
  *  a Voltage Generator (based in a DC2DC converter and GPIO pins to control
  *  - on/off - the output).
  * @nosubgrouping
  */
-class VGenerator {
+class GenericGenerator {
  public:
     /**
      * @brief Constructor.
-     * @details Assumes a default value for the configuration.
+     * @param owner Pointer to owner VGenerator object instance.
      */
-    VGenerator();
+    explicit GenericGenerator(const VGenerator *owner);
     /** @brief Destructor. */
-    virtual ~VGenerator();
-    /**
-     * @brief Starts the Voltage Generator.
-     * @details If the configuration is invalid, then fails.
-     * @return True if success, false otherwise.
-     */
-    virtual bool start() = 0;
-    /**
-     * @brief Stops the Voltage Generator.
-     * @details If the configuration is invalid, then fails.
-     * @return True if success, false otherwise.
-     */
-    virtual void stop() = 0;
+    virtual ~GenericGenerator();
     /**
      * @brief Returns if the Voltage Generator is running.
      * @return True if Voltage Generator is running, false otherwise.
      */
     virtual bool isRunning() const;
     /**
-     * @brief Enables the output of the Voltage Generator.
-     * @return True if success, false otherwise.
-     */
-    virtual bool on();
-    /**
-     * @brief Disables the output of the Voltage Generator.
-     */
-    virtual void off();
-    /**
-     * @brief Returns if output of the Voltage Generator is enabled.
-     * @return True if output of the Voltage Generator is enabled,
-     *  false otherwise.
-     */
-    virtual bool isOn() const;
-    /**
-     * @brief Adjusts the PWM duty cycle value to the output
-     *  reaches the target voltage.
-     * @details This method must be called periodically in a loop,
-     *  so that the Voltage Generator works properly.
-     */
-    virtual void adjust();
-    /**
      * @brief Sets the target output voltage of the Voltage Generator.
      * @param v Target output voltage, in Volts.
      */
-    virtual void setV(float v);
+    virtual void setV(float value);
+    /**
+     * @brief Gets the target output voltage of the Voltage Generator.
+     * @return Target output voltage, in Volts.
+     */
+    virtual float getVTarget() const;
     /**
      * @brief Gets the current output voltage of the Voltage Generator.
      * @return Current output voltage, in Volts.
      */
     virtual float getV() const;
     /**
-     * @brief Gets the target output voltage of the Voltage Generator.
-     * @return Target output voltage, in Volts.
+     * @brief Returns the calibration value of the output
+     *  of the Voltage Generator.
+     * @return Calibration value.
      */
-    virtual float getVTarget() const;
+    virtual float getCalibration() const;
     /**
      * @brief Gets the current duty cycle of the PWM.
      * @return Current duty cycle value, in percent.
@@ -335,45 +203,54 @@ class VGenerator {
     /**
      * @brief Starts the calibration process.
      * @details Sets the calibration value to zero, and sets the output voltage
-     *  to value of the <i>voltage</i> parameter.
-     * @param voltage Calibration target voltage, in Volts.
-     * @return True if success, false otherwise.
+     *  to value of the <i>reference</i> parameter.
+     * @param reference Calibration target voltage, in Volts.
      */
-    virtual bool initCalibration(float voltage) = 0;
+    virtual void initCalibration(float reference);
     /**
      * @brief Finishes the calibration process.
-     * @details Calculates the calibration value.
+     * @details Calculates and saves the calibration value.
      * @param measure Measured voltage, in Volts.
-     * @return True if success, false otherwise.
      */
-    virtual bool finishCalibration(float measure) = 0;
+    virtual void saveCalibration(float measure);
+    /** @brief Enables the output of the Voltage Generator. */
+    virtual void on() = 0;
+    /** @brief Disables the output of the Voltage Generator. */
+    virtual void off() = 0;
+    /** @brief Toggles the output of the Voltage Generator. */
+    virtual void toggle();
+    /**
+     * @brief Returns if output of the Voltage Generator is enabled.
+     * @return True if output of the Voltage Generator is enabled,
+     *  false otherwise.
+     */
+    virtual bool isOn() const;
 
  protected:
-    /* @brief Configuration data. */
-    VGenConfig config_;
-    /* @brief DC2DC converter. */
+    /* @brief Pointer to VGenerator owner object. */
+    VGenerator *owner_;
+    /* @brief Dc2Dc converter object. */
     Dc2Dc dc2dc_;
-    /* @brief GPIO manager. */
+    /* @brief Gpio manager object. */
     Gpio gpio_;
-    /* @brief Output status flag (On/Off). */
+    /* @brief Stores output on/off state. */
     bool on_;
-    /* @brief Calibration data. */
-    CalibrationData calibration_;
-    /*
-     * @brief Returns if configuration data is valid.
-     * @return True if configuration data is valid, false otherwise.
-     */
-    virtual bool isValidConfig_() const;
-    /*
-     * @brief Reads the calibration data from the flash space.
-     * @return True if success, false otherwise.
-     */
-    virtual bool readCalibration_();
-    /*
-     * @brief Writes the calibration data to the flash space.
-     * @return True if success, false otherwise.
-     */
-    virtual bool writeCalibration_();
+    /* @brief Starts the Voltage Generator.
+     * @details If the configuration is invalid, then fails.
+     * @return True if success, false otherwise. */
+    virtual bool start_();
+    /* @brief Stops the Voltage Generator. */
+    virtual void stop_();
+    /* @brief Adjusts the PWM duty cycle value to the output
+     *  reaches the target voltage.
+     * @details This method must be called periodically in a loop,
+     *  so that the Voltage Generator works properly. */
+    virtual void adjust_();
+
+  /* Friend functions. */
+  friend void second_core(MultiCore& core); // NOLINT
+  /* Friend classes. */
+  friend class VGenerator;
 };
 
 // ---------------------------------------------------------------------------
@@ -386,80 +263,40 @@ class VGenerator {
  *  to control - on/off - the output).
  * @nosubgrouping
  */
-class VddGenerator: public VGenerator {
+class VddGenerator: public GenericGenerator {
  public:
     /**
      * @brief Constructor.
-     * @details Assumes a default value for the configuration.
+     * @param owner Pointer to owner VGenerator object instance.
      */
-    VddGenerator();
-    /**
-     * @brief Constructor.
-     * @param config Configuration data.
-     */
-    explicit VddGenerator(const VddConfig& config);
+    explicit VddGenerator(const VGenerator *owner);
     /** @brief Destructor. */
     ~VddGenerator();
-    /**
-     * @brief Configures the Voltage Generator.
-     * @details If the Voltage Generator is running, then it's stopped before.
-     * @param config Configuration data.
-     */
-    void configure(const VddConfig& config);
-    /**
-     * @brief Gets the current configuration data.
-     * @return Copy of the current configuration data.
-     */
-    VddConfig getConfig() const;
-    /**
-     * @brief Starts the Voltage Generator.
-     * @details If the configuration is invalid, then fails.
-     * @return True if success, false otherwise.
-     */
-    bool start();
-    /**
-     * @brief Stops the Voltage Generator.
-     * @details If the configuration is invalid, then fails.
-     * @return True if success, false otherwise.
-     */
-    void stop();
-    /**
-     * @brief Enables/Disables VDD on VPP.
-     * @param status If true enables VDD on VPP. False otherwise.
-     * @return True if success, false otherwise.
-     */
-    bool onVpp(bool status = true);
-    /**
-     * @brief Returns if VDD on VPP is enabled.
-     * @return True if VDD on VPP is enabled, false otherwise.
-     */
-    bool isOnVpp() const;
+    /** @brief Enables the output of the Voltage Generator. */
+    void on();
+    /** @brief Disables the output of the Voltage Generator. */
+    void off();
     /**
      * @brief Starts the calibration process.
      * @details Sets the calibration value to zero, and sets the output voltage
-     *  to value of the <i>voltage</i> parameter.
-     * @param voltage Calibration target voltage, in Volts.
-     * @return True if success, false otherwise.
+     *  to value of the <i>reference</i> parameter.
+     * @param reference Calibration target voltage, in Volts. Default: 5.0.
      */
-    bool initCalibration(float voltage = 5.0f);
+    void initCalibration(float reference = 5.0f);
     /**
-     * @brief Finishes the calibration process.
-     * @details Calculates the calibration value and stops the Voltage Generator.
-     * @param measure Measured voltage, in Volts.
-     * @return True if success, false otherwise.
+     * @brief Sets/Resets the VDD on VPP pin.
+     * @param status True to set pin, false to reset.
      */
-    bool finishCalibration(float measure);
+    void onVpp(bool status = true);
+    /**
+     * @brief Gets the VDD on VPP pin status.
+     * @return The pin status.
+     */
+    bool isOnVpp() const;
 
  private:
-    /* @brief Configuration data. */
-    VddConfig config_;
-    /* @brief VDD on VPP status flag. */
+    /* @brief Stores VDD on VPP pin state. */
     bool onVpp_;
-    /*
-     * @brief Returns if configuration data is valid.
-     * @return True if configuration data is valid, false otherwise.
-     */
-    bool isValidConfig_() const;
 };
 
 // ---------------------------------------------------------------------------
@@ -472,125 +309,156 @@ class VddGenerator: public VGenerator {
  *  and one shift register to control - on/off - the output).
  * @nosubgrouping
  */
-class VppGenerator: public VGenerator {
+class VppGenerator: public GenericGenerator {
  public:
+    /**
+     * @brief Constructor.
+     * @param owner Pointer to owner VGenerator object instance.
+     */
+    explicit VppGenerator(const VGenerator *owner);
+    /** @brief Destructor. */
+    ~VppGenerator();
+    /** @brief Enables the output of the Voltage Generator. */
+    void on();
+    /** @brief Disables the output of the Voltage Generator. */
+    void off();
+    /**
+     * @brief Starts the calibration process.
+     * @details Sets the calibration value to zero, and sets the output voltage
+     *  to value of the <i>reference</i> parameter.
+     * @param reference Calibration target voltage, in Volts. Default: 12.0.
+     */
+    void initCalibration(float reference = 12.0f);
+    /**
+     * @brief Sets/Resets the VPP on A9 pin.
+     * @param status True to set pin, false to reset.
+     */
+    void onA9(bool status = true);
+    /**
+     * @brief Sets/Resets the VPP on A18 pin.
+     * @param status True to set pin, false to reset.
+     */
+    void onA18(bool status = true);
+    /**
+     * @brief Sets/Resets the VPP on CE pin.
+     * @param status True to set pin, false to reset.
+     */
+    void onCE(bool status = true);
+    /**
+     * @brief Sets/Resets the VPP on OE pin.
+     * @param status True to set pin, false to reset.
+     */
+    void onOE(bool status = true);
+    /**
+     * @brief Sets/Resets the VPP on WE pin.
+     * @param status True to set pin, false to reset.
+     */
+    void onWE(bool status = true);
+    /**
+     * @brief Gets the VPP on A9 pin status.
+     * @return The pin status.
+     */
+    bool isOnA9() const;
+    /**
+     * @brief Gets the VPP on A18 pin status.
+     * @return The pin status.
+     */
+    bool isOnA18() const;
+    /**
+     * @brief Gets the VPP on CE pin status.
+     * @return The pin status.
+     */
+    bool isOnCE() const;
+    /**
+     * @brief Gets the VPP on OE pin status.
+     * @return The pin status.
+     */
+    bool isOnOE() const;
+    /**
+     * @brief Gets the VPP on WE pin status.
+     * @return The pin status.
+     */
+    bool isOnWE() const;
+
+ private:
+    /* @brief Voltage Control Pins Shift Register. */
+    HC595 vcRegister_;
+};
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Firmware
+ * @brief Voltage (VPP/VDD) Generator Class.
+ * @details The purpose of this class is to provide the methods to manipulate
+ *  a Voltage Generator (VPP/VDD) Module.
+ * @nosubgrouping
+ */
+class VGenerator {
+ public:
+    /** @brief VPP Generator. */
+    VppGenerator vpp;
+    /** @brief VDD Generator. */
+    VddGenerator vdd;
     /**
      * @brief Constructor.
      * @details Assumes a default value for the configuration.
      */
-    VppGenerator();
+    VGenerator();
     /**
      * @brief Constructor.
      * @param config Configuration data.
      */
-    explicit VppGenerator(const VppConfig& config);
+    explicit VGenerator(const VGenConfig& config);
     /** @brief Destructor. */
-    ~VppGenerator();
+    ~VGenerator();
     /**
      * @brief Configures the Voltage Generator.
      * @details If the Voltage Generator is running, then it's stopped before.
      * @param config Configuration data.
      */
-    void configure(const VppConfig& config);
+    void configure(const VGenConfig& config);
     /**
      * @brief Gets the current configuration data.
      * @return Copy of the current configuration data.
      */
-    VppConfig getConfig() const;
+    VGenConfig getConfig() const;
     /**
      * @brief Starts the Voltage Generator.
      * @details If the configuration is invalid, then fails.
      * @return True if success, false otherwise.
      */
     bool start();
-    /**
-     * @brief Stops the Voltage Generator.
-     * @details If the configuration is invalid, then fails.
-     * @return True if success, false otherwise.
-     */
+    /** @brief Stops the Voltage Generator. */
     void stop();
     /**
-     * @brief Enables/Disables VPP on A9.
-     * @param status If true enables VPP on A9. False otherwise.
-     * @return True if success, false otherwise.
+     * @brief Returns if the Voltage Generator is running.
+     * @return True if Voltage Generator is running, false otherwise.
      */
-    bool onA9(bool status = true);
-    /**
-     * @brief Enables/Disables VPP on A18.
-     * @param status If true enables VPP on A18. False otherwise.
-     * @return True if success, false otherwise.
-     */
-    bool onA18(bool status = true);
-    /**
-     * @brief Enables/Disables VPP on CE.
-     * @param status If true enables VPP on CE. False otherwise.
-     * @return True if success, false otherwise.
-     */
-    bool onCE(bool status = true);
-    /**
-     * @brief Enables/Disables VPP on OE.
-     * @param status If true enables VPP on OE. False otherwise.
-     * @return True if success, false otherwise.
-     */
-    bool onOE(bool status = true);
-    /**
-     * @brief Enables/Disables VPP on WE.
-     * @param status If true enables VPP on WE. False otherwise.
-     * @return True if success, false otherwise.
-     */
-    bool onWE(bool status = true);
-    /**
-     * @brief Returns if VPP on A9 is enabled.
-     * @return True if VPP on A9 is enabled, false otherwise.
-     */
-    bool isOnA9() const;
-    /**
-     * @brief Returns if VPP on A18 is enabled.
-     * @return True if VPP on A18 is enabled, false otherwise.
-     */
-    bool isOnA18() const;
-    /**
-     * @brief Returns if VPP on CE is enabled.
-     * @return True if VPP on CE is enabled, false otherwise.
-     */
-    bool isOnCE() const;
-    /**
-     * @brief Returns if VPP on OE is enabled.
-     * @return True if VPP on OE is enabled, false otherwise.
-     */
-    bool isOnOE() const;
-    /**
-     * @brief Returns if VPP on WE is enabled.
-     * @return True if VPP on WE is enabled, false otherwise.
-     */
-    bool isOnWE() const;
-    /**
-     * @brief Starts the calibration process.
-     * @details Sets the calibration value to zero, and sets the output voltage
-     *  to value of the <i>voltage</i> parameter.
-     * @param voltage Calibration target voltage, in Volts.
-     * @return True if success, false otherwise.
-     */
-    bool initCalibration(float voltage = 12.0f);
-    /**
-     * @brief Finishes the calibration process.
-     * @details Calculates the calibration value and stops the Voltage Generator.
-     * @param measure Measured voltage, in Volts.
-     * @return True if success, false otherwise.
-     */
-    bool finishCalibration(float measure);
+    bool isRunning() const;
 
  private:
+    /* @brief CPU Multicore manager. */
+    MultiCore multicore_;
     /* @brief Configuration data. */
-    VppConfig config_;
-    /* @brief Voltage Control Shift Register. */
-    HC595 vcRegister_;
-    /*
-     * @brief Returns if configuration data is valid.
-     * @return True if configuration data is valid, false otherwise.
-     */
+    VGenConfig config_;
+    /* @brief Returns if configuration data is valid.
+     * @return True if configuration data is valid, false otherwise. */
     bool isValidConfig_() const;
-};
+    /* @brief Reads the calibration data from the flash space. */
+    void readCalData_();
+    /* @brief Writes the calibration data to the flash space. */
+    void writeCalData_();
+    /* @brief Calculates the checksum of the buffer.
+     * @param buf Pointer to a buffer.
+     * @param len Size of buffer, in bytes.
+     * @return Checksum of the buffer (one byte size). */
+    uint8_t checksum_(const uint8_t *buf, size_t len);
 
+  /* Friend classes. */
+  friend class GenericGenerator;
+  friend class VddGenerator;
+  friend class VppGenerator;
+};
 
 #endif  // MODULES_VGENERATOR_HPP_

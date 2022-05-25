@@ -115,12 +115,12 @@ class MultiCore {
      * @brief Sleeps the execution of current CPU core for a number of microseconds.
      * @param us Number of microseconds to sleep.
      */
-    void usleep(uint64_t us) const;
+    static void usleep(uint64_t us);
     /**
      * @brief Sleeps the execution of current CPU core for a number of milliseconds.
      * @param ms Number of milliseconds to sleep.
      */
-    void msleep(uint32_t ms) const;
+    static void msleep(uint32_t ms);
 
  private:
     /* 

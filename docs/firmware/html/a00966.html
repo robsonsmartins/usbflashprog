@@ -89,6 +89,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a721d6b9ba7da0d058bbc2914c3146f04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a721d6b9ba7da0d058bbc2914c3146f04">configure</a> (const <a class="el" href="a00962.html">Dc2DcConfig</a> &amp;config)</td></tr>
 <tr class="memdesc:a721d6b9ba7da0d058bbc2914c3146f04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the DC to DC converter.  <a href="a00966.html#a721d6b9ba7da0d058bbc2914c3146f04">More...</a><br /></td></tr>
 <tr class="separator:a721d6b9ba7da0d058bbc2914c3146f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac78cc79ff86c259c64464cc727f542"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00962.html">Dc2DcConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a7ac78cc79ff86c259c64464cc727f542">getConfig</a> () const</td></tr>
+<tr class="memdesc:a7ac78cc79ff86c259c64464cc727f542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current configuration data.  <a href="a00966.html#a7ac78cc79ff86c259c64464cc727f542">More...</a><br /></td></tr>
+<tr class="separator:a7ac78cc79ff86c259c64464cc727f542"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2184b6cd48866d49f5a0538986fe540"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#ab2184b6cd48866d49f5a0538986fe540">setCalibration</a> (float value)</td></tr>
+<tr class="memdesc:ab2184b6cd48866d49f5a0538986fe540"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the calibration value (offset) of the output of DC2DC converter.  <a href="a00966.html#ab2184b6cd48866d49f5a0538986fe540">More...</a><br /></td></tr>
+<tr class="separator:ab2184b6cd48866d49f5a0538986fe540"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c65632b0597b0010f56fffc7fd3db5"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a21c65632b0597b0010f56fffc7fd3db5">getCalibration</a> () const</td></tr>
+<tr class="memdesc:a21c65632b0597b0010f56fffc7fd3db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the calibration value of the output of DC2DC converter.  <a href="a00966.html#a21c65632b0597b0010f56fffc7fd3db5">More...</a><br /></td></tr>
+<tr class="separator:a21c65632b0597b0010f56fffc7fd3db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad5997aaaa2d622f0ca57f8b24a51a7b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#aad5997aaaa2d622f0ca57f8b24a51a7b">start</a> ()</td></tr>
 <tr class="memdesc:aad5997aaaa2d622f0ca57f8b24a51a7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the DC to DC converter.  <a href="a00966.html#aad5997aaaa2d622f0ca57f8b24a51a7b">More...</a><br /></td></tr>
 <tr class="separator:aad5997aaaa2d622f0ca57f8b24a51a7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,9 +122,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad50ed60a1a9207565841af074c67232c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#ad50ed60a1a9207565841af074c67232c">getDuty</a> () const</td></tr>
 <tr class="memdesc:ad50ed60a1a9207565841af074c67232c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current duty cycle of the PWM.  <a href="a00966.html#ad50ed60a1a9207565841af074c67232c">More...</a><br /></td></tr>
 <tr class="separator:ad50ed60a1a9207565841af074c67232c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ac78cc79ff86c259c64464cc727f542"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00962.html">Dc2DcConfig</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00966.html#a7ac78cc79ff86c259c64464cc727f542">getConfig</a> () const</td></tr>
-<tr class="memdesc:a7ac78cc79ff86c259c64464cc727f542"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current configuration data.  <a href="a00966.html#a7ac78cc79ff86c259c64464cc727f542">More...</a><br /></td></tr>
-<tr class="separator:a7ac78cc79ff86c259c64464cc727f542"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>DC To DC Converter Class. </p>
@@ -218,6 +224,72 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a7ac78cc79ff86c259c64464cc727f542"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac78cc79ff86c259c64464cc727f542">&#9670;&nbsp;</a></span>getConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00962.html">Dc2DcConfig</a> getConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current configuration data. </p>
+<dl class="section return"><dt>Returns</dt><dd>Copy of the current configuration data. </dd></dl>
+
+</div>
+</div>
+<a id="ab2184b6cd48866d49f5a0538986fe540"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2184b6cd48866d49f5a0538986fe540">&#9670;&nbsp;</a></span>setCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setCalibration </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the calibration value (offset) of the output of DC2DC converter. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Calibration value. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a21c65632b0597b0010f56fffc7fd3db5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c65632b0597b0010f56fffc7fd3db5">&#9670;&nbsp;</a></span>getCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getCalibration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the calibration value of the output of DC2DC converter. </p>
+<dl class="section return"><dt>Returns</dt><dd>Calibration value. </dd></dl>
 
 </div>
 </div>
@@ -384,26 +456,6 @@ Public Member Functions</h2></td></tr>
 
 <p>Gets the current duty cycle of the PWM. </p>
 <dl class="section return"><dt>Returns</dt><dd>Current duty cycle value, in percent. </dd></dl>
-
-</div>
-</div>
-<a id="a7ac78cc79ff86c259c64464cc727f542"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ac78cc79ff86c259c64464cc727f542">&#9670;&nbsp;</a></span>getConfig()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a00962.html">Dc2DcConfig</a> getConfig </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gets the current configuration data. </p>
-<dl class="section return"><dt>Returns</dt><dd>Copy of the current configuration data. </dd></dl>
 
 </div>
 </div>

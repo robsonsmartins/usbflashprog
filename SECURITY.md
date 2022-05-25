@@ -1,8 +1,11 @@
-# Security Policy
+# <img align="left" src="/images/icon.png" alt="usbflashprog" title="usbflashprog">USB Flash/EPROM Programmer
+A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to PC by USB port.
+
+## Security Policy
 
 This document defines the security policy, and how discovered vulnerabilities can be reported.
 
-## Supported Versions
+### Supported Versions
 
 This project maintains release versions. Applicable fixes, including security fixes, are performed only in these versions, depending on severity and feasibility.
 
@@ -11,7 +14,7 @@ This project maintains release versions. Applicable fixes, including security fi
 | 1.0.0   | :white_check_mark: |
 | < 1.0   | :x:                |
 
-## Reporting a Vulnerability - Private Disclosure Process
+### Reporting a Vulnerability - Private Disclosure Process
 
 Security is of the highest importance and all security vulnerabilities or suspected security vulnerabilities should be reported to us privately, to minimize attacks against current users of this project before they are fixed.
 Vulnerabilities will be investigated and patched on the next patch release as soon as possible.
@@ -26,7 +29,7 @@ The email will be fielded by us, which is made up of maintainers of this project
 
 Do not report non-security-impacting bugs through this channel. Use [GitHub issues](https://github.com/robsonsmartins/usbflashprog/issues/new/choose) instead.
 
-### Proposed Email Content
+#### Proposed Email Content
 
 Provide a descriptive subject line and in the body of the email include the following information:
 
@@ -36,7 +39,7 @@ Provide a descriptive subject line and in the body of the email include the foll
  - How the vulnerability affects this project usage and an estimation of the attack surface, if there is one.
  - List other projects or dependencies that were used in conjunction with this project to produce the vulnerability.
 
-### When to report a vulnerability
+#### When to report a vulnerability
  - When you think this project has a potential security vulnerability.
  - When you suspect a potential vulnerability but you are unsure that it impacts this project.
  - When you know of or suspect a potential vulnerability on another project that is used by this project. For example, this project has a dependency on Raspberry Pi Pico C/C++ SDK, etc.

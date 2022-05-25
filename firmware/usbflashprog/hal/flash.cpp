@@ -60,15 +60,11 @@ void Flash::write_(const uint8_t *buf, size_t offset, size_t len) {
     if (!buf || !len || offset + len > PICO_FLASH_SIZE_BYTES) { return; }
     size_t eraseLen = sectorSize_(len);
     if (offset + eraseLen > PICO_FLASH_SIZE_BYTES) { return; }
-#ifdef __arm__
     multicore_reset_core1();
     uint32_t ints = save_and_disable_interrupts();
-#endif
     flash_range_erase(offset, eraseLen);
     flash_range_program(offset, buf, len);
-#ifdef __arm__
     restore_interrupts(ints);
-#endif
 }
 
 void Flash::read_(uint8_t *buf, size_t offset, size_t len) {

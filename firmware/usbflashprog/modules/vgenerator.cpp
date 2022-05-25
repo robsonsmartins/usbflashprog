@@ -88,10 +88,6 @@ bool operator!=(const VGenConfig& a, const VGenConfig& b) {
 GenericGenerator::GenericGenerator(const VGenerator *owner):
         owner_(const_cast<VGenerator*>(owner)), on_(false) {}
 
-GenericGenerator::~GenericGenerator() {
-    stop_();
-}
-
 bool GenericGenerator::isRunning() const {
     return dc2dc_.isRunning();
 }
@@ -134,15 +130,11 @@ void GenericGenerator::saveCalibration(float measure) {
     } else {
         dc2dc_.setCalibration(measure - v);
     }
-#ifdef __arm__
     owner_->stop();
-#endif
     owner_->writeCalData_();
     setV(0.0f);
     off();
-#ifdef __arm__
     owner_->start();
-#endif
 }
 
 void GenericGenerator::toggle() {
@@ -174,8 +166,6 @@ void GenericGenerator::adjust_() {
 VddGenerator::VddGenerator(const VGenerator *owner): GenericGenerator(owner),
         onVpp_(false) {}
 
-VddGenerator::~VddGenerator() {}
-
 void VddGenerator::on() {
     gpio_.setPin(owner_->config_.vdd.ctrlPin);
     on_ = true;
@@ -203,8 +193,6 @@ bool VddGenerator::isOnVpp() const {
 
 VppGenerator::VppGenerator(const VGenerator *owner):
         GenericGenerator(owner) {}
-
-VppGenerator::~VppGenerator() {}
 
 void VppGenerator::on() {
     gpio_.setPin(owner_->config_.vpp.ctrlPin);
@@ -262,7 +250,8 @@ bool VppGenerator::isOnWE() const {
 
 // ---------------------------------------------------------------------------
 
-VGenerator::VGenerator(): vpp(this), vdd(this), multicore_(second_core) {
+VGenerator::VGenerator(): status_(MultiCore::csStopped),
+                          vpp(this), vdd(this), multicore_(second_core) {
     readCalData_();
 }
 
@@ -286,27 +275,37 @@ VGenConfig VGenerator::getConfig() const {
 }
 
 bool VGenerator::start() {
-    if (isRunning()) { return true; }
+    if (status_ != MultiCore::csStopped) { return true; }
     if (!isValidConfig_()) { return false; }
+    status_ = MultiCore::csStarting;
     bool vppRes = vpp.start_();
     bool vddRes = vdd.start_();
     multicore_.launch();
     multicore_.putParam(reinterpret_cast<uintptr_t>(&vpp));
     multicore_.putParam(reinterpret_cast<uintptr_t>(&vdd));
+    while (status_ == MultiCore::csStarting) { MultiCore::usleep(1); }
     return (vppRes && vddRes);
 }
 
 void VGenerator::stop() {
-    if (!isRunning()) { return; }
+    if (status_ != MultiCore::csRunning) { return; }
+    multicore_.lock();
+    status_ = MultiCore::csStopping;
+    multicore_.unlock();
     vpp.off();
     vdd.off();
     vpp.stop_();
     vdd.stop_();
     multicore_.stop();
+#ifdef __arm__
+    multicore_.lock();
+    status_ = MultiCore::csStopped;
+    multicore_.unlock();
+#endif
 }
 
 bool VGenerator::isRunning() const {
-    return multicore_.isRunning();
+    return (status_ != MultiCore::csStopped);
 }
 
 bool VGenerator::isValidConfig_() const {
@@ -365,11 +364,14 @@ uint8_t VGenerator::checksum_(const uint8_t *buf, size_t len) {
 void second_core(MultiCore& core) { // NOLINT
     VppGenerator *vpp = reinterpret_cast<VppGenerator*>(core.getParam());
     VddGenerator *vdd = reinterpret_cast<VddGenerator*>(core.getParam());
+    core.lock();
+    vpp->owner_->status_ = MultiCore::csRunning;
+    core.unlock();
     while (!core.isStopRequested()) {
         vpp->adjust_();
         vdd->adjust_();
-#ifndef __arm__
-        core.msleep(1);
-#endif
     }
+    core.lock();
+    vpp->owner_->status_ = MultiCore::csStopped;
+    core.unlock();
 }

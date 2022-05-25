@@ -195,7 +195,7 @@ TEST_F(VGeneratorTest, on_off) {
     EXPECT_EQ(vGenerator_.vpp.isOnWE(), false);
 }
 
-TEST_F(VGeneratorTest, vdd_calibration) {
+TEST_F(VGeneratorTest, calibration) {
     vGenerator_.start();
     float vActual =
         calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
@@ -203,14 +203,10 @@ TEST_F(VGeneratorTest, vdd_calibration) {
     vGenerator_.vdd.initCalibration(vActual);
     vGenerator_.vdd.saveCalibration(vActual);
     VGenerator newVGen;
-}
-
-TEST_F(VGeneratorTest, vpp_calibration) {
-    vGenerator_.start();
-    float vActual =
+    vActual =
         calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
                     vGenConfig_.vpp.adcVref);
     vGenerator_.vpp.initCalibration(vActual);
     vGenerator_.vpp.saveCalibration(vActual);
-    VGenerator newVGen;
+    VGenerator newVGen2;
 }

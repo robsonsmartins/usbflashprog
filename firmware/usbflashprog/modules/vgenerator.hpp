@@ -167,8 +167,6 @@ class GenericGenerator {
      * @param owner Pointer to owner VGenerator object instance.
      */
     explicit GenericGenerator(const VGenerator *owner);
-    /** @brief Destructor. */
-    virtual ~GenericGenerator();
     /**
      * @brief Returns if the Voltage Generator is running.
      * @return True if Voltage Generator is running, false otherwise.
@@ -176,7 +174,7 @@ class GenericGenerator {
     virtual bool isRunning() const;
     /**
      * @brief Sets the target output voltage of the Voltage Generator.
-     * @param v Target output voltage, in Volts.
+     * @param value Target output voltage, in Volts.
      */
     virtual void setV(float value);
     /**
@@ -270,8 +268,6 @@ class VddGenerator: public GenericGenerator {
      * @param owner Pointer to owner VGenerator object instance.
      */
     explicit VddGenerator(const VGenerator *owner);
-    /** @brief Destructor. */
-    ~VddGenerator();
     /** @brief Enables the output of the Voltage Generator. */
     void on();
     /** @brief Disables the output of the Voltage Generator. */
@@ -282,7 +278,7 @@ class VddGenerator: public GenericGenerator {
      *  to value of the <i>reference</i> parameter.
      * @param reference Calibration target voltage, in Volts. Default: 5.0.
      */
-    void initCalibration(float reference = 5.0f);
+    void initCalibration(float reference = 5.0f) override;
     /**
      * @brief Sets/Resets the VDD on VPP pin.
      * @param status True to set pin, false to reset.
@@ -316,8 +312,6 @@ class VppGenerator: public GenericGenerator {
      * @param owner Pointer to owner VGenerator object instance.
      */
     explicit VppGenerator(const VGenerator *owner);
-    /** @brief Destructor. */
-    ~VppGenerator();
     /** @brief Enables the output of the Voltage Generator. */
     void on();
     /** @brief Disables the output of the Voltage Generator. */
@@ -328,7 +322,7 @@ class VppGenerator: public GenericGenerator {
      *  to value of the <i>reference</i> parameter.
      * @param reference Calibration target voltage, in Volts. Default: 12.0.
      */
-    void initCalibration(float reference = 12.0f);
+    void initCalibration(float reference = 12.0f) override;
     /**
      * @brief Sets/Resets the VPP on A9 pin.
      * @param status True to set pin, false to reset.
@@ -438,6 +432,8 @@ class VGenerator {
     bool isRunning() const;
 
  private:
+    /* @brief Current status flag. */
+    MultiCore::CoreStatus status_;
     /* @brief CPU Multicore manager. */
     MultiCore multicore_;
     /* @brief Configuration data. */
@@ -455,6 +451,8 @@ class VGenerator {
      * @return Checksum of the buffer (one byte size). */
     uint8_t checksum_(const uint8_t *buf, size_t len);
 
+  /* Friend functions. */
+  friend void second_core(MultiCore& core); // NOLINT
   /* Friend classes. */
   friend class GenericGenerator;
   friend class VddGenerator;

@@ -35,12 +35,12 @@ typedef struct Dc2DcConfig {
     uint pwmPin;
     /** 
      * @brief Frequency of the PWM, in Hertz.
-     * @details Default: Pwm::PWM_DEFAULT_FREQ.
+     * @details Default: Pwm::kPwmDefaultFreq.
      */
     uint32_t pwmFreq;
     /**
      * @brief Reference voltage of the ADC, in Volts.
-     * @details Default: Adc::DEFAULT_VREF.
+     * @details Default: Adc::kAdcDefaultVRef.
      */
     float adcVref;
     /**
@@ -56,24 +56,24 @@ typedef struct Dc2DcConfig {
     float divider;
     /** 
      * @brief Minimal duty cycle value for the PWM, in %.
-     * @details Default: PWM_MIN_DUTY_CYCLE_DEFAULT.
+     * @details Default: kPwmMinDutyCycleDefault.
      */
     float pwmMinDuty;
     /** 
      * @brief Maximum duty cycle value for the PWM, in %.
-     * @details Default: PWM_MAX_DUTY_CYCLE_DEFAULT.
+     * @details Default: kPwmMaxDutyCycleDefault.
      */
     float pwmMaxDuty;
     /** 
      * @brief Step of slow increment/decrement for the PWM duty cycle.
      * @details Used when actual voltage is near to the target voltage.<br/>
-     *  Default: PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT.
+     *  Default: kPwmSlowStepDutyCycleDefault.
      */
     float pwmSlowStepDuty;
     /** 
      * @brief Step of fast increment/decrement for the PWM duty cycle.
      * @details Used when actual voltage is far to the target voltage.<br/>
-     *  Default: PWM_FAST_STEP_DUTY_CYCLE_DEFAULT.
+     *  Default: kPwmFastStepDutyCycleDefault.
      */
     float pwmFastStepDuty;
     /** 
@@ -82,13 +82,13 @@ typedef struct Dc2DcConfig {
      * @details Used formula:
      *  <code>distance = |actual - targetV * (1.0 +- vTolerance) *
      *  (1.0 +- pwmToleranceToFast)|</code><br/>
-     *  Default: PWM_TOLERANCE_TO_FAST_DEFAULT.
+     *  Default: kPwmToleranceToFastDefault.
      */
     float pwmToleranceToFast;
     /** 
      * @brief Tolerance voltage for DC2DC output.
      * @details The output voltage will vary within tolerance limits.<br/>
-     *  Default: DC2DC_VOUT_TOLERANCE_DEFAULT.
+     *  Default: kDc2DcVoutToleranceDefault.
      */
     float vTolerance;
     /**
@@ -113,14 +113,14 @@ typedef struct Dc2DcConfig {
      */
     explicit Dc2DcConfig(uint pwmPin, uint adcChannel,
                 float divider = 1.0f,
-                uint32_t pwmFreq = Pwm::PWM_DEFAULT_FREQ,
-                float adcVref = Adc::DEFAULT_VREF,
-                float pwmMinDuty = PWM_MIN_DUTY_CYCLE_DEFAULT,
-                float pwmMaxDuty = PWM_MAX_DUTY_CYCLE_DEFAULT,
-                float pwmSlowStepDuty = PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT,
-                float pwmFastStepDuty = PWM_FAST_STEP_DUTY_CYCLE_DEFAULT,
-                float pwmToleranceToFast = PWM_TOLERANCE_TO_FAST_DEFAULT,
-                float vTolerance = DC2DC_VOUT_TOLERANCE_DEFAULT);
+                uint32_t pwmFreq = Pwm::kPwmDefaultFreq,
+                float adcVref = Adc::kAdcDefaultVRef,
+                float pwmMinDuty = kPwmMinDutyCycleDefault,
+                float pwmMaxDuty = kPwmMaxDutyCycleDefault,
+                float pwmSlowStepDuty = kPwmSlowStepDutyCycleDefault,
+                float pwmFastStepDuty = kPwmFastStepDutyCycleDefault,
+                float pwmToleranceToFast = kPwmToleranceToFastDefault,
+                float vTolerance = kDc2DcVoutToleranceDefault);
     /**
      * @brief Assign Operator.
      * @param src Dc2DcConfig source object.
@@ -128,26 +128,26 @@ typedef struct Dc2DcConfig {
      */
     Dc2DcConfig& operator=(const Dc2DcConfig& src);
     /** @brief Default value for minimal duty cycle value for the PWM, in %. */
-    static constexpr float PWM_MIN_DUTY_CYCLE_DEFAULT = 0.0f;
+    static constexpr float kPwmMinDutyCycleDefault = 0.0f;
     /** @brief Default value for maximum duty cycle value for the PWM, in %. */
-    static constexpr float PWM_MAX_DUTY_CYCLE_DEFAULT = 95.0f;
+    static constexpr float kPwmMaxDutyCycleDefault = 95.0f;
     /** 
      * @brief Default value for step of slow increment/decrement for the
      *  PWM duty cycle.
      */
-    static constexpr float PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT = 0.1f;
+    static constexpr float kPwmSlowStepDutyCycleDefault = 0.1f;
     /** 
      * @brief Default value for step of fast increment/decrement for the
      *  PWM duty cycle.
      */
-    static constexpr float PWM_FAST_STEP_DUTY_CYCLE_DEFAULT = 1.0f;
+    static constexpr float kPwmFastStepDutyCycleDefault = 1.0f;
     /** 
      * @brief Default value for Tolerance between actual and target voltages
      * to consider them far.
      */
-    static constexpr float PWM_TOLERANCE_TO_FAST_DEFAULT = 0.1f;
+    static constexpr float kPwmToleranceToFastDefault = 0.1f;
     /** @brief Default value for tolerance voltage for DC2DC output. */
-    static constexpr float DC2DC_VOUT_TOLERANCE_DEFAULT = 0.05f;
+    static constexpr float kDc2DcVoutToleranceDefault = 0.05f;
     /**
      * @brief Equality Operator.
      * @param a One object.

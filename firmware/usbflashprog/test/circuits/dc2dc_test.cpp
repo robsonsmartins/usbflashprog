@@ -66,7 +66,7 @@ TEST_F(Dc2DcTest, set_get_v_duty) {
     dc2dc_.setV(12.0f);
     EXPECT_EQ(dc2dc_.getVTarget(), 12.0f);
     float vActual =
-        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2, config_.adcVref);
+        calculate_((kRawAdcData[0] + kRawAdcData[1]) / 2, config_.adcVref);
     dc2dc_.adjust();
     EXPECT_NEAR(dc2dc_.getV(), vActual, 0.2f);
     dc2dc_.setV(vActual * 1.06f);

@@ -34,11 +34,11 @@
 class Adc {
  public:
     /** @brief Default reference voltage, in Volts. */
-    static constexpr float DEFAULT_VREF = 3.3f;
+    static constexpr float kAdcDefaultVRef = 3.3f;
     /** 
      * @brief Constructor.
      * @details As default, the reference voltage is set to
-     *   DEFAULT_VREF value.
+     *   kAdcDefaultVRef value.
      */
     Adc();
     /**

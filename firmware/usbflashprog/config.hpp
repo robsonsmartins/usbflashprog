@@ -26,110 +26,122 @@
 // ---------------------------------------------------------------------------
 
 /** @brief VDD/PWM : Assigned PWM GPIO pin. */
-constexpr uint     VDD_PWM_PIN  = 20;
+constexpr uint     kVddPwmPin  = 20;
 /** @brief VDD/PWM : PWM Frequency, in Hertz. */
-constexpr uint32_t VDD_PWM_FREQ = Pwm::PWM_DEFAULT_FREQ;
+constexpr uint32_t kVddPwmFreq = Pwm::kPwmDefaultFreq;
 
 /** @brief VDD/PWM : PWM Min Duty Cycle, in Percent. */
-constexpr float    VDD_PWM_MIN_DUTY
-    = VddConfig::PWM_MIN_DUTY_CYCLE_DEFAULT;
+constexpr float    kVddPwmMinDuty
+    = VddConfig::kPwmMinDutyCycleDefault;
 
 /** @brief VDD/PWM : PWM Max Duty Cycle, in Percent. */
-constexpr float    VDD_PWM_MAX_DUTY
-    = VddConfig::PWM_MAX_DUTY_CYCLE_DEFAULT;
+constexpr float    kVddPwmMaxDuty
+    = VddConfig::kPwmMaxDutyCycleDefault;
 
 /** @brief VDD/PWM : PWM Slow Step Duty Cycle, in Percent. */
-constexpr float    VDD_PWM_SLOW_STEP_DUTY
-    = VddConfig::PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT;
+constexpr float    kVddPwmSlowStepDuty
+    = VddConfig::kPwmSlowStepDutyCycleDefault;
 
 /** @brief VDD/PWM : PWM Fast Step Duty Cycle, in Percent. */
-constexpr float    VDD_PWM_FAST_STEP_DUTY
-    = VddConfig::PWM_FAST_STEP_DUTY_CYCLE_DEFAULT;
+constexpr float    kVddPwmFastStepDuty
+    = VddConfig::kPwmFastStepDutyCycleDefault;
 
 /** @brief VDD/PWM : PWM Voltage Tolerance to use Fast Step, in Percent. */
-constexpr float    VDD_PWM_TOLERANCE_TO_FAST
-    = VddConfig::PWM_TOLERANCE_TO_FAST_DEFAULT;
+constexpr float    kVddPwmToleranceToFast
+    = VddConfig::kPwmToleranceToFastDefault;
 
 /** @brief VDD/ADC : Assigned ADC channel. */
-constexpr uint     VDD_ADC_CHANNEL    = 0;
+constexpr uint     kVddAdcChannel    = 0;
 /** @brief VDD/ADC : ADC Reference Voltage, in Volts. */
-constexpr float    VDD_ADC_VREF       = Adc::DEFAULT_VREF;
+constexpr float    kVddAdcVRef       = Adc::kAdcDefaultVRef;
 /** @brief VDD/VC : Voltage Converter Feedback R1 resistor, in Ohms. */
-constexpr float    VDD_FB_R1          = 470.0f;
+constexpr float    kVddFbR1          = 470.0f;
 /** @brief VDD/VC : Voltage Converter Feedback R2 resistor, in Ohms. */
-constexpr float    VDD_FB_R2          = 330.0f;
+constexpr float    kVddFbR2          = 330.0f;
 /** @brief VDD/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0. */
-constexpr float    VDD_DIVIDER        = (VDD_FB_R1 + VDD_FB_R2) / VDD_FB_R2;
+constexpr float    kVddDivider        = (kVddFbR1 + kVddFbR2) / kVddFbR2;
 /** @brief VDD/VC : Output Voltage Tolerance, in percent. */
-constexpr float    VDD_VOUT_TOLERANCE = VddConfig::DC2DC_VOUT_TOLERANCE_DEFAULT;
+constexpr float    kVddVoutTolerance = VddConfig::kDc2DcVoutToleranceDefault;
 
 /** @brief VDD/CTRL : Assigned Voltage Control GPIO pin. */
-constexpr uint     VDD_CTRL_PIN     = 22;
+constexpr uint     kVddCtrlPin     = 22;
 /** @brief VDD/CTRL : Assigned VDD on VPP GPIO pin. */
-constexpr uint     VDD_ON_VPP_PIN   = 17;
+constexpr uint     kVddOnVppPin   = 17;
 
 // ---------------------------------------------------------------------------
 
 /** @brief VPP/PWM : Assigned PWM GPIO pin. */
-constexpr uint     VPP_PWM_PIN  = 21;
+constexpr uint     kVppPwmPin  = 21;
 /** @brief VPP/PWM : PWM Frequency, in Hertz. */
-constexpr uint32_t VPP_PWM_FREQ = Pwm::PWM_DEFAULT_FREQ;
+constexpr uint32_t kVppPwmFreq = Pwm::kPwmDefaultFreq;
 
 /** @brief VPP/PWM : PWM Min Duty Cycle, in Percent. */
-constexpr float    VPP_PWM_MIN_DUTY
-    = VddConfig::PWM_MIN_DUTY_CYCLE_DEFAULT;
+constexpr float    kVppPwmMinDuty
+    = VddConfig::kPwmMinDutyCycleDefault;
 
 /** @brief VPP/PWM : PWM Max Duty Cycle, in Percent. */
-constexpr float    VPP_PWM_MAX_DUTY
-    = VddConfig::PWM_MAX_DUTY_CYCLE_DEFAULT;
+constexpr float    kVppPwmMaxDuty
+    = VddConfig::kPwmMaxDutyCycleDefault;
 
 /** @brief VPP/PWM : PWM Slow Step Duty Cycle, in Percent. */
-constexpr float    VPP_PWM_SLOW_STEP_DUTY
-    = VddConfig::PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT;
+constexpr float    kVppPwmSlowStepDuty
+    = VddConfig::kPwmSlowStepDutyCycleDefault;
 
 /** @brief VPP/PWM : PWM Fast Step Duty Cycle, in Percent. */
-constexpr float    VPP_PWM_FAST_STEP_DUTY
-    = VddConfig::PWM_FAST_STEP_DUTY_CYCLE_DEFAULT;
+constexpr float    kVppPwmFastStepDuty
+    = VddConfig::kPwmFastStepDutyCycleDefault;
 
 /** @brief VPP/PWM : PWM Voltage Tolerance to use Fast Step, in Percent. */
-constexpr float    VPP_PWM_TOLERANCE_TO_FAST
-    = VddConfig::PWM_TOLERANCE_TO_FAST_DEFAULT;
+constexpr float    kVppPwmToleranceToFast
+    = VddConfig::kPwmToleranceToFastDefault;
 
 /** @brief VPP/ADC : Assigned ADC channel. */
-constexpr uint     VPP_ADC_CHANNEL    = 1;
+constexpr uint     kVppAdcChannel    = 1;
 /** @brief VPP/ADC : ADC Reference Voltage, in Volts. */
-constexpr float    VPP_ADC_VREF       = Adc::DEFAULT_VREF;
+constexpr float    kVppAdcVRef       = Adc::kAdcDefaultVRef;
 /** @brief VPP/VC : Voltage Converter Feedback R1 resistor, in Ohms. */
-constexpr float    VPP_FB_R1          = 3900.0f;
+constexpr float    kVppFbR1          = 3900.0f;
 /** @brief VPP/VC : Voltage Converter Feedback R2 resistor, in Ohms. */
-constexpr float    VPP_FB_R2          = 470.0f;
+constexpr float    kVppFbR2          = 470.0f;
 /** @brief VPP/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0. */
-constexpr float    VPP_DIVIDER        = (VPP_FB_R1 + VPP_FB_R2) / VPP_FB_R2;
+constexpr float    kVppDivider        = (kVppFbR1 + kVppFbR2) / kVppFbR2;
 /** @brief VPP/VC : Output Voltage Tolerance, in percent. */
-constexpr float    VPP_VOUT_TOLERANCE = VddConfig::DC2DC_VOUT_TOLERANCE_DEFAULT;
+constexpr float    kVppVoutTolerance = VddConfig::kDc2DcVoutToleranceDefault;
 
 /** @brief VPP/CTRL : Assigned Voltage Control GPIO pin. */
-constexpr uint     VPP_CTRL_PIN     = 28;
+constexpr uint     kVppCtrlPin     = 28;
 /** @brief VPP/CTRL : Assigned Voltage Control, Shift Register SIN, GPIO pin. */
-constexpr uint     VPP_VC_SIN_PIN   = 12;
+constexpr uint     kVppVcSinPin   = 12;
 /** @brief VPP/CTRL : Assigned Voltage Control, Shift Register CLK, GPIO pin. */
-constexpr uint     VPP_VC_CLK_PIN   = 14;
+constexpr uint     kVppVcClkPin   = 14;
 /** @brief VPP/CTRL : Assigned Voltage Control, Shift Register CLR, GPIO pin. */
-constexpr uint     VPP_VC_CLR_PIN   = 15;
+constexpr uint     kVppVcClrPin   = 15;
 /** @brief VPP/CTRL : Assigned Voltage Control, Shift Register RCK, GPIO pin. */
-constexpr uint     VPP_VC_RCK_PIN   = 13;
+constexpr uint     kVppVcRckPin   = 13;
 
 // ---------------------------------------------------------------------------
 
 /** @brief VPP/CTRL : VC Shift Register, VPP on A18 bit. */
-constexpr uint8_t VPP_ON_A18_VC_REGISTER_BIT = 0;
+constexpr uint8_t kVppOnA18VcRegisterBit = 0;
 /** @brief VPP/CTRL : VC Shift Register, VPP on A9 bit. */
-constexpr uint8_t VPP_ON_A9_VC_REGISTER_BIT  = 1;
+constexpr uint8_t kVppOnA9VcRegisterBit  = 1;
 /** @brief VPP/CTRL : VC Shift Register, VPP on CE bit. */
-constexpr uint8_t VPP_ON_CE_VC_REGISTER_BIT  = 2;
+constexpr uint8_t kVppOnCEVcRegisterBit  = 2;
 /** @brief VPP/CTRL : VC Shift Register, VPP on OE bit. */
-constexpr uint8_t VPP_ON_OE_VC_REGISTER_BIT  = 3;
+constexpr uint8_t kVppOnOEVcRegisterBit  = 3;
 /** @brief VPP/CTRL : VC Shift Register, VPP on WE bit. */
-constexpr uint8_t VPP_ON_WE_VC_REGISTER_BIT  = 4;
+constexpr uint8_t kVppOnWEVcRegisterBit  = 4;
+
+// ---------------------------------------------------------------------------
+
+/** @brief VPP/GEN : VPP Initial value, in Volts. */
+constexpr float kVppInitial = 12.0f;
+/** @brief VDD/GEN : VDD Initial value, in Volts. */
+constexpr float kVddInitial =  5.0f;
+
+// ---------------------------------------------------------------------------
+
+/** @brief COMM : Communication timeout, in miliseconds. */
+constexpr uint32_t kCommTimeOut = 1000;
 
 #endif  // CONFIG_HPP_

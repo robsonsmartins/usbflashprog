@@ -29,10 +29,12 @@ elseif(NORMAL_BUILD)
         hal/pwm.cpp
         hal/multicore.cpp
         hal/flash.cpp
+        hal/serial.cpp
+        hal/string.cpp
         circuits/74hc595.cpp
         circuits/dc2dc.cpp
         modules/vgenerator.cpp
-        usbflashprog.cpp
+        modules/runner.cpp
         main.cpp
   )
 

@@ -209,43 +209,43 @@ void VppGenerator::initCalibration(float reference) {
 }
 
 void VppGenerator::onA9(bool status) {
-    vcRegister_.setBit(VPP_ON_A9_VC_REGISTER_BIT, status);
+    vcRegister_.setBit(kVppOnA9VcRegisterBit, status);
 }
 
 void VppGenerator::onA18(bool status) {
-    vcRegister_.setBit(VPP_ON_A18_VC_REGISTER_BIT, status);
+    vcRegister_.setBit(kVppOnA18VcRegisterBit, status);
 }
 
 void VppGenerator::onCE(bool status) {
-    vcRegister_.setBit(VPP_ON_CE_VC_REGISTER_BIT, status);
+    vcRegister_.setBit(kVppOnCEVcRegisterBit, status);
 }
 
 void VppGenerator::onOE(bool status) {
-    vcRegister_.setBit(VPP_ON_OE_VC_REGISTER_BIT, status);
+    vcRegister_.setBit(kVppOnOEVcRegisterBit, status);
 }
 
 void VppGenerator::onWE(bool status) {
-    vcRegister_.setBit(VPP_ON_WE_VC_REGISTER_BIT, status);
+    vcRegister_.setBit(kVppOnWEVcRegisterBit, status);
 }
 
 bool VppGenerator::isOnA9() const {
-    return vcRegister_.getBit(VPP_ON_A9_VC_REGISTER_BIT);
+    return vcRegister_.getBit(kVppOnA9VcRegisterBit);
 }
 
 bool VppGenerator::isOnA18() const {
-    return vcRegister_.getBit(VPP_ON_A18_VC_REGISTER_BIT);
+    return vcRegister_.getBit(kVppOnA18VcRegisterBit);
 }
 
 bool VppGenerator::isOnCE() const {
-    return vcRegister_.getBit(VPP_ON_CE_VC_REGISTER_BIT);
+    return vcRegister_.getBit(kVppOnCEVcRegisterBit);
 }
 
 bool VppGenerator::isOnOE() const {
-    return vcRegister_.getBit(VPP_ON_OE_VC_REGISTER_BIT);
+    return vcRegister_.getBit(kVppOnOEVcRegisterBit);
 }
 
 bool VppGenerator::isOnWE() const {
-    return vcRegister_.getBit(VPP_ON_WE_VC_REGISTER_BIT);
+    return vcRegister_.getBit(kVppOnWEVcRegisterBit);
 }
 
 // ---------------------------------------------------------------------------

@@ -20,7 +20,7 @@
  */
 // ---------------------------------------------------------------------------
 
-#include "usbflashprog.hpp"
+#include "modules/runner.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -30,15 +30,15 @@
  */
 int main();
 
-/** @brief UsbFlashProg instance. */
-UsbFlashProg ufp;
+/** @brief Runner instance. */
+Runner runner;
 
 // ---------------------------------------------------------------------------
 
 int main() {
-    ufp.init();
+    runner.init();
     while (true) {
-        ufp.firstCore();
+        runner.loop();
     }
     return 0;
 }

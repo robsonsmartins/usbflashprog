@@ -38,7 +38,7 @@ class HC595 {
     /** @brief Type of Data buffer. */
     typedef std::vector<uint8_t> TData;
     /** @brief Default value to pulse time, in microseconds. */
-    static constexpr uint DEFAULT_PULSE_TIME_US = 1;
+    static constexpr uint kDefaultPulseTime = 1;
     /** @brief Constructor. */
     HC595();
     /**
@@ -54,11 +54,11 @@ class HC595 {
      * @param oePin GPIO Pin number of Output Enable
      *  (default = 0xFF, no pin).
      * @param pulseTime Pulse time, in microseconds
-     *  (default = DEFAULT_PULSE_TIME_US).
+     *  (default = kDefaultPulseTime).
      */
     HC595(uint sinPin, uint clkPin = 0xFF, uint clrPin = 0xFF,
           uint rckPin = 0xFF, uint oePin = 0xFF,
-          uint pulseTime = DEFAULT_PULSE_TIME_US);
+          uint pulseTime = kDefaultPulseTime);
     /**
      * @brief Configures the HC595 class object.
      * @param sinPin GPIO Pin number of Serial Data Input
@@ -72,11 +72,11 @@ class HC595 {
      * @param oePin GPIO Pin number of Output Enable
      *  (default = 0xFF, no pin).
      * @param pulseTime Pulse time, in microseconds
-     *  (default = DEFAULT_PULSE_TIME_US).
+     *  (default = kDefaultPulseTime).
      */
     void configure(uint sinPin = 0xFF, uint clkPin = 0xFF, uint clrPin = 0xFF,
                    uint rckPin = 0xFF, uint oePin = 0xFF,
-                   uint pulseTime = DEFAULT_PULSE_TIME_US);
+                   uint pulseTime = kDefaultPulseTime);
     /** @brief Clears the output of the HC595. */
     void clear();
     /**

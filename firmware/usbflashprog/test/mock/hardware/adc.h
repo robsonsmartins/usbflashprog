@@ -14,7 +14,7 @@
 
 // ---------------------------------------------------------------------------
 
-constexpr const uint16_t RAW_ADC_DATA[2] = {0x221, 0xDDD};
+constexpr const uint16_t kRawAdcData[2] = {0x221, 0xDDD};
 static int8_t adcDataIndex = 0;
 
 // ---------------------------------------------------------------------------
@@ -24,7 +24,7 @@ extern "C" inline void adc_init(void) {}
 extern "C" inline void adc_select_input(uint input) {}
 
 extern "C" inline uint16_t adc_read() {
-    return (RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2;
+    return (kRawAdcData[0] + kRawAdcData[1]) / 2;
 }
 
 extern "C" inline void adc_gpio_init(uint gpio) {}
@@ -36,7 +36,7 @@ extern "C" inline void adc_run(bool run) {}
 
 extern "C" inline uint16_t adc_fifo_get_blocking() {
     if (adcDataIndex > 1) { adcDataIndex = 0; }
-    return RAW_ADC_DATA[adcDataIndex++];
+    return kRawAdcData[adcDataIndex++];
 }
 
 extern "C" inline void adc_fifo_drain() {}

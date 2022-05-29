@@ -19,23 +19,23 @@
 
 // ---------------------------------------------------------------------------
 
-constexpr uint SELECTED_GPIO_PWM_PIN = 1;
+constexpr uint kSelectedGpioPin = 1;
 
-Pwm PwmTest::pwm_ = Pwm(SELECTED_GPIO_PWM_PIN);
+Pwm PwmTest::pwm_ = Pwm(kSelectedGpioPin);
 
 // ---------------------------------------------------------------------------
 
 TEST_F(PwmTest, default_new) {
-    EXPECT_EQ(pwm_.getPin(), SELECTED_GPIO_PWM_PIN);
-    EXPECT_EQ(pwm_.getSlice(), SELECTED_GPIO_PWM_PIN);
-    EXPECT_EQ(pwm_.getChannel(), SELECTED_GPIO_PWM_PIN);
-    EXPECT_EQ(pwm_.getFreq(), Pwm::PWM_DEFAULT_FREQ);
+    EXPECT_EQ(pwm_.getPin(), kSelectedGpioPin);
+    EXPECT_EQ(pwm_.getSlice(), kSelectedGpioPin);
+    EXPECT_EQ(pwm_.getChannel(), kSelectedGpioPin);
+    EXPECT_EQ(pwm_.getFreq(), Pwm::kPwmDefaultFreq);
     EXPECT_EQ(pwm_.getDuty(), 0.0f);
     EXPECT_EQ(pwm_.isRunning(), false);
 }
 
 TEST_F(PwmTest, set_duty_freq) {
-    EXPECT_EQ(pwm_.getFreq(), Pwm::PWM_DEFAULT_FREQ);
+    EXPECT_EQ(pwm_.getFreq(), Pwm::kPwmDefaultFreq);
     pwm_.setFreq(60000);
     EXPECT_EQ(pwm_.getFreq(), 60000);
     EXPECT_EQ(pwm_.getDuty(), 0.0f);
@@ -49,11 +49,11 @@ TEST_F(PwmTest, start_stop) {
     EXPECT_EQ(pwm_.isRunning(), true);
     pwm_.stop();
     EXPECT_EQ(pwm_.isRunning(), false);
-    pwm_.setFreq(Pwm::PWM_DEFAULT_FREQ);
+    pwm_.setFreq(Pwm::kPwmDefaultFreq);
     pwm_.setDuty(50.0f);
     pwm_.start();
     EXPECT_EQ(pwm_.isRunning(), true);
-    EXPECT_EQ(pwm_.getFreq(), Pwm::PWM_DEFAULT_FREQ);
+    EXPECT_EQ(pwm_.getFreq(), Pwm::kPwmDefaultFreq);
     pwm_.setFreq(60000);
     EXPECT_EQ(pwm_.getFreq(), 60000);
     EXPECT_EQ(pwm_.getDuty(), 50.0f);

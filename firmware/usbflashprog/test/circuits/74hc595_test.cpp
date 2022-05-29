@@ -112,19 +112,19 @@ TEST_F(HC595Test, data) {
 }
 
 TEST_F(HC595Test, pulse_time) {
-    constexpr uint PULSE_TIME = 10000;
-    constexpr uint BYTES_NUM = 8;
-    constexpr uint BITS_PER_BYTE = 8;
-    hc595_.configure(1, 2, 3, 4, 5, PULSE_TIME);
-    uint8_t buf[BYTES_NUM] =
+    constexpr uint kPulseTime = 10000;
+    constexpr uint kNumBytes = 8;
+    constexpr uint kBitsPerByte = 8;
+    hc595_.configure(1, 2, 3, 4, 5, kPulseTime);
+    uint8_t buf[kNumBytes] =
         {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
     auto start = std::chrono::high_resolution_clock::now();
-    hc595_.writeData(buf, BYTES_NUM);
+    hc595_.writeData(buf, kNumBytes);
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration =
         std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
     EXPECT_NEAR(
         duration.count(),
-        (PULSE_TIME * 2 * BITS_PER_BYTE + PULSE_TIME) * BYTES_NUM / 1000,
+        (kPulseTime * 2 * kBitsPerByte + kPulseTime) * kNumBytes / 1000,
         100.0f);
 }

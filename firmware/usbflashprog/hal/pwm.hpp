@@ -33,10 +33,10 @@
 class Pwm {
  public:
     /** @brief PWM default frequency, in Hertz. */
-    static constexpr uint32_t PWM_DEFAULT_FREQ = 40'000UL;
+    static constexpr uint32_t kPwmDefaultFreq = 40'000UL;
     /**
      * @brief Constructor.
-     * @details Creates a Pwm class instance with PWM_DEFAULT_FREQ frequency
+     * @details Creates a Pwm class instance with kPwmDefaultFreq frequency
      *  and zero duty cycle.
      * @param pin The pin number.
      */

@@ -26,18 +26,18 @@
 // ---------------------------------------------------------------------------
 
 // typical choose for RP PWM module clock: 12.5 MHz
-constexpr uint32_t PWM_DEFAULT_CLOCK = 12'500'000UL;
+constexpr uint32_t kPwmDefaultClock = 12'500'000UL;
 
 // clksys: typically 125 MHz
-// let's arbitrarily choose to run pwm clock at PWM_DEFAULT_CLOCK
-float Pwm::divider_ = clock_get_hz(clk_sys) / PWM_DEFAULT_CLOCK;
+// let's arbitrarily choose to run pwm clock at kPwmDefaultClock
+float Pwm::divider_ = clock_get_hz(clk_sys) / kPwmDefaultClock;
 
 // ---------------------------------------------------------------------------
 
 Pwm::Pwm(uint pin): pin_(pin), freq_(0), duty_(0.0f), running_(false) {
     slice_ = pwm_gpio_to_slice_num(pin);
     channel_ = pwm_gpio_to_channel(pin);
-    setFreq(PWM_DEFAULT_FREQ);
+    setFreq(kPwmDefaultFreq);
 }
 
 Pwm::~Pwm() {
@@ -58,14 +58,14 @@ uint Pwm::getChannel() const {
 
 void Pwm::setFreq(uint32_t freq) {
     if (!freq) { freq = 1; }
-    if (freq > (PWM_DEFAULT_CLOCK / 2)) { freq = PWM_DEFAULT_CLOCK / 2; }
+    if (freq > (kPwmDefaultClock / 2)) { freq = kPwmDefaultClock / 2; }
     if (freq == freq_) { return; }
     // set frequency
     // determine top given Hz - assumes free-running counter rather than
     // phase-correct
-    // pwm clock should now be running at PWM_DEFAULT_CLOCK
+    // pwm clock should now be running at kPwmDefaultClock
     pwm_set_clkdiv(slice_, divider_);
-    uint32_t top =  PWM_DEFAULT_CLOCK / freq -1;
+    uint32_t top =  kPwmDefaultClock / freq -1;
     pwm_set_wrap(slice_, top);
     freq_ = freq;
 }
@@ -79,7 +79,7 @@ void Pwm::setDuty(float duty) {
     if (duty > 100.0f) duty = 100.0f;
     if (duty == duty_) { return; }
     // set duty cycle
-    uint32_t top =  PWM_DEFAULT_CLOCK / freq_ -1;
+    uint32_t top =  kPwmDefaultClock / freq_ -1;
     // calculate channel level from given duty cycle in %
     uint16_t level = (uint16_t)((top + 1.0f) * duty / 100.0f);
     pwm_set_chan_level(slice_, channel_, level);

@@ -30,19 +30,19 @@ bool FlashTest::compareData_(const uint8_t *a, const uint8_t *b, size_t len) {
 // ---------------------------------------------------------------------------
 
 TEST_F(FlashTest, read_write_verify) {
-    constexpr size_t BUFFER_SIZE = 1024;
-    uint8_t *buffer = new uint8_t[BUFFER_SIZE]();
+    constexpr size_t kBufferSize = 1024;
+    uint8_t *buffer = new uint8_t[kBufferSize]();
     std::vector<uint8_t> zero(PICO_FLASH_SIZE_BYTES, 0);
-    Flash::read(buffer, BUFFER_SIZE);
-    EXPECT_EQ(compareData_(zero.data(), buffer, BUFFER_SIZE), false);
-    for (size_t i = 0; i < BUFFER_SIZE; i++) {
+    Flash::read(buffer, kBufferSize);
+    EXPECT_EQ(compareData_(zero.data(), buffer, kBufferSize), false);
+    for (size_t i = 0; i < kBufferSize; i++) {
         buffer[i] = i & 0xFF;
     }
     EXPECT_EQ(Flash::verify(nullptr, 0), false);
-    EXPECT_EQ(Flash::verify(buffer, BUFFER_SIZE), false);
-    Flash::write(buffer, BUFFER_SIZE);
-    EXPECT_EQ(Flash::verify(buffer, BUFFER_SIZE), true);
-    Flash::read(buffer, BUFFER_SIZE);
-    EXPECT_EQ(compareData_(zero.data(), buffer, BUFFER_SIZE), false);
+    EXPECT_EQ(Flash::verify(buffer, kBufferSize), false);
+    Flash::write(buffer, kBufferSize);
+    EXPECT_EQ(Flash::verify(buffer, kBufferSize), true);
+    Flash::read(buffer, kBufferSize);
+    EXPECT_EQ(compareData_(zero.data(), buffer, kBufferSize), false);
     delete[] buffer;
 }

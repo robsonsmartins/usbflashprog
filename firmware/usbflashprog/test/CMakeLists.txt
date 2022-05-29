@@ -14,9 +14,12 @@ set(sources
     ../hal/pwm.cpp
     ../hal/multicore.cpp
     ../hal/flash.cpp
+    ../hal/string.cpp
+    ../hal/serial.cpp
     ../circuits/74hc595.cpp
     ../circuits/dc2dc.cpp
     ../modules/vgenerator.cpp
+    ../modules/runner.cpp
     hal/gpio_test.cpp 
     hal/adc_test.cpp 
     hal/pwm_test.cpp 

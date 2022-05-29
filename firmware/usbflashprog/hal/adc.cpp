@@ -24,8 +24,8 @@
 
 // ---------------------------------------------------------------------------
 
-constexpr uint GPIO_PIN_ADC_CHANNEL_0 = 26;
-constexpr uint ADC_MAX_CHANNEL = 3;
+constexpr uint kGpioPinAdcChannel0 = 26;
+constexpr uint kAdcMaxChannel = 3;
 
 /** @cond */
 float __not_in_flash_func(adc_capture)(uint channel,
@@ -34,7 +34,7 @@ float __not_in_flash_func(adc_capture)(uint channel,
 
 // ---------------------------------------------------------------------------
 
-Adc::Adc(): vref_(DEFAULT_VREF) {
+Adc::Adc(): vref_(kAdcDefaultVRef) {
     adc_init();
 }
 
@@ -67,10 +67,10 @@ float Adc::capture(uint channel, float* buf, size_t size) {
 }
 
 bool Adc::initChannel_(uint channel) {
-    if (channel > ADC_MAX_CHANNEL) { return false; }
+    if (channel > kAdcMaxChannel) { return false; }
     if (initChannels_.find(channel) != initChannels_.end()) { return true; }
     // Make sure GPIO is high-impedance, no pullups etc
-    adc_gpio_init(channel + GPIO_PIN_ADC_CHANNEL_0);
+    adc_gpio_init(channel + kGpioPinAdcChannel0);
     initChannels_.insert(channel);
     return true;
 }

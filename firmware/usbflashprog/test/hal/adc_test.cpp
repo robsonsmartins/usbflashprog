@@ -43,7 +43,7 @@ float AdcTest::mean_(const float* buf, size_t size) {
 TEST_F(AdcTest, capture) {
     float buf[512];
     static uint16_t meanMockData =
-        (RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2;
+        (kRawAdcData[0] + kRawAdcData[1]) / 2;
     EXPECT_NEAR(adc_.capture(0),
         AdcTest::calculate_(meanMockData), 0.2f);
     EXPECT_NEAR(adc_.capture(0, 1024),

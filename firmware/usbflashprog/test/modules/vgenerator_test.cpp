@@ -82,7 +82,7 @@ TEST_F(VGeneratorTest, set_get_v_duty) {
     vGenerator_.vdd.setV(5.0f);
     EXPECT_EQ(vGenerator_.vdd.getVTarget(), 5.0f);
     float vActual =
-        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+        calculate_((kRawAdcData[0] + kRawAdcData[1]) / 2,
                     vGenConfig_.vdd.adcVref);
     MultiCore::msleep(10);
     EXPECT_NEAR(vGenerator_.vdd.getV(), vActual, 0.2f);
@@ -103,7 +103,7 @@ TEST_F(VGeneratorTest, set_get_v_duty) {
     vGenerator_.vpp.setV(12.0f);
     EXPECT_EQ(vGenerator_.vpp.getVTarget(), 12.0f);
     vActual =
-        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+        calculate_((kRawAdcData[0] + kRawAdcData[1]) / 2,
                     vGenConfig_.vpp.adcVref);
     MultiCore::msleep(10);
     EXPECT_NEAR(vGenerator_.vpp.getV(), vActual, 0.2f);
@@ -198,13 +198,13 @@ TEST_F(VGeneratorTest, on_off) {
 TEST_F(VGeneratorTest, calibration) {
     vGenerator_.start();
     float vActual =
-        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+        calculate_((kRawAdcData[0] + kRawAdcData[1]) / 2,
                     vGenConfig_.vdd.adcVref);
     vGenerator_.vdd.initCalibration(vActual);
     vGenerator_.vdd.saveCalibration(vActual);
     VGenerator newVGen;
     vActual =
-        calculate_((RAW_ADC_DATA[0] + RAW_ADC_DATA[1]) / 2,
+        calculate_((kRawAdcData[0] + kRawAdcData[1]) / 2,
                     vGenConfig_.vpp.adcVref);
     vGenerator_.vpp.initCalibration(vActual);
     vGenerator_.vpp.saveCalibration(vActual);

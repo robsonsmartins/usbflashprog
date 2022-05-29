@@ -17,22 +17,22 @@
 
 #include "circuits/dc2dc.hpp"
 
-constexpr float DC2DC_DEFAULT_ADC_BUFFER_SIZE = 1000;
+constexpr float kDc2DcDefaultAdcBufferSize = 1000;
 
 // ---------------------------------------------------------------------------
 
 Dc2DcConfig::Dc2DcConfig():
         pwmPin(0xFF),
-        pwmFreq(Pwm::PWM_DEFAULT_FREQ),
-        adcVref(Adc::DEFAULT_VREF),
+        pwmFreq(Pwm::kPwmDefaultFreq),
+        adcVref(Adc::kAdcDefaultVRef),
         adcChannel(0xFF),
         divider(1.0f),
-        pwmMinDuty(PWM_MIN_DUTY_CYCLE_DEFAULT),
-        pwmMaxDuty(PWM_MAX_DUTY_CYCLE_DEFAULT),
-        pwmSlowStepDuty(PWM_SLOW_STEP_DUTY_CYCLE_DEFAULT),
-        pwmFastStepDuty(PWM_FAST_STEP_DUTY_CYCLE_DEFAULT),
-        pwmToleranceToFast(PWM_TOLERANCE_TO_FAST_DEFAULT),
-        vTolerance(DC2DC_VOUT_TOLERANCE_DEFAULT) {}
+        pwmMinDuty(kPwmMinDutyCycleDefault),
+        pwmMaxDuty(kPwmMaxDutyCycleDefault),
+        pwmSlowStepDuty(kPwmSlowStepDutyCycleDefault),
+        pwmFastStepDuty(kPwmFastStepDutyCycleDefault),
+        pwmToleranceToFast(kPwmToleranceToFastDefault),
+        vTolerance(kDc2DcVoutToleranceDefault) {}
 
 Dc2DcConfig::Dc2DcConfig(uint pwmPin, uint adcChannel, float divider,
                          uint32_t pwmFreq, float adcVref,
@@ -201,6 +201,6 @@ bool Dc2Dc::isValidConfig_() const {
 }
 
 float Dc2Dc::measureV_() const {
-    return (adc_->capture(config_.adcChannel, DC2DC_DEFAULT_ADC_BUFFER_SIZE)
+    return (adc_->capture(config_.adcChannel, kDc2DcDefaultAdcBufferSize)
         * config_.divider + calibration_);
 }

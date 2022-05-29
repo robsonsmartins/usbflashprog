@@ -1,9 +1,20 @@
 var searchData=
 [
-  ['main_2ecpp_140',['main.cpp',['../a01381.html',1,'']]],
-  ['tdata_141',['TData',['../a00958.html#a267c476c54a8621ca82d7e8e9c451769',1,'HC595']]],
-  ['teardown_142',['TearDown',['../a01018.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'HC595Test::TearDown()'],['../a01022.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'Dc2DcTest::TearDown()'],['../a01026.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'AdcTest::TearDown()'],['../a01030.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'FlashTest::TearDown()'],['../a01034.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'GpioTest::TearDown()'],['../a01038.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'MultiCoreTest::TearDown()'],['../a01042.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'PwmTest::TearDown()'],['../a01050.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'VGeneratorTest::TearDown()']]],
-  ['toggle_143',['toggle',['../a01002.html#ad277193b2dca0bab1e0ad24d45407dc3',1,'GenericGenerator']]],
-  ['togglebit_144',['toggleBit',['../a00958.html#ad1e527258a4fef33244368bfa4fcb5ec',1,'HC595']]],
-  ['togglepin_145',['togglePin',['../a00978.html#a1c3b9f8756bf4dff69c62b70c5cd3a1e',1,'Gpio']]]
+  ['savecalibration_218',['saveCalibration',['../a01033.html#afe384df618d5cf4af2c0aaba94e8a71e',1,'GenericGenerator']]],
+  ['serial_219',['Serial',['../a01005.html',1,'Serial'],['../a01005.html#a36f90bf118e9113ae398f4cf60e97d4d',1,'Serial::Serial()']]],
+  ['serial_2ecpp_220',['serial.cpp',['../a00047.html',1,'']]],
+  ['serial_2ehpp_221',['serial.hpp',['../a00050.html',1,'']]],
+  ['setbit_222',['setBit',['../a00973.html#a541f3690d6f2a0da8743b0335f216f49',1,'HC595']]],
+  ['setcalibration_223',['setCalibration',['../a00981.html#ab2184b6cd48866d49f5a0538986fe540',1,'Dc2Dc']]],
+  ['setduty_224',['setDuty',['../a01001.html#a30aae17e05a05890a47bd3e346d9e84d',1,'Pwm']]],
+  ['setfreq_225',['setFreq',['../a01001.html#a3b94395b3dcff3869dd1f0a376d7eb65',1,'Pwm']]],
+  ['setpin_226',['setPin',['../a00993.html#a6cf7db607816ea101fa7629f4731f40e',1,'Gpio']]],
+  ['setup_227',['SetUp',['../a01049.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'HC595Test::SetUp()'],['../a01081.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'VGeneratorTest::SetUp()'],['../a01073.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'PwmTest::SetUp()'],['../a01069.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'MultiCoreTest::SetUp()'],['../a01065.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'GpioTest::SetUp()'],['../a01061.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'FlashTest::SetUp()'],['../a01057.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'AdcTest::SetUp()'],['../a01053.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'Dc2DcTest::SetUp()']]],
+  ['setv_228',['setV',['../a00981.html#a16b1b73e4a129ac9a923989586bda307',1,'Dc2Dc::setV()'],['../a01033.html#a69d4e1d6d89ed7be0fd7bd645ea85240',1,'GenericGenerator::setV()']]],
+  ['split_229',['split',['../a01009.html#a114a13fddbd29e28a87d7700d3176b8a',1,'StringUtils']]],
+  ['start_230',['start',['../a00981.html#aad5997aaaa2d622f0ca57f8b24a51a7b',1,'Dc2Dc::start()'],['../a01001.html#a60de64d75454385b23995437f1d72669',1,'Pwm::start()'],['../a01045.html#aad5997aaaa2d622f0ca57f8b24a51a7b',1,'VGenerator::start()']]],
+  ['stop_231',['stop',['../a01045.html#a8c528baf37154d347366083f0f816846',1,'VGenerator::stop()'],['../a00997.html#a8c528baf37154d347366083f0f816846',1,'MultiCore::stop()'],['../a01001.html#a8c528baf37154d347366083f0f816846',1,'Pwm::stop()'],['../a00981.html#a68a350717fe6bf9012843e7c977d87b2',1,'Dc2Dc::stop()']]],
+  ['string_2ecpp_232',['string.cpp',['../a00053.html',1,'']]],
+  ['string_2ehpp_233',['string.hpp',['../a00056.html',1,'']]],
+  ['stringutils_234',['StringUtils',['../a01009.html',1,'']]]
 ];

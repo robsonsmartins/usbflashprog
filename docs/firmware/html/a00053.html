@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: vgenerator.hpp File Reference</title>
+<title>USB EPROM/Flash Programmer: string.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,66 +62,44 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_e05d7e2b1ecd646af5bb94391405f3b5.html">modules</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_52c912f73dac9c4c0e442232e1b2bd80.html">hal</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">vgenerator.hpp File Reference<div class="ingroups"><a class="el" href="a00140.html">Firmware Project</a></div></div>  </div>
+<div class="title">string.cpp File Reference<div class="ingroups"><a class="el" href="a00155.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header of the Voltage Generator Classes.  
+<p>Implementation of the String Handling Helper Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00032.html">hal/gpio.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00038.html">hal/multicore.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00011.html">circuits/dc2dc.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00005.html">circuits/74hc595.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;sstream&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;iomanip&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00056.html">hal/string.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for vgenerator.hpp:</div>
+Include dependency graph for string.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00054.png" border="0" usemap="#avgenerator_8hpp" alt=""/></div>
-<map name="avgenerator_8hpp" id="avgenerator_8hpp">
-<area shape="rect" title="Header of the Voltage Generator Classes." alt="" coords="117,5,237,32"/>
-<area shape="rect" href="a00032.html" title="Header of the Pico GPIO Class." alt="" coords="105,155,207,181"/>
-<area shape="rect" href="a00038.html" title="Header of the Pico Multi Core Class." alt="" coords="24,80,160,107"/>
-<area shape="rect" href="a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="365,80,504,107"/>
-<area shape="rect" href="a00005.html" title="Header of the 74HC595 Class." alt="" coords="185,80,341,107"/>
-<area shape="rect" title=" " alt="" coords="240,229,283,256"/>
-<area shape="rect" href="a00020.html" title="Header of the Pico ADC Class." alt="" coords="318,155,415,181"/>
-<area shape="rect" href="a00044.html" title="Header of the Pico PWM Class." alt="" coords="440,155,547,181"/>
-<area shape="rect" title=" " alt="" coords="231,155,294,181"/>
+<div class="center"><img src="a00054.png" border="0" usemap="#astring_8cpp" alt=""/></div>
+<map name="astring_8cpp" id="astring_8cpp">
+<area shape="rect" title="Implementation of the String Handling Helper Class." alt="" coords="317,5,403,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" title=" " alt="" coords="104,80,184,107"/>
+<area shape="rect" title=" " alt="" coords="208,80,283,107"/>
+<area shape="rect" title=" " alt="" coords="437,155,499,181"/>
+<area shape="rect" title=" " alt="" coords="357,80,443,107"/>
+<area shape="rect" title=" " alt="" coords="467,80,533,107"/>
+<area shape="rect" title=" " alt="" coords="558,80,621,107"/>
+<area shape="rect" href="a00056.html" title="Header of the String Handling Helper Class." alt="" coords="645,80,755,107"/>
+<area shape="rect" title=" " alt="" coords="671,155,729,181"/>
 </map>
 </div>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00990.html">VddConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the configuration fields for a <a class="el" href="a01006.html" title="Voltage (VDD) Generator Class.">VddGenerator</a> class.  <a href="a00990.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00994.html">VppConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the configuration fields for a <a class="el" href="a01010.html" title="Voltage (VPP) Generator Class.">VppGenerator</a> class.  <a href="a00994.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00998.html">VGenConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the configuration fields for a <a class="el" href="a01014.html" title="Voltage (VPP/VDD) Generator Class.">VGenerator</a> class.  <a href="a00998.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01002.html">GenericGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Voltage Generator Class.  <a href="a01002.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html">VddGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voltage (VDD) Generator Class.  <a href="a01006.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01010.html">VppGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voltage (VPP) Generator Class.  <a href="a01010.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01014.html">VGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voltage (VPP/VDD) Generator Class.  <a href="a01014.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header of the Voltage Generator Classes. </p>
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of the String Handling Helper Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

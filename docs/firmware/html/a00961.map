@@ -1,5 +1,0 @@
-<map id="Dc2DcConfig" name="Dc2DcConfig">
-<area shape="rect" id="node1" title="Defines the configuration fields for a Dc2Dc class." alt="" coords="21,5,239,435"/>
-<area shape="rect" id="node2" href="$a00990.html" title="Defines the configuration fields for a VddGenerator class." alt="" coords="5,505,119,611"/>
-<area shape="rect" id="node3" href="$a00994.html" title="Defines the configuration fields for a VppGenerator class." alt="" coords="143,483,256,633"/>
-</map>

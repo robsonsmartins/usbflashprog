@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: dc2dc_test.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: runner.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,35 +62,49 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_496ebe1283898bef521ed26ac28bcb3e.html">circuits</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_e05d7e2b1ecd646af5bb94391405f3b5.html">modules</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">dc2dc_test.cpp File Reference<div class="ingroups"><a class="el" href="a00141.html">Unit Tests</a></div></div>  </div>
+<div class="title">runner.cpp File Reference<div class="ingroups"><a class="el" href="a00155.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of Unit Test for DC To DC Converter Class.  
+<p>Implementation of the Communication <a class="el" href="a01017.html" title="Communication Runner Class.">Runner</a> Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00068.html">dc2dc_test.hpp</a>&quot;</code><br />
-<code>#include &quot;mock/hardware/adc.h&quot;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00014.html">config.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00056.html">hal/string.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00068.html">modules/runner.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for dc2dc_test.cpp:</div>
+Include dependency graph for runner.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00066.png" border="0" usemap="#adc2dc__test_8cpp" alt=""/></div>
-<map name="adc2dc__test_8cpp" id="adc2dc__test_8cpp">
-<area shape="rect" title="Implementation of Unit Test for DC To DC Converter Class." alt="" coords="70,5,189,32"/>
-<area shape="rect" href="a00068.html" title="Header of Unit Test for DC To DC Converter Class." alt="" coords="69,80,189,107"/>
-<area shape="rect" title=" " alt="" coords="5,155,109,181"/>
-<area shape="rect" href="a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="133,155,272,181"/>
-<area shape="rect" href="a00020.html" title="Header of the Pico ADC Class." alt="" coords="90,229,187,256"/>
-<area shape="rect" href="a00044.html" title="Header of the Pico PWM Class." alt="" coords="212,229,319,256"/>
-<area shape="rect" title=" " alt="" coords="117,304,160,331"/>
+<div class="center"><img src="a00066.png" border="0" usemap="#arunner_8cpp" alt=""/></div>
+<map name="arunner_8cpp" id="arunner_8cpp">
+<area shape="rect" title="Implementation of the Communication Runner Class." alt="" coords="451,5,542,32"/>
+<area shape="rect" title=" " alt="" coords="316,80,379,107"/>
+<area shape="rect" href="a00014.html" title="Configuration of UsbFlashProg." alt="" coords="403,80,492,107"/>
+<area shape="rect" href="a00056.html" title="Header of the String Handling Helper Class." alt="" coords="700,155,811,181"/>
+<area shape="rect" href="a00068.html" title="Header of the Communication Runner Class." alt="" coords="595,80,745,107"/>
+<area shape="rect" href="a00020.html" title="Header of the Pico ADC Class." alt="" coords="5,304,103,331"/>
+<area shape="rect" href="a00044.html" title="Header of the Pico PWM Class." alt="" coords="127,304,234,331"/>
+<area shape="rect" href="a00074.html" title="Header of the Voltage Generator Classes." alt="" coords="357,155,537,181"/>
+<area shape="rect" title=" " alt="" coords="229,379,271,405"/>
+<area shape="rect" href="a00032.html" title="Header of the Pico GPIO Class." alt="" coords="400,304,503,331"/>
+<area shape="rect" href="a00038.html" title="Header of the Pico Multi Core Class." alt="" coords="274,229,410,256"/>
+<area shape="rect" href="a00011.html" title="Header of the DC To DC Converter Class." alt="" coords="111,229,250,256"/>
+<area shape="rect" href="a00005.html" title="Header of the 74HC595 Class." alt="" coords="485,229,641,256"/>
+<area shape="rect" title=" " alt="" coords="632,304,695,331"/>
+<area shape="rect" title=" " alt="" coords="819,229,878,256"/>
+<area shape="rect" href="a00050.html" title="Header of the Pico Serial Communication Class." alt="" coords="887,155,997,181"/>
+<area shape="rect" href="a00062.html" title="Opcodes for communication." alt="" coords="1021,155,1185,181"/>
+<area shape="rect" title=" " alt="" coords="902,229,982,256"/>
+<area shape="rect" title=" " alt="" coords="1078,229,1129,256"/>
 </map>
 </div>
 </div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of Unit Test for DC To DC Converter Class. </p>
+<div class="textblock"><p>Implementation of the Communication <a class="el" href="a01017.html" title="Communication Runner Class.">Runner</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

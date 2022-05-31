@@ -240,7 +240,7 @@ float Runner::getParamsAsFloat_() {
 }
 
 std::string Runner::createParamFromByte_(uint8_t src) {
-    return StringUtils::fromInt(src, 16);
+    return StringUtils::fromInt(src, 16, 2, '0');
 }
 
 std::string Runner::createParamFromBool_(bool src) {

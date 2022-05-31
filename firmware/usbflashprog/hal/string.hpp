@@ -42,6 +42,12 @@ class StringUtils {
      */
     static std::string upper(const std::string &src);
     /**
+     * @brief Converts a string to lowercase.
+     * @param src Source string.
+     * @return String in lowercase. 
+     */
+    static std::string lower(const std::string &src);
+    /**
      * @brief Removes blank characters from left/right of the string.
      * @param src Source string.
      * @return Cleaned string.
@@ -51,16 +57,19 @@ class StringUtils {
      * @brief Splits a string into a vector, from a separator. 
      * @param src Source string.
      * @param separator Separator character.
+     * @param trim If true, cleans each token before add into vector.
+     *   @see trim(const std::string&). Default is false. 
      * @return Vector with string tokens.
      */
-    static TStringVector split(const std::string &src, char separator);
+    static TStringVector split(const std::string &src,
+                               char separator, bool trim = false);
     /**
      * @brief Converts a string to an integer value.
      * @param src Source string.
      * @param base Numerical base. Default is 10 (decimal).
      * @return String as integer value, or zero if fail.
      */
-    static int toInt(const std::string &src, int base = 10);
+    static int toInt(const std::string &src, uint base = 10);
     /**
      * @brief Converts a string to a float point value.
      * @param src Source string.
@@ -71,19 +80,20 @@ class StringUtils {
      * @brief Converts an integer value to a string.
      * @param src Integer value.
      * @param base Numerical base. Default is 10 (decimal).
+     * @param digits Number of min digits to format
+     *  (left pad with <i>fill</i>). Default is zero.
+     * @param fill Fill character. Default is space.
      * @return Numerical value as string.
      */
-    static std::string fromInt(int src, int base = 10);
+    static std::string fromInt(int src, uint base = 10,
+                               uint digits = 0, char fill = ' ');
     /**
      * @brief Converts a float point value to a string.
      * @param src Float point value.
+     * @param precision Number of decimals (precision). Default is 3.
      * @return Numerical value as string.
      */
-    static std::string fromFloat(float src);
-
- private:
-    /* @brief Constructor. */
-    StringUtils();
+    static std::string fromFloat(float src, uint precision = 3);
 };
 
 #endif  // HAL_STRING_HPP_

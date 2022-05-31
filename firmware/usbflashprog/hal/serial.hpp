@@ -52,20 +52,23 @@ class Serial {
     size_t getBuf(void *buf, size_t len, uint32_t us);
     /**
      * @brief Gets a string (blocks until enter/0x0A).
+     * @param us Timeout, in microseconds. Default is zero (wait for a 0x0A).
      * @return The string.
      */
-    std::string getStr();
+    std::string getStr(uint32_t us = 0);
     /**
      * @brief Gets an integer value (blocks until enter/0x0A).
      * @param base Numerical base. Default is 10 (decimal).
+     * @param us Timeout, in microseconds. Default is zero (wait for a 0x0A).
      * @return The numeric value.
      */
-    int getInt(int base = 10);
+    int getInt(uint base = 10, uint32_t us = 0);
     /**
      * @brief Gets a float point value (blocks until enter/0x0A).
+     * @param us Timeout, in microseconds. Default is zero (wait for a 0x0A).
      * @return The numeric value.
      */
-    float getFloat();
+    float getFloat(uint32_t us = 0);
     /**
      * @brief Puts a single character.
      * @param c Character to write.
@@ -89,15 +92,20 @@ class Serial {
      * @brief Puts an integer value.
      * @param src Numeric value to write.
      * @param base Numerical base. Default is 10 (decimal).
+     * @param digits Number of min digits to format
+     *  (left pad with <i>fill</i>). Default is zero.
+     * @param fill Fill character. Default is space.
      * @param flush If true, flushes the output. Default is false.
      */
-    void putInt(int src, int base = 10, bool flush = false);
+    void putInt(int src, uint base = 10,
+                uint digits = 0, char fill = ' ', bool flush = false);
     /**
      * @brief Puts a float point value.
      * @param src Numeric value to write.
+     * @param precision Number of decimals (precision). Default is 3.
      * @param flush If true, flushes the output. Default is false.
      */
-    void putFloat(float src, bool flush = false);
+    void putFloat(float src, uint precision = 3, bool flush = false);
     /**
      * @brief Returns the output stream object.
      * @return Reference to the output stream object.

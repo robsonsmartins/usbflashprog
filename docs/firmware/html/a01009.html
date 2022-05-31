@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: StringUtils Class Reference</title>
+<title>USB EPROM/Flash Programmer: MultiCore Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,106 +64,371 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="a01006.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">StringUtils Class Reference<div class="ingroups"><a class="el" href="a00155.html">Firmware Project</a></div></div>  </div>
+<div class="title">MultiCore Class Reference<div class="ingroups"><a class="el" href="a00167.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>String Handling Helper Class.  
+<p>Pico Multi Core Class.  
  <a href="a01009.html#details">More...</a></p>
 
-<p><code>#include &lt;string.hpp&gt;</code></p>
+<p><code>#include &lt;multicore.hpp&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aca93bf106e89f328fcc00d840d315984"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#aca93bf106e89f328fcc00d840d315984">TStringVector</a></td></tr>
-<tr class="memdesc:aca93bf106e89f328fcc00d840d315984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vector of strings type.  <a href="a01009.html#aca93bf106e89f328fcc00d840d315984">More...</a><br /></td></tr>
-<tr class="separator:aca93bf106e89f328fcc00d840d315984"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3202b2b32249841fb23736b0fada134"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134">CoreStatus</a> { <a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134aeebaf238abaccf7838add68e869d6fae">csStopped</a>
+, <a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134a85b80ef015e62e96a38aabb35c35ae11">csRunning</a>
+, <a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134a31605420e9fef7299ad88f49cf5db7ee">csStarting</a>
+, <a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134a697cfc4d8cf663ec66183e4c28a0dc67">csStopping</a>
+ }</td></tr>
+<tr class="memdesc:ab3202b2b32249841fb23736b0fada134"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines possible values for CPU core status.  <a href="a01009.html#ab3202b2b32249841fb23736b0fada134">More...</a><br /></td></tr>
+<tr class="separator:ab3202b2b32249841fb23736b0fada134"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3100d80684255d7a0a4c030944d1bad9"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a3100d80684255d7a0a4c030944d1bad9">MultiCoreEntry</a>) (<a class="el" href="a01009.html">MultiCore</a> &amp;)</td></tr>
+<tr class="memdesc:a3100d80684255d7a0a4c030944d1bad9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Entry point to second core routine.  <a href="a01009.html#a3100d80684255d7a0a4c030944d1bad9">More...</a><br /></td></tr>
+<tr class="separator:a3100d80684255d7a0a4c030944d1bad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a4a5b128f369424d9b4b4cfe064cd991d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a4a5b128f369424d9b4b4cfe064cd991d">MultiCore</a> (<a class="el" href="a01009.html#a3100d80684255d7a0a4c030944d1bad9">MultiCoreEntry</a> entry)</td></tr>
+<tr class="memdesc:a4a5b128f369424d9b4b4cfe064cd991d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01009.html#a4a5b128f369424d9b4b4cfe064cd991d">More...</a><br /></td></tr>
+<tr class="separator:a4a5b128f369424d9b4b4cfe064cd991d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc2254ee9a84e82214d268a21d80b2aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#adc2254ee9a84e82214d268a21d80b2aa">~MultiCore</a> ()</td></tr>
+<tr class="memdesc:adc2254ee9a84e82214d268a21d80b2aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="a01009.html#adc2254ee9a84e82214d268a21d80b2aa">More...</a><br /></td></tr>
+<tr class="separator:adc2254ee9a84e82214d268a21d80b2aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f3d8663defce2dbc704aaaa789d7046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a0f3d8663defce2dbc704aaaa789d7046">launch</a> ()</td></tr>
+<tr class="memdesc:a0f3d8663defce2dbc704aaaa789d7046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the entry point routine into second CPU core.  <a href="a01009.html#a0f3d8663defce2dbc704aaaa789d7046">More...</a><br /></td></tr>
+<tr class="separator:a0f3d8663defce2dbc704aaaa789d7046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c528baf37154d347366083f0f816846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a8c528baf37154d347366083f0f816846">stop</a> ()</td></tr>
+<tr class="memdesc:a8c528baf37154d347366083f0f816846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the execution of second CPU core.  <a href="a01009.html#a8c528baf37154d347366083f0f816846">More...</a><br /></td></tr>
+<tr class="separator:a8c528baf37154d347366083f0f816846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad619b8b51adc7874204abd71080cd90e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#ad619b8b51adc7874204abd71080cd90e">isRunning</a> () const</td></tr>
+<tr class="memdesc:ad619b8b51adc7874204abd71080cd90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return if second CPU core is running.  <a href="a01009.html#ad619b8b51adc7874204abd71080cd90e">More...</a><br /></td></tr>
+<tr class="separator:ad619b8b51adc7874204abd71080cd90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade698d03ef3275ee05cb330e957fba3c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#ade698d03ef3275ee05cb330e957fba3c">isStopRequested</a> () const</td></tr>
+<tr class="memdesc:ade698d03ef3275ee05cb330e957fba3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if the second CPU core has been requested to stop.  <a href="a01009.html#ade698d03ef3275ee05cb330e957fba3c">More...</a><br /></td></tr>
+<tr class="separator:ade698d03ef3275ee05cb330e957fba3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca46d534f3068319254b75a8a330f57f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134">CoreStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#aca46d534f3068319254b75a8a330f57f">getStatus</a> () const</td></tr>
+<tr class="memdesc:aca46d534f3068319254b75a8a330f57f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the status of second CPU core.  <a href="a01009.html#aca46d534f3068319254b75a8a330f57f">More...</a><br /></td></tr>
+<tr class="separator:aca46d534f3068319254b75a8a330f57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6ad27ff5071386aaaa9cec2c87db188"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#ae6ad27ff5071386aaaa9cec2c87db188">putParam</a> (uintptr_t src)</td></tr>
+<tr class="memdesc:ae6ad27ff5071386aaaa9cec2c87db188"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends a 32-bit parameter to second core routine.  <a href="a01009.html#ae6ad27ff5071386aaaa9cec2c87db188">More...</a><br /></td></tr>
+<tr class="separator:ae6ad27ff5071386aaaa9cec2c87db188"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26e19491f1bf205d3f10f2d6851d5739"><td class="memItemLeft" align="right" valign="top">uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a26e19491f1bf205d3f10f2d6851d5739">getParam</a> ()</td></tr>
+<tr class="memdesc:a26e19491f1bf205d3f10f2d6851d5739"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receives a 32-bit parameter sent from first core routine.  <a href="a01009.html#a26e19491f1bf205d3f10f2d6851d5739">More...</a><br /></td></tr>
+<tr class="separator:a26e19491f1bf205d3f10f2d6851d5739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa81aed607133209dade63a226818224d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#aa81aed607133209dade63a226818224d">lock</a> ()</td></tr>
+<tr class="memdesc:aa81aed607133209dade63a226818224d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Locks execution line (using mutex).  <a href="a01009.html#aa81aed607133209dade63a226818224d">More...</a><br /></td></tr>
+<tr class="separator:aa81aed607133209dade63a226818224d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9278be8203e1c42e2619179882ae4403"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a9278be8203e1c42e2619179882ae4403">unlock</a> ()</td></tr>
+<tr class="memdesc:a9278be8203e1c42e2619179882ae4403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unlocks execution line (using mutex).  <a href="a01009.html#a9278be8203e1c42e2619179882ae4403">More...</a><br /></td></tr>
+<tr class="separator:a9278be8203e1c42e2619179882ae4403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a89663fa19e5ffa424d4646cf31bb68d5"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a89663fa19e5ffa424d4646cf31bb68d5">upper</a> (const std::string &amp;src)</td></tr>
-<tr class="memdesc:a89663fa19e5ffa424d4646cf31bb68d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to uppercase.  <a href="a01009.html#a89663fa19e5ffa424d4646cf31bb68d5">More...</a><br /></td></tr>
-<tr class="separator:a89663fa19e5ffa424d4646cf31bb68d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98da230b15f694f50cf371d4f0057933"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a98da230b15f694f50cf371d4f0057933">trim</a> (const std::string &amp;src)</td></tr>
-<tr class="memdesc:a98da230b15f694f50cf371d4f0057933"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes blank characters from left/right of the string.  <a href="a01009.html#a98da230b15f694f50cf371d4f0057933">More...</a><br /></td></tr>
-<tr class="separator:a98da230b15f694f50cf371d4f0057933"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a114a13fddbd29e28a87d7700d3176b8a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a01009.html#aca93bf106e89f328fcc00d840d315984">TStringVector</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a114a13fddbd29e28a87d7700d3176b8a">split</a> (const std::string &amp;src, char separator)</td></tr>
-<tr class="memdesc:a114a13fddbd29e28a87d7700d3176b8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Splits a string into a vector, from a separator.  <a href="a01009.html#a114a13fddbd29e28a87d7700d3176b8a">More...</a><br /></td></tr>
-<tr class="separator:a114a13fddbd29e28a87d7700d3176b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63069683ddea3e5027db609f275737ef"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a63069683ddea3e5027db609f275737ef">toInt</a> (const std::string &amp;src, int base=10)</td></tr>
-<tr class="memdesc:a63069683ddea3e5027db609f275737ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to an integer value.  <a href="a01009.html#a63069683ddea3e5027db609f275737ef">More...</a><br /></td></tr>
-<tr class="separator:a63069683ddea3e5027db609f275737ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca12e0dd746ab2c2095c0869fe9bd700"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#aca12e0dd746ab2c2095c0869fe9bd700">toFloat</a> (const std::string &amp;src)</td></tr>
-<tr class="memdesc:aca12e0dd746ab2c2095c0869fe9bd700"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a string to a float point value.  <a href="a01009.html#aca12e0dd746ab2c2095c0869fe9bd700">More...</a><br /></td></tr>
-<tr class="separator:aca12e0dd746ab2c2095c0869fe9bd700"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad66da8dcf2cb5f350a92332fdc3e05d6"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#ad66da8dcf2cb5f350a92332fdc3e05d6">fromInt</a> (int src, int base=10)</td></tr>
-<tr class="memdesc:ad66da8dcf2cb5f350a92332fdc3e05d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts an integer value to a string.  <a href="a01009.html#ad66da8dcf2cb5f350a92332fdc3e05d6">More...</a><br /></td></tr>
-<tr class="separator:ad66da8dcf2cb5f350a92332fdc3e05d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6d41251be41d02cdf3434bbee06c905"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#ad6d41251be41d02cdf3434bbee06c905">fromFloat</a> (float src)</td></tr>
-<tr class="memdesc:ad6d41251be41d02cdf3434bbee06c905"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a float point value to a string.  <a href="a01009.html#ad6d41251be41d02cdf3434bbee06c905">More...</a><br /></td></tr>
-<tr class="separator:ad6d41251be41d02cdf3434bbee06c905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5df1456e1b3afb7af60ea51a799b2365"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#a5df1456e1b3afb7af60ea51a799b2365">usleep</a> (uint64_t us)</td></tr>
+<tr class="memdesc:a5df1456e1b3afb7af60ea51a799b2365"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps the execution of current CPU core for a number of microseconds.  <a href="a01009.html#a5df1456e1b3afb7af60ea51a799b2365">More...</a><br /></td></tr>
+<tr class="separator:a5df1456e1b3afb7af60ea51a799b2365"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdc34726cf3d3983ac10dddfae06c54b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01009.html#acdc34726cf3d3983ac10dddfae06c54b">msleep</a> (uint32_t ms)</td></tr>
+<tr class="memdesc:acdc34726cf3d3983ac10dddfae06c54b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sleeps the execution of current CPU core for a number of milliseconds.  <a href="a01009.html#acdc34726cf3d3983ac10dddfae06c54b">More...</a><br /></td></tr>
+<tr class="separator:acdc34726cf3d3983ac10dddfae06c54b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>String Handling Helper Class. </p>
-<p>The purpose of this class is to handle strings. </p>
+<div class="textblock"><p>Pico Multi Core Class. </p>
+<p>The purpose of this class is to allow processing on the second CPU core on the board. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="aca93bf106e89f328fcc00d840d315984"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca93bf106e89f328fcc00d840d315984">&#9670;&nbsp;</a></span>TStringVector</h2>
+<a id="a3100d80684255d7a0a4c030944d1bad9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3100d80684255d7a0a4c030944d1bad9">&#9670;&nbsp;</a></span>MultiCoreEntry</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;std::string&gt; <a class="el" href="a01009.html#aca93bf106e89f328fcc00d840d315984">TStringVector</a></td>
+          <td class="memname">typedef void(* MultiCoreEntry) (<a class="el" href="a01009.html">MultiCore</a> &amp;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Vector of strings type. </p>
+<p>Entry point to second core routine. </p>
+<p>A valid routine to be used as an entry point for the second CPU core must be of this type.<br  />
+ </p>
+<p><b>For example</b>:<br  />
+ <code> void second_core_my_entry(MultiCore&amp; core) { ... } </code></p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="ab3202b2b32249841fb23736b0fada134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3202b2b32249841fb23736b0fada134">&#9670;&nbsp;</a></span>CoreStatus</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134">CoreStatus</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Defines possible values for CPU core status. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab3202b2b32249841fb23736b0fada134aeebaf238abaccf7838add68e869d6fae"></a>csStopped&#160;</td><td class="fielddoc"><p>Core is stopped. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab3202b2b32249841fb23736b0fada134a85b80ef015e62e96a38aabb35c35ae11"></a>csRunning&#160;</td><td class="fielddoc"><p>Core is running. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab3202b2b32249841fb23736b0fada134a31605420e9fef7299ad88f49cf5db7ee"></a>csStarting&#160;</td><td class="fielddoc"><p>Core is starting (initialization). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ab3202b2b32249841fb23736b0fada134a697cfc4d8cf663ec66183e4c28a0dc67"></a>csStopping&#160;</td><td class="fielddoc"><p>Core is stopping (finalization). </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a4a5b128f369424d9b4b4cfe064cd991d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a5b128f369424d9b4b4cfe064cd991d">&#9670;&nbsp;</a></span>MultiCore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01009.html">MultiCore</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a01009.html#a3100d80684255d7a0a4c030944d1bad9">MultiCoreEntry</a>&#160;</td>
+          <td class="paramname"><em>entry</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entry</td><td>Entry point (function) for second CPU core. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adc2254ee9a84e82214d268a21d80b2aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc2254ee9a84e82214d268a21d80b2aa">&#9670;&nbsp;</a></span>~MultiCore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">~<a class="el" href="a01009.html">MultiCore</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a89663fa19e5ffa424d4646cf31bb68d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89663fa19e5ffa424d4646cf31bb68d5">&#9670;&nbsp;</a></span>upper()</h2>
+<a id="a0f3d8663defce2dbc704aaaa789d7046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f3d8663defce2dbc704aaaa789d7046">&#9670;&nbsp;</a></span>launch()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string upper </td>
+          <td class="memname">void launch </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Runs the entry point routine into second CPU core. </p>
+
+</div>
+</div>
+<a id="a8c528baf37154d347366083f0f816846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c528baf37154d347366083f0f816846">&#9670;&nbsp;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Stops the execution of second CPU core. </p>
+
+</div>
+</div>
+<a id="ad619b8b51adc7874204abd71080cd90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad619b8b51adc7874204abd71080cd90e">&#9670;&nbsp;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return if second CPU core is running. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if second CPU core is running, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="ade698d03ef3275ee05cb330e957fba3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade698d03ef3275ee05cb330e957fba3c">&#9670;&nbsp;</a></span>isStopRequested()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isStopRequested </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns if the second CPU core has been requested to stop. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if second CPU core is stopping, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="aca46d534f3068319254b75a8a330f57f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca46d534f3068319254b75a8a330f57f">&#9670;&nbsp;</a></span>getStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134">MultiCore::CoreStatus</a> getStatus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the status of second CPU core. </p>
+<dl class="section return"><dt>Returns</dt><dd>Status value. One of CoreStatus values. </dd></dl>
+
+</div>
+</div>
+<a id="ae6ad27ff5071386aaaa9cec2c87db188"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6ad27ff5071386aaaa9cec2c87db188">&#9670;&nbsp;</a></span>putParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void putParam </td>
+          <td>(</td>
+          <td class="paramtype">uintptr_t&#160;</td>
           <td class="paramname"><em>src</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Converts a string to uppercase. </p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p>Sends a 32-bit parameter to second core routine. </p>
+<p>Sends a parameter to second CPU core routine.<br  />
+ Blocks the caller (on first core) until the second core processes this parameter through <a class="el" href="a01009.html#a26e19491f1bf205d3f10f2d6851d5739" title="Receives a 32-bit parameter sent from first core routine.">getParam()</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src</td><td>Source string. </td></tr>
+    <tr><td class="paramname">src</td><td>Value to send. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String in uppercase. </dd></dl>
 
 </div>
 </div>
-<a id="a98da230b15f694f50cf371d4f0057933"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98da230b15f694f50cf371d4f0057933">&#9670;&nbsp;</a></span>trim()</h2>
+<a id="a26e19491f1bf205d3f10f2d6851d5739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26e19491f1bf205d3f10f2d6851d5739">&#9670;&nbsp;</a></span>getParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uintptr_t getParam </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Receives a 32-bit parameter sent from first core routine. </p>
+<p>Receives a parameter sent from first CPU core routine.<br  />
+ Blocks the caller (on second core) until the first core sends one parameter through putParam(uint32_t). </p><dl class="section return"><dt>Returns</dt><dd>Value received. </dd></dl>
+
+</div>
+</div>
+<a id="aa81aed607133209dade63a226818224d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa81aed607133209dade63a226818224d">&#9670;&nbsp;</a></span>lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void lock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Locks execution line (using mutex). </p>
+<p>Protects code of the simultaneous write access (and race conditions). </p>
+
+</div>
+</div>
+<a id="a9278be8203e1c42e2619179882ae4403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9278be8203e1c42e2619179882ae4403">&#9670;&nbsp;</a></span>unlock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void unlock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unlocks execution line (using mutex). </p>
+<p>Protects code of the simultaneous write access (and race conditions). </p>
+
+</div>
+</div>
+<a id="a5df1456e1b3afb7af60ea51a799b2365"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5df1456e1b3afb7af60ea51a799b2365">&#9670;&nbsp;</a></span>usleep()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,10 +437,10 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string trim </td>
+          <td class="memname">void usleep </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>src</em></td><td>)</td>
+          <td class="paramtype">uint64_t&#160;</td>
+          <td class="paramname"><em>us</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -186,19 +451,18 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Removes blank characters from left/right of the string. </p>
+<p>Sleeps the execution of current CPU core for a number of microseconds. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src</td><td>Source string. </td></tr>
+    <tr><td class="paramname">us</td><td>Number of microseconds to sleep. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Cleaned string. </dd></dl>
 
 </div>
 </div>
-<a id="a114a13fddbd29e28a87d7700d3176b8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a114a13fddbd29e28a87d7700d3176b8a">&#9670;&nbsp;</a></span>split()</h2>
+<a id="acdc34726cf3d3983ac10dddfae06c54b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdc34726cf3d3983ac10dddfae06c54b">&#9670;&nbsp;</a></span>msleep()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,102 +471,10 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a01009.html#aca93bf106e89f328fcc00d840d315984">StringUtils::TStringVector</a> split </td>
+          <td class="memname">void msleep </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>separator</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Splits a string into a vector, from a separator. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>Source string. </td></tr>
-    <tr><td class="paramname">separator</td><td>Separator character. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Vector with string tokens. </dd></dl>
-
-</div>
-</div>
-<a id="a63069683ddea3e5027db609f275737ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63069683ddea3e5027db609f275737ef">&#9670;&nbsp;</a></span>toInt()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int toInt </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Converts a string to an integer value. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>Source string. </td></tr>
-    <tr><td class="paramname">base</td><td>Numerical base. Default is 10 (decimal). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>String as integer value, or zero if fail. </dd></dl>
-
-</div>
-</div>
-<a id="aca12e0dd746ab2c2095c0869fe9bd700"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca12e0dd746ab2c2095c0869fe9bd700">&#9670;&nbsp;</a></span>toFloat()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float toFloat </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>src</em></td><td>)</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>ms</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -313,101 +485,19 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Converts a string to a float point value. </p>
+<p>Sleeps the execution of current CPU core for a number of milliseconds. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src</td><td>Source string. </td></tr>
+    <tr><td class="paramname">ms</td><td>Number of milliseconds to sleep. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>String as float point value, or zero if fail. </dd></dl>
-
-</div>
-</div>
-<a id="ad66da8dcf2cb5f350a92332fdc3e05d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad66da8dcf2cb5f350a92332fdc3e05d6">&#9670;&nbsp;</a></span>fromInt()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string fromInt </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>base</em> = <code>10</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Converts an integer value to a string. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>Integer value. </td></tr>
-    <tr><td class="paramname">base</td><td>Numerical base. Default is 10 (decimal). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Numerical value as string. </dd></dl>
-
-</div>
-</div>
-<a id="ad6d41251be41d02cdf3434bbee06c905"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6d41251be41d02cdf3434bbee06c905">&#9670;&nbsp;</a></span>fromFloat()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string fromFloat </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>src</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Converts a float point value to a string. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>Float point value. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Numerical value as string. </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="a00056.html">string.hpp</a></li>
-<li><a class="el" href="a00053.html">string.cpp</a></li>
+<li><a class="el" href="a00038.html">multicore.hpp</a></li>
+<li><a class="el" href="a00035.html">multicore.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -63,20 +63,31 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">StringUtils Member List</div>  </div>
+<div class="title">MultiCore Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01009.html">StringUtils</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a01009.html">MultiCore</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01009.html#ad6d41251be41d02cdf3434bbee06c905">fromFloat</a>(float src)</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01009.html#ad66da8dcf2cb5f350a92332fdc3e05d6">fromInt</a>(int src, int base=10)</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01009.html#a114a13fddbd29e28a87d7700d3176b8a">split</a>(const std::string &amp;src, char separator)</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01009.html#aca12e0dd746ab2c2095c0869fe9bd700">toFloat</a>(const std::string &amp;src)</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01009.html#a63069683ddea3e5027db609f275737ef">toInt</a>(const std::string &amp;src, int base=10)</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01009.html#a98da230b15f694f50cf371d4f0057933">trim</a>(const std::string &amp;src)</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01009.html#aca93bf106e89f328fcc00d840d315984">TStringVector</a> typedef</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01009.html#a89663fa19e5ffa424d4646cf31bb68d5">upper</a>(const std::string &amp;src)</td><td class="entry"><a class="el" href="a01009.html">StringUtils</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134">CoreStatus</a> enum name</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134a85b80ef015e62e96a38aabb35c35ae11">csRunning</a> enum value</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134a31605420e9fef7299ad88f49cf5db7ee">csStarting</a> enum value</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134aeebaf238abaccf7838add68e869d6fae">csStopped</a> enum value</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#ab3202b2b32249841fb23736b0fada134a697cfc4d8cf663ec66183e4c28a0dc67">csStopping</a> enum value</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#a26e19491f1bf205d3f10f2d6851d5739">getParam</a>()</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#aca46d534f3068319254b75a8a330f57f">getStatus</a>() const</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#ad619b8b51adc7874204abd71080cd90e">isRunning</a>() const</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#ade698d03ef3275ee05cb330e957fba3c">isStopRequested</a>() const</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#a0f3d8663defce2dbc704aaaa789d7046">launch</a>()</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#aa81aed607133209dade63a226818224d">lock</a>()</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#acdc34726cf3d3983ac10dddfae06c54b">msleep</a>(uint32_t ms)</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#a4a5b128f369424d9b4b4cfe064cd991d">MultiCore</a>(MultiCoreEntry entry)</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#a3100d80684255d7a0a4c030944d1bad9">MultiCoreEntry</a> typedef</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#ae6ad27ff5071386aaaa9cec2c87db188">putParam</a>(uintptr_t src)</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#a8c528baf37154d347366083f0f816846">stop</a>()</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#a9278be8203e1c42e2619179882ae4403">unlock</a>()</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01009.html#a5df1456e1b3afb7af60ea51a799b2365">usleep</a>(uint64_t us)</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"><span class="mlabel">static</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01009.html#adc2254ee9a84e82214d268a21d80b2aa">~MultiCore</a>()</td><td class="entry"><a class="el" href="a01009.html">MultiCore</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

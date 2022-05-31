@@ -63,25 +63,22 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Serial Member List</div>  </div>
+<div class="title">Gpio Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01005.html">Serial</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="a01005.html">Gpio</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a28041c27a85d19761b9755b63fd92c85">getBuf</a>(void *buf, size_t len, uint32_t us)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#a3f2dee2a25c088d441484e03766e1a6f">getChar</a>(uint32_t us=0)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a36e507250b7f2c49fa76ab0d5918ca62">getFloat</a>()</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#aec0af9f072ded80a4b635cd21b56c667">getInt</a>(int base=10)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#af6528d1aa9eac9c532406b7b2ad3651e">getStr</a>()</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#a73a51a7d4de11a5c8a5622347864fa0e">in</a>()</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a731761aa53227bf100a4bb1f35bbc8a0">out</a>()</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#a3d2da07cdfbf5530fafb7dacae494293">putBuf</a>(const void *src, size_t len, bool flush=false)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a4752c4c06ffd58ad6be29f76598df89d">putChar</a>(char c, bool flush=false)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#a0342e880cef47b659e7497be9726aa2e">putFloat</a>(float src, bool flush=false)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#ad15606bb487d411e14db84a75b38983c">putInt</a>(int src, int base=10, bool flush=false)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="a01005.html#ad0c850f22166c46475046bfb185302ff">putStr</a>(const std::string &amp;src, bool flush=false)</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a36f90bf118e9113ae398f4cf60e97d4d">Serial</a>()</td><td class="entry"><a class="el" href="a01005.html">Serial</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a03714ab70ca3ad354b01c7f07c9bc768">disablePulls</a>(uint pin)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01005.html#a1990ef1a3fbaf47cced8f3f3c786242b">getPin</a>(uint pin)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a2eec2c90e6a28e3caf6d4f61a17b46f4">Gpio</a>()</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01005.html#ac8ff90dd574b842eacce082d451c0cf5">isPulledDown</a>(uint pin)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01005.html#aa4ff751aefac162f3d52a361a132e444">isPulledUp</a>(uint pin)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01005.html#a3027e8bfc7f2d40daec39f77d84b1625">pullDown</a>(uint pin, bool enable=true)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01005.html#af3666fbbddd420e34894f13aa8ef0df0">pullUp</a>(uint pin, bool enable=true)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01005.html#ab27c0877384e6c463f77b574f65c5dfe">resetPin</a>(uint pin)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01005.html#a6cf7db607816ea101fa7629f4731f40e">setPin</a>(uint pin, bool value=true)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="a01005.html#a1c3b9f8756bf4dff69c62b70c5cd3a1e">togglePin</a>(uint pin)</td><td class="entry"><a class="el" href="a01005.html">Gpio</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

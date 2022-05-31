@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Runner Class Reference</title>
+<title>USB EPROM/Flash Programmer: Serial Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,39 +66,69 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="a01014.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Runner Class Reference<div class="ingroups"><a class="el" href="a00155.html">Firmware Project</a></div></div>  </div>
+<div class="title">Serial Class Reference<div class="ingroups"><a class="el" href="a00167.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Communication <a class="el" href="a01017.html" title="Communication Runner Class.">Runner</a> Class.  
+<p>Pico <a class="el" href="a01017.html" title="Pico Serial Communication Class.">Serial</a> Communication Class.  
  <a href="a01017.html#details">More...</a></p>
 
-<p><code>#include &lt;runner.hpp&gt;</code></p>
+<p><code>#include &lt;serial.hpp&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6a95e6fb518e68f8e1ea92cec3f3837c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a6a95e6fb518e68f8e1ea92cec3f3837c">Runner</a> ()</td></tr>
-<tr class="memdesc:a6a95e6fb518e68f8e1ea92cec3f3837c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01017.html#a6a95e6fb518e68f8e1ea92cec3f3837c">More...</a><br /></td></tr>
-<tr class="separator:a6a95e6fb518e68f8e1ea92cec3f3837c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a02fd73d861ef2e4aabb38c0c9ff82947">init</a> ()</td></tr>
-<tr class="memdesc:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the runner.  <a href="a01017.html#a02fd73d861ef2e4aabb38c0c9ff82947">More...</a><br /></td></tr>
-<tr class="separator:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
-<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop method.  <a href="a01017.html#afe461d27b9c48d5921c00d521181f12f">More...</a><br /></td></tr>
-<tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36f90bf118e9113ae398f4cf60e97d4d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a36f90bf118e9113ae398f4cf60e97d4d">Serial</a> ()</td></tr>
+<tr class="memdesc:a36f90bf118e9113ae398f4cf60e97d4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01017.html#a36f90bf118e9113ae398f4cf60e97d4d">More...</a><br /></td></tr>
+<tr class="separator:a36f90bf118e9113ae398f4cf60e97d4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f2dee2a25c088d441484e03766e1a6f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a3f2dee2a25c088d441484e03766e1a6f">getChar</a> (uint32_t us=0)</td></tr>
+<tr class="memdesc:a3f2dee2a25c088d441484e03766e1a6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a single character.  <a href="a01017.html#a3f2dee2a25c088d441484e03766e1a6f">More...</a><br /></td></tr>
+<tr class="separator:a3f2dee2a25c088d441484e03766e1a6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28041c27a85d19761b9755b63fd92c85"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a28041c27a85d19761b9755b63fd92c85">getBuf</a> (void *buf, size_t len, uint32_t us)</td></tr>
+<tr class="memdesc:a28041c27a85d19761b9755b63fd92c85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a buffer.  <a href="a01017.html#a28041c27a85d19761b9755b63fd92c85">More...</a><br /></td></tr>
+<tr class="separator:a28041c27a85d19761b9755b63fd92c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94f0e1e5aca08683ba4049c7ae9785c4"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a94f0e1e5aca08683ba4049c7ae9785c4">getStr</a> (uint32_t us=0)</td></tr>
+<tr class="memdesc:a94f0e1e5aca08683ba4049c7ae9785c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a string (blocks until enter/0x0A).  <a href="a01017.html#a94f0e1e5aca08683ba4049c7ae9785c4">More...</a><br /></td></tr>
+<tr class="separator:a94f0e1e5aca08683ba4049c7ae9785c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60e473a26fa84dd1d85d0a7a060b8a5e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a60e473a26fa84dd1d85d0a7a060b8a5e">getInt</a> (uint base=10, uint32_t us=0)</td></tr>
+<tr class="memdesc:a60e473a26fa84dd1d85d0a7a060b8a5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets an integer value (blocks until enter/0x0A).  <a href="a01017.html#a60e473a26fa84dd1d85d0a7a060b8a5e">More...</a><br /></td></tr>
+<tr class="separator:a60e473a26fa84dd1d85d0a7a060b8a5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a626887d5300ee3e48514c4bdd0248cf2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a626887d5300ee3e48514c4bdd0248cf2">getFloat</a> (uint32_t us=0)</td></tr>
+<tr class="memdesc:a626887d5300ee3e48514c4bdd0248cf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a float point value (blocks until enter/0x0A).  <a href="a01017.html#a626887d5300ee3e48514c4bdd0248cf2">More...</a><br /></td></tr>
+<tr class="separator:a626887d5300ee3e48514c4bdd0248cf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4752c4c06ffd58ad6be29f76598df89d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a4752c4c06ffd58ad6be29f76598df89d">putChar</a> (char c, bool flush=false)</td></tr>
+<tr class="memdesc:a4752c4c06ffd58ad6be29f76598df89d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts a single character.  <a href="a01017.html#a4752c4c06ffd58ad6be29f76598df89d">More...</a><br /></td></tr>
+<tr class="separator:a4752c4c06ffd58ad6be29f76598df89d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d2da07cdfbf5530fafb7dacae494293"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a3d2da07cdfbf5530fafb7dacae494293">putBuf</a> (const void *src, size_t len, bool flush=false)</td></tr>
+<tr class="memdesc:a3d2da07cdfbf5530fafb7dacae494293"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts a buffer of data.  <a href="a01017.html#a3d2da07cdfbf5530fafb7dacae494293">More...</a><br /></td></tr>
+<tr class="separator:a3d2da07cdfbf5530fafb7dacae494293"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0c850f22166c46475046bfb185302ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#ad0c850f22166c46475046bfb185302ff">putStr</a> (const std::string &amp;src, bool flush=false)</td></tr>
+<tr class="memdesc:ad0c850f22166c46475046bfb185302ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts a string.  <a href="a01017.html#ad0c850f22166c46475046bfb185302ff">More...</a><br /></td></tr>
+<tr class="separator:ad0c850f22166c46475046bfb185302ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9195e85927768aec3aa133380041d205"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a9195e85927768aec3aa133380041d205">putInt</a> (int src, uint base=10, uint digits=0, char fill=' ', bool flush=false)</td></tr>
+<tr class="memdesc:a9195e85927768aec3aa133380041d205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts an integer value.  <a href="a01017.html#a9195e85927768aec3aa133380041d205">More...</a><br /></td></tr>
+<tr class="separator:a9195e85927768aec3aa133380041d205"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fae49e58ffe79daea47dad2bfbc8e91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a3fae49e58ffe79daea47dad2bfbc8e91">putFloat</a> (float src, uint precision=3, bool flush=false)</td></tr>
+<tr class="memdesc:a3fae49e58ffe79daea47dad2bfbc8e91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts a float point value.  <a href="a01017.html#a3fae49e58ffe79daea47dad2bfbc8e91">More...</a><br /></td></tr>
+<tr class="separator:a3fae49e58ffe79daea47dad2bfbc8e91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a731761aa53227bf100a4bb1f35bbc8a0"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a731761aa53227bf100a4bb1f35bbc8a0">out</a> ()</td></tr>
+<tr class="memdesc:a731761aa53227bf100a4bb1f35bbc8a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the output stream object.  <a href="a01017.html#a731761aa53227bf100a4bb1f35bbc8a0">More...</a><br /></td></tr>
+<tr class="separator:a731761aa53227bf100a4bb1f35bbc8a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73a51a7d4de11a5c8a5622347864fa0e"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01017.html#a73a51a7d4de11a5c8a5622347864fa0e">in</a> ()</td></tr>
+<tr class="memdesc:a73a51a7d4de11a5c8a5622347864fa0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the input stream object.  <a href="a01017.html#a73a51a7d4de11a5c8a5622347864fa0e">More...</a><br /></td></tr>
+<tr class="separator:a73a51a7d4de11a5c8a5622347864fa0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Communication <a class="el" href="a01017.html" title="Communication Runner Class.">Runner</a> Class. </p>
-<p>The purpose of this class is to handle the communication (via USB-CDC) and run commands. </p>
+<div class="textblock"><p>Pico <a class="el" href="a01017.html" title="Pico Serial Communication Class.">Serial</a> Communication Class. </p>
+<p>The purpose of this class is to handle the serial communication (via UART or via USB-CDC). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a6a95e6fb518e68f8e1ea92cec3f3837c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a95e6fb518e68f8e1ea92cec3f3837c">&#9670;&nbsp;</a></span>Runner()</h2>
+<a id="a36f90bf118e9113ae398f4cf60e97d4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36f90bf118e9113ae398f4cf60e97d4d">&#9670;&nbsp;</a></span>Serial()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="a01017.html">Runner</a> </td>
+          <td class="memname"><a class="el" href="a01017.html">Serial</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -111,14 +141,398 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a02fd73d861ef2e4aabb38c0c9ff82947"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02fd73d861ef2e4aabb38c0c9ff82947">&#9670;&nbsp;</a></span>init()</h2>
+<a id="a3f2dee2a25c088d441484e03766e1a6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f2dee2a25c088d441484e03766e1a6f">&#9670;&nbsp;</a></span>getChar()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void init </td>
+          <td class="memname">int getChar </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>us</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a single character. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">us</td><td>Timeout, in microseconds. Default is zero (returns immediately). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A single char, or PICO_ERROR_TIMEOUT if timeout is reached. </dd></dl>
+
+</div>
+</div>
+<a id="a28041c27a85d19761b9755b63fd92c85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28041c27a85d19761b9755b63fd92c85">&#9670;&nbsp;</a></span>getBuf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t getBuf </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>buf</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>us</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a buffer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">buf</td><td>Pointer to buffer that receives the data. </td></tr>
+    <tr><td class="paramname">len</td><td>Size of buffer, in bytes. </td></tr>
+    <tr><td class="paramname">us</td><td>Timeout, in microseconds. Default is zero (returns immediately). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Number of bytes read, or zero if timeout is reached. </dd></dl>
+
+</div>
+</div>
+<a id="a94f0e1e5aca08683ba4049c7ae9785c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94f0e1e5aca08683ba4049c7ae9785c4">&#9670;&nbsp;</a></span>getStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string getStr </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>us</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a string (blocks until enter/0x0A). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">us</td><td>Timeout, in microseconds. Default is zero (wait for a 0x0A). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The string. </dd></dl>
+
+</div>
+</div>
+<a id="a60e473a26fa84dd1d85d0a7a060b8a5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60e473a26fa84dd1d85d0a7a060b8a5e">&#9670;&nbsp;</a></span>getInt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int getInt </td>
+          <td>(</td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>base</em> = <code>10</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>us</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets an integer value (blocks until enter/0x0A). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">base</td><td>Numerical base. Default is 10 (decimal). </td></tr>
+    <tr><td class="paramname">us</td><td>Timeout, in microseconds. Default is zero (wait for a 0x0A). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The numeric value. </dd></dl>
+
+</div>
+</div>
+<a id="a626887d5300ee3e48514c4bdd0248cf2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a626887d5300ee3e48514c4bdd0248cf2">&#9670;&nbsp;</a></span>getFloat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getFloat </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>us</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a float point value (blocks until enter/0x0A). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">us</td><td>Timeout, in microseconds. Default is zero (wait for a 0x0A). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The numeric value. </dd></dl>
+
+</div>
+</div>
+<a id="a4752c4c06ffd58ad6be29f76598df89d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4752c4c06ffd58ad6be29f76598df89d">&#9670;&nbsp;</a></span>putChar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void putChar </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flush</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Puts a single character. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>Character to write. </td></tr>
+    <tr><td class="paramname">flush</td><td>If true, flushes the output. Default is false. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3d2da07cdfbf5530fafb7dacae494293"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d2da07cdfbf5530fafb7dacae494293">&#9670;&nbsp;</a></span>putBuf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void putBuf </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>len</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flush</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Puts a buffer of data. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>Pointer to buffer to write. </td></tr>
+    <tr><td class="paramname">len</td><td>Size of buffer, in bytes. </td></tr>
+    <tr><td class="paramname">flush</td><td>If true, flushes the output. Default is false. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad0c850f22166c46475046bfb185302ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0c850f22166c46475046bfb185302ff">&#9670;&nbsp;</a></span>putStr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void putStr </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flush</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Puts a string. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>String to write. </td></tr>
+    <tr><td class="paramname">flush</td><td>If true, flushes the output. Default is false. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9195e85927768aec3aa133380041d205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9195e85927768aec3aa133380041d205">&#9670;&nbsp;</a></span>putInt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void putInt </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>base</em> = <code>10</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>digits</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>fill</em> = <code>'&#160;'</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flush</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Puts an integer value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>Numeric value to write. </td></tr>
+    <tr><td class="paramname">base</td><td>Numerical base. Default is 10 (decimal). </td></tr>
+    <tr><td class="paramname">digits</td><td>Number of min digits to format (left pad with <em>fill</em>). Default is zero. </td></tr>
+    <tr><td class="paramname">fill</td><td>Fill character. Default is space. </td></tr>
+    <tr><td class="paramname">flush</td><td>If true, flushes the output. Default is false. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3fae49e58ffe79daea47dad2bfbc8e91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fae49e58ffe79daea47dad2bfbc8e91">&#9670;&nbsp;</a></span>putFloat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void putFloat </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint&#160;</td>
+          <td class="paramname"><em>precision</em> = <code>3</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flush</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Puts a float point value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">src</td><td>Numeric value to write. </td></tr>
+    <tr><td class="paramname">precision</td><td>Number of decimals (precision). Default is 3. </td></tr>
+    <tr><td class="paramname">flush</td><td>If true, flushes the output. Default is false. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a731761aa53227bf100a4bb1f35bbc8a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a731761aa53227bf100a4bb1f35bbc8a0">&#9670;&nbsp;</a></span>out()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ostream &amp; out </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -126,18 +540,19 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Starts the runner. </p>
+<p>Returns the output stream object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the output stream object. </dd></dl>
 
 </div>
 </div>
-<a id="afe461d27b9c48d5921c00d521181f12f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&nbsp;</a></span>loop()</h2>
+<a id="a73a51a7d4de11a5c8a5622347864fa0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73a51a7d4de11a5c8a5622347864fa0e">&#9670;&nbsp;</a></span>in()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void loop </td>
+          <td class="memname">std::istream &amp; in </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -145,14 +560,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Main loop method. </p>
-<p>This method must be called periodically in a loop, so that the <a class="el" href="a01017.html" title="Communication Runner Class.">Runner</a> works properly. </p>
+<p>Returns the input stream object. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the input stream object. </dd></dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="a00068.html">runner.hpp</a></li>
-<li><a class="el" href="a00065.html">runner.cpp</a></li>
+<li><a class="el" href="a00050.html">serial.hpp</a></li>
+<li><a class="el" href="a00047.html">serial.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

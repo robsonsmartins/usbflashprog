@@ -20,10 +20,12 @@
 
 // ---------------------------------------------------------------------------
 
-static void reset_terminal_mode();
-static void set_conio_terminal_mode();
-static int kbhit(uint32_t timeout_us);
-static int getch();
+#ifdef REAL_MOCK_IMPLEMENTATION
+    static void reset_terminal_mode();
+    static void set_conio_terminal_mode();
+    static int kbhit(uint32_t timeout_us);
+    static int getch();
+#endif  // REAL_MOCK_IMPLEMENTATION
 
 // ---------------------------------------------------------------------------
 
@@ -41,7 +43,11 @@ typedef unsigned int uint;
 
 // ---------------------------------------------------------------------------
 
-static struct termios _orig_termios;
+#ifdef REAL_MOCK_IMPLEMENTATION
+    static struct termios _orig_termios;
+#else
+    constexpr char kStdioMockPredefinedChar = 'A';
+#endif  // REAL_MOCK_IMPLEMENTATION
 
 // ---------------------------------------------------------------------------
 
@@ -54,20 +60,30 @@ extern "C" inline void sleep_ms(uint32_t ms) {
 }
 
 extern "C" inline void stdio_init_all(void) {
+#ifdef REAL_MOCK_IMPLEMENTATION
     set_conio_terminal_mode();
+#endif  // REAL_MOCK_IMPLEMENTATION
 }
 
 extern "C" inline int getchar_timeout_us(uint32_t timeout_us) {
+#ifdef REAL_MOCK_IMPLEMENTATION
     if (!kbhit(timeout_us)) { return PICO_ERROR_TIMEOUT; }
     return getch();
+#else
+    return (timeout_us ? kStdioMockPredefinedChar : PICO_ERROR_TIMEOUT);
+#endif  // REAL_MOCK_IMPLEMENTATION
 }
 
 extern "C" inline int putchar_raw(int c) {
+#ifdef REAL_MOCK_IMPLEMENTATION
     std::cout << static_cast<char>(c);
+#endif  // REAL_MOCK_IMPLEMENTATION
     return c;
 }
 
 // ---------------------------------------------------------------------------
+
+#ifdef REAL_MOCK_IMPLEMENTATION
 
 void reset_terminal_mode() {
     tcsetattr(0, TCSANOW, &_orig_termios);
@@ -99,5 +115,7 @@ int getch() {
         return c;
     }
 }
+
+#endif  // REAL_MOCK_IMPLEMENTATION
 
 #endif  // TEST_MOCK_PICO_STDLIB_H_

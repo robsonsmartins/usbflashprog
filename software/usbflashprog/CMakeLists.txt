@@ -13,7 +13,10 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 COMPONENTS Widgets LinguistTools SerialPort REQUIRED)
 
-set(TS_FILES i18n/ufprog_en_US.ts)
+set(TS_FILES
+    i18n/ufprog_en_US.ts
+    i18n/ufprog_pt_BR.ts
+)
 
 set(PROJECT_SOURCES
         config.hpp
@@ -26,7 +29,6 @@ set(PROJECT_SOURCES
         diag/diagwindow.hpp
         diag/diagwindow.ui
         main.cpp
-        ${TS_FILES}
 )
 
 add_executable(ufprog ${PROJECT_SOURCES})

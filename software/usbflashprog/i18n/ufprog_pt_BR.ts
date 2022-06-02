@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="en_US">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>DiagWindow</name>
     <message>
@@ -14,23 +14,23 @@
         <location filename="../diag/diagwindow.ui" line="31"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="397"/>
         <source>Board Diagnostics</source>
-        <translation></translation>
+        <translation>Diagnósticos da Placa</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="51"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="398"/>
         <source>Port</source>
-        <translation></translation>
+        <translation>Porta</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.cpp" line="45"/>
         <source>&amp;Disconnect</source>
-        <translation></translation>
+        <translation>&amp;Desconectar</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.cpp" line="51"/>
         <source>Error opening the &quot;%1&quot; port.</source>
-        <translation></translation>
+        <translation>Erro abrindo a porta &quot;%1&quot;.</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="99"/>
@@ -67,13 +67,13 @@
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="399"/>
         <location filename="../diag/diagwindow.cpp" line="58"/>
         <source>&amp;Connect</source>
-        <translation></translation>
+        <translation>&amp;Conectar</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="194"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="404"/>
         <source>Ini&amp;t Calibration</source>
-        <translation></translation>
+        <translation>&amp;Iniciar Calibração</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="203"/>
@@ -91,7 +91,7 @@
         <location filename="../diag/diagwindow.ui" line="323"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="410"/>
         <source>I&amp;nit Calibration</source>
-        <translation></translation>
+        <translation>Iniciar &amp;Calibração</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="334"/>
@@ -127,31 +127,31 @@
         <location filename="../diag/diagwindow.ui" line="401"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="416"/>
         <source>&amp;File</source>
-        <translation></translation>
+        <translation>&amp;Arquivo</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="407"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="417"/>
         <source>&amp;Help</source>
-        <translation></translation>
+        <translation>A&amp;juda</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="418"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="394"/>
         <source>E&amp;xit</source>
-        <translation></translation>
+        <translation>Sai&amp;r</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="423"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="395"/>
         <source>A&amp;bout</source>
-        <translation></translation>
+        <translation>So&amp;bre</translation>
     </message>
     <message>
         <location filename="../diag/diagwindow.ui" line="428"/>
         <location filename="../build/ufprog_autogen/include/ui_diagwindow.h" line="396"/>
         <source>About &amp;Qt</source>
-        <translation></translation>
+        <translation>Sobre o &amp;Qt</translation>
     </message>
 </context>
 <context>
@@ -166,7 +166,7 @@
         <location filename="../main/mainwindow.ui" line="28"/>
         <location filename="../build/ufprog_autogen/include/ui_mainwindow.h" line="59"/>
         <source>&amp;File</source>
-        <translation></translation>
+        <translation>&amp;Arquivo</translation>
     </message>
 </context>
 </TS>

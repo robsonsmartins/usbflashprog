@@ -11,6 +11,7 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 * [Documentation](#documentation)
 * [Hardware Design](#hardware-design)
 * [Firmware Project](#firmware-project)
+* [Software Project](#software-project)
 * [Contributing](#contributing)
 * [License](#license)
 * [Contact](#contact)
@@ -28,9 +29,12 @@ The current status of this project is:
 
 ![Current Revision](https://img.shields.io/badge/Current%20Version-v0.1.0--rev.F-blue?style=plastic)
 ![Specifications](https://img.shields.io/badge/Specifications-almost%20stable-green?style=plastic)
-![Hardware Design SCH](https://img.shields.io/badge/Hardware%20Design%20(Schematics)-almost%20stable-yellowgreen?style=plastic) ![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-not%20started%20yet-red?style=plastic)
-![Firmware](https://img.shields.io/badge/Firmware-unstable-yellow?style=plastic) ![PC Software](https://img.shields.io/badge/PC%20Software-not%20started%20yet-red?style=plastic)
-![User Documentation](https://img.shields.io/badge/User%20Documentation-not%20started%20yet-red?style=plastic) ![Developer/Engineer Documentation](https://img.shields.io/badge/Developer%20and%20Engineer%20Documentation-almost%20stable-green?style=plastic)
+![Hardware Design SCH](https://img.shields.io/badge/Hardware%20Design%20(Schematics)-almost%20stable-yellowgreen?style=plastic)
+![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-not%20started%20yet-red?style=plastic)
+![Firmware](https://img.shields.io/badge/Firmware-unstable-yellow?style=plastic)
+![PC Software](https://img.shields.io/badge/PC%20Software-unstable-yellow?style=plastic)
+![User Documentation](https://img.shields.io/badge/User%20Documentation-not%20started%20yet-red?style=plastic)
+![Developer/Engineer Documentation](https://img.shields.io/badge/Developer%20and%20Engineer%20Documentation-almost%20stable-green?style=plastic)
 
 ## Releases
 
@@ -47,6 +51,10 @@ The most up-to-date hardware design can be accessed here: [Hardware design of th
 ## Firmware Project
 
 The most up-to-date firmware project can be accessed here: [Firmware Project of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/firmware/).
+
+## Software Project
+
+The most up-to-date software project can be accessed here: [Software Project of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/software/).
 
 ## Contributing
 

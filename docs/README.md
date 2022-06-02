@@ -12,6 +12,10 @@ The most up-to-date project specifications can be accessed here: [Specifications
 
 The most up-to-date firmware documentation can be accessed here: [Firmware Documentation of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/firmware/html/index.html).
 
+### Software Documentation
+
+The most up-to-date software documentation can be accessed here: [Software Documentation of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/software/html/index.html).
+
 ## Software versions
 
 The following software (open source/freeware and multiplatform) were used to write the documentation:

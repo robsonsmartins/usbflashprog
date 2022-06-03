@@ -64,7 +64,7 @@ compile_commands.json
 # Kicad
 *.sch-bak
 */usbflashprog-backups/*
-*/alternative_power-backups/*
+*/*/alternative_power-backups/*
 
 # Eagle project file
 # It contains a serial number and references to the file structure

@@ -8,15 +8,15 @@ Here are instructions on how to build the project.
 
 ## Contents
 
-* [GNU/Linux&copy;](#gnu/linux&copy;)
-* [Microsoft Windows&copy;](#microsoft-windows&copy;)
+* [GNU/Linux&copy;](#gnulinux)
+* [Microsoft Windows&copy;](#microsoft-windows)
 	* [Requirements](#requirements)
 	* [Install Git](#install-git)
 	* [Install CMake](#install-cmake)
 	* [Install Qt and MinGW](#install-qt-and-mingw)
-	* [Install Doxygen \[Optional\]](#install-doxygen-\[optional\])
-	* [Install GraphViz \[Optional\]](#install-graphviz-\[optional\])
-	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-\[optional\])
+	* [Install Doxygen \[Optional\]](#install-doxygen-optional)
+	* [Install GraphViz \[Optional\]](#install-graphviz-optional)
+	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Update Environment Variables](#update-environment-variables)
 	* [Build Under Command Line](#build-under-command-line)
 
@@ -41,10 +41,12 @@ TODO.
 Git makes downloading the code a lot easier, and the Windows version comes with Git Bash, which is a very useful shell that makes the Microsoft Windows command line a little more effective, like GNU/Linux.
 It is even possible to change the default terminal from VS Code to Git Bash, making it more powerful and similar to GNU/Linux.
 
-Download the latest Git SCM installer for Microsoft Windows from the [Git for Windows Downloads Page](https://git-scm.com/download/win).
-In this tutorial the [Git-2.31.1-64-bit.exe version](https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-64-bit.exe) was used.
+1. Download the latest Git SCM installer for Microsoft Windows from the [Git for Windows Downloads Page](https://git-scm.com/download/win).
+In this tutorial the [Git-2.31.1-64-bit.exe](https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-64-bit.exe) version was used.
 
-Run the installer. Use all default options. When you get to the screen asking you to choose a default editor, feel free to choose whatever you want.
+2. Run the installer. Use all default options.
+
+3. When you get to the screen asking you to choose a default editor, feel free to choose whatever you want.
 A good option is [Notepad++](https://notepad-plus-plus.org/), and if you don't have it installed, you can select Notepad (Windows default), if you don't want to use an editor in console mode.
 
 #### Install CMake
@@ -52,12 +54,14 @@ A good option is [Notepad++](https://notepad-plus-plus.org/), and if you don't h
 CMake is a build utility, which helps to automate the process of building programs.
 Unlike Make, it does not call the compiler/linker tools, but generates (platform dependent) file and directory structures needed to run Make.
 
-Download the latest version of CMake from the official website: [CMake Downloads Page](https://cmake.org/download/).
+1. Download the latest version of CMake from the official website: [CMake Downloads Page](https://cmake.org/download/).
 The version used in this tutorial was [cmake-3.20.1-windows-x86_64.msi](https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-windows-x86_64.msi).
 
-Run the installer and accept the user license. Under "Install Options", select "Add CMake to the system PATH for all users".
+2. Run the installer and accept the user license.
 
-In Destination Folder, write a short and easy path, for example `c:\cmake`.
+3. Under "Install Options", select "Add CMake to the system PATH for all users".
+
+4. In Destination Folder, write a short and easy path, for example `c:\cmake`.
 
 #### Install Qt and MinGW
 
@@ -70,10 +74,14 @@ Supports multiple languages including C and C++.
 
 Doxygen is not required to compile the binaries, but it can be useful if you want to generate the project's API documentation.
 
-To install Doxygen, download the latest version for Windows from the [Doxygen Downloads Page](https://www.doxygen.nl/download.html).
+To install Doxygen:
+
+1. Download the latest version for Windows from the [Doxygen Downloads Page](https://www.doxygen.nl/download.html).
 The version used in this tutorial was [doxygen-1.9.1-setup.exe](https://doxygen.nl/files/doxygen-1.9.1-setup.exe).
 
-Run the installer. When prompted, change the install location to a simple and easy path, such as `c:\doxygen`. Install all components.
+2. Run the installer. When prompted, change the install location to a simple and easy path, such as `c:\doxygen`.
+
+3. Install all components.
 
 #### Install GraphViz \[Optional\]
 
@@ -82,31 +90,40 @@ It's used by Doxygen to generate class diagrams, dependency between packages, et
 
 GraphViz is not needed to compile binaries, and it only makes sense to install it if Doxygen is also installed.
 
-To install GraphViz, download the latest version for Windows from the [GraphViz Downloads Page](https://graphviz.org/download/#windows).
+To install GraphViz:
+
+1. Download the latest version for Windows from the [GraphViz Downloads Page](https://graphviz.org/download/#windows).
 The version used in this tutorial was [stable_windows_10_cmake_Release_x64_graphviz-install-2.47.1-win64.exe](https://gitlab.com/graphviz/graphviz/-/package_files/9574245/download).
 
-When running the installer, under "Install Options", select the "Add Graphviz to the system PATH for all users" option.
+2. When running the installer, under "Install Options", select the "Add Graphviz to the system PATH for all users" option.
 
-When prompted, enter the installation location ("Destination Folder") for a short, easy path such as `c:\graphviz`.
+3. When prompted, enter the installation location ("Destination Folder") for a short, easy path such as `c:\graphviz`.
 
 #### Install Visual Studio Code \[Optional\]
 
 The purpose of this tutorial is to configure the popular cross-platform IDE Visual Studio Code, free and provided by Microsoft, to edit and compile the project.
 However, you can use another IDE instead (like Eclipse, for example), or even not use any IDE.
 
-To install Visual Studio Code, you must download the latest version from the [Visual Studio Code Site](https://code.visualstudio.com/).
+To install Visual Studio Code:
+
+1. Download the latest version from the [Visual Studio Code Site](https://code.visualstudio.com/).
 The version installed at the time of writing this tutorial was [VSCodeSetup-x64-1.55.1.exe](https://code.visualstudio.com/docs/?dv=win64).
 
-Visual Studio Code can be installed with all default options.
+2. Visual Studio Code can be installed with all default options.
 
-After installation, open Visual Studio Code and in the "Extensions tab", install the following extensions:
+3. After installation, open Visual Studio Code and in the "Extensions tab", install the following extensions:
 - CMake
 - CMake Tools
 - C/C++
 - Qt tools
 
 The "CMake Tools extension" must be configured to generate files for MinGW.
-To do this, go to the CMake Tools extension settings, "Extension settings", "CMake: Generator", and enter the value "MinGW Makefiles".
+
+To do this:
+
+1. Go to the CMake Tools extension settings, "Extension settings".
+
+2. Find "CMake: Generator" field, and enter the value "MinGW Makefiles".
 
 #### Update Environment Variables
 

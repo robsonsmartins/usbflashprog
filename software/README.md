@@ -4,6 +4,10 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 ## Software Project
 
+### Build Instructions
+
+Instructions on how to build the project are described in following document: [Build Instructions](BUILD.md)
+
 ### Code Style Guide
 
 - [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)

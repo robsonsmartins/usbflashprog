@@ -32,7 +32,4 @@ constexpr quint16 kUsbProductId = 0x000A;
 /** @brief COMM/USB : Interval to enumerate USB, in milliseconds. */
 constexpr int kUsbEnumerateInterval = 2000;
 
-/** @brief GENERAL : Internationalization files path. */
-constexpr const char *kI18nDirPath = "/i18n";
-
 #endif  // CONFIG_HPP_

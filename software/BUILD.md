@@ -9,6 +9,11 @@ Here are instructions on how to build the project.
 ## Contents
 
 * [GNU/Linux&copy;](#gnulinux)
+	* [Requirements](#requirements)
+	* [Install Packages](#install-packages)
+	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
+	* [Build Under Command Line](#build-under-command-line)
+	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 * [Microsoft Windows&copy;](#microsoft-windows)
 	* [Requirements](#requirements)
 	* [Install Git](#install-git)
@@ -19,10 +24,110 @@ Here are instructions on how to build the project.
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Update Environment Variables](#update-environment-variables)
 	* [Build Under Command Line](#build-under-command-line)
+	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 
 ## GNU/Linux&copy;
 
-TODO.
+### Requirements
+
+- GNU/Linux (tested with [Ubuntu Linux 22.04 LTS](https://releases.ubuntu.com/jammy/));
+- Git ([Git 1:2.34.1-1ubuntu1.2](https://packages.ubuntu.com/jammy/git));
+- CMake ([CMake 3.22.1-1ubuntu1](https://packages.ubuntu.com/jammy/cmake));
+- Qt ([Qt 5.15.3-1](https://packages.ubuntu.com/jammy/qttools5-dev-tools));
+- GNU C/C++ Compiler ([GCC 4:11.2.0-1ubuntu1](https://packages.ubuntu.com/jammy/gcc));
+- Doxygen \[Optional\] ([Doxygen 1.9.1-2ubuntu2](https://packages.ubuntu.com/jammy/doxygen));
+- GraphViz \[Optional\] ([GraphViz 2.42.2-6](https://packages.ubuntu.com/jammy/graphviz));
+- Visual Studio Code \[Optional\] ([code_1.67.2-1652812855_amd64.deb](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64), ~78.9MB)
+
+### Install Packages
+
+1. Run the following commands:
+
+```shell
+sudo apt update
+sudo apt install git cmake doxygen graphviz build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev
+sudo apt --no-install-recommends install libqt*5-dev qt*5-dev qml-module-qtquick-* qt*5-doc-html
+```
+
+### Install Visual Studio Code \[Optional\]
+
+The purpose of this tutorial is to configure the popular cross-platform IDE Visual Studio Code, free and provided by Microsoft, to edit and compile the project.
+However, you can use another IDE instead (like Eclipse, for example), or even not use any IDE.
+
+To install Visual Studio Code:
+
+1. Download the latest version from the [Visual Studio Code Site](https://code.visualstudio.com/).
+The version installed at the time of writing this tutorial was [code_1.67.2-1652812855_amd64.deb](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64).
+
+2. Run the following command:
+
+```shell
+sudo dpkg -i code_1.67.2-1652812855_amd64.deb
+```
+
+3. After installation, open Visual Studio Code and in the "Extensions tab", install the following extensions:
+- CMake
+- CMake Tools
+- C/C++
+- Qt tools
+
+### Build Under Command Line
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cd build
+cmake ..
+make -j$(nproc)
+```
+
+**Note**: If there is more than one version of the gcc/g++ compiler installed on the system, you can explicitly specify to CMake which compiler to use with the following command: 
+
+```shell
+cmake -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++ ..
+# e.g.: cmake -DCMAKE_CXX_COMPILER=/opt/gcc/8.1.0/bin/g++ ..
+```
+
+4. To run the program:
+
+```shell
+./ufprog
+```
+
+### Generate Doxygen Documentation \[Optional\]
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+doxygen
+```
+
+The documentation is generated under `usbflashprog/docs/software/html` directory.
 
 ## Microsoft Windows&copy;
 
@@ -30,9 +135,9 @@ TODO.
 
 - Microsoft Windows&copy; 10 or above;
 - Git ([Git-2.31.1-64-bit.exe](https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-64-bit.exe), ~47.5MB);
-- CMake ([cmake-3.20.1-windows-x86_64.msi](https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-windows-x86_64.msi), ~26.4MB);
+- CMake ([cmake-3.23.2-windows-x86_64.msi](https://github.com/Kitware/CMake/releases/download/v3.23.2/cmake-3.23.2-windows-x86_64.msi), ~27.9MB);
 - Qt and MinGW ([qt-opensource-windows-x86-5.12.12.exe](https://download.qt.io/official_releases/qt/5.12/5.12.12/qt-opensource-windows-x86-5.12.12.exe), ~3.7GB);
-- Doxygen \[Optional\] ([doxygen-1.9.1-setup.exe](https://doxygen.nl/files/doxygen-1.9.1-setup.exe), ~47.1MB);
+- Doxygen \[Optional\] ([doxygen-1.9.4-setup.exe](https://www.doxygen.nl/files/doxygen-1.9.4-setup.exe), ~44.4MB);
 - GraphViz \[Optional\] ([stable_windows_10_cmake_Release_x64_graphviz-install-2.47.1-win64.exe](https://gitlab.com/graphviz/graphviz/-/package_files/9574245/download), ~4.5MB);
 - Visual Studio Code \[Optional\] ([VSCodeSetup-x64-1.55.1.exe](https://code.visualstudio.com/docs/?dv=win64), ~68.9MB)
 
@@ -55,7 +160,7 @@ CMake is a build utility, which helps to automate the process of building progra
 Unlike Make, it does not call the compiler/linker tools, but generates (platform dependent) file and directory structures needed to run Make.
 
 1. Download the latest version of CMake from the official website: [CMake Downloads Page](https://cmake.org/download/).
-The version used in this tutorial was [cmake-3.20.1-windows-x86_64.msi](https://github.com/Kitware/CMake/releases/download/v3.20.1/cmake-3.20.1-windows-x86_64.msi).
+The version used in this tutorial was [cmake-3.23.2-windows-x86_64.msi](https://github.com/Kitware/CMake/releases/download/v3.23.2/cmake-3.23.2-windows-x86_64.msi).
 
 2. Run the installer and accept the user license.
 
@@ -106,7 +211,7 @@ Doxygen is not required to compile the binaries, but it can be useful if you wan
 To install Doxygen:
 
 1. Download the latest version for Windows from the [Doxygen Downloads Page](https://www.doxygen.nl/download.html).
-The version used in this tutorial was [doxygen-1.9.1-setup.exe](https://doxygen.nl/files/doxygen-1.9.1-setup.exe).
+The version used in this tutorial was [doxygen-1.9.4-setup.exe](https://www.doxygen.nl/files/doxygen-1.9.4-setup.exe).
 
 2. Run the installer. When prompted, change the install location to a simple and easy path, such as `c:\doxygen`.
 
@@ -165,6 +270,7 @@ Choose the option "Edit system environment variables", and click on "Environment
 The following variables and inputs are required:
 
 **`PATH`**
+- `C:\Qt\5.12.12\5.12.12\mingw73_64\bin`
 - `C:\Qt\5.12.12\Tools\mingw730_64\bin`
 - `C:\cmake\bin`
 - `C:\Program Files\Git\cmd`
@@ -177,4 +283,58 @@ The following variables and inputs are required:
 
 ### Build Under Command Line
 
-TODO
+1. Clone the project from the repository (using the Git Bash Shell):
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cd build
+cmake -G "MinGW Makefiles" ..
+make -j$(nproc)
+```
+
+**Note**: If there is more than one version of the MinGW compiler installed on the system, you can explicitly specify to CMake which compiler to use with the following command: 
+
+```shell
+cmake -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++.exe ..
+# e.g.: cmake -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=/c/Qt/5.12.12/Tools/mingw730_64/bin/g++.exe ..
+```
+
+4. To run the program:
+
+```shell
+./ufprog.exe
+```
+
+### Generate Doxygen Documentation \[Optional\]
+
+1. Clone the project from the repository (using the Git Bash Shell):
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+doxygen
+```
+
+The documentation is generated under `usbflashprog/docs/software/html` directory.

@@ -1,0 +1,82 @@
+# ------------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2022) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ------------------------------------------------------------------------------
+name: Build Firmware
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '4 2 * * *'
+
+env:
+  BUILD_TYPE: Release
+  FIRMWARE_PROJECT_DIR: ${{github.workspace}}/firmware/usbflashprog
+
+jobs:
+  build:
+    name: Build Firmware
+    runs-on: ubuntu-latest
+
+    steps:
+    # ------------------------------------------------------------------------
+    # Checkout the sources
+    # ------------------------------------------------------------------------
+    - name: Checkout the Sources
+      uses: actions/checkout@v3
+
+    # ------------------------------------------------------------------------
+    # Install Prerequisites
+    # ------------------------------------------------------------------------
+    - name: Install Prerequisites
+      run: |
+        sudo apt-get update &&
+        sudo apt-get install cmake build-essential gcc-arm-none-eabi libstdc++-arm-none-eabi-newlib automake autoconf texinfo libtool libftdi-dev libusb-1.0-0-dev
+
+    # ------------------------------------------------------------------------
+    # Install Pico SDK
+    # ------------------------------------------------------------------------
+    - name: Install Pico SDK
+      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      run: |
+        git clone -b master https://github.com/raspberrypi/pico-sdk.git &&
+        cd pico-sdk &&
+        git submodule update --init &&
+        echo "PICO_SDK_PATH=${{env.FIRMWARE_PROJECT_DIR}}/pico-sdk" >> $GITHUB_ENV
+        
+    # ------------------------------------------------------------------------
+    # Build PicoTool
+    # ------------------------------------------------------------------------
+    - name: Build PicoTool
+      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      run: |
+        git clone -b master https://github.com/raspberrypi/picotool.git &&
+        cd picotool && mkdir -p build && cd build &&
+        cmake .. && make -j$(nproc) && sudo cp picotool /usr/local/bin/
+
+    # ------------------------------------------------------------------------
+    # Configure CMake
+    # ------------------------------------------------------------------------
+    - name: Configure CMake
+      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      run: cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DNORMAL_BUILD=ON
+
+    # ------------------------------------------------------------------------
+    # Build
+    # ------------------------------------------------------------------------
+    - name: Build
+      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      run: cmake --build build --config ${{env.BUILD_TYPE}}
+
+    # ------------------------------------------------------------------------
+    # Upload the Binary
+    # ------------------------------------------------------------------------
+    - name: Upload the Firmware Binary (uf2)
+      uses: actions/upload-artifact@v3
+      with:
+        path: "${{env.FIRMWARE_PROJECT_DIR}}/build/usbflashprog.uf2"
+        name: "ufprog-uf2-firmware"

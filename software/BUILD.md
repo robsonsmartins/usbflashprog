@@ -12,7 +12,7 @@ Here are instructions on how to build the project.
 	* [Requirements](#requirements)
 	* [Install Packages](#install-packages)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
-	* [Build Under Command Line](#build-under-command-line)
+	* [Build](#build)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 * [Microsoft Windows&copy;](#microsoft-windows)
 	* [Requirements](#requirements)
@@ -23,7 +23,8 @@ Here are instructions on how to build the project.
 	* [Install GraphViz \[Optional\]](#install-graphviz-optional)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Update Environment Variables](#update-environment-variables)
-	* [Build Under Command Line](#build-under-command-line)
+	* [Build](#build)
+	* [Generate Installation Package \[Optional\](#generate-installation-package-optional)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 
 ## GNU/Linux&copy;
@@ -46,7 +47,7 @@ Here are instructions on how to build the project.
 ```shell
 sudo apt update
 sudo apt install git cmake doxygen graphviz build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev
-sudo apt --no-install-recommends install libqt*5-dev qt*5-dev qml-module-qtquick-* qt*5-doc-html
+sudo apt --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
 ```
 
 ### Install Visual Studio Code \[Optional\]
@@ -71,7 +72,7 @@ sudo dpkg -i code_1.67.2-1652812855_amd64.deb
 - C/C++
 - Qt tools
 
-### Build Under Command Line
+### Build
 
 1. Clone the project from the repository:
 
@@ -194,7 +195,7 @@ The version used in this tutorial was [qt-opensource-windows-x86-5.12.12.exe](ht
 - "Qt <version>" / "MinGW <version> 64-bit" (to build 64-bit binaries)
 - "Qt <version>" / "MinGW <version> 32-bit" (to build 32-bit binaries)
 - "Developer and Designer Tools" / "Qt Creator <version>"
-- "Developer and Designer Tools" / "MinGW <version> 64-bit" (to build both 64-bit/32-bit binaries)
+- "Developer and Designer Tools" / "MinGW <version> 64-bit" (to build both 64-bit binaries)
 - "Developer and Designer Tools" / "MinGW <version> 32-bit" (to build only 32-bit binaries)
 
 7. Accept the user license, and other default options from installer.
@@ -281,7 +282,7 @@ The following variables and inputs are required:
 **`Qt5_DIR`**
 - `C:\Qt\5.12.12\5.12.12\mingw73_64\lib\cmake\Qt5`
 
-### Build Under Command Line
+### Build
 
 1. Clone the project from the repository (using the Git Bash Shell):
 
@@ -300,7 +301,9 @@ cd usbflashprog/software/usbflashprog
 ```shell
 mkdir build
 cd build
-cmake -G "MinGW Makefiles" ..
+cmake -G "MinGW Makefiles" .. -DCMAKE_BUILD_TYPE=Release
+# or, for a debug version:
+# cmake -G "MinGW Makefiles" .. -DCMAKE_BUILD_TYPE=Debug
 make -j$(nproc)
 ```
 
@@ -311,11 +314,56 @@ cmake -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++.exe 
 # e.g.: cmake -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=/c/Qt/5.12.12/Tools/mingw730_64/bin/g++.exe ..
 ```
 
+**Note**: If there is more than one version of the Qt installed on the system, you can explicitly specify to CMake which version to use with the following command: 
+
+```shell
+cmake -G "MinGW Makefiles" -DQt5_DIR=<path_of_qt_lib_cmake_qt5> ..
+# e.g.: cmake -G "MinGW Makefiles" -DQt5_DIR=/c/Qt/5.12.12/5.12.12/mingw73_64/lib/cmake/Qt5 ..
+```
+
 4. To run the program:
 
 ```shell
 ./ufprog.exe
 ```
+
+### Generate Installation Package \[Optional\]
+
+1. Clone the project from the repository (using the Git Bash Shell):
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog/scripts` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog/scripts
+```
+
+3. Run the following commands:
+
+```shell
+iscc.exe ufprog.iss
+```
+
+**Note**: To create a package for 32-bit OS, run the following command instead:
+
+```shell
+iscc.exe //Darch=win32 ufprog.iss
+```
+
+The install package is generated under `software/usbflashprog/build` subdirectory.
+
+**Note**: The Qt executables and the compiler libraries are found with use of the Qt5_DIR variable.
+To change this, run the following command instead:
+
+```shell
+iscc.exe //DQT_PATH=<path_of_qt> //DMINGW_PATH=<path_of_mingw> ufprog.iss
+# e.g.: iscc.exe //DQT_PATH="d:\\Qt\\5.12.12\\5.12.12\\mingw73_32" //DMINGW_PATH="d:\\mingw73_32" ufprog.iss
+```
+
+MINGW_PATH
 
 ### Generate Doxygen Documentation \[Optional\]
 

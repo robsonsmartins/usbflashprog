@@ -6,7 +6,7 @@
 # This work is licensed under a Creative Commons Attribution-NonCommercial-
 # ShareAlike 4.0 International License.
 # ------------------------------------------------------------------------------
-name: CodeQL Analysis
+name: Test Software
 
 on:
   workflow_dispatch:
@@ -14,37 +14,22 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-  schedule:
-    - cron: '22 8 * * 3'
+
+env:
+  BUILD_TYPE: Debug
+  SOFTWARE_PROJECT_DIR: ${{github.workspace}}/software/usbflashprog
 
 jobs:
-  analyze:
-    name: Analyze Source Code
+  build:
+    name: Test Software
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
-
-    strategy:
-      fail-fast: false
-      matrix:
-        language: [ 'cpp' ]
 
     steps:
     # ------------------------------------------------------------------------
-    # Initialize
-    # ------------------------------------------------------------------------
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
-      with:
-        languages: ${{ matrix.language }}
-
-    # ------------------------------------------------------------------------
     # Checkout the sources
     # ------------------------------------------------------------------------
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+    - name: Checkout the Sources
+      uses: actions/checkout@v3
 
     # ------------------------------------------------------------------------
     # Install Prerequisites
@@ -56,19 +41,22 @@ jobs:
         sudo apt-get --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
 
     # ------------------------------------------------------------------------
-    # Build
+    # Configure CMake
     # ------------------------------------------------------------------------
-    - name: Build Application 
-      run: |
-        mkdir -p ./firmware/usbflashprog/build &&
-        cmake -B ./firmware/usbflashprog/build -S ./firmware/usbflashprog -DTEST_BUILD=ON &&
-        cmake --build ./firmware/usbflashprog/build &&
-        mkdir -p ./software/usbflashprog/build &&
-        cmake -B ./software/usbflashprog/build -S ./software/usbflashprog &&
-        cmake --build ./software/usbflashprog/build
+    - name: Configure CMake
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+      run: cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DTEST_BUILD=ON
 
     # ------------------------------------------------------------------------
-    # Perform Analysis
+    # Build
     # ------------------------------------------------------------------------
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2    
+    - name: Build
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+      run: cmake --build build --config ${{env.BUILD_TYPE}}
+
+    # ------------------------------------------------------------------------
+    # Test
+    # ------------------------------------------------------------------------
+    - name: Test
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/build
+      run: ctest -C ${{env.BUILD_TYPE}}

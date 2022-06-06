@@ -3,6 +3,8 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 [![Latest Tag][tag-shield]][tag-url] [![Latest Commit][commit-shield]][commit-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Open Issues][issues-shield]][issues-url] [![License][license-shield]][license-url] [![Project Site][site-shield]][site-url]
 
+[![Build Firmware][build-firmware-shield]][build-firmware-url] [![Build Software][build-software-shield]][build-software-url] [![Test Firmware][test-firmware-shield]][test-firmware-url] [![CodeQL][codeql-shield]][codeql-url]
+
 ## Contents
 
 * [About the Project](#about-the-project)
@@ -56,6 +58,8 @@ The most up-to-date firmware project can be accessed here: [Firmware Project of 
 
 The most up-to-date software project can be accessed here: [Software Project of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/software/).
 
+Instructions on how to build the software are described in following document: [Software Build Instructions](https://github.com/robsonsmartins/usbflashprog/blob/main/software/BUILD.md).
+
 ## Contributing
 
 Please read [CONTRIBUTING](https://github.com/robsonsmartins/usbflashprog/blob/main/CONTRIBUTING.md) for more information.
@@ -64,19 +68,21 @@ Please read [CONTRIBUTING](https://github.com/robsonsmartins/usbflashprog/blob/m
 
 Distributed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa]. 
 
-See [LICENSE](https://github.com/robsonsmartins/usbflashprog/blob/main/LICENSE) for more information.
+See [LICENSE](https://github.com/robsonsmartins/usbflashprog/blob/main/LICENSE) file for more information.
 
-- [Terms and Conditions](https://www.robsonmartins.com/content/policy/terms.php#googtrans(pt|en))
-- [Privacy Policy](https://www.robsonmartins.com/content/policy/privacy.php#googtrans(pt|en))
+The same "Terms and Conditions" and "Privacy Policy" of the [Robson Martins Home Page](https://www.robsonmartins.com) apply here:
+
+- [Terms and Conditions](https://www.robsonmartins.com/content/policy/terms.php)
+- [Privacy Policy](https://www.robsonmartins.com/content/policy/privacy.php)
 
 ## Contact
 
 [![Home Page][contact-site-shield]][contact-site-url] [![LinkedIn][contact-linkedin-shield]][contact-linkedin-url]
 
 ## Reference
-* [EzoFlash+](http://www.ezoflash.com/)
-* [MPSP](https://mpsp.robsonmartins.com)
-* [PK2C](https://pk2c.robsonmartins.com)
+* [EzoFlash+](http://www.ezoflash.com/) - Parallel Port EPROM/Flash Programmer.
+* [MPSP](https://mpsp.robsonmartins.com) - Microchip&copy; PIC Serial Port Programmer.
+* [PK2C](https://pk2c.robsonmartins.com) - Microchip&copy; PIC Kit 2 Clone Programmer.
 
 ---
 
@@ -101,6 +107,15 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 [license-url]: https://github.com/robsonsmartins/usbflashprog/blob/master/LICENSE
 [site-shield]: https://img.shields.io/badge/project%20site-usbflashprog-orange?style=plastic
 [site-url]: https://usbflashprog.robsonmartins.com
+
+[build-firmware-shield]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/firmware.yml/badge.svg?style=plastic
+[build-firmware-url]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/firmware.yml
+[build-software-shield]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/software.yml/badge.svg?style=plastic
+[build-software-url]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/software.yml
+[test-firmware-shield]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/test-firmware.yml/badge.svg?style=plastic
+[test-firmware-url]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/test-firmware.yml
+[codeql-shield]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/codeql-analysis.yml/badge.svg?style=plastic
+[codeql-url]:https://github.com/robsonsmartins/usbflashprog/actions/workflows/codeql-analysis.yml
 
 [contact-site-shield]: https://img.shields.io/badge/Home%20Page-robsonmartins.com-green?style=plastic
 [contact-site-url]: https://www.robsonmartins.com

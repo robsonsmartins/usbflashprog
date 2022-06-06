@@ -1,0 +1,169 @@
+# ------------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2022) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ------------------------------------------------------------------------------
+name: Build Software
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '12 2 * * *'
+
+env:
+  BUILD_TYPE: Release
+  SOFTWARE_PROJECT_DIR: ${{github.workspace}}/software/usbflashprog
+
+jobs:
+  build_software:
+    name: Build Software
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        arch: [x86, x86_64]
+    runs-on: ${{matrix.os}}
+    continue-on-error: true
+    steps:
+      # ------------------------------------------------------------------------
+      # Checkout the sources
+      # ------------------------------------------------------------------------
+      - name: Checkout the Sources
+        uses: actions/checkout@v3
+    
+      # ------------------------------------------------------------------------
+      # Install MinGW (Windows)
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
+        name: Install MinGW64 (Windows 64-bits)
+        uses: msys2/setup-msys2@v2
+        with:
+            msystem: mingw64
+            install: 
+                mingw-w64-x86_64-toolchain
+                mingw-w64-x86_64-cmake
+            release: false
+    
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
+        name: Install MinGW32 (Windows 32-bits)
+        uses: msys2/setup-msys2@v2
+        with:
+            msystem: mingw32
+            install: 
+                mingw-w64-i686-toolchain
+                mingw-w64-i686-cmake
+            release: false
+    
+      # ------------------------------------------------------------------------
+      # Install Inno Setup (Windows)
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest'
+        name: Install Inno Setup (Windows)
+        env:
+          INNO_SETUP_DOWNLOAD_URL: "https://files.jrsoftware.org/is/6/innosetup-6.2.1.exe"
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
+        run: |
+          wget "${{env.INNO_SETUP_DOWNLOAD_URL}}" &&
+          ./innosetup-6.2.1.exe //VERYSILENT //SUPPRESSMSGBOXES //SP //CURRENTUSER //LANG=en //NORESTART //NOICONS //DIR=".\is"
+        shell: msys2 {0}
+
+      # ------------------------------------------------------------------------
+      # Install Qt (Windows)
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
+        name: Install Qt (Windows 64-bits)
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.12.12'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_mingw73'
+          dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
+          install-deps: 'true'
+
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
+        name: Install Qt (Windows 32-bits)
+        uses: jurplel/install-qt-action@v2
+        with:
+          version: '5.12.12'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win32_mingw73'
+          dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
+          install-deps: 'true'
+
+      # ------------------------------------------------------------------------
+      # Install Prerequisites (Linux)
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
+        name: Install Prerequisites (Linux 64-bits)
+        run: |
+          sudo apt-get update &&
+          sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev &&    
+          sudo apt-get --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
+
+      # ------------------------------------------------------------------------
+      # Configure CMake
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest'
+        name: Configure CMake (Windows)
+        env:
+          CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: cmake -G "MinGW Makefiles" -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        shell: msys2 {0}
+
+      - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
+        name: Configure CMake (Linux)
+        env:
+          CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
+      # ------------------------------------------------------------------------
+      # Build
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest'
+        name: Build (Windows)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: cmake --build build --config ${{env.BUILD_TYPE}}
+        shell: msys2 {0}
+
+      - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
+        name: Build (Linux)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: cmake --build build --config ${{env.BUILD_TYPE}}
+
+      # ------------------------------------------------------------------------
+      # Create the Installer
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
+        name: Create the Installer (Windows 64-bits)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
+        run: ./is/iscc.exe //DARCH="Win64" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_64" ufprog.iss
+        shell: msys2 {0}
+
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
+        name: Create the Installer (Windows 32-bits)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
+        run: ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_32" ufprog.iss
+        shell: msys2 {0}
+
+      # ------------------------------------------------------------------------
+      # Upload the Installer
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
+        name: Upload the Installer (Windows 64-bits)
+        uses: actions/upload-artifact@v3
+        with:
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-win64-setup.exe"
+          name: "ufprog-win64-installer"
+
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
+        name: Upload the Installer (Windows 32-bits)
+        uses: actions/upload-artifact@v3
+        with:
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-win32-setup.exe"
+          name: "ufprog-win32-installer"

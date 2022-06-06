@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 
 project(ufprog VERSION 0.1 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -47,10 +47,12 @@ configure_file(resources/i18n.qrc ${CMAKE_BINARY_DIR} COPYONLY)
 # Windows application icon
 if (WIN32)
   set(WINDOWS_RES_FILE ${CMAKE_BINARY_DIR}/resources.obj)
+  set(WINDOWS_RC_FILE resources.rc)
+  set(RC_FLAGS -DMINGW -Ocoff --target=pe-x86-64)
   cmake_path(GET CMAKE_CXX_COMPILER PARENT_PATH CMAKE_CXX_COMPILER_PATH)
   set(CMAKE_RC_COMPILER ${CMAKE_CXX_COMPILER_PATH}/windres.exe)
   add_custom_command(OUTPUT ${WINDOWS_RES_FILE}
-  COMMAND ${CMAKE_RC_COMPILER} -v -DMINGW -Ocoff --target=pe-x86-64 resources.rc ${WINDOWS_RES_FILE}
+  COMMAND ${CMAKE_RC_COMPILER} ${RC_FLAGS} ${WINDOWS_RC_FILE} ${WINDOWS_RES_FILE}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/resources
   )
 endif()

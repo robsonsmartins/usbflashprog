@@ -1,0 +1,7 @@
+?package(ufprog):\
+	needs="X11" \
+	section="Science/Electronics" \
+	title="USB EPROM Flash Programmer" \
+	command="/opt/ufprog/ufprog" \
+	icon="/usr/share/pixmaps/ufprog.xpm"
+# https://www.debian.org/doc/packaging-manuals/menu.html/ch3.html

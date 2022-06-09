@@ -151,6 +151,20 @@ jobs:
         run: ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_32" ufprog.iss
         shell: msys2 {0}
 
+      - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
+        name: Create DEB Package (Linux 64-bits)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: |
+          cp -Rf scripts/deb build/ &&
+          mkdir -p build/deb/ufprog/opt/ufprog &&
+          cp -f build/ufprog build/deb/ufprog/opt/ufprog/ &&
+          cp -Rf scripts/linux-resources/* build/deb/ufprog/ &&
+          chmod 775 build/deb/ufprog/DEBIAN/* &&
+          chmod +x build/deb/ufprog/opt/ufprog/ufprog &&
+          cd build/deb &&
+          dpkg -b ufprog &&
+          mv ufprog.deb "${{env.SOFTWARE_PROJECT_DIR}}/build/"
+
       # ------------------------------------------------------------------------
       # Upload the Installer
       # ------------------------------------------------------------------------
@@ -167,3 +181,10 @@ jobs:
         with:
           path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-win32-setup.exe"
           name: "ufprog-win32-installer"
+
+      - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
+        name: Upload the Packages (Linux 64-bits)
+        uses: actions/upload-artifact@v3
+        with:
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog.deb"
+          name: "ufprog-linux64-packages"

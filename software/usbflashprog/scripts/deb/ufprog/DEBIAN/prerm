@@ -1,0 +1,3 @@
+#!/bin/sh
+set -e
+killall -q -9 ufprog || true

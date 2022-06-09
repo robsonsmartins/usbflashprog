@@ -11,6 +11,7 @@ Here are instructions on how to build the project.
 * [GNU/Linux&copy;](#gnulinux)
 	* [Requirements](#requirements)
 	* [Install Packages](#install-packages)
+	* [Install Pico C SDK](#install-pico-c-sdk)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Build](#build)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
@@ -18,13 +19,16 @@ Here are instructions on how to build the project.
 	* [Requirements](#requirements)
 	* [Install Git](#install-git)
 	* [Install CMake](#install-cmake)
-	* [Install Qt and MinGW](#install-qt-and-mingw)
+	* [Install GNU ARM Embedded Toolchain](#install-gnu-arm-embedded-toolchain)
+	* [Install MSys2 and MinGW](#install-msys2-and-mingw)
+	* [Install Python](#install-python)
+	* [Install Pico C SDK](#install-pico-c-sdk)
 	* [Install Doxygen \[Optional\]](#install-doxygen-optional)
 	* [Install GraphViz \[Optional\]](#install-graphviz-optional)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Update Environment Variables](#update-environment-variables)
 	* [Build](#build)
-	* [Generate Installation Package \[Optional\](#generate-installation-package-optional)
+	* [Debug \[Optional\]](#debug-optional)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 
 ## GNU/Linux&copy;
@@ -34,8 +38,9 @@ Here are instructions on how to build the project.
 - GNU/Linux (tested with [Ubuntu Linux 22.04 LTS](https://releases.ubuntu.com/jammy/));
 - Git ([Git 1:2.34.1-1ubuntu1.2](https://packages.ubuntu.com/jammy/git));
 - CMake ([CMake 3.22.1-1ubuntu1](https://packages.ubuntu.com/jammy/cmake));
-- Qt ([Qt 5.15.3-1](https://packages.ubuntu.com/jammy/qttools5-dev-tools));
+- GCC-ARM ([GCC-ARM 15:10.3-2021.07-4](https://packages.ubuntu.com/jammy/gcc-arm-none-eabi));
 - GNU C/C++ Compiler ([GCC 4:11.2.0-1ubuntu1](https://packages.ubuntu.com/jammy/gcc));
+- Pico C SDK Repository ([pico-sdk](https://github.com/raspberrypi/pico-sdk), ~80,5MB);
 - Doxygen \[Optional\] ([Doxygen 1.9.1-2ubuntu2](https://packages.ubuntu.com/jammy/doxygen));
 - GraphViz \[Optional\] ([GraphViz 2.42.2-6](https://packages.ubuntu.com/jammy/graphviz));
 - Visual Studio Code \[Optional\] ([code_1.67.2-1652812855_amd64.deb](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64), ~78.9MB)
@@ -46,8 +51,24 @@ Here are instructions on how to build the project.
 
 ```shell
 sudo apt update
-sudo apt install git cmake doxygen graphviz build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev
-sudo apt --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
+sudo apt install git cmake doxygen graphviz build-essential gcc-arm-none-eabi libstdc++-arm-none-eabi-newlib automake autoconf texinfo libtool libftdi-dev libusb-1.0-0-dev
+```
+
+### Install Pico C SDK
+
+The Pico SDK contains a collection of tools and libraries used to facilitate development on the Raspberry Pi Pico (and other RP2040-enabled boards).
+There is also a set of C examples in the official repositories that are useful demonstrations of how to use the SDK.
+
+1. To install the required Pico C SDK, run the following commands:
+
+```shell
+cd ~
+git clone -b master https://github.com/raspberrypi/pico-sdk.git
+cd pico-sdk
+git submodule update --init
+cd ..
+echo "export PICO_SDK_PATH=$HOME/pico-sdk" >> .bashrc
+source .bashrc
 ```
 
 ### Install Visual Studio Code \[Optional\]
@@ -70,7 +91,7 @@ sudo dpkg -i code_1.67.2-1652812855_amd64.deb
 - CMake
 - CMake Tools
 - C/C++
-- Qt tools
+- Cortex-Debug
 
 ### Build
 
@@ -80,10 +101,10 @@ sudo dpkg -i code_1.67.2-1652812855_amd64.deb
 git clone https://github.com/robsonsmartins/usbflashprog.git
 ```
 
-2. Change to `software/usbflashprog` directory:
+2. Change to `firmware/usbflashprog` directory:
 
 ```shell
-cd usbflashprog/software/usbflashprog
+cd usbflashprog/firmware/usbflashprog
 ```
 
 3. Run the following commands:
@@ -95,18 +116,7 @@ cmake ..
 make -j$(nproc)
 ```
 
-**Note**: If there is more than one version of the gcc/g++ compiler installed on the system, you can explicitly specify to CMake which compiler to use with the following command: 
-
-```shell
-cmake -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++ ..
-# e.g.: cmake -DCMAKE_CXX_COMPILER=/opt/gcc/8.1.0/bin/g++ ..
-```
-
-4. To run the program:
-
-```shell
-./ufprog
-```
+4. The generated firmware binary will be in `build/` directory, with the filename `usbflashprog.uf2`.
 
 ### Generate Doxygen Documentation \[Optional\]
 
@@ -116,10 +126,10 @@ cmake -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++ ..
 git clone https://github.com/robsonsmartins/usbflashprog.git
 ```
 
-2. Change to `software/usbflashprog` directory:
+2. Change to `firmware/usbflashprog` directory:
 
 ```shell
-cd usbflashprog/software/usbflashprog
+cd usbflashprog/firmware/usbflashprog
 ```
 
 3. Run the following commands:
@@ -128,7 +138,7 @@ cd usbflashprog/software/usbflashprog
 doxygen
 ```
 
-The documentation is generated under `usbflashprog/docs/software/html` directory.
+The documentation is generated under `usbflashprog/docs/firmware/html` directory.
 
 ## Microsoft Windows&copy;
 
@@ -137,7 +147,10 @@ The documentation is generated under `usbflashprog/docs/software/html` directory
 - Microsoft Windows&copy; 10 or above;
 - Git ([Git-2.31.1-64-bit.exe](https://github.com/git-for-windows/git/releases/download/v2.31.1.windows.1/Git-2.31.1-64-bit.exe), ~47.5MB);
 - CMake ([cmake-3.23.2-windows-x86_64.msi](https://github.com/Kitware/CMake/releases/download/v3.23.2/cmake-3.23.2-windows-x86_64.msi), ~27.9MB);
-- Qt and MinGW ([qt-opensource-windows-x86-5.12.12.exe](https://download.qt.io/official_releases/qt/5.12/5.12.12/qt-opensource-windows-x86-5.12.12.exe), ~3.7GB);
+- GNU ARM Embedded Toolchain ([gcc-arm-none-eabi-10-2020-q4-major-win32.exe](https://developer.arm.com/-/media/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-win32.exe?revision=9a4bce5a-7577-4b4f-910d-4585f55d35e8&la=en&hash=068C813EEFFB68060B5FB40E6541BDE7159AFAA0), ~122MB);
+- Python ([python-3.9.4-amd64.exe](https://www.python.org/ftp/python/3.9.4/python-3.9.4-amd64.exe), ~27MB);
+- Pico C SDK Repository ([pico-sdk](https://github.com/raspberrypi/pico-sdk), ~80,5MB);
+- MSys2/MinGW ([msys2-x86_64-20210419.exe](https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20210419.exe), ~95.8MB);
 - Doxygen \[Optional\] ([doxygen-1.9.4-setup.exe](https://www.doxygen.nl/files/doxygen-1.9.4-setup.exe), ~44.4MB);
 - GraphViz \[Optional\] ([stable_windows_10_cmake_Release_x64_graphviz-install-2.47.1-win64.exe](https://gitlab.com/graphviz/graphviz/-/package_files/9574245/download), ~4.5MB);
 - Visual Studio Code \[Optional\] ([VSCodeSetup-x64-1.55.1.exe](https://code.visualstudio.com/docs/?dv=win64), ~68.9MB)
@@ -169,38 +182,111 @@ The version used in this tutorial was [cmake-3.23.2-windows-x86_64.msi](https://
 
 4. In "Destination Folder", write a short and easy path, for example `c:\cmake`.
 
-### Install Qt and MinGW
+### Install GNU ARM Embedded Toolchain
 
-MinGW (short for Minimalist GNU for Windows) is a collection of open source compilers and linkers, which allow you to build native applications (written in languages such as C and C++) for Microsoft Windows.
+The GNU ARM Embedded Toolchain package contains the set of ARM compilers needed to compile the C and C++ source code for the RP2040 microcontroller (present on the Raspberry Pi Pico).
 
-Qt is a C++ framework based on libraries and tools that enables the development of powerful, interactive, cross-platform applications and devices.
+1. Open the [GNU ARM Embedded Toolchain downloads page](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads), and download the latest installer for Windows.
+At the time of writing this tutorial, the version used was [gcc-arm-none-eabi-10-2020-q4-major-win32.exe](https://developer.arm.com/-/media/Files/downloads/gnu-rm/10-2020q4/gcc-arm-none-eabi-10-2020-q4-major-win32.exe?revision=9a4bce5a-7577-4b4f-910d-4585f55d35e8&la=en&hash=068C813EEFFB68060B5FB40E6541BDE7159AFAA0).
 
-The installation of both tools is performed at once, through the following procedure:
+2. Run the installer. When prompted, change the install location to a short and easy path, for example `c:\gcc-arm`.
+The installer will automatically populate the destination folder with the name of the current version of the toolset.
 
-1. Download the latest version of Qt5 from the official website: [Qt Downloads Page](https://www.qt.io/offline-installers).
-The version used in this tutorial was [qt-opensource-windows-x86-5.12.12.exe](https://download.qt.io/official_releases/qt/5.12/5.12.12/qt-opensource-windows-x86-5.12.12.exe).
+3. Continue with the installation process. On the last screen, leave all options selected.
 
-**Note**: Qt 6 is currently not supported by this project.
+### Install MSys2 and MinGW
+
+MSys2 is a collection of tools and libraries that provide an easy-to-use environment for building, installing and running native software for Microsoft Windows.
+It offers a terminal (command line) similar to the GNU/Linux console, several standard POSIX and GNU commands and utilities, and a package installer similar to the Arch Linux distribution, Pacman.
+
+1. To install MSys2, download the latest version of the installer package from [msys2.org](https://www.msys2.org/).
+In this tutorial, the [msys2-x86_64-20210419.exe](https://repo.msys2.org/distrib/x86_64/msys2-x86_64-20210419.exe) version was used.
+
+2. Run the installer. Enter the desired installation folder (short path with no accents, no spaces, no symlinks, no subdirectories or network drives).
+
+3. When finished, check Run MSYS2 64bit now.
+
+To install MinGW on MSys2, follow the steps:
+
+1. First, update the package database and base packages. In the open console, run the command:
+
+```shell
+pacman -Syu
+```
+
+2. After closing the MSys2 console, reopen it through the shortcut in the Start Menu, and execute the commands:
+
+```shell
+pacman -Sy
+pacman -Su
+```
+
+3. Install the packages for compilation by running the command:
+
+```shell
+pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automake texinfo git
+```
+
+4. When asked which members to `mingw-w64-x86_64-toolchain` install, press __Enter__ to install them all (default).
+
+5. When asked about a conflict between `pkg-config` and `pkgconf`, choose option Y (Remove pkgconf).
+
+6. Downloading and installing the packages will take a long time.
+
+7. To configure Path in MSys2:
+
+- In the MSys2 terminal, open the file `~/.bashrc`, like this: `nano ~/.bashrc`.
+- At the end of the file, add the line `PATH=${PATH}:/c/cmake/bin` (path of the cmake).
+- Save the file <Ctrl + O> and close <Ctrl + X> the editor, and run `source ~/.bashrc`.
+
+Now it will be possible to execute and get the return of `cmake --version`.
+
+### Install Python
+
+Pico's SDK needs Python to script and automate some of the build functions.
+
+The Python version recommended in the [Raspberry Pi Pico Datasheet for the C/C++ SDK](https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf) is 3.9 or higher.
+Note that this version does not support Windows 7, and Python versions lower than this may not work with Pico.
+
+1. Download the latest Python version installer from the [Python Downloads Page](https://www.python.org/downloads/).
+The version used in this tutorial was [python-3.9.4-amd64.exe](https://www.python.org/ftp/python/3.9.4/python-3.9.4-amd64.exe).
 
 2. Run the installer.
+On the first screen, keep the "Install launcher for all users (recommended)" and "Add Python 3.9 to PATH" options checked.
+Choose the "Customize installation" option.
 
-3. Log in into your Qt account or create a new free account.
+3. Under "Optional Features", leave all options checked.
+Under "Advanced Options", select "Install for all users", thus leaving the first 5 options checked.
+In "Customize install location", type a short path as `C:\python`.
 
-4. Accept the user license.
+4. Click "Install Now" and wait for Python to install.
 
-5. In "Destination Folder", write a short and easy path, for example `C:\Qt\5.12.12`.
+At the end of the installation process, select the "Disable path length limit" option.
+If this option is not available, or if you leave it for later, it is important to manually disable the `MAX_PATH` length limit for the Pico SDK to work.
+Pico's SDK (and other SDKs from other cards) often have long, nested directory trees, resulting in pathnames that exceed the original Windows limit (260 characters).
 
-6. In "Select Components", check the following:
+5. \[Optional\] If you haven't selected the "Disable path length limit" option in the Python installer, or want to do it manually:
 
-- "Qt <version>" / "MinGW <version> 64-bit" (to build 64-bit binaries)
-- "Qt <version>" / "MinGW <version> 32-bit" (to build 32-bit binaries)
-- "Developer and Designer Tools" / "Qt Creator <version>"
-- "Developer and Designer Tools" / "MinGW <version> 64-bit" (to build both 64-bit binaries)
-- "Developer and Designer Tools" / "MinGW <version> 32-bit" (to build only 32-bit binaries)
+- Run `regedit` (Windows Registry Editor);
+- Open the subkey `Computer\HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem`;
+- Add a value entry (if it doesn't already exist), with name `LongPathsEnabled`, of type `DWORD`;
+- Change the value data to `1`;
+- Before using the build tools for Pico, the computer must be restarted.
 
-7. Accept the user license, and other default options from installer.
+### Install Pico C SDK
 
-8. To use the tools, it will be necessary to follow procedure [Update Environment Variables](#update-environment-variables).
+The Pico SDK contains a collection of tools and libraries used to facilitate development on the Raspberry Pi Pico (and other RP2040-enabled boards).
+There is also a set of C examples in the official repositories that are useful demonstrations of how to use the SDK.
+
+1. To install the required Pico C SDK, run the following commands (inside MSys2):
+
+```shell
+cd $HOME
+git clone -b master https://github.com/raspberrypi/pico-sdk.git
+cd pico-sdk
+git submodule update --init
+cd ..
+```
 
 ### Install Doxygen \[Optional\]
 
@@ -271,29 +357,31 @@ Choose the option "Edit system environment variables", and click on "Environment
 The following variables and inputs are required:
 
 **`PATH`**
-- `C:\Qt\5.12.12\5.12.12\mingw73_64\bin`
-- `C:\Qt\5.12.12\Tools\mingw730_64\bin`
+- `C:\msys\mingw64\bin`
 - `C:\cmake\bin`
+- `C:\gcc-arm\10 2020-q4-major\bin`
 - `C:\Program Files\Git\cmd`
+- `C:\python\Scripts\`
+- `C:\python\`
 - `C:\doxygen\bin` (if Doxygen was installed)
 - `C:\graphviz\bin` (if GraphViz was installed)
 - `C:\Program Files\Microsoft VS Code\bin` (if Visual Studio Code was installed)
 
-**`Qt5_DIR`**
-- `C:\Qt\5.12.12\5.12.12\mingw73_64\lib\cmake\Qt5`
+**`PICO_SDK_PATH`**
+- `%userprofile%\pico-sdk`
 
 ### Build
 
-1. Clone the project from the repository (using the Git Bash Shell):
+1. Clone the project from the repository (using the MSys2):
 
 ```shell
 git clone https://github.com/robsonsmartins/usbflashprog.git
 ```
 
-2. Change to `software/usbflashprog` directory:
+2. Change to `firmware/usbflashprog` directory:
 
 ```shell
-cd usbflashprog/software/usbflashprog
+cd usbflashprog/firmware/usbflashprog
 ```
 
 3. Run the following commands:
@@ -301,67 +389,15 @@ cd usbflashprog/software/usbflashprog
 ```shell
 mkdir build
 cd build
-cmake -G "MinGW Makefiles" .. -DCMAKE_BUILD_TYPE=Release
-# or, for a debug version:
-# cmake -G "MinGW Makefiles" .. -DCMAKE_BUILD_TYPE=Debug
+cmake -G "MinGW Makefiles" ..
 make -j$(nproc)
 ```
 
-**Note**: If there is more than one version of the MinGW compiler installed on the system, you can explicitly specify to CMake which compiler to use with the following command: 
+4. The generated firmware binary will be in `build/` directory, with the filename `usbflashprog.uf2`.
 
-```shell
-cmake -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++.exe ..
-# e.g.: cmake -G "MinGW Makefiles" -DCMAKE_CXX_COMPILER=/c/Qt/5.12.12/Tools/mingw730_64/bin/g++.exe ..
-```
+### Debug \[Optional\]
 
-**Note**: If there is more than one version of the Qt installed on the system, you can explicitly specify to CMake which version to use with the following command: 
-
-```shell
-cmake -G "MinGW Makefiles" -DQt5_DIR=<path_of_qt_lib_cmake_qt5> ..
-# e.g.: cmake -G "MinGW Makefiles" -DQt5_DIR=/c/Qt/5.12.12/5.12.12/mingw73_64/lib/cmake/Qt5 ..
-```
-
-4. To run the program:
-
-```shell
-./ufprog.exe
-```
-
-### Generate Installation Package \[Optional\]
-
-1. Clone the project from the repository (using the Git Bash Shell):
-
-```shell
-git clone https://github.com/robsonsmartins/usbflashprog.git
-```
-
-2. Change to `software/usbflashprog/scripts` directory:
-
-```shell
-cd usbflashprog/software/usbflashprog/scripts
-```
-
-3. Run the following commands:
-
-```shell
-iscc.exe ufprog.iss
-```
-
-**Note**: To create a package for 32-bit OS, run the following command instead:
-
-```shell
-iscc.exe //Darch=win32 ufprog.iss
-```
-
-The install package is generated under `software/usbflashprog/build` subdirectory.
-
-**Note**: The Qt executables and the compiler libraries are found with use of the Qt5_DIR variable.
-To change this, run the following command instead:
-
-```shell
-iscc.exe //DQT_PATH=<path_of_qt> //DMINGW_PATH=<path_of_mingw> ufprog.iss
-# e.g.: iscc.exe //DQT_PATH="d:\\Qt\\5.12.12\\5.12.12\\mingw73_32" //DMINGW_PATH="d:\\mingw73_32" ufprog.iss
-```
+To debug the firmware follow the tutorial [Debugging the Raspberry Pi Pico in C/C++ with VS Code and MinGW for Windows (NO Build Tools for Visual Studio!)](https://www.robsonmartins.com/content/eletr/raspi/pico/csdkwind.php).
 
 ### Generate Doxygen Documentation \[Optional\]
 
@@ -371,10 +407,10 @@ iscc.exe //DQT_PATH=<path_of_qt> //DMINGW_PATH=<path_of_mingw> ufprog.iss
 git clone https://github.com/robsonsmartins/usbflashprog.git
 ```
 
-2. Change to `software/usbflashprog` directory:
+2. Change to `firmware/usbflashprog` directory:
 
 ```shell
-cd usbflashprog/software/usbflashprog
+cd usbflashprog/firmware/usbflashprog
 ```
 
 3. Run the following commands:
@@ -383,4 +419,4 @@ cd usbflashprog/software/usbflashprog
 doxygen
 ```
 
-The documentation is generated under `usbflashprog/docs/software/html` directory.
+The documentation is generated under `usbflashprog/docs/firmware/html` directory.

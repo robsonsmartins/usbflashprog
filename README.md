@@ -3,7 +3,11 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 [![Latest Tag][tag-shield]][tag-url] [![Latest Commit][commit-shield]][commit-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Open Issues][issues-shield]][issues-url] [![License][license-shield]][license-url] [![Project Site][site-shield]][site-url]
 
-[![Build Firmware][build-firmware-shield]][build-firmware-url] [![Build Software][build-software-shield]][build-software-url] [![Test Firmware][test-firmware-shield]][test-firmware-url] [![CodeQL][codeql-shield]][codeql-url]
+[![Build Firmware][build-firmware-shield]][build-firmware-url]
+[![Build Software][build-software-shield]][build-software-url]
+[![Test Software][test-software-shield]][test-software-url]
+[![Test Firmware][test-firmware-shield]][test-firmware-url]
+[![CodeQL][codeql-shield]][codeql-url]
 
 ## Contents
 
@@ -53,6 +57,8 @@ The most up-to-date hardware design can be accessed here: [Hardware design of th
 ## Firmware Project
 
 The most up-to-date firmware project can be accessed here: [Firmware Project of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/blob/main/firmware/).
+
+Instructions on how to build the firmware are described in following document: [Firmware Build Instructions](https://github.com/robsonsmartins/usbflashprog/blob/main/firmware/BUILD.md).
 
 ## Software Project
 
@@ -114,6 +120,8 @@ This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareA
 [build-software-url]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/software.yml
 [test-firmware-shield]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/test-firmware.yml/badge.svg?style=plastic
 [test-firmware-url]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/test-firmware.yml
+[test-software-shield]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/test-software.yml/badge.svg?style=plastic
+[test-software-url]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/test-software.yml
 [codeql-shield]: https://github.com/robsonsmartins/usbflashprog/actions/workflows/codeql-analysis.yml/badge.svg?style=plastic
 [codeql-url]:https://github.com/robsonsmartins/usbflashprog/actions/workflows/codeql-analysis.yml
 

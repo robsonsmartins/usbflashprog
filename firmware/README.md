@@ -4,6 +4,10 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 ## Firmware Project
 
+### Build Instructions
+
+Instructions on how to build the project are described in following document: [Build Instructions](BUILD.md)
+
 ### Raspberry Pi Pico Platform
 
 - [Raspberry Pi Documentation](https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html)

@@ -1,10 +1,11 @@
-#define APP_NAME "USB EPROM Flash Programmer"
-#define APP_VER "0.1"
-#define APP_VERNAME APP_NAME + " " + APP_VER
-#define APP_PUBLISHER "Robson Martins"
-#define APP_URL "https://usbflashprog.robsonmartins.com/"
-#define APP_MAIN_EXE "ufprog.exe"
-#define APP_VER_REV APP_VER + "-0"
+; ------------------------------------------------------------------------------
+; USB EPROM/Flash Programmer
+;
+; Copyright (2022) Robson Martins
+;
+; This work is licensed under a Creative Commons Attribution-NonCommercial-
+; ShareAlike 4.0 International License.
+; ------------------------------------------------------------------------------
 
 #ifndef QT_PATH
 # define QT_PATH GetEnv('Qt5_DIR') + "\..\..\.."
@@ -14,17 +15,53 @@
 # define MINGW_PATH QT_PATH
 #endif
 
-#define QT_BIN_PATH StringChange(QT_PATH, "/", "\") + "\bin"
-#define QT_PLUGINS_PATH StringChange(QT_PATH, "/", "\") + "\plugins"
-#define MINGW_BIN_PATH StringChange(MINGW_PATH, "/", "\") + "\bin"
+#ifndef QT_BIN_PATH
+# define QT_BIN_PATH     StringChange(QT_PATH, "/", "\") + "\bin"
+#endif
 
-#define BUILD_PATH SourcePath + "..\build"
-#define RESOURCES_PATH SourcePath + "..\resources"
-#define WIN32_ARCH "WIN32"
+#ifndef QT_PLUGINS_PATH
+# define QT_PLUGINS_PATH StringChange(QT_PATH, "/", "\") + "\plugins"
+#endif
+
+#ifndef MINGW_BIN_PATH
+# define MINGW_BIN_PATH  StringChange(MINGW_PATH, "/", "\") + "\bin"
+#endif
+
+#ifndef BUILD_PATH
+# define BUILD_PATH     SourcePath + "..\build"
+#endif
+
+#ifndef RESOURCES_PATH
+# define RESOURCES_PATH SourcePath + "..\resources"
+#endif
 
 #ifndef ARCH
 # define ARCH "WIN64"
 #endif
+
+#ifndef VERSION
+# define VERSION "0.1"
+#endif
+
+; ------------------------------------------------------------------------------
+
+#define WIN32_ARCH     "WIN32"
+
+#define APP_NAME      "USB EPROM Flash Programmer"
+#define APP_VER       VERSION
+#define APP_VERNAME   APP_NAME + " " + APP_VER
+#define APP_PUBLISHER "Robson Martins"
+#define APP_URL       "https://usbflashprog.robsonmartins.com/"
+#define APP_MAIN_EXE  "ufprog.exe"
+#define APP_VER_REV   APP_VER + "-0"
+
+#if WIN32_ARCH == UpperCase(ARCH)
+# define OUTPUT_FILE_NAME "ufprog-" + APP_VER_REV + "-win32-setup"
+#else
+# define OUTPUT_FILE_NAME "ufprog-" + APP_VER_REV + "-win64-setup"
+#endif
+
+; ------------------------------------------------------------------------------
 
 [Setup]
 AppId={{34F2D442-D23F-482A-81C5-1FA7CE42C377}
@@ -50,18 +87,18 @@ VersionInfoCopyright={#APP_PUBLISHER}(R)
 VersionInfoProductName={#APP_NAME}
 VersionInfoProductVersion={#APP_VER}
 MinVersion=6.1sp1
-#if WIN32_ARCH == UpperCase(ARCH)
-  OutputBaseFilename=ufprog-{#APP_VER_REV}-win32-setup
-#else
+#if WIN32_ARCH != UpperCase(ARCH)
   ArchitecturesInstallIn64BitMode=x64
   ArchitecturesAllowed=x64
-  OutputBaseFilename=ufprog-{#APP_VER_REV}-win64-setup
 #endif
+OutputBaseFilename={#OUTPUT_FILE_NAME}
 DisableWelcomePage=False
 WizardImageFile=ufprog.bmp
 WizardSmallImageFile=ufprog-small.bmp
 UninstallDisplayIcon={app}\ufprog.ico
 OutputDir={#BUILD_PATH}
+
+; ------------------------------------------------------------------------------
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"
@@ -89,8 +126,12 @@ Name: es; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: tr; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: uk; MessagesFile: "compiler:Languages\Ukrainian.isl"
 
+; ------------------------------------------------------------------------------
+
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
+
+; ------------------------------------------------------------------------------
 
 [Files]
 Source: "{#BUILD_PATH}\ufprog.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -112,11 +153,15 @@ Source: "{#QT_BIN_PATH}\Qt5SerialPort.dll"; DestDir: "{app}"; Flags: ignoreversi
 Source: "{#QT_PLUGINS_PATH}\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
 Source: "{#QT_PLUGINS_PATH}\imageformats\qico.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
 
+; ------------------------------------------------------------------------------
+
 [Icons]
-Name: "{group}\{#APP_VERNAME}"; Filename: "{app}\ufprog.exe"
-Name: "{group}\Project Home Page"; Filename: "https://usbflashprog.robsonmartins.com/"
+Name: "{group}\{#APP_VERNAME}"; Filename: "{app}\{#APP_MAIN_EXE}"
+Name: "{group}\Project Home Page"; Filename: "{#APP_URL}"
 Name: "{group}\{cm:UninstallProgram,{#APP_NAME}}"; Filename: "{uninstallexe}"
-Name: "{commondesktop}\{#APP_VERNAME}"; Filename: "{app}\ufprog.exe"; Tasks: desktopicon
+Name: "{commondesktop}\{#APP_VERNAME}"; Filename: "{app}\{#APP_MAIN_EXE}"; Tasks: desktopicon
+
+; ------------------------------------------------------------------------------
 
 [UninstallDelete]
 Type: filesandordirs; Name: {app}

@@ -5,7 +5,7 @@
             "name": "(gdb) Debug",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/test/usbflashprog_test",
+            "program": "${workspaceFolder}/build/test/ufprog_test",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",

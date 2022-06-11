@@ -34,7 +34,7 @@ jobs:
     # ------------------------------------------------------------------------
     - name: Install Prerequisites
       run: |
-        sudo apt-get update &&
+        sudo apt-get update
         sudo apt-get install cmake build-essential gcc-arm-none-eabi libstdc++-arm-none-eabi-newlib automake autoconf texinfo libtool libftdi-dev libusb-1.0-0-dev
 
     # ------------------------------------------------------------------------
@@ -43,9 +43,9 @@ jobs:
     - name: Install Pico SDK
       working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
       run: |
-        git clone -b master https://github.com/raspberrypi/pico-sdk.git &&
-        cd pico-sdk &&
-        git submodule update --init &&
+        git clone -b master https://github.com/raspberrypi/pico-sdk.git
+        cd pico-sdk
+        git submodule update --init
         echo "PICO_SDK_PATH=${{env.FIRMWARE_PROJECT_DIR}}/pico-sdk" >> $GITHUB_ENV
         
     # ------------------------------------------------------------------------
@@ -54,8 +54,8 @@ jobs:
     - name: Build PicoTool
       working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
       run: |
-        git clone -b master https://github.com/raspberrypi/picotool.git &&
-        cd picotool && mkdir -p build && cd build &&
+        git clone -b master https://github.com/raspberrypi/picotool.git
+        cd picotool && mkdir -p build && cd build
         cmake .. && make -j$(nproc) && sudo cp picotool /usr/local/bin/
 
     # ------------------------------------------------------------------------
@@ -70,7 +70,9 @@ jobs:
     # ------------------------------------------------------------------------
     - name: Build
       working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
-      run: cmake --build build --config ${{env.BUILD_TYPE}}
+      run: |
+        cmake --build build --config ${{env.BUILD_TYPE}}
+        mv "build/ufprog.uf2" "build/ufprog-`cat VERSION`-`date +%s`.uf2"
 
     # ------------------------------------------------------------------------
     # Upload the Binary
@@ -78,5 +80,5 @@ jobs:
     - name: Upload the Firmware Binary (uf2)
       uses: actions/upload-artifact@v3
       with:
-        path: "${{env.FIRMWARE_PROJECT_DIR}}/build/usbflashprog.uf2"
+        path: "${{env.FIRMWARE_PROJECT_DIR}}/build/ufprog-*.uf2"
         name: "ufprog-uf2-firmware"

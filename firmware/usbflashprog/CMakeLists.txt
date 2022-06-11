@@ -7,7 +7,7 @@ if(TEST_BUILD)
   message("TEST BUILD")
   set(NORMAL_BUILD OFF)
   set(CMAKE_BUILD_TYPE Debug)
-  project(usbflashprog_test C CXX)
+  project(ufprog_test C CXX)
   set(CMAKE_C_STANDARD 11)
   set(CMAKE_CXX_STANDARD 17)
   enable_language(C CXX)
@@ -18,12 +18,12 @@ elseif(NORMAL_BUILD)
   message("NORMAL BUILD")
   set(TEST_BUILD OFF)
   include(pico_sdk_import.cmake)
-  project(usbflashprog C CXX ASM)
+  project(ufprog C CXX ASM)
   set(CMAKE_C_STANDARD 11)
   set(CMAKE_CXX_STANDARD 17)
   pico_sdk_init()
 
-  add_executable(usbflashprog 
+  add_executable(ufprog 
         hal/gpio.cpp
         hal/adc.cpp
         hal/pwm.cpp
@@ -38,17 +38,22 @@ elseif(NORMAL_BUILD)
         main.cpp
   )
 
-  target_include_directories(usbflashprog PUBLIC .)
+  target_include_directories(ufprog PUBLIC .)
 
   # Pull in our pico_stdlib which aggregates commonly used features
-  target_link_libraries(usbflashprog 
-          pico_stdlib hardware_adc hardware_pwm pico_multicore hardware_flash)
+  target_link_libraries(ufprog 
+          pico_stdlib
+          hardware_adc
+          hardware_pwm
+          pico_multicore
+          hardware_flash
+)
 
   # enable usb output, disable uart output
-  pico_enable_stdio_usb(usbflashprog 1)
-  pico_enable_stdio_uart(usbflashprog 0)
+  pico_enable_stdio_usb(ufprog 1)
+  pico_enable_stdio_uart(ufprog 0)
 
   # create map/bin/hex/uf2 file etc.
-  pico_add_extra_outputs(usbflashprog)
+  pico_add_extra_outputs(ufprog)
 
 endif()

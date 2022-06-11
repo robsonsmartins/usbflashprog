@@ -7,7 +7,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-set(name usbflashprog_test)
+set(name ufprog_test)
 set(sources 
     ../hal/gpio.cpp
     ../hal/adc.cpp

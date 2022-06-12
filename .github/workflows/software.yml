@@ -34,28 +34,30 @@ jobs:
         uses: actions/checkout@v3
     
       # ------------------------------------------------------------------------
-      # Install MinGW (Windows)
+      # Install MinGW and Qt (Windows)
       # ------------------------------------------------------------------------
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
-        name: Install MinGW64 (Windows 64-bits)
+        name: Install MinGW64 and Qt (Windows 64-bits)
         uses: msys2/setup-msys2@v2
         with:
             msystem: mingw64
             install: 
                 mingw-w64-x86_64-toolchain
                 mingw-w64-x86_64-cmake
+                mingw-w64-x86_64-qt5
             release: false
     
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
-        name: Install MinGW32 (Windows 32-bits)
+        name: Install MinGW32 and Qt (Windows 32-bits)
         uses: msys2/setup-msys2@v2
         with:
             msystem: mingw32
             install: 
                 mingw-w64-i686-toolchain
                 mingw-w64-i686-cmake
+                mingw-w64-i686-qt5
             release: false
-    
+
       # ------------------------------------------------------------------------
       # Install Inno Setup (Windows)
       # ------------------------------------------------------------------------
@@ -65,34 +67,9 @@ jobs:
           INNO_SETUP_DOWNLOAD_URL: "https://files.jrsoftware.org/is/6/innosetup-6.2.1.exe"
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
-          wget "${{env.INNO_SETUP_DOWNLOAD_URL}}" &&
+          wget "${{env.INNO_SETUP_DOWNLOAD_URL}}"
           ./innosetup-6.2.1.exe //VERYSILENT //SUPPRESSMSGBOXES //SP //CURRENTUSER //LANG=en //NORESTART //NOICONS //DIR=".\is"
         shell: msys2 {0}
-
-      # ------------------------------------------------------------------------
-      # Install Qt (Windows)
-      # ------------------------------------------------------------------------
-      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
-        name: Install Qt (Windows 64-bits)
-        uses: jurplel/install-qt-action@v2
-        with:
-          version: '5.12.12'
-          host: 'windows'
-          target: 'desktop'
-          arch: 'win64_mingw73'
-          dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
-          install-deps: 'true'
-
-      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
-        name: Install Qt (Windows 32-bits)
-        uses: jurplel/install-qt-action@v2
-        with:
-          version: '5.12.12'
-          host: 'windows'
-          target: 'desktop'
-          arch: 'win32_mingw73'
-          dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
-          install-deps: 'true'
 
       # ------------------------------------------------------------------------
       # Install Prerequisites (Linux)
@@ -100,8 +77,8 @@ jobs:
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
         name: Install Prerequisites (Linux 64-bits)
         run: |
-          sudo apt-get update &&
-          sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev &&    
+          sudo apt-get update
+          sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev   
           sudo apt-get --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
 
       # ------------------------------------------------------------------------
@@ -128,13 +105,17 @@ jobs:
       - if: matrix.os == 'windows-latest'
         name: Build (Windows)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
-        run: cmake --build build --config ${{env.BUILD_TYPE}}
+        run: |
+          cmake --build build --config ${{env.BUILD_TYPE}}
+          echo "BUILD_VERSION=`cat VERSION`-`date +%s`" >> $GITHUB_ENV
         shell: msys2 {0}
 
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
         name: Build (Linux)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
-        run: cmake --build build --config ${{env.BUILD_TYPE}}
+        run: |
+          cmake --build build --config ${{env.BUILD_TYPE}}
+          echo "BUILD_VERSION=`cat VERSION`-`date +%s`" >> $GITHUB_ENV
 
       # ------------------------------------------------------------------------
       # Create the Installer
@@ -142,28 +123,32 @@ jobs:
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
         name: Create the Installer (Windows 64-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
-        run: ./is/iscc.exe //DARCH="Win64" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_64" ufprog.iss
+        run: |
+          ./is/iscc.exe //DARCH="Win64" //DQT_PATH="c:\\msys64\\mingw64" //DQT_PLUGINS_PATH="c:\\msys64\\mingw64\\share\\qt5\\plugins" ufprog.iss
+          mv "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-`cat ${{env.SOFTWARE_PROJECT_DIR}}/VERSION`-0-win64-setup.exe" "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-win64-setup.exe"
         shell: msys2 {0}
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Create the Installer (Windows 32-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
-        run: ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_32" ufprog.iss
+        run: |
+          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="c:\\msys64\\mingw32" //DQT_PLUGINS_PATH="c:\\msys64\\mingw32\\share\\qt5\\plugins" ufprog.iss
+          mv "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-`cat ${{env.SOFTWARE_PROJECT_DIR}}/VERSION`-0-win32-setup.exe" "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-win32-setup.exe"
         shell: msys2 {0}
 
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
         name: Create DEB Package (Linux 64-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
         run: |
-          cp -Rf scripts/deb build/ &&
-          mkdir -p build/deb/ufprog/opt/ufprog &&
-          cp -f build/ufprog build/deb/ufprog/opt/ufprog/ &&
-          cp -Rf scripts/linux-resources/* build/deb/ufprog/ &&
-          chmod 775 build/deb/ufprog/DEBIAN/* &&
-          chmod +x build/deb/ufprog/opt/ufprog/ufprog &&
-          cd build/deb &&
-          dpkg -b ufprog &&
-          mv ufprog.deb "${{env.SOFTWARE_PROJECT_DIR}}/build/"
+          cp -Rf scripts/deb build/
+          mkdir -p build/deb/ufprog/opt/ufprog
+          cp -f build/ufprog build/deb/ufprog/opt/ufprog/
+          cp -Rf resources/linux/* build/deb/ufprog/
+          chmod 775 build/deb/ufprog/DEBIAN/*
+          chmod +x build/deb/ufprog/opt/ufprog/ufprog
+          cd build/deb
+          dpkg -b ufprog
+          mv ufprog.deb "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-x86_64.deb"
 
       # ------------------------------------------------------------------------
       # Upload the Installer
@@ -172,19 +157,19 @@ jobs:
         name: Upload the Installer (Windows 64-bits)
         uses: actions/upload-artifact@v3
         with:
-          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-win64-setup.exe"
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*setup.exe"
           name: "ufprog-win64-installer"
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Upload the Installer (Windows 32-bits)
         uses: actions/upload-artifact@v3
         with:
-          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-win32-setup.exe"
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*setup.exe"
           name: "ufprog-win32-installer"
 
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
         name: Upload the Packages (Linux 64-bits)
         uses: actions/upload-artifact@v3
         with:
-          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog.deb"
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*.deb"
           name: "ufprog-linux64-packages"

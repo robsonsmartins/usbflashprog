@@ -36,8 +36,8 @@ jobs:
     # ------------------------------------------------------------------------
     - name: Install Prerequisites
       run: |
-        sudo apt-get update &&
-        sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev &&    
+        sudo apt-get update
+        sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev
         sudo apt-get --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
 
     # ------------------------------------------------------------------------

@@ -125,7 +125,7 @@ jobs:
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
           ./is/iscc.exe //DARCH="Win64" //DQT_PATH="c:\\msys64\\mingw64" //DQT_PLUGINS_PATH="c:\\msys64\\mingw64\\share\\qt5\\plugins" ufprog.iss
-          mv "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-`cat ${{env.SOFTWARE_PROJECT_DIR}}/VERSION`-0-win64-setup.exe" "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-win64-setup.exe"
+          mv "../build/ufprog-`cat ../VERSION`-0-win64-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-win64-setup.exe"
         shell: msys2 {0}
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
@@ -133,7 +133,7 @@ jobs:
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
           ./is/iscc.exe //DARCH="Win32" //DQT_PATH="c:\\msys64\\mingw32" //DQT_PLUGINS_PATH="c:\\msys64\\mingw32\\share\\qt5\\plugins" ufprog.iss
-          mv "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-`cat ${{env.SOFTWARE_PROJECT_DIR}}/VERSION`-0-win32-setup.exe" "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-win32-setup.exe"
+          mv "../build/ufprog-`cat ../VERSION`-0-win32-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-win32-setup.exe"
         shell: msys2 {0}
 
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'

@@ -31,5 +31,7 @@ constexpr quint16 kUsbProductId = 0x000A;
 
 /** @brief COMM/USB : Interval to enumerate USB, in milliseconds. */
 constexpr int kUsbEnumerateInterval = 2000;
+/** @brief COMM/USB : Interval to refresh communication, in milliseconds. */
+constexpr int kUsbRefreshInterval = 1000;
 
 #endif  // CONFIG_HPP_

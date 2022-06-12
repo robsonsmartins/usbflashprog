@@ -16,21 +16,28 @@
 // ---------------------------------------------------------------------------
 
 #include <QMessageBox>
+#include <cstring>
+#include <string>
 
 #include "diag/diagwindow.hpp"
 #include "config.hpp"
 #include "./ui_diagwindow.h"
+#include "backend/opcodes.hpp"
 
 // ---------------------------------------------------------------------------
 
 DiagWindow::DiagWindow(QWidget *parent):
-        QMainWindow(parent), ui_(new Ui::DiagWindow), timer_(this) {
+        QMainWindow(parent), ui_(new Ui::DiagWindow), enumTimer_(this),
+        refreshTimer_(this) {
     ui_->setupUi(this);
     refreshPortComboBox_();
     ui_->frameVdd->setEnabled(false);
     ui_->frameVpp->setEnabled(false);
-    connect(&timer_, &QTimer::timeout, this, &DiagWindow::onTimerTimeout);
-    timer_.start(kUsbEnumerateInterval);
+    connect(&enumTimer_, &QTimer::timeout, this, &DiagWindow::onEnumTimerTimeout);
+    connect(&refreshTimer_, &QTimer::timeout, this, &DiagWindow::onRefreshTimerTimeout);
+    enumTimer_.start(kUsbEnumerateInterval);
+    setWindowFlags(Qt::MSWindowsFixedSizeDialogHint);
+    this->setFixedSize(this->size());
 }
 
 DiagWindow::~DiagWindow() {
@@ -44,7 +51,8 @@ void DiagWindow::on_pushButtonConnect_clicked() {
             ui_->frameVpp->setEnabled(true);
             ui_->pushButtonConnect->setText(tr("&Disconnect"));
             ui_->comboBoxPort->setEnabled(false);
-            timer_.stop();
+            enumTimer_.stop();
+            refreshTimer_.start(kUsbRefreshInterval);
         } else {
             QMessageBox::critical(this,
                 tr("USB Flash/EPROM Programmer"),
@@ -52,12 +60,13 @@ void DiagWindow::on_pushButtonConnect_clicked() {
                     .arg(ui_->comboBoxPort->currentText()));
         }
     } else {
+        refreshTimer_.stop();
         serial_.close();
         ui_->frameVdd->setEnabled(false);
         ui_->frameVpp->setEnabled(false);
         ui_->pushButtonConnect->setText(tr("&Connect"));
         ui_->comboBoxPort->setEnabled(true);
-        timer_.start();
+        enumTimer_.start();
     }
 }
 
@@ -69,8 +78,28 @@ void DiagWindow::on_actionAboutQt_triggered(bool checked) {
     QMessageBox::aboutQt(this);
 }
 
-void DiagWindow::onTimerTimeout() {
+void DiagWindow::onEnumTimerTimeout() {
     refreshPortComboBox_();
+}
+
+void DiagWindow::onRefreshTimerTimeout() {
+    //if (!serial_.isOpen()) { return; }
+    std::string cmd, response;
+    char buf[255];
+    // Get VDD
+    float vdd = 0.0f;
+    cmd = "0101";
+    serial_.write(cmd.c_str(), cmd.length()), true;
+    if (serial_.read(buf, 1) == 1) { }
+    cmd = "03";
+    serial_.write(cmd.c_str(), cmd.length(), true);
+    TCmdOpCode opcode = kCmdOpCodes.at(cmd);
+    if (serial_.read(buf, 6) == 6) {
+        response = std::string(buf, 0, 6);
+        vdd = std::stoi(response.substr(2, 2), nullptr, 16) + 
+            std::stoi(response.substr(4, 2), nullptr, 16) * 0.1f;
+        ui_->lcdNumberVdd->display(vdd);
+    }
 }
 
 void DiagWindow::refreshPortComboBox_() {

@@ -41,11 +41,13 @@ class DiagWindow : public QMainWindow {
     void on_pushButtonConnect_clicked();
     void on_actionExit_triggered(bool checked = false);
     void on_actionAboutQt_triggered(bool checked = false);
-    void onTimerTimeout();
+    void onEnumTimerTimeout();
+    void onRefreshTimerTimeout();
 
  private:
     Ui::DiagWindow *ui_;
-    QTimer timer_;
+    QTimer enumTimer_;
+    QTimer refreshTimer_;
     Serial serial_;
     void refreshPortComboBox_();
 };

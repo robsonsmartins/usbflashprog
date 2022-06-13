@@ -34,6 +34,7 @@ elseif(NORMAL_BUILD)
         circuits/74hc595.cpp
         circuits/dc2dc.cpp
         modules/vgenerator.cpp
+        modules/opcodes.cpp
         modules/runner.cpp
         main.cpp
   )

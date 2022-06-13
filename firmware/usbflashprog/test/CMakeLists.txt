@@ -19,6 +19,7 @@ set(sources
     ../circuits/74hc595.cpp
     ../circuits/dc2dc.cpp
     ../modules/vgenerator.cpp
+    ../modules/opcodes.cpp
     hal/gpio_test.cpp 
     hal/adc_test.cpp 
     hal/pwm_test.cpp 
@@ -29,6 +30,7 @@ set(sources
     circuits/74hc595_test.cpp
     circuits/dc2dc_test.cpp
     modules/vgenerator_test.cpp
+    modules/opcodes_test.cpp
     main.cpp
 )
 

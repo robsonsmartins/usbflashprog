@@ -19,6 +19,7 @@
 #define MODULES_RUNNER_HPP_
 
 #include <string>
+#include <vector>
 #include "hal/serial.hpp"
 #include "hal/gpio.hpp"
 #include "modules/vgenerator.hpp"
@@ -47,6 +48,8 @@ class Runner {
     void loop();
 
  private:
+    /* @brief Type of byte array. */
+    typedef std::vector<uint8_t> TByteArray;
     /* @brief VGenerator instance. */
     VGenerator vgen_;
     /* @brief VGenerator configuration. */
@@ -56,24 +59,19 @@ class Runner {
     /* @brief Serial Comm instance. */
     Serial serial_;
     /* @brief Received command. */
-    std::string command_;
+    TByteArray command_;
     /*
      * @brief Reads bytes from serial.
      * @param len Number of bytes (default is one).
-     * @return String with bytes as hex string.
+     * @return Byte array.
      */
-    std::string readByte_(size_t len = 1);
+    TByteArray readByte_(size_t len = 1);
     /*
      * @brief Finds the opcode into the command string.
      * @return Constant iterator to opcode map. 
      *  TCmdOpCodeMap::end() if not found.
      */
     TCmdOpCodeMap::const_iterator findOpCode_();
-    /*
-     * @brief Gets the first parameter as byte.
-     * @return Parameter as byte.
-     */
-    uint8_t getParamAsByte_();
     /*
      * @brief Gets the first parameter as boolean.
      * @return Parameter as boolean.
@@ -87,23 +85,11 @@ class Runner {
      */
     float getParamsAsFloat_();
     /*
-     * @brief Creates a parameter from a byte.
-     * @param src Source value.
-     * @return Parameter as hexstring.
-     */
-    std::string createParamFromByte_(uint8_t src);
-    /*
-     * @brief Creates a parameter from a boolean.
-     * @param src Source value.
-     * @return Parameter as hexstring.
-     */
-    std::string createParamFromBool_(bool src);
-    /*
      * @brief Creates two parameters from a float point.
+     * @param response Pointer to response bytes.
      * @param src Source value.
-     * @return Parameters as hexstring.
      */
-    std::string createParamsFromFloat_(float src);
+    void createParamsFromFloat_(TByteArray *response, float src);
     /* @brief Runs the received command. */
     void runCommand_();
     /*

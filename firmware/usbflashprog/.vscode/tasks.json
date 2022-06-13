@@ -21,6 +21,24 @@
             },
             "command": "scripts/test.sh",
             "group": "build"
+        },
+        {
+            "label": "coverage",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "scripts/coverage.sh",
+            "group": "build"
+        },
+        {
+            "label": "doxygen",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "scripts/doxygen.sh",
+            "group": "build"
         }
     ]
 }

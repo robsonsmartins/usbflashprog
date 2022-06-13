@@ -67,20 +67,23 @@ void Runner::loop() {
     command_ = readByte_(1);
     auto code = findOpCode_();
     if (code != kCmdOpCodes.end()) {
-        command_ += readByte_(code->second.params);
+      for (const auto i : readByte_(code->second.params)) {
+        command_.push_back(i);
+      }
     }
     runCommand_();
     gpio_.resetPin(PICO_DEFAULT_LED_PIN);
 }
 
-std::string Runner::readByte_(size_t len) {
-    std::string result;
+Runner::TByteArray Runner::readByte_(size_t len) {
+    TByteArray result;
     if (len) {
-        len *= 2;
-        char *buf = new char[len + 1];
+        uint8_t *buf = new uint8_t[len + 1];
         buf[len] = 0;
         if (serial_.getBuf(buf, len, kCommTimeOut * 1000) == len) {
-            result = buf;
+            for (size_t i = 0; i < len; i++) {
+              result.push_back(buf[i]);
+            }
             gpio_.togglePin(PICO_DEFAULT_LED_PIN);
         }
         delete[] buf;
@@ -89,26 +92,34 @@ std::string Runner::readByte_(size_t len) {
 }
 
 TCmdOpCodeMap::const_iterator Runner::findOpCode_() {
-    if (command_.length() < 2) { return kCmdOpCodes.end(); }
-    return kCmdOpCodes.find(command_.substr(0, 2).c_str());
+    if (command_.size() < 1) { return kCmdOpCodes.end(); }
+    return kCmdOpCodes.find(static_cast<kCmdOpCodeEnum>(command_[0]));
 }
 
 void Runner::runCommand_() {
-    if (command_.length() < 2) { return; }
+    if (command_.size() < 1) { return; }
     auto code = findOpCode_();
     if (code == kCmdOpCodes.end() ||
-            command_.length() < (code->second.params * 2 + 2)) {
+            command_.size() < (code->second.params + 1)) {
         // opcode not found or nparams invalid
-        serial_.putStr(kCmdResponseNok, true);
+        serial_.putChar(kCmdResponseNok, true);
         return;
     }
-    runVddCommand_(code->second.opcode);
-    runVppCommand_(code->second.opcode);
+    if (code->first == kCmdNop) {  // NOP
+        serial_.putChar(kCmdResponseOk, true);
+    } else {
+      runVddCommand_(code->first);
+      runVppCommand_(code->first);
+      // TODO(robsonsmartins): runCtrlBusCommand_
+      // TODO(robsonsmartins): runAddrBusCommand_
+      // TODO(robsonsmartins): runDataBusCommand_
+    }
 }
 
 void Runner::runVddCommand_(uint8_t opcode) {
     float v;
     bool b;
+    TByteArray response;
     switch (opcode) {
       case kCmdVddCtrl:
         if (getParamAsBool_()) {
@@ -116,39 +127,48 @@ void Runner::runVddCommand_(uint8_t opcode) {
         } else {
             vgen_.vdd.off();
         }
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVddSetV:
         v = getParamsAsFloat_();
         vgen_.vdd.setV(v);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVddGetV:
         v = vgen_.vdd.getV();
-        serial_.putStr(kCmdResponseOk + createParamsFromFloat_(v), true);
+        response.resize(3);
+        response[0] = kCmdResponseOk;
+        createParamsFromFloat_(&response, v);
+        serial_.putBuf(response.data(), response.size(), true);
         break;
       case kCmdVddGetDuty:
         v = vgen_.vdd.getDuty();
-        serial_.putStr(kCmdResponseOk + createParamsFromFloat_(v), true);
+        response.resize(3);
+        response[0] = kCmdResponseOk;
+        createParamsFromFloat_(&response, v);
+        serial_.putBuf(response.data(), response.size(), true);
         break;
       case kCmdVddGetCal:
         v = vgen_.vdd.getCalibration();
-        serial_.putStr(kCmdResponseOk + createParamsFromFloat_(v), true);
+        response.resize(3);
+        response[0] = kCmdResponseOk;
+        createParamsFromFloat_(&response, v);
+        serial_.putBuf(response.data(), response.size(), true);
         break;
       case kCmdVddInitCal:
         vgen_.vdd.initCalibration();
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVddSaveCal:
         v = getParamsAsFloat_();
         vgen_.vdd.saveCalibration(v);
         vgen_.vdd.setV(kVddInitial);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVddOnVpp:
         b = getParamAsBool_();
         vgen_.vdd.onVpp(b);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       default:
         break;
@@ -158,6 +178,7 @@ void Runner::runVddCommand_(uint8_t opcode) {
 void Runner::runVppCommand_(uint8_t opcode) {
     float v;
     bool b;
+    TByteArray response;
     switch (opcode) {
       case kCmdVppCtrl:
         if (getParamAsBool_()) {
@@ -165,94 +186,82 @@ void Runner::runVppCommand_(uint8_t opcode) {
         } else {
             vgen_.vpp.off();
         }
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppSetV:
         v = getParamsAsFloat_();
         vgen_.vpp.setV(v);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppGetV:
         v = vgen_.vpp.getV();
-        serial_.putStr(kCmdResponseOk + createParamsFromFloat_(v), true);
+        response.resize(3);
+        response[0] = kCmdResponseOk;
+        createParamsFromFloat_(&response, v);
+        serial_.putBuf(response.data(), response.size(), true);
         break;
       case kCmdVppGetDuty:
         v = vgen_.vpp.getDuty();
-        serial_.putStr(kCmdResponseOk + createParamsFromFloat_(v), true);
+        response.resize(3);
+        response[0] = kCmdResponseOk;
+        createParamsFromFloat_(&response, v);
+        serial_.putBuf(response.data(), response.size(), true);
         break;
       case kCmdVppGetCal:
         v = vgen_.vpp.getCalibration();
-        serial_.putStr(kCmdResponseOk + createParamsFromFloat_(v), true);
+        response.resize(3);
+        response[0] = kCmdResponseOk;
+        createParamsFromFloat_(&response, v);
+        serial_.putBuf(response.data(), response.size(), true);
         break;
       case kCmdVppInitCal:
         vgen_.vpp.initCalibration();
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppSaveCal:
         v = getParamsAsFloat_();
         vgen_.vpp.saveCalibration(v);
         vgen_.vpp.setV(kVppInitial);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppOnA9:
         b = getParamAsBool_();
         vgen_.vpp.onA9(b);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppOnA18:
         b = getParamAsBool_();
         vgen_.vpp.onA18(b);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppOnCE:
         b = getParamAsBool_();
         vgen_.vpp.onCE(b);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppOnOE:
         b = getParamAsBool_();
         vgen_.vpp.onOE(b);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppOnWE:
         b = getParamAsBool_();
         vgen_.vpp.onWE(b);
-        serial_.putStr(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk, true);
         break;
       default:
         break;
     }
 }
 
-uint8_t Runner::getParamAsByte_() {
-    if (command_.length() < 4) { return 0; }
-    return StringUtils::toInt(command_.substr(2, 2), 16);
-}
-
 bool Runner::getParamAsBool_() {
-    return (getParamAsByte_() != 0);
+    return (OpCode::getValueAsBool(command_.data(), command_.size()));
 }
 
 float Runner::getParamsAsFloat_() {
-    if (command_.length() < 6) { return 0.0f; }
-    return StringUtils::toInt(command_.substr(2, 2), 16) +
-           StringUtils::toInt(command_.substr(4, 2), 16) * 0.01f;
+    return (OpCode::getValueAsFloat(command_.data(), command_.size()));
 }
 
-std::string Runner::createParamFromByte_(uint8_t src) {
-    return StringUtils::fromInt(src, 16, 2, '0');
-}
-
-std::string Runner::createParamFromBool_(bool src) {
-    if (src) {
-        return createParamFromByte_(1);
-    } else {
-        return createParamFromByte_(0);
-    }
-}
-
-std::string Runner::createParamsFromFloat_(float src) {
-    double i, f = std::modf(src, &i);
-    uint8_t b1 = i, b2 = f * 100;
-    return createParamFromByte_(b1) + createParamFromByte_(b2);
+void Runner::createParamsFromFloat_(TByteArray *response, float src) {
+    OpCode::setValue(response->data(), response->size(), src);
 }

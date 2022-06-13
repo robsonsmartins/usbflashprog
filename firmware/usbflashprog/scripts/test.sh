@@ -10,13 +10,3 @@ echo "* Running tests..."
 pushd ${workspaceRoot}/build
 ctest
 popd
-echo "* Capturing coverage info..."
-lcov --directory ${workspaceRoot}/build/ --capture --output-file ${workspaceRoot}/build/coverage.info -rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude ${workspaceRoot}\/build\/\* --exclude ${workspaceRoot}\/test\/\*
-echo "* Generating coverage report..."
-genhtml ${workspaceRoot}/build/coverage.info --output-directory ${workspaceRoot}/../../docs/firmware/lcov/
-echo "* Generating documentation..."
-rm -Rf ${workspaceRoot}/../../docs/firmware/html/
-pushd ${workspaceRoot}
-doxygen
-cat doxy.log
-popd

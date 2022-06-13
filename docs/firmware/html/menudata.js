@@ -94,4 +94,6 @@ var menudata={children:[
 {text:"Variables",url:"globals_vars.html",children:[
 {text:"k",url:"globals_vars.html#index_k"},
 {text:"r",url:"globals_vars.html#index_r"}]},
-{text:"Typedefs",url:"globals_type.html"}]}]}]}
+{text:"Typedefs",url:"globals_type.html"},
+{text:"Enumerations",url:"globals_enum.html"},
+{text:"Enumerator",url:"globals_eval.html"}]}]}]}

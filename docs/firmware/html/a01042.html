@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Member List</title>
+<title>USB EPROM/Flash Programmer: Runner Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,27 +62,99 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a01039.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">GenericGenerator Member List</div>  </div>
+<div class="title">Runner Class Reference<div class="ingroups"><a class="el" href="a00176.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01045.html">GenericGenerator</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01045.html#a1727d3eeae9e245d1cf9c2c99f049c39">GenericGenerator</a>(const VGenerator *owner)</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01045.html#a21c65632b0597b0010f56fffc7fd3db5">getCalibration</a>() const</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01045.html#ad50ed60a1a9207565841af074c67232c">getDuty</a>() const</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01045.html#a0f4d92e8523757ad9e77e007d7a34003">getV</a>() const</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01045.html#a2181b2c848122897be4f31c3db7a9ac7">getVTarget</a>() const</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01045.html#a48dac7612fb489714e244837a522ad85">initCalibration</a>(float reference)</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01045.html#af887dcf7959d81b473d9251b3573a303">isOn</a>() const</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01045.html#ad619b8b51adc7874204abd71080cd90e">isRunning</a>() const</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01045.html#a10d0d33911efa143d2149202dff20c92">off</a>()=0</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01045.html#a1a086ac302551c491a2a1acc23b77a6e">on</a>()=0</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01045.html#afe384df618d5cf4af2c0aaba94e8a71e">saveCalibration</a>(float measure)</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01045.html#a69d4e1d6d89ed7be0fd7bd645ea85240">setV</a>(float value)</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01045.html#ad277193b2dca0bab1e0ad24d45407dc3">toggle</a>()</td><td class="entry"><a class="el" href="a01045.html">GenericGenerator</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
-</table></div><!-- contents -->
+<p>Communication <a class="el" href="a01042.html" title="Communication Runner Class.">Runner</a> Class.  
+ <a href="a01042.html#details">More...</a></p>
+
+<p><code>#include &lt;runner.hpp&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6a95e6fb518e68f8e1ea92cec3f3837c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01042.html#a6a95e6fb518e68f8e1ea92cec3f3837c">Runner</a> ()</td></tr>
+<tr class="memdesc:a6a95e6fb518e68f8e1ea92cec3f3837c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01042.html#a6a95e6fb518e68f8e1ea92cec3f3837c">More...</a><br /></td></tr>
+<tr class="separator:a6a95e6fb518e68f8e1ea92cec3f3837c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01042.html#a02fd73d861ef2e4aabb38c0c9ff82947">init</a> ()</td></tr>
+<tr class="memdesc:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the runner.  <a href="a01042.html#a02fd73d861ef2e4aabb38c0c9ff82947">More...</a><br /></td></tr>
+<tr class="separator:a02fd73d861ef2e4aabb38c0c9ff82947"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe461d27b9c48d5921c00d521181f12f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01042.html#afe461d27b9c48d5921c00d521181f12f">loop</a> ()</td></tr>
+<tr class="memdesc:afe461d27b9c48d5921c00d521181f12f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main loop method.  <a href="a01042.html#afe461d27b9c48d5921c00d521181f12f">More...</a><br /></td></tr>
+<tr class="separator:afe461d27b9c48d5921c00d521181f12f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Communication <a class="el" href="a01042.html" title="Communication Runner Class.">Runner</a> Class. </p>
+<p>The purpose of this class is to handle the communication (via USB-CDC) and run commands. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6a95e6fb518e68f8e1ea92cec3f3837c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a95e6fb518e68f8e1ea92cec3f3837c">&#9670;&nbsp;</a></span>Runner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01042.html">Runner</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a02fd73d861ef2e4aabb38c0c9ff82947"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02fd73d861ef2e4aabb38c0c9ff82947">&#9670;&nbsp;</a></span>init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts the runner. </p>
+
+</div>
+</div>
+<a id="afe461d27b9c48d5921c00d521181f12f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe461d27b9c48d5921c00d521181f12f">&#9670;&nbsp;</a></span>loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main loop method. </p>
+<p>This method must be called periodically in a loop, so that the <a class="el" href="a01042.html" title="Communication Runner Class.">Runner</a> works properly. </p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="a00071.html">runner.hpp</a></li>
+<li><a class="el" href="a00068.html">runner.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

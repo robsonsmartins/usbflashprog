@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: opcodes.hpp File Reference</title>
+<title>USB EPROM/Flash Programmer: opcodes.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,710 +67,71 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">opcodes.hpp File Reference<div class="ingroups"><a class="el" href="a00167.html">Firmware Project</a></div></div>  </div>
+<div class="title">opcodes.cpp File Reference<div class="ingroups"><a class="el" href="a00176.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Opcodes for communication.  
+<p>Implementation of the Opcodes for communication.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00065.html">modules/opcodes.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for opcodes.hpp:</div>
+Include dependency graph for opcodes.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00063.png" border="0" usemap="#aopcodes_8hpp" alt=""/></div>
-<map name="aopcodes_8hpp" id="aopcodes_8hpp">
-<area shape="rect" title="Opcodes for communication." alt="" coords="21,5,125,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,64,107"/>
-<area shape="rect" title=" " alt="" coords="88,80,139,107"/>
+<div class="center"><img src="a00063.png" border="0" usemap="#aopcodes_8cpp" alt=""/></div>
+<map name="aopcodes_8cpp" id="aopcodes_8cpp">
+<area shape="rect" title="Implementation of the Opcodes for communication." alt="" coords="53,5,156,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,68,107"/>
+<area shape="rect" href="a00065.html" title="Opcodes for communication." alt="" coords="92,80,256,107"/>
+<area shape="rect" title=" " alt="" coords="105,155,163,181"/>
+<area shape="rect" title=" " alt="" coords="187,155,238,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01025.html">TCmdOpCode</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an opcode to run.  <a href="a01025.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
-Typedefs</h2></td></tr>
-<tr class="memitem:a128ffa5796c67d3782435da30be76fc4"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; std::string, <a class="el" href="a01025.html">TCmdOpCode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a128ffa5796c67d3782435da30be76fc4">TCmdOpCodeMap</a></td></tr>
-<tr class="memdesc:a128ffa5796c67d3782435da30be76fc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of opcodes group (map).  <a href="a00062.html#a128ffa5796c67d3782435da30be76fc4">More...</a><br /></td></tr>
-<tr class="separator:a128ffa5796c67d3782435da30be76fc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:aee9234811ad6c5ca5e62839125c91453"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#aee9234811ad6c5ca5e62839125c91453">kCmdParamOff</a> = &quot;00&quot;</td></tr>
-<tr class="memdesc:aee9234811ad6c5ca5e62839125c91453"><td class="mdescLeft">&#160;</td><td class="mdescRight">CMD / PARAM : Defines a param with value OFF.  <a href="a00062.html#aee9234811ad6c5ca5e62839125c91453">More...</a><br /></td></tr>
-<tr class="separator:aee9234811ad6c5ca5e62839125c91453"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfe9f5def023699846ddc954afb7068f"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#acfe9f5def023699846ddc954afb7068f">kCmdParamOn</a> = &quot;01&quot;</td></tr>
-<tr class="memdesc:acfe9f5def023699846ddc954afb7068f"><td class="mdescLeft">&#160;</td><td class="mdescRight">CMD / PARAM : Defines a param with value ON.  <a href="a00062.html#acfe9f5def023699846ddc954afb7068f">More...</a><br /></td></tr>
-<tr class="separator:acfe9f5def023699846ddc954afb7068f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ee6d4ba9c9b962d75d9a8c357466284"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a2ee6d4ba9c9b962d75d9a8c357466284">kCmdResponseNok</a> = &quot;00&quot;</td></tr>
-<tr class="memdesc:a2ee6d4ba9c9b962d75d9a8c357466284"><td class="mdescLeft">&#160;</td><td class="mdescRight">CMD / RESPONSE : Defines a response with value NOK.  <a href="a00062.html#a2ee6d4ba9c9b962d75d9a8c357466284">More...</a><br /></td></tr>
-<tr class="separator:a2ee6d4ba9c9b962d75d9a8c357466284"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6a540be8bf45be8b351c084da35fda4"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#af6a540be8bf45be8b351c084da35fda4">kCmdResponseOk</a> = &quot;01&quot;</td></tr>
-<tr class="memdesc:af6a540be8bf45be8b351c084da35fda4"><td class="mdescLeft">&#160;</td><td class="mdescRight">CMD / RESPONSE : Defines a response with value OK.  <a href="a00062.html#af6a540be8bf45be8b351c084da35fda4">More...</a><br /></td></tr>
-<tr class="separator:af6a540be8bf45be8b351c084da35fda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a822471d1ad3b916f548a7c024bb25d0c"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a822471d1ad3b916f548a7c024bb25d0c">kCmdVddCtrl</a> = 0x01</td></tr>
-<tr class="memdesc:a822471d1ad3b916f548a7c024bb25d0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD Control On/Off.  <a href="a00062.html#a822471d1ad3b916f548a7c024bb25d0c">More...</a><br /></td></tr>
-<tr class="separator:a822471d1ad3b916f548a7c024bb25d0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8106f658c9e304a2d705ad15532f376"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#af8106f658c9e304a2d705ad15532f376">kCmdVddSetV</a> = 0x02</td></tr>
-<tr class="memdesc:af8106f658c9e304a2d705ad15532f376"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD Set Voltage.  <a href="a00062.html#af8106f658c9e304a2d705ad15532f376">More...</a><br /></td></tr>
-<tr class="separator:af8106f658c9e304a2d705ad15532f376"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f7d1e4b3e719a326d001b214af929f8"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a2f7d1e4b3e719a326d001b214af929f8">kCmdVddGetV</a> = 0x03</td></tr>
-<tr class="memdesc:a2f7d1e4b3e719a326d001b214af929f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD Get Voltage.  <a href="a00062.html#a2f7d1e4b3e719a326d001b214af929f8">More...</a><br /></td></tr>
-<tr class="separator:a2f7d1e4b3e719a326d001b214af929f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfa75c95b0f1d9c771dbd1c0f9fa0196"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#acfa75c95b0f1d9c771dbd1c0f9fa0196">kCmdVddGetDuty</a> = 0x04</td></tr>
-<tr class="memdesc:acfa75c95b0f1d9c771dbd1c0f9fa0196"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD Get PWM Duty Cycle.  <a href="a00062.html#acfa75c95b0f1d9c771dbd1c0f9fa0196">More...</a><br /></td></tr>
-<tr class="separator:acfa75c95b0f1d9c771dbd1c0f9fa0196"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7478e2b8c1c3340ae505ff6965c83b40"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a7478e2b8c1c3340ae505ff6965c83b40">kCmdVddGetCal</a> = 0x05</td></tr>
-<tr class="memdesc:a7478e2b8c1c3340ae505ff6965c83b40"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD Get Calibration.  <a href="a00062.html#a7478e2b8c1c3340ae505ff6965c83b40">More...</a><br /></td></tr>
-<tr class="separator:a7478e2b8c1c3340ae505ff6965c83b40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefcc1d2a2a2c4d58f5c1ecf86f7a1a8c"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#aefcc1d2a2a2c4d58f5c1ecf86f7a1a8c">kCmdVddInitCal</a> = 0x06</td></tr>
-<tr class="memdesc:aefcc1d2a2a2c4d58f5c1ecf86f7a1a8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD Init Calibration.  <a href="a00062.html#aefcc1d2a2a2c4d58f5c1ecf86f7a1a8c">More...</a><br /></td></tr>
-<tr class="separator:aefcc1d2a2a2c4d58f5c1ecf86f7a1a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9647db3143d63cc337e9dcd9e5e6e7a7"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a9647db3143d63cc337e9dcd9e5e6e7a7">kCmdVddSaveCal</a> = 0x07</td></tr>
-<tr class="memdesc:a9647db3143d63cc337e9dcd9e5e6e7a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD Save Calibration.  <a href="a00062.html#a9647db3143d63cc337e9dcd9e5e6e7a7">More...</a><br /></td></tr>
-<tr class="separator:a9647db3143d63cc337e9dcd9e5e6e7a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9531819dce04654c6045ed991638bc8c"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a9531819dce04654c6045ed991638bc8c">kCmdVddOnVpp</a> = 0x08</td></tr>
-<tr class="memdesc:a9531819dce04654c6045ed991638bc8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VDD : Opcode VDD on VPP.  <a href="a00062.html#a9531819dce04654c6045ed991638bc8c">More...</a><br /></td></tr>
-<tr class="separator:a9531819dce04654c6045ed991638bc8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a47f94ccd18489a9953d6f526006ecc46"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a47f94ccd18489a9953d6f526006ecc46">kCmdVppCtrl</a> = 0x11</td></tr>
-<tr class="memdesc:a47f94ccd18489a9953d6f526006ecc46"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP Control On/Off.  <a href="a00062.html#a47f94ccd18489a9953d6f526006ecc46">More...</a><br /></td></tr>
-<tr class="separator:a47f94ccd18489a9953d6f526006ecc46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a659a0c434ed27e8b121983ec57c28662"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a659a0c434ed27e8b121983ec57c28662">kCmdVppSetV</a> = 0x12</td></tr>
-<tr class="memdesc:a659a0c434ed27e8b121983ec57c28662"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP Set Voltage.  <a href="a00062.html#a659a0c434ed27e8b121983ec57c28662">More...</a><br /></td></tr>
-<tr class="separator:a659a0c434ed27e8b121983ec57c28662"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aea2c729a32e82ce8cad689f608559366"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#aea2c729a32e82ce8cad689f608559366">kCmdVppGetV</a> = 0x13</td></tr>
-<tr class="memdesc:aea2c729a32e82ce8cad689f608559366"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP Get Voltage.  <a href="a00062.html#aea2c729a32e82ce8cad689f608559366">More...</a><br /></td></tr>
-<tr class="separator:aea2c729a32e82ce8cad689f608559366"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a143b3d9e689b6799f309bd2400b62447"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a143b3d9e689b6799f309bd2400b62447">kCmdVppGetDuty</a> = 0x14</td></tr>
-<tr class="memdesc:a143b3d9e689b6799f309bd2400b62447"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP Get PWM Duty Cycle.  <a href="a00062.html#a143b3d9e689b6799f309bd2400b62447">More...</a><br /></td></tr>
-<tr class="separator:a143b3d9e689b6799f309bd2400b62447"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89bce77fbcb997ecd577e04c7fa2496c"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a89bce77fbcb997ecd577e04c7fa2496c">kCmdVppGetCal</a> = 0x15</td></tr>
-<tr class="memdesc:a89bce77fbcb997ecd577e04c7fa2496c"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP Get Calibration.  <a href="a00062.html#a89bce77fbcb997ecd577e04c7fa2496c">More...</a><br /></td></tr>
-<tr class="separator:a89bce77fbcb997ecd577e04c7fa2496c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6249595cdd3470baf46c0b8badf28b44"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a6249595cdd3470baf46c0b8badf28b44">kCmdVppInitCal</a> = 0x16</td></tr>
-<tr class="memdesc:a6249595cdd3470baf46c0b8badf28b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP Init Calibration.  <a href="a00062.html#a6249595cdd3470baf46c0b8badf28b44">More...</a><br /></td></tr>
-<tr class="separator:a6249595cdd3470baf46c0b8badf28b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62fc844f8db2f3f162c8428d720543f7"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a62fc844f8db2f3f162c8428d720543f7">kCmdVppSaveCal</a> = 0x17</td></tr>
-<tr class="memdesc:a62fc844f8db2f3f162c8428d720543f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP Save Calibration.  <a href="a00062.html#a62fc844f8db2f3f162c8428d720543f7">More...</a><br /></td></tr>
-<tr class="separator:a62fc844f8db2f3f162c8428d720543f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae089f4d90c3eae1897c5b37a6b2c37e6"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#ae089f4d90c3eae1897c5b37a6b2c37e6">kCmdVppOnA9</a> = 0x18</td></tr>
-<tr class="memdesc:ae089f4d90c3eae1897c5b37a6b2c37e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP on A9.  <a href="a00062.html#ae089f4d90c3eae1897c5b37a6b2c37e6">More...</a><br /></td></tr>
-<tr class="separator:ae089f4d90c3eae1897c5b37a6b2c37e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9263d91f2227c59155d76359aeade480"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a9263d91f2227c59155d76359aeade480">kCmdVppOnA18</a> = 0x19</td></tr>
-<tr class="memdesc:a9263d91f2227c59155d76359aeade480"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP on A18.  <a href="a00062.html#a9263d91f2227c59155d76359aeade480">More...</a><br /></td></tr>
-<tr class="separator:a9263d91f2227c59155d76359aeade480"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3eb96894b432931d4b2ae0a2ecf44f38"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#a3eb96894b432931d4b2ae0a2ecf44f38">kCmdVppOnCE</a> = 0x1A</td></tr>
-<tr class="memdesc:a3eb96894b432931d4b2ae0a2ecf44f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP on CE.  <a href="a00062.html#a3eb96894b432931d4b2ae0a2ecf44f38">More...</a><br /></td></tr>
-<tr class="separator:a3eb96894b432931d4b2ae0a2ecf44f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae511d2dc534dcdfc0f3c452b815ec9fa"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#ae511d2dc534dcdfc0f3c452b815ec9fa">kCmdVppOnOE</a> = 0x1B</td></tr>
-<tr class="memdesc:ae511d2dc534dcdfc0f3c452b815ec9fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP on OE.  <a href="a00062.html#ae511d2dc534dcdfc0f3c452b815ec9fa">More...</a><br /></td></tr>
-<tr class="separator:ae511d2dc534dcdfc0f3c452b815ec9fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad304fa9a82bb138e2a32aae4ed59f920"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#ad304fa9a82bb138e2a32aae4ed59f920">kCmdVppOnWE</a> = 0x1C</td></tr>
-<tr class="memdesc:ad304fa9a82bb138e2a32aae4ed59f920"><td class="mdescLeft">&#160;</td><td class="mdescRight">OPCODE / VPP : Opcode VPP on WE.  <a href="a00062.html#ad304fa9a82bb138e2a32aae4ed59f920">More...</a><br /></td></tr>
-<tr class="separator:ad304fa9a82bb138e2a32aae4ed59f920"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ab4e43100845654abce98f4bf44c947f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00062.html#ab4e43100845654abce98f4bf44c947f9">operator==</a> (const <a class="el" href="a01034.html">TCmdOpCode</a> &amp;a, const <a class="el" href="a01034.html">TCmdOpCode</a> &amp;b)</td></tr>
+<tr class="separator:ab4e43100845654abce98f4bf44c947f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Opcodes for communication. </p>
+<div class="textblock"><p>Implementation of the Opcodes for communication. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div><h2 class="groupheader">Typedef Documentation</h2>
-<a id="a128ffa5796c67d3782435da30be76fc4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a128ffa5796c67d3782435da30be76fc4">&#9670;&nbsp;</a></span>TCmdOpCodeMap</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ab4e43100845654abce98f4bf44c947f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e43100845654abce98f4bf44c947f9">&#9670;&nbsp;</a></span>operator==()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::map&lt;std::string, <a class="el" href="a01025.html">TCmdOpCode</a>&gt; <a class="el" href="a00062.html#a128ffa5796c67d3782435da30be76fc4">TCmdOpCodeMap</a></td>
+          <td class="memname">bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01034.html">TCmdOpCode</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Type of opcodes group (map). </p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="aee9234811ad6c5ca5e62839125c91453"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee9234811ad6c5ca5e62839125c91453">&#9670;&nbsp;</a></span>kCmdParamOff</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">constexpr const char* kCmdParamOff = &quot;00&quot;</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a01034.html">TCmdOpCode</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>CMD / PARAM : Defines a param with value OFF. </p>
-
-</div>
-</div>
-<a id="acfe9f5def023699846ddc954afb7068f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfe9f5def023699846ddc954afb7068f">&#9670;&nbsp;</a></span>kCmdParamOn</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">constexpr const char* kCmdParamOn = &quot;01&quot;</td>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-
-<p>CMD / PARAM : Defines a param with value ON. </p>
-
-</div>
-</div>
-<a id="a2ee6d4ba9c9b962d75d9a8c357466284"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ee6d4ba9c9b962d75d9a8c357466284">&#9670;&nbsp;</a></span>kCmdResponseNok</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kCmdResponseNok = &quot;00&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>CMD / RESPONSE : Defines a response with value NOK. </p>
-
-</div>
-</div>
-<a id="af6a540be8bf45be8b351c084da35fda4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6a540be8bf45be8b351c084da35fda4">&#9670;&nbsp;</a></span>kCmdResponseOk</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kCmdResponseOk = &quot;01&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>CMD / RESPONSE : Defines a response with value OK. </p>
-
-</div>
-</div>
-<a id="a822471d1ad3b916f548a7c024bb25d0c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a822471d1ad3b916f548a7c024bb25d0c">&#9670;&nbsp;</a></span>kCmdVddCtrl</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddCtrl = 0x01</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD Control On/Off. </p>
-
-</div>
-</div>
-<a id="af8106f658c9e304a2d705ad15532f376"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8106f658c9e304a2d705ad15532f376">&#9670;&nbsp;</a></span>kCmdVddSetV</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddSetV = 0x02</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD Set Voltage. </p>
-
-</div>
-</div>
-<a id="a2f7d1e4b3e719a326d001b214af929f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f7d1e4b3e719a326d001b214af929f8">&#9670;&nbsp;</a></span>kCmdVddGetV</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddGetV = 0x03</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD Get Voltage. </p>
-
-</div>
-</div>
-<a id="acfa75c95b0f1d9c771dbd1c0f9fa0196"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acfa75c95b0f1d9c771dbd1c0f9fa0196">&#9670;&nbsp;</a></span>kCmdVddGetDuty</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddGetDuty = 0x04</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD Get PWM Duty Cycle. </p>
-
-</div>
-</div>
-<a id="a7478e2b8c1c3340ae505ff6965c83b40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7478e2b8c1c3340ae505ff6965c83b40">&#9670;&nbsp;</a></span>kCmdVddGetCal</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddGetCal = 0x05</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD Get Calibration. </p>
-
-</div>
-</div>
-<a id="aefcc1d2a2a2c4d58f5c1ecf86f7a1a8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefcc1d2a2a2c4d58f5c1ecf86f7a1a8c">&#9670;&nbsp;</a></span>kCmdVddInitCal</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddInitCal = 0x06</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD Init Calibration. </p>
-
-</div>
-</div>
-<a id="a9647db3143d63cc337e9dcd9e5e6e7a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9647db3143d63cc337e9dcd9e5e6e7a7">&#9670;&nbsp;</a></span>kCmdVddSaveCal</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddSaveCal = 0x07</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD Save Calibration. </p>
-
-</div>
-</div>
-<a id="a9531819dce04654c6045ed991638bc8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9531819dce04654c6045ed991638bc8c">&#9670;&nbsp;</a></span>kCmdVddOnVpp</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVddOnVpp = 0x08</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VDD : Opcode VDD on VPP. </p>
-
-</div>
-</div>
-<a id="a47f94ccd18489a9953d6f526006ecc46"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47f94ccd18489a9953d6f526006ecc46">&#9670;&nbsp;</a></span>kCmdVppCtrl</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppCtrl = 0x11</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP Control On/Off. </p>
-
-</div>
-</div>
-<a id="a659a0c434ed27e8b121983ec57c28662"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a659a0c434ed27e8b121983ec57c28662">&#9670;&nbsp;</a></span>kCmdVppSetV</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppSetV = 0x12</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP Set Voltage. </p>
-
-</div>
-</div>
-<a id="aea2c729a32e82ce8cad689f608559366"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea2c729a32e82ce8cad689f608559366">&#9670;&nbsp;</a></span>kCmdVppGetV</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppGetV = 0x13</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP Get Voltage. </p>
-
-</div>
-</div>
-<a id="a143b3d9e689b6799f309bd2400b62447"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a143b3d9e689b6799f309bd2400b62447">&#9670;&nbsp;</a></span>kCmdVppGetDuty</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppGetDuty = 0x14</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP Get PWM Duty Cycle. </p>
-
-</div>
-</div>
-<a id="a89bce77fbcb997ecd577e04c7fa2496c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89bce77fbcb997ecd577e04c7fa2496c">&#9670;&nbsp;</a></span>kCmdVppGetCal</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppGetCal = 0x15</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP Get Calibration. </p>
-
-</div>
-</div>
-<a id="a6249595cdd3470baf46c0b8badf28b44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6249595cdd3470baf46c0b8badf28b44">&#9670;&nbsp;</a></span>kCmdVppInitCal</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppInitCal = 0x16</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP Init Calibration. </p>
-
-</div>
-</div>
-<a id="a62fc844f8db2f3f162c8428d720543f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62fc844f8db2f3f162c8428d720543f7">&#9670;&nbsp;</a></span>kCmdVppSaveCal</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppSaveCal = 0x17</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP Save Calibration. </p>
-
-</div>
-</div>
-<a id="ae089f4d90c3eae1897c5b37a6b2c37e6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae089f4d90c3eae1897c5b37a6b2c37e6">&#9670;&nbsp;</a></span>kCmdVppOnA9</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppOnA9 = 0x18</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP on A9. </p>
-
-</div>
-</div>
-<a id="a9263d91f2227c59155d76359aeade480"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9263d91f2227c59155d76359aeade480">&#9670;&nbsp;</a></span>kCmdVppOnA18</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppOnA18 = 0x19</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP on A18. </p>
-
-</div>
-</div>
-<a id="a3eb96894b432931d4b2ae0a2ecf44f38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3eb96894b432931d4b2ae0a2ecf44f38">&#9670;&nbsp;</a></span>kCmdVppOnCE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppOnCE = 0x1A</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP on CE. </p>
-
-</div>
-</div>
-<a id="ae511d2dc534dcdfc0f3c452b815ec9fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae511d2dc534dcdfc0f3c452b815ec9fa">&#9670;&nbsp;</a></span>kCmdVppOnOE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppOnOE = 0x1B</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP on OE. </p>
-
-</div>
-</div>
-<a id="ad304fa9a82bb138e2a32aae4ed59f920"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad304fa9a82bb138e2a32aae4ed59f920">&#9670;&nbsp;</a></span>kCmdVppOnWE</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr uint8_t kCmdVppOnWE = 0x1C</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>OPCODE / VPP : Opcode VPP on WE. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>One object. </td></tr>
+    <tr><td class="paramname">b</td><td>Another object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the objects contain equal values, false otherwise. </dd></dl>
 
 </div>
 </div>

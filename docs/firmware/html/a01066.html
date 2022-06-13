@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Member List</title>
+<title>USB EPROM/Flash Programmer: VppGenerator Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,18 +62,731 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="a01063.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">AdcTest Member List</div>  </div>
+<div class="title">VppGenerator Class Reference<div class="ingroups"><a class="el" href="a00176.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a01069.html">AdcTest</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a01069.html#a55723096fa6b29c5bd45c90ed243605a">AdcTest</a>()</td><td class="entry"><a class="el" href="a01069.html">AdcTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01069.html#a3a1707f6479611fdc609a3eb8a0cef1b">SetUp</a>() override</td><td class="entry"><a class="el" href="a01069.html">AdcTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a01069.html#ac4fca95dc3b93372ce7f2078baf8e8b6">TearDown</a>() override</td><td class="entry"><a class="el" href="a01069.html">AdcTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr><td class="entry"><a class="el" href="a01069.html#a5cdbe190349f5fa6e40fdd9653cb163e">~AdcTest</a>() override</td><td class="entry"><a class="el" href="a01069.html">AdcTest</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-</table></div><!-- contents -->
+<p>Voltage (VPP) Generator Class.  
+ <a href="a01066.html#details">More...</a></p>
+
+<p><code>#include &lt;vgenerator.hpp&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for VppGenerator:</div>
+<div class="dyncontent">
+<div class="center"><img src="a01065.png" border="0" usemap="#aVppGenerator_inherit__map" alt="Inheritance graph"/></div>
+<map name="aVppGenerator_inherit__map" id="aVppGenerator_inherit__map">
+<area shape="rect" title="Voltage (VPP) Generator Class." alt="" coords="17,395,156,663"/>
+<area shape="rect" href="a01058.html" title="Generic Voltage Generator Class." alt="" coords="5,5,168,347"/>
+</map>
+</div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aebeff918a4d61d84ceffd739df464b6b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#aebeff918a4d61d84ceffd739df464b6b">VppGenerator</a> (const <a class="el" href="a01070.html">VGenerator</a> *owner)</td></tr>
+<tr class="memdesc:aebeff918a4d61d84ceffd739df464b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01066.html#aebeff918a4d61d84ceffd739df464b6b">More...</a><br /></td></tr>
+<tr class="separator:aebeff918a4d61d84ceffd739df464b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a2f93105e0a24634af5793d2c5c5b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#af5a2f93105e0a24634af5793d2c5c5b8">on</a> ()</td></tr>
+<tr class="memdesc:af5a2f93105e0a24634af5793d2c5c5b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the output of the Voltage Generator.  <a href="a01066.html#af5a2f93105e0a24634af5793d2c5c5b8">More...</a><br /></td></tr>
+<tr class="separator:af5a2f93105e0a24634af5793d2c5c5b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f241b422ebdbd7a570178ceaebdd2fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a2f241b422ebdbd7a570178ceaebdd2fa">off</a> ()</td></tr>
+<tr class="memdesc:a2f241b422ebdbd7a570178ceaebdd2fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disables the output of the Voltage Generator.  <a href="a01066.html#a2f241b422ebdbd7a570178ceaebdd2fa">More...</a><br /></td></tr>
+<tr class="separator:a2f241b422ebdbd7a570178ceaebdd2fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a987721b464bc9c89be1fa1b1797907a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a987721b464bc9c89be1fa1b1797907a1">initCalibration</a> (float reference=12.0f) override</td></tr>
+<tr class="memdesc:a987721b464bc9c89be1fa1b1797907a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts the calibration process.  <a href="a01066.html#a987721b464bc9c89be1fa1b1797907a1">More...</a><br /></td></tr>
+<tr class="separator:a987721b464bc9c89be1fa1b1797907a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f06afd56ae85b5b1e4ebfafad88210e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a0f06afd56ae85b5b1e4ebfafad88210e">onA9</a> (bool status=true)</td></tr>
+<tr class="memdesc:a0f06afd56ae85b5b1e4ebfafad88210e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets/Resets the VPP on A9 pin.  <a href="a01066.html#a0f06afd56ae85b5b1e4ebfafad88210e">More...</a><br /></td></tr>
+<tr class="separator:a0f06afd56ae85b5b1e4ebfafad88210e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d8a0eb4bbad7bb792d743b0d2cc871c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a9d8a0eb4bbad7bb792d743b0d2cc871c">onA18</a> (bool status=true)</td></tr>
+<tr class="memdesc:a9d8a0eb4bbad7bb792d743b0d2cc871c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets/Resets the VPP on A18 pin.  <a href="a01066.html#a9d8a0eb4bbad7bb792d743b0d2cc871c">More...</a><br /></td></tr>
+<tr class="separator:a9d8a0eb4bbad7bb792d743b0d2cc871c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dffd3e2fd8d5a4adf46a2324c760fe5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a3dffd3e2fd8d5a4adf46a2324c760fe5">onCE</a> (bool status=true)</td></tr>
+<tr class="memdesc:a3dffd3e2fd8d5a4adf46a2324c760fe5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets/Resets the VPP on CE pin.  <a href="a01066.html#a3dffd3e2fd8d5a4adf46a2324c760fe5">More...</a><br /></td></tr>
+<tr class="separator:a3dffd3e2fd8d5a4adf46a2324c760fe5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb02f248196d9a140cdee7a50d960586"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#adb02f248196d9a140cdee7a50d960586">onOE</a> (bool status=true)</td></tr>
+<tr class="memdesc:adb02f248196d9a140cdee7a50d960586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets/Resets the VPP on OE pin.  <a href="a01066.html#adb02f248196d9a140cdee7a50d960586">More...</a><br /></td></tr>
+<tr class="separator:adb02f248196d9a140cdee7a50d960586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ab7a0faad72e096d08a867f450a32e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a1ab7a0faad72e096d08a867f450a32e0">onWE</a> (bool status=true)</td></tr>
+<tr class="memdesc:a1ab7a0faad72e096d08a867f450a32e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets/Resets the VPP on WE pin.  <a href="a01066.html#a1ab7a0faad72e096d08a867f450a32e0">More...</a><br /></td></tr>
+<tr class="separator:a1ab7a0faad72e096d08a867f450a32e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69c2d09ed2717ed40188debcb5aded24"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a69c2d09ed2717ed40188debcb5aded24">isOnA9</a> () const</td></tr>
+<tr class="memdesc:a69c2d09ed2717ed40188debcb5aded24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the VPP on A9 pin status.  <a href="a01066.html#a69c2d09ed2717ed40188debcb5aded24">More...</a><br /></td></tr>
+<tr class="separator:a69c2d09ed2717ed40188debcb5aded24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe4e6d719c5bfe69d3e3522de8d94f8d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#abe4e6d719c5bfe69d3e3522de8d94f8d">isOnA18</a> () const</td></tr>
+<tr class="memdesc:abe4e6d719c5bfe69d3e3522de8d94f8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the VPP on A18 pin status.  <a href="a01066.html#abe4e6d719c5bfe69d3e3522de8d94f8d">More...</a><br /></td></tr>
+<tr class="separator:abe4e6d719c5bfe69d3e3522de8d94f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a113860fa6ce46d16948aaf61848a4cd5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a113860fa6ce46d16948aaf61848a4cd5">isOnCE</a> () const</td></tr>
+<tr class="memdesc:a113860fa6ce46d16948aaf61848a4cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the VPP on CE pin status.  <a href="a01066.html#a113860fa6ce46d16948aaf61848a4cd5">More...</a><br /></td></tr>
+<tr class="separator:a113860fa6ce46d16948aaf61848a4cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a596bf3f0b512d477965f27048e093f8d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a596bf3f0b512d477965f27048e093f8d">isOnOE</a> () const</td></tr>
+<tr class="memdesc:a596bf3f0b512d477965f27048e093f8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the VPP on OE pin status.  <a href="a01066.html#a596bf3f0b512d477965f27048e093f8d">More...</a><br /></td></tr>
+<tr class="separator:a596bf3f0b512d477965f27048e093f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a28ed60d03735648c6941ed5d5b7ff87c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01066.html#a28ed60d03735648c6941ed5d5b7ff87c">isOnWE</a> () const</td></tr>
+<tr class="memdesc:a28ed60d03735648c6941ed5d5b7ff87c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the VPP on WE pin status.  <a href="a01066.html#a28ed60d03735648c6941ed5d5b7ff87c">More...</a><br /></td></tr>
+<tr class="separator:a28ed60d03735648c6941ed5d5b7ff87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad619b8b51adc7874204abd71080cd90e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#ad619b8b51adc7874204abd71080cd90e">isRunning</a> () const</td></tr>
+<tr class="memdesc:ad619b8b51adc7874204abd71080cd90e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if the Voltage Generator is running.  <a href="a01058.html#ad619b8b51adc7874204abd71080cd90e">More...</a><br /></td></tr>
+<tr class="separator:ad619b8b51adc7874204abd71080cd90e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69d4e1d6d89ed7be0fd7bd645ea85240"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#a69d4e1d6d89ed7be0fd7bd645ea85240">setV</a> (float value)</td></tr>
+<tr class="memdesc:a69d4e1d6d89ed7be0fd7bd645ea85240"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the target output voltage of the Voltage Generator.  <a href="a01058.html#a69d4e1d6d89ed7be0fd7bd645ea85240">More...</a><br /></td></tr>
+<tr class="separator:a69d4e1d6d89ed7be0fd7bd645ea85240"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2181b2c848122897be4f31c3db7a9ac7"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#a2181b2c848122897be4f31c3db7a9ac7">getVTarget</a> () const</td></tr>
+<tr class="memdesc:a2181b2c848122897be4f31c3db7a9ac7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the target output voltage of the Voltage Generator.  <a href="a01058.html#a2181b2c848122897be4f31c3db7a9ac7">More...</a><br /></td></tr>
+<tr class="separator:a2181b2c848122897be4f31c3db7a9ac7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4d92e8523757ad9e77e007d7a34003"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#a0f4d92e8523757ad9e77e007d7a34003">getV</a> () const</td></tr>
+<tr class="memdesc:a0f4d92e8523757ad9e77e007d7a34003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current output voltage of the Voltage Generator.  <a href="a01058.html#a0f4d92e8523757ad9e77e007d7a34003">More...</a><br /></td></tr>
+<tr class="separator:a0f4d92e8523757ad9e77e007d7a34003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21c65632b0597b0010f56fffc7fd3db5"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#a21c65632b0597b0010f56fffc7fd3db5">getCalibration</a> () const</td></tr>
+<tr class="memdesc:a21c65632b0597b0010f56fffc7fd3db5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the calibration value of the output of the Voltage Generator.  <a href="a01058.html#a21c65632b0597b0010f56fffc7fd3db5">More...</a><br /></td></tr>
+<tr class="separator:a21c65632b0597b0010f56fffc7fd3db5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad50ed60a1a9207565841af074c67232c"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#ad50ed60a1a9207565841af074c67232c">getDuty</a> () const</td></tr>
+<tr class="memdesc:ad50ed60a1a9207565841af074c67232c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current duty cycle of the PWM.  <a href="a01058.html#ad50ed60a1a9207565841af074c67232c">More...</a><br /></td></tr>
+<tr class="separator:ad50ed60a1a9207565841af074c67232c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe384df618d5cf4af2c0aaba94e8a71e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#afe384df618d5cf4af2c0aaba94e8a71e">saveCalibration</a> (float measure)</td></tr>
+<tr class="memdesc:afe384df618d5cf4af2c0aaba94e8a71e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finishes the calibration process.  <a href="a01058.html#afe384df618d5cf4af2c0aaba94e8a71e">More...</a><br /></td></tr>
+<tr class="separator:afe384df618d5cf4af2c0aaba94e8a71e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad277193b2dca0bab1e0ad24d45407dc3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#ad277193b2dca0bab1e0ad24d45407dc3">toggle</a> ()</td></tr>
+<tr class="memdesc:ad277193b2dca0bab1e0ad24d45407dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the output of the Voltage Generator.  <a href="a01058.html#ad277193b2dca0bab1e0ad24d45407dc3">More...</a><br /></td></tr>
+<tr class="separator:ad277193b2dca0bab1e0ad24d45407dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af887dcf7959d81b473d9251b3573a303"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html#af887dcf7959d81b473d9251b3573a303">isOn</a> () const</td></tr>
+<tr class="memdesc:af887dcf7959d81b473d9251b3573a303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if output of the Voltage Generator is enabled.  <a href="a01058.html#af887dcf7959d81b473d9251b3573a303">More...</a><br /></td></tr>
+<tr class="separator:af887dcf7959d81b473d9251b3573a303"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Voltage (VPP) Generator Class. </p>
+<p>The purpose of this class is to provide the methods to manipulate a Voltage (VPP) Generator (based in a boost DC2DC converter, GPIO pins and one shift register to control - on/off - the output). </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aebeff918a4d61d84ceffd739df464b6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebeff918a4d61d84ceffd739df464b6b">&#9670;&nbsp;</a></span>VppGenerator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01066.html">VppGenerator</a> </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01070.html">VGenerator</a> *&#160;</td>
+          <td class="paramname"><em>owner</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">owner</td><td>Pointer to owner <a class="el" href="a01070.html" title="Voltage (VPP/VDD) Generator Class.">VGenerator</a> object instance. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af5a2f93105e0a24634af5793d2c5c5b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5a2f93105e0a24634af5793d2c5c5b8">&#9670;&nbsp;</a></span>on()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void on </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables the output of the Voltage Generator. </p>
+
+<p>Implements <a class="el" href="a01058.html#a1a086ac302551c491a2a1acc23b77a6e">GenericGenerator</a>.</p>
+
+</div>
+</div>
+<a id="a2f241b422ebdbd7a570178ceaebdd2fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f241b422ebdbd7a570178ceaebdd2fa">&#9670;&nbsp;</a></span>off()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void off </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Disables the output of the Voltage Generator. </p>
+
+<p>Implements <a class="el" href="a01058.html#a10d0d33911efa143d2149202dff20c92">GenericGenerator</a>.</p>
+
+</div>
+</div>
+<a id="a987721b464bc9c89be1fa1b1797907a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a987721b464bc9c89be1fa1b1797907a1">&#9670;&nbsp;</a></span>initCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initCalibration </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>reference</em> = <code>12.0f</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Starts the calibration process. </p>
+<p>Sets the calibration value to zero, and sets the output voltage to value of the <em>reference</em> parameter. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">reference</td><td>Calibration target voltage, in Volts. Default: 12.0. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="a01058.html#a48dac7612fb489714e244837a522ad85">GenericGenerator</a>.</p>
+
+</div>
+</div>
+<a id="a0f06afd56ae85b5b1e4ebfafad88210e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f06afd56ae85b5b1e4ebfafad88210e">&#9670;&nbsp;</a></span>onA9()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onA9 </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>status</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets/Resets the VPP on A9 pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>True to set pin, false to reset. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9d8a0eb4bbad7bb792d743b0d2cc871c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d8a0eb4bbad7bb792d743b0d2cc871c">&#9670;&nbsp;</a></span>onA18()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onA18 </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>status</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets/Resets the VPP on A18 pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>True to set pin, false to reset. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3dffd3e2fd8d5a4adf46a2324c760fe5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dffd3e2fd8d5a4adf46a2324c760fe5">&#9670;&nbsp;</a></span>onCE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onCE </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>status</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets/Resets the VPP on CE pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>True to set pin, false to reset. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="adb02f248196d9a140cdee7a50d960586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb02f248196d9a140cdee7a50d960586">&#9670;&nbsp;</a></span>onOE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onOE </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>status</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets/Resets the VPP on OE pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>True to set pin, false to reset. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1ab7a0faad72e096d08a867f450a32e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1ab7a0faad72e096d08a867f450a32e0">&#9670;&nbsp;</a></span>onWE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void onWE </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>status</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets/Resets the VPP on WE pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>True to set pin, false to reset. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a69c2d09ed2717ed40188debcb5aded24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69c2d09ed2717ed40188debcb5aded24">&#9670;&nbsp;</a></span>isOnA9()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOnA9 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the VPP on A9 pin status. </p>
+<dl class="section return"><dt>Returns</dt><dd>The pin status. </dd></dl>
+
+</div>
+</div>
+<a id="abe4e6d719c5bfe69d3e3522de8d94f8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe4e6d719c5bfe69d3e3522de8d94f8d">&#9670;&nbsp;</a></span>isOnA18()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOnA18 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the VPP on A18 pin status. </p>
+<dl class="section return"><dt>Returns</dt><dd>The pin status. </dd></dl>
+
+</div>
+</div>
+<a id="a113860fa6ce46d16948aaf61848a4cd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a113860fa6ce46d16948aaf61848a4cd5">&#9670;&nbsp;</a></span>isOnCE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOnCE </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the VPP on CE pin status. </p>
+<dl class="section return"><dt>Returns</dt><dd>The pin status. </dd></dl>
+
+</div>
+</div>
+<a id="a596bf3f0b512d477965f27048e093f8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a596bf3f0b512d477965f27048e093f8d">&#9670;&nbsp;</a></span>isOnOE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOnOE </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the VPP on OE pin status. </p>
+<dl class="section return"><dt>Returns</dt><dd>The pin status. </dd></dl>
+
+</div>
+</div>
+<a id="a28ed60d03735648c6941ed5d5b7ff87c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28ed60d03735648c6941ed5d5b7ff87c">&#9670;&nbsp;</a></span>isOnWE()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOnWE </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the VPP on WE pin status. </p>
+<dl class="section return"><dt>Returns</dt><dd>The pin status. </dd></dl>
+
+</div>
+</div>
+<a id="ad619b8b51adc7874204abd71080cd90e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad619b8b51adc7874204abd71080cd90e">&#9670;&nbsp;</a></span>isRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns if the Voltage Generator is running. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if Voltage Generator is running, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a69d4e1d6d89ed7be0fd7bd645ea85240"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69d4e1d6d89ed7be0fd7bd645ea85240">&#9670;&nbsp;</a></span>setV()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void setV </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Sets the target output voltage of the Voltage Generator. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Target output voltage, in Volts. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2181b2c848122897be4f31c3db7a9ac7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2181b2c848122897be4f31c3db7a9ac7">&#9670;&nbsp;</a></span>getVTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getVTarget </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the target output voltage of the Voltage Generator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Target output voltage, in Volts. </dd></dl>
+
+</div>
+</div>
+<a id="a0f4d92e8523757ad9e77e007d7a34003"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4d92e8523757ad9e77e007d7a34003">&#9670;&nbsp;</a></span>getV()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getV </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current output voltage of the Voltage Generator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current output voltage, in Volts. </dd></dl>
+
+</div>
+</div>
+<a id="a21c65632b0597b0010f56fffc7fd3db5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21c65632b0597b0010f56fffc7fd3db5">&#9670;&nbsp;</a></span>getCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getCalibration </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the calibration value of the output of the Voltage Generator. </p>
+<dl class="section return"><dt>Returns</dt><dd>Calibration value. </dd></dl>
+
+</div>
+</div>
+<a id="ad50ed60a1a9207565841af074c67232c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad50ed60a1a9207565841af074c67232c">&#9670;&nbsp;</a></span>getDuty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float getDuty </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the current duty cycle of the PWM. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current duty cycle value, in percent. </dd></dl>
+
+</div>
+</div>
+<a id="afe384df618d5cf4af2c0aaba94e8a71e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe384df618d5cf4af2c0aaba94e8a71e">&#9670;&nbsp;</a></span>saveCalibration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void saveCalibration </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>measure</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finishes the calibration process. </p>
+<p>Calculates and saves the calibration value. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">measure</td><td>Measured voltage, in Volts. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad277193b2dca0bab1e0ad24d45407dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad277193b2dca0bab1e0ad24d45407dc3">&#9670;&nbsp;</a></span>toggle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void toggle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Toggles the output of the Voltage Generator. </p>
+
+</div>
+</div>
+<a id="af887dcf7959d81b473d9251b3573a303"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af887dcf7959d81b473d9251b3573a303">&#9670;&nbsp;</a></span>isOn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isOn </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns if output of the Voltage Generator is enabled. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if output of the Voltage Generator is enabled, false otherwise. </dd></dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li><a class="el" href="a00077.html">vgenerator.hpp</a></li>
+<li><a class="el" href="a00074.html">vgenerator.cpp</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

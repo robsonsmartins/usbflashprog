@@ -64,12 +64,14 @@ void Runner::init() {
 }
 
 void Runner::loop() {
-    command_ = readByte_(1);
+    TByteArray data;
+    command_.clear();
+    data = readByte_(1);
+    command_.insert(command_.end(), data.begin(), data.end());
     auto code = findOpCode_();
-    if (code != kCmdOpCodes.end()) {
-      for (const auto i : readByte_(code->second.params)) {
-        command_.push_back(i);
-      }
+    if (code != kCmdOpCodes.end() && code->second.params) {
+      data = readByte_(code->second.params);
+      command_.insert(command_.end(), data.begin(), data.end());
     }
     runCommand_();
     gpio_.resetPin(PICO_DEFAULT_LED_PIN);
@@ -78,12 +80,9 @@ void Runner::loop() {
 Runner::TByteArray Runner::readByte_(size_t len) {
     TByteArray result;
     if (len) {
-        uint8_t *buf = new uint8_t[len + 1];
-        buf[len] = 0;
+        uint8_t *buf = new uint8_t[len];
         if (serial_.getBuf(buf, len, kCommTimeOut * 1000) == len) {
-            for (size_t i = 0; i < len; i++) {
-              result.push_back(buf[i]);
-            }
+            result.insert(result.end(), buf, buf + len);
             gpio_.togglePin(PICO_DEFAULT_LED_PIN);
         }
         delete[] buf;

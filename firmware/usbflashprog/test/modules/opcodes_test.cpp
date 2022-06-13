@@ -37,16 +37,16 @@ TEST_F(OpCodeTest, get_opcode) {
     memset(buf, 0, sizeof(buf));
     TCmdOpCode op;
 
-    op = kCmdOpCodes.at(kCmdNop);
+    op = OpCode::getOpCode(kCmdNop);
     EXPECT_EQ(OpCode::getOpCode(buf, sizeof(buf)), op);
     buf[0] = kCmdVddCtrl;
-    op = kCmdOpCodes.at(kCmdVddCtrl);
+    op = OpCode::getOpCode(kCmdVddCtrl);
     EXPECT_EQ(OpCode::getOpCode(buf, sizeof(buf)), op);
     buf[0] = kCmdVppCtrl;
-    op = kCmdOpCodes.at(kCmdVppCtrl);
+    op = OpCode::getOpCode(kCmdVppCtrl);
     EXPECT_EQ(OpCode::getOpCode(buf, sizeof(buf)), op);
     buf[0] = 0xFF;
-    op = kCmdOpCodes.at(kCmdNop);
+    op = OpCode::getOpCode(kCmdNop);
     EXPECT_EQ(OpCode::getOpCode(buf, sizeof(buf)), op);
 }
 
@@ -59,17 +59,17 @@ TEST_F(OpCodeTest, get_value) {
     EXPECT_EQ(OpCode::getValueAsFloat(buf, sizeof(buf)), 0.0f);
     buf[1] = 0x33;  // 51
     buf[2] = 0x21;  // 33
-    EXPECT_EQ(OpCode::getValueAsByte(buf, sizeof(buf)), 0x00);
-    EXPECT_EQ(OpCode::getValueAsBool(buf, sizeof(buf)), false);
-    EXPECT_EQ(OpCode::getValueAsFloat(buf, sizeof(buf)), 0.0f);
+    EXPECT_EQ(OpCode::getValueAsByte(buf, sizeof(buf)), 0x33);
+    EXPECT_EQ(OpCode::getValueAsBool(buf, sizeof(buf)), true);
+    EXPECT_EQ(OpCode::getValueAsFloat(buf, sizeof(buf)), 51.33f);
     buf[0] = kCmdResponseOk;
     EXPECT_EQ(OpCode::getValueAsByte(buf, sizeof(buf)), 0x33);
     EXPECT_EQ(OpCode::getValueAsBool(buf, sizeof(buf)), true);
     EXPECT_EQ(OpCode::getValueAsFloat(buf, sizeof(buf)), 51.33f);
     buf[0] = kCmdResponseNok;
-    EXPECT_EQ(OpCode::getValueAsByte(buf, sizeof(buf)), 0x00);
-    EXPECT_EQ(OpCode::getValueAsBool(buf, sizeof(buf)), false);
-    EXPECT_EQ(OpCode::getValueAsFloat(buf, sizeof(buf)), 0.0f);
+    EXPECT_EQ(OpCode::getValueAsByte(buf, sizeof(buf)), 0x33);
+    EXPECT_EQ(OpCode::getValueAsBool(buf, sizeof(buf)), true);
+    EXPECT_EQ(OpCode::getValueAsFloat(buf, sizeof(buf)), 51.33f);
 }
 
 TEST_F(OpCodeTest, set_value) {

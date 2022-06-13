@@ -1,3 +1,12 @@
+# ---------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2022) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ---------------------------------------------------------------------------
+
 # This is a copy of <PICO_SDK_PATH>/external/pico_sdk_import.cmake
 
 # This can be dropped into an external project to help locate this SDK

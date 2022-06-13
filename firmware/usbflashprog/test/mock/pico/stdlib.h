@@ -10,9 +10,25 @@
 #ifndef TEST_MOCK_PICO_STDLIB_H_
 #define TEST_MOCK_PICO_STDLIB_H_
 
-#include <unistd.h>
-#include <sys/select.h>
-#include <termios.h>
+#ifdef __arm__
+# define ARM
+#endif
+#if (defined(_WIN32) || defined(WIN32)) && !defined(ARM)
+# define WINDOWS
+#elif !defined(ARM)
+# define UNIX
+#endif
+
+#ifdef WINDOWS
+# include <windows.h>
+#endif
+
+#ifdef UNIX
+# include <unistd.h>
+# include <sys/select.h>
+# include <termios.h>
+#endif
+
 #include <cstdlib>
 #include <cstring>
 #include <cstdint>
@@ -20,7 +36,7 @@
 
 // ---------------------------------------------------------------------------
 
-#ifdef REAL_MOCK_IMPLEMENTATION
+#if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
     static void reset_terminal_mode();
     static void set_conio_terminal_mode();
     static int kbhit(uint32_t timeout_us);
@@ -43,7 +59,7 @@ typedef unsigned int uint;
 
 // ---------------------------------------------------------------------------
 
-#ifdef REAL_MOCK_IMPLEMENTATION
+#if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
     static struct termios _orig_termios;
 #else
     constexpr char kStdioMockPredefinedChar = 'A';
@@ -52,21 +68,29 @@ typedef unsigned int uint;
 // ---------------------------------------------------------------------------
 
 extern "C" inline void sleep_us(uint64_t us) {
+#ifdef WINDOWS
+    Sleep(us / 1000);
+#elif defined(UNIX)
     usleep(us);
+#endif
 }
 
 extern "C" inline void sleep_ms(uint32_t ms) {
+#ifdef WINDOWS
+    Sleep(ms);
+#elif defined(UNIX)
     usleep(static_cast<uint64_t>(ms) * 1000);
+#endif
 }
 
 extern "C" inline void stdio_init_all(void) {
-#ifdef REAL_MOCK_IMPLEMENTATION
+#if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
     set_conio_terminal_mode();
 #endif  // REAL_MOCK_IMPLEMENTATION
 }
 
 extern "C" inline int getchar_timeout_us(uint32_t timeout_us) {
-#ifdef REAL_MOCK_IMPLEMENTATION
+#if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
     if (!kbhit(timeout_us)) { return PICO_ERROR_TIMEOUT; }
     return getch();
 #else
@@ -75,7 +99,7 @@ extern "C" inline int getchar_timeout_us(uint32_t timeout_us) {
 }
 
 extern "C" inline int putchar_raw(int c) {
-#ifdef REAL_MOCK_IMPLEMENTATION
+#if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
     std::cout << static_cast<char>(c);
 #endif  // REAL_MOCK_IMPLEMENTATION
     return c;
@@ -83,7 +107,7 @@ extern "C" inline int putchar_raw(int c) {
 
 // ---------------------------------------------------------------------------
 
-#ifdef REAL_MOCK_IMPLEMENTATION
+#if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
 
 void reset_terminal_mode() {
     tcsetattr(0, TCSANOW, &_orig_termios);

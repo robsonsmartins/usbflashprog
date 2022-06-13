@@ -83,6 +83,9 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ac052b8af72a287ea8be7668e89549e0a"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a01034.html">TCmdOpCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01038.html#ac052b8af72a287ea8be7668e89549e0a">getOpCode</a> (const void *buf, size_t size)</td></tr>
 <tr class="memdesc:ac052b8af72a287ea8be7668e89549e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the opcode from communication frame.  <a href="a01038.html#ac052b8af72a287ea8be7668e89549e0a">More...</a><br /></td></tr>
 <tr class="separator:ac052b8af72a287ea8be7668e89549e0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ac2a88c9f6cba1ac328b3d4a51eb028"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="a01034.html">TCmdOpCode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01038.html#a7ac2a88c9f6cba1ac328b3d4a51eb028">getOpCode</a> (uint8_t code)</td></tr>
+<tr class="memdesc:a7ac2a88c9f6cba1ac328b3d4a51eb028"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the opcode from code (byte).  <a href="a01038.html#a7ac2a88c9f6cba1ac328b3d4a51eb028">More...</a><br /></td></tr>
+<tr class="separator:a7ac2a88c9f6cba1ac328b3d4a51eb028"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aefaa2dba69447ca00bf0c27278eb231b"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01038.html#aefaa2dba69447ca00bf0c27278eb231b">getValueAsFloat</a> (const void *buf, size_t size)</td></tr>
 <tr class="memdesc:aefaa2dba69447ca00bf0c27278eb231b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the param value as float.  <a href="a01038.html#aefaa2dba69447ca00bf0c27278eb231b">More...</a><br /></td></tr>
 <tr class="separator:aefaa2dba69447ca00bf0c27278eb231b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,7 +156,7 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ac052b8af72a287ea8be7668e89549e0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac052b8af72a287ea8be7668e89549e0a">&#9670;&nbsp;</a></span>getOpCode()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac052b8af72a287ea8be7668e89549e0a">&#9670;&nbsp;</a></span>getOpCode() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,6 +194,41 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">buf</td><td>Pointer to the buffer that contains the communication frame. </td></tr>
     <tr><td class="paramname">size</td><td>Size of buffer, in bytes. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Opcode of the operation, or kCmdNop if not found. </dd></dl>
+
+</div>
+</div>
+<a id="a7ac2a88c9f6cba1ac328b3d4a51eb028"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ac2a88c9f6cba1ac328b3d4a51eb028">&#9670;&nbsp;</a></span>getOpCode() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01034.html">TCmdOpCode</a> getOpCode </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>code</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the opcode from code (byte). </p>
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">code</td><td>Code (byte). </td></tr>
   </table>
   </dd>
 </dl>

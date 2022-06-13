@@ -21,6 +21,7 @@
 // ---------------------------------------------------------------------------
 
 TCmdOpCode& TCmdOpCode::operator=(const TCmdOpCode& src) {
+  this->code   =   src.code;
   this->descr  =  src.descr;
   this->params = src.params;
   this->result = src.result;
@@ -28,7 +29,8 @@ TCmdOpCode& TCmdOpCode::operator=(const TCmdOpCode& src) {
 }
 
 bool operator==(const TCmdOpCode& a, const TCmdOpCode& b) {
-  return (a.descr  ==  b.descr &&
+  return (a.code   ==   b.code &&
+          a.descr  ==  b.descr &&
           a.params == b.params &&
           a.result == b.result);
 }
@@ -44,19 +46,23 @@ bool OpCode::isOk(const void *buf, size_t size) {
 TCmdOpCode OpCode::getOpCode(const void *buf, size_t size) {
   if (!buf || !size) { return kCmdOpCodes.at(kCmdNop); }
   const uint8_t *pbuf = static_cast<const uint8_t*>(buf);
-  auto it = kCmdOpCodes.find(static_cast<kCmdOpCodeEnum>(pbuf[0]));
+  return getOpCode(pbuf[0]);
+}
+
+TCmdOpCode OpCode::getOpCode(uint8_t code) {
+  auto it = kCmdOpCodes.find(static_cast<kCmdOpCodeEnum>(code));
   if (it == kCmdOpCodes.end()) { return kCmdOpCodes.at(kCmdNop); }
   return it->second;
 }
 
 float OpCode::getValueAsFloat(const void *buf, size_t size) {
-  if (!buf || !isOk(buf, size) || size < 3) { return 0.0f; }
+  if (!buf || size < 3) { return 0.0f; }
   const uint8_t *pbuf = static_cast<const uint8_t*>(buf);
   return static_cast<float>(pbuf[1]) + static_cast<float>(pbuf[2]) * 0.01f;
 }
 
 uint8_t OpCode::getValueAsByte(const void *buf, size_t size) {
-  if (!buf || !isOk(buf, size) || size < 2) { return 0x00; }
+  if (!buf || size < 2) { return 0x00; }
   const uint8_t *pbuf = static_cast<const uint8_t*>(buf);
   return pbuf[1];
 }

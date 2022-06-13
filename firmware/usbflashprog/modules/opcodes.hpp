@@ -25,10 +25,7 @@
 
 // ---------------------------------------------------------------------------
 
-/**
- * @ingroup Firmware
- * @brief Enumeration of the param values.
- */
+/** @brief Enumeration of the param values. */
 enum kCmdParamValueEnum {
     /** @brief CMD / PARAM : Defines a param with value OFF. */
     kCmdParamOff = 0x00,
@@ -38,10 +35,7 @@ enum kCmdParamValueEnum {
 
 // ---------------------------------------------------------------------------
 
-/**
- * @ingroup Firmware
- * @brief Enumeration of the response values.
- */
+/** @brief Enumeration of the response values. */
 enum kCmdResponseValueEnum {
     /** @brief CMD / RESPONSE : Defines a response with value NOK. */
     kCmdResponseNok = 0xA0,
@@ -51,10 +45,7 @@ enum kCmdResponseValueEnum {
 
 // ---------------------------------------------------------------------------
 
-/**
- * @ingroup Firmware
- * @brief Enumeration of the OpCodes.
- */
+/** @brief Enumeration of the OpCodes. */
 enum kCmdOpCodeEnum {
     /** @brief OPCODE / NOP : Opcode NOP. */
     kCmdNop        = 0x00,
@@ -111,6 +102,8 @@ enum kCmdOpCodeEnum {
  *  of an opcode.
  */
 typedef struct TCmdOpCode {
+    /** @brief OpCode. */
+    kCmdOpCodeEnum code;
     /** @brief Opcode description. */
     std::string descr;
     /** @brief Number of bytes of the required parameters. */
@@ -141,29 +134,29 @@ typedef std::map<kCmdOpCodeEnum, TCmdOpCode> TCmdOpCodeMap;
 
 /** @brief OPCODE : Opcodes group (map). */
 static const TCmdOpCodeMap kCmdOpCodes = {
-    { kCmdNop       , { "Nop"       , 0, 0} },
+    { kCmdNop       , { kCmdNop       , "Nop"       , 0, 0} },
 
-    { kCmdVddCtrl   , { "VddCtrl"   , 1, 0} },
-    { kCmdVddSetV   , { "VddSetV"   , 2, 0} },
-    { kCmdVddGetV   , { "VddGetV"   , 0, 2} },
-    { kCmdVddGetDuty, { "VddGetDuty", 0, 2} },
-    { kCmdVddGetCal , { "VddGetCal" , 0, 2} },
-    { kCmdVddInitCal, { "VddInitCal", 0, 0} },
-    { kCmdVddSaveCal, { "VddSaveCal", 2, 0} },
-    { kCmdVddOnVpp  , { "VddOnVpp"  , 1, 0} },
+    { kCmdVddCtrl   , { kCmdVddCtrl   , "VddCtrl"   , 1, 0} },
+    { kCmdVddSetV   , { kCmdVddSetV   , "VddSetV"   , 2, 0} },
+    { kCmdVddGetV   , { kCmdVddGetV   , "VddGetV"   , 0, 2} },
+    { kCmdVddGetDuty, { kCmdVddGetDuty, "VddGetDuty", 0, 2} },
+    { kCmdVddGetCal , { kCmdVddGetCal , "VddGetCal" , 0, 2} },
+    { kCmdVddInitCal, { kCmdVddInitCal, "VddInitCal", 0, 0} },
+    { kCmdVddSaveCal, { kCmdVddSaveCal, "VddSaveCal", 2, 0} },
+    { kCmdVddOnVpp  , { kCmdVddOnVpp  , "VddOnVpp"  , 1, 0} },
 
-    { kCmdVppCtrl   , { "VppCtrl"   , 1, 0} },
-    { kCmdVppSetV   , { "VppSetV"   , 2, 0} },
-    { kCmdVppGetV   , { "VppGetV"   , 0, 2} },
-    { kCmdVppGetDuty, { "VppGetDuty", 0, 2} },
-    { kCmdVppGetCal , { "VppGetCal" , 0, 2} },
-    { kCmdVppInitCal, { "VppInitCal", 0, 0} },
-    { kCmdVppSaveCal, { "VppSaveCal", 2, 0} },
-    { kCmdVppOnA9   , { "VppOnA9"   , 1, 0} },
-    { kCmdVppOnA18  , { "VppOnA18"  , 1, 0} },
-    { kCmdVppOnCE   , { "VppOnCE"   , 1, 0} },
-    { kCmdVppOnOE   , { "VppOnOE"   , 1, 0} },
-    { kCmdVppOnWE   , { "VppOnWE"   , 1, 0} }
+    { kCmdVppCtrl   , { kCmdVppCtrl   , "VppCtrl"   , 1, 0} },
+    { kCmdVppSetV   , { kCmdVppSetV   , "VppSetV"   , 2, 0} },
+    { kCmdVppGetV   , { kCmdVppGetV   , "VppGetV"   , 0, 2} },
+    { kCmdVppGetDuty, { kCmdVppGetDuty, "VppGetDuty", 0, 2} },
+    { kCmdVppGetCal , { kCmdVppGetCal , "VppGetCal" , 0, 2} },
+    { kCmdVppInitCal, { kCmdVppInitCal, "VppInitCal", 0, 0} },
+    { kCmdVppSaveCal, { kCmdVppSaveCal, "VppSaveCal", 2, 0} },
+    { kCmdVppOnA9   , { kCmdVppOnA9   , "VppOnA9"   , 1, 0} },
+    { kCmdVppOnA18  , { kCmdVppOnA18  , "VppOnA18"  , 1, 0} },
+    { kCmdVppOnCE   , { kCmdVppOnCE   , "VppOnCE"   , 1, 0} },
+    { kCmdVppOnOE   , { kCmdVppOnOE   , "VppOnOE"   , 1, 0} },
+    { kCmdVppOnWE   , { kCmdVppOnWE   , "VppOnWE"   , 1, 0} }
 };
 
 // ---------------------------------------------------------------------------
@@ -193,6 +186,13 @@ class OpCode {
      * @return Opcode of the operation, or kCmdNop if not found.
      */
     static TCmdOpCode getOpCode(const void *buf, size_t size);
+    /**
+     * @overload
+     * @brief Gets the opcode from code (byte).
+     * @param code Code (byte).
+     * @return Opcode of the operation, or kCmdNop if not found.
+     */
+    static TCmdOpCode getOpCode(uint8_t code);
     /**
      * @brief Gets the param value as float.
      * @param buf Pointer to the buffer that contains the result

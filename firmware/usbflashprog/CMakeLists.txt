@@ -1,3 +1,12 @@
+# ---------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2022) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ---------------------------------------------------------------------------
+
 cmake_minimum_required(VERSION 3.16)
 
 OPTION(NORMAL_BUILD "Build normal binary" ON)
@@ -41,7 +50,9 @@ elseif(NORMAL_BUILD)
 
   target_include_directories(ufprog PUBLIC .)
 
-  # Pull in our pico_stdlib which aggregates commonly used features
+  target_compile_options(ufprog PRIVATE -DPICO_STDIO_USB_ENABLE_RESET_VIA_VENDOR_INTERFACE=0)
+  target_compile_options(ufprog PRIVATE -DPICO_STDIO_USB_CONNECT_WAIT_TIMEOUT_MS=0)
+
   target_link_libraries(ufprog 
           pico_stdlib
           hardware_adc
@@ -50,11 +61,8 @@ elseif(NORMAL_BUILD)
           hardware_flash
 )
 
-  # enable usb output, disable uart output
   pico_enable_stdio_usb(ufprog 1)
   pico_enable_stdio_uart(ufprog 0)
-
-  # create map/bin/hex/uf2 file etc.
   pico_add_extra_outputs(ufprog)
 
 endif()

@@ -142,6 +142,6 @@ constexpr float kVddInitial =  5.0f;
 // ---------------------------------------------------------------------------
 
 /** @brief COMM : Communication timeout, in miliseconds. */
-constexpr uint32_t kCommTimeOut = 1000;
+constexpr uint32_t kCommTimeOut = 50;
 
 #endif  // CONFIG_HPP_

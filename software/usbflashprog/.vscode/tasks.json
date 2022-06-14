@@ -2,7 +2,23 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "create installer",
+            "label": "Update Translation",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "lupdate",
+            "args": [
+                "-recursive",
+                ".",
+                "-ts",
+                "i18n\\ufprog_en_US.ts",
+                "i18n\\ufprog_pt_BR.ts",
+            ],
+            "group": "build"
+        },
+        {
+            "label": "Create Installer (Windows)",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceRoot}/scripts"
@@ -10,5 +26,17 @@
             "command": "iscc.exe ufprog.iss",
             "group": "build"
         },
+        {
+            "type": "shell",
+            "label": "Build",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "mkdir -p build && cd build && cmake .. && make -j$(nproc)",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
     ]
 }

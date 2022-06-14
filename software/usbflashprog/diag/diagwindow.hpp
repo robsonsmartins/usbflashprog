@@ -20,7 +20,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
-#include "backend/serial.hpp"
+#include "backend/runner.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -40,7 +40,18 @@ class DiagWindow : public QMainWindow {
  private slots:
     void on_pushButtonConnect_clicked();
     void on_actionExit_triggered(bool checked = false);
+    void on_actionAbout_triggered(bool checked = false);
     void on_actionAboutQt_triggered(bool checked = false);
+    void on_checkBoxVddCtrl_toggled(bool checked = false);
+    void on_checkBoxVppCtrl_toggled(bool checked = false);
+    void on_checkBoxVddOnVpp_toggled(bool checked = false);
+    void on_checkBoxVppOnA9_toggled(bool checked = false);
+    void on_checkBoxVppOnA18_toggled(bool checked = false);
+    void on_checkBoxVppOnCE_toggled(bool checked = false);
+    void on_checkBoxVppOnOE_toggled(bool checked = false);
+    void on_checkBoxVppOnWE_toggled(bool checked = false);
+    void on_dialVdd_valueChanged(int value);
+    void on_dialVpp_valueChanged(int value);
     void onEnumTimerTimeout();
     void onRefreshTimerTimeout();
 
@@ -48,8 +59,9 @@ class DiagWindow : public QMainWindow {
     Ui::DiagWindow *ui_;
     QTimer enumTimer_;
     QTimer refreshTimer_;
-    Serial serial_;
+    Runner runner_;
     void refreshPortComboBox_();
+    void enableControls_(bool state = true);
 };
 
 #endif  // DIAG_DIAGWINDOW_HPP_

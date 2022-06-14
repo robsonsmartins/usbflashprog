@@ -15,6 +15,7 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <QDateTime>
 #include "backend/serial.hpp"
 #include "config.hpp"
 
@@ -54,12 +55,28 @@ QString Serial::getPath() const {
 
 void Serial::write(const void *src, size_t len, bool flush) {
     if (!src || !len || !port_.isOpen()) { return; }
-    port_.write(static_cast<const char*>(src), len);
+    qint64 wr = port_.write(static_cast<const char*>(src), len);
     if (flush) { port_.flush(); }
 }
 
-size_t Serial::read(void *src, size_t len) {
+size_t Serial::read(void *src, size_t len, int msecs) {
     if (!src || !len || !port_.isOpen()) { return 0; }
-    qint64 result = port_.read(static_cast<char*>(src), len);
+    char *pbuf = static_cast<char*>(src);
+    qint64 result = 0;
+    qint64 start = QDateTime::currentMSecsSinceEpoch();
+    do {
+        if (msecs) { port_.waitForReadyRead(msecs); }
+        qint64 rd = port_.read(pbuf, len);
+        if (rd < 0) { break; }
+        result += rd; 
+        pbuf += rd;
+        msecs -= (QDateTime::currentMSecsSinceEpoch() - start);
+        if (msecs < 0) { break; }
+    } while (result < len);
     return (result <= 0) ? 0 : result;
+}
+
+void Serial::purge() {
+    if (!port_.isOpen()) { return; }
+    port_.clear();
 }

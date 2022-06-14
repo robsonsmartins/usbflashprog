@@ -27,107 +27,234 @@
 
 /**
  * @ingroup Software
+ * @brief Enumeration of the param values.
+ */
+enum kCmdParamValueEnum {
+    /** @brief CMD / PARAM : Defines a param with value OFF. */
+    kCmdParamOff = 0x00,
+    /** @brief CMD / PARAM : Defines a param with value ON. */
+    kCmdParamOn  = 0x01
+};
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
+ * @brief Enumeration of the response values.
+ */
+enum kCmdResponseValueEnum {
+    /** @brief CMD / RESPONSE : Defines a response with value NOK. */
+    kCmdResponseNok = 0xA0,
+    /** @brief CMD / RESPONSE : Defines a response with value OK. */
+    kCmdResponseOk  = 0xA1
+};
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
+ * @brief Enumeration of the OpCodes.
+ */
+enum kCmdOpCodeEnum {
+    /** @brief OPCODE / NOP : Opcode NOP. */
+    kCmdNop        = 0x00,
+
+    /** @brief OPCODE / VDD : Opcode VDD Control On/Off. */
+    kCmdVddCtrl    = 0x01,
+    /** @brief OPCODE / VDD : Opcode VDD Set Voltage. */
+    kCmdVddSetV    = 0x02,
+    /** @brief OPCODE / VDD : Opcode VDD Get Voltage. */
+    kCmdVddGetV    = 0x03,
+    /** @brief OPCODE / VDD : Opcode VDD Get PWM Duty Cycle. */
+    kCmdVddGetDuty = 0x04,
+    /** @brief OPCODE / VDD : Opcode VDD Get Calibration. */
+    kCmdVddGetCal  = 0x05,
+    /** @brief OPCODE / VDD : Opcode VDD Init Calibration. */
+    kCmdVddInitCal = 0x06,
+    /** @brief OPCODE / VDD : Opcode VDD Save Calibration. */
+    kCmdVddSaveCal = 0x07,
+    /** @brief OPCODE / VDD : Opcode VDD on VPP. */
+    kCmdVddOnVpp   = 0x08,
+
+    /** @brief OPCODE / VPP : Opcode VPP Control On/Off. */
+    kCmdVppCtrl    = 0x11,
+    /** @brief OPCODE / VPP : Opcode VPP Set Voltage. */
+    kCmdVppSetV    = 0x12,
+    /** @brief OPCODE / VPP : Opcode VPP Get Voltage. */
+    kCmdVppGetV    = 0x13,
+    /** @brief OPCODE / VPP : Opcode VPP Get PWM Duty Cycle. */
+    kCmdVppGetDuty = 0x14,
+    /** @brief OPCODE / VPP : Opcode VPP Get Calibration. */
+    kCmdVppGetCal  = 0x15,
+    /** @brief OPCODE / VPP : Opcode VPP Init Calibration. */
+    kCmdVppInitCal = 0x16,
+    /** @brief OPCODE / VPP : Opcode VPP Save Calibration. */
+    kCmdVppSaveCal = 0x17,
+    /** @brief OPCODE / VPP : Opcode VPP on A9. */
+    kCmdVppOnA9    = 0x18,
+    /** @brief OPCODE / VPP : Opcode VPP on A18. */
+    kCmdVppOnA18   = 0x19,
+    /** @brief OPCODE / VPP : Opcode VPP on CE. */
+    kCmdVppOnCE    = 0x1A,
+    /** @brief OPCODE / VPP : Opcode VPP on OE. */
+    kCmdVppOnOE    = 0x1B,
+    /** @brief OPCODE / VPP : Opcode VPP on WE. */
+    kCmdVppOnWE    = 0x1C
+};
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
  * @brief Defines an opcode to run.
  * @details The purpose of this structure is to define the properties
  *  of an opcode.
  */
 typedef struct TCmdOpCode {
-    /** @brief Opcode number. */
-    uint8_t opcode;
+    /** @brief OpCode. */
+    kCmdOpCodeEnum code;
     /** @brief Opcode description. */
     std::string descr;
     /** @brief Number of bytes of the required parameters. */
     uint8_t params;
     /** @brief Number of bytes of the response. */
     uint8_t result;
+    /**
+     * @brief Assign Operator.
+     * @param src TCmdOpCode source object.
+     * @return Reference for this.
+     */
+    TCmdOpCode& operator=(const TCmdOpCode& src);
+    /**
+     * @brief Equality Operator.
+     * @param a One object.
+     * @param b Another object.
+     * @return True if the objects contain equal values, false otherwise.
+     */
+    friend bool operator==(const TCmdOpCode& a, const TCmdOpCode& b);
 } TCmdOpCode;
 
+// ---------------------------------------------------------------------------
+
 /** @brief Type of opcodes group (map). */
-typedef std::map<std::string, TCmdOpCode> TCmdOpCodeMap;
-
-// ---------------------------------------------------------------------------
-
-/** @brief CMD / PARAM : Defines a param with value OFF. */
-constexpr const char* kCmdParamOff    = "00";
-/** @brief CMD / PARAM : Defines a param with value ON. */
-constexpr const char* kCmdParamOn     = "01";
-
-// ---------------------------------------------------------------------------
-
-/** @brief CMD / RESPONSE : Defines a response with value NOK. */
-constexpr const char* kCmdResponseNok = "00";
-/** @brief CMD / RESPONSE : Defines a response with value OK. */
-constexpr const char* kCmdResponseOk  = "01";
-
-// ---------------------------------------------------------------------------
-
-/** @brief OPCODE / VDD : Opcode VDD Control On/Off. */
-constexpr uint8_t kCmdVddCtrl    = 0x01;
-/** @brief OPCODE / VDD : Opcode VDD Set Voltage. */
-constexpr uint8_t kCmdVddSetV    = 0x02;
-/** @brief OPCODE / VDD : Opcode VDD Get Voltage. */
-constexpr uint8_t kCmdVddGetV    = 0x03;
-/** @brief OPCODE / VDD : Opcode VDD Get PWM Duty Cycle. */
-constexpr uint8_t kCmdVddGetDuty = 0x04;
-/** @brief OPCODE / VDD : Opcode VDD Get Calibration. */
-constexpr uint8_t kCmdVddGetCal  = 0x05;
-/** @brief OPCODE / VDD : Opcode VDD Init Calibration. */
-constexpr uint8_t kCmdVddInitCal = 0x06;
-/** @brief OPCODE / VDD : Opcode VDD Save Calibration. */
-constexpr uint8_t kCmdVddSaveCal = 0x07;
-/** @brief OPCODE / VDD : Opcode VDD on VPP. */
-constexpr uint8_t kCmdVddOnVpp   = 0x08;
-
-/** @brief OPCODE / VPP : Opcode VPP Control On/Off. */
-constexpr uint8_t kCmdVppCtrl    = 0x11;
-/** @brief OPCODE / VPP : Opcode VPP Set Voltage. */
-constexpr uint8_t kCmdVppSetV    = 0x12;
-/** @brief OPCODE / VPP : Opcode VPP Get Voltage. */
-constexpr uint8_t kCmdVppGetV    = 0x13;
-/** @brief OPCODE / VPP : Opcode VPP Get PWM Duty Cycle. */
-constexpr uint8_t kCmdVppGetDuty = 0x14;
-/** @brief OPCODE / VPP : Opcode VPP Get Calibration. */
-constexpr uint8_t kCmdVppGetCal  = 0x15;
-/** @brief OPCODE / VPP : Opcode VPP Init Calibration. */
-constexpr uint8_t kCmdVppInitCal = 0x16;
-/** @brief OPCODE / VPP : Opcode VPP Save Calibration. */
-constexpr uint8_t kCmdVppSaveCal = 0x17;
-/** @brief OPCODE / VPP : Opcode VPP on A9. */
-constexpr uint8_t kCmdVppOnA9    = 0x18;
-/** @brief OPCODE / VPP : Opcode VPP on A18. */
-constexpr uint8_t kCmdVppOnA18   = 0x19;
-/** @brief OPCODE / VPP : Opcode VPP on CE. */
-constexpr uint8_t kCmdVppOnCE    = 0x1A;
-/** @brief OPCODE / VPP : Opcode VPP on OE. */
-constexpr uint8_t kCmdVppOnOE    = 0x1B;
-/** @brief OPCODE / VPP : Opcode VPP on WE. */
-constexpr uint8_t kCmdVppOnWE    = 0x1C;
+typedef std::map<kCmdOpCodeEnum, TCmdOpCode> TCmdOpCodeMap;
 
 // ---------------------------------------------------------------------------
 
 /** @brief OPCODE : Opcodes group (map). */
 static const TCmdOpCodeMap kCmdOpCodes = {
-    { "01", { kCmdVddCtrl   , "VddCtrl"   , 1, 0} },  // Off = 00 | On = 01
-    { "02", { kCmdVddSetV   , "VddSetV"   , 2, 0} },  // <XX.YY> format
-    { "03", { kCmdVddGetV   , "VddGetV"   , 0, 2} },  // None
-    { "04", { kCmdVddGetDuty, "VddGetDuty", 0, 2} },  // None
-    { "05", { kCmdVddGetCal , "VddGetCal" , 0, 2} },  // None
-    { "06", { kCmdVddInitCal, "VddInitCal", 0, 0} },  // None
-    { "07", { kCmdVddSaveCal, "VddSaveCal", 2, 0} },  // <XX.YY> format
-    { "08", { kCmdVddOnVpp  , "VddOnVpp"  , 1, 0} },  // Off = 00 | On = 01
+    { kCmdNop       , { kCmdNop       , "Nop"       , 0, 0} },
 
-    { "11", { kCmdVppCtrl   , "VppCtrl"   , 1, 0} },  // Off = 00 | On = 01
-    { "12", { kCmdVppSetV   , "VppSetV"   , 2, 0} },  // <XX.YY> format
-    { "13", { kCmdVppGetV   , "VppGetV"   , 0, 2} },  // None
-    { "14", { kCmdVppGetDuty, "VppGetDuty", 0, 2} },  // None
-    { "15", { kCmdVppGetCal , "VppGetCal" , 0, 2} },  // None
-    { "16", { kCmdVppInitCal, "VppInitCal", 0, 0} },  // None
-    { "17", { kCmdVppSaveCal, "VppSaveCal", 2, 0} },  // <XX.YY> format
-    { "18", { kCmdVppOnA9   , "VppOnA9"   , 1, 0} },  // Off = 00 | On = 01
-    { "19", { kCmdVppOnA18  , "VppOnA18"  , 1, 0} },  // Off = 00 | On = 01
-    { "1A", { kCmdVppOnCE   , "VppOnCE"   , 1, 0} },  // Off = 00 | On = 01
-    { "1B", { kCmdVppOnOE   , "VppOnOE"   , 1, 0} },  // Off = 00 | On = 01
-    { "1C", { kCmdVppOnWE   , "VppOnWE"   , 1, 0} }   // Off = 00 | On = 01
+    { kCmdVddCtrl   , { kCmdVddCtrl   , "VddCtrl"   , 1, 0} },
+    { kCmdVddSetV   , { kCmdVddSetV   , "VddSetV"   , 2, 0} },
+    { kCmdVddGetV   , { kCmdVddGetV   , "VddGetV"   , 0, 2} },
+    { kCmdVddGetDuty, { kCmdVddGetDuty, "VddGetDuty", 0, 2} },
+    { kCmdVddGetCal , { kCmdVddGetCal , "VddGetCal" , 0, 2} },
+    { kCmdVddInitCal, { kCmdVddInitCal, "VddInitCal", 0, 0} },
+    { kCmdVddSaveCal, { kCmdVddSaveCal, "VddSaveCal", 2, 0} },
+    { kCmdVddOnVpp  , { kCmdVddOnVpp  , "VddOnVpp"  , 1, 0} },
+
+    { kCmdVppCtrl   , { kCmdVppCtrl   , "VppCtrl"   , 1, 0} },
+    { kCmdVppSetV   , { kCmdVppSetV   , "VppSetV"   , 2, 0} },
+    { kCmdVppGetV   , { kCmdVppGetV   , "VppGetV"   , 0, 2} },
+    { kCmdVppGetDuty, { kCmdVppGetDuty, "VppGetDuty", 0, 2} },
+    { kCmdVppGetCal , { kCmdVppGetCal , "VppGetCal" , 0, 2} },
+    { kCmdVppInitCal, { kCmdVppInitCal, "VppInitCal", 0, 0} },
+    { kCmdVppSaveCal, { kCmdVppSaveCal, "VppSaveCal", 2, 0} },
+    { kCmdVppOnA9   , { kCmdVppOnA9   , "VppOnA9"   , 1, 0} },
+    { kCmdVppOnA18  , { kCmdVppOnA18  , "VppOnA18"  , 1, 0} },
+    { kCmdVppOnCE   , { kCmdVppOnCE   , "VppOnCE"   , 1, 0} },
+    { kCmdVppOnOE   , { kCmdVppOnOE   , "VppOnOE"   , 1, 0} },
+    { kCmdVppOnWE   , { kCmdVppOnWE   , "VppOnWE"   , 1, 0} }
+};
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
+ * @brief Opcode Manager Class
+ * @details The purpose of this class is to handle the opcodes of the
+ *  communication (via USB-CDC).
+ * @nosubgrouping
+ */
+class OpCode {
+ public:
+    /**
+     * @brief Checks if the return code was OK.
+     * @param buf Pointer to the buffer that contains the result
+     *  of the communication.
+     * @param size Size of buffer, in bytes.
+     * @return True if return code is OK, false otherwise. 
+     */
+    static bool isOk(const void *buf, size_t size);
+    /**
+     * @brief Gets the opcode from communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @return Opcode of the operation, or kCmdNop if not found.
+     */
+    static TCmdOpCode getOpCode(const void *buf, size_t size);
+    /**
+     * @overload
+     * @brief Gets the opcode from code (byte).
+     * @param code Code (byte).
+     * @return Opcode of the operation, or kCmdNop if not found.
+     */
+    static TCmdOpCode getOpCode(uint8_t code);
+    /**
+     * @brief Gets the param value as float.
+     * @param buf Pointer to the buffer that contains the result
+     *  of the communication.
+     * @param size Size of buffer, in bytes.
+     * @return Value of parameter as float, or 0.0f if an error occurs.
+     */
+    static float getValueAsFloat(const void *buf, size_t size);
+    /**
+     * @brief Gets the param value as byte.
+     * @param buf Pointer to the buffer that contains the result
+     *  of the communication.
+     * @param size Size of buffer, in bytes.
+     * @return Value of parameter as byte, or 0 if an error occurs.
+     */
+    static uint8_t getValueAsByte(const void *buf, size_t size);
+    /**
+     * @brief Gets the param value as bool.
+     * @param buf Pointer to the buffer that contains the result
+     *  of the communication.
+     * @param size Size of buffer, in bytes.
+     * @return Value of parameter as bool, or false if an error occurs.
+     */
+    static bool getValueAsBool(const void *buf, size_t size);
+    /**
+     * @brief Sets the param value into the communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    static bool setValue(void *buf, size_t size, float value);
+    /**
+     * @overload
+     * @brief Sets the param value into the communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    static bool setValue(void *buf, size_t size, int value);
+    /**
+     * @overload
+     * @brief Sets the param value into the communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    static bool setValue(void *buf, size_t size, bool value);
 };
 
 #endif  // BACKEND_OPCODES_HPP_

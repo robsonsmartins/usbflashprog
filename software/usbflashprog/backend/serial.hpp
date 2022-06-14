@@ -34,7 +34,8 @@ class Serial {
     bool isOpen() const;
     QString getPath() const;
     void write(const void *src, size_t len, bool flush = false);
-    size_t read(void *src, size_t len);
+    size_t read(void *src, size_t len, int msecs = 0);
+    void purge();
 
  private:
     QSerialPort port_;

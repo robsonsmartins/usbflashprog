@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
-    <height>398</height>
+    <width>566</width>
+    <height>439</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,13 +18,13 @@
     <normaloff>:/icon/ufprog.png</normaloff>:/icon/ufprog.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>5</x>
       <y>5</y>
-      <width>468</width>
-      <height>345</height>
+      <width>553</width>
+      <height>374</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -125,6 +125,12 @@
            <layout class="QHBoxLayout" name="horizontalLayoutVdd">
             <item>
              <widget class="QCheckBox" name="checkBoxVddCtrl">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>On/Off</string>
               </property>
@@ -133,7 +139,7 @@
             <item>
              <widget class="QDial" name="dialVdd">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -178,6 +184,15 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="smallDecimalPoint">
+               <bool>false</bool>
+              </property>
+              <property name="digitCount">
+               <number>5</number>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::Flat</enum>
+              </property>
              </widget>
             </item>
             <item>
@@ -200,6 +215,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::Flat</enum>
               </property>
              </widget>
             </item>
@@ -269,6 +287,12 @@
            <layout class="QHBoxLayout" name="horizontalLayoutVpp">
             <item>
              <widget class="QCheckBox" name="checkBoxVppCtrl">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
                <string>On/Off</string>
               </property>
@@ -277,7 +301,7 @@
             <item>
              <widget class="QDial" name="dialVpp">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Ignored" vsizetype="Preferred">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -319,6 +343,9 @@
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::Flat</enum>
+              </property>
              </widget>
             </item>
             <item>
@@ -341,6 +368,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="segmentStyle">
+               <enum>QLCDNumber::Flat</enum>
               </property>
              </widget>
             </item>
@@ -437,7 +467,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>477</width>
+     <width>566</width>
      <height>21</height>
     </rect>
    </property>
@@ -451,7 +481,7 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="actionA_bout"/>
+    <addaction name="actionAbout"/>
     <addaction name="actionAboutQt"/>
    </widget>
    <addaction name="menu_File"/>
@@ -463,7 +493,7 @@
     <string>E&amp;xit</string>
    </property>
   </action>
-  <action name="actionA_bout">
+  <action name="actionAbout">
    <property name="text">
     <string>A&amp;bout</string>
    </property>

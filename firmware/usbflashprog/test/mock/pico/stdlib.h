@@ -49,6 +49,8 @@ typedef unsigned int uint;
 
 #define __not_in_flash(group) __attribute__((section(".time_critical." group)))
 
+#define	__STRING(x)	#x
+
 #define __not_in_flash_func(func_name) \
     __not_in_flash(__STRING(func_name)) func_name
 
@@ -103,6 +105,12 @@ extern "C" inline int putchar_raw(int c) {
     std::cout << static_cast<char>(c);
 #endif  // REAL_MOCK_IMPLEMENTATION
     return c;
+}
+
+extern "C" inline void stdio_flush(void) {
+#if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
+    std::cout.flush();
+#endif  // REAL_MOCK_IMPLEMENTATION
 }
 
 // ---------------------------------------------------------------------------

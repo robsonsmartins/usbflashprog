@@ -147,11 +147,20 @@ Source: "{#MINGW_BIN_PATH}\libwinpthread-1.dll"; DestDir: "{app}"; Flags: ignore
 
 Source: "{#QT_BIN_PATH}\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QT_BIN_PATH}\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#QT_BIN_PATH}\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QT_BIN_PATH}\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#QT_BIN_PATH}\Qt5SerialPort.dll"; DestDir: "{app}"; Flags: ignoreversion
 
 Source: "{#QT_PLUGINS_PATH}\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
 Source: "{#QT_PLUGINS_PATH}\imageformats\qico.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qgif.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qsvg.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qtiff.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qwebp.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qicns.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qjpeg.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qtga.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "{#QT_PLUGINS_PATH}\imageformats\qwbmp.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
 
 ; ------------------------------------------------------------------------------
 

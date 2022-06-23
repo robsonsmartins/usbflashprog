@@ -49,16 +49,6 @@ jobs:
         echo "PICO_SDK_PATH=${{env.FIRMWARE_PROJECT_DIR}}/pico-sdk" >> $GITHUB_ENV
         
     # ------------------------------------------------------------------------
-    # Build PicoTool
-    # ------------------------------------------------------------------------
-    - name: Build PicoTool
-      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
-      run: |
-        git clone -b master https://github.com/raspberrypi/picotool.git
-        cd picotool && mkdir -p build && cd build
-        cmake .. && make -j$(nproc) && sudo cp picotool /usr/local/bin/
-
-    # ------------------------------------------------------------------------
     # Configure CMake
     # ------------------------------------------------------------------------
     - name: Configure CMake

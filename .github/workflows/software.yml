@@ -34,28 +34,26 @@ jobs:
         uses: actions/checkout@v3
     
       # ------------------------------------------------------------------------
-      # Install MinGW and Qt (Windows)
+      # Install MinGW (Windows)
       # ------------------------------------------------------------------------
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
-        name: Install MinGW64 and Qt (Windows 64-bits)
+        name: Install MinGW64 (Windows 64-bits)
         uses: msys2/setup-msys2@v2
         with:
             msystem: mingw64
             install: 
                 mingw-w64-x86_64-toolchain
                 mingw-w64-x86_64-cmake
-                mingw-w64-x86_64-qt5
             release: false
     
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
-        name: Install MinGW32 and Qt (Windows 32-bits)
+        name: Install MinGW32 (Windows 32-bits)
         uses: msys2/setup-msys2@v2
         with:
             msystem: mingw32
             install: 
                 mingw-w64-i686-toolchain
                 mingw-w64-i686-cmake
-                mingw-w64-i686-qt5
             release: false
 
       # ------------------------------------------------------------------------
@@ -70,6 +68,51 @@ jobs:
           wget "${{env.INNO_SETUP_DOWNLOAD_URL}}"
           ./innosetup-6.2.1.exe //VERYSILENT //SUPPRESSMSGBOXES //SP //CURRENTUSER //LANG=en //NORESTART //NOICONS //DIR=".\is"
         shell: msys2 {0}
+
+      # ------------------------------------------------------------------------
+      # Install Qt (Windows)
+      # ------------------------------------------------------------------------
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
+        name: Cache Qt (Windows 64-bits)
+        id: cache-qt-win64
+        uses: actions/cache@v1  
+        with:
+          path: ../QtCacheWin64
+          key: ${{ runner.os }}-QtCacheWin64
+
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
+        name: Install Qt (Windows 64-bits)
+        uses: jurplel/install-qt-action@v2
+        with:
+          cached: ${{ steps.cache-qt-win64.outputs.cache-hit }}
+          version: '5.12.12'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win64_mingw73'
+          dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
+          install-deps: 'true'
+
+      # ------------------------------------------------------------------------
+
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
+        name: Cache Qt (Windows 32-bits)
+        id: cache-qt-win32
+        uses: actions/cache@v1  
+        with:
+          path: ../QtCacheWin32
+          key: ${{ runner.os }}-QtCacheWin32
+
+      - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
+        name: Install Qt (Windows 32-bits)
+        uses: jurplel/install-qt-action@v2
+        with:
+          cached: ${{ steps.cache-qt-win32.outputs.cache-hit }}
+          version: '5.12.12'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win32_mingw73'
+          dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
+          install-deps: 'true'
 
       # ------------------------------------------------------------------------
       # Install Prerequisites (Linux)
@@ -124,7 +167,7 @@ jobs:
         name: Create the Installer (Windows 64-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
-          ./is/iscc.exe //DARCH="Win64" //DQT_PATH="c:\\msys64\\mingw64" //DQT_PLUGINS_PATH="c:\\msys64\\mingw64\\share\\qt5\\plugins" ufprog.iss
+          ./is/iscc.exe //DARCH="Win64" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_64" ufprog.iss
           mv "../build/ufprog-`cat ../VERSION`-0-win64-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-win64-setup.exe"
         shell: msys2 {0}
 
@@ -132,7 +175,7 @@ jobs:
         name: Create the Installer (Windows 32-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
-          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="c:\\msys64\\mingw32" //DQT_PLUGINS_PATH="c:\\msys64\\mingw32\\share\\qt5\\plugins" ufprog.iss
+          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_32" ufprog.iss
           mv "../build/ufprog-`cat ../VERSION`-0-win32-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-win32-setup.exe"
         shell: msys2 {0}
 

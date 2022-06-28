@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: Software Project</title>
+<title>USB EPROM/Flash Programmer: mainwindow.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,7 +46,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -61,47 +60,36 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_5c982d53a68cdbcd421152b4020263a9.html">main</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#files">Files</a>  </div>
   <div class="headertitle">
-<div class="title">Software Project</div>  </div>
+<div class="title">mainwindow.cpp File Reference<div class="ingroups"><a class="el" href="a00041.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Software project for USB EPROM/Flash Programmer.  
+<p>Implementation of the Main Window Class.  
 <a href="#details">More...</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:a00002"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html">serial.cpp</a></td></tr>
-<tr class="memdesc:a00002"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the Serial Port Communication Class. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00005"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00005.html">serial.hpp</a></td></tr>
-<tr class="memdesc:a00005"><td class="mdescLeft">&#160;</td><td class="mdescRight">Header of the Serial Port Communication Class. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00008"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00008.html">config.hpp</a></td></tr>
-<tr class="memdesc:a00008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configuration of UsbFlashProg. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00011"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00011.html">diagwindow.cpp</a></td></tr>
-<tr class="memdesc:a00011"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the Diagnostics Window Class. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00014"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00014.html">diagwindow.hpp</a></td></tr>
-<tr class="memdesc:a00014"><td class="mdescLeft">&#160;</td><td class="mdescRight">Header of the Diagnostics Window Class. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00017"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00017.html">mainwindow.cpp</a></td></tr>
-<tr class="memdesc:a00017"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the Main Window Class. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00020"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html">mainwindow.hpp</a></td></tr>
-<tr class="memdesc:a00020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Header of the Main Window Class. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00023"><td class="memItemLeft" align="right" valign="top">file &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00023.html">main.cpp</a></td></tr>
-<tr class="memdesc:a00023"><td class="mdescLeft">&#160;</td><td class="mdescRight">Implementation of the Main Routine. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<p>Software project for USB EPROM/Flash Programmer. </p>
-</div><!-- contents -->
+<div class="textblock"><code>#include &quot;<a class="el" href="a00032.html">mainwindow.hpp</a>&quot;</code><br />
+<code>#include &quot;./ui_mainwindow.h&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for mainwindow.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="a00030.png" border="0" usemap="#amainwindow_8cpp" alt=""/></div>
+<map name="amainwindow_8cpp" id="amainwindow_8cpp">
+<area shape="rect" title="Implementation of the Main Window Class." alt="" coords="86,5,217,32"/>
+<area shape="rect" href="a00032.html" title="Header of the Main Window Class." alt="" coords="5,80,137,107"/>
+<area shape="rect" title=" " alt="" coords="161,80,304,107"/>
+<area shape="rect" title=" " alt="" coords="13,155,129,181"/>
+</map>
+</div>
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of the Main Window Class. </p>
+<dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

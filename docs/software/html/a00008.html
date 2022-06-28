@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: config.hpp File Reference</title>
+<title>USB EPROM/Flash Programmer: runner.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,117 +60,46 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8c739bbef76d64b22d6b0911c526dd76.html">backend</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">config.hpp File Reference<div class="ingroups"><a class="el" href="a00029.html">Software Project</a></div></div>  </div>
+<div class="title">runner.cpp File Reference<div class="ingroups"><a class="el" href="a00041.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration of UsbFlashProg.  
+<p>Implementation of the Runner Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QtGlobal&gt;</code><br />
+<div class="textblock"><code>#include &lt;QDateTime&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00011.html">backend/runner.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for config.hpp:</div>
+Include dependency graph for runner.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00009.png" border="0" usemap="#aconfig_8hpp" alt=""/></div>
-<map name="aconfig_8hpp" id="aconfig_8hpp">
-<area shape="rect" title="Configuration of UsbFlashProg." alt="" coords="5,5,95,32"/>
-<area shape="rect" title=" " alt="" coords="11,80,89,107"/>
+<div class="center"><img src="a00009.png" border="0" usemap="#arunner_8cpp" alt=""/></div>
+<map name="arunner_8cpp" id="arunner_8cpp">
+<area shape="rect" title="Implementation of the Runner Class." alt="" coords="239,5,329,32"/>
+<area shape="rect" title=" " alt="" coords="163,80,259,107"/>
+<area shape="rect" href="a00011.html" title="Header of the Runner Class." alt="" coords="283,80,432,107"/>
+<area shape="rect" title=" " alt="" coords="5,229,80,256"/>
+<area shape="rect" title=" " alt="" coords="105,229,175,256"/>
+<area shape="rect" title=" " alt="" coords="395,155,469,181"/>
+<area shape="rect" title=" " alt="" coords="493,155,568,181"/>
+<area shape="rect" title=" " alt="" coords="463,229,561,256"/>
+<area shape="rect" href="a00005.html" title="Opcodes for communication." alt="" coords="592,155,755,181"/>
+<area shape="rect" href="a00017.html" title="Header of the Serial Port Communication Class." alt="" coords="176,155,320,181"/>
+<area shape="rect" title=" " alt="" coords="691,229,749,256"/>
+<area shape="rect" title=" " alt="" coords="616,229,667,256"/>
+<area shape="rect" title=" " alt="" coords="319,229,439,256"/>
+<area shape="rect" title=" " alt="" coords="199,229,294,256"/>
 </map>
 </div>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a8b22c3e3a01cbba6193ec96944230d81"><td class="memItemLeft" align="right" valign="top">constexpr quint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00008.html#a8b22c3e3a01cbba6193ec96944230d81">kUsbVendorId</a> = 0x2E8A</td></tr>
-<tr class="memdesc:a8b22c3e3a01cbba6193ec96944230d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM/USB : Vendor ID.  <a href="a00008.html#a8b22c3e3a01cbba6193ec96944230d81">More...</a><br /></td></tr>
-<tr class="separator:a8b22c3e3a01cbba6193ec96944230d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6837f08bc0f8ee437f856c4c1199cf5c"><td class="memItemLeft" align="right" valign="top">constexpr quint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00008.html#a6837f08bc0f8ee437f856c4c1199cf5c">kUsbProductId</a> = 0x000A</td></tr>
-<tr class="memdesc:a6837f08bc0f8ee437f856c4c1199cf5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM/USB : Product ID.  <a href="a00008.html#a6837f08bc0f8ee437f856c4c1199cf5c">More...</a><br /></td></tr>
-<tr class="separator:a6837f08bc0f8ee437f856c4c1199cf5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1a4c6761009677e2542e68497426cd0"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00008.html#af1a4c6761009677e2542e68497426cd0">kUsbEnumerateInterval</a> = 2000</td></tr>
-<tr class="memdesc:af1a4c6761009677e2542e68497426cd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM/USB : Interval to enumerate USB, in milliseconds.  <a href="a00008.html#af1a4c6761009677e2542e68497426cd0">More...</a><br /></td></tr>
-<tr class="separator:af1a4c6761009677e2542e68497426cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration of UsbFlashProg. </p>
+</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of the Runner Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div><h2 class="groupheader">Variable Documentation</h2>
-<a id="a8b22c3e3a01cbba6193ec96944230d81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b22c3e3a01cbba6193ec96944230d81">&#9670;&nbsp;</a></span>kUsbVendorId</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr quint16 kUsbVendorId = 0x2E8A</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>COMM/USB : Vendor ID. </p>
-
-</div>
-</div>
-<a id="a6837f08bc0f8ee437f856c4c1199cf5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6837f08bc0f8ee437f856c4c1199cf5c">&#9670;&nbsp;</a></span>kUsbProductId</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr quint16 kUsbProductId = 0x000A</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>COMM/USB : Product ID. </p>
-
-</div>
-</div>
-<a id="af1a4c6761009677e2542e68497426cd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1a4c6761009677e2542e68497426cd0">&#9670;&nbsp;</a></span>kUsbEnumerateInterval</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr int kUsbEnumerateInterval = 2000</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>COMM/USB : Interval to enumerate USB, in milliseconds. </p>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

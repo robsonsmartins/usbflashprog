@@ -1,6 +1,5 @@
-<map id="serial.hpp" name="serial.hpp">
-<area shape="rect" id="node1" title="Header of the Serial Port Communication Class." alt="" coords="117,5,204,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,76,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="101,80,221,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="245,80,340,107"/>
+<map id="opcodes.hpp" name="opcodes.hpp">
+<area shape="rect" id="node1" title="Opcodes for communication." alt="" coords="21,5,125,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,64,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="88,80,139,107"/>
 </map>

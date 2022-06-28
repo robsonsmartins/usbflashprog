@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: serial.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: opcodes.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,33 +66,76 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">serial.cpp File Reference<div class="ingroups"><a class="el" href="a00029.html">Software Project</a></div></div>  </div>
+<div class="title">opcodes.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Serial Port Communication Class.  
+<p>Implementation of the Opcodes for communication.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00005.html">backend/serial.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00008.html">config.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00005.html">backend/opcodes.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for serial.cpp:</div>
+Include dependency graph for opcodes.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00003.png" border="0" usemap="#aserial_8cpp" alt=""/></div>
-<map name="aserial_8cpp" id="aserial_8cpp">
-<area shape="rect" title="Implementation of the Serial Port Communication Class." alt="" coords="239,5,325,32"/>
-<area shape="rect" href="a00005.html" title="Header of the Serial Port Communication Class." alt="" coords="139,80,283,107"/>
-<area shape="rect" href="a00008.html" title="Configuration of UsbFlashProg." alt="" coords="333,80,423,107"/>
-<area shape="rect" title=" " alt="" coords="5,155,76,181"/>
-<area shape="rect" title=" " alt="" coords="101,155,221,181"/>
-<area shape="rect" title=" " alt="" coords="245,155,340,181"/>
-<area shape="rect" title=" " alt="" coords="364,155,443,181"/>
+<div class="center"><img src="a00003.png" border="0" usemap="#aopcodes_8cpp" alt=""/></div>
+<map name="aopcodes_8cpp" id="aopcodes_8cpp">
+<area shape="rect" title="Implementation of the Opcodes for communication." alt="" coords="53,5,156,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,68,107"/>
+<area shape="rect" href="a00005.html" title="Opcodes for communication." alt="" coords="93,80,255,107"/>
+<area shape="rect" title=" " alt="" coords="105,155,163,181"/>
+<area shape="rect" title=" " alt="" coords="187,155,238,181"/>
 </map>
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Serial Port Communication Class. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ab4e43100845654abce98f4bf44c947f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00002.html#ab4e43100845654abce98f4bf44c947f9">operator==</a> (const <a class="el" href="a00859.html">TCmdOpCode</a> &amp;a, const <a class="el" href="a00859.html">TCmdOpCode</a> &amp;b)</td></tr>
+<tr class="separator:ab4e43100845654abce98f4bf44c947f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of the Opcodes for communication. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ab4e43100845654abce98f4bf44c947f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e43100845654abce98f4bf44c947f9">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a00859.html">TCmdOpCode</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a00859.html">TCmdOpCode</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>One object. </td></tr>
+    <tr><td class="paramname">b</td><td>Another object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the objects contain equal values, false otherwise. </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

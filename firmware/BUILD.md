@@ -14,6 +14,8 @@ Here are instructions on how to build the project.
 	* [Install Pico C SDK](#install-pico-c-sdk)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Build](#build)
+	* [Test \[Optional\]](#test-optional)
+	* [Generate Code Coverage Report \[Optional\]](#generate-code-coverage-report-optional)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 * [Microsoft Windows&copy;](#microsoft-windows)
 	* [Requirements](#requirements)
@@ -41,6 +43,7 @@ Here are instructions on how to build the project.
 - GCC-ARM ([GCC-ARM 15:10.3-2021.07-4](https://packages.ubuntu.com/jammy/gcc-arm-none-eabi));
 - GNU C/C++ Compiler ([GCC 4:11.2.0-1ubuntu1](https://packages.ubuntu.com/jammy/gcc));
 - Pico C SDK Repository ([pico-sdk](https://github.com/raspberrypi/pico-sdk), ~80,5MB);
+- LCov \[Optional\] ([LCov version 1.15-1](https://packages.ubuntu.com/jammy/lcov));
 - Doxygen \[Optional\] ([Doxygen 1.9.1-2ubuntu2](https://packages.ubuntu.com/jammy/doxygen));
 - GraphViz \[Optional\] ([GraphViz 2.42.2-6](https://packages.ubuntu.com/jammy/graphviz));
 - Visual Studio Code \[Optional\] ([code_1.67.2-1652812855_amd64.deb](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64), ~78.9MB)
@@ -116,7 +119,58 @@ cmake ..
 make -j$(nproc)
 ```
 
-4. The generated firmware binary will be in `build/` directory, with the filename `usbflashprog.uf2`.
+4. The generated firmware binary will be in `build/` directory, with the filename `ufprog.uf2`.
+
+### Test \[Optional\]]
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `firmware/usbflashprog` directory:
+
+```shell
+cd usbflashprog/firmware/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON ..
+cmake --build build --config Debug
+cd build
+ctest -C Debug
+```
+
+### Generate Code Coverage Report \[Optional\]]
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `firmware/usbflashprog` directory:
+
+```shell
+cd usbflashprog/firmware/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON ..
+cmake --build build --config Debug
+cd build
+ctest -C Debug
+cd ..
+lcov --directory ./build/ --capture --output-file ./build/coverage.info -rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude .\/build\/\* --exclude .\/test\/\*
+genhtml ./build/coverage.info --output-directory <output_dir>
+```
 
 ### Generate Doxygen Documentation \[Optional\]
 
@@ -393,7 +447,7 @@ cmake -G "MinGW Makefiles" ..
 make -j$(nproc)
 ```
 
-4. The generated firmware binary will be in `build/` directory, with the filename `usbflashprog.uf2`.
+4. The generated firmware binary will be in `build/` directory, with the filename `ufprog.uf2`.
 
 ### Debug \[Optional\]
 

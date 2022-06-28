@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-06-13 22:56:26</td>
+            <td class="headerValue">2022-06-27 21:57:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">56</td>
@@ -219,9 +219,9 @@
 <a name="157"><span class="lineNum">     157 </span><span class="lineCov">         12 :     dc2dc_.stop();</span></a>
 <a name="158"><span class="lineNum">     158 </span><span class="lineCov">         12 : }</span></a>
 <a name="159"><span class="lineNum">     159 </span>            : </a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">       5774 : void GenericGenerator::adjust_() {</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">       5774 :     dc2dc_.adjust();</span></a>
-<a name="162"><span class="lineNum">     162 </span><span class="lineCov">       5774 : }</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">       6130 : void GenericGenerator::adjust_() {</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">       6130 :     dc2dc_.adjust();</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">       6130 : }</span></a>
 <a name="163"><span class="lineNum">     163 </span>            : </a>
 <a name="164"><span class="lineNum">     164 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="165"><span class="lineNum">     165 </span>            : </a>
@@ -345,7 +345,7 @@
 <a name="283"><span class="lineNum">     283 </span><span class="lineCov">          6 :     multicore_.launch();</span></a>
 <a name="284"><span class="lineNum">     284 </span><span class="lineCov">          6 :     multicore_.putParam(reinterpret_cast&lt;uintptr_t&gt;(&amp;vpp));</span></a>
 <a name="285"><span class="lineNum">     285 </span><span class="lineCov">          6 :     multicore_.putParam(reinterpret_cast&lt;uintptr_t&gt;(&amp;vdd));</span></a>
-<a name="286"><span class="lineNum">     286 </span><span class="lineCov">        118 :     while (status_ == MultiCore::csStarting) { MultiCore::usleep(1); }</span></a>
+<a name="286"><span class="lineNum">     286 </span><span class="lineCov">        107 :     while (status_ == MultiCore::csStarting) { MultiCore::usleep(1); }</span></a>
 <a name="287"><span class="lineNum">     287 </span><span class="lineCov">          6 :     return (vppRes &amp;&amp; vddRes);</span></a>
 <a name="288"><span class="lineNum">     288 </span>            : }</a>
 <a name="289"><span class="lineNum">     289 </span>            : </a>
@@ -429,9 +429,9 @@
 <a name="367"><span class="lineNum">     367 </span><span class="lineCov">          6 :     core.lock();</span></a>
 <a name="368"><span class="lineNum">     368 </span><span class="lineCov">          6 :     vpp-&gt;owner_-&gt;status_ = MultiCore::csRunning;</span></a>
 <a name="369"><span class="lineNum">     369 </span><span class="lineCov">          6 :     core.unlock();</span></a>
-<a name="370"><span class="lineNum">     370 </span><span class="lineCov">       2893 :     while (!core.isStopRequested()) {</span></a>
-<a name="371"><span class="lineNum">     371 </span><span class="lineCov">       2887 :         vpp-&gt;adjust_();</span></a>
-<a name="372"><span class="lineNum">     372 </span><span class="lineCov">       2887 :         vdd-&gt;adjust_();</span></a>
+<a name="370"><span class="lineNum">     370 </span><span class="lineCov">       3071 :     while (!core.isStopRequested()) {</span></a>
+<a name="371"><span class="lineNum">     371 </span><span class="lineCov">       3065 :         vpp-&gt;adjust_();</span></a>
+<a name="372"><span class="lineNum">     372 </span><span class="lineCov">       3065 :         vdd-&gt;adjust_();</span></a>
 <a name="373"><span class="lineNum">     373 </span>            :     }</a>
 <a name="374"><span class="lineNum">     374 </span><span class="lineCov">          6 :     core.lock();</span></a>
 <a name="375"><span class="lineNum">     375 </span><span class="lineCov">          6 :     vpp-&gt;owner_-&gt;status_ = MultiCore::csStopped;</span></a>

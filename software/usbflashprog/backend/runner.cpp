@@ -17,6 +17,7 @@
 
 #include <QDateTime>
 #include "backend/runner.hpp"
+#include "config.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -84,7 +85,7 @@ bool operator==(const TRunnerCommand& a, const TRunnerCommand& b) {
 
 Runner::Runner(QObject *parent): QObject(parent),
                                  serial_(this), running_(false) {
-    connect(&serial_, &Serial::readyRead,
+    connect(&serial_, &QSerialPort::readyRead,
             this, &Runner::onSerial_readyRead);
 }
 
@@ -92,19 +93,33 @@ Runner::~Runner() {
     close();
 }
 
-Serial::TSerialPortList Runner::list() const {
-    return serial_.list();
+TSerialPortList Runner::list() const {
+    TSerialPortList result;
+    for (const auto item : QSerialPortInfo::availablePorts()) {
+        if (item.vendorIdentifier() == kUsbVendorId &&
+                item.productIdentifier() == kUsbProductId) {
+            result.push_back(item);
+        }
+    }
+    return result;
 }
 
 bool Runner::open(const QString &path) {
     if (running_) { close(); }
-    QMutexLocker locker(&mutex_);
-    running_ = true;
-    return serial_.open(path);
+    if (path.isNull() || path.isEmpty()) { return false; }
+    serial_.setPortName(path);
+    bool result = serial_.open(QIODevice::ReadWrite);
+    if (result) {
+        running_ = true;
+        // need under Windows
+        // https://community.platformio.org/t/
+        //   serial-communication-micro-usb-on-pi-pico-c/27512/5
+        serial_.setDataTerminalReady(true);
+    }
+    return result;
 }
 
 void Runner::close() {
-    QMutexLocker locker(&mutex_);
     serial_.close();
     running_ = false;
 }
@@ -114,13 +129,12 @@ bool Runner::isOpen() const {
 }
 
 QString Runner::getPath() const {
-    return serial_.getPath();
+    return serial_.portName();
 }
 
 void Runner::send(kCmdOpCodeEnum code) {
     if (wrFifo_.size() >= 1) { checkAlive_(); }
     if (!serial_.isOpen()) { return; }
-    QMutexLocker locker(&mutex_);
     TRunnerCommand cmd;
     cmd.set(code);
     wrFifo_.enqueue(cmd);
@@ -130,7 +144,6 @@ void Runner::send(kCmdOpCodeEnum code) {
 void Runner::send(kCmdOpCodeEnum code, int param) {
     if (wrFifo_.size() >= 1) { checkAlive_(); }
     if (!serial_.isOpen()) { return; }
-    QMutexLocker locker(&mutex_);
     TRunnerCommand cmd;
     cmd.set(code, param);
     wrFifo_.enqueue(cmd);
@@ -140,7 +153,6 @@ void Runner::send(kCmdOpCodeEnum code, int param) {
 void Runner::send(kCmdOpCodeEnum code, bool param) {
     if (wrFifo_.size() >= 1) { checkAlive_(); }
     if (!serial_.isOpen()) { return; }
-    QMutexLocker locker(&mutex_);
     TRunnerCommand cmd;
     cmd.set(code, param);
     wrFifo_.enqueue(cmd);
@@ -150,19 +162,16 @@ void Runner::send(kCmdOpCodeEnum code, bool param) {
 void Runner::send(kCmdOpCodeEnum code, float param) {
     if (wrFifo_.size() >= 1) { checkAlive_(); }
     if (!serial_.isOpen()) { return; }
-    QMutexLocker locker(&mutex_);
     TRunnerCommand cmd;
     cmd.set(code, param);
     wrFifo_.enqueue(cmd);
     if (wrFifo_.size() == 1) { write_(cmd); }
 }
 
-void Runner::onSerial_readyRead(qint64 bytesAvailable) {
-    if (!bytesAvailable) { return; }
-    mutex_.lock();
+void Runner::onSerial_readyRead() {
+    if (!serial_.bytesAvailable()) { return; }
     aliveTick_ = QDateTime::currentMSecsSinceEpoch();
     rdBuffer_ += serial_.readAll();
-    mutex_.unlock();
     processData_();
 }
 
@@ -170,9 +179,7 @@ void Runner::processData_() {
     if (rdBuffer_.isEmpty()) { return; }
     TRunnerCommand cmd = wrFifo_.head();
     if (!OpCode::isOk(rdBuffer_.data(), rdBuffer_.size())) {
-        mutex_.lock();
         cmd = wrFifo_.dequeue();
-        mutex_.unlock();
         cmd.response.clear();
         cmd.response.append(rdBuffer_.data(), 1);
         rdBuffer_.remove(0, 1);
@@ -183,9 +190,7 @@ void Runner::processData_() {
         }
         if (!rdBuffer_.isEmpty()) { processData_(); }
     } else if (rdBuffer_.size() >= cmd.opcode.result + 1) {
-        mutex_.lock();
         cmd = wrFifo_.dequeue();
-        mutex_.unlock();
         cmd.response.clear();
         cmd.response.append(rdBuffer_.data(), cmd.opcode.result + 1);
         rdBuffer_.remove(0, cmd.opcode.result + 1);
@@ -199,8 +204,9 @@ void Runner::processData_() {
 }
 
 void Runner::write_(const TRunnerCommand &cmd) {
-    serial_.purge();
-    serial_.write(cmd.params.data(), cmd.params.size(), true);
+    serial_.clear();
+    serial_.write(cmd.params);
+    serial_.flush();
     aliveTick_ = QDateTime::currentMSecsSinceEpoch();
 }
 
@@ -209,8 +215,6 @@ void Runner::checkAlive_() {
     if (QDateTime::currentMSecsSinceEpoch() - aliveTick_ > kReadTimeOut) {
         running_ = false;
         if (serial_.isOpen()) { serial_.close(); }
-        mutex_.lock();
         wrFifo_.clear();
-        mutex_.unlock();
     }
 }

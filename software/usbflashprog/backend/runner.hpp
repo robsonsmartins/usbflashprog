@@ -22,14 +22,17 @@
 
 #include <QObject>
 #include <QString>
-#include <QMutex>
 #include <QQueue>
+#include <QList>
 #include <QByteArray>
+#include <QSerialPort>
+#include <QSerialPortInfo>
 
 #include "backend/opcodes.hpp"
-#include "backend/serial.hpp"
 
 // ---------------------------------------------------------------------------
+
+typedef QList<QSerialPortInfo> TSerialPortList;
 
 typedef struct TRunnerCommand {
     TCmdOpCode opcode;
@@ -55,7 +58,7 @@ class Runner: public QObject {
  public:
     explicit Runner(QObject *parent = nullptr);
     ~Runner();
-    Serial::TSerialPortList list() const;
+    TSerialPortList list() const;
     bool open(const QString &path);
     void close();
     bool isOpen() const;
@@ -70,13 +73,12 @@ class Runner: public QObject {
     void resultReady(const TRunnerCommand& command);
 
  private slots:
-    void onSerial_readyRead(qint64 bytesAvailable);
+    void onSerial_readyRead();
 
  private:
-    Serial serial_;
+    QSerialPort serial_;
     QQueue<TRunnerCommand> wrFifo_;
     QByteArray rdBuffer_;
-    QMutex mutex_;
     qint64 aliveTick_;
     bool running_;
 

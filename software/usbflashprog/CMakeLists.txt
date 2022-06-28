@@ -25,8 +25,6 @@ set(TS_FILES
 
 set(PROJECT_SOURCES
         config.hpp
-        backend/serial.cpp
-        backend/serial.hpp
         backend/opcodes.cpp
         backend/opcodes.hpp
         backend/runner.cpp

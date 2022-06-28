@@ -64,6 +64,11 @@ DiagWindow::~DiagWindow() {
     delete ui_;
 }
 
+QScreen* DiagWindow::screen() const {
+    return QGuiApplication::screenAt(
+        this->mapToGlobal({this->width() / 2, 0}));
+}
+
 void DiagWindow::on_pushButtonConnect_clicked() {
     if (!runner_.isOpen()) {
         connect_();
@@ -187,13 +192,9 @@ void DiagWindow::onRefreshTimerTimeout() {
                 .arg(port));
         return;
     }
-    // Get VDD
     runner_.send(kCmdVddGetV);
-    // Get VPP
     runner_.send(kCmdVppGetV);
-    // Get VDD Duty
     runner_.send(kCmdVddGetDuty);
-    // Get VPP Duty
     runner_.send(kCmdVppGetDuty);
 }
 
@@ -238,7 +239,7 @@ void DiagWindow::closeEvent(QCloseEvent *event) {
 }
 
 void DiagWindow::refreshPortComboBox_() {
-    Serial::TSerialPortList list = runner_.list();
+    TSerialPortList list = runner_.list();
     QStringList paths;
     for (const auto item : list) {
         paths.push_back(item.portName());

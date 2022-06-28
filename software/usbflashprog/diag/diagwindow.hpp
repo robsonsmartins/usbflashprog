@@ -37,6 +37,7 @@ class DiagWindow : public QMainWindow {
  public:
     explicit DiagWindow(QWidget *parent = nullptr);
     ~DiagWindow();
+    QScreen *screen() const;
 
  private slots:
     void on_pushButtonConnect_clicked();

@@ -13,6 +13,8 @@ Here are instructions on how to build the project.
 	* [Install Packages](#install-packages)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Build](#build)
+	* [Generate DEB Package \[Optional\]](#generate-deb-package-optional)
+	* [Generate RPM Package \[Optional\]](#generate-rpm-package-optional)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 * [Microsoft Windows&copy;](#microsoft-windows)
 	* [Requirements](#requirements)
@@ -24,7 +26,7 @@ Here are instructions on how to build the project.
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Update Environment Variables](#update-environment-variables)
 	* [Build](#build)
-	* [Generate Installation Package \[Optional\](#generate-installation-package-optional)
+	* [Generate Installation Package \[Optional\]](#generate-installation-package-optional)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 
 ## GNU/Linux&copy;
@@ -38,6 +40,7 @@ Here are instructions on how to build the project.
 - GNU C/C++ Compiler ([GCC 4:11.2.0-1ubuntu1](https://packages.ubuntu.com/jammy/gcc));
 - Doxygen \[Optional\] ([Doxygen 1.9.1-2ubuntu2](https://packages.ubuntu.com/jammy/doxygen));
 - GraphViz \[Optional\] ([GraphViz 2.42.2-6](https://packages.ubuntu.com/jammy/graphviz));
+- RPM \[Optional\] ([RPM 4.17.0+dfsg1-4build1](https://packages.ubuntu.com/jammy/rpm));
 - Visual Studio Code \[Optional\] ([code_1.67.2-1652812855_amd64.deb](https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64), ~78.9MB)
 
 ### Install Packages
@@ -107,6 +110,70 @@ cmake -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++ ..
 ```shell
 ./ufprog
 ```
+
+### Generate DEB Package \[Optional\]
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cp -Rf "scripts/deb" "build/"
+mkdir -p "build/deb/ufprog/opt/ufprog"
+cp -f "build/ufprog" "build/deb/ufprog/opt/ufprog/"
+cp -Rf "resources/linux/usr" "build/deb/ufprog/"
+chmod 775 build/deb/ufprog/DEBIAN/*
+chmod +x build/deb/ufprog/opt/ufprog/ufprog
+cd build/deb
+dpkg -b ufprog
+mv ufprog.deb "../ufprog-`cat "../../VERSION"`-0-x86_64.deb"
+```
+
+4. The generated package will be `software/usbflashprog/build/ufprog-<version>-<architecture>.deb`.
+
+### Generate RPM Package \[Optional\]
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cp -Rf "scripts/rpm" "build/"
+mkdir -p "build/rpm/ufprog/{BUILD,BUILDROOT,RPMS,SRPMS,SOURCES}"
+mkdir -p "build/rpm/ufprog/SOURCES/opt/ufprog"
+cp -f "build/ufprog" "build/rpm/ufprog/SOURCES/opt/ufprog/"
+cp -Rf "resources/linux/usr" "build/rpm/ufprog/SOURCES/"
+chmod 775 build/rpm/ufprog/SOURCES/*
+chmod +x build/rpm/ufprog/SOURCES/opt/ufprog/ufprog
+cd build/rpm/ufprog
+sed -i "/^[[:space:]]*Version:/ s/:.*/: `cat "../../../VERSION"`/" SPECS/ufprog.spec
+rpmbuild -bb SPECS/ufprog.spec
+mv RPMS/x86_64/ufprog*.rpm ../../
+```
+
+4. The generated package will be `software/usbflashprog/build/ufprog-<version>.<architecture>.rpm`.
 
 ### Generate Doxygen Documentation \[Optional\]
 

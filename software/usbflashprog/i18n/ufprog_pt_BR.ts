@@ -105,23 +105,23 @@
     </message>
     <message>
         <source>VDD Calibration</source>
-        <translation type="unfinished"></translation>
+        <translation>Calibração de VDD</translation>
     </message>
     <message>
         <source>Voltage measured on the VDD:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tensão medida no VDD:</translation>
     </message>
     <message>
         <source>VPP Calibration</source>
-        <translation type="unfinished"></translation>
+        <translation>Calibração de VPP</translation>
     </message>
     <message>
         <source>Voltage measured on the VPP:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tensão medida no VPP:</translation>
     </message>
     <message>
         <source>The device has been disconnected from the &quot;%1&quot; port.</source>
-        <translation type="unfinished"></translation>
+        <translation>O dispositivo foi desconectado da porta &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>

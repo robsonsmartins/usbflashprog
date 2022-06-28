@@ -82,7 +82,7 @@ jobs:
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
         name: Install Qt (Windows 64-bits)
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v2.14.0
         with:
           cached: ${{ steps.cache-qt-win64.outputs.cache-hit }}
           version: '5.12.12'
@@ -104,7 +104,7 @@ jobs:
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Install Qt (Windows 32-bits)
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v2.14.0
         with:
           cached: ${{ steps.cache-qt-win32.outputs.cache-hit }}
           version: '5.12.12'

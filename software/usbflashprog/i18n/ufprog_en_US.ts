@@ -103,6 +103,26 @@
         <source>&amp;Disconnect</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>VDD Calibration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Voltage measured on the VDD:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>VPP Calibration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Voltage measured on the VPP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The device has been disconnected from the &quot;%1&quot; port.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>

@@ -12,31 +12,58 @@
                 "-recursive",
                 ".",
                 "-ts",
-                "i18n\\ufprog_en_US.ts",
-                "i18n\\ufprog_pt_BR.ts",
+                "i18n/ufprog_en_US.ts",
+                "i18n/ufprog_pt_BR.ts",
             ],
             "group": "build"
         },
         {
-            "label": "Create Installer (Windows)",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceRoot}/scripts"
-            },
-            "command": "iscc.exe ufprog.iss",
-            "group": "build"
-        },
-        {
-            "type": "shell",
             "label": "Build",
+            "type": "shell",
             "options": {
                 "cwd": "${workspaceRoot}"
             },
-            "command": "mkdir -p build && cd build && cmake .. && make -j$(nproc)",
+            "command": "scripts/build.sh",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "scripts/test.sh",
+            "group": "build"
+        },
+        {
+            "label": "Coverage",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "scripts/coverage.sh",
+            "group": "build"
+        },
+        {
+            "label": "Doxygen",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "scripts/doxygen.sh",
+            "group": "build"
+        },
+        {
+            "label": "Create Installer",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "command": "scripts/generate_inst.sh",
+            "group": "build"
         }
     ]
 }

@@ -20,6 +20,7 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QCloseEvent>
 #include "backend/runner.hpp"
 
 // ---------------------------------------------------------------------------
@@ -39,6 +40,8 @@ class DiagWindow : public QMainWindow {
 
  private slots:
     void on_pushButtonConnect_clicked();
+    void on_pushButtonVddInitCal_clicked();
+    void on_pushButtonVppInitCal_clicked();
     void on_actionExit_triggered(bool checked = false);
     void on_actionAbout_triggered(bool checked = false);
     void on_actionAboutQt_triggered(bool checked = false);
@@ -54,12 +57,17 @@ class DiagWindow : public QMainWindow {
     void on_dialVpp_valueChanged(int value);
     void onEnumTimerTimeout();
     void onRefreshTimerTimeout();
+    void onRunnerResultReady(const TRunnerCommand& command);
+
+ protected:
+    void closeEvent(QCloseEvent *event);
 
  private:
     Ui::DiagWindow *ui_;
     QTimer enumTimer_;
     QTimer refreshTimer_;
     Runner runner_;
+    void connect_(bool state = true);
     void refreshPortComboBox_();
     void enableControls_(bool state = true);
 };

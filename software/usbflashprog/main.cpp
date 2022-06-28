@@ -23,6 +23,7 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <cstdlib>
 
 #include "main/mainwindow.hpp"
 #include "diag/diagwindow.hpp"
@@ -50,15 +51,21 @@ QMainWindow* createWindow(const int &argc, char *argv[]);
 // ---------------------------------------------------------------------------
 
 QMainWindow* createWindow(const int &argc, char *argv[]) {
+    /*
     for (int i = 1; i < argc; ++i) {
         if (!qstrcmp(argv[i], "--diag")) {
             return new DiagWindow();
         }
     }
     return new MainWindow();
+    */
+    return new DiagWindow();
 }
 
 int main(int argc, char *argv[]) {
+#ifdef Q_OS_LINUX
+    setenv("XDG_SESSION_TYPE", "x11", 1);
+#endif
     QApplication a(argc, argv);
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();

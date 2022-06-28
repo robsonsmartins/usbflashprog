@@ -18,25 +18,38 @@
 #ifndef BACKEND_SERIAL_HPP_
 #define BACKEND_SERIAL_HPP_
 
+#include <QObject>
 #include <QString>
+#include <QByteArray>
 #include <QSerialPortInfo>
 #include <QSerialPort>
 
 // ---------------------------------------------------------------------------
 
-class Serial {
+class Serial: public QObject {
+    Q_OBJECT
+
  public:
     typedef QList<QSerialPortInfo> TSerialPortList;
-    Serial();
+    explicit Serial(QObject *parent = nullptr);
+    ~Serial();
     TSerialPortList list() const;
     bool open(const QString &path);
     void close();
     bool isOpen() const;
     QString getPath() const;
     void write(const void *src, size_t len, bool flush = false);
+    void write(const QByteArray &src, bool flush = false);
     size_t read(void *src, size_t len, int msecs = 0);
+    QByteArray read(size_t len, int msecs = 0);
+    QByteArray readAll();
     void purge();
 
+ signals:
+    void readyRead(qint64 bytesAvailable);
+
+ private slots:
+    void onPort_readyRead();
  private:
     QSerialPort port_;
 };

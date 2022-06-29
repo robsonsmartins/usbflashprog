@@ -20,7 +20,7 @@ else
 
     cp -Rf "${workspaceRoot}/scripts/rpm" "${buildRoot}/"
     rpmRoot="${buildRoot}/rpm"
-    mkdir -p "${rpmRoot}/${appName}/{BUILD,BUILDROOT,RPMS,SRPMS,SOURCES}"
+    mkdir -p ${rpmRoot}/${appName}/{BUILD,BUILDROOT,RPMS,SRPMS,SOURCES}
     rpmSrcRoot="${rpmRoot}/${appName}/SOURCES"
     mkdir -p "${rpmSrcRoot}/opt/ufprog"
     cp -f "${buildRoot}/ufprog" "${rpmSrcRoot}/opt/ufprog/"

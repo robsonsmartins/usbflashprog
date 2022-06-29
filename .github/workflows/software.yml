@@ -22,8 +22,8 @@ jobs:
     name: Build Software
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
-        arch: [x86, x86_64]
+        os: [windows-latest, ubuntu-latest, macos-latest]
+        arch: [x86_64, x86]
     runs-on: ${{matrix.os}}
     continue-on-error: true
     steps:
@@ -70,7 +70,7 @@ jobs:
         shell: msys2 {0}
 
       # ------------------------------------------------------------------------
-      # Install Qt (Windows)
+      # Install Qt (Windows/MacOS)
       # ------------------------------------------------------------------------
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
         name: Cache Qt (Windows 64-bits)
@@ -85,12 +85,13 @@ jobs:
         uses: jurplel/install-qt-action@v2.14.0
         with:
           cached: ${{ steps.cache-qt-win64.outputs.cache-hit }}
-          version: '5.12.12'
+          version: '5.15.2'
           host: 'windows'
           target: 'desktop'
-          arch: 'win64_mingw73'
+          arch: 'win64_mingw81'
           dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
           install-deps: 'true'
+          extra: '--timeout 30'
 
       # ------------------------------------------------------------------------
 
@@ -107,12 +108,21 @@ jobs:
         uses: jurplel/install-qt-action@v2.14.0
         with:
           cached: ${{ steps.cache-qt-win32.outputs.cache-hit }}
-          version: '5.12.12'
+          version: '5.15.2'
           host: 'windows'
           target: 'desktop'
-          arch: 'win32_mingw73'
+          arch: 'win32_mingw81'
           dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
           install-deps: 'true'
+          extra: '--timeout 30'
+
+      # ------------------------------------------------------------------------
+
+      - if: matrix.os == 'macos-latest' && matrix.arch == 'x86_64'
+        name: Install Qt (MacOS)
+        run: |
+          brew install qt5
+          echo "Qt5_Dir=$(brew --prefix qt5)/lib/cmake/Qt5" >> $GITHUB_ENV
 
       # ------------------------------------------------------------------------
       # Install Prerequisites (Linux)
@@ -121,7 +131,7 @@ jobs:
         name: Install Prerequisites (Linux 64-bits)
         run: |
           sudo apt-get update
-          sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev   
+          sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev rpm sed
           sudo apt-get --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
 
       # ------------------------------------------------------------------------
@@ -142,6 +152,13 @@ jobs:
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
         run: cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
 
+      - if: matrix.os == 'macos-latest' && matrix.arch == 'x86_64'
+        name: Configure CMake (MacOS)
+        env:
+          CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: cmake -G Xcode -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+
       # ------------------------------------------------------------------------
       # Build
       # ------------------------------------------------------------------------
@@ -150,7 +167,8 @@ jobs:
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
         run: |
           cmake --build build --config ${{env.BUILD_TYPE}}
-          echo "BUILD_VERSION=`cat VERSION`-`date +%s`" >> $GITHUB_ENV
+          echo "BUILD_VERSION=`cat VERSION`" >> $GITHUB_ENV
+          echo "BUILD_REVISION=`date +%y%m%d`" >> $GITHUB_ENV
         shell: msys2 {0}
 
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
@@ -158,7 +176,17 @@ jobs:
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
         run: |
           cmake --build build --config ${{env.BUILD_TYPE}}
-          echo "BUILD_VERSION=`cat VERSION`-`date +%s`" >> $GITHUB_ENV
+          echo "BUILD_VERSION=`cat VERSION`" >> $GITHUB_ENV
+          echo "BUILD_REVISION=`date +%y%m%d`" >> $GITHUB_ENV
+
+      - if: matrix.os == 'macos-latest' && matrix.arch == 'x86_64'
+        name: Build (MacOS)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: |
+          echo "BUILD_VERSION=`cat VERSION`" >> $GITHUB_ENV
+          echo "BUILD_REVISION=`date +%y%m%d`" >> $GITHUB_ENV
+          rm VERSION
+          cmake --build build --config ${{env.BUILD_TYPE}}
 
       # ------------------------------------------------------------------------
       # Create the Installer
@@ -167,16 +195,16 @@ jobs:
         name: Create the Installer (Windows 64-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
-          ./is/iscc.exe //DARCH="Win64" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_64" ufprog.iss
-          mv "../build/ufprog-`cat ../VERSION`-0-win64-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-win64-setup.exe"
+          ./is/iscc.exe //DARCH="Win64" //DQT_PATH="..\\qt\\Qt\\5.15.2\\mingw81_64" ufprog.iss
+          mv "../build/ufprog-`cat ../VERSION`-0-win64-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-${{env.BUILD_REVISION}}-win64-setup.exe"
         shell: msys2 {0}
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Create the Installer (Windows 32-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
-          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.12.12\\mingw73_32" ufprog.iss
-          mv "../build/ufprog-`cat ../VERSION`-0-win32-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-win32-setup.exe"
+          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.15.2\\mingw81_32" ufprog.iss
+          mv "../build/ufprog-`cat ../VERSION`-0-win32-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-${{env.BUILD_REVISION}}-win32-setup.exe"
         shell: msys2 {0}
 
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
@@ -191,7 +219,32 @@ jobs:
           chmod +x build/deb/ufprog/opt/ufprog/ufprog
           cd build/deb
           dpkg -b ufprog
-          mv ufprog.deb "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-x86_64.deb"
+          mv ufprog.deb "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-${{env.BUILD_REVISION}}-x86_64.deb"
+
+      - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
+        name: Create RPM Package (Linux 64-bits)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: |
+          cp -Rf scripts/rpm build/
+          mkdir -p build/rpm/ufprog/{BUILD,BUILDROOT,RPMS,SRPMS,SOURCES}
+          mkdir -p build/rpm/ufprog/SOURCES/opt/ufprog
+          cp -f build/ufprog build/rpm/ufprog/SOURCES/opt/ufprog/
+          cp -Rf resources/linux/usr build/rpm/ufprog/SOURCES/
+          chmod 775 build/rpm/ufprog/SOURCES/*
+          chmod +x build/rpm/ufprog/SOURCES/opt/ufprog/ufprog
+          cd build/rpm/ufprog
+          sed -i "/^[[:space:]]*Version:/ s/:.*/: ${{env.BUILD_VERSION}}/" SPECS/ufprog.spec
+          sed -i "/^[[:space:]]*Release:/ s/:.*/: ${{env.BUILD_REVISION}}/" SPECS/ufprog.spec
+          rpmbuild -bb SPECS/ufprog.spec
+          mv RPMS/x86_64/ufprog*.rpm "${{env.SOFTWARE_PROJECT_DIR}}/build/"
+
+      - if: matrix.os == 'macos-latest' && matrix.arch == 'x86_64'
+        name: Create the Installer (MacOS)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: |
+          cd build/Release
+          /usr/local/opt/qt@5/bin/macdeployqt "ufprog.app" -dmg
+          cp ufprog.dmg "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-${{env.BUILD_VERSION}}-${{env.BUILD_REVISION}}.dmg"
 
       # ------------------------------------------------------------------------
       # Upload the Installer
@@ -214,5 +267,12 @@ jobs:
         name: Upload the Packages (Linux 64-bits)
         uses: actions/upload-artifact@v3
         with:
-          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*.deb"
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-*.*"
           name: "ufprog-linux64-packages"
+
+      - if: matrix.os == 'macos-latest' && matrix.arch == 'x86_64'
+        name: Upload the Installer (MacOS)
+        uses: actions/upload-artifact@v3
+        with:
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*.dmg"
+          name: "ufprog-macos-installer"

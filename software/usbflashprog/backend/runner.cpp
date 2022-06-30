@@ -98,6 +98,9 @@ TSerialPortList Runner::list() const {
     for (const auto item : QSerialPortInfo::availablePorts()) {
         if (item.vendorIdentifier() == kUsbVendorId &&
                 item.productIdentifier() == kUsbProductId) {
+#ifdef Q_OS_MACOS
+            if (item.portName().startsWith("cu.usbmodem")) { continue; }
+#endif
             result.push_back(item);
         }
     }

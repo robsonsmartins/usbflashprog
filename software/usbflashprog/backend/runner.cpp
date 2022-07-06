@@ -100,7 +100,10 @@ TSerialPortList Runner::list() const {
                 item.productIdentifier() == kUsbProductId) {
 #ifdef Q_OS_MACOS
             if (item.portName().startsWith("cu.usbmodem")) { continue; }
-#endif
+#endif  // Q_OS_MACOS
+#ifdef Q_OS_FREEBSD
+            if (item.portName().startsWith("tty")) { continue; }
+#endif  // Q_OS_FREEBSD
             result.push_back(item);
         }
     }

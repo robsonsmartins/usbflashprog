@@ -19,7 +19,7 @@ env:
 
 jobs:
   build_software:
-    name: Build Software
+    name: Build Software (Linux, Windows, MacOS)
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, macos-latest]
@@ -276,3 +276,57 @@ jobs:
         with:
           path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*.dmg"
           name: "ufprog-macos-installer"
+
+  build_software_freebsd:
+    name: Build Software (FreeBSD)
+    runs-on: macos-12
+    steps:
+      # ------------------------------------------------------------------------
+      # Checkout the sources
+      # ------------------------------------------------------------------------
+      - uses: actions/checkout@v3
+      - name: Build in FreeBSD
+        uses: vmactions/freebsd-vm@v0.1.6
+        with:
+          usesh: true
+          mem: 8192
+          # ------------------------------------------------------------------------
+          # Install Prerequisites
+          # ------------------------------------------------------------------------          
+          prepare: |
+            pkg install -y curl bash cmake devel/qt5
+          run: |
+            # ------------------------------------------------------------------------
+            # Configure CMake
+            # ------------------------------------------------------------------------
+            cd software/usbflashprog
+            cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+            # ------------------------------------------------------------------------
+            # Build
+            # ------------------------------------------------------------------------           
+            cmake --build build --config ${{env.BUILD_TYPE}}
+            export BUILD_VERSION=`cat VERSION`
+            export BUILD_REVISION=`date +%y%m%d`
+            # ------------------------------------------------------------------------
+            # Create the Installer
+            # ------------------------------------------------------------------------
+            cp -Rf scripts/freebsd build/
+            mkdir -p build/freebsd/ufprog/opt/ufprog
+            cp -f build/ufprog build/freebsd/ufprog/opt/ufprog/
+            mkdir -p build/freebsd/ufprog/usr/local
+            cp -Rf resources/linux/usr/share build/freebsd/ufprog/usr/local/
+            chmod +x build/freebsd/ufprog/opt/ufprog/ufprog
+            cd build/freebsd/ufprog
+            sed -i '' -e "/^[[:space:]]*version:/ s/:.*/: \"$BUILD_VERSION\"/" "+MANIFEST"
+            cat "+MANIFEST"
+            pkg create -v -m `pwd`/ -r `pwd`/ -p `pwd`/plist -o .
+            mv ufprog-$BUILD_VERSION.pkg "../../ufprog-$BUILD_VERSION-$BUILD_REVISION-x86_64.pkg"
+
+      # ------------------------------------------------------------------------
+      # Upload the Installer
+      # ------------------------------------------------------------------------
+      - name: Upload the Package (FreeBSD)
+        uses: actions/upload-artifact@v3
+        with:
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-*.*"
+          name: "ufprog-freebsd_amd64-package"

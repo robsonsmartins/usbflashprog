@@ -6,6 +6,24 @@ if [[ "$OSTYPE" =~ ^msys ]]; then
     pushd "${workspaceRoot}/scripts"
     iscc.exe //Darch=win64 //Dversion=`cat "${workspaceRoot}/VERSION"` ufprog.iss
     popd
+elif [[ "$OSTYPE" =~ ^FreeBSD ]]; then
+    buildRoot="${workspaceRoot}/build"
+    appName="ufprog"
+    echo "* Copying files..."
+    cp -Rf "${workspaceRoot}/scripts/freebsd" "${buildRoot}/"
+    bsdRoot="${buildRoot}/freebsd"
+    mkdir -p "${bsdRoot}/${appName}/opt/ufprog"
+    cp -f "${buildRoot}/ufprog" "${bsdRoot}/${appName}/opt/ufprog/"
+    mkdir -p "${bsdRoot}/${appName}/usr/local"
+    cp -Rf "${workspaceRoot}/resources/linux/usr/share" "${bsdRoot}/${appName}/usr/local/"
+    chmod +x ${bsdRoot}/${appName}/opt/ufprog/ufprog
+    echo "* Generating PKG package..."
+    pushd "${bsdRoot}/${appName}"
+    sed -i '' -e "/^[[:space:]]*version:/ s/:.*/: \"`cat "${workspaceRoot}/VERSION"`\"/" "+MANIFEST"
+    cat "+MANIFEST"
+    pkg create -v -m ${bsdRoot}/${appName}/ -r ${bsdRoot}/${appName}/ -p ${bsdRoot}/${appName}/plist -o .
+    mv ufprog-`cat "${workspaceRoot}/VERSION"`.pkg "${buildRoot}/ufprog-`cat "${workspaceRoot}/VERSION"`-0-x86_64.pkg"
+    popd
 else
     buildRoot="${workspaceRoot}/build"
     appName="ufprog"

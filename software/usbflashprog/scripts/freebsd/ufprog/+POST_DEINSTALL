@@ -1,0 +1,27 @@
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+echo "Uninstalling users' desktop icons and settings ..."
+__HOMELIST="root "`ls /home`
+for __USER_NAME in $__HOMELIST; do
+	if [ $__USER_NAME = "root" ]; then __HOMEDIR="/root" ; else __HOMEDIR="/home/"$__USER_NAME ; fi  
+	if [ -d $__HOMEDIR ]; then
+		if [ -f "$__HOMEDIR/.config/user-dirs.dirs" ]; then
+			__DESKTOP="$__HOMEDIR/.config/user-dirs.dirs"
+		elif [ -f "/etc/xdg/user-dirs.conf" ]; then
+			__DESKTOP="/etc/xdg/user-dirs.conf"
+		else
+			__DESKTOP=""
+		fi
+		if [ x"$__DESKTOP" = x ]; then
+			__DESKTOP=$__HOMEDIR"/Desktop"
+		else
+			__DESKTOP=`grep XDG_DESKTOP_DIR $__DESKTOP 2>/dev/null | awk -F= '{ print $2}' | xargs | awk -F/ '{ print $2}'`
+			__DESKTOP=$__HOMEDIR"/"$__DESKTOP
+		fi
+		if [ x"$__DESKTOP" = x ]; then __DESKTOP=$__HOMEDIR"/Desktop" ; fi
+		if [ -d "$__DESKTOP" ]; then
+			rm -f "$__DESKTOP/ufprog.desktop" 2>/dev/null
+		fi
+	fi
+done
+echo "Removing residual files ..."
+rm -f /opt/ufprog/*~ 2>/dev/null || true

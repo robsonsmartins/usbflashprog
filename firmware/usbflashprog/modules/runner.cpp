@@ -109,7 +109,7 @@ void Runner::runCommand_() {
     } else {
       runVddCommand_(code->first);
       runVppCommand_(code->first);
-      // TODO(robsonsmartins): runCtrlBusCommand_
+      runCtrlBusCommand_(code->first);
       // TODO(robsonsmartins): runAddrBusCommand_
       // TODO(robsonsmartins): runDataBusCommand_
     }
@@ -246,6 +246,30 @@ void Runner::runVppCommand_(uint8_t opcode) {
       case kCmdVppOnWE:
         b = getParamAsBool_();
         vgen_.vpp.onWE(b);
+        serial_.putChar(kCmdResponseOk, true);
+        break;
+      default:
+        break;
+    }
+}
+
+void Runner::runCtrlBusCommand_(uint8_t opcode) {
+    bool b;
+    TByteArray response;
+    switch (opcode) {
+      case kCmdBusCE:
+        b = getParamAsBool_();
+        gpio_.setPin(kBusCEPin, b);
+        serial_.putChar(kCmdResponseOk, true);
+        break;
+      case kCmdBusOE:
+        b = getParamAsBool_();
+        gpio_.setPin(kBusOEPin, b);
+        serial_.putChar(kCmdResponseOk, true);
+        break;
+      case kCmdBusWE:
+        b = getParamAsBool_();
+        gpio_.setPin(kBusWEPin, b);
         serial_.putChar(kCmdResponseOk, true);
         break;
       default:

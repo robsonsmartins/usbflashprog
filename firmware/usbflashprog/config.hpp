@@ -141,6 +141,15 @@ constexpr float kVddInitial =  5.0f;
 
 // ---------------------------------------------------------------------------
 
+/** @brief BUS/CTRL : Assigned CE GPIO pin. */
+constexpr uint     kBusCEPin     = 11;
+/** @brief BUS/CTRL : Assigned OE GPIO pin. */
+constexpr uint     kBusOEPin     =  9;
+/** @brief BUS/CTRL : Assigned WE GPIO pin. */
+constexpr uint     kBusWEPin     = 10;
+
+// ---------------------------------------------------------------------------
+
 /** @brief COMM : Communication timeout, in miliseconds. */
 constexpr uint32_t kCommTimeOut = 50;
 

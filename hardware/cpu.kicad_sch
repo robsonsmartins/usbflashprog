@@ -6,7 +6,7 @@
 
   (title_block
     (title "USB Flash/EPROM Programmer")
-    (date "2022-06-01")
+    (date "2022-07-06")
     (rev "v0.1.0 rev.F")
     (company "Robson Martins")
     (comment 1 "https://usbflashprog.robsonmartins.com")

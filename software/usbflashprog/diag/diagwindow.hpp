@@ -54,6 +54,9 @@ class DiagWindow : public QMainWindow {
     void on_checkBoxVppOnCE_toggled(bool checked = false);
     void on_checkBoxVppOnOE_toggled(bool checked = false);
     void on_checkBoxVppOnWE_toggled(bool checked = false);
+    void on_checkBoxCE_toggled(bool checked = false);
+    void on_checkBoxOE_toggled(bool checked = false);
+    void on_checkBoxWE_toggled(bool checked = false);
     void on_dialVdd_valueChanged(int value);
     void on_dialVpp_valueChanged(int value);
     void onEnumTimerTimeout();

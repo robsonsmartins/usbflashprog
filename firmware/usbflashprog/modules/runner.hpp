@@ -102,6 +102,11 @@ class Runner {
      * @param opcode Opcode of the command.
      */
     void runVppCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Ctrl Bus opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runCtrlBusCommand_(uint8_t opcode);
 };
 
 #endif  // MODULES_RUNNER_HPP_

@@ -248,6 +248,22 @@ bool VppGenerator::isOnWE() const {
     return vcRegister_.getBit(kVppOnWEVcRegisterBit);
 }
 
+bool VppGenerator::start_() {
+    vcRegister_.configure(
+        owner_->config_.vpp.vcSinPin,
+        owner_->config_.vpp.vcClkPin,
+        owner_->config_.vpp.vcClrPin,
+        owner_->config_.vpp.vcRckPin);
+    vcRegister_.clear();
+    vcRegister_.outputEnable();
+    return GenericGenerator::start_();
+}
+
+void VppGenerator::stop_() {
+    vcRegister_.clear();
+    GenericGenerator::stop_();
+}
+
 // ---------------------------------------------------------------------------
 
 VGenerator::VGenerator(): status_(MultiCore::csStopped),

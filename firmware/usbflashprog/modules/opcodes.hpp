@@ -90,7 +90,14 @@ enum kCmdOpCodeEnum {
     /** @brief OPCODE / VPP : Opcode VPP on OE. */
     kCmdVppOnOE    = 0x1B,
     /** @brief OPCODE / VPP : Opcode VPP on WE. */
-    kCmdVppOnWE    = 0x1C
+    kCmdVppOnWE    = 0x1C,
+
+    /** @brief OPCODE / BUS : Opcode CE Ctrl. */
+    kCmdBusCE      = 0x21,
+    /** @brief OPCODE / BUS : Opcode OE Ctrl. */
+    kCmdBusOE      = 0x22,
+    /** @brief OPCODE / BUS : Opcode WE Ctrl. */
+    kCmdBusWE      = 0x23
 };
 
 // ---------------------------------------------------------------------------
@@ -156,7 +163,11 @@ static const TCmdOpCodeMap kCmdOpCodes = {
     { kCmdVppOnA18  , { kCmdVppOnA18  , "VppOnA18"  , 1, 0} },
     { kCmdVppOnCE   , { kCmdVppOnCE   , "VppOnCE"   , 1, 0} },
     { kCmdVppOnOE   , { kCmdVppOnOE   , "VppOnOE"   , 1, 0} },
-    { kCmdVppOnWE   , { kCmdVppOnWE   , "VppOnWE"   , 1, 0} }
+    { kCmdVppOnWE   , { kCmdVppOnWE   , "VppOnWE"   , 1, 0} },
+
+    { kCmdBusCE     , { kCmdBusCE     , "CE"        , 1, 0} },
+    { kCmdBusOE     , { kCmdBusOE     , "OE"        , 1, 0} },
+    { kCmdBusWE     , { kCmdBusWE     , "WE"        , 1, 0} }
 };
 
 // ---------------------------------------------------------------------------

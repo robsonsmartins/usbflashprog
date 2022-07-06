@@ -42,6 +42,7 @@ DiagWindow::DiagWindow(QWidget *parent): QMainWindow(parent),
     refreshPortComboBox_();
     ui_->frameVdd->setEnabled(false);
     ui_->frameVpp->setEnabled(false);
+    ui_->frameBusCtrl->setEnabled(false);
     connect(&enumTimer_, &QTimer::timeout,
             this, &DiagWindow::onEnumTimerTimeout);
     connect(&refreshTimer_, &QTimer::timeout,
@@ -162,6 +163,21 @@ void DiagWindow::on_checkBoxVppOnOE_toggled(bool checked) {
 void DiagWindow::on_checkBoxVppOnWE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
     runner_.send(kCmdVppOnWE, checked);
+}
+
+void DiagWindow::on_checkBoxCE_toggled(bool checked) {
+    if (!runner_.isOpen()) { return; }
+    runner_.send(kCmdBusCE, checked);
+}
+
+void DiagWindow::on_checkBoxOE_toggled(bool checked) {
+    if (!runner_.isOpen()) { return; }
+    runner_.send(kCmdBusOE, checked);
+}
+
+void DiagWindow::on_checkBoxWE_toggled(bool checked) {
+    if (!runner_.isOpen()) { return; }
+    runner_.send(kCmdBusWE, checked);
 }
 
 void DiagWindow::on_dialVdd_valueChanged(int value) {
@@ -291,6 +307,9 @@ void DiagWindow::connect_(bool state) {
         runner_.send(kCmdVppOnCE, false);
         runner_.send(kCmdVppOnOE, false);
         runner_.send(kCmdVppOnWE, false);
+        runner_.send(kCmdBusCE, false);
+        runner_.send(kCmdBusOE, false);
+        runner_.send(kCmdBusWE, false);
     }
     if (!state) {
         refreshTimer_.stop();
@@ -308,6 +327,7 @@ void DiagWindow::connect_(bool state) {
 void DiagWindow::enableControls_(bool state) {
     ui_->frameVdd->setEnabled(state);
     ui_->frameVpp->setEnabled(state);
+    ui_->frameBusCtrl->setEnabled(state);
     ui_->comboBoxPort->setEnabled(!state);
     if (state) {
         ui_->pushButtonConnect->setText(tr("&Disconnect"));
@@ -329,6 +349,9 @@ void DiagWindow::enableControls_(bool state) {
         ui_->checkBoxVppOnCE->setChecked(false);
         ui_->checkBoxVppOnOE->setChecked(false);
         ui_->checkBoxVppOnWE->setChecked(false);
+        ui_->checkBoxCE->setChecked(false);
+        ui_->checkBoxOE->setChecked(false);
+        ui_->checkBoxWE->setChecked(false);
         ui_->lcdNumberVdd->setStyleSheet(
             "background-color:rgb(76,76,76);color:rgb(89,150,101);");
         ui_->lcdNumberVddDuty->setStyleSheet(

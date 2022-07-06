@@ -374,9 +374,20 @@ class VppGenerator: public GenericGenerator {
      */
     bool isOnWE() const;
 
+ protected:
+    /* @brief Starts the Voltage Generator.
+     * @details If the configuration is invalid, then fails.
+     * @return True if success, false otherwise. */
+    virtual bool start_();
+    /* @brief Stops the Voltage Generator. */
+    virtual void stop_();
+
  private:
     /* @brief Voltage Control Pins Shift Register. */
     HC595 vcRegister_;
+
+  /* Friend classes. */
+  friend class VGenerator;
 };
 
 // ---------------------------------------------------------------------------

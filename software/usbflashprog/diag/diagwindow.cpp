@@ -15,12 +15,14 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <QtGlobal>
 #include <QMessageBox>
 #include <QInputDialog>
 #include <QTimer>
 #include <QThread>
 #include <QStyle>
 #include <QScreen>
+#include <QWindow>
 #include <QDesktopWidget>
 
 #include <cstdio>
@@ -66,8 +68,12 @@ DiagWindow::~DiagWindow() {
 }
 
 QScreen* DiagWindow::screen() const {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+    return QGuiApplication::primaryScreen();
+#else
     return QGuiApplication::screenAt(
         this->mapToGlobal({this->width() / 2, 0}));
+#endif
 }
 
 void DiagWindow::on_pushButtonConnect_clicked() {
@@ -98,11 +104,19 @@ void DiagWindow::on_pushButtonVddInitCal_clicked() {
     enableControls_(false);
     runner_.send(kCmdVddInitCal);
     bool ok;
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+    float measured = QInputDialog::getDouble(this,
+        tr("VDD Calibration"),
+        tr("Voltage measured on the VDD:"),
+        5.0f, 3.0f, 7.0f, 2, &ok,
+        Qt::WindowFlags());
+#else
     float measured = QInputDialog::getDouble(this,
         tr("VDD Calibration"),
         tr("Voltage measured on the VDD:"),
         5.0f, 3.0f, 7.0f, 2, &ok,
         Qt::WindowFlags(), 0.1f);
+#endif
     if (ok) {
         runner_.send(kCmdVddSaveCal, measured);
     }
@@ -114,11 +128,19 @@ void DiagWindow::on_pushButtonVppInitCal_clicked() {
     enableControls_(false);
     runner_.send(kCmdVppInitCal);
     bool ok;
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+    float measured = QInputDialog::getDouble(this,
+        tr("VPP Calibration"),
+        tr("Voltage measured on the VPP:"),
+        12.0f, 10.0f, 14.0f, 2, &ok,
+        Qt::WindowFlags());
+#else
     float measured = QInputDialog::getDouble(this,
         tr("VPP Calibration"),
         tr("Voltage measured on the VPP:"),
         12.0f, 10.0f, 14.0f, 2, &ok,
         Qt::WindowFlags(), 0.1f);
+#endif        
     if (ok) {
         runner_.send(kCmdVppSaveCal, measured);
     }

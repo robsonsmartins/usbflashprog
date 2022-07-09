@@ -260,6 +260,8 @@ void DiagWindow::onRunnerResultReady(const TRunnerCommand& command) {
                      command.responseAsFloat());
             ui_->lcdNumberVppDuty->display(QString(buffer));
             break;
+        default:
+            break;
     }
     std::locale::global(originalLocale);
 }

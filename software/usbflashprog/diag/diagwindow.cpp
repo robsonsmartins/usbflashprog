@@ -45,6 +45,7 @@ DiagWindow::DiagWindow(QWidget *parent): QMainWindow(parent),
     ui_->frameVdd->setEnabled(false);
     ui_->frameVpp->setEnabled(false);
     ui_->frameBusCtrl->setEnabled(false);
+    ui_->frameBusAddr->setEnabled(false);
     connect(&enumTimer_, &QTimer::timeout,
             this, &DiagWindow::onEnumTimerTimeout);
     connect(&refreshTimer_, &QTimer::timeout,
@@ -352,6 +353,7 @@ void DiagWindow::enableControls_(bool state) {
     ui_->frameVdd->setEnabled(state);
     ui_->frameVpp->setEnabled(state);
     ui_->frameBusCtrl->setEnabled(state);
+    ui_->frameBusAddr->setEnabled(state);
     ui_->comboBoxPort->setEnabled(!state);
     if (state) {
         ui_->pushButtonConnect->setText(tr("&Disconnect"));

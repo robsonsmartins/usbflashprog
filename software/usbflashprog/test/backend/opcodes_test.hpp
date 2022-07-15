@@ -18,7 +18,7 @@
 #ifndef TEST_BACKEND_OPCODES_TEST_HPP_
 #define TEST_BACKEND_OPCODES_TEST_HPP_
 
-#include <QtTest/QtTest>
+#include <gtest/gtest.h>
 
 // ---------------------------------------------------------------------------
 
@@ -28,13 +28,16 @@
  * @details The purpose of this class is to test the OpCode Handling Classes.
  * @nosubgrouping
  */
-class OpCodeTest: public QObject {
-    Q_OBJECT
-private slots:
-    void isOk();
-    void getOpCode();
-    void getValue();
-    void setValue();
+class OpCodeTest : public testing::Test {
+ protected:
+  /** @brief Constructor. */
+  OpCodeTest() {}
+  /** @brief Destructor. */
+  ~OpCodeTest() override {}
+  /** @brief Sets Up the test. */
+  void SetUp() override {}
+  /** @brief Teardown of the test. */
+  void TearDown() override {}
 };
 
 #endif  // TEST_BACKEND_OPCODES_TEST_HPP_

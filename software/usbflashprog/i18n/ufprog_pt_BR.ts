@@ -123,6 +123,130 @@
         <source>The device has been disconnected from the &quot;%1&quot; port.</source>
         <translation>O dispositivo foi desconectado da porta &quot;%1&quot;.</translation>
     </message>
+    <message>
+        <source>Control Bus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address Bus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A23</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A22</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A21</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A20</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A19</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A18</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A17</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A15</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A14</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A10</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set Address</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>

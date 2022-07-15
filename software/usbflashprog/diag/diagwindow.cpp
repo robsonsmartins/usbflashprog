@@ -141,7 +141,7 @@ void DiagWindow::on_pushButtonVppInitCal_clicked() {
         tr("Voltage measured on the VPP:"),
         12.0f, 10.0f, 14.0f, 2, &ok,
         Qt::WindowFlags(), 0.1f);
-#endif        
+#endif
     if (ok) {
         runner_.send(kCmdVppSaveCal, measured);
     }

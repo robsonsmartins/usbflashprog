@@ -5,9 +5,9 @@
     <key>CFBundleIdentifier</key>
     <string>usbflashprog.robsonmartins.com</string>
     <key>CFBundleName</key>
-    <string>USB Flash/EPROM Programmer</string>
+    <string>USBfe Programmer</string>
     <key>CFBundleDisplayName</key>
-    <string>USB Flash/EPROM Programmer</string>
+    <string>USB Flash and EPROM Programmer</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>

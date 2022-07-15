@@ -7,7 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
- * @ingroup Firmware
+ * @ingroup Software
  * @file backend/opcodes.cpp
  * @brief Implementation of the Opcodes for communication.
  * 

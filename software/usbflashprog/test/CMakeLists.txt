@@ -7,17 +7,21 @@
 # ShareAlike 4.0 International License.
 # ---------------------------------------------------------------------------
 
-include_directories(.. .)
-
 set(QT_VERSION 5)
-set(REQUIRED_LIBS Core Gui Widgets LinguistTools SerialPort Test)
-set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort Qt5::Test)
+set(REQUIRED_LIBS Core Gui Widgets LinguistTools SerialPort)
+set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort)
+add_compile_definitions(TEST_BUILD)
 
 find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-enable_testing(true)
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 set(PROJ_NAME ufprog_test)
 
@@ -27,31 +31,27 @@ set(PROJECT_SOURCES
     ../backend/opcodes.hpp
     ../backend/runner.cpp
     ../backend/runner.hpp
-#      ../main/mainwindow.cpp
-#      ../main/mainwindow.hpp
-#      ../main/mainwindow.ui
-#      ../diag/diagwindow.cpp
-#      ../diag/diagwindow.hpp
-#      ../diag/diagwindow.ui
+    mock/qserialport.hpp
     backend/opcodes_test.hpp
     backend/opcodes_test.cpp
+    backend/runner_test.hpp
+    backend/runner_test.cpp
     main.cpp
 )
 
-set(PROJECT_RESOURCES
-        ../resources/resources.qrc
-)
+include(GoogleTest)
+find_package(Threads REQUIRED)
 
-add_executable(${PROJ_NAME} WIN32 ${PROJECT_SOURCES} ${PROJECT_RESOURCES})
-add_test(NAME OpCodeTest COMMAND ${PROJ_NAME} OpCodeTest)
+add_executable(${PROJ_NAME} WIN32 ${PROJECT_SOURCES})
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fprofile-arcs -ftest-coverage")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage")
 
 target_include_directories(${PROJ_NAME} PUBLIC . ..)
-target_link_libraries(${PROJ_NAME} PRIVATE ${REQUIRED_LIBS_QUALIFIED})
+target_link_libraries(${PROJ_NAME} gtest ${REQUIRED_LIBS_QUALIFIED})
 
 set_target_properties(${PROJ_NAME} PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
+gtest_discover_tests(${PROJ_NAME})

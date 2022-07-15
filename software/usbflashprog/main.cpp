@@ -26,7 +26,6 @@
 #include <cstdlib>
 
 #include "main/mainwindow.hpp"
-#include "diag/diagwindow.hpp"
 #include "config.hpp"
 
 // ---------------------------------------------------------------------------
@@ -51,15 +50,9 @@ QMainWindow* createWindow(const int &argc, char *argv[]);
 // ---------------------------------------------------------------------------
 
 QMainWindow* createWindow(const int &argc, char *argv[]) {
-    /*
-    for (int i = 1; i < argc; ++i) {
-        if (!qstrcmp(argv[i], "--diag")) {
-            return new DiagWindow();
-        }
-    }
+    (void)argc;
+    (void)argv;
     return new MainWindow();
-    */
-    return new DiagWindow();
 }
 
 int main(int argc, char *argv[]) {

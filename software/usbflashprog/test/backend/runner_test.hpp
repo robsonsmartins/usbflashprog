@@ -8,15 +8,15 @@
 // ---------------------------------------------------------------------------
 /** 
  * @ingroup UnitTests
- * @file test/backend/opcodes_test.hpp
- * @brief Header of Unit Test for OpCode Handling Classes.
+ * @file test/backend/runner_test.hpp
+ * @brief Header of Unit Test for Runner Class.
  * 
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
-#ifndef TEST_BACKEND_OPCODES_TEST_HPP_
-#define TEST_BACKEND_OPCODES_TEST_HPP_
+#ifndef TEST_BACKEND_RUNNER_TEST_HPP_
+#define TEST_BACKEND_RUNNER_TEST_HPP_
 
 #include <gtest/gtest.h>
 
@@ -24,20 +24,20 @@
 
 /**
  * @ingroup UnitTests
- * @brief Test class for OpCode Handling Classes.
- * @details The purpose of this class is to test the OpCode Handling Classes.
+ * @brief Test class for Runner Class.
+ * @details The purpose of this class is to test the Runner Class.
  * @nosubgrouping
  */
-class OpCodeTest : public testing::Test {
+class RunnerTest : public testing::Test {
  protected:
   /** @brief Constructor. */
-  OpCodeTest() {}
+  RunnerTest() {}
   /** @brief Destructor. */
-  ~OpCodeTest() override {}
+  ~RunnerTest() override {}
   /** @brief Sets Up the test. */
   void SetUp() override {}
   /** @brief Teardown of the test. */
   void TearDown() override {}
 };
 
-#endif  // TEST_BACKEND_OPCODES_TEST_HPP_
+#endif  // TEST_BACKEND_RUNNER_TEST_HPP_

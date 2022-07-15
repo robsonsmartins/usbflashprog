@@ -2,10 +2,26 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
-    <name>DiagWindow</name>
+    <name>MainWindow</name>
     <message>
         <source>USB Flash/EPROM Programmer</source>
         <translation>USB Flash/EPROM Programmer</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>&amp;File</translation>
+    </message>
+    <message>
+        <source>&amp;Buffer</source>
+        <translation>&amp;Buffer</translation>
+    </message>
+    <message>
+        <source>ASCII</source>
+        <translation>ASCII</translation>
+    </message>
+    <message>
+        <source>&amp;Diagnostics</source>
+        <translation>&amp;Diagnostics</translation>
     </message>
     <message>
         <source>Board Diagnostics</source>
@@ -36,20 +52,12 @@
         <translation>Duty (%)</translation>
     </message>
     <message>
-        <source>Ini&amp;t Calibration</source>
-        <translation>Ini&amp;t Calibration</translation>
-    </message>
-    <message>
         <source>VDD on VPP</source>
         <translation>VDD on VPP</translation>
     </message>
     <message>
         <source>VPP</source>
         <translation>VPP</translation>
-    </message>
-    <message>
-        <source>I&amp;nit Calibration</source>
-        <translation>I&amp;nit Calibration</translation>
     </message>
     <message>
         <source>VPP on A9</source>
@@ -72,12 +80,200 @@
         <translation>VPP on WE</translation>
     </message>
     <message>
-        <source>&amp;File</source>
-        <translation>&amp;File</translation>
+        <source>Control Bus</source>
+        <translation>Control Bus</translation>
+    </message>
+    <message>
+        <source>CE</source>
+        <translation>CE</translation>
+    </message>
+    <message>
+        <source>OE</source>
+        <translation>OE</translation>
+    </message>
+    <message>
+        <source>WE</source>
+        <translation>WE</translation>
+    </message>
+    <message>
+        <source>Address Bus</source>
+        <translation>Address Bus</translation>
+    </message>
+    <message>
+        <source>A23</source>
+        <translation>A23</translation>
+    </message>
+    <message>
+        <source>A22</source>
+        <translation>A22</translation>
+    </message>
+    <message>
+        <source>A21</source>
+        <translation>A21</translation>
+    </message>
+    <message>
+        <source>A20</source>
+        <translation>A20</translation>
+    </message>
+    <message>
+        <source>A19</source>
+        <translation>A19</translation>
+    </message>
+    <message>
+        <source>A18</source>
+        <translation>A18</translation>
+    </message>
+    <message>
+        <source>A17</source>
+        <translation>A17</translation>
+    </message>
+    <message>
+        <source>A16</source>
+        <translation>A16</translation>
+    </message>
+    <message>
+        <source>A15</source>
+        <translation>A15</translation>
+    </message>
+    <message>
+        <source>A14</source>
+        <translation>A14</translation>
+    </message>
+    <message>
+        <source>A13</source>
+        <translation>A13</translation>
+    </message>
+    <message>
+        <source>A12</source>
+        <translation>A12</translation>
+    </message>
+    <message>
+        <source>A11</source>
+        <translation>A11</translation>
+    </message>
+    <message>
+        <source>A10</source>
+        <translation>A10</translation>
+    </message>
+    <message>
+        <source>A9</source>
+        <translation>A9</translation>
+    </message>
+    <message>
+        <source>A8</source>
+        <translation>A8</translation>
+    </message>
+    <message>
+        <source>A7</source>
+        <translation>A7</translation>
+    </message>
+    <message>
+        <source>A6</source>
+        <translation>A6</translation>
+    </message>
+    <message>
+        <source>A5</source>
+        <translation>A5</translation>
+    </message>
+    <message>
+        <source>A4</source>
+        <translation>A4</translation>
+    </message>
+    <message>
+        <source>A3</source>
+        <translation>A3</translation>
+    </message>
+    <message>
+        <source>A2</source>
+        <translation>A2</translation>
+    </message>
+    <message>
+        <source>A1</source>
+        <translation>A1</translation>
+    </message>
+    <message>
+        <source>A0</source>
+        <translation>A0</translation>
+    </message>
+    <message>
+        <source>0x</source>
+        <translation>0x</translation>
+    </message>
+    <message>
+        <source>Data Bus</source>
+        <translation>Data Bus</translation>
+    </message>
+    <message>
+        <source>D15</source>
+        <translation>D15</translation>
+    </message>
+    <message>
+        <source>D14</source>
+        <translation>D14</translation>
+    </message>
+    <message>
+        <source>D13</source>
+        <translation>D13</translation>
+    </message>
+    <message>
+        <source>D12</source>
+        <translation>D12</translation>
+    </message>
+    <message>
+        <source>D11</source>
+        <translation>D11</translation>
+    </message>
+    <message>
+        <source>D10</source>
+        <translation>D10</translation>
+    </message>
+    <message>
+        <source>D9</source>
+        <translation>D9</translation>
+    </message>
+    <message>
+        <source>D8</source>
+        <translation>D8</translation>
+    </message>
+    <message>
+        <source>D7</source>
+        <translation>D7</translation>
+    </message>
+    <message>
+        <source>D6</source>
+        <translation>D6</translation>
+    </message>
+    <message>
+        <source>D5</source>
+        <translation>D5</translation>
+    </message>
+    <message>
+        <source>D4</source>
+        <translation>D4</translation>
+    </message>
+    <message>
+        <source>D3</source>
+        <translation>D3</translation>
+    </message>
+    <message>
+        <source>D2</source>
+        <translation>D2</translation>
+    </message>
+    <message>
+        <source>D1</source>
+        <translation>D1</translation>
+    </message>
+    <message>
+        <source>D0</source>
+        <translation>D0</translation>
     </message>
     <message>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
+    </message>
+    <message>
+        <source>&amp;Window</source>
+        <translation>&amp;Window</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -92,16 +288,28 @@
         <translation>About &amp;Qt</translation>
     </message>
     <message>
-        <source>Error opening the &quot;%1&quot; port.</source>
-        <translation>Error opening the &quot;%1&quot; port.</translation>
+        <source>&amp;Project Home</source>
+        <translation>&amp;Project Home</translation>
+    </message>
+    <message>
+        <source>Au&amp;thor Home</source>
+        <translation>Au&amp;thor Home</translation>
     </message>
     <message>
         <source>A memory device programmer (Flash/EPROM/E2PROM) board and software,connected to PC by USB port.</source>
         <translation>A memory device programmer (Flash/EPROM/E2PROM) board and software,connected to PC by USB port.</translation>
     </message>
     <message>
-        <source>&amp;Disconnect</source>
-        <translation>&amp;Disconnect</translation>
+        <source>Version</source>
+        <translation>Version</translation>
+    </message>
+    <message>
+        <source>Project Home Page</source>
+        <translation>Project Home Page</translation>
+    </message>
+    <message>
+        <source>Author</source>
+        <translation>Author</translation>
     </message>
     <message>
         <source>VDD Calibration</source>
@@ -123,16 +331,33 @@
         <source>The device has been disconnected from the &quot;%1&quot; port.</source>
         <translation>The device has been disconnected from the &quot;%1&quot; port.</translation>
     </message>
-</context>
-<context>
-    <name>MainWindow</name>
     <message>
-        <source>USB Flash/EPROM Programmer</source>
-        <translation>USB Flash/EPROM Programmer</translation>
+        <source>Error opening the &quot;%1&quot; port.</source>
+        <translation>Error opening the &quot;%1&quot; port.</translation>
     </message>
     <message>
-        <source>&amp;File</source>
-        <translation>&amp;File</translation>
+        <source>&amp;Disconnect</source>
+        <translation>&amp;Disconnect</translation>
+    </message>
+    <message>
+        <source>Ca&amp;librate</source>
+        <translation>Ca&amp;librate</translation>
+    </message>
+    <message>
+        <source>Cali&amp;brate</source>
+        <translation>Cali&amp;brate</translation>
+    </message>
+    <message>
+        <source>Set &amp;Address</source>
+        <translation>Set &amp;Address</translation>
+    </message>
+    <message>
+        <source>Set Da&amp;ta</source>
+        <translation>Set Da&amp;ta</translation>
+    </message>
+    <message>
+        <source>&amp;Get Data</source>
+        <translation>Set Da&amp;ta</translation>
     </message>
 </context>
 </TS>

@@ -20,12 +20,25 @@
  */
 // ---------------------------------------------------------------------------
 
-#include "backend/opcodes_test.hpp"
+#include <gtest/gtest.h>
+#include <QCoreApplication>
+#include <QTimer>
 
 // ---------------------------------------------------------------------------
 
 /**
  * @ingroup UnitTests
  * @brief Main routine for tests.
+ * @param argc Number of arguments.
+ * @param argv Array of arguments.
+ * @return Error code (zero if success).
  */
-QTEST_MAIN(OpCodeTest)
+int main(int argc, char **argv) {
+  QCoreApplication app{argc, argv};
+  QTimer::singleShot(0, [&]() {
+    ::testing::InitGoogleTest(&argc, argv);
+    auto testResult = RUN_ALL_TESTS();
+    app.exit(testResult);
+  });
+  return app.exec();
+}

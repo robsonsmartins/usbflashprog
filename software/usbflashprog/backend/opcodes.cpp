@@ -7,7 +7,7 @@
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
- * @ingroup Firmware
+ * @ingroup Software
  * @file backend/opcodes.cpp
  * @brief Implementation of the Opcodes for communication.
  * 
@@ -74,7 +74,7 @@ bool OpCode::getValueAsBool(const void *buf, size_t size) {
 bool OpCode::setValue(void *buf, size_t size, float value) {
   if (!buf || size < 3) { return false; }
   uint8_t *pbuf = static_cast<uint8_t*>(buf);
-  double i, f = std::modf(value, &i);
+  float i, f = std::modf(value, &i);
   pbuf[1] = i;
   pbuf[2] = f * 100;
   return true;

@@ -21,8 +21,22 @@
 // ---------------------------------------------------------------------------
 
 #include <QtGlobal>
+#include <QString>
 
 // ---------------------------------------------------------------------------
+
+const double kAppVersionArray[] = {
+    #include "VERSION" 
+};
+
+/** @brief GENERAL : App Version. */
+#define kAppVersion QString::number(kAppVersionArray[0],'f',1).toStdString().c_str()
+/** @brief GENERAL : Project Home Page. */
+constexpr const char *kProjectHomePage = "https://usbflashprog.robsonmartins.com/";
+/** @brief GENERAL : Author Home Page. */
+constexpr const char *kAuthorHomePage = "https://robsonmartins.com/";
+/** @brief GENERAL : Author Name. */
+constexpr const char *kAuthorName = "Robson Martins";
 
 /** @brief COMM/USB : Vendor ID. */
 constexpr quint16 kUsbVendorId = 0x2E8A;

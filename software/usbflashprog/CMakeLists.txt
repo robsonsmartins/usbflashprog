@@ -25,7 +25,6 @@ if(TEST_BUILD)
   set(CMAKE_AUTOUIC ON)
   set(CMAKE_AUTOMOC ON)
   set(CMAKE_AUTORCC ON)
-  enable_language(CXX)
   enable_testing()
   add_subdirectory(./test)
 
@@ -60,9 +59,6 @@ elseif(NORMAL_BUILD)
           main/mainwindow.cpp
           main/mainwindow.hpp
           main/mainwindow.ui
-          diag/diagwindow.cpp
-          diag/diagwindow.hpp
-          diag/diagwindow.ui
           main.cpp
   )
 
@@ -105,12 +101,8 @@ elseif(NORMAL_BUILD)
   target_link_libraries(ufprog ${REQUIRED_LIBS_QUALIFIED})
 
   set_target_properties(ufprog PROPERTIES
-      MACOSX_BUNDLE_GUI_IDENTIFIER usbflashprog.robsonmartins.com
-      MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-      MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
       MACOSX_BUNDLE TRUE
       MACOSX_BUNDLE_INFO_PLIST ${CMAKE_SOURCE_DIR}/Info.plist
-      MACOSX_DEPLOYMENT_TARGET 10.13
       WIN32_EXECUTABLE TRUE
   )
 

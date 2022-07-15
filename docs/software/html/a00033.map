@@ -1,4 +1,4 @@
-<map id="mainwindow.hpp" name="mainwindow.hpp">
-<area shape="rect" id="node1" title="Header of the Main Window Class." alt="" coords="5,5,137,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="13,80,129,107"/>
+<map id="opcodes_test.hpp" name="opcodes_test.hpp">
+<area shape="rect" id="node1" title="Header of Unit Test for OpCode Handling Classes." alt="" coords="5,5,141,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="21,80,125,107"/>
 </map>

@@ -66,41 +66,60 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">runner.hpp File Reference<div class="ingroups"><a class="el" href="a00041.html">Software Project</a></div></div>  </div>
+<div class="title">runner.hpp File Reference<div class="ingroups"><a class="el" href="a00044.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header of the Runner Class.  
+<p>Header of the <a class="el" href="a00875.html" title="Runner Class.">Runner</a> Class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;QObject&gt;</code><br />
 <code>#include &lt;QString&gt;</code><br />
-<code>#include &lt;QMutex&gt;</code><br />
 <code>#include &lt;QQueue&gt;</code><br />
+<code>#include &lt;QList&gt;</code><br />
 <code>#include &lt;QByteArray&gt;</code><br />
+<code>#include &lt;QSerialPort&gt;</code><br />
+<code>#include &lt;QSerialPortInfo&gt;</code><br />
 <code>#include &quot;<a class="el" href="a00005.html">backend/opcodes.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00017.html">backend/serial.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for runner.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="a00012.png" border="0" usemap="#arunner_8hpp" alt=""/></div>
 <map name="arunner_8hpp" id="arunner_8hpp">
-<area shape="rect" title="Header of the Runner Class." alt="" coords="312,5,403,32"/>
-<area shape="rect" title=" " alt="" coords="5,155,80,181"/>
-<area shape="rect" title=" " alt="" coords="105,155,175,181"/>
-<area shape="rect" title=" " alt="" coords="395,80,469,107"/>
-<area shape="rect" title=" " alt="" coords="493,80,568,107"/>
-<area shape="rect" title=" " alt="" coords="463,155,561,181"/>
-<area shape="rect" href="a00005.html" title="Opcodes for communication." alt="" coords="592,80,755,107"/>
-<area shape="rect" href="a00017.html" title="Header of the Serial Port Communication Class." alt="" coords="176,80,320,107"/>
-<area shape="rect" title=" " alt="" coords="691,155,749,181"/>
-<area shape="rect" title=" " alt="" coords="616,155,667,181"/>
-<area shape="rect" title=" " alt="" coords="319,155,439,181"/>
-<area shape="rect" title=" " alt="" coords="199,155,294,181"/>
+<area shape="rect" title="Header of the Runner Class." alt="" coords="331,5,421,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" title=" " alt="" coords="105,80,175,107"/>
+<area shape="rect" title=" " alt="" coords="200,80,275,107"/>
+<area shape="rect" title=" " alt="" coords="299,80,354,107"/>
+<area shape="rect" title=" " alt="" coords="378,80,475,107"/>
+<area shape="rect" title=" " alt="" coords="499,80,594,107"/>
+<area shape="rect" title=" " alt="" coords="619,80,739,107"/>
+<area shape="rect" href="a00005.html" title="Opcodes for communication." alt="" coords="763,80,925,107"/>
+<area shape="rect" title=" " alt="" coords="775,155,833,181"/>
+<area shape="rect" title=" " alt="" coords="857,155,908,181"/>
 </map>
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header of the Runner Class. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00871.html">TRunnerCommand</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a command to be run and its response.  <a href="a00871.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00875.html">Runner</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00875.html" title="Runner Class.">Runner</a> Class.  <a href="a00875.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gabf714a37d284d2dd5538b09a3e45f988"><td class="memItemLeft" align="right" valign="top">typedef QList&lt; QSerialPortInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00044.html#gabf714a37d284d2dd5538b09a3e45f988">TSerialPortList</a></td></tr>
+<tr class="memdesc:gabf714a37d284d2dd5538b09a3e45f988"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of serial ports info.  <a href="a00044.html#gabf714a37d284d2dd5538b09a3e45f988">More...</a><br /></td></tr>
+<tr class="separator:gabf714a37d284d2dd5538b09a3e45f988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header of the <a class="el" href="a00875.html" title="Runner Class.">Runner</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

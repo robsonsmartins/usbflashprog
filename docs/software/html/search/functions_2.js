@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['isok_82',['isOk',['../a00863.html#ac7857fc60a17a2ef338b2b01501ee2da',1,'OpCode']]]
+  ['isok_122',['isOk',['../a00867.html#ac7857fc60a17a2ef338b2b01501ee2da',1,'OpCode']]],
+  ['isopen_123',['isOpen',['../a00875.html#a002ed331862370f434b7befe331b5a0b',1,'Runner']]]
 ];

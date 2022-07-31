@@ -35,6 +35,10 @@
 # define RESOURCES_PATH SourcePath + "..\resources"
 #endif
 
+#ifndef THIRD_PATH
+# define THIRD_PATH SourcePath + "..\third"
+#endif
+
 #ifndef ARCH
 # define ARCH "WIN64"
 #endif
@@ -136,6 +140,10 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "{#BUILD_PATH}\ufprog.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#RESOURCES_PATH}\ufprog.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#RESOURCES_PATH}\win\ufprog\ufprog.inf"; DestDir: "{app}\driver"; Flags: ignoreversion; OnlyBelowVersion: 6.2
+Source: "{#RESOURCES_PATH}\win\ufprog\ufprog.cat"; DestDir: "{app}\driver"; Flags: ignoreversion; OnlyBelowVersion: 6.2
+Source: "{#RESOURCES_PATH}\win\ufprog.cer"; DestDir: "{tmp}"; Flags: ignoreversion; OnlyBelowVersion: 6.2
+Source: "{#THIRD_PATH}\win\certmgr.exe"; DestDir: "{tmp}"; Flags: ignoreversion; OnlyBelowVersion: 6.2
 
 #if WIN32_ARCH == UpperCase(ARCH)
   Source: "{#MINGW_BIN_PATH}\libgcc_s_dw2-1.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -169,6 +177,13 @@ Name: "{group}\{#APP_VERNAME}"; Filename: "{app}\{#APP_MAIN_EXE}"
 Name: "{group}\Project Home Page"; Filename: "{#APP_URL}"
 Name: "{group}\{cm:UninstallProgram,{#APP_NAME}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#APP_VERNAME}"; Filename: "{app}\{#APP_MAIN_EXE}"; Tasks: desktopicon
+
+; ------------------------------------------------------------------------------
+
+[Run]
+Filename: "{tmp}\certmgr.exe"; Parameters: "-add ""{tmp}\ufprog.cer"" -s -r localMachine ROOT"; Flags: runhidden waituntilterminated; OnlyBelowVersion: 6.2
+Filename: "{tmp}\certmgr.exe"; Parameters: "-add ""{tmp}\ufprog.cer"" -s -r localMachine TRUSTEDPUBLISHER"; Flags: runhidden waituntilterminated; OnlyBelowVersion: 6.2
+Filename: "pnputil.exe"; Parameters: "/i /a ""{app}\driver\ufprog.inf"""; Flags: runhidden waituntilterminated; OnlyBelowVersion: 6.2
 
 ; ------------------------------------------------------------------------------
 

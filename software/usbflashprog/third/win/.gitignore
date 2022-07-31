@@ -1,0 +1,18 @@
+# ---------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2022) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ---------------------------------------------------------------------------
+
+# Exception for win_executables
+!certmgr.exe
+!selfsign/inf2cat.exe
+!selfsign/signtool.exe
+!selfsign/Microsoft.Whos.Shared.IO.Cabinets.dll
+!selfsign/Microsoft.Whos.Shared.IO.Catalogs.dll
+!selfsign/Microsoft.Whos.Shared.Xml.InfReader.dll
+!selfsign/Microsoft.Whos.Winqual.Submissions.SubmissionBuilder.dll
+!selfsign/Microsoft.Whos.Xml.NonXmlDataReader.dll

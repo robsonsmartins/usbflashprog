@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>658</width>
+    <width>660</width>
     <height>804</height>
    </rect>
   </property>
@@ -1704,14 +1704,17 @@
                    <property name="specialValueText">
                     <string/>
                    </property>
+                   <property name="keyboardTracking">
+                    <bool>false</bool>
+                   </property>
                    <property name="showGroupSeparator" stdset="0">
                     <bool>false</bool>
                    </property>
                    <property name="suffix">
-                    <string/>
+                    <string notr="true"> H</string>
                    </property>
                    <property name="prefix">
-                    <string>0x</string>
+                    <string notr="true"/>
                    </property>
                    <property name="maximum">
                     <number>16777215</number>
@@ -2188,14 +2191,20 @@
                    <property name="specialValueText">
                     <string/>
                    </property>
+                   <property name="correctionMode">
+                    <enum>QAbstractSpinBox::CorrectToPreviousValue</enum>
+                   </property>
+                   <property name="keyboardTracking">
+                    <bool>false</bool>
+                   </property>
                    <property name="showGroupSeparator" stdset="0">
                     <bool>false</bool>
                    </property>
                    <property name="suffix">
-                    <string/>
+                    <string notr="true"> H</string>
                    </property>
                    <property name="prefix">
-                    <string>0x</string>
+                    <string notr="true"/>
                    </property>
                    <property name="maximum">
                     <number>65535</number>
@@ -2320,8 +2329,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>658</width>
-     <height>22</height>
+     <width>660</width>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

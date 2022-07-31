@@ -31,15 +31,31 @@ QT_END_NAMESPACE
 
 // ---------------------------------------------------------------------------
 
+/**
+ * @ingroup Software
+ * @brief Main Window GUI Class
+ * @details The Main Window of Application.
+ * @nosubgrouping
+ */
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
  public:
+    /**
+     * @brief Constructor.
+     * @param parent Pointer to parent object. Default is nullptr.
+     */
     explicit MainWindow(QWidget *parent = nullptr);
+    /** @brief Destructor. */
     ~MainWindow();
+    /**
+     * @brief Gets a pointer to the primary screen.
+     * @return Pointer to the primary screen object.
+     */
     QScreen *screen() const;
 
  private slots:
+    /* auto slots */
     void on_tabWidget_currentChanged(int index);
     void on_actionBuffer_triggered(bool checked = false);
     void on_actionDiagnostics_triggered(bool checked = false);
@@ -64,21 +80,53 @@ class MainWindow : public QMainWindow {
     void on_checkBoxWE_toggled(bool checked = false);
     void on_dialVdd_valueChanged(int value);
     void on_dialVpp_valueChanged(int value);
+    void on_spinBoxAddr_valueChanged(int value);
+    void on_spinBoxData_valueChanged(int value);
+    /* manual slots */
     void onEnumTimerTimeout();
     void onRefreshTimerTimeout();
     void onRunnerResultReady(const TRunnerCommand& command);
+    void onCheckBoxAddressToggled(bool checked = false);
+    void onCheckBoxDataToggled(bool checked = false);
 
  protected:
+    /*
+     * @brief OnClose event of the Window.
+     * @param event Pointer to event object.
+     */
     void closeEvent(QCloseEvent *event);
 
  private:
+    /* @brief Pointer to UI object. */
     Ui::MainWindow *ui_;
+    /* @brief Ports Enumerator Timer (Diag). */
     QTimer enumTimer_;
+    /* @brief Refresh Timer (Diag). */
     QTimer refreshTimer_;
+    /* @brief Runner object. */
     Runner runner_;
+    /* @brief Connects signals of the widgets. */
+    void connectSignals_();
+    /*
+     * @brief Connects to board via CDC port (Diag).
+     * @param state True to connect, false to disconnect.
+     */
     void connect_(bool state = true);
+    /* @brief Refreshes the port combobox (Diag). */
     void refreshPortComboBox_();
+    /*
+     * @brief Enables/Disables the controls (Diag).
+     * @param state True to enable, false otherwise.
+     */
     void enableControls_(bool state = true);
+    /* @brief Converts Addr Bus Checkbox to Spinbox Value (Diag). */
+    void addressBinToHex_();
+    /* @brief Converts Addr Bus Spinbox Value to Checkbox (Diag). */
+    void addressHexToBin_();
+    /* @brief Converts Data Bus Checkbox to Spinbox Value (Diag). */
+    void dataBinToHex_();
+    /* @brief Converts Data Bus Spinbox Value to Checkbox (Diag). */
+    void dataHexToBin_();
 };
 
 #endif  // MAIN_MAINWINDOW_HPP_

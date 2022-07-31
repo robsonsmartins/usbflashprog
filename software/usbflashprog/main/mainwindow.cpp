@@ -49,13 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui_->frameBusCtrl->setEnabled(false);
     ui_->frameBusAddr->setEnabled(false);
     ui_->frameBusData->setEnabled(false);
-    connect(&enumTimer_, &QTimer::timeout,
-            this, &MainWindow::onEnumTimerTimeout);
-    connect(&refreshTimer_, &QTimer::timeout,
-            this, &MainWindow::onRefreshTimerTimeout);
-    connect(&runner_, &Runner::resultReady,
-            this, &MainWindow::onRunnerResultReady);
-    enumTimer_.start(kUsbEnumerateInterval);
+    connectSignals_();
     enableControls_(false);
     this->setGeometry(
         QStyle::alignedRect(
@@ -63,6 +57,101 @@ MainWindow::MainWindow(QWidget *parent)
             Qt::AlignCenter,
             this->size(),
             screen()->availableGeometry()));
+    QFont font = ui_->spinBoxAddr->font();
+    font.setCapitalization(QFont::AllUppercase);
+    ui_->spinBoxAddr->setFont(font);
+    font = ui_->spinBoxData->font();
+    font.setCapitalization(QFont::AllUppercase);
+    ui_->spinBoxData->setFont(font);
+}
+
+void MainWindow::connectSignals_() {
+    connect(&enumTimer_, &QTimer::timeout,
+            this, &MainWindow::onEnumTimerTimeout);
+    connect(&refreshTimer_, &QTimer::timeout,
+            this, &MainWindow::onRefreshTimerTimeout);
+    connect(&runner_, &Runner::resultReady,
+            this, &MainWindow::onRunnerResultReady);
+    connect(ui_->checkBoxA0, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA1, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA2, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA3, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA4, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA5, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA6, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA7, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA8, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA9, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA10, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA11, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA12, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA13, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA14, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA15, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA16, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA17, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA18, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA19, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA20, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA21, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA22, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA23, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxD0, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD1, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD2, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD3, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD4, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD5, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD6, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD7, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD8, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD9, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD10, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD11, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD12, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD13, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD14, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD15, &QCheckBox::toggled,
+            this, &MainWindow::onCheckBoxDataToggled);
 }
 
 MainWindow::~MainWindow() {
@@ -79,8 +168,12 @@ QScreen* MainWindow::screen() const {
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index) {
-    connect_(false);
-    enumTimer_.stop();
+    if (ui_->tabWidget->currentWidget() == ui_->tabDiagnostics) {
+        enumTimer_.start(kUsbEnumerateInterval);
+    } else {
+        connect_(false);
+        enumTimer_.stop();
+    }
 }
 
 void MainWindow::on_actionBuffer_triggered(bool checked) {
@@ -293,6 +386,22 @@ void MainWindow::onRunnerResultReady(const TRunnerCommand& command) {
     std::locale::global(originalLocale);
 }
 
+void MainWindow::onCheckBoxAddressToggled(bool checked) {
+    addressBinToHex_();
+}
+
+void MainWindow::on_spinBoxAddr_valueChanged(int value) {
+    addressHexToBin_();
+}
+
+void MainWindow::onCheckBoxDataToggled(bool checked) {
+    dataBinToHex_();
+}
+
+void MainWindow::on_spinBoxData_valueChanged(int value) {
+    dataHexToBin_();
+}
+
 void MainWindow::closeEvent(QCloseEvent *event) {
     static bool readyToClose = false;
     if (!readyToClose) { event->ignore(); }
@@ -405,6 +514,8 @@ void MainWindow::enableControls_(bool state) {
         ui_->checkBoxCE->setChecked(false);
         ui_->checkBoxOE->setChecked(false);
         ui_->checkBoxWE->setChecked(false);
+        ui_->spinBoxAddr->setValue(0);
+        ui_->spinBoxData->setValue(0);
         ui_->lcdNumberVdd->setStyleSheet(
             "background-color:rgb(76,76,76);color:rgb(89,150,101);");
         ui_->lcdNumberVddDuty->setStyleSheet(
@@ -418,4 +529,102 @@ void MainWindow::enableControls_(bool state) {
         ui_->lcdNumberVddDuty->display(QString("0.0"));
         ui_->lcdNumberVppDuty->display(QString("0.0"));
     }
+}
+
+void MainWindow::addressBinToHex_() {
+    int value =
+        (ui_->checkBoxA0->isChecked()  ?       1 : 0) |
+        (ui_->checkBoxA1->isChecked()  ? 1 <<  1 : 0) |
+        (ui_->checkBoxA2->isChecked()  ? 1 <<  2 : 0) |
+        (ui_->checkBoxA3->isChecked()  ? 1 <<  3 : 0) |
+        (ui_->checkBoxA4->isChecked()  ? 1 <<  4 : 0) |
+        (ui_->checkBoxA5->isChecked()  ? 1 <<  5 : 0) |
+        (ui_->checkBoxA6->isChecked()  ? 1 <<  6 : 0) |
+        (ui_->checkBoxA7->isChecked()  ? 1 <<  7 : 0) |
+        (ui_->checkBoxA8->isChecked()  ? 1 <<  8 : 0) |
+        (ui_->checkBoxA9->isChecked()  ? 1 <<  9 : 0) |
+        (ui_->checkBoxA10->isChecked() ? 1 << 10 : 0) |
+        (ui_->checkBoxA11->isChecked() ? 1 << 11 : 0) |
+        (ui_->checkBoxA12->isChecked() ? 1 << 12 : 0) |
+        (ui_->checkBoxA13->isChecked() ? 1 << 13 : 0) |
+        (ui_->checkBoxA14->isChecked() ? 1 << 14 : 0) |
+        (ui_->checkBoxA15->isChecked() ? 1 << 15 : 0) |
+        (ui_->checkBoxA16->isChecked() ? 1 << 16 : 0) |
+        (ui_->checkBoxA17->isChecked() ? 1 << 17 : 0) |
+        (ui_->checkBoxA18->isChecked() ? 1 << 18 : 0) |
+        (ui_->checkBoxA19->isChecked() ? 1 << 19 : 0) |
+        (ui_->checkBoxA20->isChecked() ? 1 << 20 : 0) |
+        (ui_->checkBoxA21->isChecked() ? 1 << 21 : 0) |
+        (ui_->checkBoxA22->isChecked() ? 1 << 22 : 0) |
+        (ui_->checkBoxA23->isChecked() ? 1 << 23 : 0);
+    ui_->spinBoxAddr->setValue(value);
+}
+
+void MainWindow::addressHexToBin_() {
+    int value = ui_->spinBoxAddr->value();
+    ui_->checkBoxA0->setChecked (value & (      1));
+    ui_->checkBoxA1->setChecked (value & (1 <<  1));
+    ui_->checkBoxA2->setChecked (value & (1 <<  2));
+    ui_->checkBoxA3->setChecked (value & (1 <<  3));
+    ui_->checkBoxA4->setChecked (value & (1 <<  4));
+    ui_->checkBoxA5->setChecked (value & (1 <<  5));
+    ui_->checkBoxA6->setChecked (value & (1 <<  6));
+    ui_->checkBoxA7->setChecked (value & (1 <<  7));
+    ui_->checkBoxA8->setChecked (value & (1 <<  8));
+    ui_->checkBoxA9->setChecked (value & (1 <<  9));
+    ui_->checkBoxA10->setChecked(value & (1 << 10));
+    ui_->checkBoxA11->setChecked(value & (1 << 11));
+    ui_->checkBoxA12->setChecked(value & (1 << 12));
+    ui_->checkBoxA13->setChecked(value & (1 << 13));
+    ui_->checkBoxA14->setChecked(value & (1 << 14));
+    ui_->checkBoxA15->setChecked(value & (1 << 15));
+    ui_->checkBoxA16->setChecked(value & (1 << 16));
+    ui_->checkBoxA17->setChecked(value & (1 << 17));
+    ui_->checkBoxA18->setChecked(value & (1 << 18));
+    ui_->checkBoxA19->setChecked(value & (1 << 19));
+    ui_->checkBoxA20->setChecked(value & (1 << 20));
+    ui_->checkBoxA21->setChecked(value & (1 << 21));
+    ui_->checkBoxA22->setChecked(value & (1 << 22));
+    ui_->checkBoxA23->setChecked(value & (1 << 23));
+}
+
+void MainWindow::dataBinToHex_() {
+    int value =
+        (ui_->checkBoxD0->isChecked()  ?       1 : 0) |
+        (ui_->checkBoxD1->isChecked()  ? 1 <<  1 : 0) |
+        (ui_->checkBoxD2->isChecked()  ? 1 <<  2 : 0) |
+        (ui_->checkBoxD3->isChecked()  ? 1 <<  3 : 0) |
+        (ui_->checkBoxD4->isChecked()  ? 1 <<  4 : 0) |
+        (ui_->checkBoxD5->isChecked()  ? 1 <<  5 : 0) |
+        (ui_->checkBoxD6->isChecked()  ? 1 <<  6 : 0) |
+        (ui_->checkBoxD7->isChecked()  ? 1 <<  7 : 0) |
+        (ui_->checkBoxD8->isChecked()  ? 1 <<  8 : 0) |
+        (ui_->checkBoxD9->isChecked()  ? 1 <<  9 : 0) |
+        (ui_->checkBoxD10->isChecked() ? 1 << 10 : 0) |
+        (ui_->checkBoxD11->isChecked() ? 1 << 11 : 0) |
+        (ui_->checkBoxD12->isChecked() ? 1 << 12 : 0) |
+        (ui_->checkBoxD13->isChecked() ? 1 << 13 : 0) |
+        (ui_->checkBoxD14->isChecked() ? 1 << 14 : 0) |
+        (ui_->checkBoxD15->isChecked() ? 1 << 15 : 0);
+    ui_->spinBoxData->setValue(value);
+}
+
+void MainWindow::dataHexToBin_() {
+    int value = ui_->spinBoxData->value();
+    ui_->checkBoxD0->setChecked (value & (      1));
+    ui_->checkBoxD1->setChecked (value & (1 <<  1));
+    ui_->checkBoxD2->setChecked (value & (1 <<  2));
+    ui_->checkBoxD3->setChecked (value & (1 <<  3));
+    ui_->checkBoxD4->setChecked (value & (1 <<  4));
+    ui_->checkBoxD5->setChecked (value & (1 <<  5));
+    ui_->checkBoxD6->setChecked (value & (1 <<  6));
+    ui_->checkBoxD7->setChecked (value & (1 <<  7));
+    ui_->checkBoxD8->setChecked (value & (1 <<  8));
+    ui_->checkBoxD9->setChecked (value & (1 <<  9));
+    ui_->checkBoxD10->setChecked(value & (1 << 10));
+    ui_->checkBoxD11->setChecked(value & (1 << 11));
+    ui_->checkBoxD12->setChecked(value & (1 << 12));
+    ui_->checkBoxD13->setChecked(value & (1 << 13));
+    ui_->checkBoxD14->setChecked(value & (1 << 14));
+    ui_->checkBoxD15->setChecked(value & (1 << 15));
 }

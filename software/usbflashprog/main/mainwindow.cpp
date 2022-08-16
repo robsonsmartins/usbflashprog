@@ -25,6 +25,7 @@
 #include <QWindow>
 #include <QDesktopWidget>
 #include <QDesktopServices>
+#include <QFileDialog>
 
 #include <cstdio>
 #include <cstring>
@@ -37,6 +38,7 @@
 #include "backend/opcodes.hpp"
 
 // ---------------------------------------------------------------------------
+// General
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -49,8 +51,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui_->frameBusCtrl->setEnabled(false);
     ui_->frameBusAddr->setEnabled(false);
     ui_->frameBusData->setEnabled(false);
-    connectSignals_();
-    enableControls_(false);
     this->setGeometry(
         QStyle::alignedRect(
             Qt::LeftToRight,
@@ -63,6 +63,13 @@ MainWindow::MainWindow(QWidget *parent)
     font = ui_->spinBoxData->font();
     font.setCapitalization(QFont::AllUppercase);
     ui_->spinBoxData->setFont(font);
+
+    hexeditor_ = new QHexEditor(ui_->tabBuffer);
+    ui_->tabBuffer->layout()->addWidget(hexeditor_);
+    ui_->actionSave->setEnabled(false);
+
+    connectSignals_();
+    enableControls_(false);
 }
 
 void MainWindow::connectSignals_() {
@@ -152,6 +159,8 @@ void MainWindow::connectSignals_() {
             this, &MainWindow::onCheckBoxDataToggled);
     connect(ui_->checkBoxD15, &QCheckBox::toggled,
             this, &MainWindow::onCheckBoxDataToggled);
+    connect(hexeditor_, &QHexEditor::changed,
+            this, &MainWindow::onDataChanged);
 }
 
 MainWindow::~MainWindow() {
@@ -170,9 +179,11 @@ QScreen* MainWindow::screen() const {
 void MainWindow::on_tabWidget_currentChanged(int index) {
     if (ui_->tabWidget->currentWidget() == ui_->tabDiagnostics) {
         enumTimer_.start(kUsbEnumerateInterval);
+        ui_->frameToolBar->setVisible(false);
     } else {
         connect_(false);
         enumTimer_.stop();
+        ui_->frameToolBar->setVisible(true);
     }
 }
 
@@ -182,14 +193,6 @@ void MainWindow::on_actionBuffer_triggered(bool checked) {
 
 void MainWindow::on_actionDiagnostics_triggered(bool checked) {
     ui_->tabWidget->setCurrentWidget(ui_->tabDiagnostics);
-}
-
-void MainWindow::on_pushButtonConnect_clicked() {
-    if (!runner_.isOpen()) {
-        connect_();
-    } else {
-        connect_(false);
-    }
 }
 
 void MainWindow::on_actionExit_triggered(bool checked) {
@@ -217,6 +220,29 @@ void MainWindow::on_actionProjectHome_triggered(bool checked) {
 
 void MainWindow::on_actionAuthorHome_triggered(bool checked) {
     QDesktopServices::openUrl(QUrl(kAuthorHomePage));
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    static bool readyToClose = false;
+    if (!readyToClose) { event->ignore(); }
+    connect_(false);
+    QTimer::singleShot(500, this,
+        [this]{
+            readyToClose = true;
+            this->close();
+        });
+    enumTimer_.stop();
+}
+
+// ---------------------------------------------------------------------------
+// Diagnostics
+
+void MainWindow::on_pushButtonConnect_clicked() {
+    if (!runner_.isOpen()) {
+        connect_();
+    } else {
+        connect_(false);
+    }
 }
 
 void MainWindow::on_pushButtonVddInitCal_clicked() {
@@ -402,18 +428,6 @@ void MainWindow::on_spinBoxData_valueChanged(int value) {
     dataHexToBin_();
 }
 
-void MainWindow::closeEvent(QCloseEvent *event) {
-    static bool readyToClose = false;
-    if (!readyToClose) { event->ignore(); }
-    connect_(false);
-    QTimer::singleShot(500, this,
-        [this]{
-            readyToClose = true;
-            this->close();
-        });
-    enumTimer_.stop();
-}
-
 void MainWindow::refreshPortComboBox_() {
     TSerialPortList list = runner_.list();
     QStringList paths;
@@ -562,16 +576,16 @@ void MainWindow::addressBinToHex_() {
 
 void MainWindow::addressHexToBin_() {
     int value = ui_->spinBoxAddr->value();
-    ui_->checkBoxA0->setChecked (value & (      1));
-    ui_->checkBoxA1->setChecked (value & (1 <<  1));
-    ui_->checkBoxA2->setChecked (value & (1 <<  2));
-    ui_->checkBoxA3->setChecked (value & (1 <<  3));
-    ui_->checkBoxA4->setChecked (value & (1 <<  4));
-    ui_->checkBoxA5->setChecked (value & (1 <<  5));
-    ui_->checkBoxA6->setChecked (value & (1 <<  6));
-    ui_->checkBoxA7->setChecked (value & (1 <<  7));
-    ui_->checkBoxA8->setChecked (value & (1 <<  8));
-    ui_->checkBoxA9->setChecked (value & (1 <<  9));
+    ui_->checkBoxA0 ->setChecked(value & (1 <<  0));
+    ui_->checkBoxA1 ->setChecked(value & (1 <<  1));
+    ui_->checkBoxA2 ->setChecked(value & (1 <<  2));
+    ui_->checkBoxA3 ->setChecked(value & (1 <<  3));
+    ui_->checkBoxA4 ->setChecked(value & (1 <<  4));
+    ui_->checkBoxA5 ->setChecked(value & (1 <<  5));
+    ui_->checkBoxA6 ->setChecked(value & (1 <<  6));
+    ui_->checkBoxA7 ->setChecked(value & (1 <<  7));
+    ui_->checkBoxA8 ->setChecked(value & (1 <<  8));
+    ui_->checkBoxA9 ->setChecked(value & (1 <<  9));
     ui_->checkBoxA10->setChecked(value & (1 << 10));
     ui_->checkBoxA11->setChecked(value & (1 << 11));
     ui_->checkBoxA12->setChecked(value & (1 << 12));
@@ -611,20 +625,99 @@ void MainWindow::dataBinToHex_() {
 
 void MainWindow::dataHexToBin_() {
     int value = ui_->spinBoxData->value();
-    ui_->checkBoxD0->setChecked (value & (      1));
-    ui_->checkBoxD1->setChecked (value & (1 <<  1));
-    ui_->checkBoxD2->setChecked (value & (1 <<  2));
-    ui_->checkBoxD3->setChecked (value & (1 <<  3));
-    ui_->checkBoxD4->setChecked (value & (1 <<  4));
-    ui_->checkBoxD5->setChecked (value & (1 <<  5));
-    ui_->checkBoxD6->setChecked (value & (1 <<  6));
-    ui_->checkBoxD7->setChecked (value & (1 <<  7));
-    ui_->checkBoxD8->setChecked (value & (1 <<  8));
-    ui_->checkBoxD9->setChecked (value & (1 <<  9));
+    ui_->checkBoxD0 ->setChecked(value & (1 <<  0));
+    ui_->checkBoxD1 ->setChecked(value & (1 <<  1));
+    ui_->checkBoxD2 ->setChecked(value & (1 <<  2));
+    ui_->checkBoxD3 ->setChecked(value & (1 <<  3));
+    ui_->checkBoxD4 ->setChecked(value & (1 <<  4));
+    ui_->checkBoxD5 ->setChecked(value & (1 <<  5));
+    ui_->checkBoxD6 ->setChecked(value & (1 <<  6));
+    ui_->checkBoxD7 ->setChecked(value & (1 <<  7));
+    ui_->checkBoxD8 ->setChecked(value & (1 <<  8));
+    ui_->checkBoxD9 ->setChecked(value & (1 <<  9));
     ui_->checkBoxD10->setChecked(value & (1 << 10));
     ui_->checkBoxD11->setChecked(value & (1 << 11));
     ui_->checkBoxD12->setChecked(value & (1 << 12));
     ui_->checkBoxD13->setChecked(value & (1 << 13));
     ui_->checkBoxD14->setChecked(value & (1 << 14));
     ui_->checkBoxD15->setChecked(value & (1 << 15));
+}
+
+// ---------------------------------------------------------------------------
+// Buffer Editor
+
+void MainWindow::on_actionOpen_triggered(bool checked) {
+    QString filename = QFileDialog::getOpenFileName(this,
+        tr("Open Binary File"), "",
+        tr("Binary Files") + " (*.bin *.hex);;" +
+        tr("All Files") + " (*.*)");
+
+    if (filename.isEmpty()) { return; }
+    if (!hexeditor_->open(filename)) {
+        // error
+    }
+    ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
+    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
+        QFileInfo(filename).fileName());
+}
+
+void MainWindow::on_actionSave_triggered(bool checked) {
+    if (!hexeditor_->save()) {
+        // error
+    }
+}
+
+void MainWindow::on_actionSaveAs_triggered(bool checked) {
+    QString filename = QFileDialog::getSaveFileName(this,
+        tr("Save Binary File"), "",
+        tr("Binary Files") + " (*.bin);;" +
+        tr("All Files") + " (*.*)");
+
+    if (filename.isEmpty()) { return; }
+    if (!hexeditor_->saveAs(filename)) {
+        // error
+    }
+}
+
+void MainWindow::on_actionFillFF_triggered(bool checked) {
+    hexeditor_->fill(0xFF);
+}
+
+void MainWindow::on_actionFill00_triggered(bool checked) {
+    hexeditor_->fill(0x00);
+}
+
+void MainWindow::on_actionFillRandom_triggered(bool checked) {
+    hexeditor_->random();
+}
+
+void MainWindow::on_actionFind_triggered(bool checked) {
+    hexeditor_->showFindDialog();
+}
+
+void MainWindow::on_actionReplace_triggered(bool checked) {
+    hexeditor_->showReplaceDialog();
+}
+
+void MainWindow::on_btnOpen_clicked() {
+    on_actionOpen_triggered();
+}
+
+void MainWindow::on_btnSave_clicked() {
+    if (ui_->actionSave->isEnabled()) {
+        on_actionSave_triggered();
+    } else {
+        on_actionSaveAs_triggered();
+    }
+}
+
+void MainWindow::onDataChanged(bool status) {
+    QString title = tr("USB Flash/EPROM Programmer");
+    if (!hexeditor_->filename().isEmpty()) {
+        title += " - " +
+            QFileInfo(hexeditor_->filename()).fileName();
+        ui_->actionSave->setEnabled(status);
+    }
+    if (status) {title += "*"; }
+    setWindowTitle(title);
 }

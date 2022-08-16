@@ -2,6 +2,61 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="pt_BR">
 <context>
+    <name>HexFindDialog</name>
+    <message>
+        <source>Replace...</source>
+        <translation>Subistituir...</translation>
+    </message>
+    <message>
+        <source>Find...</source>
+        <translation>Procurar...</translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <translation>Modo:</translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation>Procurar:</translation>
+    </message>
+    <message>
+        <source>Replace:</source>
+        <translation>Subistituir:</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Opções</translation>
+    </message>
+    <message>
+        <source>Find direction</source>
+        <translation>Direção de Procura</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation>Procurar</translation>
+    </message>
+    <message>
+        <source>Replace</source>
+        <translation>Subistituir</translation>
+    </message>
+    <message>
+        <source>Not found</source>
+        <translation>Não encontrado</translation>
+    </message>
+    <message>
+        <source>Cannot find &apos;%1&apos;</source>
+        <translation>&apos;%1&apos; não encontrado</translation>
+    </message>
+    <message>
+        <source>Pattern Error</source>
+        <translation>Erro no pattern</translation>
+    </message>
+    <message>
+        <source>Hex pattern &apos;%1&apos; is not valid</source>
+        <translation>Pattern &apos;%1&apos; não é válido</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>&amp;File</source>
@@ -14,10 +69,6 @@
     <message>
         <source>&amp;Buffer</source>
         <translation>A&amp;rquivo</translation>
-    </message>
-    <message>
-        <source>ASCII</source>
-        <translation>ASCII</translation>
     </message>
     <message>
         <source>&amp;Diagnostics</source>
@@ -196,10 +247,6 @@
         <translation>A0</translation>
     </message>
     <message>
-        <source>0x</source>
-        <translation>0x</translation>
-    </message>
-    <message>
         <source>Data Bus</source>
         <translation>Bus Dados</translation>
     </message>
@@ -358,6 +405,54 @@
     <message>
         <source>&amp;Get Data</source>
         <translation>&amp;Ler Dados</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation>&amp;Editar</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>&amp;Abrir...</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Salvar</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Salvar &amp;Como...</translation>
+    </message>
+    <message>
+        <source>Fill with 0x&amp;FF</source>
+        <translation>Preencher com 0x&amp;FF</translation>
+    </message>
+    <message>
+        <source>Fill with 0x&amp;00</source>
+        <translation>Preencher com 0x&amp;00</translation>
+    </message>
+    <message>
+        <source>Fill with &amp;Random</source>
+        <translation>Preencher com Aleató&amp;rio</translation>
+    </message>
+    <message>
+        <source>Open Binary File</source>
+        <translation>Abrir Arquivo Binário</translation>
+    </message>
+    <message>
+        <source>Binary Files</source>
+        <translation>Arquivos Binários</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation>Todos Arquivos</translation>
+    </message>
+    <message>
+        <source>Save Binary File</source>
+        <translation>Salvar Arquivo Binário</translation>
     </message>
 </context>
 </TS>

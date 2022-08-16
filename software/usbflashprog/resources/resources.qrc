@@ -2,4 +2,8 @@
     <qresource prefix="/icon">
         <file>ufprog.png</file>
     </qresource>
+    <qresource>
+        <file>toolicons/file-open.ico</file>
+        <file>toolicons/file-save.ico</file>
+    </qresource>
 </RCC>

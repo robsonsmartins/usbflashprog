@@ -26,13 +26,14 @@
 // ---------------------------------------------------------------------------
 
 const double kAppVersionArray[] = {
-    #include "VERSION" 
+    #include "VERSION"
 };
 
 /** @brief GENERAL : App Version. */
-#define kAppVersion QString::number(kAppVersionArray[0],'f',1).toStdString().c_str()
+#define kAppVersion QString::number(kAppVersionArray[0],'f',1).toStdString().c_str() // NOLINT
 /** @brief GENERAL : Project Home Page. */
-constexpr const char *kProjectHomePage = "https://usbflashprog.robsonmartins.com/";
+constexpr const char *kProjectHomePage =
+    "https://usbflashprog.robsonmartins.com/";
 /** @brief GENERAL : Author Home Page. */
 constexpr const char *kAuthorHomePage = "https://robsonmartins.com/";
 /** @brief GENERAL : Author Name. */

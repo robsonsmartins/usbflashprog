@@ -39,6 +39,7 @@ elseif(NORMAL_BUILD)
   set(CMAKE_AUTOUIC ON)
   set(CMAKE_AUTOMOC ON)
   set(CMAKE_AUTORCC ON)
+  add_subdirectory(./third/QHexView)
 
   set(REQUIRED_LIBS Core Gui Widgets LinguistTools SerialPort)
   set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets Qt5::SerialPort)
@@ -56,6 +57,8 @@ elseif(NORMAL_BUILD)
           backend/opcodes.hpp
           backend/runner.cpp
           backend/runner.hpp
+          main/qhexeditor.cpp
+          main/qhexeditor.hpp
           main/mainwindow.cpp
           main/mainwindow.hpp
           main/mainwindow.ui
@@ -98,7 +101,7 @@ elseif(NORMAL_BUILD)
   add_executable(ufprog WIN32 MACOSX_BUNDLE
       ${PROJECT_SOURCES} ${PROJECT_RESOURCES} ${WINDOWS_RES_FILE} ${APP_ICON_MACOSX})
 
-  target_link_libraries(ufprog ${REQUIRED_LIBS_QUALIFIED})
+  target_link_libraries(ufprog ${REQUIRED_LIBS_QUALIFIED} QHexView)
 
   set_target_properties(ufprog PROPERTIES
       MACOSX_BUNDLE TRUE

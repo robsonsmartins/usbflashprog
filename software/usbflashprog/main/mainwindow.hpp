@@ -21,6 +21,8 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <QCloseEvent>
+
+#include "main/qhexeditor.hpp"
 #include "backend/runner.hpp"
 
 // ---------------------------------------------------------------------------
@@ -82,12 +84,23 @@ class MainWindow : public QMainWindow {
     void on_dialVpp_valueChanged(int value);
     void on_spinBoxAddr_valueChanged(int value);
     void on_spinBoxData_valueChanged(int value);
+    void on_actionOpen_triggered(bool checked = false);
+    void on_actionSave_triggered(bool checked = false);
+    void on_actionSaveAs_triggered(bool checked = false);
+    void on_actionFillFF_triggered(bool checked = false);
+    void on_actionFill00_triggered(bool checked = false);
+    void on_actionFillRandom_triggered(bool checked = false);
+    void on_actionFind_triggered(bool checked = false);
+    void on_actionReplace_triggered(bool checked = false);
+    void on_btnOpen_clicked();
+    void on_btnSave_clicked();
     /* manual slots */
     void onEnumTimerTimeout();
     void onRefreshTimerTimeout();
     void onRunnerResultReady(const TRunnerCommand& command);
     void onCheckBoxAddressToggled(bool checked = false);
     void onCheckBoxDataToggled(bool checked = false);
+    void onDataChanged(bool status = true);
 
  protected:
     /*
@@ -99,6 +112,8 @@ class MainWindow : public QMainWindow {
  private:
     /* @brief Pointer to UI object. */
     Ui::MainWindow *ui_;
+    /* @brief Pointer to QHexEditor widget. */
+    QHexEditor *hexeditor_;
     /* @brief Ports Enumerator Timer (Diag). */
     QTimer enumTimer_;
     /* @brief Refresh Timer (Diag). */

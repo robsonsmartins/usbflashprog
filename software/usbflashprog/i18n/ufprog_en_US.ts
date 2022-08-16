@@ -2,6 +2,61 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>HexFindDialog</name>
+    <message>
+        <source>Replace...</source>
+        <translation>Replace...</translation>
+    </message>
+    <message>
+        <source>Find...</source>
+        <translation>Find...</translation>
+    </message>
+    <message>
+        <source>Mode:</source>
+        <translation>Mode:</translation>
+    </message>
+    <message>
+        <source>Find:</source>
+        <translation>Find:</translation>
+    </message>
+    <message>
+        <source>Replace:</source>
+        <translation>Replace:</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>Options</translation>
+    </message>
+    <message>
+        <source>Find direction</source>
+        <translation>Find direction</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation>Find</translation>
+    </message>
+    <message>
+        <source>Replace</source>
+        <translation>Replace</translation>
+    </message>
+    <message>
+        <source>Not found</source>
+        <translation>Not found</translation>
+    </message>
+    <message>
+        <source>Cannot find &apos;%1&apos;</source>
+        <translation>Cannot find &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <source>Pattern Error</source>
+        <translation>Pattern Error</translation>
+    </message>
+    <message>
+        <source>Hex pattern &apos;%1&apos; is not valid</source>
+        <translation>Hex pattern &apos;%1&apos; is not valid</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <source>USB Flash/EPROM Programmer</source>
@@ -14,10 +69,6 @@
     <message>
         <source>&amp;Buffer</source>
         <translation>&amp;Buffer</translation>
-    </message>
-    <message>
-        <source>ASCII</source>
-        <translation>ASCII</translation>
     </message>
     <message>
         <source>&amp;Diagnostics</source>
@@ -196,10 +247,6 @@
         <translation>A0</translation>
     </message>
     <message>
-        <source>0x</source>
-        <translation>0x</translation>
-    </message>
-    <message>
         <source>Data Bus</source>
         <translation>Data Bus</translation>
     </message>
@@ -358,6 +405,54 @@
     <message>
         <source>&amp;Get Data</source>
         <translation>Set Da&amp;ta</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation>&amp;Edit</translation>
+    </message>
+    <message>
+        <source>&amp;Open...</source>
+        <translation>&amp;Open...</translation>
+    </message>
+    <message>
+        <source>&amp;Save</source>
+        <translation>&amp;Save</translation>
+    </message>
+    <message>
+        <source>Save &amp;As...</source>
+        <translation>Save &amp;As...</translation>
+    </message>
+    <message>
+        <source>Fill with 0x&amp;FF</source>
+        <translation>Fill with 0x&amp;FF</translation>
+    </message>
+    <message>
+        <source>Fill with 0x&amp;00</source>
+        <translation>Fill with 0x&amp;00</translation>
+    </message>
+    <message>
+        <source>Fill with &amp;Random</source>
+        <translation>Fill with &amp;Random</translation>
+    </message>
+    <message>
+        <source>Open Binary File</source>
+        <translation>Open Binary File</translation>
+    </message>
+    <message>
+        <source>Binary Files</source>
+        <translation>Binary Files</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation>All Files</translation>
+    </message>
+    <message>
+        <source>Save Binary File</source>
+        <translation>Save Binary File</translation>
     </message>
 </context>
 </TS>

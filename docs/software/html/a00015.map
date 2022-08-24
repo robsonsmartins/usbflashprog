@@ -1,6 +1,13 @@
-<map id="config.hpp" name="config.hpp">
-<area shape="rect" id="node1" title="Configuration of UsbFlashProg." alt="" coords="99,5,188,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,84,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="108,80,179,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="203,80,283,107"/>
+<map id="qepromfile.cpp" name="qepromfile.cpp">
+<area shape="rect" id="node1" title="Implementation of the QEpromFile Class." alt="" coords="294,5,412,32"/>
+<area shape="rect" id="node2" href="$a00017.html" title="Header of the QEpromFile Class." alt="" coords="24,80,144,107"/>
+<area shape="rect" id="node8" href="$a00011.html" title="Header of the QBinFile Class." alt="" coords="436,80,534,107"/>
+<area shape="rect" id="node9" href="$a00035.html" title="Header of the QSrecFile Class." alt="" coords="559,80,664,107"/>
+<area shape="rect" id="node10" href="$a00029.html" title="Header of the QHexFile Class." alt="" coords="168,80,271,107"/>
+<area shape="rect" id="node11" href="$a00005.html" title="Header of the QAtmelFile Class." alt="" coords="295,80,411,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="12,229,86,256"/>
+<area shape="rect" id="node4" title=" " alt="" coords="162,229,232,256"/>
+<area shape="rect" id="node5" title=" " alt="" coords="284,229,382,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="21,155,146,181"/>
+<area shape="rect" id="node7" href="$a00023.html" title="Header of the QEpromFileBase Class." alt="" coords="272,155,423,181"/>
 </map>

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['response_156',['response',['../a00871.html#ad9ae58fe7835532a37c78834f1a758b3',1,'TRunnerCommand']]],
-  ['result_157',['result',['../a00863.html#a556c80259568976b607ec50f8747d42a',1,'TCmdOpCode']]]
+  ['params_340',['params',['../a01050.html#a96e1c5b43beea49a173a0c4cdc04e57f',1,'TCmdOpCode::params()'],['../a01058.html#a66c9769ce663e6bce8734492f837ffd6',1,'TRunnerCommand::params()']]]
 ];

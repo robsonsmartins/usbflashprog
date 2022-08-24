@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['opcodetest_126',['OpCodeTest',['../a00883.html#a06e8a95bfeafdc7ce1a38e4e32668780',1,'OpCodeTest']]],
-  ['open_127',['open',['../a00875.html#a0c49f174bdf75b0bbad922ae29358b1c',1,'Runner']]],
-  ['operator_3d_128',['operator=',['../a00863.html#a300e93d9f828a794db30912d9b1c525f',1,'TCmdOpCode::operator=()'],['../a00871.html#a1d4667e6ccffd3d0d750442ff9e90fc3',1,'TRunnerCommand::operator=()']]],
-  ['operator_3d_3d_129',['operator==',['../a00002.html#ab4e43100845654abce98f4bf44c947f9',1,'operator==(const TCmdOpCode &amp;a, const TCmdOpCode &amp;b):&#160;opcodes.cpp'],['../a00008.html#a647dbe717558569de52b11ddd71f76e7',1,'operator==(const TRunnerCommand &amp;a, const TRunnerCommand &amp;b):&#160;runner.cpp']]]
+  ['main_274',['main',['../a00065.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../a00204.html#ga3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main.cpp']]],
+  ['mainwindow_275',['MainWindow',['../a01066.html#ac3df08a4bc0438931d73601110c9267e',1,'MainWindow']]]
 ];

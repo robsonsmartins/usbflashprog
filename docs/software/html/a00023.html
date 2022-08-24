@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: main.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: qepromfilebase.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,144 +60,46 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8c739bbef76d64b22d6b0911c526dd76.html">backend</a></li><li class="navelem"><a class="el" href="dir_2d32d3945318969d47e62489cddde359.html">epromfile</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">main.cpp File Reference<div class="ingroups"><a class="el" href="a00044.html">Software Project</a></div></div>  </div>
+<div class="title">qepromfilebase.hpp File Reference<div class="ingroups"><a class="el" href="a00203.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Main Routine.  
+<p>Header of the <a class="el" href="a01038.html" title="QEpromFileBase Class.">QEpromFileBase</a> Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QApplication&gt;</code><br />
-<code>#include &lt;QLocale&gt;</code><br />
-<code>#include &lt;QTranslator&gt;</code><br />
-<code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00020.html">main/mainwindow.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00014.html">config.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;QObject&gt;</code><br />
+<code>#include &lt;QString&gt;</code><br />
+<code>#include &lt;QByteArray&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for main.cpp:</div>
+Include dependency graph for qepromfilebase.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00024.png" border="0" usemap="#amain_8cpp" alt=""/></div>
-<map name="amain_8cpp" id="amain_8cpp">
-<area shape="rect" title="Implementation of the Main Routine." alt="" coords="291,5,374,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,111,107"/>
-<area shape="rect" title=" " alt="" coords="134,80,209,107"/>
-<area shape="rect" title=" " alt="" coords="233,80,329,107"/>
-<area shape="rect" title=" " alt="" coords="353,80,419,107"/>
-<area shape="rect" href="a00020.html" title="Header of the Main Window Class." alt="" coords="443,80,612,107"/>
-<area shape="rect" href="a00014.html" title="Configuration of UsbFlashProg." alt="" coords="763,80,852,107"/>
-<area shape="rect" title=" " alt="" coords="177,155,293,181"/>
-<area shape="rect" title=" " alt="" coords="492,155,563,181"/>
-<area shape="rect" title=" " alt="" coords="587,155,692,181"/>
-<area shape="rect" href="a00011.html" title="Header of the Runner Class." alt="" coords="318,155,467,181"/>
-<area shape="rect" title=" " alt="" coords="53,229,127,256"/>
-<area shape="rect" title=" " alt="" coords="901,229,972,256"/>
-<area shape="rect" title=" " alt="" coords="151,229,226,256"/>
-<area shape="rect" title=" " alt="" coords="251,229,305,256"/>
-<area shape="rect" title=" " alt="" coords="329,229,427,256"/>
-<area shape="rect" title=" " alt="" coords="451,229,545,256"/>
-<area shape="rect" title=" " alt="" coords="570,229,690,256"/>
-<area shape="rect" href="a00005.html" title="Opcodes for communication." alt="" coords="714,229,877,256"/>
-<area shape="rect" title=" " alt="" coords="726,304,785,331"/>
-<area shape="rect" title=" " alt="" coords="809,304,859,331"/>
-<area shape="rect" title=" " alt="" coords="716,155,795,181"/>
-<area shape="rect" title=" " alt="" coords="819,155,899,181"/>
+<div class="center"><img src="a00024.png" border="0" usemap="#aqepromfilebase_8hpp" alt=""/></div>
+<map name="aqepromfilebase_8hpp" id="aqepromfilebase_8hpp">
+<area shape="rect" title="Header of the QEpromFileBase Class." alt="" coords="65,5,215,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" title=" " alt="" coords="105,80,175,107"/>
+<area shape="rect" title=" " alt="" coords="199,80,297,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00023.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
-<tr class="memdesc:a0ddf1224851353fc92bfbff6f499fa97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main routine.  <a href="a00023.html#a0ddf1224851353fc92bfbff6f499fa97">More...</a><br /></td></tr>
-<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac99aacda81f414a498962d83f33e5bd0"><td class="memItemLeft" align="right" valign="top">QMainWindow *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00023.html#ac99aacda81f414a498962d83f33e5bd0">createWindow</a> (const int &amp;argc, char *argv[])</td></tr>
-<tr class="memdesc:ac99aacda81f414a498962d83f33e5bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a QMainWindow object, according to the arguments passed on the command line.  <a href="a00023.html#ac99aacda81f414a498962d83f33e5bd0">More...</a><br /></td></tr>
-<tr class="separator:ac99aacda81f414a498962d83f33e5bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01038.html">QEpromFileBase</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a01038.html" title="QEpromFileBase Class.">QEpromFileBase</a> Class.  <a href="a01038.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Main Routine. </p>
+<div class="textblock"><p>Header of the <a class="el" href="a01038.html" title="QEpromFileBase Class.">QEpromFileBase</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a0ddf1224851353fc92bfbff6f499fa97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&nbsp;</a></span>main()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int main </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>argv</em>[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Main routine. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>Number of arguments. </td></tr>
-    <tr><td class="paramname">argv</td><td>Array of arguments. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Error code (zero if success). </dd></dl>
-
-</div>
-</div>
-<a id="ac99aacda81f414a498962d83f33e5bd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac99aacda81f414a498962d83f33e5bd0">&#9670;&nbsp;</a></span>createWindow()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">QMainWindow * createWindow </td>
-          <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>argc</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>argv</em>[]&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates a QMainWindow object, according to the arguments passed on the command line. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">argc</td><td>Number of arguments. </td></tr>
-    <tr><td class="paramname">argv</td><td>Array of arguments. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the QMainWindow object. </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

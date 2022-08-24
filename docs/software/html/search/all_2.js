@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['getopcode_5',['getOpCode',['../a00867.html#ac052b8af72a287ea8be7668e89549e0a',1,'OpCode::getOpCode(const void *buf, size_t size)'],['../a00867.html#a7ac2a88c9f6cba1ac328b3d4a51eb028',1,'OpCode::getOpCode(uint8_t code)']]],
-  ['getpath_6',['getPath',['../a00875.html#a715c09155003c5b254cc27cc801804cf',1,'Runner']]],
-  ['getvalueasbool_7',['getValueAsBool',['../a00867.html#a6d1fd387f8307426534c6be220b6e4a8',1,'OpCode']]],
-  ['getvalueasbyte_8',['getValueAsByte',['../a00867.html#a41e31c74916cd1135522b75175f43309',1,'OpCode']]],
-  ['getvalueasfloat_9',['getValueAsFloat',['../a00867.html#aefaa2dba69447ca00bf0c27278eb231b',1,'OpCode']]]
+  ['data_18',['data',['../a01090.html#aa6e451eccf9519b0809baad41f5ab241',1,'AtmelGenericRecord::data()'],['../a01094.html#a76be5989e706c74266d20e16cedf5d63',1,'IHexRecord::data()'],['../a01098.html#a276e34458fea9045488d1ccdd6fe3052',1,'SRecord::data()']]],
+  ['datalen_19',['dataLen',['../a01094.html#a6424a6613f2969740955694cd9bb0822',1,'IHexRecord::dataLen()'],['../a01098.html#a6424a6613f2969740955694cd9bb0822',1,'SRecord::dataLen()']]],
+  ['descr_20',['descr',['../a01050.html#a117568e09b5d120257560c5d11e98d60',1,'TCmdOpCode']]]
 ];

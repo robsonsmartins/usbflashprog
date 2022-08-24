@@ -18,7 +18,7 @@ if(TEST_BUILD)
   message("TEST BUILD")
   set(NORMAL_BUILD OFF)
   set(CMAKE_BUILD_TYPE Debug)
-  project(ufprog_test LANGUAGES CXX)
+  project(ufprog_test LANGUAGES C CXX)
   set(CMAKE_CXX_STANDARD 11)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -31,7 +31,7 @@ if(TEST_BUILD)
 elseif(NORMAL_BUILD)
   message("NORMAL BUILD")
   set(TEST_BUILD OFF)
-  project(ufprog VERSION 0.1 LANGUAGES CXX)
+  project(ufprog VERSION 0.1 LANGUAGES C CXX)
   set(CMAKE_CXX_STANDARD 11)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -39,6 +39,7 @@ elseif(NORMAL_BUILD)
   set(CMAKE_AUTOUIC ON)
   set(CMAKE_AUTOMOC ON)
   set(CMAKE_AUTORCC ON)
+  add_subdirectory(./third/libGIS)
   add_subdirectory(./third/QHexView)
 
   set(REQUIRED_LIBS Core Gui Widgets LinguistTools SerialPort)
@@ -57,6 +58,18 @@ elseif(NORMAL_BUILD)
           backend/opcodes.hpp
           backend/runner.cpp
           backend/runner.hpp
+          backend/epromfile/qepromfilebase.cpp
+          backend/epromfile/qepromfilebase.hpp
+          backend/epromfile/qbinfile.cpp
+          backend/epromfile/qbinfile.hpp
+          backend/epromfile/qsrecfile.cpp
+          backend/epromfile/qsrecfile.hpp
+          backend/epromfile/qhexfile.cpp
+          backend/epromfile/qhexfile.hpp
+          backend/epromfile/qatmelfile.cpp
+          backend/epromfile/qatmelfile.hpp
+          backend/epromfile/qepromfile.cpp
+          backend/epromfile/qepromfile.hpp
           main/qhexeditor.cpp
           main/qhexeditor.hpp
           main/mainwindow.cpp
@@ -101,7 +114,7 @@ elseif(NORMAL_BUILD)
   add_executable(ufprog WIN32 MACOSX_BUNDLE
       ${PROJECT_SOURCES} ${PROJECT_RESOURCES} ${WINDOWS_RES_FILE} ${APP_ICON_MACOSX})
 
-  target_link_libraries(ufprog ${REQUIRED_LIBS_QUALIFIED} QHexView)
+  target_link_libraries(ufprog ${REQUIRED_LIBS_QUALIFIED} QHexView libGIS)
 
   set_target_properties(ufprog PROPERTIES
       MACOSX_BUNDLE TRUE

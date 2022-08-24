@@ -26,6 +26,7 @@
 #include <QDesktopWidget>
 #include <QDesktopServices>
 #include <QFileDialog>
+#include <QFileInfo>
 
 #include <cstdio>
 #include <cstring>
@@ -69,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui_->actionSave->setEnabled(false);
 
     connectSignals_();
-    enableControls_(false);
+    enableDiagControls_(false);
 }
 
 void MainWindow::connectSignals_() {
@@ -179,11 +180,11 @@ QScreen* MainWindow::screen() const {
 void MainWindow::on_tabWidget_currentChanged(int index) {
     if (ui_->tabWidget->currentWidget() == ui_->tabDiagnostics) {
         enumTimer_.start(kUsbEnumerateInterval);
-        ui_->frameToolBar->setVisible(false);
+        enableEditorControls_(false);
     } else {
         connect_(false);
         enumTimer_.stop();
-        ui_->frameToolBar->setVisible(true);
+        enableEditorControls_(true);
     }
 }
 
@@ -224,6 +225,15 @@ void MainWindow::on_actionAuthorHome_triggered(bool checked) {
 
 void MainWindow::closeEvent(QCloseEvent *event) {
     static bool readyToClose = false;
+    static bool closing = false;
+    if (!closing && hexeditor_->isChanged()) {
+        if (!showDialogFileChanged_()) {
+            event->ignore();
+            ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
+            return;
+        }
+    }
+    closing = true;
     if (!readyToClose) { event->ignore(); }
     connect_(false);
     QTimer::singleShot(500, this,
@@ -247,7 +257,7 @@ void MainWindow::on_pushButtonConnect_clicked() {
 
 void MainWindow::on_pushButtonVddInitCal_clicked() {
     if (!runner_.isOpen()) { return; }
-    enableControls_(false);
+    enableDiagControls_(false);
     runner_.send(kCmdVddInitCal);
     bool ok;
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
@@ -266,12 +276,12 @@ void MainWindow::on_pushButtonVddInitCal_clicked() {
     if (ok) {
         runner_.send(kCmdVddSaveCal, measured);
     }
-    enableControls_(true);
+    enableDiagControls_(true);
 }
 
 void MainWindow::on_pushButtonVppInitCal_clicked() {
     if (!runner_.isOpen()) { return; }
-    enableControls_(false);
+    enableDiagControls_(false);
     runner_.send(kCmdVppInitCal);
     bool ok;
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
@@ -290,7 +300,7 @@ void MainWindow::on_pushButtonVppInitCal_clicked() {
     if (ok) {
         runner_.send(kCmdVppSaveCal, measured);
     }
-    enableControls_(true);
+    enableDiagControls_(true);
 }
 
 void MainWindow::on_checkBoxVddCtrl_toggled(bool checked) {
@@ -369,7 +379,7 @@ void MainWindow::onRefreshTimerTimeout() {
         // Connection lost
         QString port = ui_->comboBoxPort->currentText();
         connect_(false);
-        enableControls_(false);
+        enableDiagControls_(false);
         QMessageBox::critical(this,
             tr("USB Flash/EPROM Programmer"),
             tr("The device has been disconnected from the \"%1\" port.")
@@ -460,7 +470,7 @@ void MainWindow::refreshPortComboBox_() {
 void MainWindow::connect_(bool state) {
     if (state) {
         if (runner_.open(ui_->comboBoxPort->currentText())) {
-            enableControls_();
+            enableDiagControls_();
             ui_->dialVdd->setValue(50);
             ui_->dialVpp->setValue(120);
             enumTimer_.stop();
@@ -491,14 +501,14 @@ void MainWindow::connect_(bool state) {
             QTimer::singleShot(500, this,
                 [this]{
                     runner_.close();
-                    enableControls_(false);
+                    enableDiagControls_(false);
                 });
         }
         enumTimer_.start();
     }
 }
 
-void MainWindow::enableControls_(bool state) {
+void MainWindow::enableDiagControls_(bool state) {
     ui_->frameVdd->setEnabled(state);
     ui_->frameVpp->setEnabled(state);
     ui_->frameBusCtrl->setEnabled(state);
@@ -647,14 +657,18 @@ void MainWindow::dataHexToBin_() {
 // Buffer Editor
 
 void MainWindow::on_actionOpen_triggered(bool checked) {
+    if (hexeditor_->isChanged()) {
+        if (!showDialogFileChanged_()) { return; }
+    }
+    QEpromFile::QEpromFileType type;
     QString filename = QFileDialog::getOpenFileName(this,
-        tr("Open Binary File"), "",
-        tr("Binary Files") + " (*.bin *.hex);;" +
-        tr("All Files") + " (*.*)");
-
+        tr("Open Binary File"), "", getOpenDialogFilter_());
     if (filename.isEmpty()) { return; }
     if (!hexeditor_->open(filename)) {
-        // error
+        QMessageBox::critical(this,
+            tr("USB Flash/EPROM Programmer"),
+            tr("Error reading file \"%1\".").arg(filename));
+        return;
     }
     ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
     setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
@@ -663,19 +677,25 @@ void MainWindow::on_actionOpen_triggered(bool checked) {
 
 void MainWindow::on_actionSave_triggered(bool checked) {
     if (!hexeditor_->save()) {
-        // error
+        QMessageBox::critical(this,
+            tr("USB Flash/EPROM Programmer"),
+            tr("Error writing file \"%1\".").arg(hexeditor_->filename()));
+        return;
     }
 }
 
 void MainWindow::on_actionSaveAs_triggered(bool checked) {
+    QString selectedFilter;
+    QEpromFile::QEpromFileType type;
     QString filename = QFileDialog::getSaveFileName(this,
-        tr("Save Binary File"), "",
-        tr("Binary Files") + " (*.bin);;" +
-        tr("All Files") + " (*.*)");
-
+        tr("Save Binary File"), "", getSaveDialogFilter_(), &selectedFilter);
     if (filename.isEmpty()) { return; }
-    if (!hexeditor_->saveAs(filename)) {
-        // error
+    type = QEpromFile::typeFromStr(selectedFilter);
+    if (!hexeditor_->saveAs(type, filename)) {
+        QMessageBox::critical(this,
+            tr("USB Flash/EPROM Programmer"),
+            tr("Error writing file \"%1\".").arg(filename));
+        return;
     }
 }
 
@@ -720,4 +740,42 @@ void MainWindow::onDataChanged(bool status) {
     }
     if (status) {title += "*"; }
     setWindowTitle(title);
+}
+
+void MainWindow::enableEditorControls_(bool state) {
+    ui_->frameToolBar->setVisible(state);
+    ui_->actionOpen->setEnabled(state);
+    ui_->actionSave->setEnabled(state &&
+        !hexeditor_->filename().isEmpty() && hexeditor_->isChanged());
+    ui_->actionSaveAs->setEnabled(state);
+    ui_->actionFillFF->setEnabled(state);
+    ui_->actionFill00->setEnabled(state);
+    ui_->actionFillRandom->setEnabled(state);
+    ui_->actionFind->setEnabled(state);
+    ui_->actionReplace->setEnabled(state);
+}
+
+bool MainWindow::showDialogFileChanged_() {
+    return QMessageBox::question(this,
+        tr("USB Flash/EPROM Programmer"),
+        tr("There is unsaved data in the editor. \n"
+           "Are you sure you want to lose this data?")) == QMessageBox::Yes;
+}
+
+QString MainWindow::getOpenDialogFilter_() {
+    return MainWindow::tr("All Flash/EPROM Files") +
+        " (*.bin *.rom *.s19 *.s28 *.s37 *.s *.s2 *.s3 *.hex *.eep);;" +
+        getSaveDialogFilter_() + ";;" +
+        MainWindow::tr("All Files") + " (*.*)";
+}
+
+QString MainWindow::getSaveDialogFilter_() {
+    return MainWindow::tr("Binary Files") +
+        " (*.bin *.rom);;" +
+        MainWindow::tr("Motorola S-REC Files") +
+            " (*.s19 *.s28 *.s37 *.s *.s2 *.s3);;" +
+        MainWindow::tr("Intel Hex Files") +
+            " (*.hex *.eep);;" +
+        MainWindow::tr("Atmel Generic Files") +
+            " (*.hex *.rom *.eep)";
 }

@@ -5,7 +5,7 @@
     <name>HexFindDialog</name>
     <message>
         <source>Replace...</source>
-        <translation>Subistituir...</translation>
+        <translation>Substituir...</translation>
     </message>
     <message>
         <source>Find...</source>
@@ -21,7 +21,7 @@
     </message>
     <message>
         <source>Replace:</source>
-        <translation>Subistituir:</translation>
+        <translation>Substituir:</translation>
     </message>
     <message>
         <source>Options</source>
@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>Replace</source>
-        <translation>Subistituir</translation>
+        <translation>Substituir</translation>
     </message>
     <message>
         <source>Not found</source>
@@ -49,11 +49,71 @@
     </message>
     <message>
         <source>Pattern Error</source>
-        <translation>Erro no pattern</translation>
+        <translation>Erro na expressão</translation>
     </message>
     <message>
         <source>Hex pattern &apos;%1&apos; is not valid</source>
-        <translation>Pattern &apos;%1&apos; não é válido</translation>
+        <translation>Expressão &apos;%1&apos; não é válida</translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation>Texto</translation>
+    </message>
+    <message>
+        <source>Hex</source>
+        <translation>Hexadecimal</translation>
+    </message>
+    <message>
+        <source>Int</source>
+        <translation>Inteiro</translation>
+    </message>
+    <message>
+        <source>Float</source>
+        <translation>Ponto Flutuante</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation>Todas</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Pra frente</translation>
+    </message>
+    <message>
+        <source>Backward</source>
+        <translation>Pra trás</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>qualquer</translation>
+    </message>
+    <message>
+        <source>float</source>
+        <translation>float</translation>
+    </message>
+    <message>
+        <source>double</source>
+        <translation>double</translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation>Sensível a maiúsculas</translation>
+    </message>
+    <message>
+        <source>Little Endian</source>
+        <translation>Little Endian</translation>
+    </message>
+    <message>
+        <source>Big Endian</source>
+        <translation>Big Endian</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation>Tipo:</translation>
+    </message>
+    <message>
+        <source>Endian:</source>
+        <translation>Alinhamento:</translation>
     </message>
 </context>
 <context>
@@ -407,10 +467,6 @@
         <translation>&amp;Ler Dados</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Editar</translation>
     </message>
@@ -453,6 +509,52 @@
     <message>
         <source>Save Binary File</source>
         <translation>Salvar Arquivo Binário</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Abrir</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Salvar</translation>
+    </message>
+    <message>
+        <source>Fin&amp;d...</source>
+        <translation>Proc&amp;urar...</translation>
+    </message>
+    <message>
+        <source>Re&amp;place...</source>
+        <translation>Subs&amp;tituir...</translation>
+    </message>
+    <message>
+        <source>There is unsaved data in the editor. 
+Are you sure you want to lose this data?</source>
+        <translation>Há dados não salvos no editor. 
+Tem certeza que quer perder esses dados?</translation>
+    </message>
+    <message>
+        <source>Error reading file &quot;%1&quot;.</source>
+        <translation>Houve um erro ao ler o arquivo &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error writing file &quot;%1&quot;.</source>
+        <translation>Houve um erro ao gravar o arquivo &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Motorola S-REC Files</source>
+        <translation>Arquivos Motorola S-REC</translation>
+    </message>
+    <message>
+        <source>Intel Hex Files</source>
+        <translation>Arquivos Intel Hex</translation>
+    </message>
+    <message>
+        <source>Atmel Generic Files</source>
+        <translation>Arquivos Atmel Genéricos</translation>
+    </message>
+    <message>
+        <source>All Flash/EPROM Files</source>
+        <translation>Todos Arquivos de Flash/EPROM</translation>
     </message>
 </context>
 </TS>

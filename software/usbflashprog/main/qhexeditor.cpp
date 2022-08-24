@@ -16,6 +16,7 @@
 // ---------------------------------------------------------------------------
 
 #include <QFile>
+#include <QFileInfo>
 #include <QRandomGenerator>
 #include <model/buffer/qmemorybuffer.h>
 #include <dialogs/hexfinddialog.h>
@@ -24,7 +25,8 @@
 // ---------------------------------------------------------------------------
 
 QHexEditor::QHexEditor(QWidget *parent)
-        : QHexView(parent), changed_(false), filename_(""), size_(0) {
+        : QHexView(parent), changed_(false), filename_(""),
+          size_(0), type_(QEpromFile::EpromFileBin) {
     QFont font = this->font();
     font.setPointSize(10);
     this->setFont(font);
@@ -42,45 +44,34 @@ QHexEditor::QHexEditor(QWidget *parent)
 }
 
 bool QHexEditor::open(const QString& filename) {
-    QFile file(filename);
-    if (!file.open(QIODevice::ReadOnly)) {
-        return false;
-    }
-    QByteArray data = file.read(size_);
-    if (data.isEmpty()) {
-        file.close();
-        return false;
-    }
-    file.close();
-    if (data.size() < size_) {
-        data.append(QByteArray(size_ - data.size(), 0xFF));
-    }
+    QEpromFile file;
+    QByteArray data = file.read(filename, size_);
+    if (data.isEmpty()) { return false; }
     QHexDocument *document =
         QHexDocument::fromMemory<QMemoryBuffer>(data);
     this->setDocument(document);
     filename_ = filename;
     changed_ = false;
+    type_ = file.getType();
     emit changed(false);
     return true;
 }
 
 bool QHexEditor::save(void) {
     if (filename_.isEmpty()) { return false; }
-    return saveAs(filename_);
+    return saveAs(type_, filename_);
 }
 
-bool QHexEditor::saveAs(const QString& filename) {
-    QFile file(filename);
-    if (!file.open(QIODevice::ReadWrite)) {
-        return false;
-    }
+bool QHexEditor::saveAs(QEpromFile::QEpromFileType type,
+                        const QString& filename) {
     QHexDocument *document = this->hexDocument();
-    if (!document->saveTo(&file)) {
-        return false;
-    }
-    file.close();
-    filename_ = filename;
+    QByteArray data = document->read(0, document->length());
+    QEpromFile file;
+    bool ret = file.write(type, filename, data);
+    if (!ret) { return false; }
+    filename_ = file.getFilename();
     changed_ = false;
+    type_ = type;
     emit changed(false);
     return true;
 }
@@ -136,13 +127,15 @@ bool QHexEditor::isChanged(void) const {
 
 void QHexEditor::showFindDialog(void) {
     HexFindDialog dialog(HexFindDialog::Type::Find, this);
-    dialog.setWindowFlags(dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    dialog.setWindowFlags(
+        dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     dialog.exec();
 }
 
 void QHexEditor::showReplaceDialog(void) {
     HexFindDialog dialog(HexFindDialog::Type::Replace, this);
-    dialog.setWindowFlags(dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    dialog.setWindowFlags(
+        dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
     dialog.exec();
 }
 

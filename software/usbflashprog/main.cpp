@@ -23,6 +23,7 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QLibraryInfo>
 #include <cstdlib>
 
 #include "main/mainwindow.hpp"
@@ -60,8 +61,18 @@ int main(int argc, char *argv[]) {
     setenv("XDG_SESSION_TYPE", "x11", 1);
 #endif
     QApplication a(argc, argv);
-    QTranslator translator;
+    QTranslator translator, baseTranslator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
+    // translate Qt base strings
+    for (const QString &locale : uiLanguages) {
+        const QString baseName = "qtbase_" + QLocale(locale).name();
+        if (baseTranslator.load(baseName,
+                QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
+            a.installTranslator(&baseTranslator);
+            break;
+        }
+    }
+    // translate application custom strings
     for (const QString &locale : uiLanguages) {
         const QString baseName = "ufprog_" + QLocale(locale).name();
         if (translator.load(":/i18n/" + baseName)) {

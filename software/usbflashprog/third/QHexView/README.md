@@ -1,3 +1,5 @@
+[https://github.com/Dax89/QHexView/tree/5.0](https://github.com/Dax89/QHexView/tree/5.0)
+
 <div align="center">
  <img src="https://user-images.githubusercontent.com/1503603/156148159-02d1181a-153e-4d0b-9512-5f9ac30bcd2f.png" alt="QHexView logo" title="QHexView"/>
 </div>

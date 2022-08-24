@@ -133,7 +133,21 @@ class MainWindow : public QMainWindow {
      * @brief Enables/Disables the controls (Diag).
      * @param state True to enable, false otherwise.
      */
-    void enableControls_(bool state = true);
+    void enableDiagControls_(bool state = true);
+    /*
+     * @brief Enables/Disables the controls (Editor).
+     * @param state True to enable, false otherwise.
+     */
+    void enableEditorControls_(bool state = true);
+    /*
+     * @brief Shows the file changed dialog to confirm data loses (Editor).
+     * @return True if data will be lose, false otherwise.
+     */
+    bool showDialogFileChanged_();
+    /* @brief Gets file filter of the open dialog (Editor). */
+    QString getOpenDialogFilter_();
+    /* @brief Gets file filter of the save dialog (Editor). */
+    QString getSaveDialogFilter_();
     /* @brief Converts Addr Bus Checkbox to Spinbox Value (Diag). */
     void addressBinToHex_();
     /* @brief Converts Addr Bus Spinbox Value to Checkbox (Diag). */

@@ -55,6 +55,66 @@
         <source>Hex pattern &apos;%1&apos; is not valid</source>
         <translation>Hex pattern &apos;%1&apos; is not valid</translation>
     </message>
+    <message>
+        <source>Text</source>
+        <translation>Text</translation>
+    </message>
+    <message>
+        <source>Hex</source>
+        <translation>Hex</translation>
+    </message>
+    <message>
+        <source>Int</source>
+        <translation>Int</translation>
+    </message>
+    <message>
+        <source>Float</source>
+        <translation>Float</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation>All</translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation>Forward</translation>
+    </message>
+    <message>
+        <source>Backward</source>
+        <translation>Backward</translation>
+    </message>
+    <message>
+        <source>any</source>
+        <translation>any</translation>
+    </message>
+    <message>
+        <source>float</source>
+        <translation>float</translation>
+    </message>
+    <message>
+        <source>double</source>
+        <translation>double</translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation>Case sensitive</translation>
+    </message>
+    <message>
+        <source>Little Endian</source>
+        <translation>Little Endian</translation>
+    </message>
+    <message>
+        <source>Big Endian</source>
+        <translation>Big Endian</translation>
+    </message>
+    <message>
+        <source>Type:</source>
+        <translation>Type:</translation>
+    </message>
+    <message>
+        <source>Endian:</source>
+        <translation>Endian:</translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
@@ -407,10 +467,6 @@
         <translation>Set Da&amp;ta</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation>...</translation>
-    </message>
-    <message>
         <source>&amp;Edit</source>
         <translation>&amp;Edit</translation>
     </message>
@@ -453,6 +509,52 @@
     <message>
         <source>Save Binary File</source>
         <translation>Save Binary File</translation>
+    </message>
+    <message>
+        <source>Open</source>
+        <translation>Open</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Save</translation>
+    </message>
+    <message>
+        <source>Fin&amp;d...</source>
+        <translation>Fin&amp;d...</translation>
+    </message>
+    <message>
+        <source>Re&amp;place...</source>
+        <translation>Re&amp;place...</translation>
+    </message>
+    <message>
+        <source>There is unsaved data in the editor. 
+Are you sure you want to lose this data?</source>
+        <translation>There is unsaved data in the editor. 
+Are you sure you want to lose this data?</translation>
+    </message>
+    <message>
+        <source>Error reading file &quot;%1&quot;.</source>
+        <translation>Error reading file &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Error writing file &quot;%1&quot;.</source>
+        <translation>Error writing file &quot;%1&quot;.</translation>
+    </message>
+    <message>
+        <source>Motorola S-REC Files</source>
+        <translation>Motorola S-REC Files</translation>
+    </message>
+    <message>
+        <source>Intel Hex Files</source>
+        <translation>Intel Hex Files</translation>
+    </message>
+    <message>
+        <source>Atmel Generic Files</source>
+        <translation>Atmel Generic Files</translation>
+    </message>
+    <message>
+        <source>All Flash/EPROM Files</source>
+        <translation>All Flash/EPROM Files</translation>
     </message>
 </context>
 </TS>

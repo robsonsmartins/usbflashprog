@@ -462,7 +462,8 @@ void QHexView::drawHeader(QTextCursor& c) const
     {
         c.insertText(" ", { });
 
-        for(auto i = 0u; i < m_options.linelength; i += m_options.grouplength)
+        // for(auto i = 0u; i < m_options.linelength; i += m_options.grouplength)
+        for(auto i = m_options.grouplength - 1; i < m_options.linelength; i += m_options.grouplength)
         {
             // QString h = QString::number(i, 16).rightJustified(m_options.grouplength * 2, '0').toUpper();
             QString h = QString::number(i, 16).rightJustified(m_options.grouplength * 2, ' ').toUpper();

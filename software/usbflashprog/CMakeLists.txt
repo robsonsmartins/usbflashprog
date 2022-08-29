@@ -70,8 +70,8 @@ elseif(NORMAL_BUILD)
           backend/epromfile/qatmelfile.hpp
           backend/epromfile/qepromfile.cpp
           backend/epromfile/qepromfile.hpp
-          main/qhexeditor.cpp
-          main/qhexeditor.hpp
+          ui/qhexeditor.cpp
+          ui/qhexeditor.hpp
           main/mainwindow.cpp
           main/mainwindow.hpp
           main/mainwindow.ui

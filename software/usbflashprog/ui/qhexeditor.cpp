@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 /** 
  * @ingroup Software
- * @file main/qhexeditor.cpp
+ * @file ui/qhexeditor.cpp
  * @brief Implementation of the QHexEditor Class.
  *  
  * @author Robson Martins (https://www.robsonmartins.com)
@@ -17,6 +17,7 @@
 
 #include <QFile>
 #include <QFileInfo>
+#include <QtMath>
 #include <QRandomGenerator>
 #include <model/buffer/qmemorybuffer.h>
 #include <dialogs/hexfinddialog.h>
@@ -26,7 +27,7 @@
 
 QHexEditor::QHexEditor(QWidget *parent)
         : QHexView(parent), changed_(false), filename_(""),
-          size_(0), type_(QEpromFile::EpromFileBin) {
+          size_(0), type_(QEpromFile::EpromFileBin), mode_(Mode8Bits) {
     QFont font = this->font();
     font.setPointSize(10);
     this->setFont(font);
@@ -117,6 +118,26 @@ qint64 QHexEditor::size(void) const {
     return size_;
 }
 
+void QHexEditor::setMode(QHexEditorMode mode) {
+    mode_ = mode;
+    switch (mode_) {
+        case Mode32Bits:
+            setGroupLength(4);
+            break;
+        case Mode16Bits:
+            setGroupLength(2);
+            break;
+        case Mode8Bits:
+        default:
+            setGroupLength(1);
+            break;
+    }
+}
+
+QHexEditor::QHexEditorMode QHexEditor::mode(void) const {
+    return mode_;
+}
+
 const QString& QHexEditor::filename(void) const {
     return filename_;
 }
@@ -143,4 +164,8 @@ void QHexEditor::onDataChanged(const QByteArray& data, quint64 offset,
                                QHexDocument::ChangeReason reason) {
     changed_ = true;
     emit changed();
+}
+
+void QHexEditor::setGroupLength(unsigned int l) {
+    QHexView::setGroupLength(l);
 }

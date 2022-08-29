@@ -22,7 +22,7 @@
 #include <QTimer>
 #include <QCloseEvent>
 
-#include "main/qhexeditor.hpp"
+#include "ui/qhexeditor.hpp"
 #include "backend/runner.hpp"
 
 // ---------------------------------------------------------------------------

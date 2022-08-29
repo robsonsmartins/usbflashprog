@@ -8,15 +8,15 @@
 // ---------------------------------------------------------------------------
 /** 
  * @ingroup Software
- * @file main/qhexeditor.hpp
+ * @file ui/qhexeditor.hpp
  * @brief Header of the QHexEditor Class.
  *  
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
-#ifndef MAIN_QHEXEDITOR_HPP_
-#define MAIN_QHEXEDITOR_HPP_
+#ifndef UI_QHEXEDITOR_HPP_
+#define UI_QHEXEDITOR_HPP_
 
 #include <qhexview.h>
 #include "backend/epromfile/qepromfile.hpp"
@@ -31,6 +31,17 @@
  */
 class QHexEditor : public QHexView {
     Q_OBJECT
+
+ public:
+   /** @brief Hex Editor Mode (bits grouping). */
+   enum QHexEditorMode {
+      /** @brief 8 Bits Mode. */
+      Mode8Bits,
+      /** @brief 16 Bits Mode. */
+      Mode16Bits,
+      /** @brief 32 Bits Mode. */
+      Mode32Bits
+   };
 
  public:
     /**
@@ -76,6 +87,16 @@ class QHexEditor : public QHexView {
      */
     qint64 size(void) const;
     /**
+     * @brief Sets the bit grouping mode.
+     * @param mode Bit grouping mode.
+     */
+    void setMode(QHexEditorMode mode);
+    /**
+     * @brief Gets the current bit grouping mode.
+     * @return Bit grouping mode.
+     */
+    QHexEditorMode mode(void) const;
+    /**
      * @brief Gets the current loaded filename.
      * @return Filename, or empty if nothing loaded.
      */
@@ -120,6 +141,8 @@ class QHexEditor : public QHexView {
     qint64 size_;
     /* @brief Type of the current loaded file. */
     QEpromFile::QEpromFileType type_;
+    /* @brief Editor mode. */
+    QHexEditorMode mode_;
 };
 
-#endif  // MAIN_QHEXEDITOR_HPP_
+#endif  // UI_QHEXEDITOR_HPP_

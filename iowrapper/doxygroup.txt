@@ -1,0 +1,11 @@
+/*----------------------------------------------------------------------------*/
+/** @defgroup lib_iowrapper 1. IO.DLL Wrapper
+    IO.DLL Wrapper.<br>
+    Provides all functions by IO.DLL required for I/O ports access, and
+    forwards to a compatible programmer emulator DLL.<p>
+    Uses the following Micrososft Windows registry key:
+    <b>HKEY_CURRENT_USER\\Software\\EmuProg\\</b><br>
+    and the following registry values:
+    - <b>ProgLib</b> [REG_SZ]: Name of programmer emulator DLL.
+*/
+/*----------------------------------------------------------------------------*/

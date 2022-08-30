@@ -1,0 +1,17 @@
+/** @mainpage Device Programmer Emulator
+
+    The <b>Device Programmer Emulator</b> is a C++ class library, a
+    <b>IO.DLL</b> wrapper and a group of DLL's, that provides software 
+    emulation funcionalities for a lot of Device Programmers 
+    (connected in PC standard Parallel Port) and her Target Chips.
+
+    The supported plattforms:
+    
+    - Microsoft Windows 9x or NT series (32 bit).
+
+    @author Robson Martins<br>
+            http://www.robsonmartins.com
+    @version 1.0
+    @date 2010
+*/
+/*----------------------------------------------------------------------------*/

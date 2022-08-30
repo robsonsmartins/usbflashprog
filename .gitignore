@@ -1,108 +1,121 @@
-# C++ objects and libs
-*.slo
-*.lo
+# ---------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2022) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ---------------------------------------------------------------------------
+
+# File created using '.gitignore Generator' for Visual Studio Code: https://bit.ly/vscode-gig
+
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,c,c++
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,linux,c,c++
+
+### C ###
+# Prerequisites
+*.d
+
+# Object files
 *.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
 *.a
 *.la
-*.lai
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
 *.so
 *.so.*
-*.dll
 *.dylib
 
-# Qt-es
-object_script.*.Release
-object_script.*.Debug
-*_plugin_import.cpp
-/.qmake.cache
-/.qmake.stash
-*.pro.user
-*.pro.user.*
-*.qbs.user
-*.qbs.user.*
-*.moc
-moc_*.cpp
-moc_*.h
-qrc_*.cpp
-ui_*.h
-*.qmlc
-*.jsc
-Makefile*
-*build-*
-*.qm
-*.prl
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
 
-# Qt unit tests
-target_wrapper.*
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
 
-# QtCreator
-*.autosave
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
 
-# QtCreator Qml
-*.qmlproject.user
-*.qmlproject.user.*
+### C++ ###
+# Prerequisites
 
-# QtCreator CMake
-CMakeLists.txt.user*
+# Compiled Object files
+*.slo
 
-# QtCreator 4.8< compilation database 
-compile_commands.json
+# Precompiled Headers
 
-# QtCreator local machine specific files for imported projects
-*creator.user*
+# Linker files
 
-# Ignore list for Eagle, a PCB layout tool
+# Debugger Files
 
-# Backup files
-*.s#?
-*.b#?
-*.l#?
-*.b$?
-*.s$?
-*.l$?
+# Compiled Dynamic libraries
 
-# Kicad
-*.sch-bak
-*/usbflashprog-backups/*
-*/*/alternative_power-backups/*
+# Fortran module files
+*.mod
+*.smod
 
-# Eagle project file
-# It contains a serial number and references to the file structure
-# on your computer.
-# comment the following line if you want to have your project file included.
-eagle.epf
+# Compiled Static libraries
+*.lai
 
-# CAM files
-*.$$$
-*.cmp
-*.ly2
-*.l15
-*.sol
-*.plc
-*.stc
-*.sts
-*.crc
-*.crs
+# Executables
 
-*.dri
-*.drl
-*.gpi
-*.pls
-*.ger
-*.xln
+### Linux ###
+*~
 
-*.drd
-*.drd.*
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
-*.s#*
-*.b#*
+# KDE directory preferences
+.directory
 
-*.info
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
 
-*.eps
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
 
-# file locks introduced since 7.x
-*.lck
+### VisualStudioCode ###
+.vscode/*
+!.vscode/tasks.json
+*.code-workspace
 
-# LibreOffice
-*.~lock.*
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,linux,c,c++
+
+# Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
+build/
+doxy.log

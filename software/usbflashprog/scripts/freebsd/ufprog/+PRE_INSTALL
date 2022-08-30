@@ -1,1 +1,0 @@
-killall -q -9 ufprog || true

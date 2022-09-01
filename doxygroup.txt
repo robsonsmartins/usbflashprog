@@ -12,6 +12,6 @@
     @author Robson Martins<br>
             http://www.robsonmartins.com
     @version 1.0
-    @date 2010
+    @date 2008 - 2022
 */
 /*----------------------------------------------------------------------------*/

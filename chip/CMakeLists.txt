@@ -8,12 +8,7 @@
 # ---------------------------------------------------------------------------
 cmake_minimum_required(VERSION 3.20)
 
-project(emuprog_proj LANGUAGES C CXX)
-
-add_subdirectory(./iowrapper)
-add_subdirectory(./prog)
-add_subdirectory(./chip)
-add_subdirectory(./emuprog)
-
-# Forces Compiler (32 bits)
-set(CMAKE_CXX_COMPILER "D:\\MinGW\\Qt\\5.12.12\\Tools\\mingw730_32\\bin\\g++.exe")
+project(simulator LANGUAGES C CXX)
+add_subdirectory(./sram)
+add_subdirectory(./eeprom28c)
+add_subdirectory(./eprom)

@@ -1,0 +1,29 @@
+/*----------------------------------------------------------------------------*/
+/** @defgroup chip 3. Chip Emulation Classes and Libraries
+    Chip Emulation Classes amd Libraries.<br>
+    That provides all methods for a programmable chip emulation.
+*/
+/*----------------------------------------------------------------------------*/
+/** @ingroup chip
+    @defgroup lib_chip_sram SRAM Chip Emulation Library
+    SRAM Chip Emulation Library.<br>
+    Provides all stuff need for SRAM (Static Random Access Memory) chip
+    emulation, in a single DLL (requires a Programmer Emulation DLL).
+*/
+/*----------------------------------------------------------------------------*/
+/** @ingroup chip
+    @defgroup lib_chip_eeprom28c EEPROM 28Cxxx Chip Emulation Library
+    EEPROM 28Cxxx Chip Emulation Library.<br>
+    Provides all stuff need for EEPROM (Eletrical Erasable/Programmable
+    Read-Only Memory) chip emulation (28Cxxx series), in a single DLL
+    (requires a Programmer Emulation DLL).
+*/
+/*----------------------------------------------------------------------------*/
+/** @ingroup chip
+    @defgroup lib_chip_eprom EPROM 27xxx Chip Emulation Library
+    EPROM 27xxx Chip Emulation Library.<br>
+    Provides all stuff need for EPROM (Erasable/Programmable Read-Only Memory)
+    chip emulation (27xxx series), in a single DLL
+    (requires a Programmer Emulation DLL).
+*/
+/*----------------------------------------------------------------------------*/

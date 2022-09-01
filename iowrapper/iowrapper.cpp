@@ -15,6 +15,10 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <string>
+#include <cstdio>
+#include <cstdlib>
+
 #include "iowrapper.hpp"
 
 // ---------------------------------------------------------------------------
@@ -40,17 +44,19 @@ typedef DLLIMPORT unsigned char (*PGetPort)(unsigned short int addr);  // NOLINT
 /* global vars */
 
 /* Pointer for SetPort Prog Lib function */
-PSetPort pSetPort = NULL;
+static PSetPort SetPort = NULL;
 /* Pointer for GetPort Prog Lib function */
-PGetPort pGetPort = NULL;
+static PGetPort GetPort = NULL;
 /* Prog Lib Handle */
-HMODULE hProgLib = NULL;
+static HMODULE hProgLib = NULL;
+/* Prog Lib name */
+static std::string sProgLibName = "";
 
 // ---------------------------------------------------------------------------
 /* functions */
 
-bool _Load(void);
-void _Unload(void);
+static bool _Load(void);
+static void _Unload(void);
 
 // ---------------------------------------------------------------------------
 /* implementation */
@@ -59,7 +65,7 @@ DLLEXPORT void PortOut(short int Port, char Data) {  // NOLINT
   /* initialize objects */
   if (!_Load()) return;
   /* set port data */
-  pSetPort((unsigned short int)Port, (unsigned char)Data);  // NOLINT
+  SetPort((unsigned short int)Port, (unsigned char)Data);  // NOLINT
 }
 
 DLLEXPORT void PortWordOut(short int /*Port*/, short int /*Data*/) {  // NOLINT
@@ -75,7 +81,7 @@ DLLEXPORT char PortIn(short int Port) {  // NOLINT
   if (!_Load()) return static_cast<char>(0xFF);
   /* get port data */
   return static_cast<char>(
-      pGetPort(static_cast<unsigned short int>(Port)));  // NOLINT
+      GetPort(static_cast<unsigned short int>(Port)));  // NOLINT
 }
 
 DLLEXPORT short int PortWordIn(short int /*Port*/) {  // NOLINT
@@ -92,43 +98,43 @@ DLLEXPORT void SetPortBit(short int Port, char Bit) {  // NOLINT
   /* initialize objects */
   if (!_Load()) return;
   /* get port data */
-  unsigned char tmp = pGetPort(
+  unsigned char tmp = GetPort(
       static_cast<unsigned short int>(Port));  // NOLINT
   /* calculate new data */
   tmp |= (0x01 << Bit);
   /* set port data */
-  pSetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+  SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
 }
 
 DLLEXPORT void ClrPortBit(short int Port, char Bit) {  // NOLINT
   /* initialize objects */
   if (!_Load()) return;
   /* get port data */
-  unsigned char tmp = pGetPort(
+  unsigned char tmp = GetPort(
       static_cast<unsigned short int>(Port));  // NOLINT
   /* calculate new data */
   tmp &= ~(0x01 << Bit);
   /* set port data */
-  pSetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+  SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
 }
 
 DLLEXPORT void NotPortBit(short int Port, char Bit) {  // NOLINT
   /* initialize objects */
   if (!_Load()) return;
   /* get port data */
-  unsigned char tmp = pGetPort(
+  unsigned char tmp = GetPort(
       static_cast<unsigned short int>(Port));  // NOLINT
   /* calculate new data */
   tmp ^= (0x01 << Bit);
   /* set port data */
-  pSetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+  SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
 }
 
 DLLEXPORT short int GetPortBit(short int Port, char Bit) {  // NOLINT
   /* initialize objects */
   if (!_Load()) return 1;
   /* get port data */
-  unsigned char tmp = pGetPort(
+  unsigned char tmp = GetPort(
       static_cast<unsigned short int>(Port));  // NOLINT
   /* get bit info */
   return static_cast<short int>((tmp & (0x01 << Bit)) != 0);  // NOLINT
@@ -138,12 +144,12 @@ DLLEXPORT short int RightPortShift(short int Port, short int Val) {  // NOLINT
   /* initialize objects */
   if (!_Load()) return 1;
   /* get port data */
-  unsigned char tmp = pGetPort(
+  unsigned char tmp = GetPort(
       static_cast<unsigned short int>(Port));  // NOLINT
   /* calculate new port byte */
   tmp >>= Val;
   /* set port data */
-  pSetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+  SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
   /* return */
   return static_cast<short int>(tmp);  // NOLINT
 }
@@ -152,12 +158,12 @@ DLLEXPORT short int LeftPortShift(short int Port, short int Val) {  // NOLINT
   /* initialize objects */
   if (!_Load()) return 1;
   /* get port data */
-  unsigned char tmp = pGetPort(
+  unsigned char tmp = GetPort(
       static_cast<unsigned short int>(Port));  // NOLINT
   /* calculate new port byte */
   tmp <<= Val;
   /* set port data */
-  pSetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+  SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
   /* return */
   return static_cast<short int>(tmp);  // NOLINT
 }
@@ -199,25 +205,28 @@ bool _Load(void) {
                          reinterpret_cast<LPBYTE>(strLibName),
                          &dwBufLen) != ERROR_SUCCESS) {
       /* if error, then creates the default value in registry */
-      RegSetValueEx(hKey, PROGLIB_REGISTRY_NAME, NULL, REG_SZ,
+      RegSetValueEx(hKey, PROGLIB_REGISTRY_NAME, 0, REG_SZ,
                     reinterpret_cast<const BYTE*>(strLibName), dwBufLen);
     }
     RegCloseKey(hKey);
   }
   /* check for load library */
   /* library is loaded, exit */
-  if (hProgLib != NULL) return true;
+  if (sProgLibName == strLibName && hProgLib) { return true; }
+  /* unload if loaded */
+  _Unload();
   /* load library */
   hProgLib = LoadLibraryA(strLibName);
   /* get func pointers */
-  if (hProgLib != NULL) {
-    pSetPort = reinterpret_cast<PSetPort>(GetProcAddress(hProgLib, "SetPort"));
-    pGetPort = reinterpret_cast<PGetPort>(GetProcAddress(hProgLib, "GetPort"));
+  if (hProgLib) {
+    SetPort = reinterpret_cast<PSetPort>(GetProcAddress(hProgLib, "SetPort"));
+    GetPort = reinterpret_cast<PGetPort>(GetProcAddress(hProgLib, "GetPort"));
   }
   /* if error, unload */
-  if (pSetPort == NULL || pGetPort == NULL) _Unload();
+  if (!SetPort || !GetPort) { _Unload(); }
   /* return */
-  return (hProgLib != NULL);
+  sProgLibName = strLibName;
+  return (hProgLib);
 }
 
 void _Unload(void) {
@@ -225,8 +234,9 @@ void _Unload(void) {
   if (hProgLib != NULL) {
     FreeLibrary(hProgLib);
     hProgLib = NULL;
+    sProgLibName.clear();
   }
   /* do pointer to functions = NULL */
-  pSetPort = NULL;
-  pGetPort = NULL;
+  SetPort = NULL;
+  GetPort = NULL;
 }

@@ -1,0 +1,55 @@
+/*----------------------------------------------------------------------------*/
+/** @defgroup prog 2. Programmer Emulation Classes and Libraries
+    Programmer Emulation Classes and Libraries.<br>
+    That provides all methods for a device programmer emulation.
+*/
+/*----------------------------------------------------------------------------*/
+/** @ingroup prog
+    @defgroup lib_prog_willem Willem/Sivava Programmer Emulation Library
+    Willem/Sivava Programmer Emulation Library.<br>
+    Provides all stuff need for Willem/Sivava Programmer emulation, in
+    a single DLL (requires I/O Wrapper Library, IO.DLL).<p>
+    Compatible with the following programmers:
+    - Willem Standard 3.1, 4.0, 4.1 and 4.5 at
+      http://web.archive.org/web/20071003005002/http://www.willem.org/
+    - Sivava PCB3B at http://www.mpu51.com/eprom/eprom.html
+    - EzoFlash+ 4.4 at http://www.ezoflash.com
+    <p>Uses the following Micrososft Windows registry key:
+    <b>HKEY_CURRENT_USER\\Software\\EmuProg\\</b><br>
+    and the following registry values:
+    - <b>ChipLib</b>  [REG_SZ   ]: Name of chip emulator DLL.
+    - <b>ChipSize</b> [REG_DWORD]: Chip size, in bytes (for 8 bits devices) or
+      in words (for 16 bits devices).
+
+    @see @ref WillemDoc
+*/
+/*----------------------------------------------------------------------------*/
+/** @ingroup prog
+    @defgroup lib_prog_pcb45 Sivava Programmer (PCB4.5) Emulation Library
+    Sivava Programmer (PCB4.5) Emulation Library.<br>
+    Provides all stuff need for Sivava Programmer (PCB4.5) emulation, in
+    a single DLL (requires I/O Wrapper Library, IO.DLL).<p>
+    Compatible with the following programmers:
+    - Sivava PCB4.5 at http://www.sivava.com/
+    - Sivava PCB5.0 at http://www.sivava.com/
+    - Willem Mod to PCB4.5 at http://www.py2bbs.qsl.br/willem_pcb45.php
+    <p>Uses the following Micrososft Windows registry key:
+    <b>HKEY_CURRENT_USER\\Software\\EmuProg\\</b><br>
+    and the following registry values:
+    - <b>ChipLib</b>  [REG_SZ   ]: Name of chip emulator DLL.
+    - <b>ChipSize</b> [REG_DWORD]: Chip size, in bytes (for 8 bits devices) or
+      in words (for 16 bits devices).
+
+    @see @ref Pcb45Doc
+*/
+/*----------------------------------------------------------------------------*/
+/** @page WillemDoc Willem/Sivava Programmer Documentation 
+    
+    @htmlinclude willem.htm
+*/
+/*----------------------------------------------------------------------------*/
+/** @page Pcb45Doc Sivava PCB4.5 Programmer Documentation 
+    
+    @htmlinclude pcb45.htm
+*/
+/*----------------------------------------------------------------------------*/

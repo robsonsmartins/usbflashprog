@@ -20,9 +20,8 @@
 
 // ---------------------------------------------------------------------------
 /* headers */
+#define NOGDI
 #include <windows.h>
-#include <cstdio>
-#include <cstdlib>
 
 // ---------------------------------------------------------------------------
 /* defines */
@@ -36,19 +35,25 @@
 /** @ingroup lib_iowrapper
     Write a byte (8 bits) to a port.
     @param[in] Port Port Address
-    @param[in] Data Byte to write */
+    @param[in] Data Byte to write
+    @return None
+ */
 DLLEXPORT void PortOut(short int Port, char Data);  // NOLINT
 
 /** @ingroup lib_iowrapper
     Write a word (16 bits) to a port.
     @param[in] Port Port Address
-    @param[in] Data Word to write */
+    @param[in] Data Word to write
+    @return None
+ */
 DLLEXPORT void PortWordOut(short int Port, short int Data);  // NOLINT
 
 /** @ingroup lib_iowrapper
     Write a dword (32 bits) to a port.
     @param[in] Port Port Address
-    @param[in] Data DWord to write */
+    @param[in] Data DWord to write
+    @return None
+ */
 DLLEXPORT void PortDWordOut(short int Port, int Data);  // NOLINT
 
 /** @ingroup lib_iowrapper
@@ -72,19 +77,25 @@ DLLEXPORT int PortDWordIn(short int Port);  // NOLINT
 /** @ingroup lib_iowrapper
     Set a port bit.
     @param[in] Port Port Address
-    @param[in] Bit Bit number to set (0..7) */
+    @param[in] Bit Bit number to set (0..7)
+    @return None
+ */
 DLLEXPORT void SetPortBit(short int Port, char Bit);  // NOLINT
 
 /** @ingroup lib_iowrapper
     Clear a port bit.
     @param[in] Port Port Address
-    @param[in] Bit Bit number to reset (0..7) */
+    @param[in] Bit Bit number to reset (0..7)
+    @return None
+ */
 DLLEXPORT void ClrPortBit(short int Port, char Bit);  // NOLINT
 
 /** @ingroup lib_iowrapper
     Invert a port bit.
     @param[in] Port Port Address
-    @param[in] Bit Bit number to invert (0..7) */
+    @param[in] Bit Bit number to invert (0..7)
+    @return None
+ */
 DLLEXPORT void NotPortBit(short int Port, char Bit);  // NOLINT
 
 /** @ingroup lib_iowrapper
@@ -116,11 +127,7 @@ DLLEXPORT short int IsDriverInstalled(void);  // NOLINT
 // ---------------------------------------------------------------------------
 
 /** @ingroup lib_iowrapper
-    Library Entry point for Micrososft Windows.
-    @param[in] hInst Library Instance
-    @param[in] reason Reason of the call
-    @param[in] reserved Not used
-    @return TRUE if success, FALSE if error. */
+    Library Entry point for Micrososft Windows. */
 BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved);
 
 #endif  // IOWRAPPER_HPP_    // NOLINT

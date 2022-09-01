@@ -1,0 +1,29 @@
+#include <windows.h>
+
+A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "emuprog.ico"
+
+1 VERSIONINFO
+FILEVERSION 1,0,0,0
+PRODUCTVERSION 1,0,0,0
+FILETYPE VFT_APP
+{
+  BLOCK "StringFileInfo"
+	 {
+		 BLOCK "040904E4"
+		 {
+			 VALUE "CompanyName", "Robson Martins"
+			 VALUE "FileVersion", "1.0"
+			 VALUE "FileDescription", "Willem/Sivava Prog Emulator"
+			 VALUE "InternalName", "emuprog"
+			 VALUE "LegalCopyright", "Robson Martins"
+			 VALUE "LegalTrademarks", "Robson Martins"
+			 VALUE "OriginalFilename", "emuprog"
+			 VALUE "ProductName", "Willem/Sivava Prog Emulator"
+			 VALUE "ProductVersion", "1.0"
+		 }
+	 }
+  BLOCK "VarFileInfo"
+	 {
+		 VALUE "Translation", 0x0, 1252
+	 }
+}

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>375</width>
+    <height>144</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Programmer Emulator</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../resources/resources.qrc">
+    <normaloff>:/icon/emuprog.png</normaloff>:/icon/emuprog.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout_6">
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Programmer</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cbProg">
+                 <item>
+                  <property name="text">
+                   <string>Willem/EzoFlash (PCB 3 / 4)</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>Sivava (PCB 4.5 / 5.5)</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Chip</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cbChip">
+                 <item>
+                  <property name="text">
+                   <string>SRAM</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>EEPROM 28Cxxx</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>EPROM 27xxx</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Chip Size (Bytes/Words)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cbSize">
+                 <item>
+                  <property name="text">
+                   <string>2K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>4K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>8K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>16K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>32K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>64K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>128K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>256K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>512K</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>1M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>2M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>4M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>8M</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>16M</string>
+                  </property>
+                 </item>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources>
+  <include location="../../resources/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

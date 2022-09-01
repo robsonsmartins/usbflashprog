@@ -6,14 +6,8 @@
 # This work is licensed under a Creative Commons Attribution-NonCommercial-
 # ShareAlike 4.0 International License.
 # ---------------------------------------------------------------------------
-cmake_minimum_required(VERSION 3.20)
 
-project(emuprog_proj LANGUAGES C CXX)
-
-add_subdirectory(./iowrapper)
-add_subdirectory(./prog)
-add_subdirectory(./chip)
-add_subdirectory(./emuprog)
-
-# Forces Compiler (32 bits)
-set(CMAKE_CXX_COMPILER "D:\\MinGW\\Qt\\5.12.12\\Tools\\mingw730_32\\bin\\g++.exe")
+# Exception for win_executables
+!epr097ja.exe
+!epr098d5.exe
+!epr098d10.exe

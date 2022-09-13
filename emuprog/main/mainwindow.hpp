@@ -20,6 +20,7 @@
 
 #include <QMainWindow>
 #include <QScreen>
+#include <QProcess>
 
 // ---------------------------------------------------------------------------
 
@@ -57,12 +58,21 @@ class MainWindow : public QMainWindow {
     void on_cbProg_activated(int index);
     void on_cbChip_activated(int index);
     void on_cbSize_activated(int index);
+    void on_btnPCB3_clicked();
+    void on_btnPCB45_clicked();
+    void on_btnPCB50_clicked();
 
  private:
     /* @brief Pointer to UI object. */
     Ui::MainWindow *ui_;
+    /* @brief Pointer to QProcess object. */
+    QProcess *process_;
     /* @brief Loads registry settings. */
     void loadSettings_();
+    /* @brief Runs an executable file.
+     * @param filename The filename.
+     */
+    void runExecutable_(const QString &filename);
 };
 
 #endif  // MAIN_MAINWINDOW_HPP_

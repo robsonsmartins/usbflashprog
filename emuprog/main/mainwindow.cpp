@@ -37,11 +37,16 @@
 #define CHIP_EEPROM28C "eeprom28c.dll"
 #define CHIP_EPROM "eprom.dll"
 
+#define PCB3_PROGRAM "epr097ja.exe"
+#define PCB45_PROGRAM "epr098d5.exe"
+#define PCB50_PROGRAM "epr098d10.exe"
+
 // ---------------------------------------------------------------------------
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui_(new Ui::MainWindow) {
     ui_->setupUi(this);
+    process_ = new QProcess(this);
     this->setGeometry(
         QStyle::alignedRect(
             Qt::LeftToRight,
@@ -53,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 MainWindow::~MainWindow() {
+    delete process_;
     delete ui_;
 }
 
@@ -121,6 +127,27 @@ void MainWindow::on_cbSize_activated(int index) {
     }
 }
 
+void MainWindow::on_btnPCB3_clicked() {
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB3_PROGRAM));
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB45_PROGRAM));
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB50_PROGRAM));
+    runExecutable_(PCB3_PROGRAM);
+}
+
+void MainWindow::on_btnPCB45_clicked() {
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB3_PROGRAM));
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB45_PROGRAM));
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB50_PROGRAM));
+    runExecutable_(PCB45_PROGRAM);
+}
+
+void MainWindow::on_btnPCB50_clicked() {
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB3_PROGRAM));
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB45_PROGRAM));
+    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB50_PROGRAM));
+    runExecutable_(PCB50_PROGRAM);
+}
+
 void MainWindow::loadSettings_() {
     QSettings settings(EMUPROG_REGISTRY_KEY, QSettings::NativeFormat);
     QString value = settings.value(PROGLIB_REGISTRY_VALUE).toString().toLower();
@@ -137,7 +164,7 @@ void MainWindow::loadSettings_() {
     } else {
         ui_->cbChip->setCurrentIndex(0);
     }
-    int size = settings.value(CHIPLIB_REGISTRY_VALUE).toInt();
+    int size = settings.value(CHIPSIZE_REGISTRY_VALUE).toInt();
     switch (size) {
         case 16 * 1024 * 1024:
             ui_->cbSize->setCurrentIndex(13);
@@ -183,4 +210,12 @@ void MainWindow::loadSettings_() {
             ui_->cbSize->setCurrentIndex(0);
             break;
     }
+}
+
+void MainWindow::runExecutable_(const QString &filename) {
+    QString cmd = "cmd /k ";
+    cmd.append(QCoreApplication::applicationDirPath().append("/"));
+    cmd.append(filename);
+    process_->startDetached(cmd);
+    process_->waitForStarted();
 }

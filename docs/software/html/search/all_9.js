@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['main_94',['main',['../a00065.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../a00204.html#ga3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main.cpp']]],
-  ['main_2ecpp_95',['main.cpp',['../a00065.html',1,'']]],
-  ['mainwindow_96',['MainWindow',['../a01066.html',1,'MainWindow'],['../a01066.html#ac3df08a4bc0438931d73601110c9267e',1,'MainWindow::MainWindow()']]],
-  ['mainwindow_2ecpp_97',['mainwindow.cpp',['../a00053.html',1,'']]],
-  ['mainwindow_2ehpp_98',['mainwindow.hpp',['../a00056.html',1,'']]]
+  ['opcode_72',['OpCode',['../a00933.html',1,'']]],
+  ['opcode_73',['opcode',['../a00937.html#a061932bab6caa48bdabcedd4c4c00f8f',1,'TRunnerCommand']]],
+  ['opcodes_2ecpp_74',['opcodes.cpp',['../a00038.html',1,'']]],
+  ['opcodes_2ehpp_75',['opcodes.hpp',['../a00041.html',1,'']]],
+  ['opcodes_5ftest_2ecpp_76',['opcodes_test.cpp',['../a00065.html',1,'']]],
+  ['opcodes_5ftest_2ehpp_77',['opcodes_test.hpp',['../a00068.html',1,'']]],
+  ['opcodetest_78',['OpCodeTest',['../a00949.html',1,'OpCodeTest'],['../a00949.html#a06e8a95bfeafdc7ce1a38e4e32668780',1,'OpCodeTest::OpCodeTest()']]],
+  ['open_79',['open',['../a00941.html#a0c49f174bdf75b0bbad922ae29358b1c',1,'Runner::open()'],['../a00965.html#a837626db5285134f7a50f63eca00a8fd',1,'QHexEditor::open()']]],
+  ['operator_3d_80',['operator=',['../a00929.html#a300e93d9f828a794db30912d9b1c525f',1,'TCmdOpCode::operator=()'],['../a00937.html#a1d4667e6ccffd3d0d750442ff9e90fc3',1,'TRunnerCommand::operator=()']]],
+  ['operator_3d_3d_81',['operator==',['../a00929.html#ab4e43100845654abce98f4bf44c947f9',1,'TCmdOpCode::operator==()'],['../a00937.html#a647dbe717558569de52b11ddd71f76e7',1,'TRunnerCommand::operator==()'],['../a00038.html#ab4e43100845654abce98f4bf44c947f9',1,'operator==(const TCmdOpCode &amp;a, const TCmdOpCode &amp;b):&#160;opcodes.cpp'],['../a00044.html#a647dbe717558569de52b11ddd71f76e7',1,'operator==(const TRunnerCommand &amp;a, const TRunnerCommand &amp;b):&#160;runner.cpp']]]
 ];

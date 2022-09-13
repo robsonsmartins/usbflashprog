@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: opcodes_test.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: runner_test.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,31 +67,40 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">opcodes_test.cpp File Reference<div class="ingroups"><a class="el" href="a00204.html">Unit Tests</a></div></div>  </div>
+<div class="title">runner_test.cpp File Reference<div class="ingroups"><a class="el" href="a00087.html">Unit Tests</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of Unit Test for <a class="el" href="a01054.html" title="Opcode Manager Class.">OpCode</a> Handling Classes.  
+<p>Implementation of Unit Test for <a class="el" href="a00941.html" title="Runner Class.">Runner</a> Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;cstring&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00074.html">opcodes_test.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00041.html">../../backend/opcodes.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;../mock/qserialport.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00074.html">runner_test.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00047.html">../../backend/runner.hpp</a>&quot;</code><br />
+<code>#include &lt;QThread&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for opcodes_test.cpp:</div>
+Include dependency graph for runner_test.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00072.png" border="0" usemap="#aopcodes__test_8cpp" alt=""/></div>
-<map name="aopcodes__test_8cpp" id="aopcodes__test_8cpp">
-<area shape="rect" title="Implementation of Unit Test for OpCode Handling Classes." alt="" coords="97,5,231,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,72,107"/>
-<area shape="rect" href="a00074.html" title="Header of Unit Test for OpCode Handling Classes." alt="" coords="96,80,232,107"/>
-<area shape="rect" href="a00041.html" title="Opcodes for communication." alt="" coords="256,80,443,107"/>
-<area shape="rect" title=" " alt="" coords="112,155,216,181"/>
-<area shape="rect" title=" " alt="" coords="280,155,339,181"/>
-<area shape="rect" title=" " alt="" coords="363,155,413,181"/>
+<div class="center"><img src="a00072.png" border="0" usemap="#arunner__test_8cpp" alt=""/></div>
+<map name="arunner__test_8cpp" id="arunner__test_8cpp">
+<area shape="rect" title="Implementation of Unit Test for Runner Class." alt="" coords="393,5,516,32"/>
+<area shape="rect" href="a00074.html" title="Header of Unit Test for Runner Class." alt="" coords="107,80,231,107"/>
+<area shape="rect" href="a00047.html" title="Header of the Runner Class." alt="" coords="368,80,541,107"/>
+<area shape="rect" title=" " alt="" coords="565,80,643,107"/>
+<area shape="rect" title=" " alt="" coords="5,155,109,181"/>
+<area shape="rect" title=" " alt="" coords="133,155,208,181"/>
+<area shape="rect" title=" " alt="" coords="233,155,303,181"/>
+<area shape="rect" title=" " alt="" coords="328,155,403,181"/>
+<area shape="rect" title=" " alt="" coords="427,155,482,181"/>
+<area shape="rect" title=" " alt="" coords="506,155,603,181"/>
+<area shape="rect" title=" " alt="" coords="627,155,722,181"/>
+<area shape="rect" title=" " alt="" coords="747,155,867,181"/>
+<area shape="rect" href="a00041.html" title="Opcodes for communication." alt="" coords="891,155,1053,181"/>
+<area shape="rect" title=" " alt="" coords="903,229,961,256"/>
+<area shape="rect" title=" " alt="" coords="985,229,1036,256"/>
 </map>
 </div>
 </div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of Unit Test for <a class="el" href="a01054.html" title="Opcode Manager Class.">OpCode</a> Handling Classes. </p>
+<div class="textblock"><p>Implementation of Unit Test for <a class="el" href="a00941.html" title="Runner Class.">Runner</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

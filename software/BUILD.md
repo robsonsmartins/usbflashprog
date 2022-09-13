@@ -24,6 +24,7 @@ Here are instructions on how to build the project.
 	* [Install Doxygen \[Optional\]](#install-doxygen-optional)
 	* [Install GraphViz \[Optional\]](#install-graphviz-optional)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
+	* [Install Inno Setup Compiler \[Optional\]](#install-inno-setup-compiler-optional)
 	* [Update Environment Variables](#update-environment-variables)
 	* [Build](#build)
 	* [Generate Installation Package \[Optional\]](#generate-installation-package-optional)
@@ -208,6 +209,7 @@ The documentation is generated under `usbflashprog/docs/software/html` directory
 - Doxygen \[Optional\] ([doxygen-1.9.4-setup.exe](https://www.doxygen.nl/files/doxygen-1.9.4-setup.exe), ~44.4MB);
 - GraphViz \[Optional\] ([stable_windows_10_cmake_Release_x64_graphviz-install-2.47.1-win64.exe](https://gitlab.com/graphviz/graphviz/-/package_files/9574245/download), ~4.5MB);
 - Visual Studio Code \[Optional\] ([VSCodeSetup-x64-1.55.1.exe](https://code.visualstudio.com/docs/?dv=win64), ~68.9MB)
+- Inno Setup Compiler \[Optional\] ([innosetup-6.2.1.exe](https://jrsoftware.org/download.php/is.exe), ~4.7MB)
 
 ### Install Git
 
@@ -327,6 +329,17 @@ To do this:
 
 2. Find "CMake: Generator" field, and enter the value "MinGW Makefiles".
 
+### Install Inno Setup Compiler \[Optional\]
+
+The purpose of this tutorial is to configure the Inno Setup Compiler to generate a project installation package for Microsoft Windows&copy;.
+
+To install Inno Setup:
+
+1. Download the latest version from the [Inno Setup Download Site](https://jrsoftware.org/isdl.php).
+The version installed at the time of writing this tutorial was [innosetup-6.2.1.exe](https://jrsoftware.org/download.php/is.exe).
+
+2. When prompted, enter the installation location ("Destination Folder") for a short, easy path such as `c:\is`.
+
 ### Update Environment Variables
 
 Some of the installed tools automatically update the Windows environment variables (specifically, the PATH).
@@ -345,6 +358,7 @@ The following variables and inputs are required:
 - `C:\doxygen\bin` (if Doxygen was installed)
 - `C:\graphviz\bin` (if GraphViz was installed)
 - `C:\Program Files\Microsoft VS Code\bin` (if Visual Studio Code was installed)
+- `C:\is` (if Inno Setup was installed)
 
 **`Qt5_DIR`**
 - `C:\Qt\5.12.12\5.12.12\mingw73_64\lib\cmake\Qt5`

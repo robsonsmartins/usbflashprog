@@ -6,7 +6,11 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 
 ### Build Instructions
 
-Instructions on how to build the project are described in following document: [Build Instructions](BUILD.md)
+Instructions on how to build the project are described in following document: [Build Instructions](BUILD.md).
+
+### How to sign a Microsoft Windows&copy; Driver with a Self-Signed Certificate
+
+Instructions on how to sign a Microsoft Windows&copy; driver with a self-signed certificate are described in following document: [How to sign a Microsoft Windows&copy; Driver with a Self-Signed Certificate](usbflashprog/third/win/HOWTO-SIGN.md).
 
 ### Code Style Guide
 
@@ -24,4 +28,3 @@ The following software was used to develop the software:
 - [CMake](https://packages.ubuntu.com/jammy/cmake), version 3.22.1-1ubuntu1.
 - [Google Test](https://packages.ubuntu.com/jammy/googletest), version 1.11.0-3.
 - [Doxygen](https://packages.ubuntu.com/jammy/doxygen), version 1.9.1-2ubuntu2.
-

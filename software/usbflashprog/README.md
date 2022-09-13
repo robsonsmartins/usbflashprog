@@ -26,6 +26,13 @@ The most up-to-date software documentation can be accessed here: [Software Docum
 
 The code coverage report from unit tests can be accessed here: [Code Coverage Report of the USB Flash/EPROM Programmer](https://robsonsmartins.github.io/usbflashprog/software/lcov/index.html).
 
+### Build Instructions
+
+Instructions on how to build the project are described in following document: [Build Instructions](https://github.com/robsonsmartins/usbflashprog/blob/main/software/BUILD.md).
+
+### How to sign a Microsoft Windows&copy; Driver with a Self-Signed Certificate
+
+Instructions on how to sign a Microsoft Windows&copy; driver with a self-signed certificate are described in following document: [How to sign a Microsoft Windows&copy; Driver with a Self-Signed Certificate](https://github.com/robsonsmartins/usbflashprog/blob/main/software/usbflashprog/third/win/HOWTO-SIGN.md).
 
 ### Code Style Guide
 

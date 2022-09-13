@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['teardown_316',['TearDown',['../a01074.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'OpCodeTest::TearDown()'],['../a01078.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'RunnerTest::TearDown()']]],
-  ['typefromstr_317',['typeFromStr',['../a01034.html#a0b220292ea164b81fcaa2bf2941595bd',1,'QEpromFile']]]
+  ['_7emainwindow_244',['~MainWindow',['../a00945.html#aa33fa7d45aa34b9ede5cb69ab574a1b2',1,'MainWindow']]],
+  ['_7eopcodetest_245',['~OpCodeTest',['../a00949.html#aad738d3591f409666a05b07d5f25fa8a',1,'OpCodeTest']]],
+  ['_7erunner_246',['~Runner',['../a00941.html#acf8a6ad9b69fe1db4f8e5199b5411a6f',1,'Runner']]],
+  ['_7erunnertest_247',['~RunnerTest',['../a00953.html#a5f05d25acc388cd61aa61b6ae8c2a9a4',1,'RunnerTest']]]
 ];

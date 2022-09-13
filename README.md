@@ -14,6 +14,7 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 * [About the Project](#about-the-project)
 * [Current Status](#current-status)
 * [Releases](#releases)
+* [Operating Systems](#operating-systems)
 * [Documentation](#documentation)
 * [Hardware Design](#hardware-design)
 * [Firmware Project](#firmware-project)
@@ -45,6 +46,27 @@ The current status of this project is:
 ## Releases
 
 The releases of this project are here: [Releases of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/releases).
+
+## Operating Systems
+
+The USB Flash/EPROM Programmer has compiled installation packages for the following Operating Systems:
+
+### Microsoft Windows©
+
+* Windows 7, or above (32 or 64 bits)
+
+### GNU/Linux
+
+* Ubuntu Linux 20.04, or above (64 bits)
+* RedHat/CentOS 8, or above (64 bits)
+
+### Apple MacOSX©
+
+* MacOSX 10.13, or above (Intel)
+
+### FreeBSD
+
+* FreeBSD 13.1, or above (64 bits)
 
 ## Documentation
 

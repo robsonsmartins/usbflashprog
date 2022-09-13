@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['atmelgenericerrors_346',['AtmelGenericErrors',['../a00089.html#abede0007db47033a2b4234d2ab7a05d0',1,'atmel_generic.h']]]
+  ['kcmdopcodeenum_263',['kCmdOpCodeEnum',['../a00086.html#ga9d169aaae39d9f86c725f5ee0fccec17',1,'opcodes.hpp']]],
+  ['kcmdparamvalueenum_264',['kCmdParamValueEnum',['../a00086.html#ga97f7be15bdca512128e3b9d46efc2066',1,'opcodes.hpp']]],
+  ['kcmdresponsevalueenum_265',['kCmdResponseValueEnum',['../a00086.html#ga20a6fc05d4d98ac9d07a64d1674afb55',1,'opcodes.hpp']]]
 ];

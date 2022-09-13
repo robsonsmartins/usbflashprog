@@ -10,3 +10,7 @@ Please do not redistribute these files!
 
 - [Microsoft Windows SDK License](sdk_license.txt)
 - [Microsoft Windows WDK License](wdk_license.txt)
+
+### How to sign a Microsoft Windows&copy; Driver with a Self-Signed Certificate
+
+Instructions on how to sign a Microsoft Windows&copy; driver with a self-signed certificate are described in following document: [How to sign a Microsoft Windows&copy; Driver with a Self-Signed Certificate](HOWTO-SIGN.md).

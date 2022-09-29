@@ -41,8 +41,10 @@ elseif(NORMAL_BUILD)
         hal/serial.cpp
         hal/string.cpp
         circuits/74hc595.cpp
+        circuits/74hc165.cpp
         circuits/dc2dc.cpp
         modules/vgenerator.cpp
+        modules/bus.cpp
         modules/opcodes.cpp
         modules/runner.cpp
         main.cpp

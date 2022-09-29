@@ -44,7 +44,12 @@ void HC595::clear() {
         sleep_us(pulseTime_);
         gpio_.setPin(clrPin_);
     }
-    for (auto& data : buffer_) { data = 0; }
+    if (rckPin_ != 0xFF) {
+        gpio_.setPin(rckPin_);
+        sleep_us(pulseTime_);
+        gpio_.resetPin(rckPin_);
+    }
+    buffer_.clear();
 }
 
 void HC595::outputEnable(bool value) {
@@ -59,10 +64,18 @@ void HC595::outputDisable() {
 }
 
 void HC595::writeByte(uint8_t value) {
+    clear();
+    if (!value) { return; }
     writeData(&value, 1);
 }
 
 void HC595::writeWord(uint16_t value) {
+    clear();
+    if (!value) { return; }
+    if (value <= 0xFF) {
+        writeByte(value & 0xFF);
+        return;
+    }
     uint8_t buffer[2];
     buffer[0] = value & 0xFF;
     buffer[1] = (value & 0xFF00) >> 8;
@@ -70,12 +83,21 @@ void HC595::writeWord(uint16_t value) {
 }
 
 void HC595::writeDWord(uint32_t value) {
+    clear();
+    if (!value) { return; }
+    if (value <= 0xFF) {
+        writeByte(value & 0xFF);
+        return;
+    } else if (value <= 0xFFFF) {
+        writeWord(value & 0xFFFF);
+        return;
+    }
     uint8_t buffer[4];
     buffer[0] = value & 0xFF;
     buffer[1] = (value & 0xFF00) >> 8;
     buffer[2] = (value & 0xFF0000) >> 16;
     buffer[3] = (value & 0xFF000000) >> 24;
-    writeData(buffer, 4);
+    writeData(buffer, (value <= 0xFFFFFF) ? 3 : 4);
 }
 
 void HC595::writeData(const uint8_t* buffer, uint size) {
@@ -133,6 +155,20 @@ void HC595::toggleBit(uint bit) {
     uint8_t mask = 0x01 << (bit - (index * 8));
     data ^= mask;
     buffer_[index] = data;
+    writeData(buffer_.data(), buffer_.size());
+}
+
+void HC595::increment(void) {
+    uint16_t d = 1;
+    for (uint8_t &b : buffer_) {
+        d = b + d;
+        b = d & 0xFF;
+        if (d > 0xFF) {
+            d = 1;
+        } else {
+            break;
+        }
+    }
     writeData(buffer_.data(), buffer_.size());
 }
 

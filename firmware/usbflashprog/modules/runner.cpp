@@ -26,38 +26,57 @@
 Runner::Runner() {}
 
 void Runner::init() {
-    config_.vpp.pwmPin             =             kVppPwmPin;
-    config_.vpp.pwmFreq            =            kVppPwmFreq;
-    config_.vpp.pwmMinDuty         =         kVppPwmMinDuty;
-    config_.vpp.pwmMaxDuty         =         kVppPwmMaxDuty;
-    config_.vpp.pwmSlowStepDuty    =    kVppPwmSlowStepDuty;
-    config_.vpp.pwmFastStepDuty    =    kVppPwmFastStepDuty;
-    config_.vpp.pwmToleranceToFast = kVppPwmToleranceToFast;
-    config_.vpp.adcChannel         =         kVppAdcChannel;
-    config_.vpp.adcVref            =            kVppAdcVRef;
-    config_.vpp.divider            =            kVppDivider;
-    config_.vpp.vTolerance         =      kVppVoutTolerance;
-    config_.vpp.ctrlPin            =            kVppCtrlPin;
-    config_.vpp.vcSinPin           =           kVppVcSinPin;
-    config_.vpp.vcClkPin           =           kVppVcClkPin;
-    config_.vpp.vcClrPin           =           kVppVcClrPin;
-    config_.vpp.vcRckPin           =           kVppVcRckPin;
+    vgenConfig_.vpp.pwmPin             =             kVppPwmPin;
+    vgenConfig_.vpp.pwmFreq            =            kVppPwmFreq;
+    vgenConfig_.vpp.pwmMinDuty         =         kVppPwmMinDuty;
+    vgenConfig_.vpp.pwmMaxDuty         =         kVppPwmMaxDuty;
+    vgenConfig_.vpp.pwmSlowStepDuty    =    kVppPwmSlowStepDuty;
+    vgenConfig_.vpp.pwmFastStepDuty    =    kVppPwmFastStepDuty;
+    vgenConfig_.vpp.pwmToleranceToFast = kVppPwmToleranceToFast;
+    vgenConfig_.vpp.adcChannel         =         kVppAdcChannel;
+    vgenConfig_.vpp.adcVref            =            kVppAdcVRef;
+    vgenConfig_.vpp.divider            =            kVppDivider;
+    vgenConfig_.vpp.vTolerance         =      kVppVoutTolerance;
+    vgenConfig_.vpp.ctrlPin            =            kVppCtrlPin;
+    vgenConfig_.vpp.vcSinPin           =           kVppVcSinPin;
+    vgenConfig_.vpp.vcClkPin           =           kVppVcClkPin;
+    vgenConfig_.vpp.vcClrPin           =           kVppVcClrPin;
+    vgenConfig_.vpp.vcRckPin           =           kVppVcRckPin;
 
-    config_.vdd.pwmPin             =             kVddPwmPin;
-    config_.vdd.pwmFreq            =            kVddPwmFreq;
-    config_.vdd.pwmMinDuty         =         kVddPwmMinDuty;
-    config_.vdd.pwmMaxDuty         =         kVddPwmMaxDuty;
-    config_.vdd.pwmSlowStepDuty    =    kVddPwmSlowStepDuty;
-    config_.vdd.pwmFastStepDuty    =    kVddPwmFastStepDuty;
-    config_.vdd.pwmToleranceToFast = kVddPwmToleranceToFast;
-    config_.vdd.adcChannel         =         kVddAdcChannel;
-    config_.vdd.adcVref            =            kVddAdcVRef;
-    config_.vdd.divider            =            kVddDivider;
-    config_.vdd.vTolerance         =      kVddVoutTolerance;
-    config_.vdd.ctrlPin            =            kVddCtrlPin;
-    config_.vdd.onVppPin           =           kVddOnVppPin;
+    vgenConfig_.vdd.pwmPin             =             kVddPwmPin;
+    vgenConfig_.vdd.pwmFreq            =            kVddPwmFreq;
+    vgenConfig_.vdd.pwmMinDuty         =         kVddPwmMinDuty;
+    vgenConfig_.vdd.pwmMaxDuty         =         kVddPwmMaxDuty;
+    vgenConfig_.vdd.pwmSlowStepDuty    =    kVddPwmSlowStepDuty;
+    vgenConfig_.vdd.pwmFastStepDuty    =    kVddPwmFastStepDuty;
+    vgenConfig_.vdd.pwmToleranceToFast = kVddPwmToleranceToFast;
+    vgenConfig_.vdd.adcChannel         =         kVddAdcChannel;
+    vgenConfig_.vdd.adcVref            =            kVddAdcVRef;
+    vgenConfig_.vdd.divider            =            kVddDivider;
+    vgenConfig_.vdd.vTolerance         =      kVddVoutTolerance;
+    vgenConfig_.vdd.ctrlPin            =            kVddCtrlPin;
+    vgenConfig_.vdd.onVppPin           =           kVddOnVppPin;
 
-    vgen_.configure(config_);
+    ctrlBusConfig_.cePin               =              kBusCEPin;
+    ctrlBusConfig_.oePin               =              kBusOEPin;
+    ctrlBusConfig_.wePin               =              kBusWEPin;
+
+    dataBusConfig_.dSinPin             =         kBusDataSinPin;
+    dataBusConfig_.dSoutPin            =        kBusDataSoutPin;
+    dataBusConfig_.dClkPin             =         kBusDataClkPin;
+    dataBusConfig_.dClrPin             =         kBusDataClrPin;
+    dataBusConfig_.dRckPin             =         kBusDataRckPin;
+
+    addrBusConfig_.aSinPin             =         kBusAddrSinPin;
+    addrBusConfig_.aClkPin             =         kBusAddrClkPin;
+    addrBusConfig_.aClrPin             =         kBusAddrClrPin;
+    addrBusConfig_.aRckPin             =         kBusAddrRckPin;
+
+    dataBus_.configure(dataBusConfig_);
+    addrBus_.configure(addrBusConfig_);
+    ctrlBus_.configure(ctrlBusConfig_);
+    vgen_.configure(vgenConfig_);
+
     vgen_.vpp.setV(kVppInitial);
     vgen_.vdd.setV(kVddInitial);
     vgen_.start();
@@ -110,8 +129,8 @@ void Runner::runCommand_() {
       runVddCommand_(code->first);
       runVppCommand_(code->first);
       runCtrlBusCommand_(code->first);
-      // TODO(robsonsmartins): runAddrBusCommand_
-      // TODO(robsonsmartins): runDataBusCommand_
+      runDataBusCommand_(code->first);
+      runAddrBusCommand_(code->first);
     }
 }
 
@@ -129,7 +148,7 @@ void Runner::runVddCommand_(uint8_t opcode) {
         serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVddSetV:
-        v = getParamsAsFloat_();
+        v = getParamAsFloat_();
         vgen_.vdd.setV(v);
         serial_.putChar(kCmdResponseOk, true);
         break;
@@ -159,7 +178,7 @@ void Runner::runVddCommand_(uint8_t opcode) {
         serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVddSaveCal:
-        v = getParamsAsFloat_();
+        v = getParamAsFloat_();
         vgen_.vdd.saveCalibration(v);
         vgen_.vdd.setV(kVddInitial);
         serial_.putChar(kCmdResponseOk, true);
@@ -188,7 +207,7 @@ void Runner::runVppCommand_(uint8_t opcode) {
         serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppSetV:
-        v = getParamsAsFloat_();
+        v = getParamAsFloat_();
         vgen_.vpp.setV(v);
         serial_.putChar(kCmdResponseOk, true);
         break;
@@ -218,7 +237,7 @@ void Runner::runVppCommand_(uint8_t opcode) {
         serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdVppSaveCal:
-        v = getParamsAsFloat_();
+        v = getParamAsFloat_();
         vgen_.vpp.saveCalibration(v);
         vgen_.vpp.setV(kVppInitial);
         serial_.putChar(kCmdResponseOk, true);
@@ -259,18 +278,111 @@ void Runner::runCtrlBusCommand_(uint8_t opcode) {
     switch (opcode) {
       case kCmdBusCE:
         b = getParamAsBool_();
-        gpio_.setPin(kBusCEPin, b);
+        ctrlBus_.setCE(b);
         serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdBusOE:
         b = getParamAsBool_();
-        gpio_.setPin(kBusOEPin, b);
+        ctrlBus_.setOE(b);
         serial_.putChar(kCmdResponseOk, true);
         break;
       case kCmdBusWE:
         b = getParamAsBool_();
-        gpio_.setPin(kBusWEPin, b);
+        ctrlBus_.setWE(b);
         serial_.putChar(kCmdResponseOk, true);
+        break;
+      default:
+        break;
+    }
+}
+
+void Runner::runDataBusCommand_(uint8_t opcode) {
+    uint16_t w;
+    TByteArray response;
+    switch (opcode) {
+      case kCmdBusDataClr:
+        if (dataBus_.writeByte(0)) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
+        break;
+      case kCmdBusDataSet:
+        w = getParamAsWord_();
+        if (dataBus_.writeWord(w)) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
+        break;
+      case kCmdBusDataSetB:
+        w = getParamAsByte_();
+        if (dataBus_.writeByte(w)) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
+        break;
+      case kCmdBusDataGet:
+        w = dataBus_.readWord();
+        response.resize(3);
+        response[0] = kCmdResponseOk;
+        createParamsFromWord_(&response, w);
+        serial_.putBuf(response.data(), response.size(), true);
+        break;
+      case kCmdBusDataGetB:
+        w = dataBus_.readByte();
+        response.resize(2);
+        response[0] = kCmdResponseOk;
+        createParamsFromByte_(&response, w);
+        serial_.putBuf(response.data(), response.size(), true);
+        break;
+      default:
+        break;
+    }
+}
+
+void Runner::runAddrBusCommand_(uint8_t opcode) {
+    uint32_t dw;
+    TByteArray response;
+    switch (opcode) {
+      case kCmdBusAddrClr:
+        if (addrBus_.writeByte(0)) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
+        break;
+      case kCmdBusAddrInc:
+        if (addrBus_.increment()) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
+        break;
+      case kCmdBusAddrSet:
+        dw = getParamAsDWord_();
+        if (addrBus_.writeDWord(dw)) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
+        break;
+      case kCmdBusAddrSetB:
+        dw = getParamAsByte_();
+        if (addrBus_.writeByte(dw)) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
+        break;
+      case kCmdBusAddrSetW:
+        dw = getParamAsWord_();
+        if (addrBus_.writeWord(dw)) {
+          serial_.putChar(kCmdResponseOk, true);
+        } else {
+          serial_.putChar(kCmdResponseNok, true);
+        }
         break;
       default:
         break;
@@ -281,10 +393,34 @@ bool Runner::getParamAsBool_() {
     return (OpCode::getValueAsBool(command_.data(), command_.size()));
 }
 
-float Runner::getParamsAsFloat_() {
+float Runner::getParamAsFloat_() {
     return (OpCode::getValueAsFloat(command_.data(), command_.size()));
 }
 
+uint8_t Runner::getParamAsByte_() {
+    return (OpCode::getValueAsByte(command_.data(), command_.size()));
+}
+
+u_int16_t Runner::getParamAsWord_() {
+    return (OpCode::getValueAsWord(command_.data(), command_.size()));
+}
+
+u_int32_t Runner::getParamAsDWord_() {
+    return (OpCode::getValueAsDWord(command_.data(), command_.size()));
+}
+
 void Runner::createParamsFromFloat_(TByteArray *response, float src) {
-    OpCode::setValue(response->data(), response->size(), src);
+    OpCode::setFloat(response->data(), response->size(), src);
+}
+
+void Runner::createParamsFromByte_(TByteArray *response, uint8_t src) {
+    OpCode::setByte(response->data(), response->size(), src);
+}
+
+void Runner::createParamsFromWord_(TByteArray *response, u_int16_t src) {
+    OpCode::setWord(response->data(), response->size(), src);
+}
+
+void Runner::createParamsFromDWord_(TByteArray *response, u_int32_t src) {
+    OpCode::setDWord(response->data(), response->size(), src);
 }

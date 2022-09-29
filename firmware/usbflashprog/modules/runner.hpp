@@ -23,6 +23,7 @@
 #include "hal/serial.hpp"
 #include "hal/gpio.hpp"
 #include "modules/vgenerator.hpp"
+#include "modules/bus.hpp"
 #include "modules/opcodes.hpp"
 
 // ---------------------------------------------------------------------------
@@ -53,7 +54,19 @@ class Runner {
     /* @brief VGenerator instance. */
     VGenerator vgen_;
     /* @brief VGenerator configuration. */
-    VGenConfig config_;
+    VGenConfig vgenConfig_;
+    /* @brief Control Bus instance. */
+    CtrlBus ctrlBus_;
+    /* @brief Control Bus configuration. */
+    CtrlBusConfig ctrlBusConfig_;
+    /* @brief Data Bus instance. */
+    DataBus dataBus_;
+    /* @brief Address Bus instance. */
+    AddrBus addrBus_;
+    /* @brief Data Bus configuration. */
+    DataBusConfig dataBusConfig_;
+    /* @brief Address Bus configuration. */
+    AddrBusConfig addrBusConfig_;
     /* @brief Gpio Handler instance. */
     Gpio gpio_;
     /* @brief Serial Comm instance. */
@@ -78,18 +91,53 @@ class Runner {
      */
     bool getParamAsBool_();
     /*
-     * @brief Gets two parameters as float point.
+     * @brief Gets the parameters as float point.
      * @details The first parameter is the integer part of the number.
      *   The second is the frational part. Both are hexadecimal strings.
      * @return Parameters as float point.
      */
-    float getParamsAsFloat_();
+    float getParamAsFloat_();
+    /*
+     * @brief Gets the first parameter as byte.
+     * @return Parameter as byte.
+     */
+    uint8_t getParamAsByte_();
+    /*
+     * @brief Gets two parameters as word.
+     * @details The first parameter is the MSB. The second is the LSB.
+     * @return Parameters as word.
+     */
+    u_int16_t getParamAsWord_();
+    /*
+     * @brief Gets three/four parameters as double word.
+     * @details The first parameter is the MSB. The last is the LSB.
+     * @return Parameters as double word.
+     */
+    u_int32_t getParamAsDWord_();
     /*
      * @brief Creates two parameters from a float point.
      * @param response Pointer to response bytes.
      * @param src Source value.
      */
     void createParamsFromFloat_(TByteArray *response, float src);
+    /*
+     * @brief Creates parameter from a byte.
+     * @param response Pointer to response bytes.
+     * @param src Source value.
+     */
+    void createParamsFromByte_(TByteArray *response, uint8_t src);
+    /*
+     * @brief Creates two parameters from a word.
+     * @param response Pointer to response bytes.
+     * @param src Source value.
+     */
+    void createParamsFromWord_(TByteArray *response, u_int16_t src);
+    /*
+     * @brief Creates three/four parameters from a double word.
+     * @param response Pointer to response bytes.
+     * @param src Source value.
+     */
+    void createParamsFromDWord_(TByteArray *response, u_int32_t src);
     /* @brief Runs the received command. */
     void runCommand_();
     /*
@@ -107,6 +155,16 @@ class Runner {
      * @param opcode Opcode of the command.
      */
     void runCtrlBusCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Data Bus opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDataBusCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Address Bus opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runAddrBusCommand_(uint8_t opcode);
 };
 
 #endif  // MODULES_RUNNER_HPP_

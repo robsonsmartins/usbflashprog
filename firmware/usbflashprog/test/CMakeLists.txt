@@ -26,6 +26,7 @@ set(sources
     ../hal/string.cpp
     ../hal/serial.cpp
     ../circuits/74hc595.cpp
+    ../circuits/74hc165.cpp
     ../circuits/dc2dc.cpp
     ../modules/vgenerator.cpp
     ../modules/opcodes.cpp
@@ -37,6 +38,7 @@ set(sources
     hal/string_test.cpp 
     hal/serial_test.cpp 
     circuits/74hc595_test.cpp
+    circuits/74hc165_test.cpp
     circuits/dc2dc_test.cpp
     modules/vgenerator_test.cpp
     modules/opcodes_test.cpp

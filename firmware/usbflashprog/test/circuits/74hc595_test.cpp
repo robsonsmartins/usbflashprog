@@ -67,15 +67,56 @@ TEST_F(HC595Test, data) {
     hc595_.writeByte(0x37);
     EXPECT_TRUE(compareData_(hc595_.getData(),
                             {0x37}));
+    hc595_.writeWord(0x37);
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0x37}));
+    hc595_.writeDWord(0x37);
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0x37}));
     hc595_.writeWord(0xA534);
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0x34, 0xA5}));
+    hc595_.writeDWord(0xA534);
     EXPECT_TRUE(compareData_(hc595_.getData(),
                             {0x34, 0xA5}));
     hc595_.writeDWord(0x8E743921);
     EXPECT_TRUE(compareData_(hc595_.getData(),
                             {0x21, 0x39, 0x74, 0x8E}));
     hc595_.clear();
+    EXPECT_EQ(hc595_.getData().size(), 0);
+
+    hc595_.writeDWord(0x0123FFFE);
     EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x00, 0x00, 0x00, 0x00}));
+                            {0xFE, 0xFF, 0x23, 0x01}));
+    hc595_.increment();
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0xFF, 0xFF, 0x23, 0x01}));
+    hc595_.increment();
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0x00, 0x00, 0x24, 0x01}));
+    hc595_.increment();
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0x01, 0x00, 0x24, 0x01}));
+
+    hc595_.clear();
+    EXPECT_EQ(hc595_.getData().size(), 0);
+
+    hc595_.writeDWord(0x23FFFE);
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0xFE, 0xFF, 0x23}));
+    hc595_.increment();
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0xFF, 0xFF, 0x23}));
+    hc595_.increment();
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0x00, 0x00, 0x24}));
+    hc595_.increment();
+    EXPECT_TRUE(compareData_(hc595_.getData(),
+                            {0x01, 0x00, 0x24}));
+
+    hc595_.clear();
+    EXPECT_EQ(hc595_.getData().size(), 0);
+
     uint8_t buf[6] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
     hc595_.writeData(buf, 6);
     EXPECT_TRUE(compareData_(hc595_.getData(),
@@ -88,21 +129,21 @@ TEST_F(HC595Test, data) {
     hc595_.setBit(29);
     EXPECT_EQ(hc595_.getBit(29), true);
     EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x40, 0x00, 0x00, 0x20, 0x00, 0x00}));
+                            {0x40, 0x00, 0x00, 0x20}));
     hc595_.setBit(6, false);
     hc595_.resetBit(29);
     EXPECT_EQ(hc595_.getBit(6), false);
     EXPECT_EQ(hc595_.getBit(29), false);
     EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}));
+                            {0x00, 0x00, 0x00, 0x00}));
     hc595_.toggleBit(6);
     hc595_.toggleBit(29);
     EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x40, 0x00, 0x00, 0x20, 0x00, 0x00}));
+                            {0x40, 0x00, 0x00, 0x20}));
     hc595_.toggleBit(6);
     hc595_.toggleBit(29);
     EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x00, 0x00, 0x00, 0x00, 0x00, 0x00}));
+                            {0x00, 0x00, 0x00, 0x00}));
     HC595 newHc595 = HC595(5, 4, 3, 2, 1, 20);
     EXPECT_EQ(newHc595.getData().size(), 0);
     newHc595.setBit(5);

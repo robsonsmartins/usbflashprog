@@ -150,6 +150,30 @@ constexpr uint     kBusWEPin     = 10;
 
 // ---------------------------------------------------------------------------
 
+/** @brief BUS/Data : Assigned Data Bus, Shift Register SIN, GPIO pin. */
+constexpr uint     kBusDataSinPin   =  4;
+/** @brief BUS/Data : Assigned Data Bus, Shift Register CLK, GPIO pin. */
+constexpr uint     kBusDataClkPin   =  6;
+/** @brief BUS/Data : Assigned Data Bus, Shift Register CLR, GPIO pin. */
+constexpr uint     kBusDataClrPin   =  7;
+/** @brief BUS/Data : Assigned Data Bus, Shift Register RCK, GPIO pin. */
+constexpr uint     kBusDataRckPin   =  5;
+/** @brief BUS/Data : Assigned Data Bus, Shift Register SOUT, GPIO pin. */
+constexpr uint     kBusDataSoutPin  =  8;
+
+// ---------------------------------------------------------------------------
+
+/** @brief BUS/Address : Assigned Address Bus, Shift Register SIN, GPIO pin. */
+constexpr uint     kBusAddrSinPin   =  0;
+/** @brief BUS/Address : Assigned Address Bus, Shift Register CLK, GPIO pin. */
+constexpr uint     kBusAddrClkPin   =  2;
+/** @brief BUS/Address : Assigned Address Bus, Shift Register CLR, GPIO pin. */
+constexpr uint     kBusAddrClrPin   =  3;
+/** @brief BUS/Address : Assigned Address Bus, Shift Register RCK, GPIO pin. */
+constexpr uint     kBusAddrRckPin   =  1;
+
+// ---------------------------------------------------------------------------
+
 /** @brief COMM : Communication timeout, in miliseconds. */
 constexpr uint32_t kCommTimeOut = 50;
 

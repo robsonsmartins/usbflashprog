@@ -38,6 +38,14 @@ int TRunnerCommand::responseAsByte() const {
     return OpCode::getValueAsByte(response.data(), response.size());
 }
 
+int TRunnerCommand::responseAsWord() const {
+    return OpCode::getValueAsWord(response.data(), response.size());
+}
+
+int TRunnerCommand::responseAsDWord() const {
+    return OpCode::getValueAsDWord(response.data(), response.size());
+}
+
 bool TRunnerCommand::responseAsBool() const {
     return OpCode::getValueAsBool(response.data(), response.size());
 }
@@ -48,25 +56,39 @@ void TRunnerCommand::set(kCmdOpCodeEnum code) {
     params[0] = opcode.code;
 }
 
-void TRunnerCommand::set(kCmdOpCodeEnum code, float param) {
+void TRunnerCommand::setFloat(kCmdOpCodeEnum code, float param) {
     opcode = OpCode::getOpCode(code);
     params.resize(opcode.params + 1);
     params[0] = opcode.code;
-    OpCode::setValue(params.data(), params.size(), param);
+    OpCode::setFloat(params.data(), params.size(), param);
 }
 
-void TRunnerCommand::set(kCmdOpCodeEnum code, int param) {
+void TRunnerCommand::setByte(kCmdOpCodeEnum code, uint8_t param) {
     opcode = OpCode::getOpCode(code);
     params.resize(opcode.params + 1);
     params[0] = opcode.code;
-    OpCode::setValue(params.data(), params.size(), param);
+    OpCode::setByte(params.data(), params.size(), param);
 }
 
-void TRunnerCommand::set(kCmdOpCodeEnum code, bool param) {
+void TRunnerCommand::setWord(kCmdOpCodeEnum code, uint16_t param) {
     opcode = OpCode::getOpCode(code);
     params.resize(opcode.params + 1);
     params[0] = opcode.code;
-    OpCode::setValue(params.data(), params.size(), param);
+    OpCode::setWord(params.data(), params.size(), param);
+}
+
+void TRunnerCommand::setDWord(kCmdOpCodeEnum code, uint32_t param) {
+    opcode = OpCode::getOpCode(code);
+    params.resize(opcode.params + 1);
+    params[0] = opcode.code;
+    OpCode::setDWord(params.data(), params.size(), param);
+}
+
+void TRunnerCommand::setBool(kCmdOpCodeEnum code, bool param) {
+    opcode = OpCode::getOpCode(code);
+    params.resize(opcode.params + 1);
+    params[0] = opcode.code;
+    OpCode::setBool(params.data(), params.size(), param);
 }
 
 TRunnerCommand& TRunnerCommand::operator=(const TRunnerCommand& src) {
@@ -148,29 +170,47 @@ void Runner::send(kCmdOpCodeEnum code) {
     if (wrFifo_.size() == 1) { write_(cmd); }
 }
 
-void Runner::send(kCmdOpCodeEnum code, int param) {
+void Runner::sendByte(kCmdOpCodeEnum code, uint8_t param) {
     if (wrFifo_.size() >= 1) { checkAlive_(); }
     if (!serial_.isOpen()) { return; }
     TRunnerCommand cmd;
-    cmd.set(code, param);
+    cmd.setByte(code, param);
     wrFifo_.enqueue(cmd);
     if (wrFifo_.size() == 1) { write_(cmd); }
 }
 
-void Runner::send(kCmdOpCodeEnum code, bool param) {
+void Runner::sendWord(kCmdOpCodeEnum code, uint16_t param) {
     if (wrFifo_.size() >= 1) { checkAlive_(); }
     if (!serial_.isOpen()) { return; }
     TRunnerCommand cmd;
-    cmd.set(code, param);
+    cmd.setWord(code, param);
     wrFifo_.enqueue(cmd);
     if (wrFifo_.size() == 1) { write_(cmd); }
 }
 
-void Runner::send(kCmdOpCodeEnum code, float param) {
+void Runner::sendDWord(kCmdOpCodeEnum code, uint32_t param) {
     if (wrFifo_.size() >= 1) { checkAlive_(); }
     if (!serial_.isOpen()) { return; }
     TRunnerCommand cmd;
-    cmd.set(code, param);
+    cmd.setDWord(code, param);
+    wrFifo_.enqueue(cmd);
+    if (wrFifo_.size() == 1) { write_(cmd); }
+}
+
+void Runner::sendBool(kCmdOpCodeEnum code, bool param) {
+    if (wrFifo_.size() >= 1) { checkAlive_(); }
+    if (!serial_.isOpen()) { return; }
+    TRunnerCommand cmd;
+    cmd.setBool(code, param);
+    wrFifo_.enqueue(cmd);
+    if (wrFifo_.size() == 1) { write_(cmd); }
+}
+
+void Runner::sendFloat(kCmdOpCodeEnum code, float param) {
+    if (wrFifo_.size() >= 1) { checkAlive_(); }
+    if (!serial_.isOpen()) { return; }
+    TRunnerCommand cmd;
+    cmd.setFloat(code, param);
     wrFifo_.enqueue(cmd);
     if (wrFifo_.size() == 1) { write_(cmd); }
 }

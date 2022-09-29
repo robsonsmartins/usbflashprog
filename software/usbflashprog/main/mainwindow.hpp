@@ -64,6 +64,9 @@ class MainWindow : public QMainWindow {
     void on_pushButtonConnect_clicked();
     void on_pushButtonVddInitCal_clicked();
     void on_pushButtonVppInitCal_clicked();
+    void on_pushButtonSetData_clicked();
+    void on_pushButtonGetData_clicked();
+    void on_pushButtonSetAddr_clicked();
     void on_actionExit_triggered(bool checked = false);
     void on_actionAbout_triggered(bool checked = false);
     void on_actionAboutQt_triggered(bool checked = false);

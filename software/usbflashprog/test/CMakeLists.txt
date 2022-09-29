@@ -29,13 +29,9 @@ set(PROJECT_SOURCES
     ../config.hpp
     ../backend/opcodes.cpp
     ../backend/opcodes.hpp
-    ../backend/runner.cpp
-    ../backend/runner.hpp
     mock/qserialport.hpp
     backend/opcodes_test.hpp
     backend/opcodes_test.cpp
-    backend/runner_test.hpp
-    backend/runner_test.cpp
     main.cpp
 )
 

@@ -106,7 +106,29 @@ enum kCmdOpCodeEnum {
     /** @brief OPCODE / BUS : Opcode OE Ctrl. */
     kCmdBusOE      = 0x22,
     /** @brief OPCODE / BUS : Opcode WE Ctrl. */
-    kCmdBusWE      = 0x23
+    kCmdBusWE      = 0x23,
+
+    /** @brief OPCODE / BUS : Opcode Address Clear. */
+    kCmdBusAddrClr  = 0x31,
+    /** @brief OPCODE / BUS : Opcode Address Increment. */
+    kCmdBusAddrInc  = 0x32,
+    /** @brief OPCODE / BUS : Opcode Address Set. */
+    kCmdBusAddrSet  = 0x33,
+    /** @brief OPCODE / BUS : Opcode Address Set Byte. */
+    kCmdBusAddrSetB = 0x34,
+    /** @brief OPCODE / BUS : Opcode Address Set Word. */
+    kCmdBusAddrSetW = 0x35,
+
+    /** @brief OPCODE / BUS : Opcode Data Clear. */
+    kCmdBusDataClr  = 0x41,
+    /** @brief OPCODE / BUS : Opcode Data Set. */
+    kCmdBusDataSet  = 0x42,
+    /** @brief OPCODE / BUS : Opcode Data Set Byte. */
+    kCmdBusDataSetB = 0x43,
+    /** @brief OPCODE / BUS : Opcode Data Get. */
+    kCmdBusDataGet  = 0x44,
+    /** @brief OPCODE / BUS : Opcode Data Get Byte. */
+    kCmdBusDataGetB = 0x45
 };
 
 // ---------------------------------------------------------------------------
@@ -176,7 +198,19 @@ static const TCmdOpCodeMap kCmdOpCodes = {
 
     { kCmdBusCE     , { kCmdBusCE     , "CE"        , 1, 0} },
     { kCmdBusOE     , { kCmdBusOE     , "OE"        , 1, 0} },
-    { kCmdBusWE     , { kCmdBusWE     , "WE"        , 1, 0} }
+    { kCmdBusWE     , { kCmdBusWE     , "WE"        , 1, 0} },
+
+    { kCmdBusAddrClr , { kCmdBusAddrClr , "AddrClr"    , 0, 0} },
+    { kCmdBusAddrInc , { kCmdBusAddrInc , "AddrInc"    , 0, 0} },
+    { kCmdBusAddrSet , { kCmdBusAddrSet , "AddrSet"    , 3, 0} },
+    { kCmdBusAddrSetB, { kCmdBusAddrSetB, "AddrSetByte", 1, 0} },
+    { kCmdBusAddrSetW, { kCmdBusAddrSetW, "AddrSetWord", 2, 0} },
+
+    { kCmdBusDataClr , { kCmdBusDataClr , "DataClr"    , 0, 0} },
+    { kCmdBusDataSet , { kCmdBusDataSet , "DataSet"    , 2, 0} },
+    { kCmdBusDataSetB, { kCmdBusDataSetB, "DataSetByte", 1, 0} },
+    { kCmdBusDataGet , { kCmdBusDataGet , "DataGet"    , 0, 2} },
+    { kCmdBusDataGetB, { kCmdBusDataGetB, "DataGetByte", 0, 1} }
 };
 
 // ---------------------------------------------------------------------------
@@ -238,26 +272,22 @@ class OpCode {
      */
     static bool getValueAsBool(const void *buf, size_t size);
     /**
-     * @brief Sets the param value into the communication frame.
-     * @param buf Pointer to the buffer that contains the 
-     *  communication frame.
+     * @brief Gets the param value as word.
+     * @param buf Pointer to the buffer that contains the result
+     *  of the communication.
      * @param size Size of buffer, in bytes.
-     * @param value Value to set.
-     * @return True if success, false otherwise.
+     * @return Value of parameter as word, or 0 if an error occurs.
      */
-    static bool setValue(void *buf, size_t size, float value);
+    static uint16_t getValueAsWord(const void *buf, size_t size);
     /**
-     * @overload
-     * @brief Sets the param value into the communication frame.
-     * @param buf Pointer to the buffer that contains the 
-     *  communication frame.
+     * @brief Gets the param value as double word.
+     * @param buf Pointer to the buffer that contains the result
+     *  of the communication.
      * @param size Size of buffer, in bytes.
-     * @param value Value to set.
-     * @return True if success, false otherwise.
+     * @return Value of parameter as double word, or 0 if an error occurs.
      */
-    static bool setValue(void *buf, size_t size, int value);
+    static uint32_t getValueAsDWord(const void *buf, size_t size);
     /**
-     * @overload
      * @brief Sets the param value into the communication frame.
      * @param buf Pointer to the buffer that contains the 
      *  communication frame.
@@ -265,7 +295,43 @@ class OpCode {
      * @param value Value to set.
      * @return True if success, false otherwise.
      */
-    static bool setValue(void *buf, size_t size, bool value);
+    static bool setFloat(void *buf, size_t size, float value);
+    /**
+     * @brief Sets the param value into the communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    static bool setByte(void *buf, size_t size, uint8_t value);
+    /**
+     * @brief Sets the param value into the communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    static bool setWord(void *buf, size_t size, uint16_t value);
+    /**
+     * @brief Sets the param value into the communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    static bool setDWord(void *buf, size_t size, uint32_t value);
+    /**
+     * @brief Sets the param value into the communication frame.
+     * @param buf Pointer to the buffer that contains the 
+     *  communication frame.
+     * @param size Size of buffer, in bytes.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    static bool setBool(void *buf, size_t size, bool value);
 };
 
 #endif  // BACKEND_OPCODES_HPP_

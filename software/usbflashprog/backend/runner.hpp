@@ -72,6 +72,16 @@ typedef struct TRunnerCommand {
      */
     int responseAsByte() const;
     /**
+     * @brief Returns response value as a word.
+     * @return Response value.
+     */
+    int responseAsWord() const;
+    /**
+     * @brief Returns response value as a double word.
+     * @return Response value.
+     */
+    int responseAsDWord() const;
+    /**
      * @brief Returns response value as a boolean.
      * @return Response value.
      */
@@ -82,26 +92,35 @@ typedef struct TRunnerCommand {
      */
     void set(kCmdOpCodeEnum code);
     /**
-     * @overload
      * @brief Sets the command and the parameters.
      * @param code OpCode of the command.
      * @param param Value of the param.
      */
-    void set(kCmdOpCodeEnum code, float param);
+    void setFloat(kCmdOpCodeEnum code, float param);
     /**
-     * @overload
      * @brief Sets the command and the parameters.
      * @param code OpCode of the command.
      * @param param Value of the param.
      */
-    void set(kCmdOpCodeEnum code, int param);
+    void setByte(kCmdOpCodeEnum code, uint8_t param);
     /**
-     * @overload
      * @brief Sets the command and the parameters.
      * @param code OpCode of the command.
      * @param param Value of the param.
      */
-    void set(kCmdOpCodeEnum code, bool param);
+    void setWord(kCmdOpCodeEnum code, uint16_t param);
+    /**
+     * @brief Sets the command and the parameters.
+     * @param code OpCode of the command.
+     * @param param Value of the param.
+     */
+    void setDWord(kCmdOpCodeEnum code, uint32_t param);
+    /**
+     * @brief Sets the command and the parameters.
+     * @param code OpCode of the command.
+     * @param param Value of the param.
+     */
+    void setBool(kCmdOpCodeEnum code, bool param);
     /**
      * @brief Assign Operator.
      * @param src TRunnerCommand source object.
@@ -166,26 +185,35 @@ class Runner: public QObject {
      */
     void send(kCmdOpCodeEnum code);
     /**
-     * @overload
      * @brief Sends a command via serial port.
      * @param code OpCode of the command.
      * @param param Value of the parameter.
      */
-    void send(kCmdOpCodeEnum code, int param);
+    void sendByte(kCmdOpCodeEnum code, uint8_t param);
     /**
-     * @overload
      * @brief Sends a command via serial port.
      * @param code OpCode of the command.
      * @param param Value of the parameter.
      */
-    void send(kCmdOpCodeEnum code, bool param);
+    void sendWord(kCmdOpCodeEnum code, uint16_t param);
     /**
-     * @overload
      * @brief Sends a command via serial port.
      * @param code OpCode of the command.
      * @param param Value of the parameter.
      */
-    void send(kCmdOpCodeEnum code, float param);
+    void sendDWord(kCmdOpCodeEnum code, uint32_t param);
+    /**
+     * @brief Sends a command via serial port.
+     * @param code OpCode of the command.
+     * @param param Value of the parameter.
+     */
+    void sendBool(kCmdOpCodeEnum code, bool param);
+    /**
+     * @brief Sends a command via serial port.
+     * @param code OpCode of the command.
+     * @param param Value of the parameter.
+     */
+    void sendFloat(kCmdOpCodeEnum code, float param);
 
  signals:
     /**

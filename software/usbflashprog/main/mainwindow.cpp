@@ -274,7 +274,7 @@ void MainWindow::on_pushButtonVddInitCal_clicked() {
         Qt::WindowFlags(), 0.1f);
 #endif
     if (ok) {
-        runner_.send(kCmdVddSaveCal, measured);
+        runner_.sendFloat(kCmdVddSaveCal, measured);
     }
     enableDiagControls_(true);
 }
@@ -298,76 +298,93 @@ void MainWindow::on_pushButtonVppInitCal_clicked() {
         Qt::WindowFlags(), 0.1f);
 #endif
     if (ok) {
-        runner_.send(kCmdVppSaveCal, measured);
+        runner_.sendFloat(kCmdVppSaveCal, measured);
     }
     enableDiagControls_(true);
 }
 
+void MainWindow::on_pushButtonSetData_clicked() {
+    if (!runner_.isOpen()) { return; }
+    uint16_t data = ui_->spinBoxData->value();
+    runner_.sendWord(kCmdBusDataSet, data);
+}
+
+void MainWindow::on_pushButtonGetData_clicked() {
+    if (!runner_.isOpen()) { return; }
+    runner_.send(kCmdBusDataGet);
+}
+
+void MainWindow::on_pushButtonSetAddr_clicked() {
+    if (!runner_.isOpen()) { return; }
+    uint32_t data = ui_->spinBoxAddr->value();
+    runner_.sendDWord(kCmdBusAddrSet, data);
+}
+
 void MainWindow::on_checkBoxVddCtrl_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVddCtrl, checked);
+    runner_.sendBool(kCmdVddCtrl, checked);
 }
 
 void MainWindow::on_checkBoxVppCtrl_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVppCtrl, checked);
+    runner_.sendBool(kCmdVppCtrl, checked);
 }
 
 void MainWindow::on_checkBoxVddOnVpp_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVddOnVpp, checked);
+    runner_.sendBool(kCmdVddOnVpp, checked);
 }
 
 void MainWindow::on_checkBoxVppOnA9_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVppOnA9, checked);
+    runner_.sendBool(kCmdVppOnA9, checked);
 }
 
 void MainWindow::on_checkBoxVppOnA18_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVppOnA18, checked);
+    runner_.sendBool(kCmdVppOnA18, checked);
 }
 
 void MainWindow::on_checkBoxVppOnCE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVppOnCE, checked);
+    runner_.sendBool(kCmdVppOnCE, checked);
 }
 
 void MainWindow::on_checkBoxVppOnOE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVppOnOE, checked);
+    runner_.sendBool(kCmdVppOnOE, checked);
 }
 
 void MainWindow::on_checkBoxVppOnWE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdVppOnWE, checked);
+    runner_.sendBool(kCmdVppOnWE, checked);
 }
 
 void MainWindow::on_checkBoxCE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdBusCE, checked);
+    runner_.sendBool(kCmdBusCE, checked);
 }
 
 void MainWindow::on_checkBoxOE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdBusOE, checked);
+    runner_.sendBool(kCmdBusOE, checked);
 }
 
 void MainWindow::on_checkBoxWE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdBusWE, checked);
+    runner_.sendBool(kCmdBusWE, checked);
 }
 
 void MainWindow::on_dialVdd_valueChanged(int value) {
     if (!runner_.isOpen()) { return; }
     float v = value / 10.0f;
-    runner_.send(kCmdVddSetV, v);
+    runner_.sendFloat(kCmdVddSetV, v);
 }
 
 void MainWindow::on_dialVpp_valueChanged(int value) {
     if (!runner_.isOpen()) { return; }
     float v = value / 10.0f;
-    runner_.send(kCmdVppSetV, v);
+    runner_.sendFloat(kCmdVppSetV, v);
 }
 
 void MainWindow::onEnumTimerTimeout() {
@@ -415,6 +432,12 @@ void MainWindow::onRunnerResultReady(const TRunnerCommand& command) {
             snprintf(buffer, sizeof(buffer), "%4.1f",
                      command.responseAsFloat());
             ui_->lcdNumberVppDuty->display(QString(buffer));
+            break;
+        case kCmdBusDataGet:
+            ui_->spinBoxData->setValue(command.responseAsWord());
+            break;
+        case kCmdBusDataGetB:
+            ui_->spinBoxData->setValue(command.responseAsByte());
             break;
         default:
             break;
@@ -483,17 +506,17 @@ void MainWindow::connect_(bool state) {
         }
     }
     if (runner_.isOpen()) {
-        runner_.send(kCmdVppCtrl, false);
-        runner_.send(kCmdVddCtrl, false);
-        runner_.send(kCmdVddOnVpp, false);
-        runner_.send(kCmdVppOnA9, false);
-        runner_.send(kCmdVppOnA18, false);
-        runner_.send(kCmdVppOnCE, false);
-        runner_.send(kCmdVppOnOE, false);
-        runner_.send(kCmdVppOnWE, false);
-        runner_.send(kCmdBusCE, false);
-        runner_.send(kCmdBusOE, false);
-        runner_.send(kCmdBusWE, false);
+        runner_.sendBool(kCmdVppCtrl, false);
+        runner_.sendBool(kCmdVddCtrl, false);
+        runner_.sendBool(kCmdVddOnVpp, false);
+        runner_.sendBool(kCmdVppOnA9, false);
+        runner_.sendBool(kCmdVppOnA18, false);
+        runner_.sendBool(kCmdVppOnCE, false);
+        runner_.sendBool(kCmdVppOnOE, false);
+        runner_.sendBool(kCmdVppOnWE, false);
+        runner_.sendBool(kCmdBusCE, false);
+        runner_.sendBool(kCmdBusOE, false);
+        runner_.sendBool(kCmdBusWE, false);
     }
     if (!state) {
         refreshTimer_.stop();

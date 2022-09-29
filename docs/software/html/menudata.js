@@ -77,5 +77,6 @@ var menudata={children:[
 {text:"Variables",url:"globals_vars.html"},
 {text:"Typedefs",url:"globals_type.html"},
 {text:"Enumerations",url:"globals_enum.html"},
-{text:"Enumerator",url:"globals_eval.html"},
+{text:"Enumerator",url:"globals_eval.html",children:[
+{text:"k",url:"globals_eval.html#index_k"}]},
 {text:"Macros",url:"globals_defs.html"}]}]}]}

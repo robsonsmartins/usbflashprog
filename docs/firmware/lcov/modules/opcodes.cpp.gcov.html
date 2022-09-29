@@ -31,17 +31,17 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">48</td>
-            <td class="headerCovTableEntry">48</td>
+            <td class="headerCovTableEntry">83</td>
+            <td class="headerCovTableEntry">83</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-07-06 04:47:46</td>
+            <td class="headerValue">2022-09-28 23:35:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">15</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -133,26 +133,73 @@
 <a name="71"><span class="lineNum">      71 </span><span class="lineCov">          4 :   return (getValueAsByte(buf, size) != kCmdParamOff);</span></a>
 <a name="72"><span class="lineNum">      72 </span>            : }</a>
 <a name="73"><span class="lineNum">      73 </span>            : </a>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          1 : bool OpCode::setValue(void *buf, size_t size, float value) {</span></a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          1 :   if (!buf || size &lt; 3) { return false; }</span></a>
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          1 :   uint8_t *pbuf = static_cast&lt;uint8_t*&gt;(buf);</span></a>
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          1 :   double i, f = std::modf(value, &amp;i);</span></a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          1 :   pbuf[1] = i;</span></a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          1 :   pbuf[2] = f * 100;</span></a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          1 :   return true;</span></a>
-<a name="81"><span class="lineNum">      81 </span>            : }</a>
-<a name="82"><span class="lineNum">      82 </span>            : </a>
-<a name="83"><span class="lineNum">      83 </span><span class="lineCov">          5 : bool OpCode::setValue(void *buf, size_t size, int value) {</span></a>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">          5 :   if (!buf || size &lt; 2) { return false; }</span></a>
-<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          3 :   uint8_t *pbuf = static_cast&lt;uint8_t*&gt;(buf);</span></a>
-<a name="86"><span class="lineNum">      86 </span><span class="lineCov">          3 :   pbuf[1] = value &amp; 0xFF;</span></a>
-<a name="87"><span class="lineNum">      87 </span><span class="lineCov">          3 :   return true;</span></a>
-<a name="88"><span class="lineNum">      88 </span>            : }</a>
-<a name="89"><span class="lineNum">      89 </span>            : </a>
-<a name="90"><span class="lineNum">      90 </span><span class="lineCov">          2 : bool OpCode::setValue(void *buf, size_t size, bool value) {</span></a>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          2 :   return setValue(buf, size,</span></a>
-<a name="92"><span class="lineNum">      92 </span><span class="lineCov">          2 :       static_cast&lt;uint8_t&gt;(value ? kCmdParamOn : kCmdParamOff));</span></a>
-<a name="93"><span class="lineNum">      93 </span>            : }</a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          4 : uint16_t OpCode::getValueAsWord(const void *buf, size_t size) {</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          4 :   if (size &lt; 3) { return getValueAsByte(buf, size); }</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          4 :   if (!buf) { return 0; }</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          4 :   const uint8_t *pbuf = static_cast&lt;const uint8_t*&gt;(buf);</span></a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          4 :   return (static_cast&lt;uint16_t&gt;(pbuf[1]) &lt;&lt; 8) | static_cast&lt;uint16_t&gt;(pbuf[2]);</span></a>
+<a name="79"><span class="lineNum">      79 </span>            : }</a>
+<a name="80"><span class="lineNum">      80 </span>            : </a>
+<a name="81"><span class="lineNum">      81 </span><span class="lineCov">          7 : uint32_t OpCode::getValueAsDWord(const void *buf, size_t size) {</span></a>
+<a name="82"><span class="lineNum">      82 </span><span class="lineCov">          7 :   if (size &lt; 4) { return getValueAsWord(buf, size); }</span></a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">          7 :   if (!buf) { return 0; }</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">          7 :   const uint8_t *pbuf = static_cast&lt;const uint8_t*&gt;(buf);</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          7 :   if (size == 4) {</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">          3 :     return (static_cast&lt;uint32_t&gt;(pbuf[1]) &lt;&lt; 16) |</span></a>
+<a name="87"><span class="lineNum">      87 </span><span class="lineCov">          3 :            (static_cast&lt;uint32_t&gt;(pbuf[2]) &lt;&lt;  8) |</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">          3 :            (static_cast&lt;uint32_t&gt;(pbuf[3]));</span></a>
+<a name="89"><span class="lineNum">      89 </span>            :   } else {</a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">          4 :     return (static_cast&lt;uint32_t&gt;(pbuf[1]) &lt;&lt; 24) |</span></a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          4 :            (static_cast&lt;uint32_t&gt;(pbuf[2]) &lt;&lt; 16) |</span></a>
+<a name="92"><span class="lineNum">      92 </span><span class="lineCov">          4 :            (static_cast&lt;uint32_t&gt;(pbuf[3]) &lt;&lt;  8) |</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">          4 :            (static_cast&lt;uint32_t&gt;(pbuf[4]));</span></a>
+<a name="94"><span class="lineNum">      94 </span>            :   }</a>
+<a name="95"><span class="lineNum">      95 </span>            : }</a>
+<a name="96"><span class="lineNum">      96 </span>            : </a>
+<a name="97"><span class="lineNum">      97 </span><span class="lineCov">          1 : bool OpCode::setFloat(void *buf, size_t size, float value) {</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">          1 :   if (!buf || size &lt; 3) { return false; }</span></a>
+<a name="99"><span class="lineNum">      99 </span><span class="lineCov">          1 :   uint8_t *pbuf = static_cast&lt;uint8_t*&gt;(buf);</span></a>
+<a name="100"><span class="lineNum">     100 </span><span class="lineCov">          1 :   double i, f = std::modf(value, &amp;i);</span></a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">          1 :   pbuf[1] = i;</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">          1 :   pbuf[2] = f * 100;</span></a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">          1 :   return true;</span></a>
+<a name="104"><span class="lineNum">     104 </span>            : }</a>
+<a name="105"><span class="lineNum">     105 </span>            : </a>
+<a name="106"><span class="lineNum">     106 </span><span class="lineCov">          5 : bool OpCode::setByte(void *buf, size_t size, uint8_t value) {</span></a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">          5 :   if (!buf || size &lt; 2) { return false; }</span></a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">          3 :   uint8_t *pbuf = static_cast&lt;uint8_t*&gt;(buf);</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          3 :   pbuf[1] = value &amp; 0xFF;</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">          3 :   return true;</span></a>
+<a name="111"><span class="lineNum">     111 </span>            : }</a>
+<a name="112"><span class="lineNum">     112 </span>            : </a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineCov">          1 : bool OpCode::setWord(void *buf, size_t size, uint16_t value) {</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          1 :   if (!buf || size &lt; 3) { return false; }</span></a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">          1 :   uint8_t *pbuf = static_cast&lt;uint8_t*&gt;(buf);</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">          1 :   pbuf[1] = (value &gt;&gt; 8) &amp; 0xFF;</span></a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">          1 :   pbuf[2] = value &amp; 0xFF;</span></a>
+<a name="118"><span class="lineNum">     118 </span><span class="lineCov">          1 :   return true;</span></a>
+<a name="119"><span class="lineNum">     119 </span>            : }</a>
+<a name="120"><span class="lineNum">     120 </span>            : </a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          2 : bool OpCode::setDWord(void *buf, size_t size, uint32_t value) {</span></a>
+<a name="122"><span class="lineNum">     122 </span><span class="lineCov">          2 :   if (!buf || size &lt; 4) { return false; }</span></a>
+<a name="123"><span class="lineNum">     123 </span><span class="lineCov">          2 :   uint8_t *pbuf = static_cast&lt;uint8_t*&gt;(buf);</span></a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineCov">          2 :   if (size == 4) {</span></a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">          1 :     pbuf[1] = (value &gt;&gt; 16) &amp; 0xFF;</span></a>
+<a name="126"><span class="lineNum">     126 </span><span class="lineCov">          1 :     pbuf[2] = (value &gt;&gt;  8) &amp; 0xFF;</span></a>
+<a name="127"><span class="lineNum">     127 </span><span class="lineCov">          1 :     pbuf[3] = value &amp; 0xFF;</span></a>
+<a name="128"><span class="lineNum">     128 </span>            :   } else {</a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">          1 :     pbuf[1] = (value &gt;&gt; 24) &amp; 0xFF;</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">          1 :     pbuf[2] = (value &gt;&gt; 16) &amp; 0xFF;</span></a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineCov">          1 :     pbuf[3] = (value &gt;&gt;  8) &amp; 0xFF;</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          1 :     pbuf[4] = value &amp; 0xFF;</span></a>
+<a name="133"><span class="lineNum">     133 </span>            :   }</a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">          2 :   return true;</span></a>
+<a name="135"><span class="lineNum">     135 </span>            : }</a>
+<a name="136"><span class="lineNum">     136 </span>            : </a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          2 : bool OpCode::setBool(void *buf, size_t size, bool value) {</span></a>
+<a name="138"><span class="lineNum">     138 </span><span class="lineCov">          2 :   return setByte(buf, size,</span></a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">          2 :       static_cast&lt;uint8_t&gt;(value ? kCmdParamOn : kCmdParamOff));</span></a>
+<a name="140"><span class="lineNum">     140 </span>            : }</a>
 </pre>
       </td>
     </tr>

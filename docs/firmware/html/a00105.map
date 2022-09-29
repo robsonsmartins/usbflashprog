@@ -1,5 +1,8 @@
-<map id="flash_test.hpp" name="flash_test.hpp">
-<area shape="rect" id="node1" title="Header of Unit Test for Pico Flash Class." alt="" coords="65,5,178,32"/>
+<map id="74hc595_test.hpp" name="74hc595_test.hpp">
+<area shape="rect" id="node1" title="Header of Unit Test for 74xx595 Shift Register Class." alt="" coords="66,5,203,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,109,107"/>
-<area shape="rect" id="node3" href="$a00026.html" title="Header of the Pico Flash Class." alt="" coords="134,80,239,107"/>
+<area shape="rect" id="node3" href="$a00011.html" title="Header of the 74HC595 Class." alt="" coords="134,80,290,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="127,155,190,181"/>
+<area shape="rect" id="node5" href="$a00038.html" title="Header of the Pico GPIO Class." alt="" coords="214,155,317,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="244,229,287,256"/>
 </map>

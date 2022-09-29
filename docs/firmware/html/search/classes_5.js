@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['multicore_330',['MultiCore',['../a01018.html',1,'']]],
-  ['multicoretest_331',['MultiCoreTest',['../a01094.html',1,'']]]
+  ['hc165_402',['HC165',['../a01012.html',1,'']]],
+  ['hc165test_403',['HC165Test',['../a01120.html',1,'']]],
+  ['hc595_404',['HC595',['../a01016.html',1,'']]],
+  ['hc595test_405',['HC595Test',['../a01124.html',1,'']]]
 ];

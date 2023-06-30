@@ -1,0 +1,4 @@
+*.sch linguist-language=KiCad-Schematic linguist-detectable
+*.kicad_sch linguist-language=KiCad-Schematic linguist-detectable
+*.kicad_pcb linguist-language=KiCad-Layout linguist-detectable
+*.kicad_mod linguist-language=KiCad-Layout linguist-detectable

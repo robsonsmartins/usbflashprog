@@ -295,6 +295,15 @@ pacman -S mingw-w64-x86_64-toolchain git make libtool pkg-config autoconf automa
 
 Now it will be possible to execute and get the return of `cmake --version`.
 
+8. Run the commands:
+
+```shell
+echo "alias make=mingw32-make.exe" >> ~/.profile
+source ~/.profile
+```
+
+This will configure the command `make` to call, the utility provided in the MinGW package.
+
 ### Install Python
 
 Pico's SDK needs Python to script and automate some of the build functions.

@@ -224,6 +224,15 @@ In this tutorial the [Git-2.31.1-64-bit.exe](https://github.com/git-for-windows/
 3. When you get to the screen asking you to "choose a default editor", feel free to choose whatever you want.
 A good option is [Notepad++](https://notepad-plus-plus.org/), and if you don't have it installed, you can select Notepad (Windows default), if you don't want to use an editor in console mode.
 
+4. After installation, open the Git Bash and run the commands:
+
+```shell
+echo "alias make=mingw32-make.exe" >> ~/.profile
+source ~/.profile
+```
+
+This will configure the command `make` to call, via Git Bash, the utility provided in the Qt/MinGW package.
+
 ### Install CMake
 
 CMake is a build utility, which helps to automate the process of building programs.

@@ -16,4 +16,4 @@ The most up-to-date BOM can be accessed here: [Bill of Materials of the USB Flas
 
 The following CAD software (opensource and multiplatform) was used to draw the schematic diagram and PCB:
 
-- [Kicad](https://www.kicad.org), version 6.0.4.
+- [Kicad](https://www.kicad.org), version 7.0.5.

@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name "XL6009")(type "Legacy")(uri "${KIPRJMOD}/lib/XL6009.lib")(options "")(descr ""))
-)

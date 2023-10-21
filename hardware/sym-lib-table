@@ -1,3 +1,5 @@
 (sym_lib_table
+  (version 7)
   (lib (name "MCU_RaspberryPi_and_Boards")(type "Legacy")(uri "${KIPRJMOD}/lib/MCU_RaspberryPi_and_Boards.lib")(options "")(descr ""))
+  (lib (name "DC2DC_Modules")(type "KiCad")(uri "${KIPRJMOD}/lib/DC2DC_Modules.kicad_sym")(options "")(descr ""))
 )

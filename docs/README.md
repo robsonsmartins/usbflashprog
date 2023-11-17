@@ -20,5 +20,5 @@ The most up-to-date software documentation can be accessed here: [Software Docum
 
 The following software (open source/freeware and multiplatform) were used to write the documentation:
 
-- [LibreOffice](https://www.libreoffice.org/), version 7.3.2.2.
-- [yEd Graph Editor](https://www.yworks.com/products/yed), version 3.22.
+- [LibreOffice](https://www.libreoffice.org/), version 7.5.3.2.
+- [yEd Graph Editor](https://www.yworks.com/products/yed), version 3.23.1.

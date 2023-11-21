@@ -73,16 +73,17 @@ jobs:
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
         name: Cache Qt (Windows 64-bits)
         id: cache-qt-win64
-        uses: actions/cache@v1  
+        uses: actions/cache@v3
         with:
           path: ../QtCacheWin64
           key: ${{ runner.os }}-QtCacheWin64
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
         name: Install Qt (Windows 64-bits)
-        uses: jurplel/install-qt-action@v2.14.0
+        uses: jurplel/install-qt-action@v3
         with:
-          cached: ${{ steps.cache-qt-win64.outputs.cache-hit }}
+          cache: 'true'
+          cache-key-prefix: ${{ steps.cache-qt-win64.outputs.cache-hit }}
           version: '5.15.2'
           host: 'windows'
           target: 'desktop'
@@ -96,16 +97,17 @@ jobs:
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Cache Qt (Windows 32-bits)
         id: cache-qt-win32
-        uses: actions/cache@v1  
+        uses: actions/cache@v3
         with:
           path: ../QtCacheWin32
           key: ${{ runner.os }}-QtCacheWin32
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Install Qt (Windows 32-bits)
-        uses: jurplel/install-qt-action@v2.14.0
+        uses: jurplel/install-qt-action@v3
         with:
-          cached: ${{ steps.cache-qt-win32.outputs.cache-hit }}
+          cache: 'true'
+          cache-key-prefix: ${{ steps.cache-qt-win32.outputs.cache-hit }}
           version: '5.15.2'
           host: 'windows'
           target: 'desktop'
@@ -277,15 +279,16 @@ jobs:
 
   build_software_freebsd:
     name: Build Software (FreeBSD)
-    runs-on: macos-12
+    runs-on: ubuntu-22.04
     steps:
       # ------------------------------------------------------------------------
       # Checkout the sources
       # ------------------------------------------------------------------------
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build in FreeBSD
-        uses: vmactions/freebsd-vm@v0
+        uses: vmactions/freebsd-vm@v1
         with:
+          release: 13.2
           usesh: true
           mem: 8192
           # ------------------------------------------------------------------------

@@ -27,7 +27,7 @@
 QEpromFile::QEpromFile(QObject *parent): QEpromFileBase(parent),
         eepromFile_(nullptr) {}
 
-QByteArray QEpromFile::read(const QString &filename, qint64 size) {
+QByteArray QEpromFile::read(const QString &filename, qint32 size) {
     if (QAtmelFile::isReadable(filename)) {
         type_ = EpromFileAtmel;
         eepromFile_.reset(new QAtmelFile());

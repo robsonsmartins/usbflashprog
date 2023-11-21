@@ -47,7 +47,7 @@ bool QSrecFile::isReadable(const QString &filename) {
     return true;
 }
 
-QByteArray QSrecFile::read(const QString &filename, qint64 size) {
+QByteArray QSrecFile::read(const QString &filename, qint32 size) {
     QByteArray result;
     FILE *fd = fopen(filename.toStdString().c_str(), "r");
     if (fd == NULL) {
@@ -66,7 +66,8 @@ QByteArray QSrecFile::read(const QString &filename, qint64 size) {
         if (srec.dataLen) {
             if (address == -1) { address = srec.address; }
             if (srec.address - address + srec.dataLen > result.size()) {
-                result.append(QByteArray(srec.address - address
+                result.append(QByteArray(
+                    static_cast<int>(srec.address - address)
                     + srec.dataLen - result.size(), 0xFF));
             }
             for (int i = 0; i < srec.dataLen; i++) {

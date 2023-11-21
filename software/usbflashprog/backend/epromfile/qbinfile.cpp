@@ -35,7 +35,7 @@ bool QBinFile::isReadable(const QString &filename) {
     return true;
 }
 
-QByteArray QBinFile::read(const QString &filename, qint64 size) {
+QByteArray QBinFile::read(const QString &filename, qint32 size) {
     QByteArray result;
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly)) {

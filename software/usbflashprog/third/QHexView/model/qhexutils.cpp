@@ -64,12 +64,12 @@ bool match(const QByteArray& data, const QString& pattern)
     {
         if(idx >= data.size()) return false;
 
-        const QStringRef& hexb = pattern.midRef(i, 2);
+        const QStringRef& hexb = pattern.midRef(static_cast<int>(i), 2);
         if(hexb == *WILDCARD_BYTE) continue;
 
         bool ok = false;
         auto b = static_cast<char>(hexb.toUInt(&ok, 16));
-        if(!ok || (b != data.at(idx))) return false;
+        if(!ok || (b != data.at(static_cast<int>(idx)))) return false;
     }
 
     return true;
@@ -142,7 +142,7 @@ qint64 findDefault(const QByteArray& value, qint64 startoffset, const QHexView* 
                 return false;
             }
 
-            uchar ch1 = hexdocument->at(curroffset);
+            uchar ch1 = hexdocument->at(static_cast<int>(curroffset));
             uchar ch2 = value.at(i);
 
             if(!(options & QHexFindOptions::CaseSensitive)) {
@@ -164,7 +164,7 @@ qint64 findPattern(QString pattern, qint64 startoffset, const QHexView* hexview,
     if(!Pattern::check(pattern, patternlen) || (patternlen >= hexdocument->length())) return -1;
 
     return findIter(startoffset, fd, hexview, [hexdocument, pattern, patternlen](qint64 idx, qint64& offset) -> bool {
-        if(Pattern::match(hexdocument->read(idx, patternlen), pattern)) offset = idx;
+        if(Pattern::match(hexdocument->read(idx, static_cast<int>(patternlen)), pattern)) offset = idx;
         return true;
     });
 }
@@ -275,7 +275,7 @@ QPair<qint64, qint64> replace(const QHexView* hexview, QVariant oldvalue, QVaria
 
         if(!ba.isEmpty())
         {
-            hexdocument->remove(res.first, res.second);
+            hexdocument->remove(res.first, static_cast<int>(res.second));
             hexdocument->insert(res.first, ba);
             res.second = ba.size();
         }

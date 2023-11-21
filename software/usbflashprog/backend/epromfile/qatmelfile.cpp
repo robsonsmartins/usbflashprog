@@ -43,7 +43,7 @@ bool QAtmelFile::isReadable(const QString &filename) {
     return true;
 }
 
-QByteArray QAtmelFile::read(const QString &filename, qint64 size) {
+QByteArray QAtmelFile::read(const QString &filename, qint32 size) {
     QByteArray result;
     FILE *fd = fopen(filename.toStdString().c_str(), "r");
     if (fd == NULL) {
@@ -58,7 +58,8 @@ QByteArray QAtmelFile::read(const QString &filename, qint64 size) {
             ret != ATMEL_GENERIC_OK) { break; }
         if (address == -1) { address = arec.address; }
         if (arec.address - address + 2 > result.size()) {
-            result.append(QByteArray(arec.address - address
+            result.append(QByteArray(
+                static_cast<int>(arec.address - address)
                 + 2 - result.size(), 0xFF));
         }
         for (int i = 0; i < 2; i++) {

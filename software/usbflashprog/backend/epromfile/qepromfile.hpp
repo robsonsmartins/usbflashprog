@@ -57,7 +57,7 @@ class QEpromFile: public QEpromFileBase {
      *   than this parameter, data is filled with 0xFF.
      * @return Byte array with data, or empty if an error occurs.
      */
-    QByteArray read(const QString &filename, qint64 size);
+    QByteArray read(const QString &filename, qint32 size);
     /**
      * @brief Writes data to a file.
      * @param type Type of the file to write.

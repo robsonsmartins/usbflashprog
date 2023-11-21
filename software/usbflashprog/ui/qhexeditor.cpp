@@ -66,7 +66,7 @@ bool QHexEditor::save(void) {
 bool QHexEditor::saveAs(QEpromFile::QEpromFileType type,
                         const QString& filename) {
     QHexDocument *document = this->hexDocument();
-    QByteArray data = document->read(0, document->length());
+    QByteArray data = document->read(0, static_cast<int>(document->length()));
     QEpromFile file;
     bool ret = file.write(type, filename, data);
     if (!ret) { return false; }
@@ -88,7 +88,7 @@ void QHexEditor::fill(quint8 value) {
 
 void QHexEditor::random(void) {
     QByteArray data;
-    for (qint64 i = 0; i < size_; i++) {
+    for (qint32 i = 0; i < size_; i++) {
         data += (QRandomGenerator::global()->bounded(256) & 0xFF);
     }
     QHexDocument *document =
@@ -98,12 +98,13 @@ void QHexEditor::random(void) {
     emit changed(true);
 }
 
-void QHexEditor::setSize(qint64 value) {
+void QHexEditor::setSize(qint32 value) {
     if (value == size_) { return; }
     QHexDocument *document = this->hexDocument();
     QByteArray data;
     if (document != nullptr) {
-        int len = document->length() < value ? document->length() : value;
+        int len = 
+            static_cast<int>(document->length() < value ? document->length() : value);
         data = document->read(0, len);
     }
     if (data.size() < value) {
@@ -114,7 +115,7 @@ void QHexEditor::setSize(qint64 value) {
     size_ = value;
 }
 
-qint64 QHexEditor::size(void) const {
+qint32 QHexEditor::size(void) const {
     return size_;
 }
 
@@ -160,7 +161,7 @@ void QHexEditor::showReplaceDialog(void) {
     dialog.exec();
 }
 
-void QHexEditor::onDataChanged(const QByteArray& data, quint64 offset,
+void QHexEditor::onDataChanged(const QByteArray& data, quint32 offset,
                                QHexDocument::ChangeReason reason) {
     changed_ = true;
     emit changed();

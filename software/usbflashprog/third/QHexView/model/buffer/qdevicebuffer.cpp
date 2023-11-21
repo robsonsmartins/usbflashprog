@@ -112,7 +112,7 @@ qint64 QDeviceBuffer::lastIndexOf(const QByteArray& ba, qint64 from)
             m_device->seek(readpos);
 
             QByteArray data = m_device->read(currpos - readpos);
-            int lidx = data.lastIndexOf(ba, from);
+            int lidx = data.lastIndexOf(ba, static_cast<int>(from));
 
             if(lidx >= 0)
             {

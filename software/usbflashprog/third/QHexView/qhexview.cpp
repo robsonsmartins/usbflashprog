@@ -267,7 +267,7 @@ void QHexView::selectAll()
 void QHexView::removeSelection()
 {
     if(!m_hexcursor->hasSelection()) return;
-    if(!m_readonly) m_hexdocument->remove(m_hexcursor->selectionStartOffset(), m_hexcursor->selectionLength() - 1);
+    if(!m_readonly) m_hexdocument->remove(m_hexcursor->selectionStartOffset(), static_cast<int>(m_hexcursor->selectionLength() - 1));
     m_hexcursor->clearSelection();
 }
 
@@ -352,7 +352,7 @@ void QHexView::checkState()
     qint64 vscrollmax = doclines - vislines;
     if(doclines >= vislines) vscrollmax++;
 
-    this->verticalScrollBar()->setRange(0, qMax<qint64>(0, vscrollmax));
+    this->verticalScrollBar()->setRange(0, static_cast<int>(qMax<qint64>(0, vscrollmax)));
     this->verticalScrollBar()->setPageStep(vislines - 1);
     this->verticalScrollBar()->setSingleStep(m_options.scrollsteps);
 
@@ -399,9 +399,9 @@ void QHexView::ensureVisible()
     auto vlines = this->visibleLines();
 
     if(pos.line >= (this->verticalScrollBar()->value() + vlines))
-        this->verticalScrollBar()->setValue(pos.line - vlines + 1);
+        this->verticalScrollBar()->setValue(static_cast<int>(pos.line - vlines + 1));
     else if(pos.line < this->verticalScrollBar()->value())
-        this->verticalScrollBar()->setValue(pos.line);
+        this->verticalScrollBar()->setValue(static_cast<int>(pos.line));
     else
         this->viewport()->update();
 }
@@ -625,7 +625,7 @@ int QHexView::visibleLines(bool absolute) const
 {
     int vl = static_cast<int>(qCeil(this->height() / this->lineHeight()));
     if(!m_options.hasFlag(QHexFlags::NoHeader)) vl--;
-    return absolute ? vl : qMin<int>(this->lines(), vl);
+    return absolute ? vl : qMin<int>(static_cast<int>(this->lines()), vl);
 }
 
 qint64 QHexView::getLastColumn(qint64 line) const { return this->getLine(line).size() - 1; }
@@ -720,7 +720,7 @@ QHexPosition QHexView::positionFromPoint(QPoint pt) const
             pos.column = -1;
 
             for(qint64 i = 0; i < m_hexcolumns.size(); i++) {
-                if(m_hexcolumns.at(i).left() > abspt.x()) break;
+                if(m_hexcolumns.at(static_cast<int>(i)).left() > abspt.x()) break;
                 pos.column = i;
             }
 
@@ -971,7 +971,7 @@ bool QHexView::keyPressTextInput(QKeyEvent* e)
             if(!ok) return false;
             m_hexcursor->removeSelection();
 
-            quint8 ch = m_hexdocument->isEmpty() || m_hexcursor->offset() >= m_hexdocument->length() ? '\x00' : m_hexdocument->at(m_hexcursor->offset());
+            quint8 ch = m_hexdocument->isEmpty() || m_hexcursor->offset() >= m_hexdocument->length() ? '\x00' : m_hexdocument->at(static_cast<int>(m_hexcursor->offset()));
             ch = m_writing ? (ch << 4) | val : val;
 
             if(!m_writing && (m_hexcursor->mode() == QHexCursor::Mode::Insert)) m_hexdocument->insert(m_hexcursor->offset(), val);
@@ -1200,5 +1200,5 @@ QColor QHexView::getReadableColor(QColor c) const
     return QHexView::isColorLight(c) ? palette.color(QPalette::Normal, QPalette::WindowText) : palette.color(QPalette::Normal, QPalette::HighlightedText);
 }
 
-QByteArray QHexView::selectedBytes() const { return m_hexcursor->hasSelection() ? m_hexdocument->read(m_hexcursor->selectionStartOffset(), m_hexcursor->selectionLength()) : QByteArray{ }; }
+QByteArray QHexView::selectedBytes() const { return m_hexcursor->hasSelection() ? m_hexdocument->read(m_hexcursor->selectionStartOffset(), static_cast<int>(m_hexcursor->selectionLength())) : QByteArray{ }; }
 QByteArray QHexView::getLine(qint64 line) const { return m_hexdocument ? m_hexdocument->read(line * m_options.linelength, m_options.linelength) : QByteArray{ }; }

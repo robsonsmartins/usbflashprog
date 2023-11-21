@@ -80,12 +80,12 @@ class QHexEditor : public QHexView {
      * @brief Sets the data size of the viewer.
      * @param value Data size, in bytes.
      */
-    void setSize(qint64 value);
+    void setSize(qint32 value);
     /**
      * @brief Gets the data size of the viewer.
      * @return Data size, in bytes.
      */
-    qint64 size(void) const;
+    qint32 size(void) const;
     /**
      * @brief Sets the bit grouping mode.
      * @param mode Bit grouping mode.
@@ -129,7 +129,7 @@ class QHexEditor : public QHexView {
      * @param offset Offset of changed data.
      * @param reason Reason of the change.
      */
-    void onDataChanged(const QByteArray& data, quint64 offset,
+    void onDataChanged(const QByteArray& data, quint32 offset,
                        QHexDocument::ChangeReason reason);
 
  private:
@@ -138,7 +138,7 @@ class QHexEditor : public QHexView {
     /* @brief Current filename. */
     QString filename_;
     /* @brief Data viewer size. */
-    qint64 size_;
+    qint32 size_;
     /* @brief Type of the current loaded file. */
     QEpromFile::QEpromFileType type_;
     /* @brief Editor mode. */

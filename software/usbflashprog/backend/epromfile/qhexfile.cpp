@@ -47,7 +47,7 @@ bool QHexFile::isReadable(const QString &filename) {
     return true;
 }
 
-QByteArray QHexFile::read(const QString &filename, qint64 size) {
+QByteArray QHexFile::read(const QString &filename, qint32 size) {
     QByteArray result;
     FILE *fd = fopen(filename.toStdString().c_str(), "r");
     if (fd == NULL) {
@@ -66,7 +66,8 @@ QByteArray QHexFile::read(const QString &filename, qint64 size) {
         if (irec.dataLen) {
             if (address == 0) { address = irec.address; }
             if (irec.address - address + irec.dataLen > result.size()) {
-                result.append(QByteArray(irec.address - address
+                result.append(QByteArray(
+                    static_cast<int>(irec.address - address)
                     + irec.dataLen - result.size(), 0xFF));
             }
             for (int i = 0; i < irec.dataLen; i++) {

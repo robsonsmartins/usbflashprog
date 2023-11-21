@@ -19,7 +19,7 @@ QByteArray QMappedFileBuffer::read(qint64 offset, int length)
     if(offset >= this->length()) return { };
 
     if(offset + length >= this->length())
-        length = this->length() - offset;
+        length = static_cast<int>(this->length() - offset);
 
     return QByteArray::fromRawData(reinterpret_cast<const char*>(m_mappeddata + offset), length);
 }

@@ -2,7 +2,7 @@
 #include <QIODevice>
 
 QMemoryBuffer::QMemoryBuffer(QObject *parent) : QHexBuffer{parent} { }
-uchar QMemoryBuffer::at(qint64 idx) { return static_cast<uchar>(m_buffer.at(idx)); }
+uchar QMemoryBuffer::at(qint64 idx) { return static_cast<uchar>(m_buffer.at(static_cast<int>(idx))); }
 qint64 QMemoryBuffer::length() const { return static_cast<qint64>(m_buffer.length()); }
 void QMemoryBuffer::insert(qint64 offset, const QByteArray &data) { m_buffer.insert(static_cast<int>(offset), data); }
 void QMemoryBuffer::remove(qint64 offset, int length) { m_buffer.remove(static_cast<int>(offset), length); }

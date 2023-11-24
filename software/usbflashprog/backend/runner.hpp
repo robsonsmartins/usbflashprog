@@ -1,7 +1,7 @@
 // ---------------------------------------------------------------------------
 // USB EPROM/Flash Programmer
 //
-// Copyright (2022) Robson Martins
+// Copyright (2023) Robson Martins
 //
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
@@ -22,7 +22,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QQueue>
 #include <QList>
 #include <QByteArray>
 
@@ -180,68 +179,238 @@ class Runner: public QObject {
      */
     QString getPath() const;
     /**
-     * @brief Sends a command via serial port.
-     * @param code OpCode of the command.
+     * @brief Returns the current timeout value of the serial port
+     *   communication.
+     * @return Timeout, in msec.
      */
-    void send(kCmdOpCodeEnum code);
+    uint32_t getTimeOut() const;
     /**
-     * @brief Sends a command via serial port.
-     * @param code OpCode of the command.
-     * @param param Value of the parameter.
+     * @brief Sets the timeout value of the serial port
+     *   communication.
+     * @param value Timeout, in msec.
      */
-    void sendByte(kCmdOpCodeEnum code, uint8_t param);
+    void setTimeOut(uint32_t value);
     /**
-     * @brief Sends a command via serial port.
-     * @param code OpCode of the command.
-     * @param param Value of the parameter.
+     * @brief Runs the NOP opcode.
+     * @return True if success, false otherwise.
      */
-    void sendWord(kCmdOpCodeEnum code, uint16_t param);
+    bool nop();
     /**
-     * @brief Sends a command via serial port.
-     * @param code OpCode of the command.
-     * @param param Value of the parameter.
+     * @brief Runs the VDD Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
      */
-    void sendDWord(kCmdOpCodeEnum code, uint32_t param);
+    bool vddCtrl(bool on = true);
     /**
-     * @brief Sends a command via serial port.
-     * @param code OpCode of the command.
-     * @param param Value of the parameter.
+     * @brief Runs the VDD Set Voltage opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
      */
-    void sendBool(kCmdOpCodeEnum code, bool param);
+    bool vddSet(float value);
     /**
-     * @brief Sends a command via serial port.
-     * @param code OpCode of the command.
-     * @param param Value of the parameter.
+     * @brief Runs the VDD Get Voltage opcode.
+     * @return VDD Voltage if success, -1.0f otherwise.
      */
-    void sendFloat(kCmdOpCodeEnum code, float param);
-
- signals:
+    float vddGet();
     /**
-     * @brief Signal emmited when response of the sent command is ready.
-     * @param command Sent command and its response.
+     * @brief Runs the VDD Get Duty Cycle opcode.
+     * @return VDD Duty Cycle if success, -1.0f otherwise.
      */
-    void resultReady(const TRunnerCommand& command);
-
- private slots:
-    /* @brief Receives data via serial port. */
-    void onSerial_readyRead();
+    float vddGetDuty();
+    /**
+     * @brief Runs the VDD Init Calibration opcode.
+     * @return True if success, false otherwise.
+     */
+    bool vddInitCal();
+    /**
+     * @brief Runs the VDD Save Calibration opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool vddSaveCal(float value);
+    /**
+     * @brief Runs the VDD Get Calibration opcode.
+     * @return VDD Calibration if success, -1.0f otherwise.
+     */
+    float vddGetCal();
+    /**
+     * @brief Runs the VPP Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool vppCtrl(bool on = true);
+    /**
+     * @brief Runs the VPP Set Voltage opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool vppSet(float value);
+    /**
+     * @brief Runs the VPP Get Voltage opcode.
+     * @return VPP Voltage if success, -1.0f otherwise.
+     */
+    float vppGet();
+    /**
+     * @brief Runs the VPP Get Duty Cycle opcode.
+     * @return VPP Duty Cycle if success, -1.0f otherwise.
+     */
+    float vppGetDuty();
+    /**
+     * @brief Runs the VPP Init Calibration opcode.
+     * @return True if success, false otherwise.
+     */
+    bool vppInitCal();
+    /**
+     * @brief Runs the VPP Save Calibration opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool vppSaveCal(float value);
+    /**
+     * @brief Runs the VPP Get Calibration opcode.
+     * @return VPP Calibration if success, -1.0f otherwise.
+     */
+    float vppGetCal();
+    /**
+     * @brief Runs the VDD on VPP Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool vddOnVpp(bool on = true);
+    /**
+     * @brief Runs the VPP on A9 Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool vppOnA9(bool on = true);
+    /**
+     * @brief Runs the VPP on A18 Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool vppOnA18(bool on = true);
+    /**
+     * @brief Runs the VPP on CE Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool vppOnCE(bool on = true);
+    /**
+     * @brief Runs the VPP on OE Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool vppOnOE(bool on = true);
+    /**
+     * @brief Runs the VPP on WE Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool vppOnWE(bool on = true);
+    /**
+     * @brief Runs the CE Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool setCE(bool on = true);
+    /**
+     * @brief Runs the OE Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool setOE(bool on = true);
+    /**
+     * @brief Runs the WE Control opcode.
+     * @param on If true (default), sets the pin. Resets otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool setWE(bool on = true);
+    /**
+     * @brief Runs the Address Clear opcode.
+     * @return True if success, false otherwise.
+     */
+    bool addrClr();
+    /**
+     * @brief Runs the Address Increment opcode.
+     * @return True if success, false otherwise.
+     */
+    bool addrInc();
+    /**
+     * @brief Runs the Address Set (DWord) opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool addrSet(uint32_t value);
+    /**
+     * @brief Runs the Address Set Byte opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool addrSetB(uint8_t value);
+    /**
+     * @brief Runs the Address Set Word opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool addrSetW(uint16_t value);
+    /**
+     * @brief Runs the Data Clear opcode.
+     * @return True if success, false otherwise.
+     */
+    bool dataClr();
+    /**
+     * @brief Runs the Data Set Byte opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool dataSet(uint8_t value);
+    /**
+     * @brief Runs the Data Set (Word) opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool dataSetW(uint16_t value);
+    /**
+     * @brief Runs the Data Get Byte opcode.
+     * @return Data value if success, 0xFF otherwise.
+     */
+    uint8_t dataGet();
+    /**
+     * @brief Runs the Data Get opcode.
+     * @return Data value if success, 0xFFFF otherwise.
+     */
+    uint16_t dataGetW();
+    /**
+     * @brief Pauses the program execution for a specified time
+     *   (microsecond precision).
+     * @param value Sleep time, in usec.
+     */
+    static void usDelay(uint64_t value);
+    /**
+     * @brief Pauses the program execution for a specified time
+     *   (millisecond precision).
+     * @param value Sleep time, in msec.
+     */
+    static void msDelay(uint32_t value);
 
  private:
-    /* @brief Serial port object. */
-    QSerialPort serial_;
-    /* @brief FIFO of the commands to send. */
-    QQueue<TRunnerCommand> wrFifo_;
-    /* @brief Buffer to read data from serial port. */
-    QByteArray rdBuffer_;
-    /* @brief Tickcounter used by alive timer. */
-    qint64 aliveTick_;
+    /* @brief Command timeout, in msec. */
+    uint32_t timeout_;
     /* @brief Stores if is running. */
     bool running_;
-    /* @brief Process received data (via serial port). */
-    void processData_();
-    /* @brief Sends a command via serial port.
-     * @param cmd Command to send. */
-    void write_(const TRunnerCommand &cmd);
+    /* @brief Serial port object. */
+    QSerialPort serial_;
+    /* @brief Tickcounter used by alive timer. */
+    qint64 aliveTick_;
+    /* @brief Sends data via serial port.
+     * @param data Data to send. 
+     * @return True if success, false otherwise. */
+    bool write_(const QByteArray &data);
+    /* @brief Receives data via serial port.
+     * @param data Pointer to QByteArray to receive data.
+     * @param size Size of data to receive.
+     * @return True if success, false otherwise. */
+    bool read_(QByteArray *data, uint32_t size);
     /* @brief Checks if is alive (or timeout). */
     void checkAlive_();
 };

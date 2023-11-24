@@ -100,7 +100,6 @@ class MainWindow : public QMainWindow {
     /* manual slots */
     void onEnumTimerTimeout();
     void onRefreshTimerTimeout();
-    void onRunnerResultReady(const TRunnerCommand& command);
     void onCheckBoxAddressToggled(bool checked = false);
     void onCheckBoxDataToggled(bool checked = false);
     void onDataChanged(bool status = true);

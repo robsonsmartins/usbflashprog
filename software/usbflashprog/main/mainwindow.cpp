@@ -78,8 +78,6 @@ void MainWindow::connectSignals_() {
             this, &MainWindow::onEnumTimerTimeout);
     connect(&refreshTimer_, &QTimer::timeout,
             this, &MainWindow::onRefreshTimerTimeout);
-    connect(&runner_, &Runner::resultReady,
-            this, &MainWindow::onRunnerResultReady);
     connect(ui_->checkBoxA0, &QCheckBox::toggled,
             this, &MainWindow::onCheckBoxAddressToggled);
     connect(ui_->checkBoxA1, &QCheckBox::toggled,
@@ -258,23 +256,31 @@ void MainWindow::on_pushButtonConnect_clicked() {
 void MainWindow::on_pushButtonVddInitCal_clicked() {
     if (!runner_.isOpen()) { return; }
     enableDiagControls_(false);
-    runner_.send(kCmdVddInitCal);
-    bool ok;
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-    float measured = QInputDialog::getDouble(this,
-        tr("VDD Calibration"),
-        tr("Voltage measured on the VDD:"),
-        5.0f, 3.0f, 7.0f, 2, &ok,
-        Qt::WindowFlags());
-#else
-    float measured = QInputDialog::getDouble(this,
-        tr("VDD Calibration"),
-        tr("Voltage measured on the VDD:"),
-        5.0f, 3.0f, 7.0f, 2, &ok,
-        Qt::WindowFlags(), 0.1f);
-#endif
+    float measured = 0.0f;
+    bool ok = runner_.vddInitCal();
     if (ok) {
-        runner_.sendFloat(kCmdVddSaveCal, measured);
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+        measured = QInputDialog::getDouble(this,
+            tr("VDD Calibration"),
+            tr("Voltage measured on the VDD:"),
+            5.0f, 3.0f, 7.0f, 2, &ok,
+            Qt::WindowFlags());
+#else
+        measured = QInputDialog::getDouble(this,
+            tr("VDD Calibration"),
+            tr("Voltage measured on the VDD:"),
+            5.0f, 3.0f, 7.0f, 2, &ok,
+            Qt::WindowFlags(), 0.1f);
+#endif
+        if (ok) {
+            ok = runner_.vddSaveCal(measured);
+        } else { ok = true; }
+    }
+    if (!ok) {
+        QMessageBox::critical(this,
+           tr("USB Flash/EPROM Programmer"),
+           tr("The device has been disconnected from the \"%1\" port.")
+                .arg(runner_.getPath()));
     }
     enableDiagControls_(true);
 }
@@ -282,23 +288,31 @@ void MainWindow::on_pushButtonVddInitCal_clicked() {
 void MainWindow::on_pushButtonVppInitCal_clicked() {
     if (!runner_.isOpen()) { return; }
     enableDiagControls_(false);
-    runner_.send(kCmdVppInitCal);
-    bool ok;
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-    float measured = QInputDialog::getDouble(this,
-        tr("VPP Calibration"),
-        tr("Voltage measured on the VPP:"),
-        12.0f, 10.0f, 14.0f, 2, &ok,
-        Qt::WindowFlags());
-#else
-    float measured = QInputDialog::getDouble(this,
-        tr("VPP Calibration"),
-        tr("Voltage measured on the VPP:"),
-        12.0f, 10.0f, 14.0f, 2, &ok,
-        Qt::WindowFlags(), 0.1f);
-#endif
+    float measured = 0.0f;
+    bool ok = runner_.vppInitCal();
     if (ok) {
-        runner_.sendFloat(kCmdVppSaveCal, measured);
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+        measured = QInputDialog::getDouble(this,
+            tr("VPP Calibration"),
+            tr("Voltage measured on the VPP:"),
+            12.0f, 10.0f, 14.0f, 2, &ok,
+            Qt::WindowFlags());
+#else
+        measured = QInputDialog::getDouble(this,
+            tr("VPP Calibration"),
+            tr("Voltage measured on the VPP:"),
+            12.0f, 10.0f, 14.0f, 2, &ok,
+            Qt::WindowFlags(), 0.1f);
+#endif
+        if (ok) {
+            ok = runner_.vppSaveCal(measured);
+        } else { ok = true; }
+    }
+    if (!ok) {
+        QMessageBox::critical(this,
+           tr("USB Flash/EPROM Programmer"),
+           tr("The device has been disconnected from the \"%1\" port.")
+                .arg(runner_.getPath()));
     }
     enableDiagControls_(true);
 }
@@ -306,85 +320,91 @@ void MainWindow::on_pushButtonVppInitCal_clicked() {
 void MainWindow::on_pushButtonSetData_clicked() {
     if (!runner_.isOpen()) { return; }
     uint16_t data = ui_->spinBoxData->value();
-    runner_.sendWord(kCmdBusDataSet, data);
+    if (!runner_.dataSetW(data)) {
+        QMessageBox::critical(this,
+           tr("USB Flash/EPROM Programmer"),
+           tr("The device has been disconnected from the \"%1\" port.")
+                .arg(runner_.getPath()));
+    }
 }
 
 void MainWindow::on_pushButtonGetData_clicked() {
     if (!runner_.isOpen()) { return; }
-    runner_.send(kCmdBusDataGet);
+    uint16_t value = runner_.dataGetW();
+    ui_->spinBoxData->setValue(value);
 }
 
 void MainWindow::on_pushButtonSetAddr_clicked() {
     if (!runner_.isOpen()) { return; }
     uint32_t data = ui_->spinBoxAddr->value();
-    runner_.sendDWord(kCmdBusAddrSet, data);
+    runner_.addrSet(data);
 }
 
 void MainWindow::on_checkBoxVddCtrl_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVddCtrl, checked);
+    runner_.vddCtrl(checked);
 }
 
 void MainWindow::on_checkBoxVppCtrl_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVppCtrl, checked);
+    runner_.vppCtrl(checked);
 }
 
 void MainWindow::on_checkBoxVddOnVpp_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVddOnVpp, checked);
+    runner_.vddOnVpp(checked);
 }
 
 void MainWindow::on_checkBoxVppOnA9_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVppOnA9, checked);
+    runner_.vppOnA9(checked);
 }
 
 void MainWindow::on_checkBoxVppOnA18_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVppOnA18, checked);
+    runner_.vppOnA18(checked);
 }
 
 void MainWindow::on_checkBoxVppOnCE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVppOnCE, checked);
+    runner_.vppOnCE(checked);
 }
 
 void MainWindow::on_checkBoxVppOnOE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVppOnOE, checked);
+    runner_.vppOnOE(checked);
 }
 
 void MainWindow::on_checkBoxVppOnWE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdVppOnWE, checked);
+    runner_.vppOnWE(checked);
 }
 
 void MainWindow::on_checkBoxCE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdBusCE, checked);
+    runner_.setCE(checked);
 }
 
 void MainWindow::on_checkBoxOE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdBusOE, checked);
+    runner_.setOE(checked);
 }
 
 void MainWindow::on_checkBoxWE_toggled(bool checked) {
     if (!runner_.isOpen()) { return; }
-    runner_.sendBool(kCmdBusWE, checked);
+    runner_.setWE(checked);
 }
 
 void MainWindow::on_dialVdd_valueChanged(int value) {
     if (!runner_.isOpen()) { return; }
     float v = value / 10.0f;
-    runner_.sendFloat(kCmdVddSetV, v);
+    runner_.vddSet(v);
 }
 
 void MainWindow::on_dialVpp_valueChanged(int value) {
     if (!runner_.isOpen()) { return; }
     float v = value / 10.0f;
-    runner_.sendFloat(kCmdVppSetV, v);
+    runner_.vppSet(v);
 }
 
 void MainWindow::onEnumTimerTimeout() {
@@ -403,45 +423,25 @@ void MainWindow::onRefreshTimerTimeout() {
                 .arg(port));
         return;
     }
-    runner_.send(kCmdVddGetV);
-    runner_.send(kCmdVppGetV);
-    runner_.send(kCmdVddGetDuty);
-    runner_.send(kCmdVppGetDuty);
-}
-
-void MainWindow::onRunnerResultReady(const TRunnerCommand& command) {
+    
     auto originalLocale = std::locale::global(std::locale::classic());
     char buffer[5];
-    switch (command.opcode.code) {
-        case kCmdVddGetV:
-            snprintf(buffer, sizeof(buffer), "%4.1f",
-                     command.responseAsFloat());
-            ui_->lcdNumberVdd->display(QString(buffer));
-            break;
-        case kCmdVppGetV:
-            snprintf(buffer, sizeof(buffer), "%4.1f",
-                     command.responseAsFloat());
-            ui_->lcdNumberVpp->display(QString(buffer));
-            break;
-        case kCmdVddGetDuty:
-            snprintf(buffer, sizeof(buffer), "%4.1f",
-                     command.responseAsFloat());
-            ui_->lcdNumberVddDuty->display(QString(buffer));
-            break;
-        case kCmdVppGetDuty:
-            snprintf(buffer, sizeof(buffer), "%4.1f",
-                     command.responseAsFloat());
-            ui_->lcdNumberVppDuty->display(QString(buffer));
-            break;
-        case kCmdBusDataGet:
-            ui_->spinBoxData->setValue(command.responseAsWord());
-            break;
-        case kCmdBusDataGetB:
-            ui_->spinBoxData->setValue(command.responseAsByte());
-            break;
-        default:
-            break;
-    }
+    float value = runner_.vddGet();
+    if (value < 0.0f) { value = 0.0f; }
+    snprintf(buffer, sizeof(buffer), "%4.1f", value);
+    ui_->lcdNumberVdd->display(QString(buffer));
+    value = runner_.vppGet();
+    if (value < 0.0f) { value = 0.0f; }
+    snprintf(buffer, sizeof(buffer), "%4.1f", value);
+    ui_->lcdNumberVpp->display(QString(buffer));
+    value = runner_.vddGetDuty();
+    if (value < 0.0f) { value = 0.0f; }
+    snprintf(buffer, sizeof(buffer), "%4.1f", value);
+    ui_->lcdNumberVddDuty->display(QString(buffer));
+    value = runner_.vppGetDuty();
+    if (value < 0.0f) { value = 0.0f; }
+    snprintf(buffer, sizeof(buffer), "%4.1f", value);
+    ui_->lcdNumberVppDuty->display(QString(buffer));
     std::locale::global(originalLocale);
 }
 
@@ -506,17 +506,17 @@ void MainWindow::connect_(bool state) {
         }
     }
     if (runner_.isOpen()) {
-        runner_.sendBool(kCmdVppCtrl, false);
-        runner_.sendBool(kCmdVddCtrl, false);
-        runner_.sendBool(kCmdVddOnVpp, false);
-        runner_.sendBool(kCmdVppOnA9, false);
-        runner_.sendBool(kCmdVppOnA18, false);
-        runner_.sendBool(kCmdVppOnCE, false);
-        runner_.sendBool(kCmdVppOnOE, false);
-        runner_.sendBool(kCmdVppOnWE, false);
-        runner_.sendBool(kCmdBusCE, false);
-        runner_.sendBool(kCmdBusOE, false);
-        runner_.sendBool(kCmdBusWE, false);
+        runner_.vppCtrl(false);
+        runner_.vddCtrl(false);
+        runner_.vddOnVpp(false);
+        runner_.vppOnA9(false);
+        runner_.vppOnA18(false);
+        runner_.vppOnCE(false);
+        runner_.vppOnOE(false);
+        runner_.vppOnWE(false);
+        runner_.setCE(false);
+        runner_.setOE(false);
+        runner_.setWE(false);
     }
     if (!state) {
         refreshTimer_.stop();

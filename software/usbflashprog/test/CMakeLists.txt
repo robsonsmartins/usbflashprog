@@ -17,6 +17,7 @@ find_package(Qt${QT_VERSION} COMPONENTS ${REQUIRED_LIBS} REQUIRED)
 include(FetchContent)
 FetchContent_Declare(
   googletest
+  DOWNLOAD_EXTRACT_TIMESTAMP TRUE
   URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
@@ -29,9 +30,13 @@ set(PROJECT_SOURCES
     ../config.hpp
     ../backend/opcodes.cpp
     ../backend/opcodes.hpp
+    ../backend/runner.cpp
+    ../backend/runner.hpp
     mock/qserialport.hpp
     backend/opcodes_test.hpp
     backend/opcodes_test.cpp
+    backend/runner_test.hpp
+    backend/runner_test.cpp
     main.cpp
 )
 

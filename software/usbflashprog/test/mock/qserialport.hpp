@@ -20,6 +20,13 @@
 
 // ---------------------------------------------------------------------------
 
+constexpr const char* kSerialPortDummyPort = "COM1";
+constexpr uint16_t kSerialPortDummyVendorId = 0x2E8A;
+constexpr uint16_t kSerialPortDummyProductId = 0x000A;
+constexpr uint8_t kSerialPortDummyData[] = {0xA1, 20, 33};
+
+// ---------------------------------------------------------------------------
+
 class QSerialPortInfo: public QObject {
     Q_OBJECT
 
@@ -40,13 +47,13 @@ class QSerialPortInfo: public QObject {
         return list;
     }
     QString portName() const {
-        return "COM1";
+        return kSerialPortDummyPort;
     }
     quint16 vendorIdentifier() const {
-        return 0x2E8A;
+        return kSerialPortDummyVendorId;
     }
     quint16 productIdentifier() const {
-        return 0x000A;
+        return kSerialPortDummyProductId;
     }
 };
 
@@ -56,6 +63,7 @@ class QSerialPort: public QObject {
     Q_OBJECT
 
  public:
+    static bool connected;
     enum Directions  {
         Input = 1,
         Output = 2,
@@ -77,6 +85,7 @@ class QSerialPort: public QObject {
     bool open(QIODevice::OpenMode mode) {
         (void)mode;
         opened_ = true;
+        connected = true;
         timer_->start(100);
         return true;
     }
@@ -84,31 +93,46 @@ class QSerialPort: public QObject {
         timer_->stop();
         portName_ = "";
         opened_ = false;
+        connected = false;
     }
     bool isOpen() const {
         return opened_;
     }
     bool setDataTerminalReady(bool set) {
         (void)set;
+        if (!connected) return false;
         return true;
     }
     qint64 bytesAvailable() const {
-        return 3;
+        if (!connected) return 0;
+        return sizeof(kSerialPortDummyData);
     }
     QByteArray readAll() {
         QByteArray data;
-        data.append(0xA1).append(20).append(33);
+        if (!connected) return data;
+        for (const auto d: kSerialPortDummyData) {
+            data.append(d);
+        }
         return data;
     }
     bool clear(Directions directions = AllDirections) {
         (void)directions;
-        return true;
+        return connected;
     }
     qint64 write(const QByteArray &data) {
+        if (!connected) return 0;
         return data.size();
     }
     bool flush() {
-        return true;
+        return connected;
+    }
+    bool waitForBytesWritten(int msecs = 30000) {
+        (void)msecs;
+        return connected;
+    }
+    bool waitForReadyRead(int msecs = 30000) {
+        (void)msecs;
+        return connected;
     }
 
  signals:

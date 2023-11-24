@@ -1,20 +1,34 @@
 #!/bin/bash
 workspaceRoot=$(cd -- "$(dirname -- ${BASH_SOURCE[0]})/.." &> /dev/null && pwd)
 echo "* Workspace root: ${workspaceRoot}"
+
+if [[ "$OSTYPE" =~ ^msys ]]; then
+    CMAKE="cmake -G \"MinGW Makefiles\""
+    LCOV="perl c:/ProgramData/chocolatey/lib/lcov/tools/bin/lcov"
+    GENHTML="perl c:/ProgramData/chocolatey/lib/lcov/tools/bin/genhtml"
+else
+    CMAKE="cmake"
+    LCOV="lcov"
+    GENHTML="genhtml"
+fi
+
 echo "* Generating build files..."
 rm -Rf ${workspaceRoot}/build
-if [[ "$OSTYPE" =~ ^msys ]]; then
-    cmake -G "MinGW Makefiles" -B ${workspaceRoot}/build -S ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON
-else
-    cmake -B ${workspaceRoot}/build -S ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON
-fi
+eval "${CMAKE} -B ${workspaceRoot}/build -S ${workspaceRoot} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS_DEBUG=\"-g -O0\" -DCMAKE_CXX_FLAGS_DEBUG=\"-g -O0\" -DTEST_BUILD=ON"
+
 echo "* Building test project..."
 cmake --build ${workspaceRoot}/build
+
 echo "* Running tests..."
 pushd ${workspaceRoot}/build
 ctest
 popd
+
 echo "* Capturing coverage info..."
-lcov --directory ${workspaceRoot}/build/ --capture --output-file ${workspaceRoot}/build/coverage.info -rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude ${workspaceRoot}\/build\/\* --exclude ${workspaceRoot}\/test\/\*
+eval "${LCOV} --capture --directory ${workspaceRoot}/build/ --output-file ${workspaceRoot}/build/coverage.info --rc lcov_branch_coverage=1 \
+      --exclude \/c\/MinGW\/\* --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude ${workspaceRoot}\/build\/\* --exclude ${workspaceRoot}\/test\/\*"
+
 echo "* Generating coverage report..."
-genhtml ${workspaceRoot}/build/coverage.info --output-directory ${workspaceRoot}/../../docs/software/lcov/
+rm -Rf ${workspaceRoot}/../../docs/software/lcov/
+eval "${GENHTML} --prefix ${workspaceRoot} --ignore-errors source ${workspaceRoot}/build/coverage.info --legend --title \"`git rev-parse --short HEAD`\" \
+      --output-directory ${workspaceRoot}/../../docs/software/lcov/"

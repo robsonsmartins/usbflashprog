@@ -1,5 +1,6 @@
 <map id="opcodes.hpp" name="opcodes.hpp">
-<area shape="rect" id="node1" title="Opcodes for communication." alt="" coords="21,5,125,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,64,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="88,80,139,107"/>
+<area shape="rect" id="node1" title="Opcodes for communication." alt="" coords="73,5,177,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,72,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="96,80,155,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="179,80,229,107"/>
 </map>

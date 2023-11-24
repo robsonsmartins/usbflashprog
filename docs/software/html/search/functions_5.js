@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['main_224',['main',['../a00059.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../a00081.html#ga3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main.cpp']]],
-  ['mainwindow_225',['MainWindow',['../a00939.html#ac3df08a4bc0438931d73601110c9267e',1,'MainWindow']]],
-  ['mode_226',['mode',['../a00955.html#a95d2dffa0ff1b85bc9e0b30fe275faba',1,'QHexEditor']]]
+  ['ischanged_268',['isChanged',['../a00965.html#a5e2b6e4c77e001a4337f496fbc6349b1',1,'QHexEditor']]],
+  ['isok_269',['isOk',['../a00933.html#ac7857fc60a17a2ef338b2b01501ee2da',1,'OpCode']]],
+  ['isopen_270',['isOpen',['../a00941.html#a002ed331862370f434b7befe331b5a0b',1,'Runner']]],
+  ['isreadable_271',['isReadable',['../a00905.html#a7022bf97fd2d2ccc84b5cbe2b1dcfd37',1,'QAtmelFile::isReadable()'],['../a00909.html#a7022bf97fd2d2ccc84b5cbe2b1dcfd37',1,'QBinFile::isReadable()'],['../a00917.html#a7022bf97fd2d2ccc84b5cbe2b1dcfd37',1,'QEpromFileBase::isReadable()'],['../a00921.html#a7022bf97fd2d2ccc84b5cbe2b1dcfd37',1,'QHexFile::isReadable()'],['../a00925.html#a7022bf97fd2d2ccc84b5cbe2b1dcfd37',1,'QSrecFile::isReadable()']]]
 ];

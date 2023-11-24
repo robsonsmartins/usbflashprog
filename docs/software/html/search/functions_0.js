@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['changed_205',['changed',['../a00955.html#a507586652a7308a48cf1832979003728',1,'QHexEditor']]],
-  ['close_206',['close',['../a00935.html#a5ae591df94fc66ccb85cbb6565368bca',1,'Runner']]],
-  ['createwindow_207',['createWindow',['../a00059.html#ac99aacda81f414a498962d83f33e5bd0',1,'main.cpp']]]
+  ['addrclr_243',['addrClr',['../a00941.html#a67a0642f640cbbd2ee18d92c2e107e50',1,'Runner']]],
+  ['addrinc_244',['addrInc',['../a00941.html#a0df0d2a1b3f1fc697aa67f8e22c609b6',1,'Runner']]],
+  ['addrset_245',['addrSet',['../a00941.html#a907cbe957a2d5d985287d7cfc675ab6a',1,'Runner']]],
+  ['addrsetb_246',['addrSetB',['../a00941.html#af91d37091d9eb7abcef4d8336cbc7747',1,'Runner']]],
+  ['addrsetw_247',['addrSetW',['../a00941.html#a207456d5bd4561bd2f9c464859549583',1,'Runner']]]
 ];

@@ -1,8 +1,0 @@
-<map id="QEpromFileBase" name="QEpromFileBase">
-<area shape="rect" id="node1" title="QEpromFileBase Class." alt="" coords="277,5,431,171"/>
-<area shape="rect" id="node2" href="$a00899.html" title="Atmel Generic Files Stream Class." alt="" coords="5,219,124,340"/>
-<area shape="rect" id="node3" href="$a00903.html" title="Raw Binary Files Stream Class." alt="" coords="148,219,267,340"/>
-<area shape="rect" id="node4" href="$a00907.html" title="QEpromFile Class." alt="" coords="291,219,417,340"/>
-<area shape="rect" id="node5" href="$a00915.html" title="Intel Hex Files Stream Class." alt="" coords="441,219,560,340"/>
-<area shape="rect" id="node6" href="$a00919.html" title="Motorola SREC Files Stream Class." alt="" coords="584,219,703,340"/>
-</map>

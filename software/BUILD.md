@@ -13,22 +13,24 @@ Here are instructions on how to build the project.
 	* [Install Packages](#install-packages)
 	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
 	* [Build](#build)
+	* [Test \[Optional\]](#test-optional)
+	* [Generate Code Coverage Report \[Optional\]](#generate-code-coverage-report-optional)
 	* [Generate DEB Package \[Optional\]](#generate-deb-package-optional)
 	* [Generate RPM Package \[Optional\]](#generate-rpm-package-optional)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 * [Microsoft Windows&copy;](#microsoft-windows)
-	* [Requirements](#requirements)
+	* [Requirements](#requirements-1)
 	* [Install Git](#install-git)
 	* [Install CMake](#install-cmake)
 	* [Install Qt and MinGW](#install-qt-and-mingw)
 	* [Install Doxygen \[Optional\]](#install-doxygen-optional)
 	* [Install GraphViz \[Optional\]](#install-graphviz-optional)
-	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
+	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional-1)
 	* [Install Inno Setup Compiler \[Optional\]](#install-inno-setup-compiler-optional)
 	* [Update Environment Variables](#update-environment-variables)
-	* [Build](#build)
+	* [Build](#build-1)
 	* [Generate Installation Package \[Optional\]](#generate-installation-package-optional)
-	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
+	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional-1)
 
 ## GNU/Linux&copy;
 
@@ -112,6 +114,64 @@ cmake -DCMAKE_CXX_COMPILER=<full_path_of_compiler>/g++ ..
 ./ufprog
 ```
 
+### Test \[Optional\]]
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON .
+cmake --build build --config Debug
+cd build
+ctest -C Debug
+```
+
+### Generate Code Coverage Report \[Optional\]]
+
+*Note*: This step requires `lcov`, which can be installed with the following commands:
+
+```shell
+sudo apt update
+sudo apt install lcov
+```
+
+1. Clone the project from the repository:
+
+```shell
+git clone https://github.com/robsonsmartins/usbflashprog.git
+```
+
+2. Change to `software/usbflashprog` directory:
+
+```shell
+cd usbflashprog/software/usbflashprog
+```
+
+3. Run the following commands:
+
+```shell
+mkdir build
+cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON .
+cmake --build build --config Debug
+cd build
+ctest -C Debug
+cd ..
+lcov --directory ./build/ --capture --output-file ./build/coverage.info --rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude .\/build\/\* --exclude .\/test\/\*
+genhtml ./build/coverage.info --output-directory <output_dir>
+```
+
 ### Generate DEB Package \[Optional\]
 
 1. Clone the project from the repository:
@@ -145,6 +205,13 @@ mv ufprog.deb "../ufprog-`cat "../../VERSION"`-0-x86_64.deb"
 
 ### Generate RPM Package \[Optional\]
 
+*Note*: This step requires `rpm`, which can be installed with the following commands:
+
+```shell
+sudo apt update
+sudo apt install rpm
+```
+
 1. Clone the project from the repository:
 
 ```shell
@@ -177,6 +244,13 @@ mv RPMS/x86_64/ufprog*.rpm ../../
 4. The generated package will be `software/usbflashprog/build/ufprog-<version>.<architecture>.rpm`.
 
 ### Generate Doxygen Documentation \[Optional\]
+
+*Note*: This step requires `doxygen`, which can be installed with the following commands:
+
+```shell
+sudo apt update
+sudo apt install doxygen graphviz
+```
 
 1. Clone the project from the repository:
 

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - modules/vgenerator.cpp</title>
+  <title>LCOV - 0b1fe63 - modules/vgenerator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">0b1fe63</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">251</td>
@@ -37,12 +37,20 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-09-28 23:35:37</td>
+            <td class="headerValue">2023-11-29 12:14:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">58</td>
             <td class="headerCovTableEntry">58</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -219,9 +227,9 @@
 <a name="157"><span class="lineNum">     157 </span><span class="lineCov">         12 :     dc2dc_.stop();</span></a>
 <a name="158"><span class="lineNum">     158 </span><span class="lineCov">         12 : }</span></a>
 <a name="159"><span class="lineNum">     159 </span>            : </a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">       7798 : void GenericGenerator::adjust_() {</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">       7798 :     dc2dc_.adjust();</span></a>
-<a name="162"><span class="lineNum">     162 </span><span class="lineCov">       7798 : }</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">       6072 : void GenericGenerator::adjust_() {</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">       6072 :     dc2dc_.adjust();</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">       6072 : }</span></a>
 <a name="163"><span class="lineNum">     163 </span>            : </a>
 <a name="164"><span class="lineNum">     164 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="165"><span class="lineNum">     165 </span>            : </a>
@@ -361,7 +369,7 @@
 <a name="299"><span class="lineNum">     299 </span><span class="lineCov">          6 :     multicore_.launch();</span></a>
 <a name="300"><span class="lineNum">     300 </span><span class="lineCov">          6 :     multicore_.putParam(reinterpret_cast&lt;uintptr_t&gt;(&amp;vpp));</span></a>
 <a name="301"><span class="lineNum">     301 </span><span class="lineCov">          6 :     multicore_.putParam(reinterpret_cast&lt;uintptr_t&gt;(&amp;vdd));</span></a>
-<a name="302"><span class="lineNum">     302 </span><span class="lineCov">        118 :     while (status_ == MultiCore::csStarting) { MultiCore::usleep(1); }</span></a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineCov">        121 :     while (status_ == MultiCore::csStarting) { MultiCore::usleep(1); }</span></a>
 <a name="303"><span class="lineNum">     303 </span><span class="lineCov">          6 :     return (vppRes &amp;&amp; vddRes);</span></a>
 <a name="304"><span class="lineNum">     304 </span>            : }</a>
 <a name="305"><span class="lineNum">     305 </span>            : </a>
@@ -445,9 +453,9 @@
 <a name="383"><span class="lineNum">     383 </span><span class="lineCov">          6 :     core.lock();</span></a>
 <a name="384"><span class="lineNum">     384 </span><span class="lineCov">          6 :     vpp-&gt;owner_-&gt;status_ = MultiCore::csRunning;</span></a>
 <a name="385"><span class="lineNum">     385 </span><span class="lineCov">          6 :     core.unlock();</span></a>
-<a name="386"><span class="lineNum">     386 </span><span class="lineCov">       3905 :     while (!core.isStopRequested()) {</span></a>
-<a name="387"><span class="lineNum">     387 </span><span class="lineCov">       3899 :         vpp-&gt;adjust_();</span></a>
-<a name="388"><span class="lineNum">     388 </span><span class="lineCov">       3899 :         vdd-&gt;adjust_();</span></a>
+<a name="386"><span class="lineNum">     386 </span><span class="lineCov">       3042 :     while (!core.isStopRequested()) {</span></a>
+<a name="387"><span class="lineNum">     387 </span><span class="lineCov">       3036 :         vpp-&gt;adjust_();</span></a>
+<a name="388"><span class="lineNum">     388 </span><span class="lineCov">       3036 :         vdd-&gt;adjust_();</span></a>
 <a name="389"><span class="lineNum">     389 </span>            :     }</a>
 <a name="390"><span class="lineNum">     390 </span><span class="lineCov">          6 :     core.lock();</span></a>
 <a name="391"><span class="lineNum">     391 </span><span class="lineCov">          6 :     vpp-&gt;owner_-&gt;status_ = MultiCore::csStopped;</span></a>

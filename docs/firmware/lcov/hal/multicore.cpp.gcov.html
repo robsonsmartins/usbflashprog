@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - coverage.info - hal/multicore.cpp</title>
+  <title>LCOV - 0b1fe63 - hal/multicore.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">coverage.info</td>
+            <td class="headerValue">0b1fe63</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">60</td>
@@ -37,12 +37,20 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-09-28 23:35:37</td>
+            <td class="headerValue">2023-11-29 12:14:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">14</td>
             <td class="headerCovTableEntry">14</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Legend:</td>
+            <td class="headerValueLeg">            Lines:
+            <span class="coverLegendCov">hit</span>
+            <span class="coverLegendNoCov">not hit</span>
+</td>
+            <td></td>
           </tr>
           <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
         </table>
@@ -104,7 +112,7 @@
 <a name="42"><span class="lineNum">      42 </span><span class="lineCov">          7 :     status_ = csStarting;</span></a>
 <a name="43"><span class="lineNum">      43 </span><span class="lineCov">          7 :     multicore_launch_core1(multicore_core_1_entry_);</span></a>
 <a name="44"><span class="lineNum">      44 </span><span class="lineCov">          7 :     multicore_fifo_push_blocking(reinterpret_cast&lt;uintptr_t&gt;(this));</span></a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         15 :     while (status_ == csStarting) { usleep(1); }</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">         26 :     while (status_ == csStarting) { usleep(1); }</span></a>
 <a name="46"><span class="lineNum">      46 </span>            : }</a>
 <a name="47"><span class="lineNum">      47 </span>            : </a>
 <a name="48"><span class="lineNum">      48 </span><span class="lineCov">         87 : void MultiCore::stop() {</span></a>
@@ -124,8 +132,8 @@
 <a name="62"><span class="lineNum">      62 </span><span class="lineCov">          3 :     return (status_ != csStopped);</span></a>
 <a name="63"><span class="lineNum">      63 </span>            : }</a>
 <a name="64"><span class="lineNum">      64 </span>            : </a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">       3907 : bool MultiCore::isStopRequested() const {</span></a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">       3907 :     return (status_ == csStopping);</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">       3044 : bool MultiCore::isStopRequested() const {</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">       3044 :     return (status_ == csStopping);</span></a>
 <a name="67"><span class="lineNum">      67 </span>            : }</a>
 <a name="68"><span class="lineNum">      68 </span>            : </a>
 <a name="69"><span class="lineNum">      69 </span><span class="lineCov">          3 : MultiCore::CoreStatus MultiCore::getStatus() const {</span></a>
@@ -152,9 +160,9 @@
 <a name="90"><span class="lineNum">      90 </span><span class="lineCov">         42 :     mutex_exit(mutex);</span></a>
 <a name="91"><span class="lineNum">      91 </span><span class="lineCov">         42 : }</span></a>
 <a name="92"><span class="lineNum">      92 </span>            : </a>
-<a name="93"><span class="lineNum">      93 </span><span class="lineCov">        128 : void MultiCore::usleep(uint64_t us) {</span></a>
-<a name="94"><span class="lineNum">      94 </span><span class="lineCov">        128 :     sleep_us(us);</span></a>
-<a name="95"><span class="lineNum">      95 </span><span class="lineCov">        128 : }</span></a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">        142 : void MultiCore::usleep(uint64_t us) {</span></a>
+<a name="94"><span class="lineNum">      94 </span><span class="lineCov">        142 :     sleep_us(us);</span></a>
+<a name="95"><span class="lineNum">      95 </span><span class="lineCov">        142 : }</span></a>
 <a name="96"><span class="lineNum">      96 </span>            : </a>
 <a name="97"><span class="lineNum">      97 </span><span class="lineCov">          9 : void MultiCore::msleep(uint32_t ms) {</span></a>
 <a name="98"><span class="lineNum">      98 </span><span class="lineCov">          9 :     sleep_ms(ms);</span></a>

@@ -18,20 +18,20 @@ Here are instructions on how to build the project.
 	* [Generate Code Coverage Report \[Optional\]](#generate-code-coverage-report-optional)
 	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
 * [Microsoft Windows&copy;](#microsoft-windows)
-	* [Requirements](#requirements)
+	* [Requirements](#requirements-1)
 	* [Install Git](#install-git)
 	* [Install CMake](#install-cmake)
 	* [Install GNU ARM Embedded Toolchain](#install-gnu-arm-embedded-toolchain)
 	* [Install MSys2 and MinGW](#install-msys2-and-mingw)
 	* [Install Python](#install-python)
-	* [Install Pico C SDK](#install-pico-c-sdk)
+	* [Install Pico C SDK](#install-pico-c-sdk-1)
 	* [Install Doxygen \[Optional\]](#install-doxygen-optional)
 	* [Install GraphViz \[Optional\]](#install-graphviz-optional)
-	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional)
+	* [Install Visual Studio Code \[Optional\]](#install-visual-studio-code-optional-1)
 	* [Update Environment Variables](#update-environment-variables)
-	* [Build](#build)
+	* [Build](#build-1)
 	* [Debug \[Optional\]](#debug-optional)
-	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional)
+	* [Generate Doxygen Documentation \[Optional\]](#generate-doxygen-documentation-optional-1)
 
 ## GNU/Linux&copy;
 
@@ -139,13 +139,20 @@ cd usbflashprog/firmware/usbflashprog
 
 ```shell
 mkdir build
-cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON ..
+cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON .
 cmake --build build --config Debug
 cd build
 ctest -C Debug
 ```
 
 ### Generate Code Coverage Report \[Optional\]]
+
+*Note*: This step requires `lcov`, which can be installed with the following commands:
+
+```shell
+sudo apt update
+sudo apt install lcov
+```
 
 1. Clone the project from the repository:
 
@@ -163,16 +170,23 @@ cd usbflashprog/firmware/usbflashprog
 
 ```shell
 mkdir build
-cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON ..
+cmake -B build -DCMAKE_BUILD_TYPE=Debug -DTEST_BUILD=ON .
 cmake --build build --config Debug
 cd build
 ctest -C Debug
 cd ..
-lcov --directory ./build/ --capture --output-file ./build/coverage.info -rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude .\/build\/\* --exclude .\/test\/\*
+lcov --directory ./build/ --capture --output-file ./build/coverage.info --rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude .\/build\/\* --exclude .\/test\/\*
 genhtml ./build/coverage.info --output-directory <output_dir>
 ```
 
 ### Generate Doxygen Documentation \[Optional\]
+
+*Note*: This step requires `doxygen`, which can be installed with the following commands:
+
+```shell
+sudo apt update
+sudo apt install doxygen graphviz
+```
 
 1. Clone the project from the repository:
 
@@ -344,7 +358,7 @@ There is also a set of C examples in the official repositories that are useful d
 1. To install the required Pico C SDK, run the following commands (inside MSys2):
 
 ```shell
-cd $HOME
+cd $USERPROFILE
 git clone -b master https://github.com/raspberrypi/pico-sdk.git
 cd pico-sdk
 git submodule update --init
@@ -399,7 +413,7 @@ The version installed at the time of writing this tutorial was [VSCodeSetup-x64-
 - CMake
 - CMake Tools
 - C/C++
-- Qt tools
+- Cortex-Debug
 
 The "CMake Tools extension" must be configured to generate files for MinGW.
 

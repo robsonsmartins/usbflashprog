@@ -36,17 +36,11 @@ set(PROJECT_RESOURCES
   ../resources/resources.qrc
 )
 
-# Forces Compiler and Qt5 (64 bits)
-set(CMAKE_CXX_COMPILER "D:\\MinGW\\Qt\\5.12.12\\Tools\\mingw730_64\\bin\\g++.exe")
-set(Qt5_DIR "D:\\MinGW\\Qt\\5.12.12\\5.12.12\\mingw73_64\\lib\\cmake\\Qt5")
-
 # Windows application icon
-if (WIN32)
+if(WIN32)
   set(WINDOWS_RES_FILE ${CMAKE_BINARY_DIR}/resources.obj)
   set(WINDOWS_RC_FILE ../resources/resources.rc)
   set(RC_FLAGS -DMINGW -Ocoff --target=pe-x86-64)
-  cmake_path(GET CMAKE_CXX_COMPILER PARENT_PATH CMAKE_CXX_COMPILER_PATH)
-  set(CMAKE_RC_COMPILER ${CMAKE_CXX_COMPILER_PATH}/windres.exe)
   add_custom_command(OUTPUT ${WINDOWS_RES_FILE}
   COMMAND ${CMAKE_RC_COMPILER} ${RC_FLAGS} ${WINDOWS_RC_FILE} ${WINDOWS_RES_FILE}
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/resources

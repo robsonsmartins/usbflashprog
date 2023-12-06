@@ -128,23 +128,23 @@ void MainWindow::on_cbSize_activated(int index) {
 }
 
 void MainWindow::on_btnPCB3_clicked() {
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB3_PROGRAM));
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB45_PROGRAM));
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB50_PROGRAM));
+    QProcess::execute(QString("taskkill"), QStringList({"/im",  PCB3_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB45_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB50_PROGRAM, "/f"}));
     runExecutable_(PCB3_PROGRAM);
 }
 
 void MainWindow::on_btnPCB45_clicked() {
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB3_PROGRAM));
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB45_PROGRAM));
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB50_PROGRAM));
+    QProcess::execute(QString("taskkill"), QStringList({"/im",  PCB3_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB45_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB50_PROGRAM, "/f"}));
     runExecutable_(PCB45_PROGRAM);
 }
 
 void MainWindow::on_btnPCB50_clicked() {
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB3_PROGRAM));
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB45_PROGRAM));
-    QProcess::execute(QString("taskkill /im %1 /f").arg(PCB50_PROGRAM));
+    QProcess::execute(QString("taskkill"), QStringList({"/im",  PCB3_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB45_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB50_PROGRAM, "/f"}));
     runExecutable_(PCB50_PROGRAM);
 }
 
@@ -213,9 +213,10 @@ void MainWindow::loadSettings_() {
 }
 
 void MainWindow::runExecutable_(const QString &filename) {
-    QString cmd = "cmd /k ";
-    cmd.append(QCoreApplication::applicationDirPath().append("/"));
-    cmd.append(filename);
-    process_->startDetached(cmd);
+    QString cmd = "cmd";
+    QStringList args = {"/k"};
+    args.append(QCoreApplication::applicationDirPath().append("/"));
+    args.append(filename);
+    process_->startDetached(cmd, args);
     process_->waitForStarted();
 }

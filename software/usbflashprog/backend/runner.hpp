@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/runner.hpp
  * @brief Header of the Runner Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -26,10 +26,10 @@
 #include <QByteArray>
 
 #ifndef TEST_BUILD
-#  include <QSerialPort>
-#  include <QSerialPortInfo>
+#include <QSerialPort>
+#include <QSerialPortInfo>
 #else
-#  include "test/mock/qserialport.hpp"
+#include "test/mock/qserialport.hpp"
 #endif
 
 #include "backend/opcodes.hpp"
@@ -38,7 +38,7 @@
 
 /**
  * @ingroup Software
- * @brief List of serial ports info. 
+ * @brief List of serial ports info.
  */
 typedef QList<QSerialPortInfo> TSerialPortList;
 
@@ -46,7 +46,7 @@ typedef QList<QSerialPortInfo> TSerialPortList;
 
 /**
  * @ingroup Software
- * @brief Defines a command to be run and its response. 
+ * @brief Defines a command to be run and its response.
  */
 typedef struct TRunnerCommand {
     /** @brief Opcode of the command. */
@@ -144,15 +144,15 @@ typedef struct TRunnerCommand {
  *   via USB-CDC.
  * @nosubgrouping
  */
-class Runner: public QObject {
+class Runner : public QObject {
     Q_OBJECT
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
      */
-    explicit Runner(QObject *parent = nullptr);
+    explicit Runner(QObject* parent = nullptr);
     /** @brief Destructor. */
     ~Runner();
     /**
@@ -165,7 +165,7 @@ class Runner: public QObject {
      * @param path Path of the serial port (system dependent).
      * @return True if success, false otherwise.
      */
-    bool open(const QString &path);
+    bool open(const QString& path);
     /** @brief Closes an opened serial port. */
     void close();
     /**
@@ -173,6 +173,11 @@ class Runner: public QObject {
      * @return True if a serial port is opened, false otherwise.
      */
     bool isOpen() const;
+    /**
+     * @brief Returns if an error was occurred.
+     * @return True if an error was occurred, false otherwise.
+     */
+    bool hasError() const;
     /**
      * @brief Returns the current opened serial port path (if any).
      * @return Path of opened serial port, or empty if none.
@@ -354,6 +359,11 @@ class Runner: public QObject {
      */
     bool addrSetW(uint16_t value);
     /**
+     * @brief Returns the last address.
+     * @return The last address value.
+     */
+    uint32_t addrGet() const;
+    /**
      * @brief Runs the Data Clear opcode.
      * @return True if success, false otherwise.
      */
@@ -393,7 +403,7 @@ class Runner: public QObject {
      */
     static void msDelay(uint32_t value);
 
- private:
+  private:
     /* @brief Command timeout, in msec. */
     uint32_t timeout_;
     /* @brief Stores if is running. */
@@ -402,15 +412,19 @@ class Runner: public QObject {
     QSerialPort serial_;
     /* @brief Tickcounter used by alive timer. */
     qint64 aliveTick_;
+    /* @brief Stores the last address. */
+    uint32_t address_;
+    /* @brief Indicates if an error occurred in the last operation. */
+    bool error_;
     /* @brief Sends data via serial port.
-     * @param data Data to send. 
+     * @param data Data to send.
      * @return True if success, false otherwise. */
-    bool write_(const QByteArray &data);
+    bool write_(const QByteArray& data);
     /* @brief Receives data via serial port.
      * @param data Pointer to QByteArray to receive data.
      * @param size Size of data to receive.
      * @return True if success, false otherwise. */
-    bool read_(QByteArray *data, uint32_t size);
+    bool read_(QByteArray* data, uint32_t size);
     /* @brief Checks if is alive (or timeout). */
     void checkAlive_();
 };

@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup UnitTests
  * @file test/backend/opcodes_test.hpp
  * @brief Header of Unit Test for OpCode Handling Classes.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -29,15 +29,15 @@
  * @nosubgrouping
  */
 class OpCodeTest : public testing::Test {
- protected:
-  /** @brief Constructor. */
-  OpCodeTest() {}
-  /** @brief Destructor. */
-  ~OpCodeTest() override {}
-  /** @brief Sets Up the test. */
-  void SetUp() override {}
-  /** @brief Teardown of the test. */
-  void TearDown() override {}
+  protected:
+    /** @brief Constructor. */
+    OpCodeTest() {}
+    /** @brief Destructor. */
+    ~OpCodeTest() override {}
+    /** @brief Sets Up the test. */
+    void SetUp() override {}
+    /** @brief Teardown of the test. */
+    void TearDown() override {}
 };
 
 #endif  // TEST_BACKEND_OPCODES_TEST_HPP_

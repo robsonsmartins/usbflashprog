@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/epromfile/qsrecfile.hpp
  * @brief Header of the QSrecFile Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -31,10 +31,10 @@
  *   file, in Motorola SREC (S19, S28, S37) format.
  * @nosubgrouping
  */
-class QSrecFile: public QEpromFileBase {
+class QSrecFile : public QEpromFileBase {
     Q_OBJECT
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object (default = nullptr).
@@ -61,8 +61,8 @@ class QSrecFile: public QEpromFileBase {
      * @param data Data to write.
      * @return True if success, false otherwise.
      */
-    bool write(QEpromFileType type,
-               const QString &filename, const QByteArray &data);
+    bool write(QEpromFileType type, const QString &filename,
+               const QByteArray &data);
 };
 
 #endif  // BACKEND_EPROMFILE_QSRECFILE_HPP_

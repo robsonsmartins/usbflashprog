@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file ui/qhexeditor.cpp
  * @brief Implementation of the QHexEditor Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -26,30 +26,35 @@
 // ---------------------------------------------------------------------------
 
 QHexEditor::QHexEditor(QWidget *parent)
-        : QHexView(parent), changed_(false), filename_(""),
-          size_(0), type_(QEpromFile::EpromFileBin), mode_(Mode8Bits) {
+    : QHexView(parent),
+      changed_(false),
+      filename_(""),
+      size_(0),
+      type_(QEpromFile::EpromFileBin),
+      mode_(Mode8Bits) {
     QFont font = this->font();
     font.setPointSize(10);
     this->setFont(font);
     this->setSizePolicy(QSizePolicy::Policy::Expanding,
-        QSizePolicy::Policy::Expanding);
+                        QSizePolicy::Policy::Expanding);
     QHexOptions options;
     options.addresswidth = 5;
     options.asciilabel = "ASCII";
     options.headercolor = Qt::black;
-    options.flags = QHexFlags::Styled | QHexFlags::Separators
-        | QHexFlags::HighlightAddress | QHexFlags::HighlightColumn;
+    options.flags = QHexFlags::Styled | QHexFlags::Separators |
+                    QHexFlags::HighlightAddress | QHexFlags::HighlightColumn;
     this->setOptions(options);
     setSize(1024);
     connect(this, &QHexView::dataChanged, this, &QHexEditor::onDataChanged);
 }
 
-bool QHexEditor::open(const QString& filename) {
+bool QHexEditor::open(const QString &filename) {
     QEpromFile file;
     QByteArray data = file.read(filename, size_);
-    if (data.isEmpty()) { return false; }
-    QHexDocument *document =
-        QHexDocument::fromMemory<QMemoryBuffer>(data);
+    if (data.isEmpty()) {
+        return false;
+    }
+    QHexDocument *document = QHexDocument::fromMemory<QMemoryBuffer>(data);
     this->setDocument(document);
     filename_ = filename;
     changed_ = false;
@@ -59,17 +64,21 @@ bool QHexEditor::open(const QString& filename) {
 }
 
 bool QHexEditor::save(void) {
-    if (filename_.isEmpty()) { return false; }
+    if (filename_.isEmpty()) {
+        return false;
+    }
     return saveAs(type_, filename_);
 }
 
 bool QHexEditor::saveAs(QEpromFile::QEpromFileType type,
-                        const QString& filename) {
+                        const QString &filename) {
     QHexDocument *document = this->hexDocument();
     QByteArray data = document->read(0, static_cast<int>(document->length()));
     QEpromFile file;
     bool ret = file.write(type, filename, data);
-    if (!ret) { return false; }
+    if (!ret) {
+        return false;
+    }
     filename_ = file.getFilename();
     changed_ = false;
     type_ = type;
@@ -79,8 +88,7 @@ bool QHexEditor::saveAs(QEpromFile::QEpromFileType type,
 
 void QHexEditor::fill(quint8 value) {
     QByteArray data = QByteArray(size_, value);
-    QHexDocument *document =
-        QHexDocument::fromMemory<QMemoryBuffer>(data);
+    QHexDocument *document = QHexDocument::fromMemory<QMemoryBuffer>(data);
     this->setDocument(document);
     changed_ = true;
     emit changed(true);
@@ -91,20 +99,21 @@ void QHexEditor::random(void) {
     for (qint32 i = 0; i < size_; i++) {
         data += (QRandomGenerator::global()->bounded(256) & 0xFF);
     }
-    QHexDocument *document =
-        QHexDocument::fromMemory<QMemoryBuffer>(data);
+    QHexDocument *document = QHexDocument::fromMemory<QMemoryBuffer>(data);
     this->setDocument(document);
     changed_ = true;
     emit changed(true);
 }
 
 void QHexEditor::setSize(qint32 value) {
-    if (value == size_) { return; }
+    if (value == size_) {
+        return;
+    }
     QHexDocument *document = this->hexDocument();
     QByteArray data;
     if (document != nullptr) {
-        int len = 
-            static_cast<int>(document->length() < value ? document->length() : value);
+        int len = static_cast<int>(
+            document->length() < value ? document->length() : value);
         data = document->read(0, len);
     }
     if (data.size() < value) {
@@ -115,58 +124,48 @@ void QHexEditor::setSize(qint32 value) {
     size_ = value;
 }
 
-qint32 QHexEditor::size(void) const {
-    return size_;
-}
+qint32 QHexEditor::size(void) const { return size_; }
 
 void QHexEditor::setMode(QHexEditorMode mode) {
     mode_ = mode;
     switch (mode_) {
-        case Mode32Bits:
-            setGroupLength(4);
-            break;
-        case Mode16Bits:
-            setGroupLength(2);
-            break;
-        case Mode8Bits:
-        default:
-            setGroupLength(1);
-            break;
+    case Mode32Bits:
+        setGroupLength(4);
+        break;
+    case Mode16Bits:
+        setGroupLength(2);
+        break;
+    case Mode8Bits:
+    default:
+        setGroupLength(1);
+        break;
     }
 }
 
-QHexEditor::QHexEditorMode QHexEditor::mode(void) const {
-    return mode_;
-}
+QHexEditor::QHexEditorMode QHexEditor::mode(void) const { return mode_; }
 
-const QString& QHexEditor::filename(void) const {
-    return filename_;
-}
+const QString &QHexEditor::filename(void) const { return filename_; }
 
-bool QHexEditor::isChanged(void) const {
-    return changed_;
-}
+bool QHexEditor::isChanged(void) const { return changed_; }
 
 void QHexEditor::showFindDialog(void) {
     HexFindDialog dialog(HexFindDialog::Type::Find, this);
-    dialog.setWindowFlags(
-        dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    dialog.setWindowFlags(dialog.windowFlags() &
+                          ~Qt::WindowContextHelpButtonHint);
     dialog.exec();
 }
 
 void QHexEditor::showReplaceDialog(void) {
     HexFindDialog dialog(HexFindDialog::Type::Replace, this);
-    dialog.setWindowFlags(
-        dialog.windowFlags() & ~Qt::WindowContextHelpButtonHint);
+    dialog.setWindowFlags(dialog.windowFlags() &
+                          ~Qt::WindowContextHelpButtonHint);
     dialog.exec();
 }
 
-void QHexEditor::onDataChanged(const QByteArray& data, quint32 offset,
+void QHexEditor::onDataChanged(const QByteArray &data, quint32 offset,
                                QHexDocument::ChangeReason reason) {
     changed_ = true;
     emit changed();
 }
 
-void QHexEditor::setGroupLength(unsigned int l) {
-    QHexView::setGroupLength(l);
-}
+void QHexEditor::setGroupLength(unsigned int l) { QHexView::setGroupLength(l); }

@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/epromfile/qatmelfile.hpp
  * @brief Header of the QAtmelFile Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -31,10 +31,10 @@
  *   file, in Atmel Generic format.
  * @nosubgrouping
  */
-class QAtmelFile: public QEpromFileBase {
+class QAtmelFile : public QEpromFileBase {
     Q_OBJECT
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object (default = nullptr).
@@ -61,8 +61,8 @@ class QAtmelFile: public QEpromFileBase {
      * @param data Data to write.
      * @return True if success, false otherwise.
      */
-    bool write(QEpromFileType type,
-               const QString &filename, const QByteArray &data);
+    bool write(QEpromFileType type, const QString &filename,
+               const QByteArray &data);
 };
 
 #endif  // BACKEND_EPROMFILE_QATMELFILE_HPP_

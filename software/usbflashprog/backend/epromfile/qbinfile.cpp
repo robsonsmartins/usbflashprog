@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/epromfile/qbinfile.cpp
  * @brief Implementation of the QBinFile Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -20,7 +20,7 @@
 
 // ---------------------------------------------------------------------------
 
-QBinFile::QBinFile(QObject *parent): QEpromFileBase(parent) {}
+QBinFile::QBinFile(QObject *parent) : QEpromFileBase(parent) {}
 
 bool QBinFile::isReadable(const QString &filename) {
     QFile file(filename);
@@ -53,8 +53,8 @@ QByteArray QBinFile::read(const QString &filename, qint32 size) {
     return result;
 }
 
-bool QBinFile::write(QEpromFileType type,
-                     const QString &filename, const QByteArray &data) {
+bool QBinFile::write(QEpromFileType type, const QString &filename,
+                     const QByteArray &data) {
     (void)type;
     QFile file(filename);
     if (!file.open(QIODevice::ReadWrite)) {

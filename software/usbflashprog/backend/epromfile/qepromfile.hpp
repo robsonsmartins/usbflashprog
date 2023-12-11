@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/epromfile/qepromfile.hpp
  * @brief Header of the QEpromFile Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -35,10 +35,10 @@
  * @details The purpose of this class is to manage all EPROM File formats.
  * @nosubgrouping
  */
-class QEpromFile: public QEpromFileBase {
-     Q_OBJECT
+class QEpromFile : public QEpromFileBase {
+    Q_OBJECT
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object (default = nullptr).
@@ -49,7 +49,7 @@ class QEpromFile: public QEpromFileBase {
      * @param src The source string.
      * @return Type of the file.
      */
-    static QEpromFileType typeFromStr(const QString& src);
+    static QEpromFileType typeFromStr(const QString &src);
     /**
      * @brief Reads data from a file.
      * @param filename Filename (with path).
@@ -65,10 +65,10 @@ class QEpromFile: public QEpromFileBase {
      * @param data Data to write.
      * @return True if success, false otherwise.
      */
-    bool write(QEpromFileType type,
-               const QString &filename, const QByteArray &data);
+    bool write(QEpromFileType type, const QString &filename,
+               const QByteArray &data);
 
- private:
+  private:
     /* @brief Pointer to Eprom File manager. */
     QScopedPointer<QEpromFileBase> eepromFile_;
 };

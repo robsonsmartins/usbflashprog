@@ -6,16 +6,16 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @defgroup UnitTests Unit Tests
  * @brief    Unit Tests for USB EPROM/Flash Programmer software project.
  */
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup UnitTests
  * @file test/main.cpp
  * @brief Implementation of the Unit Tests Main Routine.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -34,11 +34,11 @@
  * @return Error code (zero if success).
  */
 int main(int argc, char **argv) {
-  QCoreApplication app{argc, argv};
-  QTimer::singleShot(0, [&]() {
-    ::testing::InitGoogleTest(&argc, argv);
-    auto testResult = RUN_ALL_TESTS();
-    app.exit(testResult);
-  });
-  return app.exec();
+    QCoreApplication app{argc, argv};
+    QTimer::singleShot(0, [&]() {
+        ::testing::InitGoogleTest(&argc, argv);
+        auto testResult = RUN_ALL_TESTS();
+        app.exit(testResult);
+    });
+    return app.exec();
 }

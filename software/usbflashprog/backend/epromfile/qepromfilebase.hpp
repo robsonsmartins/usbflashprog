@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/epromfile/qepromfilebase.hpp
  * @brief Header of the QEpromFileBase Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -29,14 +29,14 @@
 /**
  * @ingroup Software
  * @brief QEpromFileBase Class
- * @details The purpose of this class is to be an interface to all the 
+ * @details The purpose of this class is to be an interface to all the
  *   EPROM File Manipulator classes.
  * @nosubgrouping
  */
-class QEpromFileBase: public QObject {
+class QEpromFileBase : public QObject {
     Q_OBJECT
 
- public:
+  public:
     /**
      * @brief Eprom File Types.
      */
@@ -51,7 +51,7 @@ class QEpromFileBase: public QObject {
         EpromFileAtmel
     };
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object (default = nullptr).
@@ -78,8 +78,8 @@ class QEpromFileBase: public QObject {
      * @param data Data to write.
      * @return True if success, false otherwise.
      */
-    virtual bool write(QEpromFileType type,
-                       const QString &filename, const QByteArray &data) = 0;
+    virtual bool write(QEpromFileType type, const QString &filename,
+                       const QByteArray &data) = 0;
     /**
      * @brief Gets the filename used to read or write the file.
      * @return The filename, or empty if file wasn't saved/opened yet.
@@ -91,7 +91,7 @@ class QEpromFileBase: public QObject {
      */
     virtual QEpromFileType getType(void) const;
 
- protected:
+  protected:
     /* @brief File type. */
     QEpromFileType type_;
     /* @brief Filename. */

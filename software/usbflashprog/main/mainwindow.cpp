@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file main/mainwindow.cpp
  * @brief Implementation of the Main Window Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -27,24 +27,32 @@
 #include <QDesktopServices>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QMenu>
+#include <QAction>
 
 #include <cstdio>
 #include <cstring>
 #include <string>
 #include <locale>
+#include <cmath>
 
 #include "mainwindow.hpp"
 #include "config.hpp"
 #include "./ui_mainwindow.h"
 #include "backend/opcodes.hpp"
 
+#include "backend/devices/parallel/sram.hpp"
+
 // ---------------------------------------------------------------------------
 // General
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui_(new Ui::MainWindow), runner_(this), enumTimer_(this),
-        refreshTimer_(this) {
+    : QMainWindow(parent),
+      ui_(new Ui::MainWindow),
+      runner_(this),
+      enumTimer_(this),
+      refreshTimer_(this),
+      device_(nullptr) {
     ui_->setupUi(this);
     refreshPortComboBox_();
     ui_->frameVdd->setEnabled(false);
@@ -52,12 +60,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui_->frameBusCtrl->setEnabled(false);
     ui_->frameBusAddr->setEnabled(false);
     ui_->frameBusData->setEnabled(false);
-    this->setGeometry(
-        QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            this->size(),
-            screen()->availableGeometry()));
+    this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
+                                          this->size(),
+                                          screen()->availableGeometry()));
     QFont font = ui_->spinBoxAddr->font();
     font.setCapitalization(QFont::AllUppercase);
     ui_->spinBoxAddr->setFont(font);
@@ -65,123 +70,133 @@ MainWindow::MainWindow(QWidget *parent)
     font.setCapitalization(QFont::AllUppercase);
     ui_->spinBoxData->setFont(font);
 
-    hexeditor_ = new QHexEditor(ui_->tabBuffer);
-    ui_->tabBuffer->layout()->addWidget(hexeditor_);
+    hexeditor_ = new QHexEditor(ui_->frameEditor);
+    ui_->frameEditor->layout()->addWidget(hexeditor_);
     ui_->actionSave->setEnabled(false);
 
     connectSignals_();
     enableDiagControls_(false);
+    enumTimer_.start(kUsbEnumerateInterval);
 }
 
 void MainWindow::connectSignals_() {
-    connect(&enumTimer_, &QTimer::timeout,
-            this, &MainWindow::onEnumTimerTimeout);
-    connect(&refreshTimer_, &QTimer::timeout,
-            this, &MainWindow::onRefreshTimerTimeout);
-    connect(ui_->checkBoxA0, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA1, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA2, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA3, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA4, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA5, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA6, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA7, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA8, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA9, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA10, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA11, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA12, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA13, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA14, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA15, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA16, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA17, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA18, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA19, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA20, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA21, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA22, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxA23, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxAddressToggled);
-    connect(ui_->checkBoxD0, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD1, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD2, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD3, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD4, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD5, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD6, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD7, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD8, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD9, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD10, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD11, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD12, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD13, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD14, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(ui_->checkBoxD15, &QCheckBox::toggled,
-            this, &MainWindow::onCheckBoxDataToggled);
-    connect(hexeditor_, &QHexEditor::changed,
-            this, &MainWindow::onDataChanged);
+    connect(&enumTimer_, &QTimer::timeout, this,
+            &MainWindow::onEnumTimerTimeout);
+    connect(ui_->btnProgDevice, &QPushButton::clicked, this,
+            &MainWindow::onBtnSelectDeviceClicked);
+    for (QMenu *submenu : ui_->menuDevice->findChildren<QMenu *>()) {
+        for (QAction *action : submenu->actions()) {
+            connect(action, &QAction::triggered, this,
+                    &MainWindow::onSelectDeviceTriggered);
+        }
+    }
+    // diag
+    connect(&refreshTimer_, &QTimer::timeout, this,
+            &MainWindow::onRefreshTimerTimeout);
+    connect(ui_->checkBoxA0, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA1, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA2, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA3, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA4, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA5, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA6, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA7, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA8, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA9, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA10, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA11, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA12, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA13, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA14, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA15, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA16, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA17, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA18, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA19, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA20, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA21, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA22, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxA23, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxAddressToggled);
+    connect(ui_->checkBoxD0, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD1, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD2, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD3, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD4, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD5, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD6, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD7, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD8, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD9, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD10, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD11, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD12, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD13, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD14, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    connect(ui_->checkBoxD15, &QCheckBox::toggled, this,
+            &MainWindow::onCheckBoxDataToggled);
+    // editor
+    connect(hexeditor_, &QHexEditor::changed, this, &MainWindow::onDataChanged);
 }
 
 MainWindow::~MainWindow() {
     delete ui_;
+    if (device_) {
+        delete device_;
+    }
 }
 
-QScreen* MainWindow::screen() const {
+QScreen *MainWindow::screen() const {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     return QGuiApplication::primaryScreen();
 #else
-    return QGuiApplication::screenAt(
-        this->mapToGlobal({this->width() / 2, 0}));
+    return QGuiApplication::screenAt(this->mapToGlobal({this->width() / 2, 0}));
 #endif
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index) {
     if (ui_->tabWidget->currentWidget() == ui_->tabDiagnostics) {
-        enumTimer_.start(kUsbEnumerateInterval);
         enableEditorControls_(false);
     } else {
         connect_(false);
-        enumTimer_.stop();
         enableEditorControls_(true);
     }
 }
@@ -199,14 +214,14 @@ void MainWindow::on_actionExit_triggered(bool checked) {
 }
 
 void MainWindow::on_actionAbout_triggered(bool checked) {
-    QMessageBox::about(this,
-        tr("USB Flash/EPROM Programmer"),
+    QMessageBox::about(
+        this, tr("USB Flash/EPROM Programmer"),
         tr("A memory device programmer (Flash/EPROM/E2PROM) board and software,"
-           "connected to PC by USB port.") + "\n\n" +
-        tr("Version") + " " + kAppVersion + "\n\n" +
-        tr("Project Home Page") + ": " + QString(kProjectHomePage) + "\n" +
-        tr("Author") + ": " + QString(kAuthorName) +
-            " (" + QString(kAuthorHomePage) + ")");
+           "connected to PC by USB port.") +
+            "\n\n" + tr("Version") + " " + kAppVersion + "\n\n" +
+            tr("Project Home Page") + ": " + QString(kProjectHomePage) + "\n" +
+            tr("Author") + ": " + QString(kAuthorName) + " (" +
+            QString(kAuthorHomePage) + ")");
 }
 
 void MainWindow::on_actionAboutQt_triggered(bool checked) {
@@ -232,14 +247,144 @@ void MainWindow::closeEvent(QCloseEvent *event) {
         }
     }
     closing = true;
-    if (!readyToClose) { event->ignore(); }
+    if (!readyToClose) {
+        event->ignore();
+    }
     connect_(false);
-    QTimer::singleShot(500, this,
-        [this]{
-            readyToClose = true;
-            this->close();
-        });
+    QTimer::singleShot(500, this, [this] {
+        readyToClose = true;
+        this->close();
+    });
     enumTimer_.stop();
+}
+
+void MainWindow::onEnumTimerTimeout() {
+    refreshPortComboBox_();
+}
+
+void MainWindow::onBtnSelectDeviceClicked(bool checked) {
+    QPoint globalPos = ui_->btnProgDevice->mapToGlobal(
+        QPoint(0, ui_->btnProgDevice->height()));
+    ui_->menuDevice->exec(globalPos);
+}
+
+void MainWindow::onSelectDeviceTriggered(bool checked) {
+    QAction *action = qobject_cast<QAction *>(sender());
+    ui_->btnProgDevice->setText(action->text());
+    if (device_) {
+        delete device_;
+    }
+    createDeviceIfSRAM_(action->text());
+    configureProgControls_();
+}
+
+void MainWindow::createDeviceIfSRAM_(const QString &label) {
+    uint32_t size = 0;
+    bool found = false;
+    if (label == ui_->actionSRAM2K->text()) {
+        found = true;
+        size = 2 * 1024;
+    } else if (label == ui_->actionSRAM8K->text()) {
+        found = true;
+        size = 8 * 1024;
+    } else if (label == ui_->actionSRAM16K->text()) {
+        found = true;
+        size = 16 * 1024;
+    } else if (label == ui_->actionSRAM32K->text()) {
+        found = true;
+        size = 32 * 1024;
+    } else if (label == ui_->actionSRAM64K->text()) {
+        found = true;
+        size = 64 * 1024;
+    } else if (label == ui_->actionSRAM128K->text()) {
+        found = true;
+        size = 128 * 1024;
+    } else if (label == ui_->actionSRAM512K->text()) {
+        found = true;
+        size = 512 * 1024;
+    }
+    if (found) {
+        device_ = new SRAM(this);
+        device_->setSize(size);
+        ui_->actionDoProgram->setText(tr("Test SRAM"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+    }
+}
+
+void MainWindow::configureProgControls_() {
+    TDeviceInformation info = device_->getInfo();
+    TDeviceCapabilities capability = info.capability;
+    bool port = !ui_->comboBoxProgPort->currentText().isEmpty();
+
+    ui_->checkBoxProgFast->setEnabled(capability.hasFastProg && port);
+    ui_->checkBoxProgSkipFF->setEnabled(capability.hasSkipFF && port);
+    ui_->comboBoxProgSectorSize->setEnabled(capability.hasSectorSize && port);
+    ui_->labelProgSectorSize->setEnabled(capability.hasSectorSize && port);
+    ui_->actionRead->setEnabled(capability.hasRead && port);
+    ui_->menuProgram->setEnabled(capability.hasProgram && port);
+    ui_->actionDoProgram->setEnabled(capability.hasProgram && port);
+    ui_->actionProgramAndVerify->setEnabled(capability.hasProgram &&
+                                            capability.hasVerify && port);
+    ui_->actionVerify->setEnabled(capability.hasVerify && port);
+    ui_->menuErase->setEnabled(capability.hasErase && port);
+    ui_->actionDoErase->setEnabled(capability.hasErase && port);
+    ui_->actionEraseAndBlankCheck->setEnabled(capability.hasErase &&
+                                              capability.hasBlankCheck && port);
+    ui_->actionBlankCheck->setEnabled(capability.hasBlankCheck && port);
+    ui_->actionGetID->setEnabled(capability.hasGetId && port);
+    ui_->actionUnprotect->setEnabled(capability.hasUnprotect && port);
+
+    ui_->btnRead->setEnabled(capability.hasRead && port);
+    ui_->btnProgram->setEnabled(capability.hasProgram && port);
+    ui_->btnVerify->setEnabled(capability.hasVerify && port);
+    ui_->btnErase->setEnabled(capability.hasErase && port);
+    ui_->btnBlankCheck->setEnabled(capability.hasBlankCheck && port);
+    ui_->btnGetID->setEnabled(capability.hasGetId && port);
+    ui_->btnUnprotect->setEnabled(capability.hasUnprotect && port);
+
+    ui_->spinBoxProgTWP->setValue(device_->getTwp());
+    ui_->spinBoxProgTWC->setValue(device_->getTwc());
+    ui_->checkBoxProgFast->setChecked(device_->getFastProg());
+    ui_->checkBoxProgSkipFF->setChecked(device_->getSkipFF());
+    int sectorSize = device_->getSectorSize();
+    int currentIndex = static_cast<int>(ceil(log2(sectorSize / 64.0)));
+    currentIndex = qMax(0, currentIndex);
+    currentIndex = qMin(ui_->comboBoxProgSectorSize->count() - 1, currentIndex);
+    ui_->comboBoxProgSectorSize->setCurrentIndex(currentIndex);
+}
+
+void MainWindow::refreshPortComboBox_() {
+    TSerialPortList list = runner_.list();
+    QStringList paths;
+    for (const auto item : list) {
+        paths.push_back(item.portName());
+    }
+    if (paths.length() != ui_->comboBoxPort->count()) {
+        ui_->comboBoxPort->clear();
+        ui_->comboBoxProgPort->clear();
+    }
+    bool found = false;
+    for (int i = 0; i < ui_->comboBoxPort->count(); i++) {
+        found = false;
+        for (const auto path : paths) {
+            if (ui_->comboBoxPort->itemText(i) == path) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            break;
+        }
+    }
+    if (!found) {
+        ui_->comboBoxPort->clear();
+        ui_->comboBoxProgPort->clear();
+        for (const auto path : paths) {
+            ui_->comboBoxPort->addItem(path);
+            ui_->comboBoxProgPort->addItem(path);
+        }
+    }
+    ui_->pushButtonConnect->setEnabled(!paths.empty());
 }
 
 // ---------------------------------------------------------------------------
@@ -254,161 +399,189 @@ void MainWindow::on_pushButtonConnect_clicked() {
 }
 
 void MainWindow::on_pushButtonVddInitCal_clicked() {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     enableDiagControls_(false);
     float measured = 0.0f;
     bool ok = runner_.vddInitCal();
     if (ok) {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-        measured = QInputDialog::getDouble(this,
-            tr("VDD Calibration"),
-            tr("Voltage measured on the VDD:"),
-            5.0f, 3.0f, 7.0f, 2, &ok,
-            Qt::WindowFlags());
+        measured = QInputDialog::getDouble(
+            this, tr("VDD Calibration"), tr("Voltage measured on the VDD:"),
+            5.0f, 3.0f, 7.0f, 2, &ok, Qt::WindowFlags());
 #else
-        measured = QInputDialog::getDouble(this,
-            tr("VDD Calibration"),
-            tr("Voltage measured on the VDD:"),
-            5.0f, 3.0f, 7.0f, 2, &ok,
-            Qt::WindowFlags(), 0.1f);
+        measured = QInputDialog::getDouble(
+            this, tr("VDD Calibration"), tr("Voltage measured on the VDD:"),
+            5.0f, 3.0f, 7.0f, 2, &ok, Qt::WindowFlags(), 0.1f);
 #endif
         if (ok) {
             ok = runner_.vddSaveCal(measured);
-        } else { ok = true; }
+        } else {
+            ok = true;
+        }
     }
     if (!ok) {
-        QMessageBox::critical(this,
-           tr("USB Flash/EPROM Programmer"),
-           tr("The device has been disconnected from the \"%1\" port.")
+        QMessageBox::critical(
+            this, tr("USB Flash/EPROM Programmer"),
+            tr("The device has been disconnected from the \"%1\" port.")
                 .arg(runner_.getPath()));
     }
     enableDiagControls_(true);
 }
 
 void MainWindow::on_pushButtonVppInitCal_clicked() {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     enableDiagControls_(false);
     float measured = 0.0f;
     bool ok = runner_.vppInitCal();
     if (ok) {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-        measured = QInputDialog::getDouble(this,
-            tr("VPP Calibration"),
-            tr("Voltage measured on the VPP:"),
-            12.0f, 10.0f, 14.0f, 2, &ok,
-            Qt::WindowFlags());
+        measured = QInputDialog::getDouble(
+            this, tr("VPP Calibration"), tr("Voltage measured on the VPP:"),
+            12.0f, 10.0f, 14.0f, 2, &ok, Qt::WindowFlags());
 #else
-        measured = QInputDialog::getDouble(this,
-            tr("VPP Calibration"),
-            tr("Voltage measured on the VPP:"),
-            12.0f, 10.0f, 14.0f, 2, &ok,
-            Qt::WindowFlags(), 0.1f);
+        measured = QInputDialog::getDouble(
+            this, tr("VPP Calibration"), tr("Voltage measured on the VPP:"),
+            12.0f, 10.0f, 14.0f, 2, &ok, Qt::WindowFlags(), 0.1f);
 #endif
         if (ok) {
             ok = runner_.vppSaveCal(measured);
-        } else { ok = true; }
+        } else {
+            ok = true;
+        }
     }
     if (!ok) {
-        QMessageBox::critical(this,
-           tr("USB Flash/EPROM Programmer"),
-           tr("The device has been disconnected from the \"%1\" port.")
+        QMessageBox::critical(
+            this, tr("USB Flash/EPROM Programmer"),
+            tr("The device has been disconnected from the \"%1\" port.")
                 .arg(runner_.getPath()));
     }
     enableDiagControls_(true);
 }
 
 void MainWindow::on_pushButtonSetData_clicked() {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     uint16_t data = ui_->spinBoxData->value();
     if (!runner_.dataSetW(data)) {
-        QMessageBox::critical(this,
-           tr("USB Flash/EPROM Programmer"),
-           tr("The device has been disconnected from the \"%1\" port.")
+        QMessageBox::critical(
+            this, tr("USB Flash/EPROM Programmer"),
+            tr("The device has been disconnected from the \"%1\" port.")
                 .arg(runner_.getPath()));
     }
 }
 
 void MainWindow::on_pushButtonGetData_clicked() {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     uint16_t value = runner_.dataGetW();
     ui_->spinBoxData->setValue(value);
 }
 
 void MainWindow::on_pushButtonSetAddr_clicked() {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     uint32_t data = ui_->spinBoxAddr->value();
     runner_.addrSet(data);
 }
 
 void MainWindow::on_checkBoxVddCtrl_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vddCtrl(checked);
 }
 
 void MainWindow::on_checkBoxVppCtrl_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vppCtrl(checked);
 }
 
 void MainWindow::on_checkBoxVddOnVpp_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vddOnVpp(checked);
 }
 
 void MainWindow::on_checkBoxVppOnA9_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vppOnA9(checked);
 }
 
 void MainWindow::on_checkBoxVppOnA18_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vppOnA18(checked);
 }
 
 void MainWindow::on_checkBoxVppOnCE_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vppOnCE(checked);
 }
 
 void MainWindow::on_checkBoxVppOnOE_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vppOnOE(checked);
 }
 
 void MainWindow::on_checkBoxVppOnWE_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.vppOnWE(checked);
 }
 
 void MainWindow::on_checkBoxCE_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.setCE(checked);
 }
 
 void MainWindow::on_checkBoxOE_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.setOE(checked);
 }
 
 void MainWindow::on_checkBoxWE_toggled(bool checked) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     runner_.setWE(checked);
 }
 
 void MainWindow::on_dialVdd_valueChanged(int value) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     float v = value / 10.0f;
     runner_.vddSet(v);
 }
 
 void MainWindow::on_dialVpp_valueChanged(int value) {
-    if (!runner_.isOpen()) { return; }
+    if (!runner_.isOpen()) {
+        return;
+    }
     float v = value / 10.0f;
     runner_.vppSet(v);
-}
-
-void MainWindow::onEnumTimerTimeout() {
-    refreshPortComboBox_();
 }
 
 void MainWindow::onRefreshTimerTimeout() {
@@ -417,29 +590,37 @@ void MainWindow::onRefreshTimerTimeout() {
         QString port = ui_->comboBoxPort->currentText();
         connect_(false);
         enableDiagControls_(false);
-        QMessageBox::critical(this,
-            tr("USB Flash/EPROM Programmer"),
+        QMessageBox::critical(
+            this, tr("USB Flash/EPROM Programmer"),
             tr("The device has been disconnected from the \"%1\" port.")
                 .arg(port));
         return;
     }
-    
+
     auto originalLocale = std::locale::global(std::locale::classic());
     char buffer[5];
     float value = runner_.vddGet();
-    if (value < 0.0f) { value = 0.0f; }
+    if (value < 0.0f) {
+        value = 0.0f;
+    }
     snprintf(buffer, sizeof(buffer), "%4.1f", value);
     ui_->lcdNumberVdd->display(QString(buffer));
     value = runner_.vppGet();
-    if (value < 0.0f) { value = 0.0f; }
+    if (value < 0.0f) {
+        value = 0.0f;
+    }
     snprintf(buffer, sizeof(buffer), "%4.1f", value);
     ui_->lcdNumberVpp->display(QString(buffer));
     value = runner_.vddGetDuty();
-    if (value < 0.0f) { value = 0.0f; }
+    if (value < 0.0f) {
+        value = 0.0f;
+    }
     snprintf(buffer, sizeof(buffer), "%4.1f", value);
     ui_->lcdNumberVddDuty->display(QString(buffer));
     value = runner_.vppGetDuty();
-    if (value < 0.0f) { value = 0.0f; }
+    if (value < 0.0f) {
+        value = 0.0f;
+    }
     snprintf(buffer, sizeof(buffer), "%4.1f", value);
     ui_->lcdNumberVppDuty->display(QString(buffer));
     std::locale::global(originalLocale);
@@ -461,35 +642,6 @@ void MainWindow::on_spinBoxData_valueChanged(int value) {
     dataHexToBin_();
 }
 
-void MainWindow::refreshPortComboBox_() {
-    TSerialPortList list = runner_.list();
-    QStringList paths;
-    for (const auto item : list) {
-        paths.push_back(item.portName());
-    }
-    if (paths.length() != ui_->comboBoxPort->count()) {
-        ui_->comboBoxPort->clear();
-    }
-    bool found = false;
-    for (int i = 0; i < ui_->comboBoxPort->count(); i++) {
-        found = false;
-        for (const auto path : paths) {
-            if (ui_->comboBoxPort->itemText(i) == path) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) { break; }
-    }
-    if (!found) {
-        ui_->comboBoxPort->clear();
-        for (const auto path : paths) {
-            ui_->comboBoxPort->addItem(path);
-        }
-    }
-    ui_->pushButtonConnect->setEnabled(!paths.empty());
-}
-
 void MainWindow::connect_(bool state) {
     if (state) {
         if (runner_.open(ui_->comboBoxPort->currentText())) {
@@ -499,10 +651,9 @@ void MainWindow::connect_(bool state) {
             enumTimer_.stop();
             refreshTimer_.start(kUsbRefreshInterval);
         } else {
-            QMessageBox::critical(this,
-                tr("USB Flash/EPROM Programmer"),
-                tr("Error opening the \"%1\" port.")
-                    .arg(ui_->comboBoxPort->currentText()));
+            QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
+                                  tr("Error opening the \"%1\" port.")
+                                      .arg(ui_->comboBoxPort->currentText()));
         }
     }
     if (runner_.isOpen()) {
@@ -521,11 +672,10 @@ void MainWindow::connect_(bool state) {
     if (!state) {
         refreshTimer_.stop();
         if (runner_.isOpen()) {
-            QTimer::singleShot(500, this,
-                [this]{
-                    runner_.close();
-                    enableDiagControls_(false);
-                });
+            QTimer::singleShot(500, this, [this] {
+                runner_.close();
+                enableDiagControls_(false);
+            });
         }
         enumTimer_.start();
     }
@@ -579,46 +729,45 @@ void MainWindow::enableDiagControls_(bool state) {
 }
 
 void MainWindow::addressBinToHex_() {
-    int value =
-        (ui_->checkBoxA0->isChecked()  ?       1 : 0) |
-        (ui_->checkBoxA1->isChecked()  ? 1 <<  1 : 0) |
-        (ui_->checkBoxA2->isChecked()  ? 1 <<  2 : 0) |
-        (ui_->checkBoxA3->isChecked()  ? 1 <<  3 : 0) |
-        (ui_->checkBoxA4->isChecked()  ? 1 <<  4 : 0) |
-        (ui_->checkBoxA5->isChecked()  ? 1 <<  5 : 0) |
-        (ui_->checkBoxA6->isChecked()  ? 1 <<  6 : 0) |
-        (ui_->checkBoxA7->isChecked()  ? 1 <<  7 : 0) |
-        (ui_->checkBoxA8->isChecked()  ? 1 <<  8 : 0) |
-        (ui_->checkBoxA9->isChecked()  ? 1 <<  9 : 0) |
-        (ui_->checkBoxA10->isChecked() ? 1 << 10 : 0) |
-        (ui_->checkBoxA11->isChecked() ? 1 << 11 : 0) |
-        (ui_->checkBoxA12->isChecked() ? 1 << 12 : 0) |
-        (ui_->checkBoxA13->isChecked() ? 1 << 13 : 0) |
-        (ui_->checkBoxA14->isChecked() ? 1 << 14 : 0) |
-        (ui_->checkBoxA15->isChecked() ? 1 << 15 : 0) |
-        (ui_->checkBoxA16->isChecked() ? 1 << 16 : 0) |
-        (ui_->checkBoxA17->isChecked() ? 1 << 17 : 0) |
-        (ui_->checkBoxA18->isChecked() ? 1 << 18 : 0) |
-        (ui_->checkBoxA19->isChecked() ? 1 << 19 : 0) |
-        (ui_->checkBoxA20->isChecked() ? 1 << 20 : 0) |
-        (ui_->checkBoxA21->isChecked() ? 1 << 21 : 0) |
-        (ui_->checkBoxA22->isChecked() ? 1 << 22 : 0) |
-        (ui_->checkBoxA23->isChecked() ? 1 << 23 : 0);
+    int value = (ui_->checkBoxA0->isChecked() ? 1 : 0) |
+                (ui_->checkBoxA1->isChecked() ? 1 << 1 : 0) |
+                (ui_->checkBoxA2->isChecked() ? 1 << 2 : 0) |
+                (ui_->checkBoxA3->isChecked() ? 1 << 3 : 0) |
+                (ui_->checkBoxA4->isChecked() ? 1 << 4 : 0) |
+                (ui_->checkBoxA5->isChecked() ? 1 << 5 : 0) |
+                (ui_->checkBoxA6->isChecked() ? 1 << 6 : 0) |
+                (ui_->checkBoxA7->isChecked() ? 1 << 7 : 0) |
+                (ui_->checkBoxA8->isChecked() ? 1 << 8 : 0) |
+                (ui_->checkBoxA9->isChecked() ? 1 << 9 : 0) |
+                (ui_->checkBoxA10->isChecked() ? 1 << 10 : 0) |
+                (ui_->checkBoxA11->isChecked() ? 1 << 11 : 0) |
+                (ui_->checkBoxA12->isChecked() ? 1 << 12 : 0) |
+                (ui_->checkBoxA13->isChecked() ? 1 << 13 : 0) |
+                (ui_->checkBoxA14->isChecked() ? 1 << 14 : 0) |
+                (ui_->checkBoxA15->isChecked() ? 1 << 15 : 0) |
+                (ui_->checkBoxA16->isChecked() ? 1 << 16 : 0) |
+                (ui_->checkBoxA17->isChecked() ? 1 << 17 : 0) |
+                (ui_->checkBoxA18->isChecked() ? 1 << 18 : 0) |
+                (ui_->checkBoxA19->isChecked() ? 1 << 19 : 0) |
+                (ui_->checkBoxA20->isChecked() ? 1 << 20 : 0) |
+                (ui_->checkBoxA21->isChecked() ? 1 << 21 : 0) |
+                (ui_->checkBoxA22->isChecked() ? 1 << 22 : 0) |
+                (ui_->checkBoxA23->isChecked() ? 1 << 23 : 0);
     ui_->spinBoxAddr->setValue(value);
 }
 
 void MainWindow::addressHexToBin_() {
     int value = ui_->spinBoxAddr->value();
-    ui_->checkBoxA0 ->setChecked(value & (1 <<  0));
-    ui_->checkBoxA1 ->setChecked(value & (1 <<  1));
-    ui_->checkBoxA2 ->setChecked(value & (1 <<  2));
-    ui_->checkBoxA3 ->setChecked(value & (1 <<  3));
-    ui_->checkBoxA4 ->setChecked(value & (1 <<  4));
-    ui_->checkBoxA5 ->setChecked(value & (1 <<  5));
-    ui_->checkBoxA6 ->setChecked(value & (1 <<  6));
-    ui_->checkBoxA7 ->setChecked(value & (1 <<  7));
-    ui_->checkBoxA8 ->setChecked(value & (1 <<  8));
-    ui_->checkBoxA9 ->setChecked(value & (1 <<  9));
+    ui_->checkBoxA0->setChecked(value & (1 << 0));
+    ui_->checkBoxA1->setChecked(value & (1 << 1));
+    ui_->checkBoxA2->setChecked(value & (1 << 2));
+    ui_->checkBoxA3->setChecked(value & (1 << 3));
+    ui_->checkBoxA4->setChecked(value & (1 << 4));
+    ui_->checkBoxA5->setChecked(value & (1 << 5));
+    ui_->checkBoxA6->setChecked(value & (1 << 6));
+    ui_->checkBoxA7->setChecked(value & (1 << 7));
+    ui_->checkBoxA8->setChecked(value & (1 << 8));
+    ui_->checkBoxA9->setChecked(value & (1 << 9));
     ui_->checkBoxA10->setChecked(value & (1 << 10));
     ui_->checkBoxA11->setChecked(value & (1 << 11));
     ui_->checkBoxA12->setChecked(value & (1 << 12));
@@ -636,38 +785,37 @@ void MainWindow::addressHexToBin_() {
 }
 
 void MainWindow::dataBinToHex_() {
-    int value =
-        (ui_->checkBoxD0->isChecked()  ?       1 : 0) |
-        (ui_->checkBoxD1->isChecked()  ? 1 <<  1 : 0) |
-        (ui_->checkBoxD2->isChecked()  ? 1 <<  2 : 0) |
-        (ui_->checkBoxD3->isChecked()  ? 1 <<  3 : 0) |
-        (ui_->checkBoxD4->isChecked()  ? 1 <<  4 : 0) |
-        (ui_->checkBoxD5->isChecked()  ? 1 <<  5 : 0) |
-        (ui_->checkBoxD6->isChecked()  ? 1 <<  6 : 0) |
-        (ui_->checkBoxD7->isChecked()  ? 1 <<  7 : 0) |
-        (ui_->checkBoxD8->isChecked()  ? 1 <<  8 : 0) |
-        (ui_->checkBoxD9->isChecked()  ? 1 <<  9 : 0) |
-        (ui_->checkBoxD10->isChecked() ? 1 << 10 : 0) |
-        (ui_->checkBoxD11->isChecked() ? 1 << 11 : 0) |
-        (ui_->checkBoxD12->isChecked() ? 1 << 12 : 0) |
-        (ui_->checkBoxD13->isChecked() ? 1 << 13 : 0) |
-        (ui_->checkBoxD14->isChecked() ? 1 << 14 : 0) |
-        (ui_->checkBoxD15->isChecked() ? 1 << 15 : 0);
+    int value = (ui_->checkBoxD0->isChecked() ? 1 : 0) |
+                (ui_->checkBoxD1->isChecked() ? 1 << 1 : 0) |
+                (ui_->checkBoxD2->isChecked() ? 1 << 2 : 0) |
+                (ui_->checkBoxD3->isChecked() ? 1 << 3 : 0) |
+                (ui_->checkBoxD4->isChecked() ? 1 << 4 : 0) |
+                (ui_->checkBoxD5->isChecked() ? 1 << 5 : 0) |
+                (ui_->checkBoxD6->isChecked() ? 1 << 6 : 0) |
+                (ui_->checkBoxD7->isChecked() ? 1 << 7 : 0) |
+                (ui_->checkBoxD8->isChecked() ? 1 << 8 : 0) |
+                (ui_->checkBoxD9->isChecked() ? 1 << 9 : 0) |
+                (ui_->checkBoxD10->isChecked() ? 1 << 10 : 0) |
+                (ui_->checkBoxD11->isChecked() ? 1 << 11 : 0) |
+                (ui_->checkBoxD12->isChecked() ? 1 << 12 : 0) |
+                (ui_->checkBoxD13->isChecked() ? 1 << 13 : 0) |
+                (ui_->checkBoxD14->isChecked() ? 1 << 14 : 0) |
+                (ui_->checkBoxD15->isChecked() ? 1 << 15 : 0);
     ui_->spinBoxData->setValue(value);
 }
 
 void MainWindow::dataHexToBin_() {
     int value = ui_->spinBoxData->value();
-    ui_->checkBoxD0 ->setChecked(value & (1 <<  0));
-    ui_->checkBoxD1 ->setChecked(value & (1 <<  1));
-    ui_->checkBoxD2 ->setChecked(value & (1 <<  2));
-    ui_->checkBoxD3 ->setChecked(value & (1 <<  3));
-    ui_->checkBoxD4 ->setChecked(value & (1 <<  4));
-    ui_->checkBoxD5 ->setChecked(value & (1 <<  5));
-    ui_->checkBoxD6 ->setChecked(value & (1 <<  6));
-    ui_->checkBoxD7 ->setChecked(value & (1 <<  7));
-    ui_->checkBoxD8 ->setChecked(value & (1 <<  8));
-    ui_->checkBoxD9 ->setChecked(value & (1 <<  9));
+    ui_->checkBoxD0->setChecked(value & (1 << 0));
+    ui_->checkBoxD1->setChecked(value & (1 << 1));
+    ui_->checkBoxD2->setChecked(value & (1 << 2));
+    ui_->checkBoxD3->setChecked(value & (1 << 3));
+    ui_->checkBoxD4->setChecked(value & (1 << 4));
+    ui_->checkBoxD5->setChecked(value & (1 << 5));
+    ui_->checkBoxD6->setChecked(value & (1 << 6));
+    ui_->checkBoxD7->setChecked(value & (1 << 7));
+    ui_->checkBoxD8->setChecked(value & (1 << 8));
+    ui_->checkBoxD9->setChecked(value & (1 << 9));
     ui_->checkBoxD10->setChecked(value & (1 << 10));
     ui_->checkBoxD11->setChecked(value & (1 << 11));
     ui_->checkBoxD12->setChecked(value & (1 << 12));
@@ -681,27 +829,30 @@ void MainWindow::dataHexToBin_() {
 
 void MainWindow::on_actionOpen_triggered(bool checked) {
     if (hexeditor_->isChanged()) {
-        if (!showDialogFileChanged_()) { return; }
+        if (!showDialogFileChanged_()) {
+            return;
+        }
     }
     QEpromFile::QEpromFileType type;
-    QString filename = QFileDialog::getOpenFileName(this,
-        tr("Open Binary File"), "", getOpenDialogFilter_());
-    if (filename.isEmpty()) { return; }
+    QString filename = QFileDialog::getOpenFileName(
+        this, tr("Open Binary File"), "", getOpenDialogFilter_());
+    if (filename.isEmpty()) {
+        return;
+    }
     if (!hexeditor_->open(filename)) {
-        QMessageBox::critical(this,
-            tr("USB Flash/EPROM Programmer"),
-            tr("Error reading file \"%1\".").arg(filename));
+        QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
+                              tr("Error reading file \"%1\".").arg(filename));
         return;
     }
     ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
     setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
-        QFileInfo(filename).fileName());
+                   QFileInfo(filename).fileName());
 }
 
 void MainWindow::on_actionSave_triggered(bool checked) {
     if (!hexeditor_->save()) {
-        QMessageBox::critical(this,
-            tr("USB Flash/EPROM Programmer"),
+        QMessageBox::critical(
+            this, tr("USB Flash/EPROM Programmer"),
             tr("Error writing file \"%1\".").arg(hexeditor_->filename()));
         return;
     }
@@ -710,14 +861,16 @@ void MainWindow::on_actionSave_triggered(bool checked) {
 void MainWindow::on_actionSaveAs_triggered(bool checked) {
     QString selectedFilter;
     QEpromFile::QEpromFileType type;
-    QString filename = QFileDialog::getSaveFileName(this,
-        tr("Save Binary File"), "", getSaveDialogFilter_(), &selectedFilter);
-    if (filename.isEmpty()) { return; }
+    QString filename =
+        QFileDialog::getSaveFileName(this, tr("Save Binary File"), "",
+                                     getSaveDialogFilter_(), &selectedFilter);
+    if (filename.isEmpty()) {
+        return;
+    }
     type = QEpromFile::typeFromStr(selectedFilter);
     if (!hexeditor_->saveAs(type, filename)) {
-        QMessageBox::critical(this,
-            tr("USB Flash/EPROM Programmer"),
-            tr("Error writing file \"%1\".").arg(filename));
+        QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
+                              tr("Error writing file \"%1\".").arg(filename));
         return;
     }
 }
@@ -757,19 +910,20 @@ void MainWindow::on_btnSave_clicked() {
 void MainWindow::onDataChanged(bool status) {
     QString title = tr("USB Flash/EPROM Programmer");
     if (!hexeditor_->filename().isEmpty()) {
-        title += " - " +
-            QFileInfo(hexeditor_->filename()).fileName();
+        title += " - " + QFileInfo(hexeditor_->filename()).fileName();
         ui_->actionSave->setEnabled(status);
     }
-    if (status) {title += "*"; }
+    if (status) {
+        title += "*";
+    }
     setWindowTitle(title);
 }
 
 void MainWindow::enableEditorControls_(bool state) {
     ui_->frameToolBar->setVisible(state);
     ui_->actionOpen->setEnabled(state);
-    ui_->actionSave->setEnabled(state &&
-        !hexeditor_->filename().isEmpty() && hexeditor_->isChanged());
+    ui_->actionSave->setEnabled(state && !hexeditor_->filename().isEmpty() &&
+                                hexeditor_->isChanged());
     ui_->actionSaveAs->setEnabled(state);
     ui_->actionFillFF->setEnabled(state);
     ui_->actionFill00->setEnabled(state);
@@ -779,26 +933,24 @@ void MainWindow::enableEditorControls_(bool state) {
 }
 
 bool MainWindow::showDialogFileChanged_() {
-    return QMessageBox::question(this,
-        tr("USB Flash/EPROM Programmer"),
-        tr("There is unsaved data in the editor. \n"
-           "Are you sure you want to lose this data?")) == QMessageBox::Yes;
+    return QMessageBox::question(
+               this, tr("USB Flash/EPROM Programmer"),
+               tr("There is unsaved data in the editor. \n"
+                  "Are you sure you want to lose this data?")) ==
+           QMessageBox::Yes;
 }
 
 QString MainWindow::getOpenDialogFilter_() {
     return MainWindow::tr("All Flash/EPROM Files") +
-        " (*.bin *.rom *.s19 *.s28 *.s37 *.s *.s2 *.s3 *.hex *.eep);;" +
-        getSaveDialogFilter_() + ";;" +
-        MainWindow::tr("All Files") + " (*.*)";
+           " (*.bin *.rom *.s19 *.s28 *.s37 *.s *.s2 *.s3 *.hex *.eep);;" +
+           getSaveDialogFilter_() + ";;" + MainWindow::tr("All Files") +
+           " (*.*)";
 }
 
 QString MainWindow::getSaveDialogFilter_() {
-    return MainWindow::tr("Binary Files") +
-        " (*.bin *.rom);;" +
-        MainWindow::tr("Motorola S-REC Files") +
-            " (*.s19 *.s28 *.s37 *.s *.s2 *.s3);;" +
-        MainWindow::tr("Intel Hex Files") +
-            " (*.hex *.eep);;" +
-        MainWindow::tr("Atmel Generic Files") +
-            " (*.hex *.rom *.eep)";
+    return MainWindow::tr("Binary Files") + " (*.bin *.rom);;" +
+           MainWindow::tr("Motorola S-REC Files") +
+           " (*.s19 *.s28 *.s37 *.s *.s2 *.s3);;" +
+           MainWindow::tr("Intel Hex Files") + " (*.hex *.eep);;" +
+           MainWindow::tr("Atmel Generic Files") + " (*.hex *.rom *.eep)";
 }

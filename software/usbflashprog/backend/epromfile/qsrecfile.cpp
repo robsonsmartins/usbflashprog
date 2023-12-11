@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/epromfile/qsrecfile.cpp
  * @brief Implementation of the QSrecFile Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -21,12 +21,12 @@
 #include "qsrecfile.hpp"
 
 extern "C" {
-# include "third/libGIS/srecord.h"
+#include "third/libGIS/srecord.h"
 }
 
 // ---------------------------------------------------------------------------
 
-QSrecFile::QSrecFile(QObject *parent): QEpromFileBase(parent) {}
+QSrecFile::QSrecFile(QObject *parent) : QEpromFileBase(parent) {}
 
 bool QSrecFile::isReadable(const QString &filename) {
     FILE *fd = fopen(filename.toStdString().c_str(), "r");
@@ -58,21 +58,26 @@ QByteArray QSrecFile::read(const QString &filename, qint32 size) {
     qint64 address = -1;
     do {
         ret = Read_SRecord(&srec, fd);
-        if (ret != SRECORD_ERROR_EOF && ret != SRECORD_OK) { break; }
+        if (ret != SRECORD_ERROR_EOF && ret != SRECORD_OK) {
+            break;
+        }
         if (Checksum_SRecord(&srec) != srec.checksum) {
             ret = SRECORD_ERROR_INVALID_RECORD;
             break;
         }
         if (srec.dataLen) {
-            if (address == -1) { address = srec.address; }
+            if (address == -1) {
+                address = srec.address;
+            }
             if (srec.address - address + srec.dataLen > result.size()) {
-                result.append(QByteArray(
-                    static_cast<int>(srec.address - address)
-                    + srec.dataLen - result.size(), 0xFF));
+                result.append(
+                    QByteArray(static_cast<int>(srec.address - address) +
+                                   srec.dataLen - result.size(),
+                               0xFF));
             }
             for (int i = 0; i < srec.dataLen; i++) {
-                result[i + srec.address -
-                       static_cast<quint32>(address)] = srec.data[i];
+                result[i + srec.address - static_cast<quint32>(address)] =
+                    srec.data[i];
             }
         }
     } while (ret == SRECORD_OK);
@@ -90,14 +95,14 @@ QByteArray QSrecFile::read(const QString &filename, qint32 size) {
     return result;
 }
 
-bool QSrecFile::write(QEpromFileType type,
-                      const QString &filename, const QByteArray &data) {
+bool QSrecFile::write(QEpromFileType type, const QString &filename,
+                      const QByteArray &data) {
     (void)type;
     SRecord srec;
     quint32 address = 0;
     int total = data.size();
     int len = 34;
-    const uint8_t *p = reinterpret_cast<const uint8_t*>(data.data());
+    const uint8_t *p = reinterpret_cast<const uint8_t *>(data.data());
     int start = 1;
     int end = 9;
     QString suffix = ".s19";
@@ -118,19 +123,31 @@ bool QSrecFile::write(QEpromFileType type,
         return false;
     }
     while (total) {
-        if (len > total) { len = total; }
-        if (New_SRecord(start, address,
-            p + address, len, &srec) != SRECORD_OK) { break; }
-        if (Write_SRecord(&srec, fd) != SRECORD_OK) { break; }
+        if (len > total) {
+            len = total;
+        }
+        if (New_SRecord(start, address, p + address, len, &srec) !=
+            SRECORD_OK) {
+            break;
+        }
+        if (Write_SRecord(&srec, fd) != SRECORD_OK) {
+            break;
+        }
         total -= len;
         address += len;
     }
     if (!total) {
-        if (New_SRecord(end, 0, NULL, 0, &srec) != SRECORD_OK) { total = -1; }
-        if (Write_SRecord(&srec, fd) != SRECORD_OK) { total = -1; }
+        if (New_SRecord(end, 0, NULL, 0, &srec) != SRECORD_OK) {
+            total = -1;
+        }
+        if (Write_SRecord(&srec, fd) != SRECORD_OK) {
+            total = -1;
+        }
     }
     fclose(fd);
-    if (total) { return false; }
+    if (total) {
+        return false;
+    }
     filename_ = filename + suffix;
     return true;
 }

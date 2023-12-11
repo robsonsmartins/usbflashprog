@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file config.hpp
  * @brief Configuration of UsbFlashProg.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -20,17 +20,21 @@
 
 // ---------------------------------------------------------------------------
 
-#include <QtGlobal>
 #include <QString>
+#include <QtGlobal>
 
 // ---------------------------------------------------------------------------
 
+// clang-format off
 const double kAppVersionArray[] = {
-    #include "VERSION"
+#   include "VERSION"
 };
+// clang-format on
 
 /** @brief GENERAL : App Version. */
-#define kAppVersion QString::number(kAppVersionArray[0],'f',1).toStdString().c_str() // NOLINT
+// clang-format off
+#define kAppVersion QString::number(kAppVersionArray[0], 'f', 1).toStdString().c_str() // NOLINT
+// clang-format on
 /** @brief GENERAL : Project Home Page. */
 constexpr const char *kProjectHomePage =
     "https://usbflashprog.robsonmartins.com/";

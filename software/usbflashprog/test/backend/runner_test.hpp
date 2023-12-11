@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup UnitTests
  * @file test/backend/runner_test.hpp
  * @brief Header of Unit Test for Runner Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -29,15 +29,14 @@
  * @nosubgrouping
  */
 class RunnerTest : public testing::Test {
- protected:
-  /** @brief Constructor. */
-  RunnerTest() {}
-  /** @brief Destructor. */
-  ~RunnerTest() override {}
-  /** @brief Sets Up the test. */
-  void SetUp() override {}
-  /** @brief Teardown of the test. */
-  void TearDown() override {}
+  protected:
+    /** @brief Constructor. */
+    RunnerTest() {}
+    /** @brief Destructor. */
+    ~RunnerTest() override {}
+    /** @brief Sets Up the test. */
+    void SetUp() override {}
+    /** @brief Teardown of the test. */
+    void TearDown() override {}
 };
-
 #endif  // TEST_BACKEND_RUNNER_TEST_HPP_

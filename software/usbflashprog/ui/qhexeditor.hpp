@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file ui/qhexeditor.hpp
  * @brief Header of the QHexEditor Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -32,23 +32,23 @@
 class QHexEditor : public QHexView {
     Q_OBJECT
 
- public:
+  public:
     /** @brief Hex Editor Mode (bits grouping). */
     enum QHexEditorMode {
-      /** @brief 8 Bits Mode. */
-      Mode8Bits,
-      /** @brief 16 Bits Mode. */
-      Mode16Bits,
-      /** @brief 32 Bits Mode. */
-      Mode32Bits
+        /** @brief 8 Bits Mode. */
+        Mode8Bits,
+        /** @brief 16 Bits Mode. */
+        Mode16Bits,
+        /** @brief 32 Bits Mode. */
+        Mode32Bits
     };
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object (default = nullptr).
      */
-    explicit QHexEditor(QWidget *parent = nullptr);
+    explicit QHexEditor(QWidget* parent = nullptr);
     /**
      * @brief Opens a file.
      * @param filename The filename.
@@ -122,7 +122,7 @@ class QHexEditor : public QHexView {
      */
     void changed(bool status = true);
 
- private slots:
+  private slots:
     /*
      * @brief QHexView::dataChanged Signal event.
      * @param data Changed data.
@@ -132,7 +132,7 @@ class QHexEditor : public QHexView {
     void onDataChanged(const QByteArray& data, quint32 offset,
                        QHexDocument::ChangeReason reason);
 
- private:
+  private:
     /* @brief Data changed status. */
     bool changed_;
     /* @brief Current filename. */

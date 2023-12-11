@@ -10,14 +10,15 @@
  * @ingroup UnitTests
  * @file test/backend/opcodes_test.cpp
  * @brief Implementation of Unit Test for OpCode Handling Classes.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
-#include <cstring>
 #include "opcodes_test.hpp"
 #include "../../backend/opcodes.hpp"
+
+#include <cstring>
 
 // ---------------------------------------------------------------------------
 

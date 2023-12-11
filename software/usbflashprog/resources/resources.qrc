@@ -5,5 +5,12 @@
     <qresource>
         <file>toolicons/file-open.ico</file>
         <file>toolicons/file-save.ico</file>
+        <file>toolicons/action-read.ico</file>
+        <file>toolicons/action-prog.ico</file>
+        <file>toolicons/action-verify.ico</file>
+        <file>toolicons/action-erase.ico</file>
+        <file>toolicons/action-blank-check.ico</file>
+        <file>toolicons/action-getid.ico</file>
+        <file>toolicons/action-unprotect.ico</file>
     </qresource>
 </RCC>

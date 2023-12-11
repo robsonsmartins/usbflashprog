@@ -6,28 +6,28 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @defgroup Software Software Project
  * @brief    Software project for USB EPROM/Flash Programmer.
  */
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file main.cpp
  * @brief Implementation of the Main Routine.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
 #include <QApplication>
+#include <QLibraryInfo>
 #include <QLocale>
 #include <QTranslator>
-#include <QLibraryInfo>
 #include <cstdlib>
 
-#include "main/mainwindow.hpp"
 #include "config.hpp"
+#include "main/mainwindow.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -46,11 +46,11 @@ int main(int argc, char *argv[]);
  * @param argv Array of arguments.
  * @return Pointer to the QMainWindow object.
  */
-QMainWindow* createWindow(const int &argc, char *argv[]);
+QMainWindow *createWindow(const int &argc, char *argv[]);
 
 // ---------------------------------------------------------------------------
 
-QMainWindow* createWindow(const int &argc, char *argv[]) {
+QMainWindow *createWindow(const int &argc, char *argv[]) {
     (void)argc;
     (void)argv;
     return new MainWindow();
@@ -66,7 +66,8 @@ int main(int argc, char *argv[]) {
     // translate Qt base strings
     for (const QString &locale : uiLanguages) {
         const QString baseName = "qtbase_" + QLocale(locale).name();
-        if (baseTranslator.load(baseName,
+        if (baseTranslator.load(
+                baseName,
                 QLibraryInfo::location(QLibraryInfo::TranslationsPath))) {
             a.installTranslator(&baseTranslator);
             break;

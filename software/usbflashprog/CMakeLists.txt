@@ -72,6 +72,10 @@ elseif(NORMAL_BUILD)
           backend/epromfile/qepromfile.hpp
           ui/qhexeditor.cpp
           ui/qhexeditor.hpp
+          backend/devices/device.cpp
+          backend/devices/device.hpp
+          backend/devices/parallel/sram.cpp
+          backend/devices/parallel/sram.hpp
           main/mainwindow.cpp
           main/mainwindow.hpp
           main/mainwindow.ui

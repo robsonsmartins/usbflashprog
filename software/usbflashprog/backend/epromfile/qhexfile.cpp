@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file backend/epromfile/qhexfile.cpp
  * @brief Implementation of the QHexFile Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -21,12 +21,12 @@
 #include "qhexfile.hpp"
 
 extern "C" {
-# include "third/libGIS/ihex.h"
+#include "third/libGIS/ihex.h"
 }
 
 // ---------------------------------------------------------------------------
 
-QHexFile::QHexFile(QObject *parent): QEpromFileBase(parent) {}
+QHexFile::QHexFile(QObject *parent) : QEpromFileBase(parent) {}
 
 bool QHexFile::isReadable(const QString &filename) {
     FILE *fd = fopen(filename.toStdString().c_str(), "r");
@@ -58,21 +58,26 @@ QByteArray QHexFile::read(const QString &filename, qint32 size) {
     qint64 address = -1;
     do {
         ret = Read_IHexRecord(&irec, fd);
-        if (ret != IHEX_ERROR_EOF && ret != IHEX_OK) { break; }
+        if (ret != IHEX_ERROR_EOF && ret != IHEX_OK) {
+            break;
+        }
         if (Checksum_IHexRecord(&irec) != irec.checksum) {
             ret = IHEX_ERROR_INVALID_RECORD;
             break;
         }
         if (irec.dataLen) {
-            if (address == 0) { address = irec.address; }
+            if (address == 0) {
+                address = irec.address;
+            }
             if (irec.address - address + irec.dataLen > result.size()) {
-                result.append(QByteArray(
-                    static_cast<int>(irec.address - address)
-                    + irec.dataLen - result.size(), 0xFF));
+                result.append(
+                    QByteArray(static_cast<int>(irec.address - address) +
+                                   irec.dataLen - result.size(),
+                               0xFF));
             }
             for (int i = 0; i < irec.dataLen; i++) {
-                result[i + irec.address -
-                       static_cast<quint32>(address)] = irec.data[i];
+                result[i + irec.address - static_cast<quint32>(address)] =
+                    irec.data[i];
             }
         }
     } while (ret == IHEX_OK);
@@ -90,14 +95,14 @@ QByteArray QHexFile::read(const QString &filename, qint32 size) {
     return result;
 }
 
-bool QHexFile::write(QEpromFileType type,
-                     const QString &filename, const QByteArray &data) {
+bool QHexFile::write(QEpromFileType type, const QString &filename,
+                     const QByteArray &data) {
     (void)type;
     IHexRecord irec;
     quint32 address = 0;
     int total = data.size();
     int len = 34;
-    const uint8_t *p = reinterpret_cast<const uint8_t*>(data.data());
+    const uint8_t *p = reinterpret_cast<const uint8_t *>(data.data());
     int start = IHEX_TYPE_00;
     int end = IHEX_TYPE_01;
     QString suffix = ".hex";
@@ -109,19 +114,31 @@ bool QHexFile::write(QEpromFileType type,
         return false;
     }
     while (total) {
-        if (len > total) { len = total; }
-        if (New_IHexRecord(start, address,
-            p + address, len, &irec) != IHEX_OK) { break; }
-        if (Write_IHexRecord(&irec, fd) != IHEX_OK) { break; }
+        if (len > total) {
+            len = total;
+        }
+        if (New_IHexRecord(start, address, p + address, len, &irec) !=
+            IHEX_OK) {
+            break;
+        }
+        if (Write_IHexRecord(&irec, fd) != IHEX_OK) {
+            break;
+        }
         total -= len;
         address += len;
     }
     if (!total) {
-        if (New_IHexRecord(end, 0, NULL, 0, &irec) != IHEX_OK) { total = -1; }
-        if (Write_IHexRecord(&irec, fd) != IHEX_OK) { total = -1; }
+        if (New_IHexRecord(end, 0, NULL, 0, &irec) != IHEX_OK) {
+            total = -1;
+        }
+        if (Write_IHexRecord(&irec, fd) != IHEX_OK) {
+            total = -1;
+        }
     }
     fclose(fd);
-    if (total) { return false; }
+    if (total) {
+        return false;
+    }
     filename_ = filename + suffix;
     return true;
 }

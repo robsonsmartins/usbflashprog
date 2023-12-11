@@ -10,15 +10,16 @@
  * @ingroup UnitTests
  * @file test/backend/runner_test.cpp
  * @brief Implementation of Unit Test for Runner Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
-#include <chrono>
-#include <cstring>
 #include "runner_test.hpp"
 #include "../../backend/runner.hpp"
+
+#include <chrono>
+#include <cstring>
 
 // ---------------------------------------------------------------------------
 
@@ -146,8 +147,7 @@ TEST_F(RunnerTest, cmdBusAddr) {
 
 TEST_F(RunnerTest, cmdBusData) {
     Runner runner;
-    uint16_t expected =
-        kSerialPortDummyData[1] << 8 | kSerialPortDummyData[2];
+    uint16_t expected = kSerialPortDummyData[1] << 8 | kSerialPortDummyData[2];
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.dataClr(), true);
     EXPECT_EQ(runner.dataSet(0x12), true);
@@ -165,63 +165,63 @@ TEST_F(RunnerTest, delay) {
     start = std::chrono::steady_clock::now();
     Runner::usDelay(10);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 10, 100);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(100);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 100, 100);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(200);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 200, 100);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(1000);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 1000, 100);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(10000);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 10, 1);
 
     start = std::chrono::steady_clock::now();
     Runner::msDelay(5);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 5, 1);
 
     start = std::chrono::steady_clock::now();
     Runner::msDelay(50);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 50, 5);
 
     start = std::chrono::steady_clock::now();
     Runner::msDelay(500);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 500, 50);
 
     start = std::chrono::steady_clock::now();
     Runner::msDelay(1000);
     end = std::chrono::steady_clock::now();
-    elapsed =
-        std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
+                  .count();
     EXPECT_NEAR(elapsed, 1000, 100);
 }

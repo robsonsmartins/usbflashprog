@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Software
  * @file main/mainwindow.hpp
  * @brief Header of the Main Window Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -24,12 +24,15 @@
 
 #include "ui/qhexeditor.hpp"
 #include "backend/runner.hpp"
+#include "backend/devices/device.hpp"
 
 // ---------------------------------------------------------------------------
 
+// clang-format off
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+// clang-format on
 
 // ---------------------------------------------------------------------------
 
@@ -42,7 +45,7 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
@@ -56,7 +59,7 @@ class MainWindow : public QMainWindow {
      */
     QScreen *screen() const;
 
- private slots:
+  private slots:
     /* auto slots */
     void on_tabWidget_currentChanged(int index);
     void on_actionBuffer_triggered(bool checked = false);
@@ -103,15 +106,17 @@ class MainWindow : public QMainWindow {
     void onCheckBoxAddressToggled(bool checked = false);
     void onCheckBoxDataToggled(bool checked = false);
     void onDataChanged(bool status = true);
+    void onBtnSelectDeviceClicked(bool checked = false);
+    void onSelectDeviceTriggered(bool checked = false);
 
- protected:
+  protected:
     /*
      * @brief OnClose event of the Window.
      * @param event Pointer to event object.
      */
     void closeEvent(QCloseEvent *event);
 
- private:
+  private:
     /* @brief Pointer to UI object. */
     Ui::MainWindow *ui_;
     /* @brief Pointer to QHexEditor widget. */
@@ -122,15 +127,24 @@ class MainWindow : public QMainWindow {
     QTimer refreshTimer_;
     /* @brief Runner object. */
     Runner runner_;
+    /* @brief Device pointer. */
+    Device *device_;
     /* @brief Connects signals of the widgets. */
     void connectSignals_();
+    /*
+     * @brief Creates device if it's a SRAM (Prog).
+     * @param label The triggered action text.
+     */
+    void createDeviceIfSRAM_(const QString &label);
+    /* @brief Enables/Disables the controls (Prog). */
+    void configureProgControls_();
+    /* @brief Refreshes the port comboboxes (Prog/Diag). */
+    void refreshPortComboBox_();
     /*
      * @brief Connects to board via CDC port (Diag).
      * @param state True to connect, false to disconnect.
      */
     void connect_(bool state = true);
-    /* @brief Refreshes the port combobox (Diag). */
-    void refreshPortComboBox_();
     /*
      * @brief Enables/Disables the controls (Diag).
      * @param state True to enable, false otherwise.

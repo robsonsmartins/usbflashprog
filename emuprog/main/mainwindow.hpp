@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup emu
  * @file main/mainwindow.hpp
  * @brief Header of the Main Window Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -25,7 +25,9 @@
 // ---------------------------------------------------------------------------
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 QT_END_NAMESPACE
 
 // ---------------------------------------------------------------------------
@@ -39,7 +41,7 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
- public:
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
@@ -53,7 +55,7 @@ class MainWindow : public QMainWindow {
      */
     QScreen *screen() const;
 
- private slots:
+  private slots:
     /* auto slots */
     void on_cbProg_activated(int index);
     void on_cbChip_activated(int index);
@@ -62,7 +64,7 @@ class MainWindow : public QMainWindow {
     void on_btnPCB45_clicked();
     void on_btnPCB50_clicked();
 
- private:
+  private:
     /* @brief Pointer to UI object. */
     Ui::MainWindow *ui_;
     /* @brief Pointer to QProcess object. */

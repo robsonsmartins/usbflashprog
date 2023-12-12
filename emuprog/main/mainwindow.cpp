@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup emu
  * @file main/mainwindow.cpp
  * @brief Implementation of the Main Window Class.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -47,12 +47,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui_(new Ui::MainWindow) {
     ui_->setupUi(this);
     process_ = new QProcess(this);
-    this->setGeometry(
-        QStyle::alignedRect(
-            Qt::LeftToRight,
-            Qt::AlignCenter,
-            this->size(),
-            screen()->availableGeometry()));
+    this->setGeometry(QStyle::alignedRect(Qt::LeftToRight, Qt::AlignCenter,
+                                          this->size(),
+                                          screen()->availableGeometry()));
     this->setFixedSize(this->geometry().width(), this->geometry().height());
     loadSettings_();
 }
@@ -62,12 +59,11 @@ MainWindow::~MainWindow() {
     delete ui_;
 }
 
-QScreen* MainWindow::screen() const {
+QScreen *MainWindow::screen() const {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
     return QGuiApplication::primaryScreen();
 #else
-    return QGuiApplication::screenAt(
-        this->mapToGlobal({this->width() / 2, 0}));
+    return QGuiApplication::screenAt(this->mapToGlobal({this->width() / 2, 0}));
 #endif
 }
 
@@ -128,23 +124,32 @@ void MainWindow::on_cbSize_activated(int index) {
 }
 
 void MainWindow::on_btnPCB3_clicked() {
-    QProcess::execute(QString("taskkill"), QStringList({"/im",  PCB3_PROGRAM, "/f"}));
-    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB45_PROGRAM, "/f"}));
-    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB50_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB3_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB45_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB50_PROGRAM, "/f"}));
     runExecutable_(PCB3_PROGRAM);
 }
 
 void MainWindow::on_btnPCB45_clicked() {
-    QProcess::execute(QString("taskkill"), QStringList({"/im",  PCB3_PROGRAM, "/f"}));
-    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB45_PROGRAM, "/f"}));
-    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB50_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB3_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB45_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB50_PROGRAM, "/f"}));
     runExecutable_(PCB45_PROGRAM);
 }
 
 void MainWindow::on_btnPCB50_clicked() {
-    QProcess::execute(QString("taskkill"), QStringList({"/im",  PCB3_PROGRAM, "/f"}));
-    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB45_PROGRAM, "/f"}));
-    QProcess::execute(QString("taskkill"), QStringList({"/im", PCB50_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB3_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB45_PROGRAM, "/f"}));
+    QProcess::execute(QString("taskkill"),
+                      QStringList({"/im", PCB50_PROGRAM, "/f"}));
     runExecutable_(PCB50_PROGRAM);
 }
 

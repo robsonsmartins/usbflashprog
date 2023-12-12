@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup lib_chip_eprom
  * @file    eprom.hpp
  * @brief   Header file (C++) for EPROM 27xxx Chip Emulation Library
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -37,49 +37,49 @@
 /** @ingroup lib_chip_eprom
     Set Memory Size.
     @param[in] size Memory size (number of addressable positions)
-    @return None */
+ */
 DLLEXPORT void SetSize(unsigned long size);
 
 /** @ingroup lib_chip_eprom
     Set/Reset VDD (main power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetVDD(unsigned char state);
 
 /** @ingroup lib_chip_eprom
     Set/Reset VPP (high voltage programming power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetVPP(unsigned char state);
 
 /** @ingroup lib_chip_eprom
     Set/Reset OE (Output Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetOE(unsigned char state);
 
 /** @ingroup lib_chip_eprom
     Set/Reset CE (Chip Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetCE(unsigned char state);
 
 /** @ingroup lib_chip_eprom
     Set/Reset WE (Write Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetWE(unsigned char state);
 
 /** @ingroup lib_chip_eprom
     Write a Address Bus value.
     @param[in] addr Address to be writed in bus
-    @return None */
+ */
 DLLEXPORT void SetAddrBus(unsigned long addr);
 
 /** @ingroup lib_chip_eprom
     Write a value to Data Bus.
     @param[in] data Data to be writed in bus
-    @return None */
+ */
 DLLEXPORT void SetDataBus(unsigned short data);
 
 /** @ingroup lib_chip_eprom
@@ -90,19 +90,19 @@ DLLEXPORT unsigned short GetDataBus(void);
 /** @ingroup lib_chip_eprom
     Set/Reset Serial CS (Chip Select) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SerialSetCS(unsigned char state);
 
 /** @ingroup lib_chip_eprom
     Set/Reset Serial Clock pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SerialSetClk(unsigned char state);
 
 /** @ingroup lib_chip_eprom
     Set/Reset Serial Data pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SerialSetData(unsigned char state);
 
 /** @ingroup lib_chip_eprom
@@ -124,8 +124,8 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved);
 /** @ingroup chip
     @brief   EPROM 27xxx Chip Emulator Class.
     @details Emulates a EPROM 27xxx Chip. */
-class ChipEPROM: public BaseParChip {
- public:
+class ChipEPROM : public BaseParChip {
+  public:
     /** Default Constructor. */
     ChipEPROM();
     /** Destructor. */
@@ -133,7 +133,7 @@ class ChipEPROM: public BaseParChip {
     /* reimplemented */
     virtual void SetSize(unsigned long size);
 
- protected:
+  protected:
     /* emulates the chip */
     virtual void EmuChip(void);
 };

@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup lib_prog_willem
  * @file    willem.hpp
  * @brief   Header file (C++) for Willem/Sivava Programmer Emulation Library
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -38,8 +38,7 @@
     Wrapper for a hardware port write byte operation.
     @param addr Port Address
     @param data Writed data byte
-    @return None
- */
+  */
 DLLEXPORT void SetPort(unsigned short int addr, unsigned char data);  // NOLINT
 
 /** @ingroup lib_prog_willem
@@ -61,14 +60,14 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved);
              - Willem Standard 3.1, 4.0, 4.1 and 4.5
              - Sivava PCB3B
              - EzoFlash+ 4.4 */
-class WillemProg: public BaseProg {
- public:
+class WillemProg : public BaseProg {
+  public:
     /** Default Constructor. */
     WillemProg();
     /** Destructor. */
     virtual ~WillemProg();
 
- protected:
+  protected:
     /* emulates the programmer */
     /* data is a byte from/to register */
     virtual void EmuCtrlPort(unsigned char data);

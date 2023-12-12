@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup prog
  * @file    baseprog.hpp
  * @brief   Programmer Emulation Base Classes (C++ header file)
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -25,7 +25,7 @@
     Provides all abstract methods need for a programmer emulator, connected at
     PC standard Parallel Port. */
 class BaseProg {
- public:
+  public:
     /** Default Constructor. */
     BaseProg();
     /** Destructor. */
@@ -33,15 +33,15 @@ class BaseProg {
     /** Write byte into port by address.
         @param[in] addr I/O Port Address
         @param[in] data Data to write
-        @return None
-    */
-    virtual void SetPort(unsigned short int addr, unsigned char data);  // NOLINT
+     */
+    virtual void SetPort(unsigned short int addr,
+                         unsigned char data);  // NOLINT
     /** Read byte from port by address.
         @param[in] addr I/O Port Address
         @return Readed Data. */
     virtual unsigned char GetPort(unsigned short int addr);  // NOLINT
 
- protected:
+  protected:
     /* parallel port mirror registers */
     unsigned char f_data_port;
     unsigned char f_status_port;
@@ -52,13 +52,11 @@ class BaseProg {
     unsigned char f_data_serial_sr;
     /** Emulates hardware Control Port response.
         @param[in] data Data written to Control Port register
-        @return None
-    */
+     */
     virtual void EmuCtrlPort(unsigned char data) = 0;
     /** Emulates hardware Data Port response.
         @param[in] data Data written to Data Port register
-        @return None
-    */
+     */
     virtual void EmuDataPort(unsigned char data) = 0;
 };
 

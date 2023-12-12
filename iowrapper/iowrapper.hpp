@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup lib_iowrapper
  * @file    iowrapper.hpp
  * @brief   Header file (C++) for IO.DLL Wrapper
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -36,7 +36,6 @@
     Write a byte (8 bits) to a port.
     @param[in] Port Port Address
     @param[in] Data Byte to write
-    @return None
  */
 DLLEXPORT void PortOut(short int Port, char Data);  // NOLINT
 
@@ -44,7 +43,6 @@ DLLEXPORT void PortOut(short int Port, char Data);  // NOLINT
     Write a word (16 bits) to a port.
     @param[in] Port Port Address
     @param[in] Data Word to write
-    @return None
  */
 DLLEXPORT void PortWordOut(short int Port, short int Data);  // NOLINT
 
@@ -52,7 +50,6 @@ DLLEXPORT void PortWordOut(short int Port, short int Data);  // NOLINT
     Write a dword (32 bits) to a port.
     @param[in] Port Port Address
     @param[in] Data DWord to write
-    @return None
  */
 DLLEXPORT void PortDWordOut(short int Port, int Data);  // NOLINT
 
@@ -78,7 +75,6 @@ DLLEXPORT int PortDWordIn(short int Port);  // NOLINT
     Set a port bit.
     @param[in] Port Port Address
     @param[in] Bit Bit number to set (0..7)
-    @return None
  */
 DLLEXPORT void SetPortBit(short int Port, char Bit);  // NOLINT
 
@@ -86,7 +82,6 @@ DLLEXPORT void SetPortBit(short int Port, char Bit);  // NOLINT
     Clear a port bit.
     @param[in] Port Port Address
     @param[in] Bit Bit number to reset (0..7)
-    @return None
  */
 DLLEXPORT void ClrPortBit(short int Port, char Bit);  // NOLINT
 
@@ -94,7 +89,6 @@ DLLEXPORT void ClrPortBit(short int Port, char Bit);  // NOLINT
     Invert a port bit.
     @param[in] Port Port Address
     @param[in] Bit Bit number to invert (0..7)
-    @return None
  */
 DLLEXPORT void NotPortBit(short int Port, char Bit);  // NOLINT
 

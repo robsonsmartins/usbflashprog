@@ -6,16 +6,16 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @defgroup emu 4. Emulator Software Project
  * @brief    Software project for Programmer Emulator.
  */
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup emu
  * @file main.cpp
  * @brief Implementation of the Main Routine.
- *  
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------

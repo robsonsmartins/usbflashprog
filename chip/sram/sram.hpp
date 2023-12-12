@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup lib_chip_sram
  * @file    sram.hpp
  * @brief   Header file (C++) for SRAM Chip Emulation Library
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -37,49 +37,49 @@
 /** @ingroup lib_chip_sram
     Set Memory Size.
     @param[in] size Memory size (number of addressable positions)
-    @return None */
+ */
 DLLEXPORT void SetSize(unsigned long size);
 
 /** @ingroup lib_chip_sram
     Set/Reset VDD (main power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetVDD(unsigned char state);
 
 /** @ingroup lib_chip_sram
     Set/Reset VPP (high voltage programming power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetVPP(unsigned char state);
 
 /** @ingroup lib_chip_sram
     Set/Reset OE (Output Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetOE(unsigned char state);
 
 /** @ingroup lib_chip_sram
     Set/Reset CE (Chip Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetCE(unsigned char state);
 
 /** @ingroup lib_chip_sram
     Set/Reset WE (Write Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SetWE(unsigned char state);
 
 /** @ingroup lib_chip_sram
     Write a Address Bus value.
     @param[in] addr Address to be writed in bus
-    @return None */
+ */
 DLLEXPORT void SetAddrBus(unsigned long addr);
 
 /** @ingroup lib_chip_sram
     Write a value to Data Bus.
     @param[in] data Data to be writed in bus
-    @return None */
+ */
 DLLEXPORT void SetDataBus(unsigned short data);
 
 /** @ingroup lib_chip_sram
@@ -90,19 +90,19 @@ DLLEXPORT unsigned short GetDataBus(void);
 /** @ingroup lib_chip_sram
     Set/Reset Serial CS (Chip Select) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SerialSetCS(unsigned char state);
 
 /** @ingroup lib_chip_sram
     Set/Reset Serial Clock pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SerialSetClk(unsigned char state);
 
 /** @ingroup lib_chip_sram
     Set/Reset Serial Data pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
-    @return None */
+ */
 DLLEXPORT void SerialSetData(unsigned char state);
 
 /** @ingroup lib_chip_sram
@@ -124,8 +124,8 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved);
 /** @ingroup chip
     @brief   SRAM Chip Emulator Class.
     @details Emulates a SRAM Chip. */
-class ChipSRAM: public BaseParChip {
- public:
+class ChipSRAM : public BaseParChip {
+  public:
     /** Default Constructor. */
     ChipSRAM();
     /** Destructor. */
@@ -134,7 +134,7 @@ class ChipSRAM: public BaseParChip {
     virtual void SetSize(unsigned long size);
     virtual void SetVDD(bool state);
 
- protected:
+  protected:
     /* emulates the chip */
     virtual void EmuChip(void);
 };

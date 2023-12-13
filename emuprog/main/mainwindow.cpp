@@ -218,10 +218,11 @@ void MainWindow::loadSettings_() {
 }
 
 void MainWindow::runExecutable_(const QString &filename) {
-    QString cmd = "cmd";
-    QStringList args = {"/k"};
-    args.append(QCoreApplication::applicationDirPath().append("/"));
-    args.append(filename);
-    process_->startDetached(cmd, args);
+    QString cmd = "cmd.exe";
+    QStringList args = {"/c"};
+    args.append(QCoreApplication::applicationDirPath().append("/").append(filename));
+    process_->setProgram(cmd);
+    process_->setArguments(args);
+    process_->startDetached();
     process_->waitForStarted();
 }

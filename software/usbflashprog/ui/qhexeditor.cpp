@@ -86,6 +86,19 @@ bool QHexEditor::saveAs(QEpromFile::QEpromFileType type,
     return true;
 }
 
+void QHexEditor::putData(const QByteArray &data) {
+    QHexDocument *document =
+        QHexDocument::fromMemory<QMemoryBuffer>(data.left(size_));
+    this->setDocument(document);
+    changed_ = true;
+    emit changed(true);
+}
+
+QByteArray QHexEditor::getData(void) const {
+    QHexDocument *document = this->hexDocument();
+    return document->read(0, static_cast<int>(document->length()));
+}
+
 void QHexEditor::fill(quint8 value) {
     QByteArray data = QByteArray(size_, value);
     QHexDocument *document = QHexDocument::fromMemory<QMemoryBuffer>(data);
@@ -124,29 +137,37 @@ void QHexEditor::setSize(qint32 value) {
     size_ = value;
 }
 
-qint32 QHexEditor::size(void) const { return size_; }
+qint32 QHexEditor::size(void) const {
+    return size_;
+}
 
 void QHexEditor::setMode(QHexEditorMode mode) {
     mode_ = mode;
     switch (mode_) {
-    case Mode32Bits:
-        setGroupLength(4);
-        break;
-    case Mode16Bits:
-        setGroupLength(2);
-        break;
-    case Mode8Bits:
-    default:
-        setGroupLength(1);
-        break;
+        case Mode32Bits:
+            setGroupLength(4);
+            break;
+        case Mode16Bits:
+            setGroupLength(2);
+            break;
+        case Mode8Bits:
+        default:
+            setGroupLength(1);
+            break;
     }
 }
 
-QHexEditor::QHexEditorMode QHexEditor::mode(void) const { return mode_; }
+QHexEditor::QHexEditorMode QHexEditor::mode(void) const {
+    return mode_;
+}
 
-const QString &QHexEditor::filename(void) const { return filename_; }
+const QString &QHexEditor::filename(void) const {
+    return filename_;
+}
 
-bool QHexEditor::isChanged(void) const { return changed_; }
+bool QHexEditor::isChanged(void) const {
+    return changed_;
+}
 
 void QHexEditor::showFindDialog(void) {
     HexFindDialog dialog(HexFindDialog::Type::Find, this);
@@ -168,4 +189,6 @@ void QHexEditor::onDataChanged(const QByteArray &data, quint32 offset,
     emit changed();
 }
 
-void QHexEditor::setGroupLength(unsigned int l) { QHexView::setGroupLength(l); }
+void QHexEditor::setGroupLength(unsigned int l) {
+    QHexView::setGroupLength(l);
+}

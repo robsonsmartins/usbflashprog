@@ -74,6 +74,8 @@ elseif(NORMAL_BUILD)
           ui/qhexeditor.hpp
           backend/devices/device.cpp
           backend/devices/device.hpp
+          backend/devices/parallel/dummy.cpp
+          backend/devices/parallel/dummy.hpp
           backend/devices/parallel/sram.cpp
           backend/devices/parallel/sram.hpp
           main/mainwindow.cpp

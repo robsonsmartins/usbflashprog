@@ -23,7 +23,7 @@
 // ---------------------------------------------------------------------------
 
 SRAM::SRAM(QObject *parent) : Device(parent) {
-    info_.deviceType = kParallelMemory;
+    info_.deviceType = kDeviceParallelMemory;
     info_.name = "SRAM";
     info_.capability.hasProgram = true;
     info_.voltage.vddProgram = 5.0f;
@@ -38,31 +38,38 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
     (void)buffer;
     (void)verify;
     uint32_t current = 0, total = size_ * 4;
-    bool error = false;
-    uint32_t addr = 0;
+    bool error = true;
     if (runner_.open(port_)) {
+        error = false;
         resetBus_();
         runner_.vddSet(info_.voltage.vddProgram);
         runner_.vddCtrl();
         runner_.setCE();
-        if (!testRAM_(current, total)) {
+        if (!doPatternTest_(current, total)) {
             error = true;
-            addr = runner_.addrGet();
+        }
+        if (!doRandomTest_(current, total)) {
+            error = true;
         }
         resetBus_();
         if (!error) {
             error = runner_.hasError();
+            if (error) {
+                emit onProgress(total, total, true, false);
+            }
         }
         runner_.close();
+    } else {
+        emit onProgress(0, total, true, false);
     }
-    emit onProgress(total, total, 100.0f, true);
-    emit onFinish(addr, !error);
+    if (!error) {
+        emit onProgress(total, total, true);
+    }
     return !error;
 }
 
-bool SRAM::testRAM_(uint32_t &current, uint32_t total) {
-    // test #1/2
-    QByteArray buffer = generateRandomData_();
+bool SRAM::doPatternTest_(uint32_t &current, uint32_t total) {
+    QByteArray buffer = generatePatternData_();
     runner_.addrClr();
     if (!program_(buffer, current, total)) {
         return false;
@@ -71,8 +78,11 @@ bool SRAM::testRAM_(uint32_t &current, uint32_t total) {
     if (!verify_(buffer, current, total)) {
         return false;
     }
-    // test #2/2
-    buffer = generateRandomData_();
+    return !runner_.hasError();
+}
+
+bool SRAM::doRandomTest_(uint32_t &current, uint32_t total) {
+    QByteArray buffer = generateRandomData_();
     runner_.addrClr();
     if (!program_(buffer, current, total)) {
         return false;
@@ -119,14 +129,20 @@ bool SRAM::read_(uint8_t &data) {
 bool SRAM::program_(const QByteArray &buffer, uint32_t &current,
                     uint32_t total) {
     for (const auto &data : buffer) {
+        emit onProgress(current, total);
+        if (canceling_) {
+            emit onProgress(current, total, true, false, true);
+            return false;
+        }
         uint8_t read;
         write_(data);
         read_(read);
         runner_.addrInc();
         if (runner_.hasError() || read != data) {
+            emit onProgress(current, total, true, false);
             return false;
         }
-        emit onProgress(current, total, current * 100.0f / total);
+
         current++;
     }
     return true;
@@ -135,13 +151,18 @@ bool SRAM::program_(const QByteArray &buffer, uint32_t &current,
 bool SRAM::verify_(const QByteArray &buffer, uint32_t &current,
                    uint32_t total) {
     for (const auto &data : buffer) {
+        emit onProgress(current, total);
+        if (canceling_) {
+            emit onProgress(current, total, true, false, true);
+            return false;
+        }
         uint8_t read;
         read_(read);
         runner_.addrInc();
         if (runner_.hasError() || read != data) {
+            emit onProgress(current, total, true, false);
             return false;
         }
-        emit onProgress(current, total, current * 100.0f / total);
         current++;
     }
     return true;
@@ -151,6 +172,16 @@ QByteArray SRAM::generateRandomData_() {
     QByteArray buffer(size_, 0);
     for (int i = 0; i < size_; ++i) {
         buffer[i] = static_cast<char>(QRandomGenerator::global()->generate());
+    }
+    return buffer;
+}
+
+QByteArray SRAM::generatePatternData_() {
+    QByteArray buffer(size_, 0);
+    uint8_t data = 0x55;
+    for (int i = 0; i < size_; ++i) {
+        buffer[i] = static_cast<char>(data);
+        data = ~data;
     }
     return buffer;
 }

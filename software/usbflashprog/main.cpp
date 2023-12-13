@@ -61,6 +61,9 @@ int main(int argc, char *argv[]) {
     setenv("XDG_SESSION_TYPE", "x11", 1);
 #endif
     QApplication a(argc, argv);
+    a.setOrganizationName("RobsonMartins");
+    a.setOrganizationDomain("robsonmartins.com");
+    a.setApplicationName("UsbFlashProg");
     QTranslator translator, baseTranslator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     // translate Qt base strings

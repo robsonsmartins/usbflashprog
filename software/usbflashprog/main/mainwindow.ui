@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>660</width>
+    <width>686</width>
     <height>834</height>
    </rect>
   </property>
@@ -84,6 +84,113 @@
         </widget>
        </item>
        <item>
+        <widget class="QToolButton" name="btnFind">
+         <property name="toolTip">
+          <string>Find...</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/resources.qrc">
+           <normaloff>:/toolicons/file-find.ico</normaloff>:/toolicons/file-find.ico</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnReplace">
+         <property name="toolTip">
+          <string>Replace...</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/resources.qrc">
+           <normaloff>:/toolicons/file-replace.ico</normaloff>:/toolicons/file-replace.ico</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="Line" name="line_11">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnFillFF">
+         <property name="toolTip">
+          <string>Fill with 0xFF</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/resources.qrc">
+           <normaloff>:/toolicons/edit-fill-ff.ico</normaloff>:/toolicons/edit-fill-ff.ico</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnFill00">
+         <property name="toolTip">
+          <string>Fill with 0x00</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/resources.qrc">
+           <normaloff>:/toolicons/edit-fill-00.ico</normaloff>:/toolicons/edit-fill-00.ico</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnFillRandom">
+         <property name="toolTip">
+          <string>Fill with Random</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/resources.qrc">
+           <normaloff>:/toolicons/edit-fill-rand.ico</normaloff>:/toolicons/edit-fill-rand.ico</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="Line" name="line_9">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -99,7 +206,7 @@
           <string>Read</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string/>
          </property>
          <property name="icon">
           <iconset resource="../resources/resources.qrc">
@@ -145,7 +252,7 @@
           <string>Verify/Compare</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string/>
          </property>
          <property name="icon">
           <iconset resource="../resources/resources.qrc">
@@ -168,7 +275,7 @@
           <string>Erase</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string/>
          </property>
          <property name="icon">
           <iconset resource="../resources/resources.qrc">
@@ -191,7 +298,7 @@
           <string>Blank Check</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string/>
          </property>
          <property name="icon">
           <iconset resource="../resources/resources.qrc">
@@ -221,7 +328,7 @@
           <string>Get ID</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string/>
          </property>
          <property name="icon">
           <iconset resource="../resources/resources.qrc">
@@ -244,7 +351,7 @@
           <string>Unprotect</string>
          </property>
          <property name="text">
-          <string>...</string>
+          <string/>
          </property>
          <property name="icon">
           <iconset resource="../resources/resources.qrc">
@@ -299,7 +406,7 @@
       </property>
       <widget class="QWidget" name="tabBuffer">
        <attribute name="title">
-        <string>&amp;Buffer</string>
+        <string>Buffer</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_13">
         <item>
@@ -364,6 +471,9 @@
                    <property name="contextMenuPolicy">
                     <enum>Qt::NoContextMenu</enum>
                    </property>
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
                    <property name="text">
                     <string>Press to select...</string>
                    </property>
@@ -375,7 +485,7 @@
                  <item>
                   <widget class="QLabel" name="labelProgTWP">
                    <property name="text">
-                    <string>tWP (µS)</string>
+                    <string notr="true">tWP</string>
                    </property>
                   </widget>
                  </item>
@@ -389,7 +499,7 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>50</width>
+                     <width>45</width>
                      <height>26</height>
                     </size>
                    </property>
@@ -406,14 +516,46 @@
                     <number>1</number>
                    </property>
                    <property name="maximum">
-                    <number>600</number>
+                    <number>999</number>
                    </property>
+                   <property name="value">
+                    <number>1</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxProgTWPUnit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QComboBox::drop-down {border-width: 0px;} QComboBox::down-arrow {image: url(noimg); border-width: 0px;}</string>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string notr="true">µS</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">mS</string>
+                    </property>
+                   </item>
                   </widget>
                  </item>
                  <item>
                   <widget class="QLabel" name="labelProgTWC">
                    <property name="text">
-                    <string>tWC (µS)</string>
+                    <string notr="true">tWC</string>
                    </property>
                   </widget>
                  </item>
@@ -427,7 +569,7 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>50</width>
+                     <width>45</width>
                      <height>26</height>
                     </size>
                    </property>
@@ -438,8 +580,40 @@
                     <number>1</number>
                    </property>
                    <property name="maximum">
-                    <number>600</number>
+                    <number>999</number>
                    </property>
+                   <property name="value">
+                    <number>1</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxProgTWCUnit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>38</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QComboBox::drop-down {border-width: 0px;} QComboBox::down-arrow {image: url(noimg); border-width: 0px;}</string>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string notr="true">µS</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">mS</string>
+                    </property>
+                   </item>
                   </widget>
                  </item>
                  <item>
@@ -467,7 +641,7 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>590</width>
+                   <width>620</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -533,32 +707,32 @@
                    </property>
                    <item>
                     <property name="text">
-                     <string>64</string>
+                     <string notr="true">64</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>128</string>
+                     <string notr="true">128</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>256</string>
+                     <string notr="true">256</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>512</string>
+                     <string notr="true">512</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>1024</string>
+                     <string notr="true">1024</string>
                     </property>
                    </item>
                    <item>
                     <property name="text">
-                     <string>2048</string>
+                     <string notr="true">2048</string>
                     </property>
                    </item>
                   </widget>
@@ -606,7 +780,7 @@
       </widget>
       <widget class="QWidget" name="tabDiagnostics">
        <attribute name="title">
-        <string>&amp;Diagnostics</string>
+        <string>Diagnostics</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_12">
         <item>
@@ -740,7 +914,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>&amp;Connect</string>
+                  <string>Connect</string>
                  </property>
                 </widget>
                </item>
@@ -824,7 +998,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>VDD</string>
+                  <string notr="true">VDD</string>
                  </property>
                 </widget>
                </item>
@@ -996,7 +1170,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Ca&amp;librate</string>
+                  <string>Calibrate</string>
                  </property>
                  <property name="checkable">
                   <bool>false</bool>
@@ -1033,7 +1207,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>VDD on VPP</string>
+                <string notr="true">VDD on VPP</string>
                </property>
               </widget>
              </item>
@@ -1102,7 +1276,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>VPP</string>
+                  <string notr="true">VPP</string>
                  </property>
                 </widget>
                </item>
@@ -1253,7 +1427,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>Cali&amp;brate</string>
+                  <string>Calibrate</string>
                  </property>
                 </widget>
                </item>
@@ -1283,7 +1457,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>VPP on A9</string>
+                  <string notr="true">VPP on A9</string>
                  </property>
                 </widget>
                </item>
@@ -1296,7 +1470,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>VPP on A18</string>
+                  <string notr="true">VPP on A18</string>
                  </property>
                 </widget>
                </item>
@@ -1309,7 +1483,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>VPP on CE</string>
+                  <string notr="true">VPP on CE</string>
                  </property>
                 </widget>
                </item>
@@ -1322,7 +1496,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>VPP on OE</string>
+                  <string notr="true">VPP on OE</string>
                  </property>
                 </widget>
                </item>
@@ -1335,7 +1509,7 @@
                   </size>
                  </property>
                  <property name="text">
-                  <string>VPP on WE</string>
+                  <string notr="true">VPP on WE</string>
                  </property>
                 </widget>
                </item>
@@ -1459,7 +1633,7 @@
                   <string notr="true">text-decoration:overline</string>
                  </property>
                  <property name="text">
-                  <string>CE</string>
+                  <string notr="true">CE</string>
                  </property>
                 </widget>
                </item>
@@ -1487,7 +1661,7 @@
                   <string notr="true">text-decoration:overline</string>
                  </property>
                  <property name="text">
-                  <string>OE</string>
+                  <string notr="true">OE</string>
                  </property>
                 </widget>
                </item>
@@ -1515,7 +1689,7 @@
                   <string notr="true">text-decoration:overline</string>
                  </property>
                  <property name="text">
-                  <string>WE</string>
+                  <string notr="true">WE</string>
                  </property>
                 </widget>
                </item>
@@ -1628,7 +1802,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A23</string>
+                      <string notr="true">A23</string>
                      </property>
                     </widget>
                    </item>
@@ -1647,7 +1821,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A22</string>
+                      <string notr="true">A22</string>
                      </property>
                     </widget>
                    </item>
@@ -1666,7 +1840,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A21</string>
+                      <string notr="true">A21</string>
                      </property>
                     </widget>
                    </item>
@@ -1685,7 +1859,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A20</string>
+                      <string notr="true">A20</string>
                      </property>
                     </widget>
                    </item>
@@ -1704,7 +1878,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A19</string>
+                      <string notr="true">A19</string>
                      </property>
                     </widget>
                    </item>
@@ -1723,7 +1897,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A18</string>
+                      <string notr="true">A18</string>
                      </property>
                     </widget>
                    </item>
@@ -1742,7 +1916,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A17</string>
+                      <string notr="true">A17</string>
                      </property>
                     </widget>
                    </item>
@@ -1761,7 +1935,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A16</string>
+                      <string notr="true">A16</string>
                      </property>
                     </widget>
                    </item>
@@ -1784,7 +1958,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A15</string>
+                      <string notr="true">A15</string>
                      </property>
                     </widget>
                    </item>
@@ -1803,7 +1977,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A14</string>
+                      <string notr="true">A14</string>
                      </property>
                     </widget>
                    </item>
@@ -1822,7 +1996,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A13</string>
+                      <string notr="true">A13</string>
                      </property>
                     </widget>
                    </item>
@@ -1841,7 +2015,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A12</string>
+                      <string notr="true">A12</string>
                      </property>
                     </widget>
                    </item>
@@ -1860,7 +2034,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A11</string>
+                      <string notr="true">A11</string>
                      </property>
                     </widget>
                    </item>
@@ -1879,7 +2053,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A10</string>
+                      <string notr="true">A10</string>
                      </property>
                     </widget>
                    </item>
@@ -1898,7 +2072,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A9</string>
+                      <string notr="true">A9</string>
                      </property>
                     </widget>
                    </item>
@@ -1917,7 +2091,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A8</string>
+                      <string notr="true">A8</string>
                      </property>
                     </widget>
                    </item>
@@ -1940,7 +2114,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A7</string>
+                      <string notr="true">A7</string>
                      </property>
                     </widget>
                    </item>
@@ -1959,7 +2133,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A6</string>
+                      <string notr="true">A6</string>
                      </property>
                     </widget>
                    </item>
@@ -1978,7 +2152,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A5</string>
+                      <string notr="true">A5</string>
                      </property>
                     </widget>
                    </item>
@@ -1997,7 +2171,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A4</string>
+                      <string notr="true">A4</string>
                      </property>
                     </widget>
                    </item>
@@ -2016,7 +2190,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A3</string>
+                      <string notr="true">A3</string>
                      </property>
                     </widget>
                    </item>
@@ -2035,7 +2209,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A2</string>
+                      <string notr="true">A2</string>
                      </property>
                     </widget>
                    </item>
@@ -2054,7 +2228,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A1</string>
+                      <string notr="true">A1</string>
                      </property>
                     </widget>
                    </item>
@@ -2073,7 +2247,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>A0</string>
+                      <string notr="true">A0</string>
                      </property>
                     </widget>
                    </item>
@@ -2153,7 +2327,7 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>Set &amp;Address</string>
+                    <string>Set Address</string>
                    </property>
                   </widget>
                  </item>
@@ -2255,7 +2429,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D15</string>
+                      <string notr="true">D15</string>
                      </property>
                     </widget>
                    </item>
@@ -2274,7 +2448,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D14</string>
+                      <string notr="true">D14</string>
                      </property>
                     </widget>
                    </item>
@@ -2293,7 +2467,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D13</string>
+                      <string notr="true">D13</string>
                      </property>
                     </widget>
                    </item>
@@ -2312,7 +2486,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D12</string>
+                      <string notr="true">D12</string>
                      </property>
                     </widget>
                    </item>
@@ -2331,7 +2505,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D11</string>
+                      <string notr="true">D11</string>
                      </property>
                     </widget>
                    </item>
@@ -2350,7 +2524,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D10</string>
+                      <string notr="true">D10</string>
                      </property>
                     </widget>
                    </item>
@@ -2369,7 +2543,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D9</string>
+                      <string notr="true">D9</string>
                      </property>
                     </widget>
                    </item>
@@ -2388,7 +2562,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D8</string>
+                      <string notr="true">D8</string>
                      </property>
                     </widget>
                    </item>
@@ -2411,7 +2585,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D7</string>
+                      <string notr="true">D7</string>
                      </property>
                     </widget>
                    </item>
@@ -2430,7 +2604,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D6</string>
+                      <string notr="true">D6</string>
                      </property>
                     </widget>
                    </item>
@@ -2449,7 +2623,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D5</string>
+                      <string notr="true">D5</string>
                      </property>
                     </widget>
                    </item>
@@ -2468,7 +2642,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D4</string>
+                      <string notr="true">D4</string>
                      </property>
                     </widget>
                    </item>
@@ -2487,7 +2661,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D3</string>
+                      <string notr="true">D3</string>
                      </property>
                     </widget>
                    </item>
@@ -2506,7 +2680,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D2</string>
+                      <string notr="true">D2</string>
                      </property>
                     </widget>
                    </item>
@@ -2525,7 +2699,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D1</string>
+                      <string notr="true">D1</string>
                      </property>
                     </widget>
                    </item>
@@ -2544,7 +2718,7 @@
                       </size>
                      </property>
                      <property name="text">
-                      <string>D0</string>
+                      <string notr="true">D0</string>
                      </property>
                     </widget>
                    </item>
@@ -2643,7 +2817,7 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>Set Da&amp;ta</string>
+                    <string>Set Data</string>
                    </property>
                   </widget>
                  </item>
@@ -2662,7 +2836,7 @@
                     </size>
                    </property>
                    <property name="text">
-                    <string>&amp;Get Data</string>
+                    <string>Get Data</string>
                    </property>
                   </widget>
                  </item>
@@ -2737,13 +2911,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>660</width>
+     <width>686</width>
      <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>&amp;File</string>
+     <string>File</string>
     </property>
     <addaction name="actionOpen"/>
     <addaction name="actionSave"/>
@@ -2753,7 +2927,7 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>&amp;Help</string>
+     <string>Help</string>
     </property>
     <addaction name="actionAbout"/>
     <addaction name="actionAboutQt"/>
@@ -2763,14 +2937,14 @@
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
-     <string>&amp;Window</string>
+     <string>Window</string>
     </property>
     <addaction name="actionBuffer"/>
     <addaction name="actionDiagnostics"/>
    </widget>
    <widget class="QMenu" name="menuBuffer">
     <property name="title">
-     <string>&amp;Edit</string>
+     <string>Edit</string>
     </property>
     <addaction name="actionFillFF"/>
     <addaction name="actionFill00"/>
@@ -2781,7 +2955,7 @@
    </widget>
    <widget class="QMenu" name="menuDevice">
     <property name="title">
-     <string>De&amp;vice</string>
+     <string>Device</string>
     </property>
     <widget class="QMenu" name="menuParallelMemory">
      <property name="title">
@@ -2792,11 +2966,13 @@
        <string>SRAM</string>
       </property>
       <addaction name="actionSRAM2K"/>
+      <addaction name="actionSRAM4K"/>
       <addaction name="actionSRAM8K"/>
       <addaction name="actionSRAM16K"/>
       <addaction name="actionSRAM32K"/>
       <addaction name="actionSRAM64K"/>
       <addaction name="actionSRAM128K"/>
+      <addaction name="actionSRAM256K"/>
       <addaction name="actionSRAM512K"/>
      </widget>
      <addaction name="menuSRAM"/>
@@ -2812,7 +2988,7 @@
    </widget>
    <widget class="QMenu" name="menuAction">
     <property name="title">
-     <string>&amp;Action</string>
+     <string>Action</string>
     </property>
     <widget class="QMenu" name="menuProgram">
      <property name="enabled">
@@ -2839,6 +3015,7 @@
     <addaction name="actionVerify"/>
     <addaction name="menuErase"/>
     <addaction name="actionBlankCheck"/>
+    <addaction name="separator"/>
     <addaction name="actionGetID"/>
     <addaction name="actionUnprotect"/>
    </widget>
@@ -2852,77 +3029,122 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionExit">
    <property name="text">
-    <string>E&amp;xit</string>
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+X</string>
    </property>
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>A&amp;bout</string>
+    <string>About</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Shift+F1</string>
    </property>
   </action>
   <action name="actionAboutQt">
    <property name="text">
-    <string>About &amp;Qt</string>
+    <string>About Qt</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Alt+F1</string>
    </property>
   </action>
   <action name="actionBuffer">
    <property name="text">
-    <string>&amp;Buffer</string>
+    <string>Buffer</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+1</string>
    </property>
   </action>
   <action name="actionDiagnostics">
    <property name="text">
-    <string>&amp;Diagnostics</string>
+    <string>Diagnostics</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+2</string>
    </property>
   </action>
   <action name="actionProjectHome">
    <property name="text">
-    <string>&amp;Project Home</string>
+    <string>Project Home</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">F1</string>
    </property>
   </action>
   <action name="actionAuthorHome">
    <property name="text">
-    <string>Au&amp;thor Home</string>
+    <string>Author Home</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+F1</string>
    </property>
   </action>
   <action name="actionOpen">
    <property name="text">
-    <string>&amp;Open...</string>
+    <string>Open...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+L</string>
    </property>
   </action>
   <action name="actionSave">
    <property name="text">
-    <string>&amp;Save</string>
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+S</string>
    </property>
   </action>
   <action name="actionSaveAs">
    <property name="text">
-    <string>Save &amp;As...</string>
+    <string>Save As...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+S</string>
    </property>
   </action>
   <action name="actionFillFF">
    <property name="text">
-    <string>Fill with 0x&amp;FF</string>
+    <string>Fill with 0xFF</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+N</string>
    </property>
   </action>
   <action name="actionFill00">
    <property name="text">
-    <string>Fill with 0x&amp;00</string>
+    <string>Fill with 0x00</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+N</string>
    </property>
   </action>
   <action name="actionFillRandom">
    <property name="text">
-    <string>Fill with &amp;Random</string>
+    <string>Fill with Random</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Alt+N</string>
    </property>
   </action>
   <action name="actionFind">
    <property name="text">
-    <string>Fin&amp;d...</string>
+    <string>Find...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+F</string>
    </property>
   </action>
   <action name="actionReplace">
    <property name="text">
-    <string>Re&amp;place...</string>
+    <string>Replace...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+F</string>
    </property>
   </action>
   <action name="actionRead">
@@ -2932,6 +3154,9 @@
    <property name="text">
     <string>Read</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+R</string>
+   </property>
   </action>
   <action name="actionVerify">
    <property name="enabled">
@@ -2939,6 +3164,9 @@
    </property>
    <property name="text">
     <string>Verify/Compare</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+C</string>
    </property>
   </action>
   <action name="actionBlankCheck">
@@ -2948,6 +3176,9 @@
    <property name="text">
     <string>Blank Check</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+B</string>
+   </property>
   </action>
   <action name="actionGetID">
    <property name="enabled">
@@ -2955,6 +3186,9 @@
    </property>
    <property name="text">
     <string>Get ID</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+I</string>
    </property>
   </action>
   <action name="actionUnprotect">
@@ -2964,6 +3198,9 @@
    <property name="text">
     <string>Unprotect</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+U</string>
+   </property>
   </action>
   <action name="actionProgramAndVerify">
    <property name="enabled">
@@ -2971,6 +3208,9 @@
    </property>
    <property name="text">
     <string>Program and Verify</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+P</string>
    </property>
   </action>
   <action name="actionDoProgram">
@@ -2980,6 +3220,9 @@
    <property name="text">
     <string>Program</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+P</string>
+   </property>
   </action>
   <action name="actionDoErase">
    <property name="enabled">
@@ -2987,6 +3230,9 @@
    </property>
    <property name="text">
     <string>Erase</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+E</string>
    </property>
   </action>
   <action name="actionEraseAndBlankCheck">
@@ -2996,6 +3242,9 @@
    <property name="text">
     <string>Erase and Blank Check</string>
    </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+Shift+E</string>
+   </property>
   </action>
   <action name="actionDeviceI2C">
    <property name="enabled">
@@ -3003,6 +3252,9 @@
    </property>
    <property name="text">
     <string>I2C Memory</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionDeviceSPI">
@@ -3012,6 +3264,9 @@
    <property name="text">
     <string>SPI Memory</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionEPROM">
    <property name="enabled">
@@ -3019,6 +3274,9 @@
    </property>
    <property name="text">
     <string>EPROM</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionEPROMElectricalErasable">
@@ -3028,6 +3286,9 @@
    <property name="text">
     <string>EPROM (Electrical Erasable)</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionEEPROM">
    <property name="enabled">
@@ -3035,6 +3296,9 @@
    </property>
    <property name="text">
     <string>EEPROM</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionFlash">
@@ -3044,40 +3308,134 @@
    <property name="text">
     <string>Flash</string>
    </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
   </action>
   <action name="actionSRAM2K">
    <property name="text">
-    <string>SRAM 6116 (2KB)</string>
+    <string notr="true">SRAM xx16 (2KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx16 (2KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx16 (2KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionSRAM8K">
    <property name="text">
-    <string>SRAM 6264 (8KB)</string>
+    <string notr="true">SRAM xx64 (8KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx64 (8KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx64 (8KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionSRAM16K">
    <property name="text">
-    <string>SRAM 62128 (16KB)</string>
+    <string notr="true">SRAM xx128 (16KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx128 (16KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx128 (16KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionSRAM32K">
    <property name="text">
-    <string>SRAM 62256 (32KB)</string>
+    <string notr="true">SRAM xx256 (32KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx256 (32KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx256 (32KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionSRAM64K">
    <property name="text">
-    <string>SRAM 62512 (64KB)</string>
+    <string notr="true">SRAM xx512 (64KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx512 (64KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx512 (64KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionSRAM128K">
    <property name="text">
-    <string>SRAM 628128 (128KB)</string>
+    <string notr="true">SRAM xx010 (128KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx010 (128KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx010 (128KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
   <action name="actionSRAM512K">
    <property name="text">
-    <string>SRAM 628512 (512KB)</string>
+    <string notr="true">SRAM xx040 (512KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx040 (512KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx040 (512KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="actionSRAM4K">
+   <property name="text">
+    <string notr="true">SRAM xx32 (4KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx32 (4KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx32 (4KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
+   </property>
+  </action>
+  <action name="actionSRAM256K">
+   <property name="text">
+    <string notr="true">SRAM xx020 (256KB)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx020 (256KB)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx020 (256KB)</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true"/>
    </property>
   </action>
  </widget>

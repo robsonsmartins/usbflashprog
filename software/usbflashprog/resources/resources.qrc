@@ -5,6 +5,11 @@
     <qresource>
         <file>toolicons/file-open.ico</file>
         <file>toolicons/file-save.ico</file>
+        <file>toolicons/file-find.ico</file>
+        <file>toolicons/file-replace.ico</file>
+        <file>toolicons/edit-fill-ff.ico</file>
+        <file>toolicons/edit-fill-00.ico</file>
+        <file>toolicons/edit-fill-rand.ico</file>
         <file>toolicons/action-read.ico</file>
         <file>toolicons/action-prog.ico</file>
         <file>toolicons/action-verify.ico</file>

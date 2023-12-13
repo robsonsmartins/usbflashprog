@@ -45,15 +45,20 @@ class SRAM : public Device {
     explicit SRAM(QObject *parent = nullptr);
     /** @brief Destructor. */
     virtual ~SRAM();
-
+    /* Reimplemented */
     virtual bool program(const QByteArray &buffer, bool verify = false);
 
   protected:
-    /* @brief Tests the SRAM.
+    /* @brief Tests the SRAM: Pattern Test.
      * @param current[in,out] Current progress, in bytes.
      * @param total Total progress, in bytes.
      * @return True if success, false otherwise. */
-    virtual bool testRAM_(uint32_t &current, uint32_t total);
+    virtual bool doPatternTest_(uint32_t &current, uint32_t total);
+    /* @brief Tests the SRAM: Random Test.
+     * @param current[in,out] Current progress, in bytes.
+     * @param total Total progress, in bytes.
+     * @return True if success, false otherwise. */
+    virtual bool doRandomTest_(uint32_t &current, uint32_t total);
     /* @brief Resets (and initializes) the bus (address, data, control).
      * @return True if success, false otherwise. */
     virtual bool resetBus_();
@@ -68,6 +73,9 @@ class SRAM : public Device {
     /* @brief Generates a buffer with random data.
      * @return Buffer with random data. */
     virtual QByteArray generateRandomData_();
+    /* @brief Generates a buffer with a specified pattern data.
+     * @return Buffer with pattern data. */
+    virtual QByteArray generatePatternData_();
     /* @brief Program the SRAM.
      * @param buffer Data to write.
      * @param current[in,out] Current progress, in bytes.

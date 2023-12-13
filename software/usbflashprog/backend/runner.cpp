@@ -16,7 +16,6 @@
 // ---------------------------------------------------------------------------
 
 #include <QDateTime>
-#include <QCoreApplication>
 
 #include <chrono>
 #include <thread>
@@ -124,7 +123,9 @@ Runner::Runner(QObject* parent)
       error_(false),
       address_(0) {}
 
-Runner::~Runner() { close(); }
+Runner::~Runner() {
+    close();
+}
 
 TSerialPortList Runner::list() const {
     TSerialPortList result;
@@ -173,13 +174,21 @@ void Runner::close() {
     error_ = false;
 }
 
-bool Runner::isOpen() const { return running_; }
+bool Runner::isOpen() const {
+    return running_;
+}
 
-bool Runner::hasError() const { return error_; }
+bool Runner::hasError() const {
+    return error_;
+}
 
-QString Runner::getPath() const { return serial_.portName(); }
+QString Runner::getPath() const {
+    return serial_.portName();
+}
 
-uint32_t Runner::getTimeOut() const { return timeout_; }
+uint32_t Runner::getTimeOut() const {
+    return timeout_;
+}
 
 void Runner::setTimeOut(uint32_t value) {
     if (timeout_ == value) {
@@ -782,7 +791,9 @@ bool Runner::addrSetW(uint16_t value) {
     return true;
 }
 
-uint32_t Runner::addrGet() const { return address_; }
+uint32_t Runner::addrGet() const {
+    return address_;
+}
 
 bool Runner::dataClr() {
     if (error_ || !serial_.isOpen()) {
@@ -918,7 +929,7 @@ void Runner::msDelay(uint32_t value) {
     auto end = start;
     int64_t elapsed = 0;
     do {
-        QCoreApplication::processEvents();
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
         end = std::chrono::steady_clock::now();
         elapsed =
             std::chrono::duration_cast<std::chrono::milliseconds>(end - start)

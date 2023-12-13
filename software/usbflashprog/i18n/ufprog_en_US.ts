@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="en_US">
 <context>
+    <name>Device</name>
+    <message>
+        <source>Unknown</source>
+        <translation>Unknown</translation>
+    </message>
+</context>
+<context>
     <name>HexFindDialog</name>
     <message>
         <source>Replace...</source>
@@ -123,32 +130,12 @@
         <translation>USB Flash/EPROM Programmer</translation>
     </message>
     <message>
-        <source>&amp;File</source>
-        <translation>&amp;File</translation>
-    </message>
-    <message>
-        <source>&amp;Buffer</source>
-        <translation>&amp;Buffer</translation>
-    </message>
-    <message>
-        <source>&amp;Diagnostics</source>
-        <translation>&amp;Diagnostics</translation>
-    </message>
-    <message>
         <source>Board Diagnostics</source>
         <translation>Board Diagnostics</translation>
     </message>
     <message>
         <source>Port</source>
         <translation>Port</translation>
-    </message>
-    <message>
-        <source>&amp;Connect</source>
-        <translation>&amp;Connect</translation>
-    </message>
-    <message>
-        <source>VDD</source>
-        <translation>VDD</translation>
     </message>
     <message>
         <source>On/Off</source>
@@ -163,244 +150,16 @@
         <translation>Duty (%)</translation>
     </message>
     <message>
-        <source>VDD on VPP</source>
-        <translation>VDD on VPP</translation>
-    </message>
-    <message>
-        <source>VPP</source>
-        <translation>VPP</translation>
-    </message>
-    <message>
-        <source>VPP on A9</source>
-        <translation>VPP on A9</translation>
-    </message>
-    <message>
-        <source>VPP on A18</source>
-        <translation>VPP on A18</translation>
-    </message>
-    <message>
-        <source>VPP on CE</source>
-        <translation>VPP on CE</translation>
-    </message>
-    <message>
-        <source>VPP on OE</source>
-        <translation>VPP on OE</translation>
-    </message>
-    <message>
-        <source>VPP on WE</source>
-        <translation>VPP on WE</translation>
-    </message>
-    <message>
         <source>Control Bus</source>
         <translation>Control Bus</translation>
-    </message>
-    <message>
-        <source>CE</source>
-        <translation>CE</translation>
-    </message>
-    <message>
-        <source>OE</source>
-        <translation>OE</translation>
-    </message>
-    <message>
-        <source>WE</source>
-        <translation>WE</translation>
     </message>
     <message>
         <source>Address Bus</source>
         <translation>Address Bus</translation>
     </message>
     <message>
-        <source>A23</source>
-        <translation>A23</translation>
-    </message>
-    <message>
-        <source>A22</source>
-        <translation>A22</translation>
-    </message>
-    <message>
-        <source>A21</source>
-        <translation>A21</translation>
-    </message>
-    <message>
-        <source>A20</source>
-        <translation>A20</translation>
-    </message>
-    <message>
-        <source>A19</source>
-        <translation>A19</translation>
-    </message>
-    <message>
-        <source>A18</source>
-        <translation>A18</translation>
-    </message>
-    <message>
-        <source>A17</source>
-        <translation>A17</translation>
-    </message>
-    <message>
-        <source>A16</source>
-        <translation>A16</translation>
-    </message>
-    <message>
-        <source>A15</source>
-        <translation>A15</translation>
-    </message>
-    <message>
-        <source>A14</source>
-        <translation>A14</translation>
-    </message>
-    <message>
-        <source>A13</source>
-        <translation>A13</translation>
-    </message>
-    <message>
-        <source>A12</source>
-        <translation>A12</translation>
-    </message>
-    <message>
-        <source>A11</source>
-        <translation>A11</translation>
-    </message>
-    <message>
-        <source>A10</source>
-        <translation>A10</translation>
-    </message>
-    <message>
-        <source>A9</source>
-        <translation>A9</translation>
-    </message>
-    <message>
-        <source>A8</source>
-        <translation>A8</translation>
-    </message>
-    <message>
-        <source>A7</source>
-        <translation>A7</translation>
-    </message>
-    <message>
-        <source>A6</source>
-        <translation>A6</translation>
-    </message>
-    <message>
-        <source>A5</source>
-        <translation>A5</translation>
-    </message>
-    <message>
-        <source>A4</source>
-        <translation>A4</translation>
-    </message>
-    <message>
-        <source>A3</source>
-        <translation>A3</translation>
-    </message>
-    <message>
-        <source>A2</source>
-        <translation>A2</translation>
-    </message>
-    <message>
-        <source>A1</source>
-        <translation>A1</translation>
-    </message>
-    <message>
-        <source>A0</source>
-        <translation>A0</translation>
-    </message>
-    <message>
         <source>Data Bus</source>
         <translation>Data Bus</translation>
-    </message>
-    <message>
-        <source>D15</source>
-        <translation>D15</translation>
-    </message>
-    <message>
-        <source>D14</source>
-        <translation>D14</translation>
-    </message>
-    <message>
-        <source>D13</source>
-        <translation>D13</translation>
-    </message>
-    <message>
-        <source>D12</source>
-        <translation>D12</translation>
-    </message>
-    <message>
-        <source>D11</source>
-        <translation>D11</translation>
-    </message>
-    <message>
-        <source>D10</source>
-        <translation>D10</translation>
-    </message>
-    <message>
-        <source>D9</source>
-        <translation>D9</translation>
-    </message>
-    <message>
-        <source>D8</source>
-        <translation>D8</translation>
-    </message>
-    <message>
-        <source>D7</source>
-        <translation>D7</translation>
-    </message>
-    <message>
-        <source>D6</source>
-        <translation>D6</translation>
-    </message>
-    <message>
-        <source>D5</source>
-        <translation>D5</translation>
-    </message>
-    <message>
-        <source>D4</source>
-        <translation>D4</translation>
-    </message>
-    <message>
-        <source>D3</source>
-        <translation>D3</translation>
-    </message>
-    <message>
-        <source>D2</source>
-        <translation>D2</translation>
-    </message>
-    <message>
-        <source>D1</source>
-        <translation>D1</translation>
-    </message>
-    <message>
-        <source>D0</source>
-        <translation>D0</translation>
-    </message>
-    <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Help</translation>
-    </message>
-    <message>
-        <source>&amp;Window</source>
-        <translation>&amp;Window</translation>
-    </message>
-    <message>
-        <source>E&amp;xit</source>
-        <translation>E&amp;xit</translation>
-    </message>
-    <message>
-        <source>A&amp;bout</source>
-        <translation>A&amp;bout</translation>
-    </message>
-    <message>
-        <source>About &amp;Qt</source>
-        <translation>About &amp;Qt</translation>
-    </message>
-    <message>
-        <source>&amp;Project Home</source>
-        <translation>&amp;Project Home</translation>
-    </message>
-    <message>
-        <source>Au&amp;thor Home</source>
-        <translation>Au&amp;thor Home</translation>
     </message>
     <message>
         <source>A memory device programmer (Flash/EPROM/E2PROM) board and software,connected to PC by USB port.</source>
@@ -443,58 +202,6 @@
         <translation>Error opening the &quot;%1&quot; port.</translation>
     </message>
     <message>
-        <source>&amp;Disconnect</source>
-        <translation>&amp;Disconnect</translation>
-    </message>
-    <message>
-        <source>Ca&amp;librate</source>
-        <translation>Ca&amp;librate</translation>
-    </message>
-    <message>
-        <source>Cali&amp;brate</source>
-        <translation>Cali&amp;brate</translation>
-    </message>
-    <message>
-        <source>Set &amp;Address</source>
-        <translation>Set &amp;Address</translation>
-    </message>
-    <message>
-        <source>Set Da&amp;ta</source>
-        <translation>Set Da&amp;ta</translation>
-    </message>
-    <message>
-        <source>&amp;Get Data</source>
-        <translation>Set Da&amp;ta</translation>
-    </message>
-    <message>
-        <source>&amp;Edit</source>
-        <translation>&amp;Edit</translation>
-    </message>
-    <message>
-        <source>&amp;Open...</source>
-        <translation>&amp;Open...</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Save</translation>
-    </message>
-    <message>
-        <source>Save &amp;As...</source>
-        <translation>Save &amp;As...</translation>
-    </message>
-    <message>
-        <source>Fill with 0x&amp;FF</source>
-        <translation>Fill with 0x&amp;FF</translation>
-    </message>
-    <message>
-        <source>Fill with 0x&amp;00</source>
-        <translation>Fill with 0x&amp;00</translation>
-    </message>
-    <message>
-        <source>Fill with &amp;Random</source>
-        <translation>Fill with &amp;Random</translation>
-    </message>
-    <message>
         <source>Open Binary File</source>
         <translation>Open Binary File</translation>
     </message>
@@ -519,20 +226,6 @@
         <translation>Save</translation>
     </message>
     <message>
-        <source>Fin&amp;d...</source>
-        <translation>Fin&amp;d...</translation>
-    </message>
-    <message>
-        <source>Re&amp;place...</source>
-        <translation>Re&amp;place...</translation>
-    </message>
-    <message>
-        <source>There is unsaved data in the editor. 
-Are you sure you want to lose this data?</source>
-        <translation>There is unsaved data in the editor. 
-Are you sure you want to lose this data?</translation>
-    </message>
-    <message>
         <source>Error reading file &quot;%1&quot;.</source>
         <translation>Error reading file &quot;%1&quot;.</translation>
     </message>
@@ -555,6 +248,234 @@ Are you sure you want to lose this data?</translation>
     <message>
         <source>All Flash/EPROM Files</source>
         <translation>All Flash/EPROM Files</translation>
+    </message>
+    <message>
+        <source>Read</source>
+        <translation>Read</translation>
+    </message>
+    <message>
+        <source>Program</source>
+        <translation>Program</translation>
+    </message>
+    <message>
+        <source>Verify/Compare</source>
+        <translation>Verify/Compare</translation>
+    </message>
+    <message>
+        <source>Erase</source>
+        <translation>Erase</translation>
+    </message>
+    <message>
+        <source>Blank Check</source>
+        <translation>Blank Check</translation>
+    </message>
+    <message>
+        <source>Get ID</source>
+        <translation>Get ID</translation>
+    </message>
+    <message>
+        <source>Unprotect</source>
+        <translation>Unprotect</translation>
+    </message>
+    <message>
+        <source>Device</source>
+        <translation>Device</translation>
+    </message>
+    <message>
+        <source>Press to select...</source>
+        <translation>Press to select...</translation>
+    </message>
+    <message>
+        <source>Skip Write 0xFF</source>
+        <translation>Skip Write 0xFF</translation>
+    </message>
+    <message>
+        <source>Fast Programming/Erase</source>
+        <translation>Fast Programming/Erase</translation>
+    </message>
+    <message>
+        <source>Sector Size</source>
+        <translation>Sector Size</translation>
+    </message>
+    <message>
+        <source>Parallel Memory</source>
+        <translation>Parallel Memory</translation>
+    </message>
+    <message>
+        <source>SRAM</source>
+        <translation>SRAM</translation>
+    </message>
+    <message>
+        <source>I2C Memory</source>
+        <translation>I2C Memory</translation>
+    </message>
+    <message>
+        <source>SPI Memory</source>
+        <translation>SPI Memory</translation>
+    </message>
+    <message>
+        <source>EPROM</source>
+        <translation>EPROM</translation>
+    </message>
+    <message>
+        <source>EPROM (Electrical Erasable)</source>
+        <translation>EPROM (Electrical Erasable)</translation>
+    </message>
+    <message>
+        <source>EEPROM</source>
+        <translation>EEPROM</translation>
+    </message>
+    <message>
+        <source>Flash</source>
+        <translation>Flash</translation>
+    </message>
+    <message>
+        <source>Operation canceled.</source>
+        <translation>Operation canceled.</translation>
+    </message>
+    <message>
+        <source>Operation successfully completed.</source>
+        <translation>Operation successfully completed.</translation>
+    </message>
+    <message>
+        <source>Error at address 0x%1</source>
+        <translation>Error at address 0x%1</translation>
+    </message>
+    <message>
+        <source>Processing address 0x%1 of 0x%2</source>
+        <translation>Processing address 0x%1 of 0x%2</translation>
+    </message>
+    <message>
+        <source>Test SRAM</source>
+        <translation>Test SRAM</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Cancel</translation>
+    </message>
+    <message>
+        <source>Manufacturer: 0x%1 (%2)</source>
+        <translation>Manufacturer: 0x%1 (%2)</translation>
+    </message>
+    <message>
+        <source>There is unsaved data in the editor.</source>
+        <translation>There is unsaved data in the editor.</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to lose this data?</source>
+        <translation>Are you sure you want to lose this data?</translation>
+    </message>
+    <message>
+        <source>Device : 0x%1</source>
+        <translation>Device : 0x%1</translation>
+    </message>
+    <message>
+        <source>Exit</source>
+        <translation>Exit</translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>About</translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation>About Qt</translation>
+    </message>
+    <message>
+        <source>Buffer</source>
+        <translation>Buffer</translation>
+    </message>
+    <message>
+        <source>Diagnostics</source>
+        <translation>Diagnostics</translation>
+    </message>
+    <message>
+        <source>Project Home</source>
+        <translation>Project Home</translation>
+    </message>
+    <message>
+        <source>Author Home</source>
+        <translation>Author Home</translation>
+    </message>
+    <message>
+        <source>Open...</source>
+        <translation>Open...</translation>
+    </message>
+    <message>
+        <source>Save As...</source>
+        <translation>Save As...</translation>
+    </message>
+    <message>
+        <source>Fill with 0xFF</source>
+        <translation>Fill with 0xFF</translation>
+    </message>
+    <message>
+        <source>Fill with 0x00</source>
+        <translation>Fill with 0x00</translation>
+    </message>
+    <message>
+        <source>Fill with Random</source>
+        <translation>Fill with Random</translation>
+    </message>
+    <message>
+        <source>Find...</source>
+        <translation>Find...</translation>
+    </message>
+    <message>
+        <source>Replace...</source>
+        <translation>Replace...</translation>
+    </message>
+    <message>
+        <source>Program and Verify</source>
+        <translation>Program and Verify</translation>
+    </message>
+    <message>
+        <source>Erase and Blank Check</source>
+        <translation>Erase and Blank Check</translation>
+    </message>
+    <message>
+        <source>Connect</source>
+        <translation>Connect</translation>
+    </message>
+    <message>
+        <source>Calibrate</source>
+        <translation>Calibrate</translation>
+    </message>
+    <message>
+        <source>Set Address</source>
+        <translation>Set Address</translation>
+    </message>
+    <message>
+        <source>Set Data</source>
+        <translation>Set Data</translation>
+    </message>
+    <message>
+        <source>Get Data</source>
+        <translation>Get Data</translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation>File</translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>Help</translation>
+    </message>
+    <message>
+        <source>Window</source>
+        <translation>Window</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Edit</translation>
+    </message>
+    <message>
+        <source>Action</source>
+        <translation>Action</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation>Disconnect</translation>
     </message>
 </context>
 </TS>

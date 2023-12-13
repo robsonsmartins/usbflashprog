@@ -68,6 +68,16 @@ class QHexEditor : public QHexView {
      */
     bool saveAs(QEpromFile::QEpromFileType type, const QString& filename);
     /**
+     * @brief Puts the data into the editor.
+     * @param data Data to put, from offset 0. Max `QHexEditor::size()`.
+     */
+    void putData(const QByteArray& data);
+    /**
+     * @brief Gets the data from the editor.
+     * @return Data buffer.
+     */
+    QByteArray getData(void) const;
+    /**
      * @brief Fills all data with a value.
      * @param value Value to fill (default = 0xFF).
      */

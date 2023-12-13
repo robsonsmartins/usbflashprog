@@ -29,6 +29,8 @@
 #include <QFileInfo>
 #include <QMenu>
 #include <QAction>
+#include <QSettings>
+#include <QSignalBlocker>
 
 #include <cstdio>
 #include <cstring>
@@ -41,7 +43,26 @@
 #include "./ui_mainwindow.h"
 #include "backend/opcodes.hpp"
 
+#include "backend/devices/parallel/dummy.hpp"
 #include "backend/devices/parallel/sram.hpp"
+
+// ---------------------------------------------------------------------------
+
+/* @brief Minimum length of dialog labels, in characters. */
+constexpr int kDialogLabelMinLength = 80;
+
+/* @brief Setting: Programmer / Selected Device. */
+constexpr const char *kSettingProgDevice = "Prog/Device";
+/* @brief Setting: Programmer / tWP. */
+constexpr const char *kSettingProgTwp = "Prog/tWP";
+/* @brief Setting: Programmer / tWC. */
+constexpr const char *kSettingProgTwc = "Prog/tWC";
+/* @brief Setting: Programmer / Skip Prog 0xFF. */
+constexpr const char *kSettingProgSkipFF = "Prog/SkipFF";
+/* @brief Setting: Programmer / Fast Prog/Erase. */
+constexpr const char *kSettingProgFast = "Prog/FastProg";
+/* @brief Setting: Programmer / Sector Size. */
+constexpr const char *kSettingProgSectorSize = "Prog/SectorSize";
 
 // ---------------------------------------------------------------------------
 // General
@@ -70,13 +91,40 @@ MainWindow::MainWindow(QWidget *parent)
     font.setCapitalization(QFont::AllUppercase);
     ui_->spinBoxData->setFont(font);
 
+    progress_ = new QProgressDialog(this);
+    progress_->close();
+    progress_->setMinimumWidth(400);
+    progress_->setMinimumDuration(0);
+    progress_->setWindowModality(Qt::WindowModal);
+    progress_->setWindowFlags(
+        (progress_->windowFlags() | Qt::MSWindowsFixedSizeDialogHint) &
+        ~Qt::WindowContextHelpButtonHint);
+
     hexeditor_ = new QHexEditor(ui_->frameEditor);
     ui_->frameEditor->layout()->addWidget(hexeditor_);
-    ui_->actionSave->setEnabled(false);
+    ui_->frameEditor->layout()->setContentsMargins(0, 0, 20, 20);
 
+    QFrame *frame = new QFrame();
+    QHBoxLayout *layout = new QHBoxLayout(frame);
+    QWidget *contentWidget = new QWidget();
+    layout->addWidget(contentWidget);
+
+    ui_->actionSave->setEnabled(false);
     connectSignals_();
     enableDiagControls_(false);
     enumTimer_.start(kUsbEnumerateInterval);
+
+    loadSettings_();
+}
+
+MainWindow::~MainWindow() {
+    delete progress_;
+    if (device_) {
+        device_->disconnect();
+        delete device_;
+    }
+    delete hexeditor_;
+    delete ui_;
 }
 
 void MainWindow::connectSignals_() {
@@ -90,6 +138,8 @@ void MainWindow::connectSignals_() {
                     &MainWindow::onSelectDeviceTriggered);
         }
     }
+    // editor
+    connect(hexeditor_, &QHexEditor::changed, this, &MainWindow::onDataChanged);
     // diag
     connect(&refreshTimer_, &QTimer::timeout, this,
             &MainWindow::onRefreshTimerTimeout);
@@ -173,15 +223,6 @@ void MainWindow::connectSignals_() {
             &MainWindow::onCheckBoxDataToggled);
     connect(ui_->checkBoxD15, &QCheckBox::toggled, this,
             &MainWindow::onCheckBoxDataToggled);
-    // editor
-    connect(hexeditor_, &QHexEditor::changed, this, &MainWindow::onDataChanged);
-}
-
-MainWindow::~MainWindow() {
-    delete ui_;
-    if (device_) {
-        delete device_;
-    }
 }
 
 QScreen *MainWindow::screen() const {
@@ -262,6 +303,10 @@ void MainWindow::onEnumTimerTimeout() {
     refreshPortComboBox_();
 }
 
+void MainWindow::on_comboBoxProgPort_currentIndexChanged(int index) {
+    configureProgControls_();
+}
+
 void MainWindow::onBtnSelectDeviceClicked(bool checked) {
     QPoint globalPos = ui_->btnProgDevice->mapToGlobal(
         QPoint(0, ui_->btnProgDevice->height()));
@@ -271,11 +316,225 @@ void MainWindow::onBtnSelectDeviceClicked(bool checked) {
 void MainWindow::onSelectDeviceTriggered(bool checked) {
     QAction *action = qobject_cast<QAction *>(sender());
     ui_->btnProgDevice->setText(action->text());
+    createDevice_();
+    configureProgControls_();
+    saveSettings_();
+}
+
+void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
+                                  bool success, bool canceled) {
+    if (!current) progress_->setRange(current, total);
+    if (canceled) {
+        progress_->setValue(total);
+        QMessageBox::warning(
+            this, progress_->windowTitle(),
+            tr("Operation canceled.").leftJustified(kDialogLabelMinLength));
+    } else if (done && success) {
+        progress_->setValue(total);
+        QMessageBox::information(this, progress_->windowTitle(),
+                                 tr("Operation successfully completed.")
+                                     .leftJustified(kDialogLabelMinLength));
+    } else if (done && !success) {
+        progress_->setValue(total);
+        QMessageBox::critical(
+            this, progress_->windowTitle(),
+            tr("Error at address 0x%1")
+                .arg(QString("%1").arg(current, 4, 16, QChar('0')).toUpper())
+                .leftJustified(kDialogLabelMinLength));
+    } else {
+        progress_->setValue(current);
+        progress_->setLabelText(
+            tr("Processing address 0x%1 of 0x%2")
+                .arg(QString("%1").arg(current, 4, 16, QChar('0')).toUpper())
+                .arg(QString("%1").arg(total, 4, 16, QChar('0')).toUpper()));
+    }
+}
+
+void MainWindow::on_actionRead_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasRead) return;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionRead->text());
+    QByteArray buffer;
+    if (device_->read(buffer)) {
+        hexeditor_->putData(buffer);
+    }
+}
+
+void MainWindow::on_actionDoProgram_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasProgram) return;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionDoProgram->text());
+    device_->program(hexeditor_->getData());
+}
+
+void MainWindow::on_actionProgramAndVerify_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasProgram ||
+        !device_->getInfo().capability.hasVerify) {
+        return;
+    }
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionProgramAndVerify->text());
+    device_->program(hexeditor_->getData(), true);
+}
+
+void MainWindow::on_actionVerify_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasVerify) return;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionVerify->text());
+    device_->verify(hexeditor_->getData());
+}
+
+void MainWindow::on_actionDoErase_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasErase) return;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionDoErase->text());
+    device_->erase();
+}
+
+void MainWindow::on_actionEraseAndBlankCheck_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasErase ||
+        !device_->getInfo().capability.hasBlankCheck) {
+        return;
+    }
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionEraseAndBlankCheck->text());
+    device_->erase(true);
+}
+
+void MainWindow::on_actionBlankCheck_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasBlankCheck) return;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionBlankCheck->text());
+    device_->blankCheck();
+}
+
+void MainWindow::on_actionGetID_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasGetId) return;
+    TDeviceID deviceId;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionGetID->text());
+    if (device_->getId(deviceId)) {
+        QMessageBox::information(
+            this, progress_->windowTitle(),
+            tr("Manufacturer: 0x%1 (%2)")
+                    .arg(QString("%1")
+                             .arg(deviceId.manufacturer, 2, 16, QChar('0'))
+                             .toUpper())
+                    .arg(deviceId.getManufacturerName())
+                    .leftJustified(kDialogLabelMinLength) +
+                "\n" +
+                tr("Device : 0x%1")
+                    .arg(QString("%1")
+                             .arg(deviceId.device, 2, 16, QChar('0'))
+                             .toUpper())
+                    .leftJustified(kDialogLabelMinLength));
+    }
+}
+
+void MainWindow::on_actionUnprotect_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasUnprotect) return;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionUnprotect->text());
+    device_->unprotect();
+}
+
+void MainWindow::on_btnRead_clicked() {
+    on_actionRead_triggered();
+}
+
+void MainWindow::on_btnProgram_clicked() {
+    on_actionDoProgram_triggered();
+}
+
+void MainWindow::on_btnVerify_clicked() {
+    on_actionVerify_triggered();
+}
+
+void MainWindow::on_btnErase_clicked() {
+    on_actionDoErase_triggered();
+}
+
+void MainWindow::on_btnBlankCheck_clicked() {
+    on_actionBlankCheck_triggered();
+}
+
+void MainWindow::on_btnGetID_clicked() {
+    on_actionGetID_triggered();
+}
+
+void MainWindow::on_btnUnprotect_clicked() {
+    on_actionUnprotect_triggered();
+}
+
+void MainWindow::on_spinBoxProgTWP_valueChanged(int value) {
+    saveSettings_();
+}
+
+void MainWindow::on_spinBoxProgTWC_valueChanged(int value) {
+    saveSettings_();
+}
+
+void MainWindow::on_checkBoxProgSkipFF_toggled(bool checked) {
+    saveSettings_();
+}
+
+void MainWindow::on_checkBoxProgFast_toggled(bool checked) {
+    saveSettings_();
+}
+
+void MainWindow::on_comboBoxProgSectorSize_currentIndexChanged(int index) {
+    saveSettings_();
+}
+
+void MainWindow::loadSettings_() {
+    QSettings settings;
+    QString device = settings.value(kSettingProgDevice).toString();
+    uint32_t twp = settings.value(kSettingProgTwp).toUInt();
+    uint32_t twc = settings.value(kSettingProgTwc).toUInt();
+    bool skipFF = settings.value(kSettingProgSkipFF).toInt() != 0;
+    bool fastProg = settings.value(kSettingProgFast).toInt() != 0;
+    uint16_t sectorSize = settings.value(kSettingProgSectorSize).toUInt();
+    if (!device.isEmpty()) {
+        ui_->btnProgDevice->setText(device);
+        createDevice_();
+        device_->setTwp(twp);
+        device_->setTwc(twc);
+        device_->setSkipFF(skipFF);
+        device_->setFastProg(fastProg);
+        device_->setSectorSize(sectorSize);
+    }
+    configureProgControls_();
+}
+
+void MainWindow::saveSettings_() {
+    QSettings settings;
+    QString device = ui_->btnProgDevice->text();
+    settings.setValue(kSettingProgDevice, device);
+    uint32_t twp = ui_->spinBoxProgTWP->value();
+    if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) twp *= 1000;
+    settings.setValue(kSettingProgTwp, twp);
+    uint32_t twc = ui_->spinBoxProgTWC->value();
+    if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) twc *= 1000;
+    settings.setValue(kSettingProgTwc, twc);
+    int skipFF = ui_->checkBoxProgSkipFF->isChecked() ? 1 : 0;
+    settings.setValue(kSettingProgSkipFF, skipFF);
+    int fastProg = ui_->checkBoxProgFast->isChecked() ? 1 : 0;
+    settings.setValue(kSettingProgFast, fastProg);
+    uint16_t sectorSize = ui_->comboBoxProgSectorSize->currentText().toUInt();
+    settings.setValue(kSettingProgSectorSize, sectorSize);
+}
+
+void MainWindow::createDevice_() {
     if (device_) {
+        device_->disconnect();
         delete device_;
     }
-    createDeviceIfSRAM_(action->text());
-    configureProgControls_();
+
+    // createDeviceIfSRAM_(ui_->btnProgDevice->text());
+    device_ = new Dummy(this);
+    device_->setSize(2 * 1024);
+
+    connect(device_, &Device::onProgress, this, &MainWindow::onActionProgress);
 }
 
 void MainWindow::createDeviceIfSRAM_(const QString &label) {
@@ -284,6 +543,9 @@ void MainWindow::createDeviceIfSRAM_(const QString &label) {
     if (label == ui_->actionSRAM2K->text()) {
         found = true;
         size = 2 * 1024;
+    } else if (label == ui_->actionSRAM4K->text()) {
+        found = true;
+        size = 4 * 1024;
     } else if (label == ui_->actionSRAM8K->text()) {
         found = true;
         size = 8 * 1024;
@@ -299,6 +561,9 @@ void MainWindow::createDeviceIfSRAM_(const QString &label) {
     } else if (label == ui_->actionSRAM128K->text()) {
         found = true;
         size = 128 * 1024;
+    } else if (label == ui_->actionSRAM256K->text()) {
+        found = true;
+        size = 256 * 1024;
     } else if (label == ui_->actionSRAM512K->text()) {
         found = true;
         size = 512 * 1024;
@@ -312,7 +577,16 @@ void MainWindow::createDeviceIfSRAM_(const QString &label) {
 }
 
 void MainWindow::configureProgControls_() {
-    TDeviceInformation info = device_->getInfo();
+    ui_->spinBoxProgTWP->blockSignals(true);
+    ui_->comboBoxProgTWPUnit->blockSignals(true);
+    ui_->spinBoxProgTWC->blockSignals(true);
+    ui_->comboBoxProgTWCUnit->blockSignals(true);
+    ui_->checkBoxProgFast->blockSignals(true);
+    ui_->checkBoxProgSkipFF->blockSignals(true);
+    ui_->comboBoxProgSectorSize->blockSignals(true);
+
+    TDeviceInformation info;
+    if (device_) info = device_->getInfo();
     TDeviceCapabilities capability = info.capability;
     bool port = !ui_->comboBoxProgPort->currentText().isEmpty();
 
@@ -342,15 +616,68 @@ void MainWindow::configureProgControls_() {
     ui_->btnGetID->setEnabled(capability.hasGetId && port);
     ui_->btnUnprotect->setEnabled(capability.hasUnprotect && port);
 
-    ui_->spinBoxProgTWP->setValue(device_->getTwp());
-    ui_->spinBoxProgTWC->setValue(device_->getTwc());
-    ui_->checkBoxProgFast->setChecked(device_->getFastProg());
-    ui_->checkBoxProgSkipFF->setChecked(device_->getSkipFF());
-    int sectorSize = device_->getSectorSize();
-    int currentIndex = static_cast<int>(ceil(log2(sectorSize / 64.0)));
-    currentIndex = qMax(0, currentIndex);
-    currentIndex = qMin(ui_->comboBoxProgSectorSize->count() - 1, currentIndex);
-    ui_->comboBoxProgSectorSize->setCurrentIndex(currentIndex);
+    if (device_) {
+        hexeditor_->setSize(device_->getSize());
+
+        uint32_t twp = device_->getTwp();
+        if (twp < 1000) {
+            ui_->spinBoxProgTWP->setValue(twp);
+            ui_->comboBoxProgTWPUnit->setCurrentIndex(0);
+        } else {
+            ui_->spinBoxProgTWP->setValue(twp / 1000);
+            ui_->comboBoxProgTWPUnit->setCurrentIndex(1);
+        }
+
+        uint32_t twc = device_->getTwc();
+        if (twc < 1000) {
+            ui_->spinBoxProgTWC->setValue(twc);
+            ui_->comboBoxProgTWCUnit->setCurrentIndex(0);
+        } else {
+            ui_->spinBoxProgTWC->setValue(twc / 1000);
+            ui_->comboBoxProgTWCUnit->setCurrentIndex(1);
+        }
+
+        ui_->checkBoxProgFast->setChecked(device_->getFastProg());
+        ui_->checkBoxProgSkipFF->setChecked(device_->getSkipFF());
+
+        int sectorSize = device_->getSectorSize();
+        int currentIndex = static_cast<int>(ceil(log2(sectorSize / 64.0)));
+        currentIndex = qMax(0, currentIndex);
+        currentIndex =
+            qMin(ui_->comboBoxProgSectorSize->count() - 1, currentIndex);
+        ui_->comboBoxProgSectorSize->setCurrentIndex(currentIndex);
+    }
+
+    ui_->spinBoxProgTWP->blockSignals(false);
+    ui_->comboBoxProgTWPUnit->blockSignals(false);
+    ui_->spinBoxProgTWC->blockSignals(false);
+    ui_->comboBoxProgTWCUnit->blockSignals(false);
+    ui_->checkBoxProgFast->blockSignals(false);
+    ui_->checkBoxProgSkipFF->blockSignals(false);
+    ui_->comboBoxProgSectorSize->blockSignals(false);
+}
+
+void MainWindow::configureDeviceFromControls_() {
+    device_->setPort(ui_->comboBoxPort->currentText());
+    uint32_t twp = ui_->spinBoxProgTWP->value();
+    if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) twp *= 1000;
+    device_->setTwp(twp);
+    uint32_t twc = ui_->spinBoxProgTWC->value();
+    if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) twc *= 1000;
+    device_->setTwc(twc);
+    device_->setSkipFF(ui_->checkBoxProgSkipFF->isChecked());
+    device_->setFastProg(ui_->checkBoxProgFast->isChecked());
+    device_->setSectorSize(ui_->comboBoxProgSectorSize->currentText().toInt());
+}
+
+void MainWindow::showDialogActionProgress_(const QString &msg) {
+    progress_->setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " + msg);
+    progress_->setCancelButtonText(tr("Cancel"));
+    progress_->setRange(0, 100);
+    progress_->setAutoClose(true);
+    connect(progress_, &QProgressDialog::canceled, [&] { device_->cancel(); });
+    progress_->setValue(0);
+    progress_->open();
 }
 
 void MainWindow::refreshPortComboBox_() {
@@ -425,7 +752,8 @@ void MainWindow::on_pushButtonVddInitCal_clicked() {
         QMessageBox::critical(
             this, tr("USB Flash/EPROM Programmer"),
             tr("The device has been disconnected from the \"%1\" port.")
-                .arg(runner_.getPath()));
+                .arg(runner_.getPath())
+                .leftJustified(kDialogLabelMinLength));
     }
     enableDiagControls_(true);
 }
@@ -457,7 +785,8 @@ void MainWindow::on_pushButtonVppInitCal_clicked() {
         QMessageBox::critical(
             this, tr("USB Flash/EPROM Programmer"),
             tr("The device has been disconnected from the \"%1\" port.")
-                .arg(runner_.getPath()));
+                .arg(runner_.getPath())
+                .leftJustified(kDialogLabelMinLength));
     }
     enableDiagControls_(true);
 }
@@ -471,7 +800,8 @@ void MainWindow::on_pushButtonSetData_clicked() {
         QMessageBox::critical(
             this, tr("USB Flash/EPROM Programmer"),
             tr("The device has been disconnected from the \"%1\" port.")
-                .arg(runner_.getPath()));
+                .arg(runner_.getPath())
+                .leftJustified(kDialogLabelMinLength));
     }
 }
 
@@ -593,7 +923,8 @@ void MainWindow::onRefreshTimerTimeout() {
         QMessageBox::critical(
             this, tr("USB Flash/EPROM Programmer"),
             tr("The device has been disconnected from the \"%1\" port.")
-                .arg(port));
+                .arg(port)
+                .leftJustified(kDialogLabelMinLength));
         return;
     }
 
@@ -653,7 +984,8 @@ void MainWindow::connect_(bool state) {
         } else {
             QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
                                   tr("Error opening the \"%1\" port.")
-                                      .arg(ui_->comboBoxPort->currentText()));
+                                      .arg(ui_->comboBoxPort->currentText())
+                                      .leftJustified(kDialogLabelMinLength));
         }
     }
     if (runner_.isOpen()) {
@@ -689,7 +1021,7 @@ void MainWindow::enableDiagControls_(bool state) {
     ui_->frameBusData->setEnabled(state);
     ui_->comboBoxPort->setEnabled(!state);
     if (state) {
-        ui_->pushButtonConnect->setText(tr("&Disconnect"));
+        ui_->pushButtonConnect->setText(tr("Disconnect"));
         ui_->lcdNumberVdd->setStyleSheet(
             "background-color:rgb(0,0,0);color:rgb(143,240,164);");
         ui_->lcdNumberVddDuty->setStyleSheet(
@@ -699,7 +1031,7 @@ void MainWindow::enableDiagControls_(bool state) {
         ui_->lcdNumberVppDuty->setStyleSheet(
             "background-color:rgb(0,0,0);color:rgb(249,240,107);");
     } else {
-        ui_->pushButtonConnect->setText(tr("&Connect"));
+        ui_->pushButtonConnect->setText(tr("Connect"));
         ui_->checkBoxVddCtrl->setChecked(false);
         ui_->checkBoxVppCtrl->setChecked(false);
         ui_->checkBoxVddOnVpp->setChecked(false);
@@ -841,7 +1173,9 @@ void MainWindow::on_actionOpen_triggered(bool checked) {
     }
     if (!hexeditor_->open(filename)) {
         QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
-                              tr("Error reading file \"%1\".").arg(filename));
+                              tr("Error reading file \"%1\".")
+                                  .arg(filename)
+                                  .leftJustified(kDialogLabelMinLength));
         return;
     }
     ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
@@ -851,9 +1185,10 @@ void MainWindow::on_actionOpen_triggered(bool checked) {
 
 void MainWindow::on_actionSave_triggered(bool checked) {
     if (!hexeditor_->save()) {
-        QMessageBox::critical(
-            this, tr("USB Flash/EPROM Programmer"),
-            tr("Error writing file \"%1\".").arg(hexeditor_->filename()));
+        QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
+                              tr("Error writing file \"%1\".")
+                                  .arg(hexeditor_->filename())
+                                  .leftJustified(kDialogLabelMinLength));
         return;
     }
 }
@@ -870,7 +1205,9 @@ void MainWindow::on_actionSaveAs_triggered(bool checked) {
     type = QEpromFile::typeFromStr(selectedFilter);
     if (!hexeditor_->saveAs(type, filename)) {
         QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
-                              tr("Error writing file \"%1\".").arg(filename));
+                              tr("Error writing file \"%1\".")
+                                  .arg(filename)
+                                  .leftJustified(kDialogLabelMinLength));
         return;
     }
 }
@@ -907,6 +1244,26 @@ void MainWindow::on_btnSave_clicked() {
     }
 }
 
+void MainWindow::on_btnFind_clicked() {
+    on_actionFind_triggered();
+}
+
+void MainWindow::on_btnReplace_clicked() {
+    on_actionReplace_triggered();
+}
+
+void MainWindow::on_btnFillFF_clicked() {
+    on_actionFillFF_triggered();
+}
+
+void MainWindow::on_btnFill00_clicked() {
+    on_actionFill00_triggered();
+}
+
+void MainWindow::on_btnFillRandom_clicked() {
+    on_actionFillRandom_triggered();
+}
+
 void MainWindow::onDataChanged(bool status) {
     QString title = tr("USB Flash/EPROM Programmer");
     if (!hexeditor_->filename().isEmpty()) {
@@ -935,8 +1292,11 @@ void MainWindow::enableEditorControls_(bool state) {
 bool MainWindow::showDialogFileChanged_() {
     return QMessageBox::question(
                this, tr("USB Flash/EPROM Programmer"),
-               tr("There is unsaved data in the editor. \n"
-                  "Are you sure you want to lose this data?")) ==
+               tr("There is unsaved data in the editor.")
+                       .leftJustified(kDialogLabelMinLength) +
+                   "\n" +
+                   tr("Are you sure you want to lose this data?")
+                       .leftJustified(kDialogLabelMinLength)) ==
            QMessageBox::Yes;
 }
 

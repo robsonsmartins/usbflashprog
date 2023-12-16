@@ -1,6 +1,9 @@
-<map id="opcodes.hpp" name="opcodes.hpp">
-<area shape="rect" id="node1" title="Opcodes for communication." alt="" coords="73,5,177,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,72,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="96,80,155,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="179,80,229,107"/>
+<map id="qepromfilebase.hpp" name="qepromfilebase.hpp">
+<area shape="rect" id="Node000001" title="Header of the QEpromFileBase Class." alt="" coords="65,5,199,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,75,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="118,35,69,73,65,69,114,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="99,80,165,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,33,135,65,129,65,129,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="189,80,278,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="151,30,205,69,202,73,148,35"/>
 </map>

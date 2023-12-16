@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['kauthorhomepage_348',['kAuthorHomePage',['../a00050.html#afd686b0c747f93dc8811f33f7eeb350f',1,'config.hpp']]],
-  ['kauthorname_349',['kAuthorName',['../a00050.html#a1c90f4d75009e5aeaafb1ba2b5296e1f',1,'config.hpp']]],
-  ['kprojecthomepage_350',['kProjectHomePage',['../a00050.html#a503ba82f2918b39a81ecbfbf1b8372a3',1,'config.hpp']]],
-  ['kusbenumerateinterval_351',['kUsbEnumerateInterval',['../a00050.html#af1a4c6761009677e2542e68497426cd0',1,'config.hpp']]],
-  ['kusbproductid_352',['kUsbProductId',['../a00050.html#a6837f08bc0f8ee437f856c4c1199cf5c',1,'config.hpp']]],
-  ['kusbrefreshinterval_353',['kUsbRefreshInterval',['../a00050.html#a96b75885bb2a5ee2e41e9e78b07366af',1,'config.hpp']]],
-  ['kusbvendorid_354',['kUsbVendorId',['../a00050.html#a8b22c3e3a01cbba6193ec96944230d81',1,'config.hpp']]]
+  ['hasblankcheck_0',['hasBlankCheck',['../a00931.html#ae15dee1b66a28addc12f045a373808ff',1,'TDeviceCapabilities']]],
+  ['haserase_1',['hasErase',['../a00931.html#a633d3798dc7322d3c946e921e192819f',1,'TDeviceCapabilities']]],
+  ['hasfastprog_2',['hasFastProg',['../a00931.html#ad5b46ef3141000c01216e8fe56cdb7f3',1,'TDeviceCapabilities']]],
+  ['hasgetid_3',['hasGetId',['../a00931.html#a99c0c9e1746536c2cc7d691d6b167685',1,'TDeviceCapabilities']]],
+  ['hasprogram_4',['hasProgram',['../a00931.html#acdf692fdc9bcdfaefe9255f8c3c6ee4c',1,'TDeviceCapabilities']]],
+  ['hasread_5',['hasRead',['../a00931.html#a04d1bfc8beb546be58dde526c8118f47',1,'TDeviceCapabilities']]],
+  ['hassectorsize_6',['hasSectorSize',['../a00931.html#a7ae913327a11a2f2830cebe41facb430',1,'TDeviceCapabilities']]],
+  ['hasskipff_7',['hasSkipFF',['../a00931.html#a73132a3ed09fbf25ef68211b3cc97584',1,'TDeviceCapabilities']]],
+  ['hasunprotect_8',['hasUnprotect',['../a00931.html#a199513cdfe9cf6f2a92bbea5ff0957a6',1,'TDeviceCapabilities']]],
+  ['hasverify_9',['hasVerify',['../a00931.html#af402cfce986d3d72130b67c3471ff0d3',1,'TDeviceCapabilities']]]
 ];

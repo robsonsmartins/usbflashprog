@@ -1,3 +1,13 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$a00965.html" title="QHexEditor Class." alt="" coords="5,5,101,32"/>
+<area shape="rect" id="Node000000" href="$a00963.html" title="QEpromFileBase Class." alt="" coords="5,107,126,133"/>
+<area shape="rect" id="Node000001" href="$a00951.html" title="Atmel Generic Files Stream Class." alt="" coords="176,5,262,32"/>
+<area shape="poly" id="edge3_Node000000_Node000001" title=" " alt="" coords="95,96,172,42,191,30,194,35,175,46,98,100"/>
+<area shape="rect" id="Node000002" href="$a00955.html" title="Raw Binary Files Stream Class." alt="" coords="183,56,255,83"/>
+<area shape="poly" id="edge4_Node000000_Node000002" title=" " alt="" coords="121,99,182,79,184,84,123,104"/>
+<area shape="rect" id="Node000003" href="$a00959.html" title="QEpromFile Class." alt="" coords="174,107,264,133"/>
+<area shape="poly" id="edge5_Node000000_Node000003" title=" " alt="" coords="140,117,173,117,173,123,140,123"/>
+<area shape="rect" id="Node000004" href="$a00967.html" title="Intel Hex Files Stream Class." alt="" coords="181,157,257,184"/>
+<area shape="poly" id="edge6_Node000000_Node000004" title=" " alt="" coords="123,136,182,156,180,161,121,141"/>
+<area shape="rect" id="Node000005" href="$a00971.html" title="Motorola SREC Files Stream Class." alt="" coords="179,208,259,235"/>
+<area shape="poly" id="edge7_Node000000_Node000005" title=" " alt="" coords="98,140,175,194,194,205,191,210,172,198,95,144"/>
 </map>

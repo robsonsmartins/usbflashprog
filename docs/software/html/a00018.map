@@ -1,8 +1,33 @@
-<map id="qepromfile.hpp" name="qepromfile.hpp">
-<area shape="rect" id="node1" title="Header of the QEpromFile Class." alt="" coords="113,5,233,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,155,80,181"/>
-<area shape="rect" id="node3" title=" " alt="" coords="121,155,191,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="226,155,323,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="324,80,449,107"/>
-<area shape="rect" id="node6" href="$a00023.html" title="Header of the QEpromFileBase Class." alt="" coords="98,80,249,107"/>
+<map id="sram.hpp" name="sram.hpp">
+<area shape="rect" id="Node000001" title="Class of a Parallel SRAM." alt="" coords="524,5,599,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,229,75,256"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="526,35,396,83,302,118,210,157,77,224,74,220,208,152,300,113,394,77,525,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="593,229,658,256"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="574,31,589,53,602,79,613,115,621,151,627,214,622,215,615,152,608,116,598,81,584,55,569,34"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="682,229,771,256"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="577,31,623,78,676,151,715,215,710,218,671,154,619,82,574,34"/>
+<area shape="rect" id="Node000005" href="$a00005.html" title="Base class of a Device." alt="" coords="406,80,589,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="552,34,520,71,516,67,548,31"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="452,110,291,157,89,226,87,221,290,152,451,105"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="505,106,524,140,551,180,596,219,592,223,547,183,519,143,500,108"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="518,105,697,219,694,224,515,109"/>
+<area shape="rect" id="Node000006" href="$a00065.html" title="Header of the Runner Class." alt="" coords="303,155,438,181"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="477,110,407,149,404,145,474,105"/>
+<area shape="poly" id="edge9_Node000006_Node000002" title=" " alt="" coords="308,185,89,232,88,226,307,179"/>
+<area shape="poly" id="edge10_Node000006_Node000003" title=" " alt="" coords="416,179,579,225,578,231,414,184"/>
+<area shape="poly" id="edge12_Node000006_Node000004" title=" " alt="" coords="436,179,668,226,667,231,435,185"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="99,229,152,256"/>
+<area shape="poly" id="edge11_Node000006_Node000007" title=" " alt="" coords="327,185,167,231,165,226,326,179"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="176,229,264,256"/>
+<area shape="poly" id="edge13_Node000006_Node000008" title=" " alt="" coords="346,184,261,225,258,220,343,179"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="289,229,397,256"/>
+<area shape="poly" id="edge14_Node000006_Node000009" title=" " alt="" coords="368,183,355,217,350,215,363,181"/>
+<area shape="rect" id="Node000010" href="$a00059.html" title="Opcodes for communication." alt="" coords="421,229,569,256"/>
+<area shape="poly" id="edge15_Node000006_Node000010" title=" " alt="" coords="394,180,462,219,459,224,391,184"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="383,304,444,331"/>
+<area shape="poly" id="edge16_Node000010_Node000011" title=" " alt="" coords="482,259,440,296,436,292,479,255"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="468,304,521,331"/>
+<area shape="poly" id="edge17_Node000010_Node000012" title=" " alt="" coords="497,257,497,289,492,289,492,257"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="545,304,591,331"/>
+<area shape="poly" id="edge18_Node000010_Node000013" title=" " alt="" coords="509,255,547,292,543,296,506,258"/>
 </map>

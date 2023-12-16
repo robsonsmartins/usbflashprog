@@ -1,0 +1,7 @@
+<map id="Device" name="Device">
+<area shape="rect" id="Node000001" title="Device Base Class." alt="" coords="79,5,187,480"/>
+<area shape="rect" id="Node000002" href="$a00943.html" title="Parallel Dummy Device Class." alt="" coords="5,539,105,821"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,494,83,539,78,538,86,493"/>
+<area shape="rect" id="Node000003" href="$a00947.html" title="Parallel SRAM Class." alt="" coords="129,528,293,832"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,493,187,528,181,529,175,494"/>
+</map>

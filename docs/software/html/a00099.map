@@ -1,0 +1,34 @@
+<map id="qhexeditor.cpp" name="qhexeditor.cpp">
+<area shape="rect" id="Node000001" title="Implementation of the QHexEditor Class." alt="" coords="281,5,387,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,58,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="281,33,73,82,71,77,280,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="82,80,154,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="297,35,170,78,168,73,296,30"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="178,80,242,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="314,35,245,75,243,70,311,30"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="266,80,402,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="337,33,337,65,332,65,332,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="427,80,618,107"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="368,30,477,72,475,77,366,35"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="642,80,794,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="388,27,637,74,636,79,387,33"/>
+<area shape="rect" id="Node000008" href="$a00101.html" title="Header of the QHexEditor Class." alt="" coords="818,80,925,107"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="388,23,568,45,804,77,803,82,568,50,387,28"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="743,155,827,181"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="858,109,813,147,809,143,855,105"/>
+<area shape="rect" id="Node000010" href="$a00035.html" title="Header of the QEpromFile Class." alt="" coords="851,155,1065,181"/>
+<area shape="poly" id="edge9_Node000008_Node000010" title=" " alt="" coords="888,105,934,143,930,147,885,109"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="800,304,869,331"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="934,184,903,204,874,231,855,261,844,291,839,289,851,258,869,228,900,200,931,180"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="910,304,975,331"/>
+<area shape="poly" id="edge11_Node000010_Node000012" title=" " alt="" coords="932,184,904,203,892,216,882,230,879,247,885,264,897,279,912,293,909,297,893,283,880,266,874,248,877,228,887,213,901,199,929,180"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1008,304,1098,331"/>
+<area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="985,180,1014,200,1039,228,1051,259,1055,289,1050,290,1046,260,1035,231,1010,204,982,184"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1100,229,1216,256"/>
+<area shape="poly" id="edge13_Node000010_Node000014" title=" " alt="" coords="994,179,1110,221,1109,226,992,184"/>
+<area shape="rect" id="Node000015" href="$a00041.html" title="Header of the QEpromFileBase Class." alt="" coords="892,229,1025,256"/>
+<area shape="poly" id="edge14_Node000010_Node000015" title=" " alt="" coords="961,182,961,214,956,214,956,182"/>
+<area shape="poly" id="edge15_Node000015_Node000011" title=" " alt="" coords="938,259,869,299,867,294,935,254"/>
+<area shape="poly" id="edge16_Node000015_Node000012" title=" " alt="" coords="958,257,951,290,945,289,953,256"/>
+<area shape="poly" id="edge17_Node000015_Node000013" title=" " alt="" coords="976,254,1027,293,1023,297,973,259"/>
+</map>

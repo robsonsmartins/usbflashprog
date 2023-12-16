@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$a00945.html" title="Main Window GUI Class." alt="" coords="5,5,112,32"/>
+<area shape="rect" id="Node000000" href="$a00939.html" title="Device Base Class." alt="" coords="5,31,65,57"/>
+<area shape="rect" id="Node000001" href="$a00943.html" title="Parallel Dummy Device Class." alt="" coords="113,5,179,32"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="79,31,112,24,113,29,80,37"/>
+<area shape="rect" id="Node000002" href="$a00947.html" title="Parallel SRAM Class." alt="" coords="116,56,176,83"/>
+<area shape="poly" id="edge2_Node000000_Node000002" title=" " alt="" coords="80,51,116,60,115,65,79,57"/>
 </map>

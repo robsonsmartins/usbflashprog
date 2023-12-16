@@ -1,12 +1,30 @@
-<map id="qatmelfile.cpp" name="qatmelfile.cpp">
-<area shape="rect" id="node1" title="Implementation of the QAtmelFile Class." alt="" coords="162,5,277,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,87,60,114"/>
-<area shape="rect" id="node3" title=" " alt="" coords="85,87,165,114"/>
-<area shape="rect" id="node4" title=" " alt="" coords="189,87,250,114"/>
-<area shape="rect" id="node5" href="$a00005.html" title="Header of the QAtmelFile Class." alt="" coords="275,87,391,114"/>
-<area shape="rect" id="node10" title=" " alt="" coords="415,80,551,121"/>
-<area shape="rect" id="node6" href="$a00023.html" title="Header of the QEpromFileBase Class." alt="" coords="257,169,408,196"/>
-<area shape="rect" id="node7" title=" " alt="" coords="198,244,273,271"/>
-<area shape="rect" id="node8" title=" " alt="" coords="297,244,368,271"/>
-<area shape="rect" id="node9" title=" " alt="" coords="392,244,489,271"/>
+<map id="device.cpp" name="device.cpp">
+<area shape="rect" id="Node000001" title="Implementation of the Base class of a Device." alt="" coords="124,5,207,32"/>
+<area shape="rect" id="Node000002" href="$a00005.html" title="Base class of a Device." alt="" coords="74,80,257,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="168,33,168,65,163,65,163,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,229,75,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="157,109,62,220,58,216,153,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="99,229,165,256"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="165,108,141,215,135,214,160,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="189,229,278,256"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="174,106,224,215,219,217,169,108"/>
+<area shape="rect" id="Node000006" href="$a00065.html" title="Header of the Runner Class." alt="" coords="270,155,405,181"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="196,105,295,146,293,151,194,110"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="284,185,90,231,88,226,283,179"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="302,184,180,227,178,222,301,179"/>
+<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="321,184,265,223,262,218,318,180"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="719,229,772,256"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="406,175,541,194,705,226,704,231,540,199,405,180"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="303,229,391,256"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="342,182,346,214,341,215,336,182"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="415,229,524,256"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="362,180,435,219,432,224,359,184"/>
+<area shape="rect" id="Node000010" href="$a00059.html" title="Opcodes for communication." alt="" coords="547,229,696,256"/>
+<area shape="poly" id="edge12_Node000006_Node000010" title=" " alt="" coords="387,179,558,223,557,228,386,184"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="510,304,570,331"/>
+<area shape="poly" id="edge13_Node000010_Node000011" title=" " alt="" coords="609,259,567,296,563,292,605,255"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="595,304,648,331"/>
+<area shape="poly" id="edge14_Node000010_Node000012" title=" " alt="" coords="624,257,624,289,619,289,619,257"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="672,304,718,331"/>
+<area shape="poly" id="edge15_Node000010_Node000013" title=" " alt="" coords="636,255,674,292,670,296,632,258"/>
 </map>

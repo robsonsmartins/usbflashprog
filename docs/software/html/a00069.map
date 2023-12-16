@@ -1,4 +1,9 @@
-<map id="opcodes_test.hpp" name="opcodes_test.hpp">
-<area shape="rect" id="node1" title="Header of Unit Test for OpCode Handling Classes." alt="" coords="5,5,141,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="21,80,125,107"/>
+<map id="config.hpp" name="config.hpp">
+<area shape="rect" id="Node000001" title="Configuration of UsbFlashProg." alt="" coords="91,5,172,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,71,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,35,67,73,64,69,113,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="95,80,168,107"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,33,134,65,129,65,129,33"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="192,80,271,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="150,30,204,69,200,73,147,35"/>
 </map>

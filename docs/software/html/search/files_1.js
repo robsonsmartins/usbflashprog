@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['main_2ecpp_217',['main.cpp',['../a00059.html',1,'']]],
-  ['mainwindow_2ecpp_218',['mainwindow.cpp',['../a00053.html',1,'']]],
-  ['mainwindow_2ehpp_219',['mainwindow.hpp',['../a00056.html',1,'']]]
+  ['device_2ecpp_0',['device.cpp',['../a00002.html',1,'']]],
+  ['device_2ehpp_1',['device.hpp',['../a00005.html',1,'']]],
+  ['dummy_2ecpp_2',['dummy.cpp',['../a00008.html',1,'']]],
+  ['dummy_2ehpp_3',['dummy.hpp',['../a00011.html',1,'']]]
 ];

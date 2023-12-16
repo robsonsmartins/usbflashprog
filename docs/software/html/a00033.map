@@ -1,12 +1,30 @@
-<map id="qsrecfile.cpp" name="qsrecfile.cpp">
-<area shape="rect" id="node1" title="Implementation of the QSrecFile Class." alt="" coords="167,5,271,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,60,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="85,80,165,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="189,80,250,107"/>
-<area shape="rect" id="node5" href="$a00035.html" title="Header of the QSrecFile Class." alt="" coords="275,80,380,107"/>
-<area shape="rect" id="node10" title=" " alt="" coords="404,80,563,107"/>
-<area shape="rect" id="node6" href="$a00023.html" title="Header of the QEpromFileBase Class." alt="" coords="252,155,403,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="193,229,267,256"/>
-<area shape="rect" id="node8" title=" " alt="" coords="292,229,363,256"/>
-<area shape="rect" id="node9" title=" " alt="" coords="387,229,484,256"/>
+<map id="qepromfile.cpp" name="qepromfile.cpp">
+<area shape="rect" id="Node000001" title="Implementation of the QEpromFile Class." alt="" coords="278,5,383,32"/>
+<area shape="rect" id="Node000002" href="$a00035.html" title="Header of the QEpromFile Class." alt="" coords="36,80,142,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="289,35,146,78,144,73,288,30"/>
+<area shape="rect" id="Node000008" href="$a00029.html" title="Header of the QBinFile Class." alt="" coords="405,80,491,107"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="352,30,417,70,414,74,350,35"/>
+<area shape="rect" id="Node000009" href="$a00053.html" title="Header of the QSrecFile Class." alt="" coords="515,80,610,107"/>
+<area shape="poly" id="edge12_Node000001_Node000009" title=" " alt="" coords="372,30,509,73,507,78,370,35"/>
+<area shape="rect" id="Node000010" href="$a00047.html" title="Header of the QHexFile Class." alt="" coords="165,80,256,107"/>
+<area shape="poly" id="edge14_Node000001_Node000010" title=" " alt="" coords="311,35,245,74,242,70,308,30"/>
+<area shape="rect" id="Node000011" href="$a00023.html" title="Header of the QAtmelFile Class." alt="" coords="280,80,381,107"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="333,33,333,65,328,65,328,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="13,229,82,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="63,109,34,129,21,141,12,156,8,171,11,187,28,217,23,219,6,189,3,171,7,154,17,138,31,125,60,105"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="156,229,222,256"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="107,105,130,126,153,153,170,184,183,214,178,216,166,187,148,156,126,130,103,109"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="272,229,362,256"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="110,105,287,219,285,224,107,109"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="22,155,138,181"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="90,108,86,140,81,139,85,107"/>
+<area shape="rect" id="Node000007" href="$a00041.html" title="Header of the QEpromFileBase Class." alt="" coords="264,155,397,181"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="132,105,275,147,274,153,130,110"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="282,184,98,231,96,226,281,179"/>
+<area shape="poly" id="edge8_Node000007_Node000004" title=" " alt="" coords="307,184,228,224,226,220,305,179"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="331,182,325,215,319,214,326,181"/>
+<area shape="poly" id="edge11_Node000008_Node000007" title=" " alt="" coords="429,109,364,149,362,144,426,105"/>
+<area shape="poly" id="edge13_Node000009_Node000007" title=" " alt="" coords="523,110,386,152,384,147,521,105"/>
+<area shape="poly" id="edge15_Node000010_Node000007" title=" " alt="" coords="233,105,299,144,296,149,230,109"/>
+<area shape="poly" id="edge17_Node000011_Node000007" title=" " alt="" coords="333,107,333,140,328,140,328,107"/>
 </map>

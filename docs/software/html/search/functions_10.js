@@ -1,4 +1,29 @@
 var searchData=
 [
-  ['write_341',['write',['../a00905.html#a2de68466bce667fafdd97b7001c70a0f',1,'QAtmelFile::write()'],['../a00909.html#a2de68466bce667fafdd97b7001c70a0f',1,'QBinFile::write()'],['../a00913.html#a2de68466bce667fafdd97b7001c70a0f',1,'QEpromFile::write()'],['../a00917.html#a8d590d7e9b5a5166b2216ab76eb6551d',1,'QEpromFileBase::write()'],['../a00921.html#a2de68466bce667fafdd97b7001c70a0f',1,'QHexFile::write()'],['../a00925.html#a2de68466bce667fafdd97b7001c70a0f',1,'QSrecFile::write()']]]
+  ['save_0',['save',['../a01011.html#a42f5c4512d33caa063e396c9211c6c00',1,'QHexEditor']]],
+  ['saveas_1',['saveAs',['../a01011.html#a18da3b9b552cc15769eb89fd996e565c',1,'QHexEditor']]],
+  ['screen_2',['screen',['../a00991.html#a189a4795e5117b123dff5d45b2f6e130',1,'MainWindow']]],
+  ['set_3',['set',['../a00983.html#aa600effd4339e5abb5838b62dae6811d',1,'TRunnerCommand']]],
+  ['setbool_4',['setBool',['../a00979.html#add2b87cda26180d8bc740e130ab0de38',1,'OpCode::setBool()'],['../a00983.html#a60fdbd0f8a0380505bb6c848e248a884',1,'TRunnerCommand::setBool()']]],
+  ['setbyte_5',['setByte',['../a00979.html#a9cf20463c2ab14bb7cbb65d04a5cce40',1,'OpCode::setByte()'],['../a00983.html#ab4084b261da681a46251e42a384e53d6',1,'TRunnerCommand::setByte()']]],
+  ['setce_6',['setCE',['../a00987.html#afd906f7b1c6cd1cbabb92b7bc2f389af',1,'Runner']]],
+  ['setdword_7',['setDWord',['../a00979.html#af8ddd7ac9455caa08d8b11285b5749ad',1,'OpCode::setDWord()'],['../a00983.html#a14fd6908c3fdcfdef6651cc36af17108',1,'TRunnerCommand::setDWord()']]],
+  ['setfastprog_8',['setFastProg',['../a00939.html#a2361a3779314c0a2864d505cbc8eba6f',1,'Device']]],
+  ['setfloat_9',['setFloat',['../a00979.html#ac276be2e83a87dc986915f611991a220',1,'OpCode::setFloat()'],['../a00983.html#acff535f33b7c541529546296fe933c9c',1,'TRunnerCommand::setFloat()']]],
+  ['setmode_10',['setMode',['../a01011.html#ad6a34f1d657c4b5cd61fbf8c5d8210ab',1,'QHexEditor']]],
+  ['setoe_11',['setOE',['../a00987.html#a36f0423a5104111011f1375f822383e3',1,'Runner']]],
+  ['setport_12',['setPort',['../a00939.html#a789b2164e10c58a795a697704430551a',1,'Device']]],
+  ['setsectorsize_13',['setSectorSize',['../a00939.html#a0688eb09592699d0fcb9d0b0b2d54893',1,'Device']]],
+  ['setsize_14',['setSize',['../a00939.html#ab11f392ccca895305587946e122b4aed',1,'Device::setSize()'],['../a00943.html#ab11f392ccca895305587946e122b4aed',1,'Dummy::setSize()'],['../a01011.html#ac5953c89350d1aa482dca282e658920a',1,'QHexEditor::setSize()']]],
+  ['setskipff_15',['setSkipFF',['../a00939.html#a453c4ea828bf3f06bbb061335c040fb0',1,'Device']]],
+  ['settimeout_16',['setTimeOut',['../a00987.html#ad7b4817f0d4ed404eec510dd96df482f',1,'Runner']]],
+  ['settwc_17',['setTwc',['../a00939.html#aafad0334998d7134bbc72aceb03b4014',1,'Device']]],
+  ['settwp_18',['setTwp',['../a00939.html#a16fb7778a522c0fe1548b92ebf0b8503',1,'Device']]],
+  ['setup_19',['SetUp',['../a00995.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'OpCodeTest::SetUp()'],['../a00999.html#a3a1707f6479611fdc609a3eb8a0cef1b',1,'RunnerTest::SetUp()']]],
+  ['setwe_20',['setWE',['../a00987.html#a2f5643b161195b308791be822f4130d0',1,'Runner']]],
+  ['setword_21',['setWord',['../a00979.html#a4fa76fd22f53186ca8b200e4b82a62ea',1,'OpCode::setWord()'],['../a00983.html#a8e457ee1275aaef8fc1a8a9067dca24a',1,'TRunnerCommand::setWord()']]],
+  ['showfinddialog_22',['showFindDialog',['../a01011.html#aa5ac4cbe36b49f1a96abe73766f1073e',1,'QHexEditor']]],
+  ['showreplacedialog_23',['showReplaceDialog',['../a01011.html#afe96bcdc04cb12c94df85e5885432a11',1,'QHexEditor']]],
+  ['size_24',['size',['../a01011.html#ae5a32c78e1b09c5d54b5fe0e7f4b92a9',1,'QHexEditor']]],
+  ['sram_25',['SRAM',['../a00947.html#a79be16fae0bda39afff2943332e956af',1,'SRAM']]]
 ];

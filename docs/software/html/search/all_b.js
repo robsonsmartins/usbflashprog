@@ -1,13 +1,14 @@
 var searchData=
 [
-  ['opcode_97',['OpCode',['../a00933.html',1,'']]],
-  ['opcode_98',['opcode',['../a00937.html#a061932bab6caa48bdabcedd4c4c00f8f',1,'TRunnerCommand']]],
-  ['opcodes_2ecpp_99',['opcodes.cpp',['../a00038.html',1,'']]],
-  ['opcodes_2ehpp_100',['opcodes.hpp',['../a00041.html',1,'']]],
-  ['opcodes_5ftest_2ecpp_101',['opcodes_test.cpp',['../a00065.html',1,'']]],
-  ['opcodes_5ftest_2ehpp_102',['opcodes_test.hpp',['../a00068.html',1,'']]],
-  ['opcodetest_103',['OpCodeTest',['../a00949.html',1,'OpCodeTest'],['../a00949.html#a06e8a95bfeafdc7ce1a38e4e32668780',1,'OpCodeTest::OpCodeTest()']]],
-  ['open_104',['open',['../a00941.html#a0c49f174bdf75b0bbad922ae29358b1c',1,'Runner::open()'],['../a00965.html#a837626db5285134f7a50f63eca00a8fd',1,'QHexEditor::open()']]],
-  ['operator_3d_105',['operator=',['../a00929.html#a300e93d9f828a794db30912d9b1c525f',1,'TCmdOpCode::operator=()'],['../a00937.html#a1d4667e6ccffd3d0d750442ff9e90fc3',1,'TRunnerCommand::operator=()']]],
-  ['operator_3d_3d_106',['operator==',['../a00929.html#ab4e43100845654abce98f4bf44c947f9',1,'TCmdOpCode::operator==()'],['../a00937.html#a647dbe717558569de52b11ddd71f76e7',1,'TRunnerCommand::operator==()'],['../a00038.html#ab4e43100845654abce98f4bf44c947f9',1,'operator==(const TCmdOpCode &amp;a, const TCmdOpCode &amp;b):&#160;opcodes.cpp'],['../a00044.html#a647dbe717558569de52b11ddd71f76e7',1,'operator==(const TRunnerCommand &amp;a, const TRunnerCommand &amp;b):&#160;runner.cpp']]]
+  ['main_0',['main',['../a00077.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../a00105.html#ga3c04138a5bfe5d72780bb7e82a18e627',1,'main(int argc, char **argv):&#160;main.cpp']]],
+  ['main_2ecpp_1',['main.cpp',['../a00077.html',1,'']]],
+  ['mainwindow_2',['MainWindow',['../a00991.html',1,'MainWindow'],['../a00991.html#ac3df08a4bc0438931d73601110c9267e',1,'MainWindow::MainWindow()']]],
+  ['mainwindow_2ecpp_3',['mainwindow.cpp',['../a00071.html',1,'']]],
+  ['mainwindow_2ehpp_4',['mainwindow.hpp',['../a00074.html',1,'']]],
+  ['manufacturer_5',['manufacturer',['../a00923.html#ae77497dfafe239d6455bed1daad3aed0',1,'TDeviceID']]],
+  ['mode_6',['mode',['../a01011.html#a95d2dffa0ff1b85bc9e0b30fe275faba',1,'QHexEditor']]],
+  ['mode16bits_7',['Mode16Bits',['../a01011.html#ad4ccd732ff6686ae76984e6e556be9b6a931f6ce41f3b3a6f24382412529dbc3c',1,'QHexEditor']]],
+  ['mode32bits_8',['Mode32Bits',['../a01011.html#ad4ccd732ff6686ae76984e6e556be9b6a31b45fe794b7f5a152bf47755eec2a8e',1,'QHexEditor']]],
+  ['mode8bits_9',['Mode8Bits',['../a01011.html#ad4ccd732ff6686ae76984e6e556be9b6a34e8ec93f853fe69beff6261275f2ae0',1,'QHexEditor']]],
+  ['msdelay_10',['msDelay',['../a00987.html#afaa91eb9a8e0cf5c3be76c13578def8e',1,'Runner']]]
 ];

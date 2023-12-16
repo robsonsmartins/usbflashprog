@@ -1,10 +1,17 @@
-<map id="qhexeditor.hpp" name="qhexeditor.hpp">
-<area shape="rect" id="node1" title="Header of the QHexEditor Class." alt="" coords="91,5,210,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,101,107"/>
-<area shape="rect" id="node3" href="$a00017.html" title="Header of the QEpromFile Class." alt="" coords="126,80,370,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="80,229,155,256"/>
-<area shape="rect" id="node5" title=" " alt="" coords="195,229,266,256"/>
-<area shape="rect" id="node6" title=" " alt="" coords="301,229,398,256"/>
-<area shape="rect" id="node7" title=" " alt="" coords="399,155,524,181"/>
-<area shape="rect" id="node8" href="$a00023.html" title="Header of the QEpromFileBase Class." alt="" coords="173,155,323,181"/>
+<map id="opcodes_test.cpp" name="opcodes_test.cpp">
+<area shape="rect" id="Node000001" title="Implementation of Unit Test for OpCode Handling Classes." alt="" coords="180,5,304,32"/>
+<area shape="rect" id="Node000002" href="$a00086.html" title="Header of Unit Test for OpCode Handling Classes." alt="" coords="5,80,130,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="213,35,112,76,110,71,211,30"/>
+<area shape="rect" id="Node000004" href="$a00059.html" title="Opcodes for communication." alt="" coords="156,80,328,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="245,33,245,65,240,65,240,33"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="352,80,412,107"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="268,30,346,70,343,75,265,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="15,155,109,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="69,107,67,140,61,140,64,107"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="133,155,194,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="230,109,189,147,186,143,227,105"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="218,155,272,181"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="245,107,247,140,241,140,240,107"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="295,155,341,181"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="257,105,296,142,293,146,254,109"/>
 </map>

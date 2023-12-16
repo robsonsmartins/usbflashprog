@@ -1,23 +1,13 @@
 var searchData=
 [
-  ['vddctrl_321',['vddCtrl',['../a00941.html#a1f24bb54a65784e1733b56b43561c2a7',1,'Runner']]],
-  ['vddget_322',['vddGet',['../a00941.html#a204184091a531a687f50be7556ec43d0',1,'Runner']]],
-  ['vddgetcal_323',['vddGetCal',['../a00941.html#a5b5ca565efc13f4356153c81ad9047f0',1,'Runner']]],
-  ['vddgetduty_324',['vddGetDuty',['../a00941.html#acf7990a7086f11a4f54c826bdbde2321',1,'Runner']]],
-  ['vddinitcal_325',['vddInitCal',['../a00941.html#a0ebe55d836a754086989fc2893739915',1,'Runner']]],
-  ['vddonvpp_326',['vddOnVpp',['../a00941.html#a6c13d2bc34cd33d7243ae1408a8765da',1,'Runner']]],
-  ['vddsavecal_327',['vddSaveCal',['../a00941.html#ab5accd1d909bf06920bd505198210d9f',1,'Runner']]],
-  ['vddset_328',['vddSet',['../a00941.html#ac16616f601f0695c1d1c765bd6e5511b',1,'Runner']]],
-  ['vppctrl_329',['vppCtrl',['../a00941.html#a8cfbbfcc4194f23da3971557d13a76b0',1,'Runner']]],
-  ['vppget_330',['vppGet',['../a00941.html#a22e610cde8665e2675db87bb54f6c627',1,'Runner']]],
-  ['vppgetcal_331',['vppGetCal',['../a00941.html#aebb0b75396a002b244dc325ea98f72c5',1,'Runner']]],
-  ['vppgetduty_332',['vppGetDuty',['../a00941.html#a7c5245e99139c2e4a084293cee90806d',1,'Runner']]],
-  ['vppinitcal_333',['vppInitCal',['../a00941.html#afa92dbf2bda9f246f7d439030df8600f',1,'Runner']]],
-  ['vppona18_334',['vppOnA18',['../a00941.html#a8791148b89cf09f58affe4d6a7ad4242',1,'Runner']]],
-  ['vppona9_335',['vppOnA9',['../a00941.html#a8f802be4828a5dd90584af46e45429e6',1,'Runner']]],
-  ['vpponce_336',['vppOnCE',['../a00941.html#a4594662038e7fa85895d874fd8611a33',1,'Runner']]],
-  ['vpponoe_337',['vppOnOE',['../a00941.html#a3576eeefd98b20c028988b119fdcc092',1,'Runner']]],
-  ['vpponwe_338',['vppOnWE',['../a00941.html#aa99191803fb58189accfa06c26524ba7',1,'Runner']]],
-  ['vppsavecal_339',['vppSaveCal',['../a00941.html#a90c385ca537b7b165acd02eecbcab9f6',1,'Runner']]],
-  ['vppset_340',['vppSet',['../a00941.html#af982e42a38ccde8252d679193ca84b69',1,'Runner']]]
+  ['random_0',['random',['../a01011.html#a69ff8ca58e4ae6664c3963ded574454e',1,'QHexEditor']]],
+  ['read_1',['read',['../a00939.html#ab2e6abd0442f83e56a0f26289557f43e',1,'Device::read()'],['../a00943.html#ab2e6abd0442f83e56a0f26289557f43e',1,'Dummy::read()'],['../a00951.html#acf3a15ec58822e5829667b6271670552',1,'QAtmelFile::read()'],['../a00955.html#acf3a15ec58822e5829667b6271670552',1,'QBinFile::read()'],['../a00959.html#acf3a15ec58822e5829667b6271670552',1,'QEpromFile::read()'],['../a00963.html#a14b89e4b94167c472425243abe35c5fa',1,'QEpromFileBase::read()'],['../a00967.html#acf3a15ec58822e5829667b6271670552',1,'QHexFile::read()'],['../a00971.html#acf3a15ec58822e5829667b6271670552',1,'QSrecFile::read()']]],
+  ['responseasbool_2',['responseAsBool',['../a00983.html#aff69022ad315429f8eed69f5b4ad1ef2',1,'TRunnerCommand']]],
+  ['responseasbyte_3',['responseAsByte',['../a00983.html#a0a3706f1fb1b7f3918ae7335fd75b4e3',1,'TRunnerCommand']]],
+  ['responseasdword_4',['responseAsDWord',['../a00983.html#a1f516c934bffdbd4d2cd63ef6de85f78',1,'TRunnerCommand']]],
+  ['responseasfloat_5',['responseAsFloat',['../a00983.html#a6b8ffa22a37b53d5ff3835c78781976f',1,'TRunnerCommand']]],
+  ['responseasword_6',['responseAsWord',['../a00983.html#ad3b5c4cb6bb387edf6c3221ecb6f083c',1,'TRunnerCommand']]],
+  ['responseisok_7',['responseIsOk',['../a00983.html#a34afa213bfc7e8f9de3bad72d01850ed',1,'TRunnerCommand']]],
+  ['runner_8',['Runner',['../a00987.html#a98bb61ddea92172033f04aeb316e680a',1,'Runner']]],
+  ['runnertest_9',['RunnerTest',['../a00999.html#a99dc4e5cfda1a40e3ef8bea59426de84',1,'RunnerTest']]]
 ];

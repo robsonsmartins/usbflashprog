@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['changed_5',['changed',['../a00965.html#a507586652a7308a48cf1832979003728',1,'QHexEditor']]],
-  ['close_6',['close',['../a00941.html#a5ae591df94fc66ccb85cbb6565368bca',1,'Runner']]],
-  ['code_7',['code',['../a00929.html#a26a6dc09ff9c0c706991e3bb163a1f25',1,'TCmdOpCode']]],
-  ['config_2ehpp_8',['config.hpp',['../a00050.html',1,'']]],
-  ['createwindow_9',['createWindow',['../a00059.html#ac99aacda81f414a498962d83f33e5bd0',1,'main.cpp']]]
+  ['blankcheck_0',['blankCheck',['../a00939.html#ae7becb0d7629ccaaef28c25adbf3d543',1,'Device::blankCheck()'],['../a00943.html#ae7becb0d7629ccaaef28c25adbf3d543',1,'Dummy::blankCheck()']]]
 ];

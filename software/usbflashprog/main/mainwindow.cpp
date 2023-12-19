@@ -528,12 +528,15 @@ void MainWindow::createDevice_() {
     if (device_) {
         device_->disconnect();
         delete device_;
+        device_ = nullptr;
     }
-
-    // createDeviceIfSRAM_(ui_->btnProgDevice->text());
-    device_ = new Dummy(this);
-    device_->setSize(2 * 1024);
-
+    createDeviceIfSRAM_(ui_->btnProgDevice->text());
+    if (!device_) {
+        device_ = new Dummy(this);
+        device_->setSize(2 * 1024);
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+    }
     connect(device_, &Device::onProgress, this, &MainWindow::onActionProgress);
 }
 

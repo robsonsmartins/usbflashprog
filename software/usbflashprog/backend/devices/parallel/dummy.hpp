@@ -45,19 +45,27 @@ class Dummy : public Device {
     explicit Dummy(QObject *parent = nullptr);
     /** @brief Destructor. */
     virtual ~Dummy();
-
+    /* Reimplemented */
     virtual void setSize(uint32_t value);
-
+    /* Reimplemented */
     virtual bool getId(TDeviceID &result);
+    /* Reimplemented */
     virtual bool read(QByteArray &buffer);
+    /* Reimplemented */
     virtual bool program(const QByteArray &buffer, bool verify = false);
+    /* Reimplemented */
     virtual bool verify(const QByteArray &buffer);
+    /* Reimplemented */
     virtual bool erase(bool check = false);
+    /* Reimplemented */
     virtual bool blankCheck();
+    /* Reimplemented */
     virtual bool unprotect();
 
   protected:
+    /* @brief The internal buffer. */
     QByteArray buffer_;
+    /* @brief Indicates if is write protected. */
     bool protected_;
 };
 

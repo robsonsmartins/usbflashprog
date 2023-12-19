@@ -45,24 +45,25 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
         runner_.vddSet(info_.voltage.vddProgram);
         runner_.vddCtrl();
         runner_.setCE();
-        if (!doPatternTest_(current, total)) {
-            error = true;
-        }
-        if (!doRandomTest_(current, total)) {
+        runner_.usDelay(30);  // 30 uS
+        if (!doPatternTest_(current, total) || !doRandomTest_(current, total)) {
             error = true;
         }
         resetBus_();
         if (!error) {
             error = runner_.hasError();
             if (error) {
+                // fail (error)
                 emit onProgress(total, total, true, false);
             }
         }
         runner_.close();
     } else {
+        // fail (no open port)
         emit onProgress(0, total, true, false);
     }
     if (!error) {
+        // success (done)
         emit onProgress(total, total, true);
     }
     return !error;
@@ -71,26 +72,18 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
 bool SRAM::doPatternTest_(uint32_t &current, uint32_t total) {
     QByteArray buffer = generatePatternData_();
     runner_.addrClr();
-    if (!program_(buffer, current, total)) {
-        return false;
-    }
+    if (!program_(buffer, current, total)) return false;
     runner_.addrClr();
-    if (!verify_(buffer, current, total)) {
-        return false;
-    }
+    if (!verify_(buffer, current, total)) return false;
     return !runner_.hasError();
 }
 
 bool SRAM::doRandomTest_(uint32_t &current, uint32_t total) {
     QByteArray buffer = generateRandomData_();
     runner_.addrClr();
-    if (!program_(buffer, current, total)) {
-        return false;
-    }
+    if (!program_(buffer, current, total)) return false;
     runner_.addrClr();
-    if (!verify_(buffer, current, total)) {
-        return false;
-    }
+    if (!verify_(buffer, current, total)) return false;
     return !runner_.hasError();
 }
 
@@ -107,15 +100,16 @@ bool SRAM::resetBus_() {
     runner_.vppOnOE(false);
     runner_.vppOnWE(false);
     runner_.dataClr();
+    runner_.usDelay(25);  // 25 uS
     return !runner_.hasError();
 }
 
 bool SRAM::write_(uint8_t data) {
     runner_.dataSet(data);
     runner_.setWE(true);
-    runner_.usDelay(twp_);
+    runner_.usDelay(twp_);  // tWP uS
     runner_.setWE(false);
-    runner_.usDelay(twc_);
+    runner_.usDelay(twc_);  // tWC uS
     return !runner_.hasError();
 }
 

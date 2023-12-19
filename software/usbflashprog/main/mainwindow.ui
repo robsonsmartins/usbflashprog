@@ -2980,6 +2980,7 @@
      <addaction name="actionEPROMElectricalErasable"/>
      <addaction name="actionEEPROM"/>
      <addaction name="actionFlash"/>
+     <addaction name="actionDummy"/>
     </widget>
     <addaction name="menuParallelMemory"/>
     <addaction name="separator"/>
@@ -3436,6 +3437,17 @@
    </property>
    <property name="shortcut">
     <string notr="true"/>
+   </property>
+  </action>
+  <action name="actionDummy">
+   <property name="text">
+    <string notr="true">Dummy</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Dummy</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Dummy</string>
    </property>
   </action>
  </widget>

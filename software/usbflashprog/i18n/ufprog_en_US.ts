@@ -477,5 +477,25 @@
         <source>Disconnect</source>
         <translation>Disconnect</translation>
     </message>
+    <message>
+        <source>The amount of data in the buffer is different from the device size.</source>
+        <translation>The amount of data in the buffer is different from the device size.</translation>
+    </message>
+    <message>
+        <source>Do you want to write the truncated data anyway?</source>
+        <translation>Do you want to write the truncated data anyway?</translation>
+    </message>
+    <message>
+        <source>Size: %1 | Checksum: 0x%2 [ADD16] | 0x%3 [CRC32]</source>
+        <translation>Size: %1 | Checksum: 0x%2 [ADD16] | 0x%3 [CRC32]</translation>
+    </message>
+    <message>
+        <source>0 - Byte Programming</source>
+        <translation>0 - Byte Programming</translation>
+    </message>
+    <message>
+        <source>Press to change unit</source>
+        <translation>Press to change unit</translation>
+    </message>
 </context>
 </TS>

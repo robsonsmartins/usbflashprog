@@ -399,7 +399,7 @@ void QHexView::ensureVisible()
     auto vlines = this->visibleLines();
 
     if(pos.line >= (this->verticalScrollBar()->value() + vlines))
-        this->verticalScrollBar()->setValue(static_cast<int>(pos.line - vlines + 1));
+        this->verticalScrollBar()->setValue(static_cast<int>(pos.line - vlines + 2));
     else if(pos.line < this->verticalScrollBar()->value())
         this->verticalScrollBar()->setValue(static_cast<int>(pos.line));
     else

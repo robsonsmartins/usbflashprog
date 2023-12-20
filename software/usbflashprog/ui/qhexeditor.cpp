@@ -91,7 +91,7 @@ void QHexEditor::putData(const QByteArray &data) {
         QHexDocument::fromMemory<QMemoryBuffer>(data.left(size_));
     this->setDocument(document);
     changed_ = true;
-    emit changed(true);
+    emit changed();
 }
 
 QByteArray QHexEditor::getData(void) const {
@@ -103,8 +103,8 @@ void QHexEditor::fill(quint8 value) {
     QByteArray data = QByteArray(size_, value);
     QHexDocument *document = QHexDocument::fromMemory<QMemoryBuffer>(data);
     this->setDocument(document);
-    changed_ = true;
-    emit changed(true);
+    changed_ = (value != 0xFF);
+    emit changed(changed_);
 }
 
 void QHexEditor::random(void) {
@@ -115,7 +115,7 @@ void QHexEditor::random(void) {
     QHexDocument *document = QHexDocument::fromMemory<QMemoryBuffer>(data);
     this->setDocument(document);
     changed_ = true;
-    emit changed(true);
+    emit changed();
 }
 
 void QHexEditor::setSize(qint32 value) {
@@ -135,6 +135,7 @@ void QHexEditor::setSize(qint32 value) {
     document = QHexDocument::fromMemory<QMemoryBuffer>(data);
     this->setDocument(document);
     size_ = value;
+    emit changed(false);
 }
 
 qint32 QHexEditor::size(void) const {
@@ -181,12 +182,63 @@ void QHexEditor::showReplaceDialog(void) {
     dialog.setWindowFlags(dialog.windowFlags() &
                           ~Qt::WindowContextHelpButtonHint);
     dialog.exec();
+    QByteArray data = getData();
+    if (data.size() != size_) {
+        QHexCursor *cursor = hexCursor();
+        QHexPosition pos = cursor->position();
+        qint64 start = cursor->selectionStartOffset();
+        qint64 len = cursor->selectionLength();
+        if (data.size() < size_) {
+            data.append(QByteArray(size_ - data.size(), 0xFF));
+        } else if (data.size() > size_) {
+            data.resize(size_);
+        }
+        putData(data);
+        cursor->select(start);
+        cursor->selectSize(len);
+        cursor->move(pos);
+    }
 }
 
 void QHexEditor::onDataChanged(const QByteArray &data, quint32 offset,
                                QHexDocument::ChangeReason reason) {
     changed_ = true;
     emit changed();
+}
+
+void QHexEditor::keyPressEvent(QKeyEvent *e) {
+    QHexCursor *cursor = hexCursor();
+    auto start = cursor->selectionStartOffset();
+    auto end = cursor->selectionEndOffset();
+    switch (e->key()) {
+        case Qt::Key_Backspace:
+        case Qt::Key_Delete: {
+            if (end - start < 0) {
+                e->accept();
+                return;
+            }
+            QByteArray data = getData();
+            if (e->key() == Qt::Key_Backspace && start == end)
+                data = data.remove(start - 1, end - start + 1);
+            else
+                data = data.remove(start, end - start + 1);
+            data.append(QByteArray(end - start + 1, 0xFF));
+            putData(data);
+            if (e->key() == Qt::Key_Backspace)
+                cursor->move(start - 1);
+            else
+                cursor->move(end);
+            e->accept();
+            break;
+        }
+        case Qt::Key_Insert:
+            e->accept();
+            break;
+        default:
+            if (cursor->hasSelection()) cursor->move(start);
+            QHexView::keyPressEvent(e);
+            break;
+    }
 }
 
 void QHexEditor::setGroupLength(unsigned int l) {

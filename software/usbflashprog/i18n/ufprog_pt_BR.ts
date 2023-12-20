@@ -477,5 +477,25 @@
         <source>Disconnect</source>
         <translation>Desconectar</translation>
     </message>
+    <message>
+        <source>The amount of data in the buffer is different from the device size.</source>
+        <translation>A quantidade de dados no editor é diferente do tamanho do dispositivo.</translation>
+    </message>
+    <message>
+        <source>Do you want to write the truncated data anyway?</source>
+        <translation>Você quer gravar o dispositivo com os dados truncados, mesmo assim?</translation>
+    </message>
+    <message>
+        <source>Size: %1 | Checksum: 0x%2 [ADD16] | 0x%3 [CRC32]</source>
+        <translation>Tamanho: %1 | Soma: 0x%2 [ADD16] | 0x%3 [CRC32]</translation>
+    </message>
+    <message>
+        <source>0 - Byte Programming</source>
+        <translation>0 - Gravação por Byte</translation>
+    </message>
+    <message>
+        <source>Press to change unit</source>
+        <translation>Aperte para alterar a unidade</translation>
+    </message>
 </context>
 </TS>

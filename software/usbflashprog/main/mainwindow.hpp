@@ -156,6 +156,8 @@ class MainWindow : public QMainWindow {
     Ui::MainWindow *ui_;
     /* @brief Pointer to QHexEditor widget. */
     QHexEditor *hexeditor_;
+    /* @brief Pointer to checksum QLabel widget. */
+    QLabel *checksumLabel_;
     /* @brief Pointer to QProgressDialog widget (Prog). */
     QProgressDialog *progress_;
     /* @brief Ports Enumerator Timer (Diag). */
@@ -204,6 +206,8 @@ class MainWindow : public QMainWindow {
     QString getOpenDialogFilter_();
     /* @brief Gets file filter of the save dialog (Editor). */
     QString getSaveDialogFilter_();
+    /* @brief Updates checksum info (Editor). */
+    void updateCheckSum_();
     /*
      * @brief Connects to board via CDC port (Diag).
      * @param state True to connect, false to disconnect.

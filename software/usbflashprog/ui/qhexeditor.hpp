@@ -18,6 +18,8 @@
 #ifndef UI_QHEXEDITOR_HPP_
 #define UI_QHEXEDITOR_HPP_
 
+#include <QKeyEvent>
+
 #include <qhexview.h>
 #include "backend/epromfile/qepromfile.hpp"
 
@@ -141,6 +143,11 @@ class QHexEditor : public QHexView {
      */
     void onDataChanged(const QByteArray& data, quint32 offset,
                        QHexDocument::ChangeReason reason);
+
+  protected:
+    /* @brief Key Press Event handler
+     * @param e Pointer to the QKeyEvent object. */
+    void keyPressEvent(QKeyEvent* e) override;
 
   private:
     /* @brief Data changed status. */

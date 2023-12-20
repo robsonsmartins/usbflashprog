@@ -471,6 +471,9 @@
                    <property name="contextMenuPolicy">
                     <enum>Qt::NoContextMenu</enum>
                    </property>
+                   <property name="toolTip">
+                    <string>Press to select...</string>
+                   </property>
                    <property name="styleSheet">
                     <string notr="true"/>
                    </property>
@@ -537,6 +540,9 @@
                      <height>25</height>
                     </size>
                    </property>
+                   <property name="toolTip">
+                    <string>Press to change unit</string>
+                   </property>
                    <property name="styleSheet">
                     <string notr="true">QComboBox::drop-down {border-width: 0px;} QComboBox::down-arrow {image: url(noimg); border-width: 0px;}</string>
                    </property>
@@ -600,6 +606,9 @@
                      <width>38</width>
                      <height>25</height>
                     </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Press to change unit</string>
                    </property>
                    <property name="styleSheet">
                     <string notr="true">QComboBox::drop-down {border-width: 0px;} QComboBox::down-arrow {image: url(noimg); border-width: 0px;}</string>
@@ -701,10 +710,15 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>50</width>
+                     <width>120</width>
                      <height>25</height>
                     </size>
                    </property>
+                   <item>
+                    <property name="text">
+                     <string>0 - Byte Programming</string>
+                    </property>
+                   </item>
                    <item>
                     <property name="text">
                      <string notr="true">64</string>

@@ -195,7 +195,7 @@ jobs:
         name: Create the Installer (Windows 64-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
-          ./is/iscc.exe //DARCH="Win64" //DQT_PATH="..\\qt\\Qt\\5.15.2\\mingw81_64" ufprog.iss
+          ./is/iscc.exe //DARCH="Win64" //DQT_PATH="..\\qt\\Qt\\5.15.2\\mingw81_64" //Dversion="`cat ../VERSION`" ufprog.iss
           mv "../build/ufprog-`cat ../VERSION`-0-win64-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-${{env.BUILD_REVISION}}-win64-setup.exe"
         shell: msys2 {0}
 
@@ -203,7 +203,7 @@ jobs:
         name: Create the Installer (Windows 32-bits)
         working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
         run: |
-          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.15.2\\mingw81_32" ufprog.iss
+          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.15.2\\mingw81_32" //Dversion="`cat ../VERSION`" ufprog.iss
           mv "../build/ufprog-`cat ../VERSION`-0-win32-setup.exe" "../build/ufprog-${{env.BUILD_VERSION}}-${{env.BUILD_REVISION}}-win32-setup.exe"
         shell: msys2 {0}
 

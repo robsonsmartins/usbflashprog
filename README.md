@@ -14,6 +14,7 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 * [About the Project](#about-the-project)
 * [Current Status](#current-status)
 * [Releases](#releases)
+* [Downloads](#downloads)
 * [Operating Systems](#operating-systems)
 * [Documentation](#documentation)
 * [Hardware Design](#hardware-design)
@@ -34,18 +35,34 @@ In a future release, programming of some microcontroller families (eg. Microchip
 
 The current status of this project is:
 
-![Current Revision](https://img.shields.io/badge/Current%20Version-v0.1.0--rev.G-blue?style=plastic)
+![Current Revision](https://img.shields.io/badge/Current%20Version-v0.2.0--rev.A-blue?style=plastic)
 ![Specifications](https://img.shields.io/badge/Specifications-almost%20stable-green?style=plastic)
 ![Hardware Design SCH](https://img.shields.io/badge/Hardware%20Design%20(Schematics)-almost%20stable-yellowgreen?style=plastic)
 ![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-not%20started%20yet-red?style=plastic)
-![Firmware](https://img.shields.io/badge/Firmware-unstable-yellow?style=plastic)
-![PC Software](https://img.shields.io/badge/PC%20Software-unstable-yellow?style=plastic)
+![Firmware](https://img.shields.io/badge/Firmware-almost%20stable-yellowgreen?style=plastic)
+![PC Software](https://img.shields.io/badge/PC%20Software-almost%20stable-yellowgreen?style=plastic)
 ![User Documentation](https://img.shields.io/badge/User%20Documentation-not%20started%20yet-red?style=plastic)
 ![Developer/Engineer Documentation](https://img.shields.io/badge/Developer%20and%20Engineer%20Documentation-almost%20stable-green?style=plastic)
 
 ## Releases
 
 The releases of this project are here: [Releases of the USB Flash/EPROM Programmer](https://github.com/robsonsmartins/usbflashprog/releases).
+
+## Downloads
+
+Downloads of the latest version of the project are available here:
+
+*USB Flash/EPROM Programmer 0.2*:
+
+* [Specifications](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/specs.pdf) (PDF format, ~617KB)
+* [Schematics](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/usbflashprog_sch.pdf) (PDF format, ~142KB)
+* [Bill of Materials](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/usbflashprog_bom.pdf) (PDF format, ~52KB)
+* [Firmware Binary (UF2 to Raspberry Pi Pico)](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-uf2-firmware.zip) (ZIP format, ~207KB)
+* [Software Installer - Microsoft Windows© 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-win64-installer.zip) (ZIP format, ~10MB)
+* [Software Installer - Microsoft Windows© 32 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-win32-installer.zip) (ZIP format, ~10MB)
+* [Software Installer - Apple macOS© 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-macos-installer.zip) (ZIP format, ~21MB)
+* [Software Installer - GNU/Linux 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-linux64-packages.zip) (ZIP format, ~473KB)
+* [Software Installer - FreeBSD 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-freebsd_amd64-package.zip) (ZIP format, ~177KB)
 
 ## Operating Systems
 
@@ -60,13 +77,13 @@ The USB Flash/EPROM Programmer has compiled installation packages for the follow
 * Ubuntu Linux 20.04, or above (64 bits)
 * RedHat/CentOS 8, or above (64 bits)
 
-### Apple MacOSX©
+### Apple macOS©
 
-* MacOSX 10.13, or above (Intel)
+* macOS 10.13, or above (Intel)
 
 ### FreeBSD
 
-* FreeBSD 13.1, or above (64 bits)
+* FreeBSD 13.2, or above (64 bits)
 
 ## Documentation
 

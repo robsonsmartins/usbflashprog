@@ -290,10 +290,6 @@
         <translation>Skip Write 0xFF</translation>
     </message>
     <message>
-        <source>Fast Programming/Erase</source>
-        <translation>Fast Programming/Erase</translation>
-    </message>
-    <message>
         <source>Sector Size</source>
         <translation>Sector Size</translation>
     </message>
@@ -496,6 +492,18 @@
     <message>
         <source>Press to change unit</source>
         <translation>Press to change unit</translation>
+    </message>
+    <message>
+        <source>Adjust VDD [Caution!]</source>
+        <translation>Adjust VDD [Caution!]</translation>
+    </message>
+    <message>
+        <source>Adjust VPP [Caution!]</source>
+        <translation>Adjust VPP [Caution!]</translation>
+    </message>
+    <message>
+        <source>Fast Mode</source>
+        <translation>Fast Mode</translation>
     </message>
 </context>
 </TS>

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>686</width>
+    <width>702</width>
     <height>834</height>
    </rect>
   </property>
@@ -426,6 +426,12 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_23">
                  <item>
                   <widget class="QLabel" name="labelProgPort">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>Port</string>
                    </property>
@@ -449,6 +455,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelProgDevice">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string>Device</string>
                    </property>
@@ -487,6 +499,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelProgTWP">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string notr="true">tWP</string>
                    </property>
@@ -560,6 +578,12 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelProgTWC">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
                    <property name="text">
                     <string notr="true">tWC</string>
                    </property>
@@ -625,19 +649,6 @@
                    </item>
                   </widget>
                  </item>
-                 <item>
-                  <spacer name="horizontalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
                 </layout>
                </item>
                <item>
@@ -650,7 +661,7 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>620</width>
+                   <width>630</width>
                    <height>0</height>
                   </size>
                  </property>
@@ -683,7 +694,7 @@
                     <bool>false</bool>
                    </property>
                    <property name="text">
-                    <string>Fast Programming/Erase</string>
+                    <string>Fast Mode</string>
                    </property>
                   </widget>
                  </item>
@@ -691,6 +702,12 @@
                   <widget class="QLabel" name="labelProgSectorSize">
                    <property name="enabled">
                     <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
                    <property name="text">
                     <string>Sector Size</string>
@@ -710,7 +727,7 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>120</width>
+                     <width>160</width>
                      <height>25</height>
                     </size>
                    </property>
@@ -752,17 +769,116 @@
                   </widget>
                  </item>
                  <item>
-                  <spacer name="horizontalSpacer_14">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                  <widget class="QLabel" name="labelProgVDD">
+                   <property name="enabled">
+                    <bool>false</bool>
                    </property>
-                   <property name="sizeHint" stdset="0">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string notr="true">VDD</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxProgVDD">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
                     <size>
-                     <width>40</width>
-                     <height>20</height>
+                     <width>55</width>
+                     <height>26</height>
                     </size>
                    </property>
-                  </spacer>
+                   <property name="toolTip">
+                    <string>Adjust VDD [Caution!]</string>
+                   </property>
+                   <property name="suffix">
+                    <string notr="true"> V</string>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="minimum">
+                    <double>2.500000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>6.800000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>5.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labelProgVPP">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string notr="true">VPP</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxProgVPP">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>55</width>
+                     <height>26</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Adjust VPP [Caution!]</string>
+                   </property>
+                   <property name="suffix">
+                    <string notr="true"> V</string>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="minimum">
+                    <double>10.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>25.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>12.000000000000000</double>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
@@ -770,6 +886,19 @@
              </item>
             </layout>
            </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </item>
@@ -2925,7 +3054,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>686</width>
+     <width>702</width>
      <height>21</height>
     </rect>
    </property>

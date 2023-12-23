@@ -290,10 +290,6 @@
         <translation>Não Gravar 0xFF</translation>
     </message>
     <message>
-        <source>Fast Programming/Erase</source>
-        <translation>Progamação/Apagamento Rápido</translation>
-    </message>
-    <message>
         <source>Sector Size</source>
         <translation>Tamanho do Setor</translation>
     </message>
@@ -496,6 +492,18 @@
     <message>
         <source>Press to change unit</source>
         <translation>Aperte para alterar a unidade</translation>
+    </message>
+    <message>
+        <source>Adjust VDD [Caution!]</source>
+        <translation>Ajuste de VDD [Cuidado!]</translation>
+    </message>
+    <message>
+        <source>Adjust VPP [Caution!]</source>
+        <translation>Ajuste de VPP [Cuidado!]</translation>
+    </message>
+    <message>
+        <source>Fast Mode</source>
+        <translation>Modo Rápido</translation>
     </message>
 </context>
 </TS>

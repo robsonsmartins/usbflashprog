@@ -91,6 +91,8 @@ class MainWindow : public QMainWindow {
     void on_btnUnprotect_clicked();
     void on_spinBoxProgTWP_valueChanged(int value);
     void on_spinBoxProgTWC_valueChanged(int value);
+    void on_spinBoxProgVDD_valueChanged(double value);
+    void on_spinBoxProgVPP_valueChanged(double value);
     void on_checkBoxProgSkipFF_toggled(bool checked = false);
     void on_checkBoxProgFast_toggled(bool checked = false);
     void on_comboBoxProgSectorSize_currentIndexChanged(int index);

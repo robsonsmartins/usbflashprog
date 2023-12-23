@@ -26,9 +26,10 @@ SRAM::SRAM(QObject *parent) : Device(parent) {
     info_.deviceType = kDeviceParallelMemory;
     info_.name = "SRAM";
     info_.capability.hasProgram = true;
-    info_.voltage.vddProgram = 5.0f;
+    info_.capability.hasVDD = true;
     twp_ = 3;
     twc_ = 5;
+    vdd_ = 5.0f;
     size_ = 2048;
 }
 
@@ -42,7 +43,7 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
     if (runner_.open(port_)) {
         error = false;
         resetBus_();
-        runner_.vddSet(info_.voltage.vddProgram);
+        runner_.vddSet(vdd_);
         runner_.vddCtrl();
         runner_.setCE();
         runner_.usDelay(30);  // 30 uS

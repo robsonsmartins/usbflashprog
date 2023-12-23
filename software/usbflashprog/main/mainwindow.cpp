@@ -57,6 +57,10 @@ constexpr const char *kSettingProgDevice = "Prog/Device";
 constexpr const char *kSettingProgTwp = "Prog/tWP";
 /* @brief Setting: Programmer / tWC. */
 constexpr const char *kSettingProgTwc = "Prog/tWC";
+/* @brief Setting: Programmer / VDD. */
+constexpr const char *kSettingProgVdd = "Prog/VDD";
+/* @brief Setting: Programmer / VPP. */
+constexpr const char *kSettingProgVpp = "Prog/VPP";
 /* @brief Setting: Programmer / Skip Prog 0xFF. */
 constexpr const char *kSettingProgSkipFF = "Prog/SkipFF";
 /* @brief Setting: Programmer / Fast Prog/Erase. */
@@ -496,6 +500,14 @@ void MainWindow::on_spinBoxProgTWC_valueChanged(int value) {
     saveSettings_();
 }
 
+void MainWindow::on_spinBoxProgVDD_valueChanged(double value) {
+    saveSettings_();
+}
+
+void MainWindow::on_spinBoxProgVPP_valueChanged(double value) {
+    saveSettings_();
+}
+
 void MainWindow::on_checkBoxProgSkipFF_toggled(bool checked) {
     saveSettings_();
 }
@@ -511,16 +523,21 @@ void MainWindow::on_comboBoxProgSectorSize_currentIndexChanged(int index) {
 void MainWindow::loadSettings_() {
     QSettings settings;
     QString device = settings.value(kSettingProgDevice).toString();
-    uint32_t twp = settings.value(kSettingProgTwp).toUInt();
-    uint32_t twc = settings.value(kSettingProgTwc).toUInt();
-    bool skipFF = settings.value(kSettingProgSkipFF).toInt() != 0;
-    bool fastProg = settings.value(kSettingProgFast).toInt() != 0;
-    uint16_t sectorSize = settings.value(kSettingProgSectorSize).toUInt();
+    uint32_t twp = settings.value(kSettingProgTwp).toString().toUInt();
+    uint32_t twc = settings.value(kSettingProgTwc).toString().toUInt();
+    float vdd = settings.value(kSettingProgVdd).toString().toFloat();
+    float vpp = settings.value(kSettingProgVpp).toString().toFloat();
+    bool skipFF = settings.value(kSettingProgSkipFF).toString().toInt() != 0;
+    bool fastProg = settings.value(kSettingProgFast).toString().toInt() != 0;
+    uint16_t sectorSize =
+        settings.value(kSettingProgSectorSize).toString().toUInt();
     if (!device.isEmpty()) {
         ui_->btnProgDevice->setText(device);
         createDevice_();
         device_->setTwp(twp);
         device_->setTwc(twc);
+        device_->setVdd(vdd);
+        device_->setVpp(vpp);
         device_->setSkipFF(skipFF);
         device_->setFastProg(fastProg);
         device_->setSectorSize(sectorSize);
@@ -534,19 +551,23 @@ void MainWindow::saveSettings_() {
     settings.setValue(kSettingProgDevice, device);
     uint32_t twp = ui_->spinBoxProgTWP->value();
     if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) twp *= 1000;
-    settings.setValue(kSettingProgTwp, twp);
+    settings.setValue(kSettingProgTwp, QString::number(twp));
     uint32_t twc = ui_->spinBoxProgTWC->value();
     if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) twc *= 1000;
-    settings.setValue(kSettingProgTwc, twc);
+    settings.setValue(kSettingProgTwc, QString::number(twc));
+    float vdd = ui_->spinBoxProgVDD->value();
+    settings.setValue(kSettingProgVdd, QString::number(vdd));
+    float vpp = ui_->spinBoxProgVPP->value();
+    settings.setValue(kSettingProgVpp, QString::number(vpp));
     int skipFF = ui_->checkBoxProgSkipFF->isChecked() ? 1 : 0;
-    settings.setValue(kSettingProgSkipFF, skipFF);
+    settings.setValue(kSettingProgSkipFF, QString::number(skipFF));
     int fastProg = ui_->checkBoxProgFast->isChecked() ? 1 : 0;
-    settings.setValue(kSettingProgFast, fastProg);
+    settings.setValue(kSettingProgFast, QString::number(fastProg));
     uint16_t sectorSize = 0;
     if (ui_->comboBoxProgSectorSize->currentIndex() != 0) {
         sectorSize = ui_->comboBoxProgSectorSize->currentText().toUInt();
     }
-    settings.setValue(kSettingProgSectorSize, sectorSize);
+    settings.setValue(kSettingProgSectorSize, QString::number(sectorSize));
 }
 
 void MainWindow::createDevice_() {
@@ -609,6 +630,8 @@ void MainWindow::configureProgControls_() {
     ui_->comboBoxProgTWPUnit->blockSignals(true);
     ui_->spinBoxProgTWC->blockSignals(true);
     ui_->comboBoxProgTWCUnit->blockSignals(true);
+    ui_->spinBoxProgVDD->blockSignals(true);
+    ui_->spinBoxProgVPP->blockSignals(true);
     ui_->checkBoxProgFast->blockSignals(true);
     ui_->checkBoxProgSkipFF->blockSignals(true);
     ui_->comboBoxProgSectorSize->blockSignals(true);
@@ -644,6 +667,11 @@ void MainWindow::configureProgControls_() {
     ui_->btnGetID->setEnabled(capability.hasGetId && port);
     ui_->btnUnprotect->setEnabled(capability.hasUnprotect && port);
 
+    ui_->spinBoxProgVDD->setEnabled(capability.hasVDD && port);
+    ui_->labelProgVDD->setEnabled(capability.hasVDD && port);
+    ui_->spinBoxProgVPP->setEnabled(capability.hasVPP && port);
+    ui_->labelProgVPP->setEnabled(capability.hasVPP && port);
+
     if (device_) {
         hexeditor_->setSize(device_->getSize());
 
@@ -665,6 +693,8 @@ void MainWindow::configureProgControls_() {
             ui_->comboBoxProgTWCUnit->setCurrentIndex(1);
         }
 
+        ui_->spinBoxProgVDD->setValue(device_->getVdd());
+        ui_->spinBoxProgVPP->setValue(device_->getVpp());
         ui_->checkBoxProgFast->setChecked(device_->getFastProg());
         ui_->checkBoxProgSkipFF->setChecked(device_->getSkipFF());
 
@@ -683,6 +713,8 @@ void MainWindow::configureProgControls_() {
     ui_->comboBoxProgTWPUnit->blockSignals(false);
     ui_->spinBoxProgTWC->blockSignals(false);
     ui_->comboBoxProgTWCUnit->blockSignals(false);
+    ui_->spinBoxProgVDD->blockSignals(false);
+    ui_->spinBoxProgVPP->blockSignals(false);
     ui_->checkBoxProgFast->blockSignals(false);
     ui_->checkBoxProgSkipFF->blockSignals(false);
     ui_->comboBoxProgSectorSize->blockSignals(false);
@@ -696,6 +728,8 @@ void MainWindow::configureDeviceFromControls_() {
     uint32_t twc = ui_->spinBoxProgTWC->value();
     if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) twc *= 1000;
     device_->setTwc(twc);
+    device_->setVdd(ui_->spinBoxProgVDD->value());
+    device_->setVpp(ui_->spinBoxProgVPP->value());
     device_->setSkipFF(ui_->checkBoxProgSkipFF->isChecked());
     device_->setFastProg(ui_->checkBoxProgFast->isChecked());
     uint16_t sectorSize = 0;

@@ -63,37 +63,6 @@ typedef struct TDeviceID {
 
 /**
  * @ingroup Software
- * @brief Stores voltage configuration of a device.
- */
-typedef struct TDeviceVoltageConfig {
-    /** @brief VDD value to Program. */
-    float vddProgram;
-    /** @brief VPP value to Program. */
-    float vppProgram;
-    /** @brief VDD value to Read. */
-    float vddRead;
-    /** @brief VPP value to Read. */
-    float vppRead;
-    /** @brief VDD value to Erase. */
-    float vddErase;
-    /** @brief VPP value to Erase. */
-    float vppErase;
-    /** @brief VDD value to GetId. */
-    float vddGetId;
-    /** @brief VPP value to GetId. */
-    float vppGetId;
-    /** @brief VDD value to Unprotect. */
-    float vddUnprotect;
-    /** @brief VPP value to Unprotect. */
-    float vppUnprotect;
-    /** @brief Constructor. */
-    TDeviceVoltageConfig();
-} TDeviceVoltageConfig;
-
-// ---------------------------------------------------------------------------
-
-/**
- * @ingroup Software
  * @brief Stores capability flags of a device.
  */
 typedef struct TDeviceCapabilities {
@@ -117,6 +86,10 @@ typedef struct TDeviceCapabilities {
     bool hasFastProg;
     /** @brief Device has Skip Prog 0xFF configuration. */
     bool hasSkipFF;
+    /** @brief Device has VDD Adjust configuration. */
+    bool hasVDD;
+    /** @brief Device has VPP Adjust configuration. */
+    bool hasVPP;
     /** @brief Constructor. */
     TDeviceCapabilities();
 } TDeviceCapabilities;
@@ -132,8 +105,6 @@ typedef struct TDeviceInformation {
     kDeviceTypeEnum deviceType;
     /** @brief Device algorithm name. */
     QString name;
-    /** @brief Device voltage config. */
-    TDeviceVoltageConfig voltage;
     /** @brief Device capability flags. */
     TDeviceCapabilities capability;
     /** @brief Constructor. */
@@ -200,6 +171,26 @@ class Device : public QObject {
      * @return tWC value, in microseconds.
      */
     virtual uint32_t getTwc() const;
+    /**
+     * @brief Sets the VDD.
+     * @param value VDD value, in volts.
+     */
+    virtual void setVdd(float value);
+    /**
+     * @brief Returns the configured VDD (in volts).
+     * @return VDD value, in volts.
+     */
+    virtual float getVdd() const;
+    /**
+     * @brief Sets the VPP.
+     * @param value VPP value, in volts.
+     */
+    virtual void setVpp(float value);
+    /**
+     * @brief Returns the configured VPP (in volts).
+     * @return VPP value, in volts.
+     */
+    virtual float getVpp() const;
     /**
      * @brief Sets the Skip Prog 0xFF.
      * @param value If true (default), enables skip prog 0xFF, disables
@@ -308,11 +299,15 @@ class Device : public QObject {
     uint32_t twp_;
     /* @brief tWC, in microseconds. */
     uint32_t twc_;
+    /* @brief VDD, in volts. */
+    float vdd_;
+    /* @brief VPP, in volts. */
+    float vpp_;
     /* @brief Enables skip prog 0xFF. */
     bool skipFF_;
     /* @brief Enables fast prog/erase. */
     bool fastProg_;
-    /* @brief Sector size, in bytes. */
+    /* @brief Sector size, in bytes (0 = byte mode). */
     uint16_t sectorSize_;
     /* @brief Serial port path. */
     QString port_;

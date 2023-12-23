@@ -33,8 +33,12 @@ Dummy::Dummy(QObject *parent) : Device(parent), protected_(true) {
     info_.capability.hasSectorSize = true;
     info_.capability.hasFastProg = true;
     info_.capability.hasSkipFF = true;
+    info_.capability.hasVDD = true;
+    info_.capability.hasVPP = true;
     twp_ = 1000;
     twc_ = 2000;
+    vdd_ = 5.0f;
+    vpp_ = 12.0f;
     setSize(2048);
 }
 

@@ -80,20 +80,6 @@ QString TDeviceID::getManufacturerName(void) const {
 
 // ---------------------------------------------------------------------------
 
-TDeviceVoltageConfig::TDeviceVoltageConfig()
-    : vddProgram(0.0f),
-      vppProgram(0.0f),
-      vddRead(0.0f),
-      vppRead(0.0f),
-      vddErase(0.0f),
-      vppErase(0.0f),
-      vddGetId(0.0f),
-      vppGetId(0.0f),
-      vddUnprotect(0.0f),
-      vppUnprotect(0.0f) {}
-
-// ---------------------------------------------------------------------------
-
 TDeviceCapabilities::TDeviceCapabilities()
     : hasProgram(false),
       hasVerify(false),
@@ -119,6 +105,8 @@ Device::Device(QObject *parent)
       size_(0),
       twp_(1),
       twc_(1),
+      vdd_(5.0f),
+      vpp_(12.0f),
       skipFF_(false),
       fastProg_(false),
       sectorSize_(0),
@@ -135,16 +123,8 @@ Device::Device(QObject *parent)
     info_.capability.hasSectorSize = false;
     info_.capability.hasFastProg = false;
     info_.capability.hasSkipFF = false;
-    info_.voltage.vddProgram = 0.0f;
-    info_.voltage.vppProgram = 0.0f;
-    info_.voltage.vddRead = 0.0f;
-    info_.voltage.vppRead = 0.0f;
-    info_.voltage.vddErase = 0.0f;
-    info_.voltage.vppErase = 0.0f;
-    info_.voltage.vddGetId = 0.0f;
-    info_.voltage.vppGetId = 0.0f;
-    info_.voltage.vddUnprotect = 0.0f;
-    info_.voltage.vppUnprotect = 0.0f;
+    info_.capability.hasVDD = true;
+    info_.capability.hasVPP = false;
 }
 
 Device::~Device() {}
@@ -183,6 +163,24 @@ void Device::setTwc(uint32_t us) {
 
 uint32_t Device::getTwc() const {
     return twc_;
+}
+
+void Device::setVdd(float value) {
+    if (vdd_ == value) return;
+    if (value >= 0.0f) vdd_ = value;
+}
+
+float Device::getVdd() const {
+    return vdd_;
+}
+
+void Device::setVpp(float value) {
+    if (vpp_ == value) return;
+    if (value >= 0.0f) vpp_ = value;
+}
+
+float Device::getVpp() const {
+    return vpp_;
 }
 
 void Device::setSkipFF(bool value) {

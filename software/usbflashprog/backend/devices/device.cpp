@@ -30,6 +30,7 @@ QString TDeviceID::getManufacturerName(void) const {
         case 0x04:
             return "Fujitsu";
         case 0x0C:  // to validate
+        case 0x29:
             return "Microchip Technology";
         case 0x1C:  // to validate
             return "EON";
@@ -57,6 +58,8 @@ QString TDeviceID::getManufacturerName(void) const {
             return "Adesto Technologies";
         case 0x89:
             return "Intel";
+        case 0x8F:
+            return "National Semiconductor";
         case 0x9D:  // to validate
             return "Xicor";
         case 0xAD:
@@ -105,7 +108,8 @@ Device::Device(QObject *parent)
       size_(0),
       twp_(1),
       twc_(1),
-      vdd_(5.0f),
+      vddRd_(5.0f),
+      vddWr_(5.0f),
       vpp_(12.0f),
       skipFF_(false),
       fastProg_(false),
@@ -165,13 +169,22 @@ uint32_t Device::getTwc() const {
     return twc_;
 }
 
-void Device::setVdd(float value) {
-    if (vdd_ == value) return;
-    if (value >= 0.0f) vdd_ = value;
+void Device::setVddRd(float value) {
+    if (vddRd_ == value) return;
+    if (value >= 0.0f) vddRd_ = value;
 }
 
-float Device::getVdd() const {
-    return vdd_;
+float Device::getVddRd() const {
+    return vddRd_;
+}
+
+void Device::setVddWr(float value) {
+    if (vddWr_ == value) return;
+    if (value >= 0.0f) vddWr_ = value;
+}
+
+float Device::getVddWr() const {
+    return vddWr_;
 }
 
 void Device::setVpp(float value) {

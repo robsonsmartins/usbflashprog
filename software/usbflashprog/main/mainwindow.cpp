@@ -53,12 +53,16 @@ constexpr int kDialogLabelMinLength = 80;
 
 /* @brief Setting: Programmer / Selected Device. */
 constexpr const char *kSettingProgDevice = "Prog/Device";
+/* @brief Setting: Programmer / Device Size. */
+constexpr const char *kSettingProgDeviceSize = "Prog/DeviceSize";
 /* @brief Setting: Programmer / tWP. */
 constexpr const char *kSettingProgTwp = "Prog/tWP";
 /* @brief Setting: Programmer / tWC. */
 constexpr const char *kSettingProgTwc = "Prog/tWC";
-/* @brief Setting: Programmer / VDD. */
-constexpr const char *kSettingProgVdd = "Prog/VDD";
+/* @brief Setting: Programmer / VDD to Read. */
+constexpr const char *kSettingProgVddRd = "Prog/VDDToRead";
+/* @brief Setting: Programmer / VDD to Prog. */
+constexpr const char *kSettingProgVddWr = "Prog/VDDToProg";
 /* @brief Setting: Programmer / VPP. */
 constexpr const char *kSettingProgVpp = "Prog/VPP";
 /* @brief Setting: Programmer / Skip Prog 0xFF. */
@@ -151,6 +155,10 @@ MainWindow::MainWindow(QWidget *parent)
         ~Qt::WindowContextHelpButtonHint);
 
     hexeditor_ = new QHexEditor(ui_->frameEditor);
+    hexeditor_->setMaximumWidth(620);
+    hexeditor_->setFixedWidth(620);
+    hexeditor_->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    ui_->frameEditor->layout()->setAlignment(Qt::AlignLeft);
     ui_->frameEditor->layout()->addWidget(hexeditor_);
     ui_->frameEditor->layout()->setContentsMargins(0, 0, 20, 20);
 
@@ -500,7 +508,11 @@ void MainWindow::on_spinBoxProgTWC_valueChanged(int value) {
     saveSettings_();
 }
 
-void MainWindow::on_spinBoxProgVDD_valueChanged(double value) {
+void MainWindow::on_spinBoxProgVDDrd_valueChanged(double value) {
+    saveSettings_();
+}
+
+void MainWindow::on_spinBoxProgVDDwr_valueChanged(double value) {
     saveSettings_();
 }
 
@@ -520,12 +532,28 @@ void MainWindow::on_comboBoxProgSectorSize_currentIndexChanged(int index) {
     saveSettings_();
 }
 
+void MainWindow::on_comboBoxProgSize_currentIndexChanged(int index) {
+    if (device_) {
+        if (hexeditor_->isChanged()) {
+            if (!showDialogFileChanged_()) return;
+        }
+        uint32_t size = static_cast<uint32_t>(
+            ceil(powf(2, ui_->comboBoxProgSize->currentIndex()) * 2048.0f));
+        device_->setSize(size);
+        configureProgControls_();
+        hexeditor_->fill(0xFF);
+        saveSettings_();
+    }
+}
+
 void MainWindow::loadSettings_() {
     QSettings settings;
     QString device = settings.value(kSettingProgDevice).toString();
+    uint32_t size = settings.value(kSettingProgDeviceSize).toString().toUInt();
     uint32_t twp = settings.value(kSettingProgTwp).toString().toUInt();
     uint32_t twc = settings.value(kSettingProgTwc).toString().toUInt();
-    float vdd = settings.value(kSettingProgVdd).toString().toFloat();
+    float vddRd = settings.value(kSettingProgVddRd).toString().toFloat();
+    float vddWr = settings.value(kSettingProgVddWr).toString().toFloat();
     float vpp = settings.value(kSettingProgVpp).toString().toFloat();
     bool skipFF = settings.value(kSettingProgSkipFF).toString().toInt() != 0;
     bool fastProg = settings.value(kSettingProgFast).toString().toInt() != 0;
@@ -534,9 +562,11 @@ void MainWindow::loadSettings_() {
     if (!device.isEmpty()) {
         ui_->btnProgDevice->setText(device);
         createDevice_();
+        device_->setSize(size);
         device_->setTwp(twp);
         device_->setTwc(twc);
-        device_->setVdd(vdd);
+        device_->setVddRd(vddRd);
+        device_->setVddWr(vddWr);
         device_->setVpp(vpp);
         device_->setSkipFF(skipFF);
         device_->setFastProg(fastProg);
@@ -549,14 +579,19 @@ void MainWindow::saveSettings_() {
     QSettings settings;
     QString device = ui_->btnProgDevice->text();
     settings.setValue(kSettingProgDevice, device);
+    uint32_t size = static_cast<uint32_t>(
+        ceil(powf(2, ui_->comboBoxProgSize->currentIndex()) * 2048.0f));
+    settings.setValue(kSettingProgDeviceSize, QString::number(size));
     uint32_t twp = ui_->spinBoxProgTWP->value();
     if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) twp *= 1000;
     settings.setValue(kSettingProgTwp, QString::number(twp));
     uint32_t twc = ui_->spinBoxProgTWC->value();
     if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) twc *= 1000;
     settings.setValue(kSettingProgTwc, QString::number(twc));
-    float vdd = ui_->spinBoxProgVDD->value();
-    settings.setValue(kSettingProgVdd, QString::number(vdd));
+    float vddRd = ui_->spinBoxProgVDDrd->value();
+    settings.setValue(kSettingProgVddRd, QString::number(vddRd));
+    float vddWr = ui_->spinBoxProgVDDwr->value();
+    settings.setValue(kSettingProgVddWr, QString::number(vddWr));
     float vpp = ui_->spinBoxProgVPP->value();
     settings.setValue(kSettingProgVpp, QString::number(vpp));
     int skipFF = ui_->checkBoxProgSkipFF->isChecked() ? 1 : 0;
@@ -579,7 +614,7 @@ void MainWindow::createDevice_() {
     createDeviceIfSRAM_(ui_->btnProgDevice->text());
     if (!device_) {
         device_ = new Dummy(this);
-        device_->setSize(2 * 1024);
+        device_->setSize(2048);
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
     }
@@ -587,41 +622,11 @@ void MainWindow::createDevice_() {
 }
 
 void MainWindow::createDeviceIfSRAM_(const QString &label) {
-    uint32_t size = 0;
-    bool found = false;
-    if (label == ui_->actionSRAM2K->text()) {
-        found = true;
-        size = 2 * 1024;
-    } else if (label == ui_->actionSRAM4K->text()) {
-        found = true;
-        size = 4 * 1024;
-    } else if (label == ui_->actionSRAM8K->text()) {
-        found = true;
-        size = 8 * 1024;
-    } else if (label == ui_->actionSRAM16K->text()) {
-        found = true;
-        size = 16 * 1024;
-    } else if (label == ui_->actionSRAM32K->text()) {
-        found = true;
-        size = 32 * 1024;
-    } else if (label == ui_->actionSRAM64K->text()) {
-        found = true;
-        size = 64 * 1024;
-    } else if (label == ui_->actionSRAM128K->text()) {
-        found = true;
-        size = 128 * 1024;
-    } else if (label == ui_->actionSRAM256K->text()) {
-        found = true;
-        size = 256 * 1024;
-    } else if (label == ui_->actionSRAM512K->text()) {
-        found = true;
-        size = 512 * 1024;
-    }
-    if (found) {
+    if (label == ui_->actionSRAM->text()) {
         device_ = new SRAM(this);
-        device_->setSize(size);
         ui_->actionDoProgram->setText(tr("Test SRAM"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_->setSize(2048);
     }
 }
 
@@ -630,11 +635,13 @@ void MainWindow::configureProgControls_() {
     ui_->comboBoxProgTWPUnit->blockSignals(true);
     ui_->spinBoxProgTWC->blockSignals(true);
     ui_->comboBoxProgTWCUnit->blockSignals(true);
-    ui_->spinBoxProgVDD->blockSignals(true);
+    ui_->spinBoxProgVDDrd->blockSignals(true);
+    ui_->spinBoxProgVDDwr->blockSignals(true);
     ui_->spinBoxProgVPP->blockSignals(true);
     ui_->checkBoxProgFast->blockSignals(true);
     ui_->checkBoxProgSkipFF->blockSignals(true);
     ui_->comboBoxProgSectorSize->blockSignals(true);
+    ui_->comboBoxProgSize->blockSignals(true);
 
     TDeviceInformation info;
     if (device_) info = device_->getInfo();
@@ -667,14 +674,14 @@ void MainWindow::configureProgControls_() {
     ui_->btnGetID->setEnabled(capability.hasGetId && port);
     ui_->btnUnprotect->setEnabled(capability.hasUnprotect && port);
 
-    ui_->spinBoxProgVDD->setEnabled(capability.hasVDD && port);
-    ui_->labelProgVDD->setEnabled(capability.hasVDD && port);
+    ui_->spinBoxProgVDDrd->setEnabled(capability.hasVDD && port);
+    ui_->labelProgVDDrd->setEnabled(capability.hasVDD && port);
+    ui_->spinBoxProgVDDwr->setEnabled(capability.hasVPP && port);
+    ui_->labelProgVDDwr->setEnabled(capability.hasVPP && port);
     ui_->spinBoxProgVPP->setEnabled(capability.hasVPP && port);
     ui_->labelProgVPP->setEnabled(capability.hasVPP && port);
 
     if (device_) {
-        hexeditor_->setSize(device_->getSize());
-
         uint32_t twp = device_->getTwp();
         if (twp < 1000) {
             ui_->spinBoxProgTWP->setValue(twp);
@@ -693,7 +700,8 @@ void MainWindow::configureProgControls_() {
             ui_->comboBoxProgTWCUnit->setCurrentIndex(1);
         }
 
-        ui_->spinBoxProgVDD->setValue(device_->getVdd());
+        ui_->spinBoxProgVDDrd->setValue(device_->getVddRd());
+        ui_->spinBoxProgVDDwr->setValue(device_->getVddWr());
         ui_->spinBoxProgVPP->setValue(device_->getVpp());
         ui_->checkBoxProgFast->setChecked(device_->getFastProg());
         ui_->checkBoxProgSkipFF->setChecked(device_->getSkipFF());
@@ -707,17 +715,30 @@ void MainWindow::configureProgControls_() {
                 qMin(ui_->comboBoxProgSectorSize->count() - 1, currentIndex);
         }
         ui_->comboBoxProgSectorSize->setCurrentIndex(currentIndex);
+
+        uint32_t size = device_->getSize();
+        currentIndex = 0;
+        if (size != 0) {
+            currentIndex = static_cast<int>(ceil(log2(size / 2048.0)));
+            currentIndex = qMax(0, currentIndex);
+            currentIndex =
+                qMin(ui_->comboBoxProgSize->count() - 1, currentIndex);
+        }
+        ui_->comboBoxProgSize->setCurrentIndex(currentIndex);
+        hexeditor_->setSize(size);
     }
 
     ui_->spinBoxProgTWP->blockSignals(false);
     ui_->comboBoxProgTWPUnit->blockSignals(false);
     ui_->spinBoxProgTWC->blockSignals(false);
     ui_->comboBoxProgTWCUnit->blockSignals(false);
-    ui_->spinBoxProgVDD->blockSignals(false);
+    ui_->spinBoxProgVDDrd->blockSignals(false);
+    ui_->spinBoxProgVDDwr->blockSignals(false);
     ui_->spinBoxProgVPP->blockSignals(false);
     ui_->checkBoxProgFast->blockSignals(false);
     ui_->checkBoxProgSkipFF->blockSignals(false);
     ui_->comboBoxProgSectorSize->blockSignals(false);
+    ui_->comboBoxProgSize->blockSignals(false);
 }
 
 void MainWindow::configureDeviceFromControls_() {
@@ -728,7 +749,8 @@ void MainWindow::configureDeviceFromControls_() {
     uint32_t twc = ui_->spinBoxProgTWC->value();
     if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) twc *= 1000;
     device_->setTwc(twc);
-    device_->setVdd(ui_->spinBoxProgVDD->value());
+    device_->setVddRd(ui_->spinBoxProgVDDrd->value());
+    device_->setVddWr(ui_->spinBoxProgVDDwr->value());
     device_->setVpp(ui_->spinBoxProgVPP->value());
     device_->setSkipFF(ui_->checkBoxProgSkipFF->isChecked());
     device_->setFastProg(ui_->checkBoxProgFast->isChecked());

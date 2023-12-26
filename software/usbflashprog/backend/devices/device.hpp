@@ -172,15 +172,25 @@ class Device : public QObject {
      */
     virtual uint32_t getTwc() const;
     /**
-     * @brief Sets the VDD.
+     * @brief Sets the VDD to Read.
      * @param value VDD value, in volts.
      */
-    virtual void setVdd(float value);
+    virtual void setVddRd(float value);
     /**
-     * @brief Returns the configured VDD (in volts).
+     * @brief Returns the configured VDD to Read (in volts).
      * @return VDD value, in volts.
      */
-    virtual float getVdd() const;
+    virtual float getVddRd() const;
+    /**
+     * @brief Sets the VDD to Program.
+     * @param value VDD value, in volts.
+     */
+    virtual void setVddWr(float value);
+    /**
+     * @brief Returns the configured VDD to Program (in volts).
+     * @return VDD value, in volts.
+     */
+    virtual float getVddWr() const;
     /**
      * @brief Sets the VPP.
      * @param value VPP value, in volts.
@@ -299,8 +309,10 @@ class Device : public QObject {
     uint32_t twp_;
     /* @brief tWC, in microseconds. */
     uint32_t twc_;
-    /* @brief VDD, in volts. */
-    float vdd_;
+    /* @brief VDD to Read, in volts. */
+    float vddRd_;
+    /* @brief VDD to Program, in volts. */
+    float vddWr_;
     /* @brief VPP, in volts. */
     float vpp_;
     /* @brief Enables skip prog 0xFF. */

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
+    <width>677</width>
     <height>834</height>
    </rect>
   </property>
@@ -427,7 +427,7 @@
                  <item>
                   <widget class="QLabel" name="labelProgPort">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -440,14 +440,14 @@
                  <item>
                   <widget class="QComboBox" name="comboBoxProgPort">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>120</width>
+                     <width>180</width>
                      <height>25</height>
                     </size>
                    </property>
@@ -456,7 +456,7 @@
                  <item>
                   <widget class="QLabel" name="labelProgDevice">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -469,14 +469,14 @@
                  <item>
                   <widget class="QPushButton" name="btnProgDevice">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>160</width>
+                     <width>200</width>
                      <height>26</height>
                     </size>
                    </property>
@@ -498,9 +498,140 @@
                   </widget>
                  </item>
                  <item>
+                  <widget class="QLabel" name="labelProgSize">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Size</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxProgSize">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="currentText">
+                    <string>2KB</string>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string notr="true">2KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">4KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">8KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">16KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">32KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">64KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">128KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">256KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">512KB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">1MB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">2MB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">4MB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">8MB</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">16MB</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line_8">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>605</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>605</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_22">
+                 <item>
                   <widget class="QLabel" name="labelProgTWP">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -520,7 +651,7 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>45</width>
+                     <width>50</width>
                      <height>26</height>
                     </size>
                    </property>
@@ -547,7 +678,7 @@
                  <item>
                   <widget class="QComboBox" name="comboBoxProgTWPUnit">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -579,7 +710,7 @@
                  <item>
                   <widget class="QLabel" name="labelProgTWC">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -599,7 +730,7 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>45</width>
+                     <width>50</width>
                      <height>26</height>
                     </size>
                    </property>
@@ -620,7 +751,7 @@
                  <item>
                   <widget class="QComboBox" name="comboBoxProgTWCUnit">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -649,143 +780,40 @@
                    </item>
                   </widget>
                  </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="Line" name="line_8">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>630</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>590</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_21">
                  <item>
-                  <widget class="QCheckBox" name="checkBoxProgSkipFF">
-                   <property name="enabled">
-                    <bool>false</bool>
+                  <spacer name="horizontalSpacer_14">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
                    </property>
-                   <property name="text">
-                    <string>Skip Write 0xFF</string>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Preferred</enum>
                    </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QCheckBox" name="checkBoxProgFast">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="text">
-                    <string>Fast Mode</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="labelProgSectorSize">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Sector Size</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBoxProgSectorSize">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
+                   <property name="sizeHint" stdset="0">
                     <size>
-                     <width>160</width>
-                     <height>25</height>
+                     <width>40</width>
+                     <height>20</height>
                     </size>
                    </property>
-                   <item>
-                    <property name="text">
-                     <string>0 - Byte Programming</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">64</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">128</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">256</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">512</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">1024</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string notr="true">2048</string>
-                    </property>
-                   </item>
-                  </widget>
+                  </spacer>
                  </item>
                  <item>
-                  <widget class="QLabel" name="labelProgVDD">
+                  <widget class="QLabel" name="labelProgVDDrd">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string notr="true">VDD</string>
+                    <string notr="true">VDD Read</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QDoubleSpinBox" name="spinBoxProgVDD">
+                  <widget class="QDoubleSpinBox" name="spinBoxProgVDDrd">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -802,7 +830,63 @@
                     </size>
                    </property>
                    <property name="toolTip">
-                    <string>Adjust VDD [Caution!]</string>
+                    <string>Adjust VDD to Read [Caution!]</string>
+                   </property>
+                   <property name="suffix">
+                    <string notr="true"> V</string>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="minimum">
+                    <double>2.500000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>6.800000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>5.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labelProgVDDwr">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string notr="true">VDD Prog</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxProgVDDwr">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>55</width>
+                     <height>26</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Adjust VDD to Program [Caution!]</string>
                    </property>
                    <property name="suffix">
                     <string notr="true"> V</string>
@@ -830,7 +914,7 @@
                     <bool>false</bool>
                    </property>
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -882,6 +966,149 @@
                  </item>
                 </layout>
                </item>
+               <item>
+                <widget class="Line" name="line_12">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>605</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>605</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_21">
+                 <item>
+                  <widget class="QCheckBox" name="checkBoxProgSkipFF">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Skip Write 0xFF</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkBoxProgFast">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Fast Program/Erase Mode</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labelProgSectorSize">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Sector Size</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxProgSectorSize">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>0 - Byte Programming</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">64</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">128</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">256</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">512</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">1024</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">2048</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
               </layout>
              </item>
             </layout>
@@ -894,7 +1121,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>20</width>
               <height>20</height>
              </size>
             </property>
@@ -3054,7 +3281,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>702</width>
+     <width>677</width>
      <height>21</height>
     </rect>
    </property>
@@ -3108,15 +3335,7 @@
       <property name="title">
        <string>SRAM</string>
       </property>
-      <addaction name="actionSRAM2K"/>
-      <addaction name="actionSRAM4K"/>
-      <addaction name="actionSRAM8K"/>
-      <addaction name="actionSRAM16K"/>
-      <addaction name="actionSRAM32K"/>
-      <addaction name="actionSRAM64K"/>
-      <addaction name="actionSRAM128K"/>
-      <addaction name="actionSRAM256K"/>
-      <addaction name="actionSRAM512K"/>
+      <addaction name="actionSRAM"/>
      </widget>
      <addaction name="menuSRAM"/>
      <addaction name="actionEPROM"/>
@@ -3456,15 +3675,15 @@
     <string notr="true"/>
    </property>
   </action>
-  <action name="actionSRAM2K">
+  <action name="actionSRAM">
    <property name="text">
-    <string notr="true">SRAM xx16 (2KB)</string>
+    <string notr="true">SRAM 20/61/62</string>
    </property>
    <property name="iconText">
-    <string notr="true">SRAM xx16 (2KB)</string>
+    <string notr="true">SRAM 20/61/62</string>
    </property>
    <property name="toolTip">
-    <string notr="true">SRAM xx16 (2KB)</string>
+    <string notr="true">SRAM 20/61/62</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>

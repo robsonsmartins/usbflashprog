@@ -91,11 +91,13 @@ class MainWindow : public QMainWindow {
     void on_btnUnprotect_clicked();
     void on_spinBoxProgTWP_valueChanged(int value);
     void on_spinBoxProgTWC_valueChanged(int value);
-    void on_spinBoxProgVDD_valueChanged(double value);
+    void on_spinBoxProgVDDrd_valueChanged(double value);
+    void on_spinBoxProgVDDwr_valueChanged(double value);
     void on_spinBoxProgVPP_valueChanged(double value);
     void on_checkBoxProgSkipFF_toggled(bool checked = false);
     void on_checkBoxProgFast_toggled(bool checked = false);
     void on_comboBoxProgSectorSize_currentIndexChanged(int index);
+    void on_comboBoxProgSize_currentIndexChanged(int index);
     /* editor */
     void on_actionOpen_triggered(bool checked = false);
     void on_actionSave_triggered(bool checked = false);

@@ -494,16 +494,20 @@
         <translation>Press to change unit</translation>
     </message>
     <message>
-        <source>Adjust VDD [Caution!]</source>
-        <translation>Adjust VDD [Caution!]</translation>
-    </message>
-    <message>
         <source>Adjust VPP [Caution!]</source>
         <translation>Adjust VPP [Caution!]</translation>
     </message>
     <message>
-        <source>Fast Mode</source>
-        <translation>Fast Mode</translation>
+        <source>Adjust VDD to Read [Caution!]</source>
+        <translation>Adjust VDD to Read [Caution!]</translation>
+    </message>
+    <message>
+        <source>Adjust VDD to Program [Caution!]</source>
+        <translation>Adjust VDD to Program [Caution!]</translation>
+    </message>
+    <message>
+        <source>Fast Program/Erase Mode</source>
+        <translation>Fast Program/Erase Mode</translation>
     </message>
 </context>
 </TS>

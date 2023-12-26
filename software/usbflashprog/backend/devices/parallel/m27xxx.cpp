@@ -19,19 +19,22 @@
 
 // ---------------------------------------------------------------------------
 
-M27xxx::M27xxx(QObject *parent) : SRAM(parent) {
+M27xxx::M27xxx(QObject *parent)
+    : SRAM(parent), progWithWE_(true), progIsInverted_(false) {
     info_.deviceType = kDeviceParallelMemory;
     info_.name = "EPROM 27xxx";
     info_.capability.hasRead = true;
     info_.capability.hasProgram = true;
     info_.capability.hasVerify = true;
     info_.capability.hasBlankCheck = true;
+    info_.capability.hasGetId = true;
     info_.capability.hasVDD = true;
     info_.capability.hasVPP = true;
     skipFF_ = true;
-    twp_ = 3;
-    twc_ = 5;
-    vdd_ = 5.0f;
+    twp_ = 600;
+    twc_ = 8;
+    vddRd_ = 5.0f;
+    vddWr_ = 6.0f;
     vpp_ = 13.0f;
     size_ = 2048;
 }
@@ -51,5 +54,9 @@ bool M27xxx::verify(const QByteArray &buffer) {
 }
 
 bool M27xxx::blankCheck() {
+    return false;
+}
+
+bool M27xxx::getId(TDeviceID &result) {
     return false;
 }

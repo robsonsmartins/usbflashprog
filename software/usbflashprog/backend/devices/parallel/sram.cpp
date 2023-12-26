@@ -29,7 +29,7 @@ SRAM::SRAM(QObject *parent) : Device(parent) {
     info_.capability.hasVDD = true;
     twp_ = 3;
     twc_ = 5;
-    vdd_ = 5.0f;
+    vddRd_ = 5.0f;
     size_ = 2048;
 }
 
@@ -43,7 +43,7 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
     if (runner_.open(port_)) {
         error = false;
         resetBus_();
-        runner_.vddSet(vdd_);
+        runner_.vddSet(vddRd_);
         runner_.vddCtrl();
         runner_.setCE();
         runner_.usDelay(30);  // 30 uS

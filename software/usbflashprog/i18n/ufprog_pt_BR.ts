@@ -487,23 +487,27 @@
     </message>
     <message>
         <source>0 - Byte Programming</source>
-        <translation>0 - Gravação por Byte</translation>
+        <translation>0 - Programação por Byte</translation>
     </message>
     <message>
         <source>Press to change unit</source>
         <translation>Aperte para alterar a unidade</translation>
     </message>
     <message>
-        <source>Adjust VDD [Caution!]</source>
-        <translation>Ajuste de VDD [Cuidado!]</translation>
-    </message>
-    <message>
         <source>Adjust VPP [Caution!]</source>
         <translation>Ajuste de VPP [Cuidado!]</translation>
     </message>
     <message>
-        <source>Fast Mode</source>
-        <translation>Modo Rápido</translation>
+        <source>Adjust VDD to Read [Caution!]</source>
+        <translation>Ajuste de VDD para Leitura [Cuidado!]</translation>
+    </message>
+    <message>
+        <source>Adjust VDD to Program [Caution!]</source>
+        <translation>Ajuste de VDD para Programação [Cuidado!]</translation>
+    </message>
+    <message>
+        <source>Fast Program/Erase Mode</source>
+        <translation>Modo de Programação/Apagamento Rápido</translation>
     </message>
 </context>
 </TS>

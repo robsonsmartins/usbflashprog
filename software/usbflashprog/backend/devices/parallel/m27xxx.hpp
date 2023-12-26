@@ -53,6 +53,12 @@ class M27xxx : public SRAM {
     virtual bool verify(const QByteArray &buffer);
     /* Reimplemented */
     virtual bool blankCheck();
+    /* Reimplemented */
+    virtual bool getId(TDeviceID &result);
+
+  protected:
+    bool progWithWE_;      // true use WE / false use CE
+    bool progIsInverted_;  // true invert prog pin (positive pulse)
 };
 
 #endif  // BACKEND_DEVICES_PARALLEL_M27XXX_HPP_

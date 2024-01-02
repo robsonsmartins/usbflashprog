@@ -30,7 +30,10 @@ SRAM::SRAM(QObject *parent) : Device(parent) {
     twp_ = 3;
     twc_ = 5;
     vddRd_ = 5.0f;
+    vddWr_ = 5.0f;
     size_ = 2048;
+    resetBusDelay_ = 25;  // 25 uS
+    initDelay_ = 30;      // 30 uS
 }
 
 SRAM::~SRAM() {}
@@ -38,35 +41,18 @@ SRAM::~SRAM() {}
 bool SRAM::program(const QByteArray &buffer, bool verify) {
     (void)buffer;
     (void)verify;
+    canceling_ = false;
     uint32_t current = 0, total = size_ * 4;
-    bool error = true;
-    if (runner_.open(port_)) {
-        error = false;
-        resetBus_();
-        runner_.vddSet(vddRd_);
-        runner_.vddCtrl();
-        runner_.setCE();
-        runner_.usDelay(30);  // 30 uS
-        if (!doPatternTest_(current, total) || !doRandomTest_(current, total)) {
-            error = true;
-        }
-        resetBus_();
-        if (!error) {
-            error = runner_.hasError();
-            if (error) {
-                // fail (error)
-                emit onProgress(total, total, true, false);
-            }
-        }
-        runner_.close();
-    } else {
-        // fail (no open port)
-        emit onProgress(0, total, true, false);
+    if (!initialize_(kDeviceOpRead)) return false;
+    bool error = false;
+    if (!doPatternTest_(current, total) || !doRandomTest_(current, total)) {
+        error = true;
     }
-    if (!error) {
-        // success (done)
-        emit onProgress(total, total, true);
+    if (!error && runner_.hasError()) {
+        return finalize_(total, total, true, false);
     }
+    if (!error) emit onProgress(total, total, true);
+    finalize_();
     return !error;
 }
 
@@ -101,7 +87,7 @@ bool SRAM::resetBus_() {
     runner_.vppOnOE(false);
     runner_.vppOnWE(false);
     runner_.dataClr();
-    runner_.usDelay(25);  // 25 uS
+    runner_.usDelay(resetBusDelay_);
     return !runner_.hasError();
 }
 
@@ -161,6 +147,46 @@ bool SRAM::verify_(const QByteArray &buffer, uint32_t &current,
         current++;
     }
     return true;
+}
+
+bool SRAM::initialize_(kDeviceOperation operation) {
+    if (!runner_.open(port_)) {
+        emit onProgress(0, size_, true, false);
+        return false;
+    }
+    resetBus_();
+    switch (operation) {
+        case kDeviceOpProg:
+        case kDeviceOpGetId:
+            runner_.vddSet(vddWr_);
+            runner_.vddCtrl();
+            runner_.setCE();
+            runner_.vppSet(vpp_);
+            runner_.vppCtrl();
+            break;
+        case kDeviceOpRead:
+        default:
+            runner_.vddSet(vddRd_);
+            runner_.vddCtrl();
+            runner_.setCE();
+            runner_.vddOnVpp();
+            break;
+    }
+    runner_.usDelay(initDelay_);
+    if (runner_.hasError()) return finalize_(0, size_, true, false);
+    return true;
+}
+
+void SRAM::finalize_() {
+    resetBus_();
+    runner_.close();
+}
+
+bool SRAM::finalize_(uint32_t current, uint32_t total, bool done, bool success,
+                     bool canceled) {
+    finalize_();
+    emit onProgress(current, total, done, success, canceled);
+    return success;
 }
 
 QByteArray SRAM::generateRandomData_() {

@@ -183,3 +183,11 @@ bool Dummy::unprotect() {
     emit onProgress(100, 100, true);
     return true;
 }
+
+// ---------------------------------------------------------------------------
+
+Dummy16Bit::Dummy16Bit(QObject *parent) : Dummy(parent) {
+    info_.name = "Dummy (16 bits)";
+}
+
+Dummy16Bit::~Dummy16Bit() {}

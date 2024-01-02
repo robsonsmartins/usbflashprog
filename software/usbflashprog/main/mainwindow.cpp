@@ -45,6 +45,7 @@
 
 #include "backend/devices/parallel/dummy.hpp"
 #include "backend/devices/parallel/sram.hpp"
+#include "backend/devices/parallel/eprom.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -127,7 +128,8 @@ MainWindow::MainWindow(QWidget *parent)
       runner_(this),
       enumTimer_(this),
       refreshTimer_(this),
-      device_(nullptr) {
+      device_(nullptr),
+      noWarningDevice_(false) {
     ui_->setupUi(this);
     refreshPortComboBox_();
     ui_->frameVdd->setEnabled(false);
@@ -321,6 +323,7 @@ void MainWindow::onSelectDeviceTriggered(bool checked) {
     configureProgControls_();
     saveSettings_();
     hexeditor_->fill(0xFF);
+    noWarningDevice_ = false;
 }
 
 void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
@@ -348,7 +351,8 @@ void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
         progress_->setLabelText(
             tr("Processing address 0x%1 of 0x%2")
                 .arg(QString("%1").arg(current, 4, 16, QChar('0')).toUpper())
-                .arg(QString("%1").arg(total, 4, 16, QChar('0')).toUpper()));
+                .arg(
+                    QString("%1").arg(total - 1, 4, 16, QChar('0')).toUpper()));
     }
 }
 
@@ -357,6 +361,7 @@ void MainWindow::on_actionRead_triggered(bool checked) {
     if (hexeditor_->isChanged()) {
         if (!showDialogFileChanged_()) return;
     }
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionRead->text());
     QByteArray buffer;
@@ -369,19 +374,8 @@ void MainWindow::on_actionRead_triggered(bool checked) {
 void MainWindow::on_actionDoProgram_triggered(bool checked) {
     if (!device_ || !device_->getInfo().capability.hasProgram) return;
     QByteArray data = hexeditor_->getData();
-    if (data.size() != device_->getSize()) {
-        if (QMessageBox::question(
-                this, tr("USB Flash/EPROM Programmer"),
-                tr("The amount of data in the buffer is different from the "
-                   "device size.")
-                        .leftJustified(kDialogLabelMinLength) +
-                    "\n" +
-                    tr("Do you want to write the truncated data anyway?")
-                        .leftJustified(kDialogLabelMinLength)) ==
-            QMessageBox::No) {
-            return;
-        }
-    }
+    if (!showDifferentSizeDialog_(data)) return;
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionDoProgram->text());
     device_->program(data);
@@ -393,19 +387,8 @@ void MainWindow::on_actionProgramAndVerify_triggered(bool checked) {
         return;
     }
     QByteArray data = hexeditor_->getData();
-    if (data.size() != device_->getSize()) {
-        if (QMessageBox::question(
-                this, tr("USB Flash/EPROM Programmer"),
-                tr("The amount of data in the buffer is different from the "
-                   "device size.")
-                        .leftJustified(kDialogLabelMinLength) +
-                    "\n" +
-                    tr("Do you want to write the truncated data anyway?")
-                        .leftJustified(kDialogLabelMinLength)) ==
-            QMessageBox::No) {
-            return;
-        }
-    }
+    if (!showDifferentSizeDialog_(data)) return;
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionProgramAndVerify->text());
     device_->program(data, true);
@@ -413,6 +396,7 @@ void MainWindow::on_actionProgramAndVerify_triggered(bool checked) {
 
 void MainWindow::on_actionVerify_triggered(bool checked) {
     if (!device_ || !device_->getInfo().capability.hasVerify) return;
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionVerify->text());
     device_->verify(hexeditor_->getData());
@@ -420,6 +404,7 @@ void MainWindow::on_actionVerify_triggered(bool checked) {
 
 void MainWindow::on_actionDoErase_triggered(bool checked) {
     if (!device_ || !device_->getInfo().capability.hasErase) return;
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionDoErase->text());
     device_->erase();
@@ -430,6 +415,7 @@ void MainWindow::on_actionEraseAndBlankCheck_triggered(bool checked) {
         !device_->getInfo().capability.hasBlankCheck) {
         return;
     }
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionEraseAndBlankCheck->text());
     device_->erase(true);
@@ -437,6 +423,7 @@ void MainWindow::on_actionEraseAndBlankCheck_triggered(bool checked) {
 
 void MainWindow::on_actionBlankCheck_triggered(bool checked) {
     if (!device_ || !device_->getInfo().capability.hasBlankCheck) return;
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionBlankCheck->text());
     device_->blankCheck();
@@ -444,6 +431,7 @@ void MainWindow::on_actionBlankCheck_triggered(bool checked) {
 
 void MainWindow::on_actionGetID_triggered(bool checked) {
     if (!device_ || !device_->getInfo().capability.hasGetId) return;
+    if (!showActionWarningDialog_()) return;
     TDeviceID deviceId;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionGetID->text());
@@ -467,6 +455,7 @@ void MainWindow::on_actionGetID_triggered(bool checked) {
 
 void MainWindow::on_actionUnprotect_triggered(bool checked) {
     if (!device_ || !device_->getInfo().capability.hasUnprotect) return;
+    if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionUnprotect->text());
     device_->unprotect();
@@ -612,8 +601,15 @@ void MainWindow::createDevice_() {
         device_ = nullptr;
     }
     createDeviceIfSRAM_(ui_->btnProgDevice->text());
+    createDeviceIfEPROM_(ui_->btnProgDevice->text());
     if (!device_) {
-        device_ = new Dummy(this);
+        if (ui_->btnProgDevice->text() == ui_->actionDummy->text()) {
+            device_ = new Dummy(this);
+            hexeditor_->setMode(QHexEditor::Mode8Bits);
+        } else {
+            device_ = new Dummy16Bit(this);
+            hexeditor_->setMode(QHexEditor::Mode16Bits);
+        }
         device_->setSize(2048);
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
@@ -622,11 +618,156 @@ void MainWindow::createDevice_() {
 }
 
 void MainWindow::createDeviceIfSRAM_(const QString &label) {
-    if (label == ui_->actionSRAM->text()) {
+    uint32_t size = 0x800;
+    bool found = false, custom = false;
+    if (label == ui_->actionSRAM_2KB->text()) {
+        size = 0x800;
+        found = true;
+    } else if (label == ui_->actionSRAM_8KB->text()) {
+        size = 0x2000;
+        found = true;
+    } else if (label == ui_->actionSRAM_16KB->text()) {
+        size = 0x4000;
+        found = true;
+    } else if (label == ui_->actionSRAM_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionSRAM->text()) {
+        found = true;
+        custom = true;
+    }
+    if (found) {
         device_ = new SRAM(this);
         ui_->actionDoProgram->setText(tr("Test SRAM"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_->setSize(2048);
+        device_->setSize(size);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+    }
+}
+
+void MainWindow::createDeviceIfEPROM_(const QString &label) {
+    uint32_t size = 0x800;
+    bool found = false, custom = false;
+    // 27xxx
+    if (label == ui_->actionEPROM27_2KB->text()) {
+        size = 0x800;
+        found = true;
+    } else if (label == ui_->actionEPROM27_4KB->text()) {
+        size = 0x1000;
+        found = true;
+    } else if (label == ui_->actionEPROM27_8KB->text()) {
+        size = 0x2000;
+        found = true;
+    } else if (label == ui_->actionEPROM27_16KB->text()) {
+        size = 0x4000;
+        found = true;
+    } else if (label == ui_->actionEPROM27_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionEPROM27_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionEPROM27_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEPROM27_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEPROM27_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionEPROM27xxx->text()) {
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new M27xxx(this);
+        device_->setSize(size);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+    }
+    size = 0x800;
+    found = false;
+    custom = false;
+    // 27Cxxx
+    if (label == ui_->actionEPROM27C_2KB->text()) {
+        size = 0x800;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_4KB->text()) {
+        size = 0x1000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_8KB->text()) {
+        size = 0x2000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_16KB->text()) {
+        size = 0x4000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C_1MB->text()) {
+        size = 0x100000;
+        found = true;
+    } else if (label == ui_->actionEPROM27Cxxx->text()) {
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new M27Cxxx(this);
+        device_->setSize(size);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+    }
+    size = 0x800;
+    found = false;
+    custom = false;
+    // 27Cxxx 16 bits
+    if (label == ui_->actionEPROM27C16Bit_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C16Bit_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C16Bit_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C16Bit_1MB->text()) {
+        size = 0x100000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C16Bit_2MB->text()) {
+        size = 0x200000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C16Bit_4MB->text()) {
+        size = 0x400000;
+        found = true;
+    } else if (label == ui_->actionEPROM27C16Bitxxx->text()) {
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new M27C16Bit(this);
+        device_->setSize(size);
+        hexeditor_->setMode(QHexEditor::Mode16Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
     }
 }
 
@@ -771,6 +912,44 @@ void MainWindow::showDialogActionProgress_(const QString &msg) {
     progress_->open();
 }
 
+bool MainWindow::showDifferentSizeDialog_(const QByteArray &data) {
+    if (data.size() != device_->getSize()) {
+        if (QMessageBox::question(
+                this, tr("USB Flash/EPROM Programmer"),
+                tr("The amount of data in the buffer is different from the "
+                   "device size.")
+                        .leftJustified(kDialogLabelMinLength) +
+                    "\n" +
+                    tr("Do you want to write the truncated data anyway?")
+                        .leftJustified(kDialogLabelMinLength)) ==
+            QMessageBox::No) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool MainWindow::showActionWarningDialog_() {
+    if (noWarningDevice_) return true;
+    if (QMessageBox::warning(
+            this, tr("USB Flash/EPROM Programmer"),
+            tr("Caution! Check the VDD and VPP voltages and the size of "
+               "the "
+               "device before running, otherwise you will damage it!")
+                    .leftJustified(kDialogLabelMinLength) +
+                "\n\n" +
+                tr("Consult the device datasheet for more information.")
+                    .leftJustified(kDialogLabelMinLength) +
+                "\n\n" +
+                tr("Are you sure you want to continue?")
+                    .leftJustified(kDialogLabelMinLength),
+            QMessageBox::Yes | QMessageBox::No) == QMessageBox::No) {
+        return false;
+    }
+    noWarningDevice_ = true;
+    return true;
+}
+
 void MainWindow::refreshPortComboBox_() {
     TSerialPortList list = runner_.list();
     QStringList paths;
@@ -814,6 +993,7 @@ void MainWindow::on_pushButtonConnect_clicked() {
     } else {
         connect_(false);
     }
+    noWarningDevice_ = false;
 }
 
 void MainWindow::on_pushButtonVddInitCal_clicked() {
@@ -1387,9 +1567,9 @@ void MainWindow::updateCheckSum_() {
     }
     crc32 ^= 0xFFFFFFFF;
     QString size;
-    if (data.size() > 1024 * 1024) {
+    if (data.size() >= 1024 * 1024) {
         size = QString("%1 MB").arg(ceilf(data.size() / (1024.0f * 1024.0f)));
-    } else if (data.size() > 1024) {
+    } else if (data.size() >= 1024) {
         size = QString("%1 KB").arg(ceilf(data.size() / 1024.0f));
     } else {
         size = QString("%1 Bytes").arg(data.size());

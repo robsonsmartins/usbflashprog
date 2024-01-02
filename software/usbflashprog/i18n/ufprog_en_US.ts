@@ -310,10 +310,6 @@
         <translation>SPI Memory</translation>
     </message>
     <message>
-        <source>EPROM</source>
-        <translation>EPROM</translation>
-    </message>
-    <message>
         <source>EPROM (Electrical Erasable)</source>
         <translation>EPROM (Electrical Erasable)</translation>
     </message>
@@ -508,6 +504,30 @@
     <message>
         <source>Fast Program/Erase Mode</source>
         <translation>Fast Program/Erase Mode</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation>Size</translation>
+    </message>
+    <message>
+        <source>VDD Read</source>
+        <translation>VDD Read</translation>
+    </message>
+    <message>
+        <source>VDD Prog</source>
+        <translation>VDD Prog</translation>
+    </message>
+    <message>
+        <source>Caution! Check the VDD and VPP voltages and the size of the device before running, otherwise you will damage it!</source>
+        <translation>Caution! Check the VDD and VPP voltages and the size of the device before running, otherwise you will damage it!</translation>
+    </message>
+    <message>
+        <source>Consult the device datasheet for more information.</source>
+        <translation>Consult the device datasheet for more information.</translation>
+    </message>
+    <message>
+        <source>Are you sure you want to continue?</source>
+        <translation>Are you sure you want to continue?</translation>
     </message>
 </context>
 </TS>

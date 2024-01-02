@@ -172,6 +172,8 @@ class MainWindow : public QMainWindow {
     Runner runner_;
     /* @brief Device pointer (Prog). */
     Device *device_;
+    /* @brief If true, no shows warning about action over device (Prog). */
+    bool noWarningDevice_;
     /* @brief Connects signals of the widgets. */
     void connectSignals_();
     /* @brief Loads configuration settings. */
@@ -185,6 +187,11 @@ class MainWindow : public QMainWindow {
      * @param label The triggered action text.
      */
     void createDeviceIfSRAM_(const QString &label);
+    /*
+     * @brief Creates device if it's an EPROM (Prog).
+     * @param label The triggered action text.
+     */
+    void createDeviceIfEPROM_(const QString &label);
     /* @brief Enables/Disables the controls (Prog). */
     void configureProgControls_();
     /* @brief Configures the device based in the ui values (Prog). */
@@ -194,6 +201,17 @@ class MainWindow : public QMainWindow {
      * @param msg Text to display.
      */
     void showDialogActionProgress_(const QString &msg);
+    /*
+     * @brief Shows the different size dialog (Prog).
+     * @param data Data to compare with device (size).
+     * @return True if it can continue, false otherwise.
+     */
+    bool showDifferentSizeDialog_(const QByteArray &data);
+    /*
+     * @brief Shows the warning about Device Action (Prog).
+     * @return True if it can continue, false otherwise.
+     */
+    bool showActionWarningDialog_();
     /* @brief Refreshes the port comboboxes (Prog/Diag). */
     void refreshPortComboBox_();
     /*

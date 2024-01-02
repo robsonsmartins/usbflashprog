@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>677</width>
-    <height>834</height>
+    <height>842</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -525,7 +525,7 @@
                     </size>
                    </property>
                    <property name="currentText">
-                    <string>2KB</string>
+                    <string notr="true">2KB</string>
                    </property>
                    <item>
                     <property name="text">
@@ -808,7 +808,7 @@
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string notr="true">VDD Read</string>
+                    <string>VDD Read</string>
                    </property>
                   </widget>
                  </item>
@@ -864,7 +864,7 @@
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string notr="true">VDD Prog</string>
+                    <string>VDD Prog</string>
                    </property>
                   </widget>
                  </item>
@@ -3335,14 +3335,68 @@
       <property name="title">
        <string>SRAM</string>
       </property>
+      <addaction name="actionSRAM_2KB"/>
+      <addaction name="actionSRAM_8KB"/>
+      <addaction name="actionSRAM_16KB"/>
+      <addaction name="actionSRAM_32KB"/>
+      <addaction name="separator"/>
       <addaction name="actionSRAM"/>
      </widget>
+     <widget class="QMenu" name="menuEPROM">
+      <property name="title">
+       <string notr="true">EPROM</string>
+      </property>
+      <widget class="QMenu" name="menuEPROM27">
+       <property name="title">
+        <string>EPROM 27</string>
+       </property>
+       <addaction name="actionEPROM27_2KB"/>
+       <addaction name="actionEPROM27_4KB"/>
+       <addaction name="actionEPROM27_8KB"/>
+       <addaction name="actionEPROM27_16KB"/>
+       <addaction name="actionEPROM27_32KB"/>
+       <addaction name="actionEPROM27_64KB"/>
+       <addaction name="actionEPROM27_128KB"/>
+       <addaction name="actionEPROM27_256KB"/>
+       <addaction name="actionEPROM27_512KB"/>
+       <addaction name="separator"/>
+       <addaction name="actionEPROM27xxx"/>
+      </widget>
+      <widget class="QMenu" name="menuEPROM27C">
+       <property name="title">
+        <string>EPROM 27C</string>
+       </property>
+       <addaction name="actionEPROM27C_2KB"/>
+       <addaction name="actionEPROM27C_4KB"/>
+       <addaction name="actionEPROM27C_8KB"/>
+       <addaction name="actionEPROM27C_16KB"/>
+       <addaction name="actionEPROM27C_32KB"/>
+       <addaction name="actionEPROM27C_64KB"/>
+       <addaction name="actionEPROM27C_128KB"/>
+       <addaction name="actionEPROM27C_256KB"/>
+       <addaction name="actionEPROM27C_512KB"/>
+       <addaction name="actionEPROM27C_1MB"/>
+       <addaction name="separator"/>
+       <addaction name="actionEPROM27C16Bit_128KB"/>
+       <addaction name="actionEPROM27C16Bit_256KB"/>
+       <addaction name="actionEPROM27C16Bit_512KB"/>
+       <addaction name="actionEPROM27C16Bit_1MB"/>
+       <addaction name="actionEPROM27C16Bit_2MB"/>
+       <addaction name="actionEPROM27C16Bit_4MB"/>
+       <addaction name="separator"/>
+       <addaction name="actionEPROM27Cxxx"/>
+       <addaction name="actionEPROM27C16Bitxxx"/>
+      </widget>
+      <addaction name="menuEPROM27"/>
+      <addaction name="menuEPROM27C"/>
+     </widget>
      <addaction name="menuSRAM"/>
-     <addaction name="actionEPROM"/>
+     <addaction name="menuEPROM"/>
      <addaction name="actionEPROMElectricalErasable"/>
      <addaction name="actionEEPROM"/>
      <addaction name="actionFlash"/>
      <addaction name="actionDummy"/>
+     <addaction name="actionDummy16Bit"/>
     </widget>
     <addaction name="menuParallelMemory"/>
     <addaction name="separator"/>
@@ -3631,17 +3685,6 @@
     <string notr="true"/>
    </property>
   </action>
-  <action name="actionEPROM">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>EPROM</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
   <action name="actionEPROMElectricalErasable">
    <property name="enabled">
     <bool>false</bool>
@@ -3677,13 +3720,13 @@
   </action>
   <action name="actionSRAM">
    <property name="text">
-    <string notr="true">SRAM 20/61/62</string>
+    <string notr="true">SRAM 20/61/62 xxx</string>
    </property>
    <property name="iconText">
-    <string notr="true">SRAM 20/61/62</string>
+    <string notr="true">SRAM 20/61/62 xxx</string>
    </property>
    <property name="toolTip">
-    <string notr="true">SRAM 20/61/62</string>
+    <string notr="true">SRAM 20/61/62 xxx</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -3810,6 +3853,440 @@
    </property>
    <property name="toolTip">
     <string notr="true">Dummy</string>
+   </property>
+  </action>
+  <action name="actionEPROM27xxx">
+   <property name="text">
+    <string notr="true">EPROM 27xxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27xxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27xxx</string>
+   </property>
+  </action>
+  <action name="actionEPROM27Cxxx">
+   <property name="text">
+    <string notr="true">EPROM 27Cxxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27Cxxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27Cxxx</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C16Bitxxx">
+   <property name="text">
+    <string notr="true">EPROM 27Cxxx (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27Cxxx (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27Cxxx (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionSRAM_2KB">
+   <property name="text">
+    <string notr="true">SRAM 2016/6116</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM 2016/6116</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM 2016/6116</string>
+   </property>
+  </action>
+  <action name="actionSRAM_4KB">
+   <property name="text">
+    <string notr="true">SRAM xx32</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx32</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx32</string>
+   </property>
+  </action>
+  <action name="actionSRAM_8KB">
+   <property name="text">
+    <string notr="true">SRAM 6264</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM 6264</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM 6264</string>
+   </property>
+  </action>
+  <action name="actionSRAM_16KB">
+   <property name="text">
+    <string notr="true">SRAM 62128</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM 62128</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM 62128</string>
+   </property>
+  </action>
+  <action name="actionSRAM_32KB">
+   <property name="text">
+    <string notr="true">SRAM 62256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM 62256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM 62256</string>
+   </property>
+  </action>
+  <action name="actionSRAM_64KB">
+   <property name="text">
+    <string notr="true">SRAM xx512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx512</string>
+   </property>
+  </action>
+  <action name="actionSRAM_128KB">
+   <property name="text">
+    <string notr="true">SRAM xx010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx010</string>
+   </property>
+  </action>
+  <action name="actionSRAM_256KB">
+   <property name="text">
+    <string notr="true">SRAM xx020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx020</string>
+   </property>
+  </action>
+  <action name="actionSRAM_512KB">
+   <property name="text">
+    <string notr="true">SRAM xx040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx040</string>
+   </property>
+  </action>
+  <action name="actionSRAM_1MB">
+   <property name="text">
+    <string notr="true">SRAM xx080</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">SRAM xx080</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">SRAM xx080</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_2KB">
+   <property name="text">
+    <string notr="true">EPROM 2716</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 2716</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 2716</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_4KB">
+   <property name="text">
+    <string notr="true">EPROM 2732/2532</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 2732/2532</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 2732/2532</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_8KB">
+   <property name="text">
+    <string notr="true">EPROM 2764</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 2764</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 2764</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_16KB">
+   <property name="text">
+    <string notr="true">EPROM 27128</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27128</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27128</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_32KB">
+   <property name="text">
+    <string notr="true">EPROM 27256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27256</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_64KB">
+   <property name="text">
+    <string notr="true">EPROM 27512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27512</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_128KB">
+   <property name="text">
+    <string notr="true">EPROM 27010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27010</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_256KB">
+   <property name="text">
+    <string notr="true">EPROM 27020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27020</string>
+   </property>
+  </action>
+  <action name="actionEPROM27_512KB">
+   <property name="text">
+    <string notr="true">EPROM 27040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27040</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_2KB">
+   <property name="text">
+    <string notr="true">EPROM 27C16</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C16</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C16</string>
+   </property>
+  </action>
+  <action name="actionDummy16Bit">
+   <property name="text">
+    <string notr="true">Dummy (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Dummy (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Dummy (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_4KB">
+   <property name="text">
+    <string notr="true">EPROM 27C32/25C32</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C32/25C32</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C32/25C32</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_8KB">
+   <property name="text">
+    <string notr="true">EPROM 27C64</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C64</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C64</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_16KB">
+   <property name="text">
+    <string notr="true">EPROM 27C128</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C128</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C128</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_32KB">
+   <property name="text">
+    <string notr="true">EPROM 27C256/87C256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C256/87C256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C256/87C256</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_64KB">
+   <property name="text">
+    <string notr="true">EPROM 27C512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C512</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_128KB">
+   <property name="text">
+    <string notr="true">EPROM 27C010/1000/1001</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C010/1000/1001</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C010/1000/1001</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_256KB">
+   <property name="text">
+    <string notr="true">EPROM 27C020/2000/2001</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C020/2000/2001</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C020/2000/2001</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_512KB">
+   <property name="text">
+    <string notr="true">EPROM 27C040/4000/4001</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C040/4000/4001</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C040/4000/4001</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C_1MB">
+   <property name="text">
+    <string notr="true">EPROM 27C080/801</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C080/801</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C080/801</string>
+   </property>
+  </action>
+  <action name="actionEPROM_27C160">
+   <property name="text">
+    <string>EPROM 27C160</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C16Bit_128KB">
+   <property name="text">
+    <string notr="true">EPROM 27C1024/210 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C1024/210 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C1024/210 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C16Bit_256KB">
+   <property name="text">
+    <string notr="true">EPROM 27C2048/220/202 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C2048/220/202 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C2048/220/202 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C16Bit_512KB">
+   <property name="text">
+    <string notr="true">EPROM 27C4096/240/4002/400 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C4096/240/4002/400 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C4096/240/4002/400 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C16Bit_1MB">
+   <property name="text">
+    <string notr="true">EPROM 27C800 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C800 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C800 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C16Bit_2MB">
+   <property name="text">
+    <string notr="true">EPROM 27C160 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C160 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C160 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionEPROM27C16Bit_4MB">
+   <property name="text">
+    <string notr="true">EPROM 27C322 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27C322 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27C322 (16 bit)</string>
    </property>
   </action>
  </widget>

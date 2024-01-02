@@ -69,4 +69,26 @@ class Dummy : public Device {
     bool protected_;
 };
 
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
+ * @brief Parallel Dummy 16 Bit Device Class
+ * @details The purpose of this class is to simulate a parallel device
+ *   (16 bits).
+ * @nosubgrouping
+ */
+class Dummy16Bit : public Dummy {
+    Q_OBJECT
+
+  public:
+    /**
+     * @brief Constructor.
+     * @param parent Pointer to parent object. Default is nullptr.
+     */
+    explicit Dummy16Bit(QObject *parent = nullptr);
+    /** @brief Destructor. */
+    virtual ~Dummy16Bit();
+};
+
 #endif  // BACKEND_DEVICES_PARALLEL_DUMMY_HPP_

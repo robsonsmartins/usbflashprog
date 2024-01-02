@@ -78,8 +78,8 @@ elseif(NORMAL_BUILD)
           backend/devices/parallel/dummy.hpp
           backend/devices/parallel/sram.cpp
           backend/devices/parallel/sram.hpp
-          backend/devices/parallel/m27xxx.cpp
-          backend/devices/parallel/m27xxx.hpp
+          backend/devices/parallel/eprom.cpp
+          backend/devices/parallel/eprom.hpp
           main/mainwindow.cpp
           main/mainwindow.hpp
           main/mainwindow.ui

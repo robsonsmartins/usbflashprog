@@ -31,7 +31,7 @@
 /**
  * @ingroup Software
  * @brief Parallel SRAM Class
- * @details The purpose of this class is to test SRAM 5V Memories.
+ * @details The purpose of this class is to test SRAM Memories.
  * @nosubgrouping
  */
 class SRAM : public Device {
@@ -49,6 +49,19 @@ class SRAM : public Device {
     virtual bool program(const QByteArray &buffer, bool verify = false);
 
   protected:
+    /* @brief Device Operation. */
+    enum kDeviceOperation {
+        /* @brief Device Read */
+        kDeviceOpRead,
+        /* @brief Device Prog */
+        kDeviceOpProg,
+        /* @brief Device GetId */
+        kDeviceOpGetId
+    };
+    /* @brief Delay after reset bus, in usec */
+    uint64_t resetBusDelay_;
+    /* @brief Delay after initialize, in usec */
+    uint64_t initDelay_;
     /* @brief Tests the SRAM: Pattern Test.
      * @param current[in,out] Current progress, in bytes.
      * @param total Total progress, in bytes.
@@ -90,6 +103,22 @@ class SRAM : public Device {
      * @return True if success, false otherwise. */
     virtual bool verify_(const QByteArray &buffer, uint32_t &current,
                          uint32_t total);
+    /* @brief Open and init resources.
+     * @param operation Device operation.
+     * @return True if success, false otherwise. */
+    virtual bool initialize_(kDeviceOperation operation);
+    /* @brief Close resources and emit signals for status.
+     * @param current Current address (default is zero).
+     * @param total Total size [last address + 1] (default is zero).
+     * @param done True if operation was finished, false otherwise (default).
+     * @param success True if success (default), false otherwise.
+     * @param canceled True if operation was canceled,
+     *   false otherwise (default).
+     * @return True if success, false otherwise. */
+    virtual bool finalize_(uint32_t current, uint32_t total, bool done = false,
+                           bool success = true, bool canceled = false);
+    /* @brief Close resources. */
+    virtual void finalize_();
 };
 
 #endif  // BACKEND_DEVICES_PARALLEL_SRAM_HPP_

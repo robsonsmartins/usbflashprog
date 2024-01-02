@@ -54,6 +54,6 @@ The following software was used to develop the software:
 
 **author** [Robson Martins](https://www.robsonmartins.com)
 
-**version** 0.1
+**version** 0.2
 
 **date** 2023

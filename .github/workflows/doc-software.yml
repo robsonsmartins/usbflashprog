@@ -1,23 +1,23 @@
 # ------------------------------------------------------------------------------
 # USB EPROM/Flash Programmer
 #
-# Copyright (2022) Robson Martins
+# Copyright (2024) Robson Martins
 #
 # This work is licensed under a Creative Commons Attribution-NonCommercial-
 # ShareAlike 4.0 International License.
 # ------------------------------------------------------------------------------
-name: Update Firmware Doc
+name: Update Software Doc
 
 on:
   workflow_dispatch:
 
 env:
   BUILD_TYPE: Debug
-  FIRMWARE_PROJECT_DIR: ${{github.workspace}}/firmware/usbflashprog
+  SOFTWARE_PROJECT_DIR: ${{github.workspace}}/software/usbflashprog
 
 jobs:
   build:
-    name: Update Firmware Doc
+    name: Update Software Doc
     runs-on: ubuntu-latest
 
     steps:
@@ -36,46 +36,47 @@ jobs:
     - name: Install Prerequisites
       run: |
         sudo apt-get update
-        sudo apt-get install lcov doxygen graphviz
+        sudo apt-get install cmake build-essential libglu1-mesa-dev libpulse-dev libglib2.0-dev lcov doxygen graphviz
+        sudo apt-get --no-install-recommends install libqt*5-dev qt*5-dev libqt5waylandcompositor5-dev
 
     # ------------------------------------------------------------------------
     # Configure CMake
     # ------------------------------------------------------------------------
     - name: Configure CMake
-      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
       run: cmake -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DTEST_BUILD=ON
 
     # ------------------------------------------------------------------------
     # Build
     # ------------------------------------------------------------------------
     - name: Build
-      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
       run: cmake --build build --config ${{env.BUILD_TYPE}}
 
     # ------------------------------------------------------------------------
     # Test
     # ------------------------------------------------------------------------
     - name: Test
-      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}/build
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
 
     # ------------------------------------------------------------------------
     # Coverage
     # ------------------------------------------------------------------------
     - name: Coverage
-      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
       run: |
-        rm -Rf ${{env.FIRMWARE_PROJECT_DIR}}/../../docs/firmware/lcov/
-        lcov --directory ${{env.FIRMWARE_PROJECT_DIR}}/build/ --capture --output-file ${{env.FIRMWARE_PROJECT_DIR}}/build/coverage.info -rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude ${{env.FIRMWARE_PROJECT_DIR}}\/build\/\* --exclude ${{env.FIRMWARE_PROJECT_DIR}}\/test\/\*
-        genhtml --prefix ${{env.FIRMWARE_PROJECT_DIR}} --ignore-errors source ${{env.FIRMWARE_PROJECT_DIR}}/build/coverage.info --legend --title \"`git rev-parse --short HEAD`\" --output-directory ${{env.FIRMWARE_PROJECT_DIR}}/../../docs/firmware/lcov/
+        rm -Rf ${{env.SOFTWARE_PROJECT_DIR}}/../../docs/software/lcov/
+        lcov --directory ${{env.SOFTWARE_PROJECT_DIR}}/build/ --capture --output-file ${{env.SOFTWARE_PROJECT_DIR}}/build/coverage.info -rc lcov_branch_coverage=1 --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude ${{env.SOFTWARE_PROJECT_DIR}}\/build\/\* --exclude ${{env.SOFTWARE_PROJECT_DIR}}\/test\/\*
+        genhtml --prefix ${{env.SOFTWARE_PROJECT_DIR}} --ignore-errors source ${{env.SOFTWARE_PROJECT_DIR}}/build/coverage.info --legend --title \"`git rev-parse --short HEAD`\" --output-directory ${{env.SOFTWARE_PROJECT_DIR}}/../../docs/software/lcov/
 
     # ------------------------------------------------------------------------
     # Doxygen
     # ------------------------------------------------------------------------
     - name: Doxygen
-      working-directory: ${{env.FIRMWARE_PROJECT_DIR}}
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
       run: |
-        rm -Rf ${{env.FIRMWARE_PROJECT_DIR}}/../../docs/firmware/html/
+        rm -Rf ${{env.SOFTWARE_PROJECT_DIR}}/../../docs/software/html/
         doxygen
 
     # ------------------------------------------------------------------------
@@ -85,8 +86,8 @@ jobs:
       run: |
         git config --local user.email "noreply-github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
-        git add docs/firmware/
-        git commit -m "Update Firmware Documentation" -a
+        git add docs/software/
+        git commit -m "Update Software Documentation" -a
 
     # ------------------------------------------------------------------------
     # Push

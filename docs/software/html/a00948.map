@@ -1,0 +1,5 @@
+<map id="Dummy16Bit" name="Dummy16Bit">
+<area shape="rect" id="node1" title="Parallel Dummy 16 Bit Device Class." alt="" coords="5,725,149,817"/>
+<area shape="rect" id="node2" href="$a00945.html" title="Parallel Dummy Device Class." alt="" coords="16,453,139,677"/>
+<area shape="rect" id="node3" href="$a00941.html" title="Device Base Class." alt="" coords="19,5,135,405"/>
+</map>

@@ -1,9 +1,0 @@
-<map id="main.cpp" name="main.cpp">
-<area shape="rect" id="Node000001" title="Implementation of the Unit Tests Main Routine." alt="" coords="147,5,222,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,100,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="163,35,90,75,87,70,160,30"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="123,80,246,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,33,187,65,182,65,182,33"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="270,80,334,107"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="206,30,271,70,268,74,204,35"/>
-</map>

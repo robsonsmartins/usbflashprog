@@ -1,16 +1,7 @@
-<map id="qepromfile.hpp" name="qepromfile.hpp">
-<area shape="rect" id="Node000001" title="Header of the QEpromFile Class." alt="" coords="111,5,217,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,155,75,181"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="140,35,109,55,79,82,61,111,50,142,45,140,57,109,75,78,106,50,137,30"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="115,155,181,181"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="138,35,110,54,97,67,88,81,85,98,91,114,103,130,118,144,114,148,99,133,86,117,79,98,83,79,93,63,107,50,135,30"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="214,155,303,181"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="190,30,219,50,245,79,257,109,261,140,256,141,252,111,240,81,216,54,187,35"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="306,80,422,107"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="200,30,316,72,314,77,198,35"/>
-<area shape="rect" id="Node000006" href="$a00041.html" title="Header of the QEpromFileBase Class." alt="" coords="97,80,231,107"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="167,33,167,65,161,65,161,33"/>
-<area shape="poly" id="edge6_Node000006_Node000002" title=" " alt="" coords="144,110,75,149,73,145,141,105"/>
-<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="164,108,156,141,151,140,159,107"/>
-<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="182,105,232,143,229,148,179,109"/>
+<map id="qbinfile.hpp" name="qbinfile.hpp">
+<area shape="rect" id="node1" title="Header of the QBinFile Class." alt="" coords="91,5,189,32"/>
+<area shape="rect" id="node2" href="$a00047.html" title="Header of the QEpromFileBase Class." alt="" coords="65,80,215,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="105,155,175,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="199,155,297,181"/>
 </map>

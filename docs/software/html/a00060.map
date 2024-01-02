@@ -1,9 +1,7 @@
-<map id="opcodes.hpp" name="opcodes.hpp">
-<area shape="rect" id="Node000001" title="Opcodes for communication." alt="" coords="69,5,165,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,66,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,35,62,72,59,68,101,31"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="90,80,144,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="120,33,120,65,114,65,114,33"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="167,80,213,107"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="131,31,169,68,166,72,128,34"/>
+<map id="qsrecfile.hpp" name="qsrecfile.hpp">
+<area shape="rect" id="node1" title="Header of the QSrecFile Class." alt="" coords="87,5,193,32"/>
+<area shape="rect" id="node2" href="$a00047.html" title="Header of the QEpromFileBase Class." alt="" coords="65,80,215,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="105,155,175,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="199,155,297,181"/>
 </map>

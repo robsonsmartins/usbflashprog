@@ -1,11 +1,15 @@
-<map id="qatmelfile.hpp" name="qatmelfile.hpp">
-<area shape="rect" id="Node000001" title="Header of the QAtmelFile Class." alt="" coords="81,5,183,32"/>
-<area shape="rect" id="Node000002" href="$a00041.html" title="Header of the QEpromFileBase Class." alt="" coords="65,80,199,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="135,33,135,65,129,65,129,33"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,155,75,181"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="118,109,69,148,65,143,114,105"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="99,155,165,181"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="135,107,135,140,129,140,129,107"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="189,155,278,181"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="151,105,205,143,202,148,148,109"/>
+<map id="sram.hpp" name="sram.hpp">
+<area shape="rect" id="node1" title="Class of a Parallel SRAM." alt="" coords="557,5,640,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,229,80,256"/>
+<area shape="rect" id="node3" title=" " alt="" coords="634,229,705,256"/>
+<area shape="rect" id="node4" title=" " alt="" coords="729,229,826,256"/>
+<area shape="rect" id="node5" href="$a00005.html" title="Base class of a Device." alt="" coords="427,80,632,107"/>
+<area shape="rect" id="node6" href="$a00071.html" title="Header of the Runner Class." alt="" coords="320,155,469,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="105,229,159,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="183,229,278,256"/>
+<area shape="rect" id="node9" title=" " alt="" coords="303,229,423,256"/>
+<area shape="rect" id="node10" href="$a00065.html" title="Opcodes for communication." alt="" coords="447,229,609,256"/>
+<area shape="rect" id="node11" title=" " alt="" coords="408,304,475,331"/>
+<area shape="rect" id="node12" title=" " alt="" coords="499,304,557,331"/>
+<area shape="rect" id="node13" title=" " alt="" coords="581,304,632,331"/>
 </map>

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['device_0',['Device',['../a00939.html',1,'']]],
-  ['dummy_1',['Dummy',['../a00943.html',1,'']]]
+  ['device_283',['Device',['../a00941.html',1,'']]],
+  ['dummy_284',['Dummy',['../a00945.html',1,'']]],
+  ['dummy16bit_285',['Dummy16Bit',['../a00949.html',1,'']]]
 ];

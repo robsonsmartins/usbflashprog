@@ -1,5 +1,4 @@
-<map id="runner_test.hpp" name="runner_test.hpp">
-<area shape="rect" id="Node000001" title="Header of Unit Test for Runner Class." alt="" coords="5,5,117,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="14,80,108,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="64,33,64,65,58,65,58,33"/>
+<map id="opcodes_test.hpp" name="opcodes_test.hpp">
+<area shape="rect" id="node1" title="Header of Unit Test for OpCode Handling Classes." alt="" coords="5,5,141,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="21,80,125,107"/>
 </map>

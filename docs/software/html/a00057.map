@@ -1,13 +1,12 @@
-<map id="opcodes.cpp" name="opcodes.cpp">
-<area shape="rect" id="Node000001" title="Implementation of the Opcodes for communication." alt="" coords="49,5,144,32"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,80,63,107"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,34,56,70,52,67,84,31"/>
-<area shape="rect" id="Node000003" href="$a00059.html" title="Opcodes for communication." alt="" coords="87,80,235,107"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="110,31,142,67,138,71,106,34"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="49,155,110,181"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="148,109,106,147,102,143,145,105"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="134,155,187,181"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="163,107,163,140,158,140,158,107"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="211,155,257,181"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="175,105,213,142,209,146,172,109"/>
+<map id="qsrecfile.cpp" name="qsrecfile.cpp">
+<area shape="rect" id="node1" title="Implementation of the QSrecFile Class." alt="" coords="167,5,271,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,60,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="85,80,165,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="189,80,250,107"/>
+<area shape="rect" id="node5" href="$a00059.html" title="Header of the QSrecFile Class." alt="" coords="275,80,380,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="404,80,563,107"/>
+<area shape="rect" id="node6" href="$a00047.html" title="Header of the QEpromFileBase Class." alt="" coords="252,155,403,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="193,229,267,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="292,229,363,256"/>
+<area shape="rect" id="node9" title=" " alt="" coords="387,229,484,256"/>
 </map>

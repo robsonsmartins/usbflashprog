@@ -93,7 +93,9 @@ TDeviceCapabilities::TDeviceCapabilities()
       hasUnprotect(false),
       hasSectorSize(false),
       hasFastProg(false),
-      hasSkipFF(false) {}
+      hasSkipFF(false),
+      hasVDD(false),
+      hasVPP(false) {}
 
 // ---------------------------------------------------------------------------
 
@@ -111,6 +113,7 @@ Device::Device(QObject *parent)
       vddRd_(5.0f),
       vddWr_(5.0f),
       vpp_(12.0f),
+      vee_(12.0f),
       skipFF_(false),
       fastProg_(false),
       sectorSize_(0),
@@ -194,6 +197,15 @@ void Device::setVpp(float value) {
 
 float Device::getVpp() const {
     return vpp_;
+}
+
+void Device::setVee(float value) {
+    if (vee_ == value) return;
+    if (value >= 0.0f) vee_ = value;
+}
+
+float Device::getVee() const {
+    return vee_;
 }
 
 void Device::setSkipFF(bool value) {

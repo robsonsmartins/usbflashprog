@@ -160,4 +160,41 @@ class M27C16Bit : public M27Cxxx {
     virtual ~M27C16Bit();
 };
 
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
+ * @brief Parallel EPROM W27Exxx Class
+ * @details The purpose of this class is to program EPROM W27E/SF Memories
+ *  (Electrical Erasable).
+ * @nosubgrouping
+ */
+class W27Exxx : public M27Cxxx {
+    Q_OBJECT
+
+  public:
+    /**
+     * @brief Constructor.
+     * @param parent Pointer to parent object. Default is nullptr.
+     */
+    explicit W27Exxx(QObject *parent = nullptr);
+    /** @brief Destructor. */
+    virtual ~W27Exxx();
+    /* Reimplemented */
+    virtual bool erase(bool check = false);
+    /* Reimplemented */
+    virtual bool blankCheck();
+
+  protected:
+    /* @brief Delay of Erase pulse, in msec */
+    uint32_t erasePulseDelay_;
+    /* Reimplemented */
+    virtual bool initialize_(kDeviceOperation operation);
+    /* @brief Erase the EPROM.
+     * @param current[in,out] Current progress, in bytes.
+     * @param total Total progress, in bytes.
+     * @return True if success, false otherwise. */
+    virtual bool erase_(uint32_t &current, uint32_t total);
+};
+
 #endif  // BACKEND_DEVICES_PARALLEL_EPROM_HPP_

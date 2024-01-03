@@ -490,10 +490,6 @@
         <translation>Press to change unit</translation>
     </message>
     <message>
-        <source>Adjust VPP [Caution!]</source>
-        <translation>Adjust VPP [Caution!]</translation>
-    </message>
-    <message>
         <source>Adjust VDD to Read [Caution!]</source>
         <translation>Adjust VDD to Read [Caution!]</translation>
     </message>
@@ -510,24 +506,24 @@
         <translation>Size</translation>
     </message>
     <message>
-        <source>VDD Read</source>
-        <translation>VDD Read</translation>
-    </message>
-    <message>
-        <source>VDD Prog</source>
-        <translation>VDD Prog</translation>
-    </message>
-    <message>
-        <source>Caution! Check the VDD and VPP voltages and the size of the device before running, otherwise you will damage it!</source>
-        <translation>Caution! Check the VDD and VPP voltages and the size of the device before running, otherwise you will damage it!</translation>
-    </message>
-    <message>
         <source>Consult the device datasheet for more information.</source>
         <translation>Consult the device datasheet for more information.</translation>
     </message>
     <message>
         <source>Are you sure you want to continue?</source>
         <translation>Are you sure you want to continue?</translation>
+    </message>
+    <message>
+        <source>Adjust VPP to Program [Caution!]</source>
+        <translation>Adjust VPP to Program [Caution!]</translation>
+    </message>
+    <message>
+        <source>Adjust VPP to Erase [Caution!]</source>
+        <translation>Adjust VPP to Erase [Caution!]</translation>
+    </message>
+    <message>
+        <source>Caution! Check the VDD, VPP and VEE voltages and the size of the device before running, otherwise you will damage it!</source>
+        <translation>Caution! Check the VDD, VPP and VEE voltages and the size of the device before running, otherwise you will damage it!</translation>
     </message>
 </context>
 </TS>

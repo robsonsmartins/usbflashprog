@@ -35,6 +35,7 @@ EPROM::EPROM(QObject *parent) : SRAM(parent), mode16bit_(false) {
     vddRd_ = 5.0f;
     vddWr_ = 6.0f;
     vpp_ = 13.0f;
+    vee_ = 13.0f;
     size_ = 2048;
     maxAttemptsProg_ = 25;
     vppPulseDelay_ = 150;
@@ -293,8 +294,8 @@ bool EPROM::initialize_(kDeviceOperation operation) {
             runner_.vddSet(vddRd_);
             runner_.vddCtrl();
             initControlPins_(true);
-            // VPP set
-            runner_.vppSet(vpp_);
+            // VPP set with VEE
+            runner_.vppSet(vee_);
             if (!isOeVppPin_()) {
                 // VDD Rd on VPP
                 runner_.vddOnVpp();
@@ -412,21 +413,13 @@ bool EPROM::verify_(const QByteArray &buffer, uint32_t &current,
 // ---------------------------------------------------------------------------
 
 M27xxx::M27xxx(QObject *parent) : EPROM(parent) {
-    info_.deviceType = kDeviceParallelMemory;
     info_.name = "EPROM 27xxx";
-    info_.capability.hasRead = true;
-    info_.capability.hasProgram = true;
-    info_.capability.hasVerify = true;
-    info_.capability.hasBlankCheck = true;
-    info_.capability.hasGetId = true;
-    info_.capability.hasVDD = true;
-    info_.capability.hasVPP = true;
-    skipFF_ = true;
     twp_ = 50000;
     twc_ = 50;
     vddRd_ = 5.0f;
     vddWr_ = 5.0f;
     vpp_ = 25.0f;
+    vee_ = 12.0f;
     size_ = 2048;
 }
 
@@ -435,21 +428,13 @@ M27xxx::~M27xxx() {}
 // ---------------------------------------------------------------------------
 
 M27Cxxx::M27Cxxx(QObject *parent) : EPROM(parent) {
-    info_.deviceType = kDeviceParallelMemory;
     info_.name = "EPROM 27Cxxx";
-    info_.capability.hasRead = true;
-    info_.capability.hasProgram = true;
-    info_.capability.hasVerify = true;
-    info_.capability.hasBlankCheck = true;
-    info_.capability.hasGetId = true;
-    info_.capability.hasVDD = true;
-    info_.capability.hasVPP = true;
-    skipFF_ = true;
     twp_ = 500;
     twc_ = 8;
     vddRd_ = 5.0f;
     vddWr_ = 6.0f;
     vpp_ = 13.0f;
+    vee_ = 12.0f;
     size_ = 2048;
 }
 
@@ -463,3 +448,156 @@ M27C16Bit::M27C16Bit(QObject *parent) : M27Cxxx(parent) {
 }
 
 M27C16Bit::~M27C16Bit() {}
+
+// ---------------------------------------------------------------------------
+
+W27Exxx::W27Exxx(QObject *parent) : M27Cxxx(parent) {
+    info_.name = "EPROM W27C/27E/27SF";
+    info_.capability.hasErase = true;
+    info_.capability.hasBlankCheck = true;
+    twp_ = 100;
+    twc_ = 15;
+    vddRd_ = 5.0f;
+    vddWr_ = 5.0f;
+    vpp_ = 12.0f;
+    vee_ = 14.0f;
+    size_ = 2048;
+    erasePulseDelay_ = 100;  // 100 ms
+}
+
+W27Exxx::~W27Exxx() {}
+
+bool W27Exxx::erase(bool check) {
+    canceling_ = false;
+    int total = static_cast<int>(size_);
+    // Init pins/bus to Prog operation
+    if (!initialize_(kDeviceOpErase)) return false;
+    uint32_t current = 0;
+    bool error = false;
+    // Erase the device
+    if (!erase_(current, total)) error = true;
+    // If no error and check flag is enabled, verify device
+    if (!error && check) {
+        // VDD off and VPP off
+        runner_.vppCtrl(false);
+        runner_.vddCtrl(false);
+        // VDD Rd on
+        runner_.vddSet(vddRd_);
+        runner_.vddCtrl();
+        // VDD Rd on VPP
+        runner_.vddOnVpp();
+        // Clear AddrBus
+        runner_.addrClr();
+        initControlPins_(true);
+        runner_.usDelay(initDelay_);
+        if (runner_.hasError()) return finalize_(0, total, true, false);
+        current = 0;
+        // Creates a blank (0xFF) buffer
+        QByteArray buffer(size_, 0xFF);
+        // Read the device and verify (compare) buffer
+        if (!verify_(buffer, current, total)) error = true;
+    }
+    if (!error) emit onProgress(total, total, true);
+    // Close resources
+    finalize_();
+    return !error;
+}
+
+bool W27Exxx::blankCheck() {
+    canceling_ = false;
+    int total = static_cast<int>(size_);
+    // Init pins/bus to Read operation
+    if (!initialize_(kDeviceOpRead)) return false;
+    uint32_t current = 0;
+    bool error = false;
+    // Creates a blank (0xFF) buffer
+    QByteArray buffer(size_, 0xFF);
+    // Read the device and verify (compare) buffer
+    if (!verify_(buffer, current, total)) error = true;
+    if (!error) emit onProgress(total, total, true);
+    // Close resources
+    finalize_();
+    return !error;
+}
+
+bool W27Exxx::initialize_(kDeviceOperation operation) {
+    if (operation != kDeviceOpErase) {
+        return M27Cxxx::initialize_(operation);
+    }
+    // Operation == Erase
+    if (!runner_.open(port_)) {
+        emit onProgress(0, size_, true, false);
+        return false;
+    }
+    // Init bus and pins
+    resetBus_();
+    // VDD Wr on
+    runner_.vddSet(vddWr_);
+    runner_.vddCtrl();
+    initControlPins_(false);
+    // VPP set with VEE
+    // VPP on
+    runner_.vppSet(vee_);
+    runner_.vppCtrl();
+    // VPP on A9
+    runner_.vppOnA9();
+    // Data is 0xFF
+    if (mode16bit_) {
+        runner_.dataSetW(0xFFFF);
+    } else {
+        runner_.dataSet(0xFF);
+    }
+    runner_.usDelay(initDelay_);
+    if (runner_.hasError()) return finalize_(0, size_, true, false);
+    return true;
+}
+
+bool W27Exxx::erase_(uint32_t &current, uint32_t total) {
+    uint16_t read = 0xFFFF;
+    int increment = mode16bit_ ? 2 : 1;
+    uint16_t empty = mode16bit_ ? 0xFFFF : 0xFF;
+    uint32_t initial = current;
+    // Repeat for n max attempts
+    for (int j = 1; j <= maxAttemptsProg_; j++) {
+        current = initial;
+        // Erase entire chip
+        // Addr = 0
+        runner_.addrClr();
+        // Data = 0xFF
+        if (mode16bit_) {
+            runner_.dataSetW(0xFFFF);
+        } else {
+            runner_.dataSet(0xFF);
+        }
+        // VPP on A9
+        runner_.vppOnA9();
+        // ~PGM is LO (start erase pulse)
+        runner_.setWE();
+        runner_.msDelay(erasePulseDelay_);
+        // ~PGM is HI (end erase pulse)
+        runner_.setWE(false);
+        runner_.usDelay(twc_);
+        // VPP on A9 off
+        runner_.vppOnA9(false);
+        bool success = true;
+        for (int i = 0; i < size_; i += increment) {
+            // Read byte
+            read_(read);
+            // Verify
+            if (read != empty) {
+                success = false;
+                break;
+            }
+            if (runner_.hasError() || j == maxAttemptsProg_) {
+                // Error
+                emit onProgress(current, total, true, false);
+                return false;
+            }
+            // Increment Address
+            runner_.addrInc();
+            current += increment;
+        }
+        if (success) break;
+    }
+    return true;
+}

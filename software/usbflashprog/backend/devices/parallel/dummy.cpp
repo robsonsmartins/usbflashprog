@@ -40,6 +40,7 @@ Dummy::Dummy(QObject *parent) : Device(parent), protected_(true) {
     vddRd_ = 5.0f;
     vddWr_ = 5.0f;
     vpp_ = 12.0f;
+    vee_ = 12.0f;
     setSize(2048);
 }
 

@@ -651,7 +651,7 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>50</width>
+                     <width>46</width>
                      <height>26</height>
                     </size>
                    </property>
@@ -695,6 +695,9 @@
                    <property name="styleSheet">
                     <string notr="true">QComboBox::drop-down {border-width: 0px;} QComboBox::down-arrow {image: url(noimg); border-width: 0px;}</string>
                    </property>
+                   <property name="currentText">
+                    <string notr="true">µS</string>
+                   </property>
                    <item>
                     <property name="text">
                      <string notr="true">µS</string>
@@ -730,7 +733,7 @@
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>50</width>
+                     <width>46</width>
                      <height>26</height>
                     </size>
                    </property>
@@ -768,6 +771,24 @@
                    <property name="styleSheet">
                     <string notr="true">QComboBox::drop-down {border-width: 0px;} QComboBox::down-arrow {image: url(noimg); border-width: 0px;}</string>
                    </property>
+                   <property name="currentText">
+                    <string notr="true">µS</string>
+                   </property>
+                   <property name="minimumContentsLength">
+                    <number>0</number>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>18</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="frame">
+                    <bool>true</bool>
+                   </property>
+                   <property name="modelColumn">
+                    <number>0</number>
+                   </property>
                    <item>
                     <property name="text">
                      <string notr="true">µS</string>
@@ -790,7 +811,7 @@
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>40</width>
+                     <width>0</width>
                      <height>20</height>
                     </size>
                    </property>
@@ -807,8 +828,33 @@
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
+                   <property name="font">
+                    <font>
+                     <pointsize>8</pointsize>
+                     <kerning>true</kerning>
+                    </font>
+                   </property>
                    <property name="text">
-                    <string>VDD Read</string>
+                    <string notr="true">VDD
+Rd</string>
+                   </property>
+                   <property name="textFormat">
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>false</bool>
+                   </property>
+                   <property name="margin">
+                    <number>0</number>
+                   </property>
+                   <property name="indent">
+                    <number>-1</number>
                    </property>
                   </widget>
                  </item>
@@ -864,7 +910,17 @@
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string>VDD Prog</string>
+                    <string notr="true">VDD
+Wr</string>
+                   </property>
+                   <property name="textFormat">
+                    <enum>Qt::PlainText</enum>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="margin">
+                    <number>0</number>
                    </property>
                   </widget>
                  </item>
@@ -942,7 +998,7 @@
                     </size>
                    </property>
                    <property name="toolTip">
-                    <string>Adjust VPP [Caution!]</string>
+                    <string>Adjust VPP to Program [Caution!]</string>
                    </property>
                    <property name="suffix">
                     <string notr="true"> V</string>
@@ -961,6 +1017,62 @@
                    </property>
                    <property name="value">
                     <double>12.000000000000000</double>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labelProgVEE">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string notr="true">VEE</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxProgVEE">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>55</width>
+                     <height>26</height>
+                    </size>
+                   </property>
+                   <property name="toolTip">
+                    <string>Adjust VPP to Erase [Caution!]</string>
+                   </property>
+                   <property name="suffix">
+                    <string notr="true"> V</string>
+                   </property>
+                   <property name="decimals">
+                    <number>1</number>
+                   </property>
+                   <property name="minimum">
+                    <double>10.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>25.000000000000000</double>
+                   </property>
+                   <property name="singleStep">
+                    <double>0.100000000000000</double>
+                   </property>
+                   <property name="value">
+                    <double>14.000000000000000</double>
                    </property>
                   </widget>
                  </item>
@@ -3348,7 +3460,7 @@
       </property>
       <widget class="QMenu" name="menuEPROM27">
        <property name="title">
-        <string>EPROM 27</string>
+        <string notr="true">EPROM 27</string>
        </property>
        <addaction name="actionEPROM27_2KB"/>
        <addaction name="actionEPROM27_4KB"/>
@@ -3364,7 +3476,7 @@
       </widget>
       <widget class="QMenu" name="menuEPROM27C">
        <property name="title">
-        <string>EPROM 27C</string>
+        <string notr="true">EPROM 27C</string>
        </property>
        <addaction name="actionEPROM27C_2KB"/>
        <addaction name="actionEPROM27C_4KB"/>
@@ -3390,9 +3502,58 @@
       <addaction name="menuEPROM27"/>
       <addaction name="menuEPROM27C"/>
      </widget>
+     <widget class="QMenu" name="menuEPROMElectricalErasable">
+      <property name="title">
+       <string>EPROM (Electrical Erasable)</string>
+      </property>
+      <widget class="QMenu" name="menuEPROM_W27_Winbond">
+       <property name="title">
+        <string notr="true">Winbond W27E/W27C</string>
+       </property>
+       <addaction name="actionEPROMW27_32KB"/>
+       <addaction name="actionEPROMW27_64KB"/>
+       <addaction name="actionEPROMW27_128KB"/>
+       <addaction name="actionEPROMW27_256KB"/>
+       <addaction name="actionEPROMW27_256KB_12V"/>
+       <addaction name="actionEPROMW27_512KB"/>
+      </widget>
+      <widget class="QMenu" name="menuEPROM_27SF_SST">
+       <property name="title">
+        <string notr="true">SST 27SF</string>
+       </property>
+       <addaction name="actionEPROM27SF_32KB"/>
+       <addaction name="actionEPROM27SF_64KB"/>
+       <addaction name="actionEPROM27SF_128KB"/>
+       <addaction name="actionEPROM27SF_256KB"/>
+       <addaction name="actionEPROM27SF_512KB"/>
+      </widget>
+      <widget class="QMenu" name="menuEPROM_26C_MXIC">
+       <property name="title">
+        <string notr="true">MXIC MX26C</string>
+       </property>
+       <addaction name="actionEPROM26C_128KB"/>
+       <addaction name="actionEPROM26C_256KB"/>
+       <addaction name="actionEPROM26C_512KB"/>
+      </widget>
+      <widget class="QMenu" name="menuEPROM_37VF_SST">
+       <property name="title">
+        <string notr="true">SST 37VF (3.3V)</string>
+       </property>
+       <addaction name="actionEPROM37VF_64KB"/>
+       <addaction name="actionEPROM37VF_128KB"/>
+       <addaction name="actionEPROM37VF_256KB"/>
+       <addaction name="actionEPROM37VF_512KB"/>
+      </widget>
+      <addaction name="menuEPROM_W27_Winbond"/>
+      <addaction name="menuEPROM_26C_MXIC"/>
+      <addaction name="menuEPROM_27SF_SST"/>
+      <addaction name="menuEPROM_37VF_SST"/>
+      <addaction name="separator"/>
+      <addaction name="actionEPROM27Exxx"/>
+     </widget>
      <addaction name="menuSRAM"/>
      <addaction name="menuEPROM"/>
-     <addaction name="actionEPROMElectricalErasable"/>
+     <addaction name="menuEPROMElectricalErasable"/>
      <addaction name="actionEEPROM"/>
      <addaction name="actionFlash"/>
      <addaction name="actionDummy"/>
@@ -3685,17 +3846,6 @@
     <string notr="true"/>
    </property>
   </action>
-  <action name="actionEPROMElectricalErasable">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>EPROM (Electrical Erasable)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
   <action name="actionEEPROM">
    <property name="enabled">
     <bool>false</bool>
@@ -3727,118 +3877,6 @@
    </property>
    <property name="toolTip">
     <string notr="true">SRAM 20/61/62 xxx</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM8K">
-   <property name="text">
-    <string notr="true">SRAM xx64 (8KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx64 (8KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx64 (8KB)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM16K">
-   <property name="text">
-    <string notr="true">SRAM xx128 (16KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx128 (16KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx128 (16KB)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM32K">
-   <property name="text">
-    <string notr="true">SRAM xx256 (32KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx256 (32KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx256 (32KB)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM64K">
-   <property name="text">
-    <string notr="true">SRAM xx512 (64KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx512 (64KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx512 (64KB)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM128K">
-   <property name="text">
-    <string notr="true">SRAM xx010 (128KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx010 (128KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx010 (128KB)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM512K">
-   <property name="text">
-    <string notr="true">SRAM xx040 (512KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx040 (512KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx040 (512KB)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM4K">
-   <property name="text">
-    <string notr="true">SRAM xx32 (4KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx32 (4KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx32 (4KB)</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionSRAM256K">
-   <property name="text">
-    <string notr="true">SRAM xx020 (256KB)</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx020 (256KB)</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx020 (256KB)</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -3899,17 +3937,6 @@
     <string notr="true">SRAM 2016/6116</string>
    </property>
   </action>
-  <action name="actionSRAM_4KB">
-   <property name="text">
-    <string notr="true">SRAM xx32</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx32</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx32</string>
-   </property>
-  </action>
   <action name="actionSRAM_8KB">
    <property name="text">
     <string notr="true">SRAM 6264</string>
@@ -3941,61 +3968,6 @@
    </property>
    <property name="toolTip">
     <string notr="true">SRAM 62256</string>
-   </property>
-  </action>
-  <action name="actionSRAM_64KB">
-   <property name="text">
-    <string notr="true">SRAM xx512</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx512</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx512</string>
-   </property>
-  </action>
-  <action name="actionSRAM_128KB">
-   <property name="text">
-    <string notr="true">SRAM xx010</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx010</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx010</string>
-   </property>
-  </action>
-  <action name="actionSRAM_256KB">
-   <property name="text">
-    <string notr="true">SRAM xx020</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx020</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx020</string>
-   </property>
-  </action>
-  <action name="actionSRAM_512KB">
-   <property name="text">
-    <string notr="true">SRAM xx040</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx040</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx040</string>
-   </property>
-  </action>
-  <action name="actionSRAM_1MB">
-   <property name="text">
-    <string notr="true">SRAM xx080</string>
-   </property>
-   <property name="iconText">
-    <string notr="true">SRAM xx080</string>
-   </property>
-   <property name="toolTip">
-    <string notr="true">SRAM xx080</string>
    </property>
   </action>
   <action name="actionEPROM27_2KB">
@@ -4218,11 +4190,6 @@
     <string notr="true">EPROM 27C080/801</string>
    </property>
   </action>
-  <action name="actionEPROM_27C160">
-   <property name="text">
-    <string>EPROM 27C160</string>
-   </property>
-  </action>
   <action name="actionEPROM27C16Bit_128KB">
    <property name="text">
     <string notr="true">EPROM 27C1024/210 (16 bit)</string>
@@ -4287,6 +4254,215 @@
    </property>
    <property name="toolTip">
     <string notr="true">EPROM 27C322 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionEPROM27Exxx">
+   <property name="text">
+    <string notr="true">EPROM W27/27E/27SF/37VF/26C xxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM W27/27E/27SF/37VF/26C xxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM W27/27E/27SF/37VF/26C xxx</string>
+   </property>
+  </action>
+  <action name="actionEPROMW27_32KB">
+   <property name="text">
+    <string notr="true">EPROM W27x256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM W27x256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM W27x256</string>
+   </property>
+  </action>
+  <action name="actionEPROMW27_64KB">
+   <property name="text">
+    <string notr="true">EPROM W27x512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM W27x512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM W27x512</string>
+   </property>
+  </action>
+  <action name="actionEPROMW27_128KB">
+   <property name="text">
+    <string notr="true">EPROM W27x010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM W27x010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM W27x010</string>
+   </property>
+  </action>
+  <action name="actionEPROMW27_256KB">
+   <property name="text">
+    <string notr="true">EPROM W27x020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM W27x020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM W27x020</string>
+   </property>
+  </action>
+  <action name="actionEPROMW27_256KB_12V">
+   <property name="text">
+    <string notr="true">EPROM W27C02</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM W27C02</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM W27C02</string>
+   </property>
+  </action>
+  <action name="actionEPROMW27_512KB">
+   <property name="text">
+    <string notr="true">EPROM W27x040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM W27x040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM W27x040</string>
+   </property>
+  </action>
+  <action name="actionEPROM27SF_32KB">
+   <property name="text">
+    <string notr="true">EPROM 27SF256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27SF256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27SF256</string>
+   </property>
+  </action>
+  <action name="actionEPROM27SF_64KB">
+   <property name="text">
+    <string notr="true">EPROM 27SF512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27SF512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27SF512</string>
+   </property>
+  </action>
+  <action name="actionEPROM27SF_128KB">
+   <property name="text">
+    <string notr="true">EPROM 27SF010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27SF010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27SF010</string>
+   </property>
+  </action>
+  <action name="actionEPROM27SF_256KB">
+   <property name="text">
+    <string notr="true">EPROM 27SF020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27SF020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27SF020</string>
+   </property>
+  </action>
+  <action name="actionEPROM27SF_512KB">
+   <property name="text">
+    <string notr="true">EPROM 27SF040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 27SF040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 27SF040</string>
+   </property>
+  </action>
+  <action name="actionEPROM26C_128KB">
+   <property name="text">
+    <string notr="true">EPROM MX26C1000</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM MX26C1000</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM MX26C1000</string>
+   </property>
+  </action>
+  <action name="actionEPROM26C_256KB">
+   <property name="text">
+    <string notr="true">EPROM MX26C2000</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM MX26C2000</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM MX26C2000</string>
+   </property>
+  </action>
+  <action name="actionEPROM26C_512KB">
+   <property name="text">
+    <string notr="true">EPROM MX26C4000</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM MX26C4000</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM MX26C4000</string>
+   </property>
+  </action>
+  <action name="actionEPROM37VF_64KB">
+   <property name="text">
+    <string notr="true">EPROM 37VF512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 37VF512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 37VF512</string>
+   </property>
+  </action>
+  <action name="actionEPROM37VF_128KB">
+   <property name="text">
+    <string notr="true">EPROM 37VF010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 37VF010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 37VF010</string>
+   </property>
+  </action>
+  <action name="actionEPROM37VF_256KB">
+   <property name="text">
+    <string notr="true">EPROM 37VF020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 37VF020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 37VF020</string>
+   </property>
+  </action>
+  <action name="actionEPROM37VF_512KB">
+   <property name="text">
+    <string notr="true">EPROM 37VF040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EPROM 37VF040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EPROM 37VF040</string>
    </property>
   </action>
  </widget>

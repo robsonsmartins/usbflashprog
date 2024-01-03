@@ -94,6 +94,7 @@ class MainWindow : public QMainWindow {
     void on_spinBoxProgVDDrd_valueChanged(double value);
     void on_spinBoxProgVDDwr_valueChanged(double value);
     void on_spinBoxProgVPP_valueChanged(double value);
+    void on_spinBoxProgVEE_valueChanged(double value);
     void on_checkBoxProgSkipFF_toggled(bool checked = false);
     void on_checkBoxProgFast_toggled(bool checked = false);
     void on_comboBoxProgSectorSize_currentIndexChanged(int index);
@@ -192,6 +193,11 @@ class MainWindow : public QMainWindow {
      * @param label The triggered action text.
      */
     void createDeviceIfEPROM_(const QString &label);
+    /*
+     * @brief Creates device if it's an Erasable EPROM (Prog).
+     * @param label The triggered action text.
+     */
+    void createDeviceIfErasableEPROM_(const QString &label);
     /* @brief Enables/Disables the controls (Prog). */
     void configureProgControls_();
     /* @brief Configures the device based in the ui values (Prog). */

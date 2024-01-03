@@ -55,6 +55,8 @@ class SRAM : public Device {
         kDeviceOpRead,
         /* @brief Device Prog */
         kDeviceOpProg,
+        /* @brief Device Erase */
+        kDeviceOpErase,
         /* @brief Device GetId */
         kDeviceOpGetId
     };

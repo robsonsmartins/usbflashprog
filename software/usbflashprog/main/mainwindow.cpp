@@ -66,6 +66,8 @@ constexpr const char *kSettingProgVddRd = "Prog/VDDToRead";
 constexpr const char *kSettingProgVddWr = "Prog/VDDToProg";
 /* @brief Setting: Programmer / VPP. */
 constexpr const char *kSettingProgVpp = "Prog/VPP";
+/* @brief Setting: Programmer / VEE. */
+constexpr const char *kSettingProgVee = "Prog/VEE";
 /* @brief Setting: Programmer / Skip Prog 0xFF. */
 constexpr const char *kSettingProgSkipFF = "Prog/SkipFF";
 /* @brief Setting: Programmer / Fast Prog/Erase. */
@@ -509,6 +511,10 @@ void MainWindow::on_spinBoxProgVPP_valueChanged(double value) {
     saveSettings_();
 }
 
+void MainWindow::on_spinBoxProgVEE_valueChanged(double value) {
+    saveSettings_();
+}
+
 void MainWindow::on_checkBoxProgSkipFF_toggled(bool checked) {
     saveSettings_();
 }
@@ -544,6 +550,7 @@ void MainWindow::loadSettings_() {
     float vddRd = settings.value(kSettingProgVddRd).toString().toFloat();
     float vddWr = settings.value(kSettingProgVddWr).toString().toFloat();
     float vpp = settings.value(kSettingProgVpp).toString().toFloat();
+    float vee = settings.value(kSettingProgVee).toString().toFloat();
     bool skipFF = settings.value(kSettingProgSkipFF).toString().toInt() != 0;
     bool fastProg = settings.value(kSettingProgFast).toString().toInt() != 0;
     uint16_t sectorSize =
@@ -557,6 +564,7 @@ void MainWindow::loadSettings_() {
         device_->setVddRd(vddRd);
         device_->setVddWr(vddWr);
         device_->setVpp(vpp);
+        device_->setVee(vee);
         device_->setSkipFF(skipFF);
         device_->setFastProg(fastProg);
         device_->setSectorSize(sectorSize);
@@ -583,6 +591,8 @@ void MainWindow::saveSettings_() {
     settings.setValue(kSettingProgVddWr, QString::number(vddWr));
     float vpp = ui_->spinBoxProgVPP->value();
     settings.setValue(kSettingProgVpp, QString::number(vpp));
+    float vee = ui_->spinBoxProgVEE->value();
+    settings.setValue(kSettingProgVee, QString::number(vee));
     int skipFF = ui_->checkBoxProgSkipFF->isChecked() ? 1 : 0;
     settings.setValue(kSettingProgSkipFF, QString::number(skipFF));
     int fastProg = ui_->checkBoxProgFast->isChecked() ? 1 : 0;
@@ -602,6 +612,7 @@ void MainWindow::createDevice_() {
     }
     createDeviceIfSRAM_(ui_->btnProgDevice->text());
     createDeviceIfEPROM_(ui_->btnProgDevice->text());
+    createDeviceIfErasableEPROM_(ui_->btnProgDevice->text());
     if (!device_) {
         if (ui_->btnProgDevice->text() == ui_->actionDummy->text()) {
             device_ = new Dummy(this);
@@ -771,6 +782,137 @@ void MainWindow::createDeviceIfEPROM_(const QString &label) {
     }
 }
 
+void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
+    uint32_t size = 0x800;
+    bool found = false, custom = false;
+    float vpp = 12.0f, vee = 14.0f, vdd = 5.0f;
+    // W27x
+    if (label == ui_->actionEPROMW27_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionEPROMW27_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionEPROMW27_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEPROMW27_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEPROMW27_256KB_12V->text()) {
+        size = 0x40000;
+        found = true;
+        vee = 12.0f;
+    } else if (label == ui_->actionEPROMW27_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionEPROM27Exxx->text()) {
+        size = 0x800;
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new W27Exxx(this);
+        device_->setSize(size);
+        device_->setVpp(vpp);
+        device_->setVee(vee);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+    }
+    found = false;
+    vpp = 12.0f;
+    vee = 12.0f;
+    vdd = 5.0f;
+    // 27SF
+    if (label == ui_->actionEPROM27SF_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionEPROM27SF_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionEPROM27SF_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEPROM27SF_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEPROM27SF_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new W27Exxx(this);
+        device_->setSize(size);
+        device_->setVpp(vpp);
+        device_->setVee(vee);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(false);
+    }
+    found = false;
+    vpp = 12.75f;
+    vee = 12.75f;
+    vdd = 6.25f;
+    // MX26C
+    if (label == ui_->actionEPROM26C_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEPROM26C_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEPROM26C_512KB->text()) {
+        size = 0x80000;
+        found = true;
+        vee = 12.5f;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new W27Exxx(this);
+        device_->setSize(size);
+        device_->setVpp(vpp);
+        device_->setVee(vee);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(false);
+    }
+    found = false;
+    vpp = 12.0f;
+    vee = 12.0f;
+    vdd = 3.3f;
+    // 37VF
+    if (label == ui_->actionEPROM37VF_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionEPROM37VF_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEPROM37VF_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEPROM37VF_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new W27Exxx(this);
+        device_->setSize(size);
+        device_->setVpp(vpp);
+        device_->setVee(vee);
+        device_->setVddRd(vdd);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(false);
+    }
+}
+
 void MainWindow::configureProgControls_() {
     ui_->spinBoxProgTWP->blockSignals(true);
     ui_->comboBoxProgTWPUnit->blockSignals(true);
@@ -779,6 +921,7 @@ void MainWindow::configureProgControls_() {
     ui_->spinBoxProgVDDrd->blockSignals(true);
     ui_->spinBoxProgVDDwr->blockSignals(true);
     ui_->spinBoxProgVPP->blockSignals(true);
+    ui_->spinBoxProgVEE->blockSignals(true);
     ui_->checkBoxProgFast->blockSignals(true);
     ui_->checkBoxProgSkipFF->blockSignals(true);
     ui_->comboBoxProgSectorSize->blockSignals(true);
@@ -792,35 +935,41 @@ void MainWindow::configureProgControls_() {
     ui_->checkBoxProgFast->setEnabled(capability.hasFastProg && port);
     ui_->checkBoxProgSkipFF->setEnabled(capability.hasSkipFF && port);
     ui_->comboBoxProgSectorSize->setEnabled(capability.hasSectorSize && port);
-    ui_->labelProgSectorSize->setEnabled(capability.hasSectorSize && port);
+    ui_->labelProgSectorSize->setEnabled(
+        ui_->comboBoxProgSectorSize->isEnabled());
     ui_->actionRead->setEnabled(capability.hasRead && port);
     ui_->menuProgram->setEnabled(capability.hasProgram && port);
-    ui_->actionDoProgram->setEnabled(capability.hasProgram && port);
+    ui_->actionDoProgram->setEnabled(ui_->menuProgram->isEnabled());
     ui_->actionProgramAndVerify->setEnabled(capability.hasProgram &&
                                             capability.hasVerify && port);
     ui_->actionVerify->setEnabled(capability.hasVerify && port);
     ui_->menuErase->setEnabled(capability.hasErase && port);
-    ui_->actionDoErase->setEnabled(capability.hasErase && port);
+    ui_->actionDoErase->setEnabled(ui_->menuErase->isEnabled());
     ui_->actionEraseAndBlankCheck->setEnabled(capability.hasErase &&
                                               capability.hasBlankCheck && port);
     ui_->actionBlankCheck->setEnabled(capability.hasBlankCheck && port);
     ui_->actionGetID->setEnabled(capability.hasGetId && port);
     ui_->actionUnprotect->setEnabled(capability.hasUnprotect && port);
 
-    ui_->btnRead->setEnabled(capability.hasRead && port);
-    ui_->btnProgram->setEnabled(capability.hasProgram && port);
-    ui_->btnVerify->setEnabled(capability.hasVerify && port);
-    ui_->btnErase->setEnabled(capability.hasErase && port);
-    ui_->btnBlankCheck->setEnabled(capability.hasBlankCheck && port);
-    ui_->btnGetID->setEnabled(capability.hasGetId && port);
-    ui_->btnUnprotect->setEnabled(capability.hasUnprotect && port);
+    ui_->btnRead->setEnabled(ui_->actionRead->isEnabled());
+    ui_->btnProgram->setEnabled(ui_->actionDoProgram->isEnabled());
+    ui_->btnVerify->setEnabled(ui_->actionVerify->isEnabled());
+    ui_->btnErase->setEnabled(ui_->actionDoErase->isEnabled());
+    ui_->btnBlankCheck->setEnabled(ui_->actionBlankCheck->isEnabled());
+    ui_->btnGetID->setEnabled(ui_->actionGetID->isEnabled());
+    ui_->btnUnprotect->setEnabled(ui_->actionUnprotect->isEnabled());
 
     ui_->spinBoxProgVDDrd->setEnabled(capability.hasVDD && port);
-    ui_->labelProgVDDrd->setEnabled(capability.hasVDD && port);
+    ui_->labelProgVDDrd->setEnabled(ui_->spinBoxProgVDDrd->isEnabled());
     ui_->spinBoxProgVDDwr->setEnabled(capability.hasVPP && port);
-    ui_->labelProgVDDwr->setEnabled(capability.hasVPP && port);
+    ui_->labelProgVDDwr->setEnabled(ui_->spinBoxProgVDDwr->isEnabled());
     ui_->spinBoxProgVPP->setEnabled(capability.hasVPP && port);
-    ui_->labelProgVPP->setEnabled(capability.hasVPP && port);
+    ui_->labelProgVPP->setEnabled(ui_->spinBoxProgVPP->isEnabled());
+    ui_->spinBoxProgVEE->setEnabled(capability.hasVPP && port &&
+                                    (capability.hasErase ||
+                                     capability.hasGetId ||
+                                     capability.hasUnprotect));
+    ui_->labelProgVEE->setEnabled(ui_->spinBoxProgVEE->isEnabled());
 
     if (device_) {
         uint32_t twp = device_->getTwp();
@@ -844,6 +993,7 @@ void MainWindow::configureProgControls_() {
         ui_->spinBoxProgVDDrd->setValue(device_->getVddRd());
         ui_->spinBoxProgVDDwr->setValue(device_->getVddWr());
         ui_->spinBoxProgVPP->setValue(device_->getVpp());
+        ui_->spinBoxProgVEE->setValue(device_->getVee());
         ui_->checkBoxProgFast->setChecked(device_->getFastProg());
         ui_->checkBoxProgSkipFF->setChecked(device_->getSkipFF());
 
@@ -876,6 +1026,7 @@ void MainWindow::configureProgControls_() {
     ui_->spinBoxProgVDDrd->blockSignals(false);
     ui_->spinBoxProgVDDwr->blockSignals(false);
     ui_->spinBoxProgVPP->blockSignals(false);
+    ui_->spinBoxProgVEE->blockSignals(false);
     ui_->checkBoxProgFast->blockSignals(false);
     ui_->checkBoxProgSkipFF->blockSignals(false);
     ui_->comboBoxProgSectorSize->blockSignals(false);
@@ -893,6 +1044,7 @@ void MainWindow::configureDeviceFromControls_() {
     device_->setVddRd(ui_->spinBoxProgVDDrd->value());
     device_->setVddWr(ui_->spinBoxProgVDDwr->value());
     device_->setVpp(ui_->spinBoxProgVPP->value());
+    device_->setVee(ui_->spinBoxProgVEE->value());
     device_->setSkipFF(ui_->checkBoxProgSkipFF->isChecked());
     device_->setFastProg(ui_->checkBoxProgFast->isChecked());
     uint16_t sectorSize = 0;
@@ -933,9 +1085,8 @@ bool MainWindow::showActionWarningDialog_() {
     if (noWarningDevice_) return true;
     if (QMessageBox::warning(
             this, tr("USB Flash/EPROM Programmer"),
-            tr("Caution! Check the VDD and VPP voltages and the size of "
-               "the "
-               "device before running, otherwise you will damage it!")
+            tr("Caution! Check the VDD, VPP and VEE voltages and the size of "
+               "the device before running, otherwise you will damage it!")
                     .leftJustified(kDialogLabelMinLength) +
                 "\n\n" +
                 tr("Consult the device datasheet for more information.")

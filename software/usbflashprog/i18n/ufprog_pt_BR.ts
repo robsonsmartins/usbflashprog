@@ -490,10 +490,6 @@
         <translation>Aperte para alterar a unidade</translation>
     </message>
     <message>
-        <source>Adjust VPP [Caution!]</source>
-        <translation>Ajuste de VPP [Cuidado!]</translation>
-    </message>
-    <message>
         <source>Adjust VDD to Read [Caution!]</source>
         <translation>Ajuste de VDD para Leitura [Cuidado!]</translation>
     </message>
@@ -510,24 +506,24 @@
         <translation>Tamanho</translation>
     </message>
     <message>
-        <source>VDD Read</source>
-        <translation>VDD Leitura</translation>
-    </message>
-    <message>
-        <source>VDD Prog</source>
-        <translation>VDD Prog</translation>
-    </message>
-    <message>
-        <source>Caution! Check the VDD and VPP voltages and the size of the device before running, otherwise you will damage it!</source>
-        <translation>Cuidado! Verifique as tensões de VDD e VPP e o tamanho do dispositivo antes de executar, sob pena de danificá-lo!</translation>
-    </message>
-    <message>
         <source>Consult the device datasheet for more information.</source>
         <translation>Consulte o manual técnico do dispositivo para mais informações.</translation>
     </message>
     <message>
         <source>Are you sure you want to continue?</source>
         <translation>Tem certeza que deseja continuar?</translation>
+    </message>
+    <message>
+        <source>Adjust VPP to Program [Caution!]</source>
+        <translation>Ajuste de VPP para Programação [Cuidado!]</translation>
+    </message>
+    <message>
+        <source>Adjust VPP to Erase [Caution!]</source>
+        <translation>Ajuste de VPP para Apagamento [Cuidado!]</translation>
+    </message>
+    <message>
+        <source>Caution! Check the VDD, VPP and VEE voltages and the size of the device before running, otherwise you will damage it!</source>
+        <translation>Cuidado! Verifique as tensões de VDD, VPP e VEE e o tamanho do dispositivo antes de executar, sob pena de danificá-lo!</translation>
     </message>
 </context>
 </TS>

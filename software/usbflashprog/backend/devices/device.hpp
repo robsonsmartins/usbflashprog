@@ -202,6 +202,16 @@ class Device : public QObject {
      */
     virtual float getVpp() const;
     /**
+     * @brief Sets the VEE.
+     * @param value VEE value, in volts.
+     */
+    virtual void setVee(float value);
+    /**
+     * @brief Returns the configured VEE (in volts).
+     * @return VEE value, in volts.
+     */
+    virtual float getVee() const;
+    /**
      * @brief Sets the Skip Prog 0xFF.
      * @param value If true (default), enables skip prog 0xFF, disables
      * otherwise.
@@ -315,6 +325,8 @@ class Device : public QObject {
     float vddWr_;
     /* @brief VPP, in volts. */
     float vpp_;
+    /* @brief VEE (VPP to Erase), in volts. */
+    float vee_;
     /* @brief Enables skip prog 0xFF. */
     bool skipFF_;
     /* @brief Enables fast prog/erase. */

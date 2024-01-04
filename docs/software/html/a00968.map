@@ -1,8 +1,0 @@
-<map id="SRAM" name="SRAM">
-<area shape="rect" id="node1" title="Parallel SRAM Class." alt="" coords="41,453,238,751"/>
-<area shape="rect" id="node3" href="$a00953.html" title="Parallel EPROM Class." alt="" coords="49,799,230,1140"/>
-<area shape="rect" id="node2" href="$a00941.html" title="Device Base Class." alt="" coords="81,5,197,405"/>
-<area shape="rect" id="node4" href="$a00961.html" title="Parallel EPROM 27Cxxx (CMOS) Class." alt="" coords="11,1188,129,1280"/>
-<area shape="rect" id="node6" href="$a00957.html" title="Parallel EPROM 27xxx (NMOS) Class." alt="" coords="153,1188,264,1280"/>
-<area shape="rect" id="node5" href="$a00965.html" title="Parallel EPROM 27Cxxx 16Bit (CMOS) Class." alt="" coords="5,1328,135,1420"/>
-</map>

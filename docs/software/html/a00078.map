@@ -26,12 +26,12 @@
 <area shape="rect" id="node44" href="$a00074.html" title="Configuration of UsbFlashProg." alt="" coords="143,87,232,114"/>
 <area shape="rect" id="node46" title=" " alt="" coords="3960,87,4103,114"/>
 <area shape="rect" id="node47" href="$a00011.html" title="Class of a Parallel Dummy Device." alt="" coords="327,169,509,211"/>
-<area shape="rect" id="node48" href="$a00023.html" title="Class of a Parallel SRAM." alt="" coords="680,169,863,211"/>
-<area shape="rect" id="node49" href="$a00017.html" title="Classes of the Parallel EPROM." alt="" coords="680,80,863,121"/>
+<area shape="rect" id="node48" href="$a01419.html" title="Class of a Parallel SRAM." alt="" coords="680,169,863,211"/>
+<area shape="rect" id="node49" href="$a01404.html" title="Classes of the Parallel EPROM." alt="" coords="680,80,863,121"/>
 <area shape="rect" id="node24" title=" " alt="" coords="1613,177,1729,203"/>
 <area shape="rect" id="node25" title=" " alt="" coords="1117,177,1223,203"/>
 <area shape="rect" id="node26" title=" " alt="" coords="1458,177,1589,203"/>
-<area shape="rect" id="node27" href="$a00107.html" title="Header of the QHexEditor Class." alt="" coords="1299,177,1433,203"/>
+<area shape="rect" id="node27" href="$a00125.html" title="Header of the QHexEditor Class." alt="" coords="1299,177,1433,203"/>
 <area shape="rect" id="node36" href="$a00071.html" title="Header of the Runner Class." alt="" coords="1349,333,1498,360"/>
 <area shape="rect" id="node43" href="$a00005.html" title="Base class of a Device." alt="" coords="669,259,874,285"/>
 <area shape="rect" id="node28" title=" " alt="" coords="1319,259,1413,285"/>

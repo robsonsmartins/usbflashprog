@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['main_2ecpp_315',['main.cpp',['../a00083.html',1,'']]],
-  ['mainwindow_2ecpp_316',['mainwindow.cpp',['../a00077.html',1,'']]],
-  ['mainwindow_2ehpp_317',['mainwindow.hpp',['../a00080.html',1,'']]]
+  ['emulator_2ecpp_363',['emulator.cpp',['../a00113.html',1,'']]],
+  ['emulator_2ehpp_364',['emulator.hpp',['../a00116.html',1,'']]]
 ];

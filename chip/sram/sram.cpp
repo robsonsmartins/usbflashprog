@@ -214,19 +214,15 @@ ChipSRAM::ChipSRAM() : BaseParChip() {
 ChipSRAM::~ChipSRAM() {}
 
 void ChipSRAM::SetSize(unsigned long size) {
-    if (size == f_memory_area.size()) {
-        return;
-    }
-    /* initialize with random contents */
-    RandomizeData();
+    if (size == f_memory_area.size()) return;
     /* inherited */
     BaseParChip::SetSize(size);
+    /* initialize with random contents */
+    RandomizeData();
 }
 
 void ChipSRAM::SetVDD(bool state) {
-    if (state == f_vdd) {
-        return;
-    }
+    if (state == f_vdd) return;
     /* initialize with random contents */
     if (state) RandomizeData();
     /* inherited */

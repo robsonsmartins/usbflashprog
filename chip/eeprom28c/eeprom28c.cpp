@@ -213,13 +213,11 @@ ChipEEPROM28C::ChipEEPROM28C() : BaseParChip() {
 ChipEEPROM28C::~ChipEEPROM28C() {}
 
 void ChipEEPROM28C::SetSize(unsigned long size) {
-    if (size == f_memory_area.size()) {
-        return;
-    }
-    /* initialize with 0xFF */
-    FillData(0xFF);
+    if (size == f_memory_area.size()) return;
     /* inherited */
     BaseParChip::SetSize(size);
+    /* initialize with 0xFF */
+    FillData(0xFF);
 }
 
 void ChipEEPROM28C::EmuChip(void) {

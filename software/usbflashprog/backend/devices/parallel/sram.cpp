@@ -109,7 +109,7 @@ bool SRAM::read_(uint8_t &data) {
 
 bool SRAM::program_(const QByteArray &buffer, uint32_t &current,
                     uint32_t total) {
-    for (const auto &data : buffer) {
+    for (const uint8_t &data : buffer) {
         emit onProgress(current, total);
         if (canceling_) {
             emit onProgress(current, total, true, false, true);
@@ -131,7 +131,7 @@ bool SRAM::program_(const QByteArray &buffer, uint32_t &current,
 
 bool SRAM::verify_(const QByteArray &buffer, uint32_t &current,
                    uint32_t total) {
-    for (const auto &data : buffer) {
+    for (const uint8_t &data : buffer) {
         emit onProgress(current, total);
         if (canceling_) {
             emit onProgress(current, total, true, false, true);
@@ -205,4 +205,32 @@ QByteArray SRAM::generatePatternData_() {
         data = ~data;
     }
     return buffer;
+}
+
+bool SRAM::getId(TDeviceID &result) {
+    (void)result;
+    return false;
+}
+
+bool SRAM::read(QByteArray &buffer) {
+    (void)buffer;
+    return false;
+}
+
+bool SRAM::verify(const QByteArray &buffer) {
+    (void)buffer;
+    return false;
+}
+
+bool SRAM::erase(bool check) {
+    (void)check;
+    return false;
+}
+
+bool SRAM::blankCheck() {
+    return false;
+}
+
+bool SRAM::unprotect() {
+    return false;
 }

@@ -121,6 +121,20 @@ class SRAM : public Device {
                            bool success = true, bool canceled = false);
     /* @brief Close resources. */
     virtual void finalize_();
+
+  private:
+    /* Reimplemented */
+    virtual bool getId(TDeviceID &result);
+    /* Reimplemented */
+    virtual bool read(QByteArray &buffer);
+    /* Reimplemented */
+    virtual bool verify(const QByteArray &buffer);
+    /* Reimplemented */
+    virtual bool erase(bool check = false);
+    /* Reimplemented */
+    virtual bool blankCheck();
+    /* Reimplemented */
+    virtual bool unprotect();
 };
 
 #endif  // BACKEND_DEVICES_PARALLEL_SRAM_HPP_

@@ -93,6 +93,10 @@ class EPROM : public SRAM {
      * @param read If true indicates Read operation (default).
          False otherwise. */
     virtual void initControlPins_(bool read = true);
+
+  private:
+    /* Reimplemented */
+    virtual bool unprotect();
 };
 
 // ---------------------------------------------------------------------------

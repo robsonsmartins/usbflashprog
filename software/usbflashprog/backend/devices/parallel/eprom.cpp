@@ -152,8 +152,8 @@ bool EPROM::getId(TDeviceID &result) {
 
 bool EPROM::isOeVppPin_() {
     switch (size_) {
-        case 0x1000:    //  4KB
-        case 0x10000:   // 64KB
+        case 0x001000:  //  4KB
+        case 0x010000:  // 64KB
         case 0x100000:  //  1MB
         case 0x400000:  //  4MB
             // ~OE/VPP Pin
@@ -176,8 +176,8 @@ bool EPROM::isPositiveProgPulse_() {
 
 bool EPROM::isPgmCePin_() {
     switch (size_) {
-        case 0x2000:   //   8KB
-        case 0x4000:   //  16KB
+        case 0x02000:  //   8KB
+        case 0x04000:  //  16KB
         case 0x20000:  // 128KB
         case 0x40000:  // 256KB
             // ~CE and ~PGM Pin are separated
@@ -358,15 +358,17 @@ bool EPROM::program_(const QByteArray &buffer, uint32_t &current,
             emit onProgress(current, total, true, false, true);
             return false;
         }
-        data = buffer[i];
+        data = buffer[i] & 0xFF;
         if (mode16bit_) {
-            data <<= 8;             // MSB
-            data |= buffer[i + 1];  // LSB
+            data <<= 8;                      // MSB
+            data |= (buffer[i + 1] & 0xFF);  // LSB
         }
         // Repeat for n max attempts
         for (int j = 1; j <= maxAttemptsProg_; j++) {
             // Write byte (if not 0xFF)
             if (data != empty) write_(data);
+            // PGM/~CE is LO
+            if (isPgmCePin_()) runner_.setWE();
             // Read byte
             read_(read);
             // Verify
@@ -394,10 +396,10 @@ bool EPROM::verify_(const QByteArray &buffer, uint32_t &current,
             emit onProgress(current, total, true, false, true);
             return false;
         }
-        data = buffer[i];
+        data = buffer[i] & 0xFF;
         if (mode16bit_) {
-            data <<= 8;             // MSB
-            data |= buffer[i + 1];  // LSB
+            data <<= 8;                      // MSB
+            data |= (buffer[i + 1] & 0xFF);  // LSB
         }
         read_(read);
         runner_.addrInc();
@@ -408,6 +410,10 @@ bool EPROM::verify_(const QByteArray &buffer, uint32_t &current,
         current += increment;
     }
     return true;
+}
+
+bool EPROM::unprotect() {
+    return false;
 }
 
 // ---------------------------------------------------------------------------
@@ -571,14 +577,26 @@ bool W27Exxx::erase_(uint32_t &current, uint32_t total) {
         }
         // VPP on A9
         runner_.vppOnA9();
-        // ~PGM is LO (start erase pulse)
-        runner_.setWE();
+        if (isPositiveProgPulse_()) {
+            // PGM is HI (start erase pulse)
+            runner_.setWE(false);
+        } else {
+            // ~PGM is LO (start erase pulse)
+            runner_.setWE();
+        }
         runner_.msDelay(erasePulseDelay_);
-        // ~PGM is HI (end erase pulse)
-        runner_.setWE(false);
+        if (isPositiveProgPulse_()) {
+            // PGM is LO (end erase pulse)
+            runner_.setWE();
+        } else {
+            // ~PGM is HI (end erase pulse)
+            runner_.setWE(false);
+        }
         runner_.usDelay(twc_);
         // VPP on A9 off
         runner_.vppOnA9(false);
+        // PGM/~CE is LO
+        if (isPgmCePin_()) runner_.setWE();
         bool success = true;
         for (int i = 0; i < size_; i += increment) {
             // Read byte

@@ -243,37 +243,3 @@ void Device::cancel() {
     if (canceling_) return;
     canceling_ = true;
 }
-
-bool Device::getId(TDeviceID &result) {
-    (void)result;
-    return false;
-}
-
-bool Device::read(QByteArray &buffer) {
-    buffer.clear();
-    return false;
-}
-
-bool Device::program(const QByteArray &buffer, bool verify) {
-    if (verify) return this->verify(buffer);
-    return false;
-}
-
-bool Device::verify(const QByteArray &buffer) {
-    QByteArray read;
-    if (!this->read(read)) return false;
-    return (!buffer.compare(read));
-}
-
-bool Device::erase(bool check) {
-    if (check) return blankCheck();
-    return false;
-}
-
-bool Device::blankCheck() {
-    return false;
-}
-
-bool Device::unprotect() {
-    return false;
-}

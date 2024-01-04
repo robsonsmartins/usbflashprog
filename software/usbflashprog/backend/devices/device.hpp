@@ -257,13 +257,13 @@ class Device : public QObject {
      * @param[out] result Reference to TDeviceID structure to receive data.
      * @return True if success, false otherwise.
      */
-    virtual bool getId(TDeviceID &result);
+    virtual bool getId(TDeviceID &result) = 0;
     /**
      * @brief Read the Device.
      * @param[out] buffer Reference to QByteArray to receive data.
      * @return True if success, false otherwise.
      */
-    virtual bool read(QByteArray &buffer);
+    virtual bool read(QByteArray &buffer) = 0;
     /**
      * @brief Program the Device.
      * @param[out] buffer Data to write.
@@ -271,30 +271,30 @@ class Device : public QObject {
      *   Default is false.
      * @return True if success, false otherwise.
      */
-    virtual bool program(const QByteArray &buffer, bool verify = false);
+    virtual bool program(const QByteArray &buffer, bool verify = false) = 0;
     /**
      * @brief Verifies the Device.
      * @param buffer Data to compare.
      * @return True if success, false otherwise.
      */
-    virtual bool verify(const QByteArray &buffer);
+    virtual bool verify(const QByteArray &buffer) = 0;
     /**
      * @brief Erases the Device.
      * @param check If true, calls Device::blankCheck() after erase.
      *   Default is false.
      * @return True if success, false otherwise.
      */
-    virtual bool erase(bool check = false);
+    virtual bool erase(bool check = false) = 0;
     /**
      * @brief Verifies if the Device is blank.
      * @return True if device is blank, false otherwise.
      */
-    virtual bool blankCheck();
+    virtual bool blankCheck() = 0;
     /**
      * @brief Unprotects the Device.
      * @return True if success, false otherwise.
      */
-    virtual bool unprotect();
+    virtual bool unprotect() = 0;
 
   Q_SIGNALS:
     /**

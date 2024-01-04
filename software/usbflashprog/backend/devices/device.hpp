@@ -24,7 +24,11 @@
 #include <QString>
 #include <QByteArray>
 
+#ifndef TEST_BUILD
 #include "backend/runner.hpp"
+#else
+#include "test/emulator/emulator.hpp"
+#endif
 
 // ---------------------------------------------------------------------------
 
@@ -336,7 +340,11 @@ class Device : public QObject {
     /* @brief Serial port path. */
     QString port_;
     /* @brief The Runner instance. */
+#ifndef TEST_BUILD
     Runner runner_;
+#else
+    Emulator runner_;
+#endif
     /* @brief Device information. */
     TDeviceInformation info_;
 };

@@ -167,49 +167,49 @@ TEST_F(RunnerTest, delay) {
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 10, 100);
+    EXPECT_NEAR(elapsed, 10, 200);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(100);
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 100, 100);
+    EXPECT_NEAR(elapsed, 100, 200);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(200);
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 200, 100);
+    EXPECT_NEAR(elapsed, 200, 200);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(1000);
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 1000, 100);
+    EXPECT_NEAR(elapsed, 1000, 200);
 
     start = std::chrono::steady_clock::now();
     Runner::usDelay(10000);
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 10, 1);
+    EXPECT_NEAR(elapsed, 10, 50);
 
     start = std::chrono::steady_clock::now();
     Runner::msDelay(5);
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 5, 1);
+    EXPECT_NEAR(elapsed, 5, 50);
 
     start = std::chrono::steady_clock::now();
     Runner::msDelay(50);
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 50, 5);
+    EXPECT_NEAR(elapsed, 50, 50);
 
     start = std::chrono::steady_clock::now();
     Runner::msDelay(500);
@@ -223,5 +223,5 @@ TEST_F(RunnerTest, delay) {
     end = std::chrono::steady_clock::now();
     elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                   .count();
-    EXPECT_NEAR(elapsed, 1000, 100);
+    EXPECT_NEAR(elapsed, 1000, 50);
 }

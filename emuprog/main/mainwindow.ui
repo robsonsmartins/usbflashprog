@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>196</height>
+    <height>232</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -44,6 +44,12 @@
            </item>
            <item>
             <widget class="QComboBox" name="cbProg">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
              <item>
               <property name="text">
                <string>Willem/EzoFlash (PCB3 / PCB4)</string>
@@ -69,6 +75,12 @@
            </item>
            <item>
             <widget class="QComboBox" name="cbChip">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
              <item>
               <property name="text">
                <string>SRAM</string>
@@ -93,12 +105,18 @@
            <item>
             <widget class="QLabel" name="label_3">
              <property name="text">
-              <string>Chip Size (Bytes/Words)</string>
+              <string>Chip Size (Bytes)</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QComboBox" name="cbSize">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
              <item>
               <property name="text">
                <string>2K</string>
@@ -190,6 +208,12 @@
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
             <widget class="QPushButton" name="btnPCB3">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
              <property name="text">
               <string>PCB3</string>
              </property>
@@ -197,6 +221,12 @@
            </item>
            <item>
             <widget class="QPushButton" name="btnPCB45">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
              <property name="text">
               <string>PCB45</string>
              </property>
@@ -204,12 +234,31 @@
            </item>
            <item>
             <widget class="QPushButton" name="btnPCB50">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
              <property name="text">
               <string>PCB50</string>
              </property>
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnShowLog">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Show Log</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

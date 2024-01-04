@@ -63,6 +63,7 @@ class MainWindow : public QMainWindow {
     void on_btnPCB3_clicked();
     void on_btnPCB45_clicked();
     void on_btnPCB50_clicked();
+    void on_btnShowLog_clicked();
 
   private:
     /* @brief Pointer to UI object. */

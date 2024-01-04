@@ -153,6 +153,12 @@ void MainWindow::on_btnPCB50_clicked() {
     runExecutable_(PCB50_PROGRAM);
 }
 
+void MainWindow::on_btnShowLog_clicked() {
+    QProcess::startDetached(
+        QString("notepad"),
+        QStringList({QString(std::getenv("USERPROFILE")) + "\\chip.log"}));
+}
+
 void MainWindow::loadSettings_() {
     QSettings settings(EMUPROG_REGISTRY_KEY, QSettings::NativeFormat);
     QString value = settings.value(PROGLIB_REGISTRY_VALUE).toString().toLower();
@@ -220,7 +226,8 @@ void MainWindow::loadSettings_() {
 void MainWindow::runExecutable_(const QString &filename) {
     QString cmd = "cmd.exe";
     QStringList args = {"/c"};
-    args.append(QCoreApplication::applicationDirPath().append("/").append(filename));
+    args.append(
+        QCoreApplication::applicationDirPath().append("/").append(filename));
     process_->setProgram(cmd);
     process_->setArguments(args);
     process_->startDetached();

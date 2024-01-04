@@ -25,6 +25,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <chrono>
 #include "basechip.hpp"
 
 // ---------------------------------------------------------------------------
@@ -36,15 +37,12 @@
 // ---------------------------------------------------------------------------
 /* variables */
 
-/* High precision timer frequency, in ticks/sec. */
-static LONGLONG PerformanceFrequency = 0;
+/* System tick for log */
+static const auto START_SYSTEM_TICK = std::chrono::high_resolution_clock::now();
 
 // ---------------------------------------------------------------------------
 /* functions */
 
-/* Gets the current System Tick (in usec).
-   @return System Tick, in usec (64 bits wide). */
-static unsigned long long usGetSystemTick(void);
 /* Generates a random unsigned short number.
    @return Random number (in range: 0 to 65535). */
 static unsigned short GenRandomUShort(void);
@@ -57,7 +55,6 @@ BaseChip::BaseChip()
     : f_vdd(false), f_vpp(false), f_addr_bus(0), f_data_bus(0) {
     /* logfile */
     f_logfile = CreateLogFile();
-    f_last_tick = usGetSystemTick();
 }
 
 BaseChip::BaseChip(const BaseChip& src)
@@ -66,7 +63,6 @@ BaseChip::BaseChip(const BaseChip& src)
       f_addr_bus(src.f_addr_bus),
       f_data_bus(src.f_data_bus) {
     f_logfile = CreateLogFile();
-    f_last_tick = usGetSystemTick();
     f_memory_area = src.f_memory_area;
 }
 
@@ -75,26 +71,19 @@ BaseChip& BaseChip::operator=(const BaseChip& src) {
     f_vpp = src.f_vpp;
     f_addr_bus = src.f_addr_bus;
     f_data_bus = src.f_data_bus;
-    if (f_logfile) {
-        fclose(f_logfile);
-    }
+    if (f_logfile) fclose(f_logfile);
     f_logfile = CreateLogFile();
-    f_last_tick = usGetSystemTick();
     f_memory_area = src.f_memory_area;
     return *this;
 }
 
 BaseChip::~BaseChip() {
     /* logfile */
-    if (f_logfile) {
-        fclose(f_logfile);
-    }
+    if (f_logfile) fclose(f_logfile);
 }
 
 void BaseChip::SetSize(unsigned long size) {
-    if (size == f_memory_area.size()) {
-        return;
-    }
+    if (size == f_memory_area.size()) return;
     /* log */
     WriteToLog("SetSize(%lu)", size);
     /* sets the chip size */
@@ -104,9 +93,7 @@ void BaseChip::SetSize(unsigned long size) {
 }
 
 void BaseChip::SetVDD(bool state) {
-    if (state == f_vdd) {
-        return;
-    }
+    if (state == f_vdd) return;
     /* log */
     WriteToLog("SetVDD(%d)", static_cast<int>(state));
     f_vdd = state;
@@ -114,9 +101,7 @@ void BaseChip::SetVDD(bool state) {
 }
 
 void BaseChip::SetVPP(bool state) {
-    if (state == f_vpp) {
-        return;
-    }
+    if (state == f_vpp) return;
     /* log */
     WriteToLog("SetVPP(%d)", static_cast<int>(state));
     f_vpp = state;
@@ -143,9 +128,7 @@ void BaseChip::Read(void) {
     }
     static unsigned long last_addr = f_addr_bus;
     unsigned short data = f_memory_area[f_addr_bus];
-    if (f_data_bus == data && f_addr_bus == last_addr) {
-        return;
-    }
+    if (f_data_bus == data && f_addr_bus == last_addr) return;
     /* returns the data from memory area */
     f_data_bus = data;
     /* update last_addr */
@@ -169,13 +152,14 @@ void BaseChip::Write(void) {
 
 void BaseChip::WriteToLog(const char* msg, ...) {
     /* checks the params */
-    if (f_logfile == NULL || msg == NULL) {
-        return;
-    }
-    unsigned long long current_tick = usGetSystemTick();
+    if (f_logfile == NULL || msg == NULL) return;
+    const auto current_tick = std::chrono::high_resolution_clock::now();
+    unsigned long long diff =
+        std::chrono::duration_cast<std::chrono::microseconds>(current_tick -
+                                                              START_SYSTEM_TICK)
+            .count();
     /* writes a timestamp to log */
-    fprintf(f_logfile, "%10.10llu ", current_tick - f_last_tick);
-    f_last_tick = current_tick;
+    fprintf(f_logfile, "%10.10llu ", diff);
     /* writes the params to log */
     va_list args;
     va_start(args, msg);
@@ -194,9 +178,7 @@ BaseParChip::BaseParChip()
 BaseParChip::~BaseParChip() {}
 
 void BaseParChip::SetOE(bool state) {
-    if (state == f_oe) {
-        return;
-    }
+    if (state == f_oe) return;
     /* log */
     WriteToLog("SetOE(%d)", static_cast<int>(state));
     f_oe = state;
@@ -204,9 +186,7 @@ void BaseParChip::SetOE(bool state) {
 }
 
 void BaseParChip::SetCE(bool state) {
-    if (state == f_ce) {
-        return;
-    }
+    if (state == f_ce) return;
     /* log */
     WriteToLog("SetCE(%d)", static_cast<int>(state));
     f_ce = state;
@@ -214,9 +194,7 @@ void BaseParChip::SetCE(bool state) {
 }
 
 void BaseParChip::SetWE(bool state) {
-    if (state == f_we) {
-        return;
-    }
+    if (state == f_we) return;
     /* log */
     WriteToLog("SetWE(%d)", static_cast<int>(state));
     f_we = state;
@@ -226,17 +204,13 @@ void BaseParChip::SetWE(bool state) {
 void BaseParChip::SetAddrBus(unsigned long addr) {
     /* calculates the valid address (into memory area) */
     unsigned long addr_new = (addr & (f_memory_area.size() - 1));
-    if (f_addr_bus == addr_new) {
-        return;
-    }
+    if (f_addr_bus == addr_new) return;
     /* set addr bus */
     f_addr_bus = addr_new;
 }
 
 void BaseParChip::SetDataBus(unsigned short data) {
-    if (f_data_bus == data) {
-        return;
-    }
+    if (f_data_bus == data) return;
     /* changes the data bus */
     f_data_bus = data;
     /* writes data */
@@ -258,9 +232,7 @@ BaseSerChip::BaseSerChip()
 BaseSerChip::~BaseSerChip() {}
 
 void BaseSerChip::SerialSetCS(bool state) {
-    if (state == f_ser_cs) {
-        return;
-    }
+    if (state == f_ser_cs) return;
     /* log */
     WriteToLog("SerialSetCS(%d)", static_cast<int>(state));
     f_ser_cs = state;
@@ -268,9 +240,7 @@ void BaseSerChip::SerialSetCS(bool state) {
 }
 
 void BaseSerChip::SerialSetClk(bool state) {
-    if (state == f_ser_clk) {
-        return;
-    }
+    if (state == f_ser_clk) return;
     /* log */
     WriteToLog("SerialSetClk(%d)", static_cast<int>(state));
     f_ser_clk = state;
@@ -290,30 +260,6 @@ bool BaseSerChip::SerialGetData(void) {
 
 // ---------------------------------------------------------------------------
 /* internal functions */
-
-unsigned long long usGetSystemTick(void) {
-    unsigned long long result;
-    LARGE_INTEGER PerFreq, Count;
-    long double ld_result;
-    /* gets the current counter */
-    QueryPerformanceCounter(&Count);
-    /* gets the timer frequency, if global variable not assigned */
-    if (PerformanceFrequency == 0) {
-        /* Get performance details for timing */
-        if (!QueryPerformanceFrequency(&PerFreq)) {
-            /* No high precision timer, then calls GetTickCount() */
-            return static_cast<unsigned long long>(GetTickCount()) * 1000;
-        }
-        /* updates the global variable */
-        PerformanceFrequency = PerFreq.QuadPart;
-    }
-    /* calculates counter to usec */
-    ld_result = static_cast<long double>(Count.QuadPart) * 1000000.0L;
-    ld_result /= static_cast<long double>(PerformanceFrequency);
-    result = static_cast<unsigned long long>(ld_result);
-    /* returns */
-    return result;
-}
 
 unsigned short GenRandomUShort(void) {
     /* generates a random unsigned short number */

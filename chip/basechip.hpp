@@ -72,8 +72,6 @@ class BaseChip {
     std::vector<unsigned short> f_memory_area;
     /* logfile stream */
     FILE* f_logfile;
-    /* last tickcount time */
-    unsigned long long f_last_tick;
     /* Writes the msg and variables to log file.
        @param[in] msg String message
        @param[in] ... Variables */

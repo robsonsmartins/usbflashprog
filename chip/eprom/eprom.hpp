@@ -134,6 +134,12 @@ class ChipEPROM : public BaseParChip {
     virtual void SetSize(unsigned long size);
 
   protected:
+    /* count n writes 0xFF to addr zero */
+    int f_numWriteFFAddrZero;
+    /* count n writes another data */
+    int f_numWriteAnother;
+    /* reimplemented */
+    virtual void Write(void);
     /* emulates the chip */
     virtual void EmuChip(void);
 };

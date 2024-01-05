@@ -26,6 +26,7 @@ TEST_F(OpCodeTest, is_ok) {
     uint8_t buf[32];
     memset(buf, 0, sizeof(buf));
 
+    EXPECT_EQ(OpCode::isOk(nullptr, 0), false);
     EXPECT_EQ(OpCode::isOk(buf, sizeof(buf)), false);
     buf[0] = kCmdResponseNok;
     EXPECT_EQ(OpCode::isOk(buf, sizeof(buf)), false);
@@ -39,6 +40,7 @@ TEST_F(OpCodeTest, get_opcode) {
     TCmdOpCode op;
 
     op = OpCode::getOpCode(kCmdNop);
+    EXPECT_EQ(OpCode::getOpCode(nullptr, 0), op);
     EXPECT_EQ(OpCode::getOpCode(buf, sizeof(buf)), op);
     buf[0] = kCmdVddCtrl;
     op = OpCode::getOpCode(kCmdVddCtrl);
@@ -54,6 +56,14 @@ TEST_F(OpCodeTest, get_opcode) {
 TEST_F(OpCodeTest, get_value) {
     uint8_t buf[32];
     memset(buf, 0, sizeof(buf));
+
+    EXPECT_EQ(OpCode::getValueAsByte(nullptr, 0), 0x00);
+    EXPECT_EQ(OpCode::getValueAsBool(nullptr, 0), false);
+    EXPECT_EQ(OpCode::getValueAsFloat(nullptr, 0), 0.0f);
+    EXPECT_EQ(OpCode::getValueAsWord(nullptr, 0), 0x0000);
+    EXPECT_EQ(OpCode::getValueAsWord(nullptr, 3), 0x0000);
+    EXPECT_EQ(OpCode::getValueAsDWord(nullptr, 0), 0x00000000);
+    EXPECT_EQ(OpCode::getValueAsDWord(nullptr, 4), 0x00000000);
 
     EXPECT_EQ(OpCode::getValueAsByte(buf, 2), 0x00);
     EXPECT_EQ(OpCode::getValueAsBool(buf, 2), false);
@@ -92,6 +102,10 @@ TEST_F(OpCodeTest, set_value) {
 
     EXPECT_EQ(OpCode::setByte(nullptr, sizeof(buf), 0x00), false);
     EXPECT_EQ(OpCode::setByte(buf, 0, 0x00), false);
+    EXPECT_EQ(OpCode::setBool(nullptr, 0, false), false);
+    EXPECT_EQ(OpCode::setFloat(nullptr, 0, 0.0f), false);
+    EXPECT_EQ(OpCode::setWord(nullptr, 0, 0), false);
+    EXPECT_EQ(OpCode::setDWord(nullptr, 0, 0), false);
 
     EXPECT_EQ(buf[1], 0x00);
     EXPECT_EQ(OpCode::setByte(buf, 2, 0x33), true);

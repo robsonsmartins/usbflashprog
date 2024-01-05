@@ -63,7 +63,7 @@ QString TDeviceID::getManufacturerName(void) const {
         case 0x9D:  // to validate
             return "Xicor";
         case 0xAD:
-            return "Hyudai";
+            return "Hyundai";
         case 0xB0:
             return "Sharp";
         case 0xBF:

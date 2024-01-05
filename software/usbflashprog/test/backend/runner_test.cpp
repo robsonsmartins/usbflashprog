@@ -23,15 +23,29 @@
 
 // ---------------------------------------------------------------------------
 
+TEST_F(RunnerTest, runner_command) {
+    TRunnerCommand cmd1;
+    TRunnerCommand cmd2 = cmd1;
+    EXPECT_EQ(cmd2, cmd1);
+    EXPECT_NEAR(cmd1.responseAsFloat(), 0.0f, 0.1f);
+    EXPECT_EQ(cmd1.responseAsByte(), 0);
+    EXPECT_EQ(cmd1.responseAsWord(), 0);
+    EXPECT_EQ(cmd1.responseAsDWord(), 0);
+    EXPECT_EQ(cmd1.responseAsBool(), false);
+}
+
 TEST_F(RunnerTest, list_open_close) {
     Runner runner;
     TSerialPortList items = runner.list();
     EXPECT_EQ(items.size(), 1);
     EXPECT_EQ(items[0].portName().toStdString(), "COM1");
     EXPECT_EQ(runner.isOpen(), false);
+    EXPECT_EQ(runner.open(QString("")), false);
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.getPath().toStdString(), "COM1");
     EXPECT_EQ(runner.isOpen(), true);
+    EXPECT_EQ(runner.hasError(), false);
+    EXPECT_EQ(runner.open(QString("COM1")), true);
     runner.setTimeOut(400);
     EXPECT_EQ(runner.getTimeOut(), 400);
     runner.setTimeOut(200);
@@ -64,6 +78,7 @@ TEST_F(RunnerTest, disconnect) {
 
 TEST_F(RunnerTest, nop) {
     Runner runner;
+    EXPECT_EQ(runner.nop(), false);
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.nop(), true);
     runner.close();
@@ -72,6 +87,16 @@ TEST_F(RunnerTest, nop) {
 TEST_F(RunnerTest, cmdVdd) {
     Runner runner;
     float expected = kSerialPortDummyData[1] + kSerialPortDummyData[2] / 100.0f;
+
+    EXPECT_EQ(runner.vddCtrl(), false);
+    EXPECT_EQ(runner.vddSet(expected), false);
+    EXPECT_EQ(runner.vddGet(), -1.0f);
+    EXPECT_EQ(runner.vddGetDuty(), -1.0f);
+    EXPECT_EQ(runner.vddGetCal(), -1.0f);
+    EXPECT_EQ(runner.vddInitCal(), false);
+    EXPECT_EQ(runner.vddSaveCal(expected), false);
+    EXPECT_EQ(runner.vddOnVpp(), false);
+
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.vddCtrl(), true);
     EXPECT_EQ(runner.vddCtrl(false), true);
@@ -91,6 +116,20 @@ TEST_F(RunnerTest, cmdVdd) {
 TEST_F(RunnerTest, cmdVpp) {
     Runner runner;
     float expected = kSerialPortDummyData[1] + kSerialPortDummyData[2] / 100.0f;
+
+    EXPECT_EQ(runner.vppCtrl(), false);
+    EXPECT_EQ(runner.vppSet(expected), false);
+    EXPECT_EQ(runner.vppGet(), -1.0f);
+    EXPECT_EQ(runner.vppGetDuty(), -1.0f);
+    EXPECT_EQ(runner.vppGetCal(), -1.0f);
+    EXPECT_EQ(runner.vppInitCal(), false);
+    EXPECT_EQ(runner.vppSaveCal(expected), false);
+    EXPECT_EQ(runner.vppOnA18(), false);
+    EXPECT_EQ(runner.vppOnA9(), false);
+    EXPECT_EQ(runner.vppOnCE(), false);
+    EXPECT_EQ(runner.vppOnOE(), false);
+    EXPECT_EQ(runner.vppOnWE(), false);
+
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.vppCtrl(), true);
     EXPECT_EQ(runner.vppCtrl(false), true);
@@ -121,6 +160,11 @@ TEST_F(RunnerTest, cmdVpp) {
 
 TEST_F(RunnerTest, cmdBusCtrl) {
     Runner runner;
+
+    EXPECT_EQ(runner.setCE(), false);
+    EXPECT_EQ(runner.setOE(), false);
+    EXPECT_EQ(runner.setWE(), false);
+
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.setCE(), true);
     EXPECT_EQ(runner.setCE(false), true);
@@ -136,22 +180,43 @@ TEST_F(RunnerTest, cmdBusCtrl) {
 
 TEST_F(RunnerTest, cmdBusAddr) {
     Runner runner;
+
+    EXPECT_EQ(runner.addrClr(), false);
+    EXPECT_EQ(runner.addrInc(), false);
+    EXPECT_EQ(runner.addrSet(0x12345678), false);
+    EXPECT_EQ(runner.addrSetW(0x1234), false);
+    EXPECT_EQ(runner.addrSetB(0x12), false);
+
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.addrClr(), true);
     EXPECT_EQ(runner.addrInc(), true);
     EXPECT_EQ(runner.addrSet(0x12345678), true);
     EXPECT_EQ(runner.addrSetW(0x1234), true);
     EXPECT_EQ(runner.addrSetB(0x12), true);
+    EXPECT_EQ(runner.addrSet(0x00), true);
+    EXPECT_EQ(runner.addrSetW(0x00), true);
+    EXPECT_EQ(runner.addrSetB(0x00), true);
+    EXPECT_EQ(runner.addrSet(0x12345678), true);
+    EXPECT_EQ(runner.addrGet(), 0x12345678);
     runner.close();
 }
 
 TEST_F(RunnerTest, cmdBusData) {
     Runner runner;
     uint16_t expected = kSerialPortDummyData[1] << 8 | kSerialPortDummyData[2];
+
+    EXPECT_EQ(runner.dataClr(), false);
+    EXPECT_EQ(runner.dataSet(0x12), false);
+    EXPECT_EQ(runner.dataSetW(0x1234), false);
+    EXPECT_EQ(runner.dataGetW(), 0xFFFF);
+    EXPECT_EQ(runner.dataGet(), 0xFF);
+
     EXPECT_EQ(runner.open(QString("COM1")), true);
     EXPECT_EQ(runner.dataClr(), true);
     EXPECT_EQ(runner.dataSet(0x12), true);
     EXPECT_EQ(runner.dataSetW(0x1234), true);
+    EXPECT_EQ(runner.dataSet(0x00), true);
+    EXPECT_EQ(runner.dataSetW(0x00), true);
     EXPECT_EQ(runner.dataGetW(), expected);
     EXPECT_EQ(runner.dataGet(), expected >> 8);
     runner.close();

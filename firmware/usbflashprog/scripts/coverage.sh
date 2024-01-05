@@ -26,7 +26,8 @@ popd
 
 echo "* Capturing coverage info..."
 eval "${LCOV} --capture --directory ${workspaceRoot}/build/ --output-file ${workspaceRoot}/build/coverage.info --rc lcov_branch_coverage=1 \
-      --exclude \/c\/MinGW\/\* --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude ${workspaceRoot}\/build\/\* --exclude ${workspaceRoot}\/test\/\*"
+      --exclude \/c\/MinGW\/\* --exclude \/usr\/include\/\* --exclude \/usr\/local\/include\/\* --exclude ${workspaceRoot}\/build\/\* \
+	  --exclude ${workspaceRoot}\/test\/\* --exclude ${workspaceRoot}\/\*\.h\*"
 
 echo "* Generating coverage report..."
 rm -Rf ${workspaceRoot}/../../docs/firmware/lcov/

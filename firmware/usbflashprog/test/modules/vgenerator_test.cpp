@@ -73,11 +73,16 @@ TEST_F(VGeneratorTest, start_stop) {
 
 TEST_F(VGeneratorTest, set_get_v_duty) {
     EXPECT_EQ(vGenerator_.isRunning(), false);
-    EXPECT_EQ(vGenerator_.start(), true);
-    EXPECT_EQ(vGenerator_.isRunning(), true);
+
     EXPECT_EQ(vGenerator_.vdd.getVTarget(), 0.0f);
     EXPECT_EQ(vGenerator_.vdd.getDuty(), 0.0f);
     EXPECT_EQ(vGenerator_.vdd.getV(), 0.0f);
+    EXPECT_EQ(vGenerator_.vpp.getVTarget(), 0.0f);
+    EXPECT_EQ(vGenerator_.vpp.getDuty(), 0.0f);
+    EXPECT_EQ(vGenerator_.vpp.getV(), 0.0f);
+
+    EXPECT_EQ(vGenerator_.start(), true);
+    EXPECT_EQ(vGenerator_.isRunning(), true);
     vGenerator_.vdd.on();
     vGenerator_.vdd.setV(5.0f);
     EXPECT_EQ(vGenerator_.vdd.getVTarget(), 5.0f);
@@ -96,9 +101,6 @@ TEST_F(VGeneratorTest, set_get_v_duty) {
     MultiCore::msleep(10);
     EXPECT_NEAR(vGenerator_.vdd.getV(), vActual, 0.2f);
 
-    EXPECT_EQ(vGenerator_.vpp.getVTarget(), 0.0f);
-    EXPECT_EQ(vGenerator_.vpp.getDuty(), 0.0f);
-    EXPECT_EQ(vGenerator_.vpp.getV(), 0.0f);
     vGenerator_.vpp.on();
     vGenerator_.vpp.setV(12.0f);
     EXPECT_EQ(vGenerator_.vpp.getVTarget(), 12.0f);

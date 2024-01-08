@@ -101,7 +101,7 @@ float GenericGenerator::getVTarget() const {
 }
 
 float GenericGenerator::getV() const {
-    if (!owner_->isRunning() || !isOn() ||
+    if (!owner_->isRunning() ||
          dc2dc_.getV() < 0.0f) { return 0.0f; }
     return dc2dc_.getV();
 }
@@ -300,6 +300,7 @@ bool VGenerator::start() {
     multicore_.putParam(reinterpret_cast<uintptr_t>(&vpp));
     multicore_.putParam(reinterpret_cast<uintptr_t>(&vdd));
     while (status_ == MultiCore::csStarting) { MultiCore::usleep(1); }
+    MultiCore::msleep(200);
     return (vppRes && vddRes);
 }
 

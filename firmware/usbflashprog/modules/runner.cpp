@@ -72,14 +72,14 @@ void Runner::init() {
     addrBusConfig_.aClrPin             =         kBusAddrClrPin;
     addrBusConfig_.aRckPin             =         kBusAddrRckPin;
 
-    dataBus_.configure(dataBusConfig_);
-    addrBus_.configure(addrBusConfig_);
-    ctrlBus_.configure(ctrlBusConfig_);
     vgen_.configure(vgenConfig_);
-
     vgen_.vpp.setV(kVppInitial);
     vgen_.vdd.setV(kVddInitial);
     vgen_.start();
+
+    dataBus_.configure(dataBusConfig_);
+    addrBus_.configure(addrBusConfig_);
+    ctrlBus_.configure(ctrlBusConfig_);
 }
 
 void Runner::loop() {

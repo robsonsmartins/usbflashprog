@@ -42,12 +42,10 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
     (void)buffer;
     (void)verify;
     canceling_ = false;
-    uint32_t current = 0, total = size_ * 4;
+    uint32_t current = 0, total = size_;
     if (!initialize_(kDeviceOpRead)) return false;
     bool error = false;
-    if (!doPatternTest_(current, total) || !doRandomTest_(current, total)) {
-        error = true;
-    }
+    if (!doPatternTest_() || !doRandomTest_()) error = true;
     if (!error && runner_.hasError()) {
         return finalize_(total, total, true, false);
     }
@@ -56,21 +54,25 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
     return !error;
 }
 
-bool SRAM::doPatternTest_(uint32_t &current, uint32_t total) {
+bool SRAM::doPatternTest_() {
     QByteArray buffer = generatePatternData_();
     runner_.addrClr();
-    if (!program_(buffer, current, total)) return false;
+    uint32_t current = 0;
+    if (!program_(buffer, current, size_)) return false;
     runner_.addrClr();
-    if (!verify_(buffer, current, total)) return false;
+    current = 0;
+    if (!verify_(buffer, current, size_)) return false;
     return !runner_.hasError();
 }
 
-bool SRAM::doRandomTest_(uint32_t &current, uint32_t total) {
+bool SRAM::doRandomTest_() {
     QByteArray buffer = generateRandomData_();
     runner_.addrClr();
-    if (!program_(buffer, current, total)) return false;
+    uint32_t current = 0;
+    if (!program_(buffer, current, size_)) return false;
     runner_.addrClr();
-    if (!verify_(buffer, current, total)) return false;
+    current = 0;
+    if (!verify_(buffer, current, size_)) return false;
     return !runner_.hasError();
 }
 
@@ -123,7 +125,6 @@ bool SRAM::program_(const QByteArray &buffer, uint32_t &current,
             emit onProgress(current, total, true, false);
             return false;
         }
-
         current++;
     }
     return true;

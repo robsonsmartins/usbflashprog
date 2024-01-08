@@ -65,15 +65,11 @@ class SRAM : public Device {
     /* @brief Delay after initialize, in usec */
     uint64_t initDelay_;
     /* @brief Tests the SRAM: Pattern Test.
-     * @param current[in,out] Current progress, in bytes.
-     * @param total Total progress, in bytes.
      * @return True if success, false otherwise. */
-    virtual bool doPatternTest_(uint32_t &current, uint32_t total);
+    virtual bool doPatternTest_();
     /* @brief Tests the SRAM: Random Test.
-     * @param current[in,out] Current progress, in bytes.
-     * @param total Total progress, in bytes.
      * @return True if success, false otherwise. */
-    virtual bool doRandomTest_(uint32_t &current, uint32_t total);
+    virtual bool doRandomTest_();
     /* @brief Resets (and initializes) the bus (address, data, control).
      * @return True if success, false otherwise. */
     virtual bool resetBus_();

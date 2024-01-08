@@ -16,6 +16,7 @@
 // ---------------------------------------------------------------------------
 
 #include <QDateTime>
+#include <QApplication>
 
 #include <chrono>
 #include <thread>
@@ -149,12 +150,8 @@ TSerialPortList Runner::list() const {
 }
 
 bool Runner::open(const QString& path) {
-    if (running_) {
-        close();
-    }
-    if (path.isNull() || path.isEmpty()) {
-        return false;
-    }
+    if (running_) close();
+    if (path.isNull() || path.isEmpty()) return false;
     serial_.setPortName(path);
     bool result = serial_.open(QIODevice::ReadWrite);
     if (result) {
@@ -191,9 +188,7 @@ uint32_t Runner::getTimeOut() const {
 }
 
 void Runner::setTimeOut(uint32_t value) {
-    if (timeout_ == value) {
-        return;
-    }
+    if (timeout_ == value) return;
     timeout_ = value;
 }
 
@@ -204,12 +199,8 @@ bool Runner::nop() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdNop);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -224,12 +215,8 @@ bool Runner::vddCtrl(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVddCtrl, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -244,12 +231,8 @@ bool Runner::vddSet(float value) {
     }
     TRunnerCommand cmd;
     cmd.setFloat(kCmdVddSetV, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -264,12 +247,8 @@ float Runner::vddGet() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVddGetV);
-    if (!write_(cmd.params)) {
-        return -1.0f;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return -1.0f;
-    }
+    if (!write_(cmd.params)) return -1.0f;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return -1.0f;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return -1.0f;
@@ -284,12 +263,8 @@ float Runner::vddGetDuty() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVddGetDuty);
-    if (!write_(cmd.params)) {
-        return -1.0f;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return -1.0f;
-    }
+    if (!write_(cmd.params)) return -1.0f;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return -1.0f;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return -1.0f;
@@ -304,12 +279,8 @@ bool Runner::vddInitCal() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVddInitCal);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -324,12 +295,8 @@ bool Runner::vddSaveCal(float value) {
     }
     TRunnerCommand cmd;
     cmd.setFloat(kCmdVddSaveCal, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -344,12 +311,8 @@ float Runner::vddGetCal() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVddGetCal);
-    if (!write_(cmd.params)) {
-        return -1.0f;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return -1.0f;
-    }
+    if (!write_(cmd.params)) return -1.0f;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return -1.0f;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return -1.0f;
@@ -364,12 +327,8 @@ bool Runner::vppCtrl(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVppCtrl, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -384,12 +343,8 @@ bool Runner::vppSet(float value) {
     }
     TRunnerCommand cmd;
     cmd.setFloat(kCmdVppSetV, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -404,12 +359,8 @@ float Runner::vppGet() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVppGetV);
-    if (!write_(cmd.params)) {
-        return -1.0f;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return -1.0f;
-    }
+    if (!write_(cmd.params)) return -1.0f;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return -1.0f;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return -1.0f;
@@ -424,12 +375,8 @@ float Runner::vppGetDuty() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVppGetDuty);
-    if (!write_(cmd.params)) {
-        return -1.0f;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return -1.0f;
-    }
+    if (!write_(cmd.params)) return -1.0f;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return -1.0f;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return -1.0f;
@@ -444,12 +391,8 @@ bool Runner::vppInitCal() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVppInitCal);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -464,12 +407,8 @@ bool Runner::vppSaveCal(float value) {
     }
     TRunnerCommand cmd;
     cmd.setFloat(kCmdVppSaveCal, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -484,12 +423,8 @@ float Runner::vppGetCal() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdVppGetCal);
-    if (!write_(cmd.params)) {
-        return -1.0f;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return -1.0f;
-    }
+    if (!write_(cmd.params)) return -1.0f;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return -1.0f;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return -1.0f;
@@ -504,12 +439,8 @@ bool Runner::vddOnVpp(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVddOnVpp, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -524,12 +455,8 @@ bool Runner::vppOnA9(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVppOnA9, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -544,12 +471,8 @@ bool Runner::vppOnA18(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVppOnA18, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -564,12 +487,8 @@ bool Runner::vppOnCE(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVppOnCE, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -584,12 +503,8 @@ bool Runner::vppOnOE(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVppOnOE, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -604,12 +519,8 @@ bool Runner::vppOnWE(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdVppOnWE, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -624,12 +535,8 @@ bool Runner::setCE(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdBusCE, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -644,12 +551,8 @@ bool Runner::setOE(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdBusOE, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -664,12 +567,8 @@ bool Runner::setWE(bool on) {
     }
     TRunnerCommand cmd;
     cmd.setBool(kCmdBusWE, on);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -684,12 +583,8 @@ bool Runner::addrClr() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdBusAddrClr);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -705,12 +600,8 @@ bool Runner::addrInc() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdBusAddrInc);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -720,21 +611,15 @@ bool Runner::addrInc() {
 }
 
 bool Runner::addrSet(uint32_t value) {
-    if (!value) {
-        return addrClr();
-    }
+    if (!value) return addrClr();
     if (error_ || !serial_.isOpen()) {
         error_ = true;
         return false;
     }
     TRunnerCommand cmd;
     cmd.setDWord(kCmdBusAddrSet, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -744,21 +629,15 @@ bool Runner::addrSet(uint32_t value) {
 }
 
 bool Runner::addrSetB(uint8_t value) {
-    if (!value) {
-        return addrClr();
-    }
+    if (!value) return addrClr();
     if (error_ || !serial_.isOpen()) {
         error_ = true;
         return false;
     }
     TRunnerCommand cmd;
     cmd.setByte(kCmdBusAddrSetB, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -768,21 +647,15 @@ bool Runner::addrSetB(uint8_t value) {
 }
 
 bool Runner::addrSetW(uint16_t value) {
-    if (!value) {
-        return addrClr();
-    }
+    if (!value) return addrClr();
     if (error_ || !serial_.isOpen()) {
         error_ = true;
         return false;
     }
     TRunnerCommand cmd;
     cmd.setWord(kCmdBusAddrSetW, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -802,12 +675,8 @@ bool Runner::dataClr() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdBusDataClr);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -816,21 +685,15 @@ bool Runner::dataClr() {
 }
 
 bool Runner::dataSet(uint8_t value) {
-    if (!value) {
-        return dataClr();
-    }
+    if (!value) return dataClr();
     if (error_ || !serial_.isOpen()) {
         error_ = true;
         return false;
     }
     TRunnerCommand cmd;
     cmd.setByte(kCmdBusDataSetB, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -839,21 +702,15 @@ bool Runner::dataSet(uint8_t value) {
 }
 
 bool Runner::dataSetW(uint16_t value) {
-    if (!value) {
-        return dataClr();
-    }
+    if (!value) return dataClr();
     if (error_ || !serial_.isOpen()) {
         error_ = true;
         return false;
     }
     TRunnerCommand cmd;
     cmd.setWord(kCmdBusDataSet, value);
-    if (!write_(cmd.params)) {
-        return false;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return false;
-    }
+    if (!write_(cmd.params)) return false;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return false;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return false;
@@ -868,12 +725,8 @@ uint8_t Runner::dataGet() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdBusDataGetB);
-    if (!write_(cmd.params)) {
-        return 0xff;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return 0xff;
-    }
+    if (!write_(cmd.params)) return 0xff;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return 0xff;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return 0xff;
@@ -888,12 +741,8 @@ uint16_t Runner::dataGetW() {
     }
     TRunnerCommand cmd;
     cmd.set(kCmdBusDataGet);
-    if (!write_(cmd.params)) {
-        return 0xffff;
-    }
-    if (!read_(&cmd.response, cmd.opcode.result + 1)) {
-        return 0xffff;
-    }
+    if (!write_(cmd.params)) return 0xffff;
+    if (!read_(&cmd.response, cmd.opcode.result + 1)) return 0xffff;
     if (!cmd.responseIsOk()) {
         error_ = true;
         return 0xffff;
@@ -902,9 +751,7 @@ uint16_t Runner::dataGetW() {
 }
 
 void Runner::usDelay(uint64_t value) {
-    if (!value) {
-        return;
-    }
+    if (!value) return;
     if (value >= 10000) {
         msDelay(value / 1000);
         return;
@@ -922,9 +769,7 @@ void Runner::usDelay(uint64_t value) {
 }
 
 void Runner::msDelay(uint32_t value) {
-    if (!value) {
-        return;
-    }
+    if (!value) return;
     auto start = std::chrono::steady_clock::now();
     auto end = start;
     int64_t elapsed = 0;
@@ -934,16 +779,13 @@ void Runner::msDelay(uint32_t value) {
         elapsed =
             std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                 .count();
+        if (value > 50) QApplication::processEvents();
     } while (elapsed < value);
 }
 
 bool Runner::write_(const QByteArray& data) {
-    if (error_) {
-        return false;
-    }
-    if (data.isEmpty()) {
-        return true;
-    }
+    if (error_) return false;
+    if (data.isEmpty()) return true;
     serial_.clear();
     serial_.write(data);
     serial_.flush();
@@ -956,12 +798,8 @@ bool Runner::write_(const QByteArray& data) {
 }
 
 bool Runner::read_(QByteArray* data, uint32_t size) {
-    if (error_) {
-        return false;
-    }
-    if (data == nullptr || !size) {
-        return true;
-    }
+    if (error_) return false;
+    if (data == nullptr || !size) return true;
     data->clear();
     while (data->size() < size) {
         if (!serial_.waitForReadyRead(timeout_)) {
@@ -972,9 +810,7 @@ bool Runner::read_(QByteArray* data, uint32_t size) {
         data->append(serial_.readAll());
         aliveTick_ = QDateTime::currentMSecsSinceEpoch();
     }
-    if (data->size() > size) {
-        data->resize(size);
-    }
+    if (data->size() > size) data->resize(size);
     if (data->size() != size) {
         error_ = true;
         return false;
@@ -983,13 +819,9 @@ bool Runner::read_(QByteArray* data, uint32_t size) {
 }
 
 void Runner::checkAlive_() {
-    if (!running_) {
-        return;
-    }
+    if (!running_) return;
     if (QDateTime::currentMSecsSinceEpoch() - aliveTick_ > kReadTimeOut) {
         running_ = false;
-        if (serial_.isOpen()) {
-            serial_.close();
-        }
+        if (serial_.isOpen()) serial_.close();
     }
 }

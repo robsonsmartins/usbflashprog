@@ -128,10 +128,6 @@ class HC595 {
      */
     void toggleBit(uint bit);
     /**
-     * @brief Increments the data on outputs of the HC595 units.
-     */
-    void increment(void);
-    /**
      * @brief Gets the data written in HC595 units.
      * @return Reference to "software stored" data buffer.
      */

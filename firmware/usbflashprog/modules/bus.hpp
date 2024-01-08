@@ -277,27 +277,10 @@ class DataBus {
      * @return Readed value or 0 if an error occurs.
      */
     uint16_t readWord(void);
-    /**
-     * @brief Sets a bit into Data Bus.
-     * @param bit Bit number to set.
-     * @param value Value to set.
-     * @return True if success. False otherwise.
-     */
-    bool setBit(uint bit, bool value = true);
-    /**
-     * @brief Toggles a bit into Data Bus.
-     * @param bit Bit number to toggle.
-     * @return True if success. False otherwise.
-     */
-    bool toggleBit(uint bit);
-    /**
-     * @brief Gets a bit from the Data Bus.
-     * @param bit Bit number to get.
-     * @return Value of the bit, or false if an error occurs.
-     */
-    bool getBit(uint bit);
 
  private:
+    /* @brief Stores current address. */
+    uint16_t data_;
     /* @brief Data Output Shift Register. */
     HC595 outRegister_;
     /* @brief Data Input Shift Register. */
@@ -360,24 +343,15 @@ class AddrBus {
      * @return True if success. False otherwise.
      */
     bool writeDWord(uint32_t value);
-
+    /**
+     * @brief Increments the Address Bus.
+     * @return True if success. False otherwise.
+     */
     bool increment();
 
-    /**
-     * @brief Sets a bit into Address Bus.
-     * @param bit Bit number to set.
-     * @param value Value to set.
-     * @return True if success. False otherwise.
-     */
-    bool setBit(uint bit, bool value = true);
-    /**
-     * @brief Toggles a bit into Address Bus.
-     * @param bit Bit number to toggle.
-     * @return True if success. False otherwise.
-     */
-    bool toggleBit(uint bit);
-
  private:
+    /* @brief Stores current address. */
+    uint32_t address_;
     /* @brief Address Output Shift Register. */
     HC595 outRegister_;
     /* @brief Configuration data. */

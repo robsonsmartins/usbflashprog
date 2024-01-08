@@ -118,7 +118,7 @@ bool CtrlBus::isValidConfig_() const {
 
 // ---------------------------------------------------------------------------
 
-DataBus::DataBus() {}
+DataBus::DataBus(): data_(0) {}
 
 DataBus::DataBus(const DataBusConfig& config) {
     configure(config);
@@ -135,6 +135,7 @@ void DataBus::configure(const DataBusConfig& config) {
                           0xFF, config.dSoutPin);
     inRegister_.chipEnable();
     outRegister_.clear();
+    data_ = 0;
 }
 
 DataBusConfig DataBus::getConfig() const {
@@ -144,12 +145,14 @@ DataBusConfig DataBus::getConfig() const {
 bool DataBus::writeByte(uint8_t value) {
     if (!isValidConfig_()) { return false; }
     outRegister_.writeByte(value);
+    data_ = value;
     return true;
 }
 
 bool DataBus::writeWord(uint16_t value) {
     if (!isValidConfig_()) { return false; }
     outRegister_.writeWord(value);
+    data_ = value;
     return true;
 }
 
@@ -165,24 +168,6 @@ uint16_t DataBus::readWord(void) {
     return inRegister_.readWord(true);
 }
 
-bool DataBus::setBit(uint bit, bool value) {
-    if (!isValidConfig_()) { return false; }
-    outRegister_.setBit(bit, value);
-    return true;
-}
-
-bool DataBus::toggleBit(uint bit) {
-    if (!isValidConfig_()) { return false; }
-    outRegister_.toggleBit(bit);
-    return true;
-}
-
-bool DataBus::getBit(uint bit) {
-    if (!isValidConfig_()) { return false; }
-    inRegister_.load();
-    return inRegister_.getBit(bit);
-}
-
 bool DataBus::isValidConfig_() const {
     return (config_.dClkPin  != 0xFF &&
             config_.dClrPin  != 0xFF &&
@@ -193,7 +178,7 @@ bool DataBus::isValidConfig_() const {
 
 // ---------------------------------------------------------------------------
 
-AddrBus::AddrBus() {}
+AddrBus::AddrBus(): address_(0) {}
 
 AddrBus::AddrBus(const AddrBusConfig& config) {
     configure(config);
@@ -207,6 +192,7 @@ void AddrBus::configure(const AddrBusConfig& config) {
                            config.aClrPin, config.aRckPin);
     outRegister_.outputEnable();
     outRegister_.clear();
+    address_ = 0;
 }
 
 AddrBusConfig AddrBus::getConfig() const {
@@ -216,36 +202,28 @@ AddrBusConfig AddrBus::getConfig() const {
 bool AddrBus::writeByte(uint8_t value) {
     if (!isValidConfig_()) { return false; }
     outRegister_.writeByte(value);
+    address_ = value;
     return true;
 }
 
 bool AddrBus::writeWord(uint16_t value) {
     if (!isValidConfig_()) { return false; }
     outRegister_.writeWord(value);
+    address_ = value;
     return true;
 }
 
 bool AddrBus::writeDWord(uint32_t value) {
     if (!isValidConfig_()) { return false; }
     outRegister_.writeDWord(value);
+    address_ = value;
     return true;
 }
 
 bool AddrBus::increment() {
     if (!isValidConfig_()) { return false; }
-    outRegister_.increment();
-    return true;
-}
-
-bool AddrBus::setBit(uint bit, bool value) {
-    if (!isValidConfig_()) { return false; }
-    outRegister_.setBit(bit, value);
-    return true;
-}
-
-bool AddrBus::toggleBit(uint bit) {
-    if (!isValidConfig_()) { return false; }
-    outRegister_.toggleBit(bit);
+    address_++;
+    outRegister_.writeDWord(address_);
     return true;
 }
 

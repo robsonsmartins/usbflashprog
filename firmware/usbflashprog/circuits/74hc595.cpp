@@ -158,20 +158,6 @@ void HC595::toggleBit(uint bit) {
     writeData(buffer_.data(), buffer_.size());
 }
 
-void HC595::increment(void) {
-    uint16_t d = 1;
-    for (uint8_t &b : buffer_) {
-        d = b + d;
-        b = d & 0xFF;
-        if (d > 0xFF) {
-            d = 1;
-        } else {
-            break;
-        }
-    }
-    writeData(buffer_.data(), buffer_.size());
-}
-
 const HC595::TData& HC595::getData(void) const {
     return buffer_;
 }

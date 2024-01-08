@@ -346,15 +346,15 @@ void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
         QMessageBox::critical(
             this, progress_->windowTitle(),
             tr("Error at address 0x%1")
-                .arg(QString("%1").arg(current, 4, 16, QChar('0')).toUpper())
+                .arg(QString("%1").arg(current, 6, 16, QChar('0')).toUpper())
                 .leftJustified(kDialogLabelMinLength));
     } else {
         progress_->setValue(current);
         progress_->setLabelText(
             tr("Processing address 0x%1 of 0x%2")
-                .arg(QString("%1").arg(current, 4, 16, QChar('0')).toUpper())
+                .arg(QString("%1").arg(current, 6, 16, QChar('0')).toUpper())
                 .arg(
-                    QString("%1").arg(total - 1, 4, 16, QChar('0')).toUpper()));
+                    QString("%1").arg(total - 1, 6, 16, QChar('0')).toUpper()));
     }
 }
 
@@ -1157,12 +1157,21 @@ void MainWindow::on_pushButtonVddInitCal_clicked() {
     if (ok) {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
         measured = QInputDialog::getDouble(
-            this, tr("VDD Calibration"), tr("Voltage measured on the VDD:"),
-            5.0f, 3.0f, 7.0f, 2, &ok, Qt::WindowFlags());
+            this, tr("VDD Calibration"),
+            tr("Voltage measured on the VDD:")
+                .leftJustified(kDialogLabelMinLength),
+            5.0f, 3.0f, 7.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint);
 #else
         measured = QInputDialog::getDouble(
-            this, tr("VDD Calibration"), tr("Voltage measured on the VDD:"),
-            5.0f, 3.0f, 7.0f, 2, &ok, Qt::WindowFlags(), 0.1f);
+            this, tr("VDD Calibration"),
+            tr("Voltage measured on the VDD:")
+                .leftJustified(kDialogLabelMinLength),
+            5.0f, 3.0f, 7.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint,
+            0.1f);
 #endif
         if (ok) {
             ok = runner_.vddSaveCal(measured);
@@ -1190,12 +1199,21 @@ void MainWindow::on_pushButtonVppInitCal_clicked() {
     if (ok) {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
         measured = QInputDialog::getDouble(
-            this, tr("VPP Calibration"), tr("Voltage measured on the VPP:"),
-            12.0f, 10.0f, 14.0f, 2, &ok, Qt::WindowFlags());
+            this, tr("VPP Calibration"),
+            tr("Voltage measured on the VPP:")
+                .leftJustified(kDialogLabelMinLength),
+            12.0f, 10.0f, 14.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint);
 #else
         measured = QInputDialog::getDouble(
-            this, tr("VPP Calibration"), tr("Voltage measured on the VPP:"),
-            12.0f, 10.0f, 14.0f, 2, &ok, Qt::WindowFlags(), 0.1f);
+            this, tr("VPP Calibration"),
+            tr("Voltage measured on the VPP:")
+                .leftJustified(kDialogLabelMinLength),
+            12.0f, 10.0f, 14.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint,
+            0.1f);
 #endif
         if (ok) {
             ok = runner_.vppSaveCal(measured);

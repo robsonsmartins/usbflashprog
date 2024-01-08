@@ -10,7 +10,7 @@
  * @ingroup Firmware
  * @file hal/string.cpp
  * @brief Implementation of the String Handling Helper Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -44,18 +44,18 @@ std::string StringUtils::lower(const std::string &src) {
 
 std::string StringUtils::trim(const std::string &src) {
     std::string s = src;
-    s.erase(s.begin(),
-            std::find_if(s.begin(), s.end(),
-            [](unsigned char c) { return (!std::isspace(c)); }));
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char c) {
+                return (!std::isspace(c));
+            }));
     s.erase(std::find_if(s.rbegin(), s.rend(),
-            [](unsigned char c) { return (!std::isspace(c)); }).base(),
+                         [](unsigned char c) { return (!std::isspace(c)); })
+                .base(),
             s.end());
     return s;
 }
 
 StringUtils::TStringVector StringUtils::split(const std::string &src,
-                                              char separator,
-                                              bool trim) {
+                                              char separator, bool trim) {
     TStringVector s;
     std::istringstream iss(src);
     std::string buf;
@@ -85,12 +85,11 @@ std::string StringUtils::fromInt(int src, uint base, uint digits, char fill) {
     size_t pos;
     switch (base) {
         case 16:
-            oss << std::setfill(fill) << std::setw(digits)
-                << std::hex << std::uppercase << src;
+            oss << std::setfill(fill) << std::setw(digits) << std::hex
+                << std::uppercase << src;
             break;
         case 8:
-            oss << std::setfill(fill) << std::setw(digits)
-                << std::oct << src;
+            oss << std::setfill(fill) << std::setw(digits) << std::oct << src;
             break;
         case 2:
             tmp = std::bitset<32>(src).to_string();
@@ -106,8 +105,7 @@ std::string StringUtils::fromInt(int src, uint base, uint digits, char fill) {
             oss << tmp;
             break;
         case 10:
-            oss << std::setfill(fill) << std::setw(digits)
-                << std::dec << src;
+            oss << std::setfill(fill) << std::setw(digits) << std::dec << src;
             break;
         default:
             oss << src;

@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/circuits/74hc165_test.cpp
  * @brief Implementation of Unit Test for 74xx165 Shift Register Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -18,7 +18,7 @@
 #include "74hc165_test.hpp"
 #include "mock/hardware/gpio.h"
 
-#include <chrono> // NOLINT
+#include <chrono>  // NOLINT
 
 // ---------------------------------------------------------------------------
 
@@ -37,7 +37,6 @@ void HC165Test::SetUp() {
 void HC165Test::TearDown() {}
 
 // ---------------------------------------------------------------------------
-
 
 TEST_F(HC165Test, ce) {
     EXPECT_EQ(hc165_.getCE(), false);
@@ -101,8 +100,7 @@ TEST_F(HC165Test, pulse_time) {
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration =
         std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-    EXPECT_NEAR(
-        duration.count(),
-        (kPulseTime * 2 * kBitsPerByte + kPulseTime) * kNumBytes / 1000,
-        100.0f);
+    EXPECT_NEAR(duration.count(),
+                (kPulseTime * 2 * kBitsPerByte + kPulseTime) * kNumBytes / 1000,
+                100.0f);
 }

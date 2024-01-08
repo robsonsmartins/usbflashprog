@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file hal/multicore.hpp
  * @brief Header of the Pico Multi Core Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -33,10 +33,10 @@ class MultiCore;
  * @nosubgrouping
  */
 class MultiCore {
- public:
+  public:
     /**
      * @brief Entry point to second core routine.
-     * @details A valid routine to be used as an entry point for the second CPU 
+     * @details A valid routine to be used as an entry point for the second CPU
      *  core must be of this type.<br/>
      *  <p><b>For example</b>:<br/>
      *  <code>
@@ -45,19 +45,19 @@ class MultiCore {
      *   }
      *  </code></p>
      */
-    typedef void (*MultiCoreEntry) (MultiCore&);
+    typedef void (*MultiCoreEntry)(MultiCore &);
     /**
      * @brief Defines possible values for CPU core status.
      */
     enum CoreStatus {
-       /** @brief Core is stopped. */
-       csStopped,
-       /** @brief Core is running. */
-       csRunning,
-       /** @brief Core is starting (initialization). */
-       csStarting,
-       /** @brief Core is stopping (finalization). */
-       csStopping
+        /** @brief Core is stopped. */
+        csStopped,
+        /** @brief Core is running. */
+        csRunning,
+        /** @brief Core is starting (initialization). */
+        csStarting,
+        /** @brief Core is stopping (finalization). */
+        csStopping
     };
     /**
      * @brief Constructor.
@@ -101,30 +101,34 @@ class MultiCore {
      * @return Value received.
      */
     uintptr_t getParam();
-    /** 
+    /**
      * @brief Locks execution line (using mutex).
-     * @details Protects code of the simultaneous write access (and race conditions).
+     * @details Protects code of the simultaneous write access (and race
+     * conditions).
      */
     void lock();
-    /** 
+    /**
      * @brief Unlocks execution line (using mutex).
-     * @details Protects code of the simultaneous write access (and race conditions).
+     * @details Protects code of the simultaneous write access (and race
+     * conditions).
      */
     void unlock();
     /**
-     * @brief Sleeps the execution of current CPU core for a number of microseconds.
+     * @brief Sleeps the execution of current CPU core for a number of
+     * microseconds.
      * @param us Number of microseconds to sleep.
      */
     static void usleep(uint64_t us);
     /**
-     * @brief Sleeps the execution of current CPU core for a number of milliseconds.
+     * @brief Sleeps the execution of current CPU core for a number of
+     * milliseconds.
      * @param ms Number of milliseconds to sleep.
      */
     static void msleep(uint32_t ms);
 
- private:
-    /* 
-     * @brief Entry point (pointer to function) of the second CPU 
+  private:
+    /*
+     * @brief Entry point (pointer to function) of the second CPU
      *  core routine.
      */
     MultiCoreEntry entry_;
@@ -133,13 +137,13 @@ class MultiCore {
     /* @brief Pointer to mutex object (for synchronization). */
     void *mutex_;
 
-  /** @cond */
-  /*
-   * @brief Internal function used as entry point for the 
-   *  second core routine.
-   */
-  friend void multicore_core_1_entry_();
-  /** @endcond */
+    /** @cond */
+    /*
+     * @brief Internal function used as entry point for the
+     *  second core routine.
+     */
+    friend void multicore_core_1_entry_();
+    /** @endcond */
 };
 
 #endif  // HAL_MULTICORE_HPP_

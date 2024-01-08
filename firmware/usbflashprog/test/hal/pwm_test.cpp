@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/hal/pwm_test.cpp
  * @brief Implementation of Unit Test for Pico PWM Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------

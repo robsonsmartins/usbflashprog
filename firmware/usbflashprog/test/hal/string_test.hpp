@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup UnitTests
  * @file test/hal/string_test.hpp
  * @brief Header of Unit Test for String Handling Helper Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -31,15 +31,15 @@
  * @nosubgrouping
  */
 class StringTest : public testing::Test {
- protected:
-  /** @brief Constructor. */
-  StringTest() {}
-  /** @brief Destructor. */
-  ~StringTest() override {}
-  /** @brief Sets Up the test. */
-  void SetUp() override {}
-  /** @brief Teardown of the test. */
-  void TearDown() override {}
+  protected:
+    /** @brief Constructor. */
+    StringTest() {}
+    /** @brief Destructor. */
+    ~StringTest() override {}
+    /** @brief Sets Up the test. */
+    void SetUp() override {}
+    /** @brief Teardown of the test. */
+    void TearDown() override {}
 };
 
 #endif  // TEST_HAL_STRING_TEST_HPP_

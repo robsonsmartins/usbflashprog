@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file circuits/74hc165.hpp
  * @brief Header of the 74HC165 Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -29,12 +29,12 @@
  * @ingroup Firmware
  * @brief 74xx165 Shift Register Class.
  * @details The purpose of this class is to interface a 74xx165
- *  Shift Register. 
+ *  Shift Register.
  *  Datasheet available on: https://tinyurl.com/bdzmty8v.
  * @nosubgrouping
  */
 class HC165 {
- public:
+  public:
     /** @brief Type of Data buffer. */
     typedef std::vector<bool> TData;
     /** @brief Default value to pulse time, in microseconds. */
@@ -56,9 +56,8 @@ class HC165 {
      * @param pulseTime Pulse time, in microseconds
      *  (default = kDefaultPulseTime).
      */
-    HC165(uint plPin, uint clkPin = 0xFF, uint cePin = 0xFF,
-          uint q7Pin = 0xFF, uint nq7Pin = 0xFF,
-          uint pulseTime = kDefaultPulseTime);
+    HC165(uint plPin, uint clkPin = 0xFF, uint cePin = 0xFF, uint q7Pin = 0xFF,
+          uint nq7Pin = 0xFF, uint pulseTime = kDefaultPulseTime);
     /**
      * @brief Configures the HC165 class object.
      * @param plPin GPIO Pin number of ~Parallel Load
@@ -79,14 +78,14 @@ class HC165 {
                    uint pulseTime = kDefaultPulseTime);
     /**
      * @brief Changes the Chip Enable pin of the HC165.
-     * @param value If true, activate CE. 
+     * @param value If true, activate CE.
      *  Else, disables the chip.
      */
     void chipEnable(bool value = true);
     /** @brief Disables the chip. */
     void chipDisable(void);
     /**
-     * @brief Gets the Chip Enable status. 
+     * @brief Gets the Chip Enable status.
      * @return Value of Chip Enable ("software stored").
      */
     const bool getCE(void) const;
@@ -126,7 +125,7 @@ class HC165 {
     /**
      * @brief Reads data from the arbitrary HC165 units in cascade.
      *   Shifts data in units if need.
-     * @param buffer Pointer to buffer to receive data. 
+     * @param buffer Pointer to buffer to receive data.
      *   First is the LSB byte.
      * @param size Size of buffer.
      * @param reverse If true, reverses the bit order (Q0 to Q7).
@@ -135,7 +134,7 @@ class HC165 {
      */
     uint readData(uint8_t* buffer, uint size, bool reverse = false);
 
- private:
+  private:
     /* @brief GPIO handler. */
     Gpio gpio_;
     /* @brief ~CE GPIO pin number. */

@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/hal/gpio_test.cpp
  * @brief Implementation of Unit Test for Pico GPIO Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------

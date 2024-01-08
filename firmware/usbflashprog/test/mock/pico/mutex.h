@@ -10,7 +10,7 @@
 #ifndef TEST_MOCK_PICO_MUTEX_H_
 #define TEST_MOCK_PICO_MUTEX_H_
 
-#include <mutex> // NOLINT
+#include <mutex>  // NOLINT
 
 #include "pico/stdlib.h"
 

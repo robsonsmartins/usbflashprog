@@ -10,7 +10,6 @@
 #ifndef TEST_MOCK_HARDWARE_FLASH_H_
 #define TEST_MOCK_HARDWARE_FLASH_H_
 
-
 #include <vector>
 #include "pico/stdlib.h"
 
@@ -25,7 +24,9 @@ static std::vector<uint8_t> flashData_(PICO_FLASH_SIZE_BYTES, 0xFF);
 #define XIP_BASE (reinterpret_cast<uintptr_t>(flashData_.data()))
 
 extern "C" inline void flash_range_erase(uint32_t flash_offs, size_t count) {
-    if (flash_offs >= flashData_.size() || !count) { return; }
+    if (flash_offs >= flashData_.size() || !count) {
+        return;
+    }
     for (size_t i = flash_offs; i < count && i < flashData_.size(); i++) {
         flashData_[i] = 0;
     }
@@ -33,10 +34,12 @@ extern "C" inline void flash_range_erase(uint32_t flash_offs, size_t count) {
 
 extern "C" inline void flash_range_program(uint32_t flash_offs,
                                            const uint8_t *data, size_t count) {
-    if (!count || !data || flash_offs >= flashData_.size()) { return; }
+    if (!count || !data || flash_offs >= flashData_.size()) {
+        return;
+    }
     size_t size = (flash_offs + count - 1) >= flashData_.size()
-        ? flashData_.size() - flash_offs
-        : count;
+                      ? flashData_.size() - flash_offs
+                      : count;
     for (size_t i = 0; i < size; i++) {
         flashData_[i + flash_offs] = data[i];
     }

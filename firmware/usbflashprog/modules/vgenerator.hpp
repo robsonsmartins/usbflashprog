@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file modules/vgenerator.hpp
  * @brief Header of the Voltage Generator Classes.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -29,13 +29,13 @@
  * @ingroup Firmware
  * @brief Defines the configuration fields for a VddGenerator class.
  */
-typedef struct VddConfig: Dc2DcConfig {
-    /** 
+typedef struct VddConfig : Dc2DcConfig {
+    /**
      * @brief Pin number of the Control Voltage.
      * @details Default: 0xFF (not assigned).
      */
     uint ctrlPin;
-    /** 
+    /**
      * @brief Pin number of the VDD on VPP signal.
      * @details Default: 0xFF (not assigned).
      */
@@ -66,28 +66,28 @@ typedef struct VddConfig: Dc2DcConfig {
  * @ingroup Firmware
  * @brief Defines the configuration fields for a VppGenerator class.
  */
-typedef struct VppConfig: Dc2DcConfig {
-    /** 
+typedef struct VppConfig : Dc2DcConfig {
+    /**
      * @brief Pin number of the Control Voltage.
      * @details Default: 0xFF (not assigned).
      */
     uint ctrlPin;
-    /** 
+    /**
      * @brief Pin number of the VControl Shift Register SIN signal.
      * @details Default: 0xFF (not assigned).
      */
     uint vcSinPin;
-    /** 
+    /**
      * @brief Pin number of the VControl Shift Register CLK signal.
      * @details Default: 0xFF (not assigned).
      */
     uint vcClkPin;
-    /** 
+    /**
      * @brief Pin number of the VControl Shift Register CLR signal.
      * @details Default: 0xFF (not assigned).
      */
     uint vcClrPin;
-    /** 
+    /**
      * @brief Pin number of the VControl Shift Register RCK signal.
      * @details Default: 0xFF (not assigned).
      */
@@ -161,12 +161,12 @@ class VGenerator;
  * @nosubgrouping
  */
 class GenericGenerator {
- public:
+  public:
     /**
      * @brief Constructor.
      * @param owner Pointer to owner VGenerator object instance.
      */
-    explicit GenericGenerator(const VGenerator *owner);
+    explicit GenericGenerator(const VGenerator* owner);
     /**
      * @brief Returns if the Voltage Generator is running.
      * @return True if Voltage Generator is running, false otherwise.
@@ -224,9 +224,9 @@ class GenericGenerator {
      */
     virtual bool isOn() const;
 
- protected:
+  protected:
     /* @brief Pointer to VGenerator owner object. */
-    VGenerator *owner_;
+    VGenerator* owner_;
     /* @brief Dc2Dc converter object. */
     Dc2Dc dc2dc_;
     /* @brief Gpio manager object. */
@@ -245,10 +245,10 @@ class GenericGenerator {
      *  so that the Voltage Generator works properly. */
     virtual void adjust_();
 
-  /* Friend functions. */
-  friend void second_core(MultiCore& core); // NOLINT
-  /* Friend classes. */
-  friend class VGenerator;
+    /* Friend functions. */
+    friend void second_core(MultiCore& core);  // NOLINT
+    /* Friend classes. */
+    friend class VGenerator;
 };
 
 // ---------------------------------------------------------------------------
@@ -261,13 +261,13 @@ class GenericGenerator {
  *  to control - on/off - the output).
  * @nosubgrouping
  */
-class VddGenerator: public GenericGenerator {
- public:
+class VddGenerator : public GenericGenerator {
+  public:
     /**
      * @brief Constructor.
      * @param owner Pointer to owner VGenerator object instance.
      */
-    explicit VddGenerator(const VGenerator *owner);
+    explicit VddGenerator(const VGenerator* owner);
     /** @brief Enables the output of the Voltage Generator. */
     void on();
     /** @brief Disables the output of the Voltage Generator. */
@@ -290,7 +290,7 @@ class VddGenerator: public GenericGenerator {
      */
     bool isOnVpp() const;
 
- private:
+  private:
     /* @brief Stores VDD on VPP pin state. */
     bool onVpp_;
 };
@@ -305,13 +305,13 @@ class VddGenerator: public GenericGenerator {
  *  and one shift register to control - on/off - the output).
  * @nosubgrouping
  */
-class VppGenerator: public GenericGenerator {
- public:
+class VppGenerator : public GenericGenerator {
+  public:
     /**
      * @brief Constructor.
      * @param owner Pointer to owner VGenerator object instance.
      */
-    explicit VppGenerator(const VGenerator *owner);
+    explicit VppGenerator(const VGenerator* owner);
     /** @brief Enables the output of the Voltage Generator. */
     void on();
     /** @brief Disables the output of the Voltage Generator. */
@@ -374,7 +374,7 @@ class VppGenerator: public GenericGenerator {
      */
     bool isOnWE() const;
 
- protected:
+  protected:
     /* @brief Starts the Voltage Generator.
      * @details If the configuration is invalid, then fails.
      * @return True if success, false otherwise. */
@@ -382,12 +382,12 @@ class VppGenerator: public GenericGenerator {
     /* @brief Stops the Voltage Generator. */
     virtual void stop_();
 
- private:
+  private:
     /* @brief Voltage Control Pins Shift Register. */
     HC595 vcRegister_;
 
-  /* Friend classes. */
-  friend class VGenerator;
+    /* Friend classes. */
+    friend class VGenerator;
 };
 
 // ---------------------------------------------------------------------------
@@ -400,7 +400,7 @@ class VppGenerator: public GenericGenerator {
  * @nosubgrouping
  */
 class VGenerator {
- public:
+  public:
     /** @brief VPP Generator. */
     VppGenerator vpp;
     /** @brief VDD Generator. */
@@ -442,7 +442,7 @@ class VGenerator {
      */
     bool isRunning() const;
 
- private:
+  private:
     /* @brief Current status flag. */
     MultiCore::CoreStatus status_;
     /* @brief CPU Multicore manager. */
@@ -460,14 +460,14 @@ class VGenerator {
      * @param buf Pointer to a buffer.
      * @param len Size of buffer, in bytes.
      * @return Checksum of the buffer (one byte size). */
-    uint8_t checksum_(const uint8_t *buf, size_t len);
+    uint8_t checksum_(const uint8_t* buf, size_t len);
 
-  /* Friend functions. */
-  friend void second_core(MultiCore& core); // NOLINT
-  /* Friend classes. */
-  friend class GenericGenerator;
-  friend class VddGenerator;
-  friend class VppGenerator;
+    /* Friend functions. */
+    friend void second_core(MultiCore& core);  // NOLINT
+    /* Friend classes. */
+    friend class GenericGenerator;
+    friend class VddGenerator;
+    friend class VppGenerator;
 };
 
 #endif  // MODULES_VGENERATOR_HPP_

@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup UnitTests
  * @file test/hal/serial_test.hpp
  * @brief Header of Unit Test for Serial Communication Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -31,17 +31,17 @@
  * @nosubgrouping
  */
 class SerialTest : public testing::Test {
- protected:
-  /** @brief Constructor. */
-  SerialTest() {}
-  /** @brief Destructor. */
-  ~SerialTest() override {}
-  /** @brief Sets Up the test. */
-  void SetUp() override {}
-  /** @brief Teardown of the test. */
-  void TearDown() override {}
-  /* @brief Serial class object to test. */
-  static Serial serial_;
+  protected:
+    /** @brief Constructor. */
+    SerialTest() {}
+    /** @brief Destructor. */
+    ~SerialTest() override {}
+    /** @brief Sets Up the test. */
+    void SetUp() override {}
+    /** @brief Teardown of the test. */
+    void TearDown() override {}
+    /* @brief Serial class object to test. */
+    static Serial serial_;
 };
 
 #endif  // TEST_HAL_SERIAL_TEST_HPP_

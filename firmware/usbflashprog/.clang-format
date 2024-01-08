@@ -1,0 +1,10 @@
+BasedOnStyle: Google
+IndentWidth: 4
+UseTab: Never
+AllowShortFunctionsOnASingleLine: Empty
+IndentCaseLabels: true
+SeparateDefinitionBlocks: Leave
+IncludeBlocks: Merge
+SortIncludes: Never
+EmptyLineBeforeAccessModifier: Always
+AccessModifierOffset: -2

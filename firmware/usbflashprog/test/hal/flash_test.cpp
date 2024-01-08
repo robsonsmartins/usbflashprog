@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/hal/flash_test.cpp
  * @brief Implementation of Unit Test for Pico Flash Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------

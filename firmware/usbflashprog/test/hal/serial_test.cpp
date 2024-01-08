@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/hal/serial_test.cpp
  * @brief Implementation of Unit Test for Serial Communication Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------

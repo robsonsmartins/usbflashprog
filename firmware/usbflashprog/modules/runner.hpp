@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file modules/runner.hpp
  * @brief Header of the Communication Runner Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -36,19 +36,19 @@
  * @nosubgrouping
  */
 class Runner {
- public:
+  public:
     /** @brief Constructor. */
     Runner();
     /** @brief Starts the runner. */
     void init();
-    /** 
+    /**
      * @brief Main loop method.
      * @details This method must be called periodically in a loop,
      *  so that the Runner works properly.
      */
     void loop();
 
- private:
+  private:
     /* @brief Type of byte array. */
     typedef std::vector<uint8_t> TByteArray;
     /* @brief VGenerator instance. */
@@ -81,7 +81,7 @@ class Runner {
     TByteArray readByte_(size_t len = 1);
     /*
      * @brief Finds the opcode into the command string.
-     * @return Constant iterator to opcode map. 
+     * @return Constant iterator to opcode map.
      *  TCmdOpCodeMap::end() if not found.
      */
     TCmdOpCodeMap::const_iterator findOpCode_();

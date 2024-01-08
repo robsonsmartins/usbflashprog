@@ -10,7 +10,7 @@
  * @ingroup Firmware
  * @file hal/adc.cpp
  * @brief Implementation of the Pico ADC Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -28,35 +28,41 @@ constexpr uint kGpioPinAdcChannel0 = 26;
 constexpr uint kAdcMaxChannel = 3;
 
 /** @cond */
-float __not_in_flash_func(adc_capture)(uint channel,
-                                       uint16_t *buf, size_t size);
+float __not_in_flash_func(adc_capture)(uint channel, uint16_t *buf,
+                                       size_t size);
 /** @endcond */
 
 // ---------------------------------------------------------------------------
 
-Adc::Adc(): vref_(kAdcDefaultVRef) {
+Adc::Adc() : vref_(kAdcDefaultVRef) {
     adc_init();
 }
 
-Adc::Adc(float vref): vref_(vref) {
+Adc::Adc(float vref) : vref_(vref) {
     adc_init();
 }
 
 float Adc::capture(uint channel) {
-    if (!initChannel_(channel)) { return -1.0f; }
+    if (!initChannel_(channel)) {
+        return -1.0f;
+    }
     adc_select_input(channel);
     return calculate_(adc_read());
 }
 
 float Adc::capture(uint channel, size_t size) {
-    if (!size || !initChannel_(channel)) { return -1.0f; }
+    if (!size || !initChannel_(channel)) {
+        return -1.0f;
+    }
     adc_select_input(channel);
     std::vector<uint16_t> raw(size);
     return calculate_(adc_capture(channel, raw.data(), size));
 }
 
-float Adc::capture(uint channel, float* buf, size_t size) {
-    if (!size || !buf || !initChannel_(channel)) { return -1.0f; }
+float Adc::capture(uint channel, float *buf, size_t size) {
+    if (!size || !buf || !initChannel_(channel)) {
+        return -1.0f;
+    }
     adc_select_input(channel);
     std::vector<uint16_t> raw(size);
     float result = calculate_(adc_capture(channel, raw.data(), size));
@@ -67,8 +73,12 @@ float Adc::capture(uint channel, float* buf, size_t size) {
 }
 
 bool Adc::initChannel_(uint channel) {
-    if (channel > kAdcMaxChannel) { return false; }
-    if (initChannels_.find(channel) != initChannels_.end()) { return true; }
+    if (channel > kAdcMaxChannel) {
+        return false;
+    }
+    if (initChannels_.find(channel) != initChannels_.end()) {
+        return true;
+    }
     // Make sure GPIO is high-impedance, no pullups etc
     adc_gpio_init(channel + kGpioPinAdcChannel0);
     initChannels_.insert(channel);
@@ -83,8 +93,8 @@ float Adc::calculate_(uint16_t value) const {
 // ---------------------------------------------------------------------------
 
 /** @cond */
-float __not_in_flash_func(adc_capture)(uint channel,
-                                       uint16_t *buf, size_t size) {
+float __not_in_flash_func(adc_capture)(uint channel, uint16_t *buf,
+                                       size_t size) {
     adc_fifo_setup(true, false, 0, false, false);
     adc_run(true);
     float mbuf = 0.0f;

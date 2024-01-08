@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file hal/adc.hpp
  * @brief Header of the Pico ADC Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -27,15 +27,15 @@
 /**
  * @ingroup Firmware
  * @brief Pico ADC Class
- * @details The purpose of this class is to manipulate the ADC on the 
+ * @details The purpose of this class is to manipulate the ADC on the
  *  board.
  * @nosubgrouping
  */
 class Adc {
- public:
+  public:
     /** @brief Default reference voltage, in Volts. */
     static constexpr float kAdcDefaultVRef = 3.3f;
-    /** 
+    /**
      * @brief Constructor.
      * @details As default, the reference voltage is set to
      *   kAdcDefaultVRef value.
@@ -51,7 +51,7 @@ class Adc {
      * @details Captures and returns one sample.
      *   The valid channels are 0 to 3.
      * @param channel Number of the ADC channel (0 to 3).
-     * @return Value of the sample, in Volts. 
+     * @return Value of the sample, in Volts.
      */
     float capture(uint channel);
     /**
@@ -60,7 +60,7 @@ class Adc {
      *   The valid channels are 0 to 3.
      * @param channel Number of the ADC channel (0 to 3).
      * @param size Number of samples to capture.
-     * @return Mean of all sample values, in Volts. 
+     * @return Mean of all sample values, in Volts.
      */
     float capture(uint channel, size_t size);
     /**
@@ -70,11 +70,11 @@ class Adc {
      * @param channel Number of the ADC channel (0 to 3).
      * @param buf Pointer to buffer that receive the captured samples.
      * @param size Number of samples to capture.
-     * @return Mean of all sample values, in Volts. 
+     * @return Mean of all sample values, in Volts.
      */
     float capture(uint channel, float* buf, size_t size);
 
- private:
+  private:
     /* @brief Current reference voltage. */
     float vref_;
     /* @brief Set of initialized channels. */
@@ -86,9 +86,9 @@ class Adc {
      */
     bool initChannel_(uint channel);
     /*
-     * @brief Calculate the real value, based in VRef. 
+     * @brief Calculate the real value, based in VRef.
      * @param value ADC raw value (12 bits).
-     * @return Real value, in Volts. 
+     * @return Real value, in Volts.
      */
     float calculate_(uint16_t value) const;
 };

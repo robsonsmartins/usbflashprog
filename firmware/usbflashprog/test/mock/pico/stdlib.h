@@ -11,22 +11,22 @@
 #define TEST_MOCK_PICO_STDLIB_H_
 
 #ifdef __arm__
-# define ARM
+#define ARM
 #endif
 #if (defined(_WIN32) || defined(WIN32)) && !defined(ARM)
-# define WINDOWS
+#define WINDOWS
 #elif !defined(ARM)
-# define UNIX
+#define UNIX
 #endif
 
 #ifdef WINDOWS
-# include <windows.h>
+#include <windows.h>
 #endif
 
 #ifdef UNIX
-# include <unistd.h>
-# include <sys/select.h>
-# include <termios.h>
+#include <unistd.h>
+#include <sys/select.h>
+#include <termios.h>
 #endif
 
 #include <cstdlib>
@@ -37,10 +37,10 @@
 // ---------------------------------------------------------------------------
 
 #if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
-    static void reset_terminal_mode();
-    static void set_conio_terminal_mode();
-    static int kbhit(uint32_t timeout_us);
-    static int getch();
+static void reset_terminal_mode();
+static void set_conio_terminal_mode();
+static int kbhit(uint32_t timeout_us);
+static int getch();
 #endif  // REAL_MOCK_IMPLEMENTATION
 
 // ---------------------------------------------------------------------------
@@ -49,7 +49,7 @@ typedef unsigned int uint;
 
 #define __not_in_flash(group) __attribute__((section(".time_critical." group)))
 
-#define	__STRING(x)	#x
+#define __STRING(x) #x
 
 #define __not_in_flash_func(func_name) \
     __not_in_flash(__STRING(func_name)) func_name
@@ -62,9 +62,9 @@ typedef unsigned int uint;
 // ---------------------------------------------------------------------------
 
 #if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
-    static struct termios _orig_termios;
+static struct termios _orig_termios;
 #else
-    constexpr char kStdioMockPredefinedChar = 'A';
+constexpr char kStdioMockPredefinedChar = 'A';
 #endif  // REAL_MOCK_IMPLEMENTATION
 
 // ---------------------------------------------------------------------------
@@ -93,7 +93,9 @@ extern "C" inline void stdio_init_all(void) {
 
 extern "C" inline int getchar_timeout_us(uint32_t timeout_us) {
 #if defined(REAL_MOCK_IMPLEMENTATION) && defined(UNIX)
-    if (!kbhit(timeout_us)) { return PICO_ERROR_TIMEOUT; }
+    if (!kbhit(timeout_us)) {
+        return PICO_ERROR_TIMEOUT;
+    }
     return getch();
 #else
     return (timeout_us ? kStdioMockPredefinedChar : PICO_ERROR_TIMEOUT);
@@ -131,7 +133,7 @@ void set_conio_terminal_mode() {
 }
 
 int kbhit(uint32_t timeout_us) {
-    struct timeval tv = { 0L, timeout_us };
+    struct timeval tv = {0L, timeout_us};
     fd_set fds;
     FD_ZERO(&fds);
     FD_SET(0, &fds);

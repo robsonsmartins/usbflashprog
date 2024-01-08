@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/hal/adc_test.cpp
  * @brief Implementation of Unit Test for Pico ADC Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -42,17 +42,14 @@ float AdcTest::mean_(const float* buf, size_t size) {
 
 TEST_F(AdcTest, capture) {
     float buf[512];
-    static uint16_t meanMockData =
-        (kRawAdcData[0] + kRawAdcData[1]) / 2;
-    EXPECT_NEAR(adc_.capture(0),
-        AdcTest::calculate_(meanMockData), 0.2f);
-    EXPECT_NEAR(adc_.capture(0, 1024),
-        AdcTest::calculate_(meanMockData), 0.2f);
-    EXPECT_NEAR(adc_.capture(0, buf, 512),
-        AdcTest::calculate_(meanMockData), 0.2f);
-    EXPECT_NEAR(AdcTest::mean_(buf, 512),
-        AdcTest::calculate_(meanMockData), 0.2f);
+    static uint16_t meanMockData = (kRawAdcData[0] + kRawAdcData[1]) / 2;
+    EXPECT_NEAR(adc_.capture(0), AdcTest::calculate_(meanMockData), 0.2f);
+    EXPECT_NEAR(adc_.capture(0, 1024), AdcTest::calculate_(meanMockData), 0.2f);
+    EXPECT_NEAR(adc_.capture(0, buf, 512), AdcTest::calculate_(meanMockData),
+                0.2f);
+    EXPECT_NEAR(AdcTest::mean_(buf, 512), AdcTest::calculate_(meanMockData),
+                0.2f);
     Adc newAdc = Adc(5.0f);
-    EXPECT_NEAR(newAdc.capture(0),
-        AdcTest::calculate_(meanMockData, 5.0f), 0.2f);
+    EXPECT_NEAR(newAdc.capture(0), AdcTest::calculate_(meanMockData, 5.0f),
+                0.2f);
 }

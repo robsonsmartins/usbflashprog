@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/modules/opcodes_test.cpp
  * @brief Implementation of Unit Test for OpCode Handling Classes.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------

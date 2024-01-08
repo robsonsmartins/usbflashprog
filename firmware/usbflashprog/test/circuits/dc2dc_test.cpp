@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/circuits/dc2dc_test.cpp
  * @brief Implementation of Unit Test for DC To DC Converter Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------

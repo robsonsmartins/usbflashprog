@@ -10,7 +10,7 @@
  * @ingroup Firmware
  * @file hal/gpio.cpp
  * @brief Implementation of the Pico GPIO Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -74,7 +74,9 @@ bool Gpio::isPulledDown(uint pin) {
 }
 
 void Gpio::initPin_(uint pin) {
-    if (initPins_.find(pin) != initPins_.end()) { return; }
+    if (initPins_.find(pin) != initPins_.end()) {
+        return;
+    }
     gpio_init(pin);
     initPins_.insert(pin);
 }

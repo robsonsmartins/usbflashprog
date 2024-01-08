@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file modules/bus.hpp
  * @brief Header of the Bus Classes.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -29,17 +29,17 @@
  * @brief Defines the configuration fields for a Control Bus class.
  */
 typedef struct CtrlBusConfig {
-    /** 
+    /**
      * @brief Pin number of the Chip Enable.
      * @details Default: 0xFF (not assigned).
      */
     uint cePin;
-    /** 
+    /**
      * @brief Pin number of the Output Enable.
      * @details Default: 0xFF (not assigned).
      */
     uint oePin;
-    /** 
+    /**
      * @brief Pin number of the Write Enable.
      * @details Default: 0xFF (not assigned).
      */
@@ -71,27 +71,27 @@ typedef struct CtrlBusConfig {
  * @brief Defines the configuration fields for a Data Bus class.
  */
 typedef struct DataBusConfig {
-    /** 
+    /**
      * @brief Pin number of the Data Shift Register SIN signal.
      * @details Default: 0xFF (not assigned).
      */
     uint dSinPin;
-    /** 
+    /**
      * @brief Pin number of the Data Shift Register CLK signal.
      * @details Default: 0xFF (not assigned).
      */
     uint dClkPin;
-    /** 
+    /**
      * @brief Pin number of the Data Shift Register CLR signal.
      * @details Default: 0xFF (not assigned).
      */
     uint dClrPin;
-    /** 
+    /**
      * @brief Pin number of the Data Shift Register RCK signal.
      * @details Default: 0xFF (not assigned).
      */
     uint dRckPin;
-    /** 
+    /**
      * @brief Pin number of the Data Shift Register SOUT signal (Q7).
      * @details Default: 0xFF (not assigned).
      */
@@ -123,22 +123,22 @@ typedef struct DataBusConfig {
  * @brief Defines the configuration fields for a Address Bus class.
  */
 typedef struct AddrBusConfig {
-    /** 
+    /**
      * @brief Pin number of the Address Shift Register SIN signal.
      * @details Default: 0xFF (not assigned).
      */
     uint aSinPin;
-    /** 
+    /**
      * @brief Pin number of the Address Shift Register CLK signal.
      * @details Default: 0xFF (not assigned).
      */
     uint aClkPin;
-    /** 
+    /**
      * @brief Pin number of the Address Shift Register CLR signal.
      * @details Default: 0xFF (not assigned).
      */
     uint aClrPin;
-    /** 
+    /**
      * @brief Pin number of the Address Shift Register RCK signal.
      * @details Default: 0xFF (not assigned).
      */
@@ -173,7 +173,7 @@ typedef struct AddrBusConfig {
  * @nosubgrouping
  */
 class CtrlBus {
- public:
+  public:
     /**
      * @brief Constructor.
      * @details Assumes a default value for the configuration.
@@ -212,7 +212,7 @@ class CtrlBus {
      */
     void setWE(bool value = true);
 
- private:
+  private:
     /* @brief Gpio Handler instance. */
     Gpio gpio_;
     /* @brief Configuration data. */
@@ -232,7 +232,7 @@ class CtrlBus {
  * @nosubgrouping
  */
 class DataBus {
- public:
+  public:
     /**
      * @brief Constructor.
      * @details Assumes a default value for the configuration.
@@ -278,7 +278,7 @@ class DataBus {
      */
     uint16_t readWord(void);
 
- private:
+  private:
     /* @brief Stores current address. */
     uint16_t data_;
     /* @brief Data Output Shift Register. */
@@ -302,7 +302,7 @@ class DataBus {
  * @nosubgrouping
  */
 class AddrBus {
- public:
+  public:
     /**
      * @brief Constructor.
      * @details Assumes a default value for the configuration.
@@ -349,7 +349,7 @@ class AddrBus {
      */
     bool increment();
 
- private:
+  private:
     /* @brief Stores current address. */
     uint32_t address_;
     /* @brief Address Output Shift Register. */

@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/hal/string_test.cpp
  * @brief Implementation of Unit Test for String Handling Helper Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -49,32 +49,28 @@ TEST_F(StringTest, trim) {
 }
 
 TEST_F(StringTest, split) {
-    EXPECT_EQ(StringUtils::split("", ','),
-              StringUtils::TStringVector({}));
-    EXPECT_EQ(StringUtils::split(",", ','),
-              StringUtils::TStringVector({}));
+    EXPECT_EQ(StringUtils::split("", ','), StringUtils::TStringVector({}));
+    EXPECT_EQ(StringUtils::split(",", ','), StringUtils::TStringVector({}));
     EXPECT_EQ(StringUtils::split("a", ','),
               StringUtils::TStringVector({std::string("a")}));
     EXPECT_EQ(StringUtils::split("a,", ','),
               StringUtils::TStringVector({std::string("a")}));
     EXPECT_EQ(StringUtils::split("a,b", ','),
-              StringUtils::TStringVector({std::string("a"),
-                                          std::string("b")}));
+              StringUtils::TStringVector({std::string("a"), std::string("b")}));
     EXPECT_EQ(StringUtils::split("a,b,", ','),
-              StringUtils::TStringVector({std::string("a"),
-                                          std::string("b")}));
-    EXPECT_EQ(StringUtils::split("a b,c", ','),
-              StringUtils::TStringVector({std::string("a b"),
-                                          std::string("c")}));
-    EXPECT_EQ(StringUtils::split("a b,c", ' '),
-              StringUtils::TStringVector({std::string("a"),
-                                          std::string("b,c")}));
-    EXPECT_EQ(StringUtils::split("a b , c", ','),
-              StringUtils::TStringVector({std::string("a b "),
-                                          std::string(" c")}));
-    EXPECT_EQ(StringUtils::split("a b , c", ',', true),
-              StringUtils::TStringVector({std::string("a b"),
-                                          std::string("c")}));
+              StringUtils::TStringVector({std::string("a"), std::string("b")}));
+    EXPECT_EQ(
+        StringUtils::split("a b,c", ','),
+        StringUtils::TStringVector({std::string("a b"), std::string("c")}));
+    EXPECT_EQ(
+        StringUtils::split("a b,c", ' '),
+        StringUtils::TStringVector({std::string("a"), std::string("b,c")}));
+    EXPECT_EQ(
+        StringUtils::split("a b , c", ','),
+        StringUtils::TStringVector({std::string("a b "), std::string(" c")}));
+    EXPECT_EQ(
+        StringUtils::split("a b , c", ',', true),
+        StringUtils::TStringVector({std::string("a b"), std::string("c")}));
 }
 
 TEST_F(StringTest, toInt) {

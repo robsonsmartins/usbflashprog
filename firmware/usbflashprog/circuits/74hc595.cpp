@@ -10,7 +10,7 @@
  * @ingroup Firmware
  * @file circuits/74hc595.cpp
  * @brief Implementation of the 74HC595 Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -19,22 +19,23 @@
 
 // ---------------------------------------------------------------------------
 
-HC595::HC595(): oe_(false) {
+HC595::HC595() : oe_(false) {
     configure();
 }
 
-HC595::HC595(uint sinPin, uint clkPin, uint clrPin,
-             uint rckPin, uint oePin, uint pulseTime): oe_(false) {
+HC595::HC595(uint sinPin, uint clkPin, uint clrPin, uint rckPin, uint oePin,
+             uint pulseTime)
+    : oe_(false) {
     configure(sinPin, clkPin, clrPin, rckPin, oePin, pulseTime);
 }
 
-void HC595::configure(uint sinPin, uint clkPin, uint clrPin,
-                      uint rckPin, uint oePin, uint pulseTime) {
-    sinPin_    =    sinPin;
-    clkPin_    =    clkPin;
-    clrPin_    =    clrPin;
-    rckPin_    =    rckPin;
-    oePin_     =     oePin;
+void HC595::configure(uint sinPin, uint clkPin, uint clrPin, uint rckPin,
+                      uint oePin, uint pulseTime) {
+    sinPin_ = sinPin;
+    clkPin_ = clkPin;
+    clrPin_ = clrPin;
+    rckPin_ = rckPin;
+    oePin_ = oePin;
     pulseTime_ = pulseTime;
 }
 
@@ -65,13 +66,17 @@ void HC595::outputDisable() {
 
 void HC595::writeByte(uint8_t value) {
     clear();
-    if (!value) { return; }
+    if (!value) {
+        return;
+    }
     writeData(&value, 1);
 }
 
 void HC595::writeWord(uint16_t value) {
     clear();
-    if (!value) { return; }
+    if (!value) {
+        return;
+    }
     if (value <= 0xFF) {
         writeByte(value & 0xFF);
         return;
@@ -84,7 +89,9 @@ void HC595::writeWord(uint16_t value) {
 
 void HC595::writeDWord(uint32_t value) {
     clear();
-    if (!value) { return; }
+    if (!value) {
+        return;
+    }
     if (value <= 0xFF) {
         writeByte(value & 0xFF);
         return;
@@ -101,12 +108,18 @@ void HC595::writeDWord(uint32_t value) {
 }
 
 void HC595::writeData(const uint8_t* buffer, uint size) {
-    if (!size || !buffer) { return; }
-    if (buffer_.size() < size) { buffer_.resize(size); }
-    if (rckPin_ != 0xFF) { gpio_.resetPin(rckPin_); }
+    if (!size || !buffer) {
+        return;
+    }
+    if (buffer_.size() < size) {
+        buffer_.resize(size);
+    }
+    if (rckPin_ != 0xFF) {
+        gpio_.resetPin(rckPin_);
+    }
     buffer += size - 1;
-    for (uint8_t* pData = buffer_.data() + size - 1;
-         size != 0; size--, pData--, buffer--) {
+    for (uint8_t* pData = buffer_.data() + size - 1; size != 0;
+         size--, pData--, buffer--) {
         *pData = *buffer;
         if (sinPin_ != 0xFF && clkPin_ != 0xFF) {
             gpio_.resetPin(clkPin_);
@@ -164,9 +177,7 @@ const HC595::TData& HC595::getData(void) const {
 
 const bool HC595::getBit(uint bit) const {
     uint index = bit / 8;
-    uint8_t data = (index < buffer_.size())
-        ? buffer_[index]
-        : 0;
+    uint8_t data = (index < buffer_.size()) ? buffer_[index] : 0;
     uint8_t mask = 0x01 << (bit - (index * 8));
     return (data & mask);
 }

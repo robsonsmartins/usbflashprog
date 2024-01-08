@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file hal/flash.hpp
  * @brief Header of the Pico Flash Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -30,17 +30,17 @@
  * @nosubgrouping
  */
 class Flash {
- public:
+  public:
     /**
      * @brief Writes data to the flash space.
      * @details Writes data to the end of the program's flash memory space.<br/>
      *   <b>WARNINGS</b>:
      *   <ul>
      *     <li>The second CPU core is stopped for this operation!</li>
-     *     <li>All data on the sector (flash sector size) will be erased first!</li>
-     *     <li>If the buffer size is greater than the available free space
-     *      (total size of flash memory minus program size), the program will be
-     *      permanently corrupted at runtime!</li>
+     *     <li>All data on the sector (flash sector size) will be erased
+     * first!</li> <li>If the buffer size is greater than the available free
+     * space (total size of flash memory minus program size), the program will
+     * be permanently corrupted at runtime!</li>
      *   </ul>
      * @param data Pointer to a buffer to write.
      * @param len Size of buffer, in bytes.
@@ -63,7 +63,7 @@ class Flash {
      */
     static bool verify(const uint8_t *data, size_t len);
 
- private:
+  private:
     /*
      * @brief Writes data to the flash space.
      * @param buf Pointer to a buffer to write.
@@ -89,19 +89,19 @@ class Flash {
     /*
      * @brief Returns the page size.
      * @param len Length of requested operation, in bytes.
-     * @return Page Size, in bytes. 
+     * @return Page Size, in bytes.
      */
     static size_t pageSize_(size_t len);
     /*
      * @brief Returns the sector size.
      * @param len Length of requested operation, in bytes.
-     * @return Sector Size, in bytes. 
+     * @return Sector Size, in bytes.
      */
     static size_t sectorSize_(size_t len);
     /*
      * @brief Returns the offset from start.
      * @param len Length of requested operation, in bytes.
-     * @return Offset, in bytes. 
+     * @return Offset, in bytes.
      */
     static size_t offset_(size_t len);
 };

@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file hal/serial.hpp
  * @brief Header of the Pico Serial Communication Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -33,12 +33,13 @@
  * @nosubgrouping
  */
 class Serial {
- public:
+  public:
     /** @brief Constructor. */
     Serial();
     /**
      * @brief Gets a single character.
-     * @param us Timeout, in microseconds. Default is zero (returns immediately).
+     * @param us Timeout, in microseconds. Default is zero (returns
+     * immediately).
      * @return A single char, or PICO_ERROR_TIMEOUT if timeout is reached.
      */
     int getChar(uint32_t us = 0);
@@ -46,7 +47,8 @@ class Serial {
      * @brief Gets a buffer.
      * @param buf Pointer to buffer that receives the data.
      * @param len Size of buffer, in bytes.
-     * @param us Timeout, in microseconds. Default is zero (returns immediately).
+     * @param us Timeout, in microseconds. Default is zero (returns
+     * immediately).
      * @return Number of bytes read, or zero if timeout is reached.
      */
     size_t getBuf(void *buf, size_t len, uint32_t us);
@@ -97,8 +99,8 @@ class Serial {
      * @param fill Fill character. Default is space.
      * @param flush If true, flushes the output. Default is false.
      */
-    void putInt(int src, uint base = 10,
-                uint digits = 0, char fill = ' ', bool flush = false);
+    void putInt(int src, uint base = 10, uint digits = 0, char fill = ' ',
+                bool flush = false);
     /**
      * @brief Puts a float point value.
      * @param src Numeric value to write.
@@ -110,12 +112,12 @@ class Serial {
      * @brief Returns the output stream object.
      * @return Reference to the output stream object.
      */
-    std::ostream& out();
+    std::ostream &out();
     /**
      * @brief Returns the input stream object.
      * @return Reference to the input stream object.
      */
-    std::istream& in();
+    std::istream &in();
 };
 
 #endif  // HAL_SERIAL_HPP_

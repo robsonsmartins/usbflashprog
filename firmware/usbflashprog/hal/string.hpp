@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file hal/string.hpp
  * @brief Header of the String Handling Helper Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -32,19 +32,19 @@
  * @nosubgrouping
  */
 class StringUtils {
- public:
+  public:
     /** @brief Vector of strings type. */
     typedef std::vector<std::string> TStringVector;
     /**
      * @brief Converts a string to uppercase.
      * @param src Source string.
-     * @return String in uppercase. 
+     * @return String in uppercase.
      */
     static std::string upper(const std::string &src);
     /**
      * @brief Converts a string to lowercase.
      * @param src Source string.
-     * @return String in lowercase. 
+     * @return String in lowercase.
      */
     static std::string lower(const std::string &src);
     /**
@@ -54,15 +54,15 @@ class StringUtils {
      */
     static std::string trim(const std::string &src);
     /**
-     * @brief Splits a string into a vector, from a separator. 
+     * @brief Splits a string into a vector, from a separator.
      * @param src Source string.
      * @param separator Separator character.
      * @param trim If true, cleans each token before add into vector.
-     *   @see trim(const std::string&). Default is false. 
+     *   @see trim(const std::string&). Default is false.
      * @return Vector with string tokens.
      */
-    static TStringVector split(const std::string &src,
-                               char separator, bool trim = false);
+    static TStringVector split(const std::string &src, char separator,
+                               bool trim = false);
     /**
      * @brief Converts a string to an integer value.
      * @param src Source string.
@@ -85,8 +85,8 @@ class StringUtils {
      * @param fill Fill character. Default is space.
      * @return Numerical value as string.
      */
-    static std::string fromInt(int src, uint base = 10,
-                               uint digits = 0, char fill = ' ');
+    static std::string fromInt(int src, uint base = 10, uint digits = 0,
+                               char fill = ' ');
     /**
      * @brief Converts a float point value to a string.
      * @param src Float point value.

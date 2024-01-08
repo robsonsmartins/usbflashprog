@@ -10,14 +10,14 @@
  * @ingroup UnitTests
  * @file test/circuits/74hc595_test.cpp
  * @brief Implementation of Unit Test for 74xx595 Shift Register Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
 #include "74hc595_test.hpp"
 
-#include <chrono> // NOLINT
+#include <chrono>  // NOLINT
 
 // ---------------------------------------------------------------------------
 
@@ -35,8 +35,7 @@ void HC595Test::SetUp() {
 
 void HC595Test::TearDown() {}
 
-bool HC595Test::compareData_(const HC595::TData& a,
-                             const HC595::TData& b) {
+bool HC595Test::compareData_(const HC595::TData& a, const HC595::TData& b) {
     if (a.size() != b.size()) return false;
     for (size_t i = 0; i < a.size(); i++) {
         if (a[i] != b[i]) return false;
@@ -62,34 +61,27 @@ TEST_F(HC595Test, data) {
     EXPECT_EQ(hc595_.getData().size(), 0);
     hc595_.writeByte(0x5A);
     EXPECT_EQ(hc595_.getData().size(), 1);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x5A}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x5A}));
     hc595_.writeByte(0x37);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x37}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x37}));
     hc595_.writeWord(0x37);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x37}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x37}));
     hc595_.writeDWord(0x37);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x37}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x37}));
     hc595_.writeWord(0xA534);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x34, 0xA5}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x34, 0xA5}));
     hc595_.writeDWord(0xA534);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x34, 0xA5}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x34, 0xA5}));
     hc595_.writeDWord(0x8E743921);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x21, 0x39, 0x74, 0x8E}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x21, 0x39, 0x74, 0x8E}));
 
     hc595_.clear();
     EXPECT_EQ(hc595_.getData().size(), 0);
 
     uint8_t buf[6] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06};
     hc595_.writeData(buf, 6);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x01, 0x02, 0x03, 0x04, 0x05, 0x06}));
+    EXPECT_TRUE(
+        compareData_(hc595_.getData(), {0x01, 0x02, 0x03, 0x04, 0x05, 0x06}));
     hc595_.clear();
     EXPECT_EQ(hc595_.getBit(6), false);
     hc595_.setBit(6);
@@ -97,22 +89,18 @@ TEST_F(HC595Test, data) {
     EXPECT_EQ(hc595_.getBit(29), false);
     hc595_.setBit(29);
     EXPECT_EQ(hc595_.getBit(29), true);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x40, 0x00, 0x00, 0x20}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x40, 0x00, 0x00, 0x20}));
     hc595_.setBit(6, false);
     hc595_.resetBit(29);
     EXPECT_EQ(hc595_.getBit(6), false);
     EXPECT_EQ(hc595_.getBit(29), false);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x00, 0x00, 0x00, 0x00}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x00, 0x00, 0x00, 0x00}));
     hc595_.toggleBit(6);
     hc595_.toggleBit(29);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x40, 0x00, 0x00, 0x20}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x40, 0x00, 0x00, 0x20}));
     hc595_.toggleBit(6);
     hc595_.toggleBit(29);
-    EXPECT_TRUE(compareData_(hc595_.getData(),
-                            {0x00, 0x00, 0x00, 0x00}));
+    EXPECT_TRUE(compareData_(hc595_.getData(), {0x00, 0x00, 0x00, 0x00}));
     HC595 newHc595 = HC595(5, 4, 3, 2, 1, 20);
     EXPECT_EQ(newHc595.getData().size(), 0);
     newHc595.setBit(5);
@@ -126,15 +114,13 @@ TEST_F(HC595Test, pulse_time) {
     constexpr uint kNumBytes = 8;
     constexpr uint kBitsPerByte = 8;
     hc595_.configure(1, 2, 3, 4, 5, kPulseTime);
-    uint8_t buf[kNumBytes] =
-        {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+    uint8_t buf[kNumBytes] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
     auto start = std::chrono::high_resolution_clock::now();
     hc595_.writeData(buf, kNumBytes);
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration =
         std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-    EXPECT_NEAR(
-        duration.count(),
-        (kPulseTime * 2 * kBitsPerByte + kPulseTime) * kNumBytes / 1000,
-        100.0f);
+    EXPECT_NEAR(duration.count(),
+                (kPulseTime * 2 * kBitsPerByte + kPulseTime) * kNumBytes / 1000,
+                100.0f);
 }

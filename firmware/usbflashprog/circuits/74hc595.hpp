@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file circuits/74hc595.hpp
  * @brief Header of the 74HC595 Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -28,13 +28,13 @@
 /**
  * @ingroup Firmware
  * @brief 74xx595 Shift Register Class.
- * @details The purpose of this class is to interface a 74xx595 
- *  Shift Register. 
+ * @details The purpose of this class is to interface a 74xx595
+ *  Shift Register.
  *  Datasheet available on: https://tinyurl.com/5crbkb52.
  * @nosubgrouping
  */
 class HC595 {
- public:
+  public:
     /** @brief Type of Data buffer. */
     typedef std::vector<uint8_t> TData;
     /** @brief Default value to pulse time, in microseconds. */
@@ -48,7 +48,7 @@ class HC595 {
      * @param clkPin GPIO Pin number of Data Clock
      *  (default = 0xFF, no pin).
      * @param clrPin GPIO Pin number of ~Clear
-     *  (default = 0xFF, no pin). 
+     *  (default = 0xFF, no pin).
      * @param rckPin GPIO Pin number of Latch Clock
      *  (default = 0xFF, no pin).
      * @param oePin GPIO Pin number of Output Enable
@@ -66,7 +66,7 @@ class HC595 {
      * @param clkPin GPIO Pin number of Data Clock
      *  (default = 0xFF, no pin).
      * @param clrPin GPIO Pin number of ~Clear
-     *  (default = 0xFF, no pin). 
+     *  (default = 0xFF, no pin).
      * @param rckPin GPIO Pin number of Latch Clock
      *  (default = 0xFF, no pin).
      * @param oePin GPIO Pin number of Output Enable
@@ -81,7 +81,7 @@ class HC595 {
     void clear();
     /**
      * @brief Changes the Output Enable pin of the HC595.
-     * @param value If true, activate OE. 
+     * @param value If true, activate OE.
      *  Else, disables the output (put its in tristate).
      */
     void outputEnable(bool value = true);
@@ -139,12 +139,12 @@ class HC595 {
      */
     const bool getBit(uint bit) const;
     /**
-     * @brief Gets the Output Enable status. 
+     * @brief Gets the Output Enable status.
      * @return Value of Output Enable ("software stored").
      */
     const bool getOE(void) const;
 
- private:
+  private:
     /* @brief Pulse time, in microseconds. */
     uint pulseTime_;
     /* @brief ~OE GPIO pin number. */

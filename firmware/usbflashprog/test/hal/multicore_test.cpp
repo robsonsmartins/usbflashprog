@@ -10,7 +10,7 @@
  * @ingroup UnitTests
  * @file test/hal/multicore_test.cpp
  * @brief Implementation of Unit Test for Pico Multi Core Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -21,7 +21,7 @@
 
 constexpr uint64_t kWaitTime = 10;  // in usec
 
-void second_core_entry_(MultiCore& core); // NOLINT
+void second_core_entry_(MultiCore& core);  // NOLINT
 
 MultiCore MultiCoreTest::multicore_ = MultiCore(second_core_entry_);
 
@@ -53,7 +53,7 @@ TEST_F(MultiCoreTest, launch_stop) {
 
 // ---------------------------------------------------------------------------
 
-void second_core_entry_(MultiCore& core) { // NOLINT
+void second_core_entry_(MultiCore& core) {  // NOLINT
     uintptr_t p = 0;
     do {
         p = core.getParam();

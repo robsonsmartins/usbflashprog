@@ -10,9 +10,9 @@
 #ifndef TEST_MOCK_PICO_MULTICORE_H_
 #define TEST_MOCK_PICO_MULTICORE_H_
 
-#include <thread> // NOLINT
-#include <chrono> // NOLINT
-#include <mutex> // NOLINT
+#include <thread>  // NOLINT
+#include <chrono>  // NOLINT
+#include <mutex>   // NOLINT
 #include <queue>
 
 #include "pico/stdlib.h"
@@ -50,7 +50,9 @@ extern "C" inline uintptr_t multicore_fifo_pop_blocking() {
     uintptr_t data = 0;
     while (_fifo[index].empty()) {
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
-        if (_stopreq) { return 0; }
+        if (_stopreq) {
+            return 0;
+        }
     }
     _mutex.lock();
     data = _fifo[index].front();

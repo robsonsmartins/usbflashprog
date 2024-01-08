@@ -10,7 +10,7 @@
  * @ingroup Firmware
  * @file circuits/74hc165.cpp
  * @brief Implementation of the 74HC165 Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -19,22 +19,23 @@
 
 // ---------------------------------------------------------------------------
 
-HC165::HC165(): ce_(false) {
+HC165::HC165() : ce_(false) {
     configure();
 }
 
-HC165::HC165(uint plPin, uint clkPin, uint cePin, uint q7Pin,
-             uint nq7Pin, uint pulseTime): ce_(false) {
+HC165::HC165(uint plPin, uint clkPin, uint cePin, uint q7Pin, uint nq7Pin,
+             uint pulseTime)
+    : ce_(false) {
     configure(plPin, clkPin, cePin, q7Pin, nq7Pin, pulseTime);
 }
 
-void HC165::configure(uint plPin, uint clkPin, uint cePin,
-                      uint q7Pin, uint nq7Pin, uint pulseTime) {
-    plPin_     =     plPin;
-    clkPin_    =    clkPin;
-    cePin_     =     cePin;
-    q7Pin_     =     q7Pin;
-    nq7Pin_    =    nq7Pin;
+void HC165::configure(uint plPin, uint clkPin, uint cePin, uint q7Pin,
+                      uint nq7Pin, uint pulseTime) {
+    plPin_ = plPin;
+    clkPin_ = clkPin;
+    cePin_ = cePin;
+    q7Pin_ = q7Pin;
+    nq7Pin_ = nq7Pin;
     pulseTime_ = pulseTime;
 }
 
@@ -65,8 +66,7 @@ void HC165::load() {
 }
 
 bool HC165::getBit(uint index) {
-    if (clkPin_ == 0xFF ||
-            (q7Pin_ == 0xFF && nq7Pin_ == 0xFF)) {
+    if (clkPin_ == 0xFF || (q7Pin_ == 0xFF && nq7Pin_ == 0xFF)) {
         return false;
     }
     for (uint i = 0; i < index; i++) {
@@ -117,9 +117,10 @@ uint32_t HC165::readDWord(bool reverse) {
 }
 
 uint HC165::readData(uint8_t* buffer, uint size, bool reverse) {
-    if (!buffer || !size) { return 0; }
-    if (clkPin_ == 0xFF ||
-            (q7Pin_ == 0xFF && nq7Pin_ == 0xFF)) {
+    if (!buffer || !size) {
+        return 0;
+    }
+    if (clkPin_ == 0xFF || (q7Pin_ == 0xFF && nq7Pin_ == 0xFF)) {
         return 0;
     }
     TData bits;
@@ -135,7 +136,7 @@ uint HC165::readData(uint8_t* buffer, uint size, bool reverse) {
         sleep_us(pulseTime_);
     }
     std::size_t start = reverse ? 0 : bits.size() - 1;
-    std::size_t end = reverse ? bits.size() - 1: 0;
+    std::size_t end = reverse ? bits.size() - 1 : 0;
     std::size_t nbit = start;
     for (uint nbyte = 0; nbyte < size; nbyte++) {
         buffer[nbyte] = 0;
@@ -143,14 +144,18 @@ uint HC165::readData(uint8_t* buffer, uint size, bool reverse) {
             if (bits[nbit]) {
                 buffer[nbyte] |= (1 << b);
             }
-            if (nbit == end) { break; }
+            if (nbit == end) {
+                break;
+            }
             if (reverse) {
                 nbit++;
             } else {
                 nbit--;
             }
         }
-        if (nbit == end) { break; }
+        if (nbit == end) {
+            break;
+        }
     }
     return size;
 }

@@ -10,7 +10,7 @@
  * @ingroup Firmware
  * @file hal/flash.cpp
  * @brief Implementation of the Pico Flash Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -57,9 +57,13 @@ bool Flash::verify(const uint8_t *data, size_t len) {
 }
 
 void Flash::write_(const uint8_t *buf, size_t offset, size_t len) {
-    if (!buf || !len || offset + len > PICO_FLASH_SIZE_BYTES) { return; }
+    if (!buf || !len || offset + len > PICO_FLASH_SIZE_BYTES) {
+        return;
+    }
     size_t eraseLen = sectorSize_(len);
-    if (offset + eraseLen > PICO_FLASH_SIZE_BYTES) { return; }
+    if (offset + eraseLen > PICO_FLASH_SIZE_BYTES) {
+        return;
+    }
     multicore_reset_core1();
     uint32_t ints = save_and_disable_interrupts();
     flash_range_erase(offset, eraseLen);
@@ -68,8 +72,11 @@ void Flash::write_(const uint8_t *buf, size_t offset, size_t len) {
 }
 
 void Flash::read_(uint8_t *buf, size_t offset, size_t len) {
-    if (!buf || !len || offset + len > PICO_FLASH_SIZE_BYTES) { return; }
-    const uint8_t *pFlash = reinterpret_cast<const uint8_t*>(XIP_BASE + offset);
+    if (!buf || !len || offset + len > PICO_FLASH_SIZE_BYTES) {
+        return;
+    }
+    const uint8_t *pFlash =
+        reinterpret_cast<const uint8_t *>(XIP_BASE + offset);
     std::memcpy(buf, pFlash, len);
 }
 
@@ -85,13 +92,12 @@ bool Flash::verify_(const uint8_t *buf, size_t offset, size_t len) {
 }
 
 size_t Flash::pageSize_(size_t len) {
-    return (len + FLASH_PAGE_SIZE - 1) /
-        FLASH_PAGE_SIZE * FLASH_PAGE_SIZE;
+    return (len + FLASH_PAGE_SIZE - 1) / FLASH_PAGE_SIZE * FLASH_PAGE_SIZE;
 }
 
 size_t Flash::sectorSize_(size_t len) {
-    return (len + FLASH_SECTOR_SIZE - 1) /
-        FLASH_SECTOR_SIZE * FLASH_SECTOR_SIZE;
+    return (len + FLASH_SECTOR_SIZE - 1) / FLASH_SECTOR_SIZE *
+           FLASH_SECTOR_SIZE;
 }
 
 size_t Flash::offset_(size_t len) {

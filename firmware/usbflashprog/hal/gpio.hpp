@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file hal/gpio.hpp
  * @brief Header of the Pico GPIO Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -27,12 +27,12 @@
 /**
  * @ingroup Firmware
  * @brief Pico GPIO Class
- * @details The purpose of this class is to manipulate the GPIO pins on the 
+ * @details The purpose of this class is to manipulate the GPIO pins on the
  *  board.
  * @nosubgrouping
  */
 class Gpio {
- public:
+  public:
     /** @brief Constructor. */
     Gpio();
     /**
@@ -54,19 +54,19 @@ class Gpio {
     /**
      * @brief Gets the pin value.
      * @param pin The pin number.
-     * @return The pin value. 
+     * @return The pin value.
      */
     bool getPin(uint pin);
     /**
      * @brief Enables (or disables) the pullup of the pin.
      * @param pin The pin number.
-     * @param enable True to enable pullup (default), or false to disable. 
+     * @param enable True to enable pullup (default), or false to disable.
      */
     void pullUp(uint pin, bool enable = true);
     /**
      * @brief Enables (or disables) the pulldown of the pin.
      * @param pin The pin number.
-     * @param enable True to enable pulldown (default), or false to disable. 
+     * @param enable True to enable pulldown (default), or false to disable.
      */
     void pullDown(uint pin, bool enable = true);
     /**
@@ -89,7 +89,7 @@ class Gpio {
      */
     bool isPulledDown(uint pin);
 
- private:
+  private:
     /* @brief Set of initialized pins. */
     std::set<uint> initPins_;
     /*

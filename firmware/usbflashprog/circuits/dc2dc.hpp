@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup Firmware
  * @file circuits/dc2dc.hpp
  * @brief Header of the DC To DC Converter Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -28,12 +28,12 @@
  * @brief Defines the configuration fields for a Dc2Dc class.
  */
 typedef struct Dc2DcConfig {
-    /** 
+    /**
      * @brief Pin number of the PWM.
      * @details Default: 0xFF (not assigned).
      */
     uint pwmPin;
-    /** 
+    /**
      * @brief Frequency of the PWM, in Hertz.
      * @details Default: Pwm::kPwmDefaultFreq.
      */
@@ -48,35 +48,35 @@ typedef struct Dc2DcConfig {
      * @details Default: 0xFF (not assigned).
      */
     uint adcChannel;
-    /** 
+    /**
      * @brief Feedback divider in output of DC2DC converter.
      * @details Typical formula: Divider = (R1 + R2) / R2.<br/>
      *  Default: 1.0.
-     */ 
+     */
     float divider;
-    /** 
+    /**
      * @brief Minimal duty cycle value for the PWM, in %.
      * @details Default: kPwmMinDutyCycleDefault.
      */
     float pwmMinDuty;
-    /** 
+    /**
      * @brief Maximum duty cycle value for the PWM, in %.
      * @details Default: kPwmMaxDutyCycleDefault.
      */
     float pwmMaxDuty;
-    /** 
+    /**
      * @brief Step of slow increment/decrement for the PWM duty cycle.
      * @details Used when actual voltage is near to the target voltage.<br/>
      *  Default: kPwmSlowStepDutyCycleDefault.
      */
     float pwmSlowStepDuty;
-    /** 
+    /**
      * @brief Step of fast increment/decrement for the PWM duty cycle.
      * @details Used when actual voltage is far to the target voltage.<br/>
      *  Default: kPwmFastStepDutyCycleDefault.
      */
     float pwmFastStepDuty;
-    /** 
+    /**
      * @brief Tolerance between actual and target voltages to consider
      *  them far.
      * @details Used formula:
@@ -85,7 +85,7 @@ typedef struct Dc2DcConfig {
      *  Default: kPwmToleranceToFastDefault.
      */
     float pwmToleranceToFast;
-    /** 
+    /**
      * @brief Tolerance voltage for DC2DC output.
      * @details The output voltage will vary within tolerance limits.<br/>
      *  Default: kDc2DcVoutToleranceDefault.
@@ -105,22 +105,23 @@ typedef struct Dc2DcConfig {
      * @param adcVref Reference voltage of the ADC, in Volts.
      * @param pwmMinDuty Minimal duty cycle value for the PWM, in %.
      * @param pwmMaxDuty Maximum duty cycle value for the PWM, in %.
-     * @param pwmSlowStepDuty Step of slow increment/decrement for the PWM duty cycle.
-     * @param pwmFastStepDuty Step of fast increment/decrement for the PWM duty cycle.
-     * @param pwmToleranceToFast Tolerance between actual and target voltages to consider
-     *  them far.
+     * @param pwmSlowStepDuty Step of slow increment/decrement for the PWM duty
+     * cycle.
+     * @param pwmFastStepDuty Step of fast increment/decrement for the PWM duty
+     * cycle.
+     * @param pwmToleranceToFast Tolerance between actual and target voltages to
+     * consider them far.
      * @param vTolerance Tolerance voltage for DC2DC output.
      */
-    explicit Dc2DcConfig(uint pwmPin, uint adcChannel,
-                float divider = 1.0f,
-                uint32_t pwmFreq = Pwm::kPwmDefaultFreq,
-                float adcVref = Adc::kAdcDefaultVRef,
-                float pwmMinDuty = kPwmMinDutyCycleDefault,
-                float pwmMaxDuty = kPwmMaxDutyCycleDefault,
-                float pwmSlowStepDuty = kPwmSlowStepDutyCycleDefault,
-                float pwmFastStepDuty = kPwmFastStepDutyCycleDefault,
-                float pwmToleranceToFast = kPwmToleranceToFastDefault,
-                float vTolerance = kDc2DcVoutToleranceDefault);
+    explicit Dc2DcConfig(uint pwmPin, uint adcChannel, float divider = 1.0f,
+                         uint32_t pwmFreq = Pwm::kPwmDefaultFreq,
+                         float adcVref = Adc::kAdcDefaultVRef,
+                         float pwmMinDuty = kPwmMinDutyCycleDefault,
+                         float pwmMaxDuty = kPwmMaxDutyCycleDefault,
+                         float pwmSlowStepDuty = kPwmSlowStepDutyCycleDefault,
+                         float pwmFastStepDuty = kPwmFastStepDutyCycleDefault,
+                         float pwmToleranceToFast = kPwmToleranceToFastDefault,
+                         float vTolerance = kDc2DcVoutToleranceDefault);
     /**
      * @brief Assign Operator.
      * @param src Dc2DcConfig source object.
@@ -131,17 +132,17 @@ typedef struct Dc2DcConfig {
     static constexpr float kPwmMinDutyCycleDefault = 0.0f;
     /** @brief Default value for maximum duty cycle value for the PWM, in %. */
     static constexpr float kPwmMaxDutyCycleDefault = 95.0f;
-    /** 
+    /**
      * @brief Default value for step of slow increment/decrement for the
      *  PWM duty cycle.
      */
     static constexpr float kPwmSlowStepDutyCycleDefault = 0.1f;
-    /** 
+    /**
      * @brief Default value for step of fast increment/decrement for the
      *  PWM duty cycle.
      */
     static constexpr float kPwmFastStepDutyCycleDefault = 1.0f;
-    /** 
+    /**
      * @brief Default value for Tolerance between actual and target voltages
      * to consider them far.
      */
@@ -174,7 +175,7 @@ typedef struct Dc2DcConfig {
  * @nosubgrouping
  */
 class Dc2Dc {
- public:
+  public:
     /**
      * @brief Constructor.
      * @details Assumes a default value for the configuration.
@@ -255,7 +256,7 @@ class Dc2Dc {
      */
     float getDuty() const;
 
- private:
+  private:
     /* @brief Configuration data. */
     Dc2DcConfig config_;
     /* @brief Adc instance. */

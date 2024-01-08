@@ -6,11 +6,11 @@
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
-/** 
+/**
  * @ingroup UnitTests
  * @file test/circuits/74hc165_test.hpp
  * @brief Header of Unit Test for 74xx165 Shift Register Class.
- * 
+ *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
@@ -31,17 +31,17 @@
  * @nosubgrouping
  */
 class HC165Test : public testing::Test {
- protected:
-  /** @brief Constructor. */
-  HC165Test();
-  /** @brief Destructor. */
-  ~HC165Test() override;
-  /** @brief Sets Up the test. */
-  void SetUp() override;
-  /** @brief Teardown of the test. */
-  void TearDown() override;
-  /* @brief HC165 class object to test. */
-  static HC165 hc165_;
+  protected:
+    /** @brief Constructor. */
+    HC165Test();
+    /** @brief Destructor. */
+    ~HC165Test() override;
+    /** @brief Sets Up the test. */
+    void SetUp() override;
+    /** @brief Teardown of the test. */
+    void TearDown() override;
+    /* @brief HC165 class object to test. */
+    static HC165 hc165_;
 };
 
 #endif  // TEST_CIRCUITS_74HC165_TEST_HPP_

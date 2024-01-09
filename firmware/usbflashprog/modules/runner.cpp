@@ -83,9 +83,11 @@ void Runner::init() {
 }
 
 void Runner::loop() {
+    int c = serial_.getChar(0);
+    if (c == PICO_ERROR_TIMEOUT) return;
     TByteArray data;
+    data.insert(data.end(), c & 0xFF);
     command_.clear();
-    data = readByte_(1);
     command_.insert(command_.end(), data.begin(), data.end());
     auto code = findOpCode_();
     if (code != kCmdOpCodes.end() && code->second.params) {
@@ -110,25 +112,21 @@ Runner::TByteArray Runner::readByte_(size_t len) {
 }
 
 TCmdOpCodeMap::const_iterator Runner::findOpCode_() {
-    if (command_.size() < 1) {
-        return kCmdOpCodes.end();
-    }
+    if (command_.size() < 1) return kCmdOpCodes.end();
     return kCmdOpCodes.find(static_cast<kCmdOpCodeEnum>(command_[0]));
 }
 
 void Runner::runCommand_() {
-    if (command_.size() < 1) {
-        return;
-    }
+    if (command_.size() < 1) return;
     auto code = findOpCode_();
     if (code == kCmdOpCodes.end() ||
         command_.size() < (code->second.params + 1)) {
         // opcode not found or nparams invalid
-        serial_.putChar(kCmdResponseNok, true);
+        serial_.putChar(kCmdResponseNok);
         return;
     }
     if (code->first == kCmdNop) {  // NOP
-        serial_.putChar(kCmdResponseOk, true);
+        serial_.putChar(kCmdResponseOk);
     } else {
         runVddCommand_(code->first);
         runVppCommand_(code->first);
@@ -149,48 +147,48 @@ void Runner::runVddCommand_(uint8_t opcode) {
             } else {
                 vgen_.vdd.off();
             }
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVddSetV:
             v = getParamAsFloat_();
             vgen_.vdd.setV(v);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVddGetV:
             v = vgen_.vdd.getV();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVddGetDuty:
             v = vgen_.vdd.getDuty();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVddGetCal:
             v = vgen_.vdd.getCalibration();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVddInitCal:
             vgen_.vdd.initCalibration();
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVddSaveCal:
             v = getParamAsFloat_();
             vgen_.vdd.saveCalibration(v);
             vgen_.vdd.setV(kVddInitial);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVddOnVpp:
             b = getParamAsBool_();
             vgen_.vdd.onVpp(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         default:
             break;
@@ -208,68 +206,68 @@ void Runner::runVppCommand_(uint8_t opcode) {
             } else {
                 vgen_.vpp.off();
             }
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppSetV:
             v = getParamAsFloat_();
             vgen_.vpp.setV(v);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppGetV:
             v = vgen_.vpp.getV();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVppGetDuty:
             v = vgen_.vpp.getDuty();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVppGetCal:
             v = vgen_.vpp.getCalibration();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVppInitCal:
             vgen_.vpp.initCalibration();
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppSaveCal:
             v = getParamAsFloat_();
             vgen_.vpp.saveCalibration(v);
             vgen_.vpp.setV(kVppInitial);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnA9:
             b = getParamAsBool_();
             vgen_.vpp.onA9(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnA18:
             b = getParamAsBool_();
             vgen_.vpp.onA18(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnCE:
             b = getParamAsBool_();
             vgen_.vpp.onCE(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnOE:
             b = getParamAsBool_();
             vgen_.vpp.onOE(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnWE:
             b = getParamAsBool_();
             vgen_.vpp.onWE(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         default:
             break;
@@ -283,17 +281,17 @@ void Runner::runCtrlBusCommand_(uint8_t opcode) {
         case kCmdBusCE:
             b = getParamAsBool_();
             ctrlBus_.setCE(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdBusOE:
             b = getParamAsBool_();
             ctrlBus_.setOE(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdBusWE:
             b = getParamAsBool_();
             ctrlBus_.setWE(b);
-            serial_.putChar(kCmdResponseOk, true);
+            serial_.putChar(kCmdResponseOk);
             break;
         default:
             break;
@@ -306,25 +304,25 @@ void Runner::runDataBusCommand_(uint8_t opcode) {
     switch (opcode) {
         case kCmdBusDataClr:
             if (dataBus_.writeByte(0)) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusDataSet:
             w = getParamAsWord_();
             if (dataBus_.writeWord(w)) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusDataSetB:
             w = getParamAsByte_();
             if (dataBus_.writeByte(w)) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusDataGet:
@@ -332,14 +330,14 @@ void Runner::runDataBusCommand_(uint8_t opcode) {
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromWord_(&response, w);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         case kCmdBusDataGetB:
             w = dataBus_.readByte();
             response.resize(2);
             response[0] = kCmdResponseOk;
             createParamsFromByte_(&response, w);
-            serial_.putBuf(response.data(), response.size(), true);
+            serial_.putBuf(response.data(), response.size());
             break;
         default:
             break;
@@ -352,40 +350,40 @@ void Runner::runAddrBusCommand_(uint8_t opcode) {
     switch (opcode) {
         case kCmdBusAddrClr:
             if (addrBus_.writeByte(0)) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusAddrInc:
             if (addrBus_.increment()) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusAddrSet:
             dw = getParamAsDWord_();
             if (addrBus_.writeDWord(dw)) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusAddrSetB:
             dw = getParamAsByte_();
             if (addrBus_.writeByte(dw)) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusAddrSetW:
             dw = getParamAsWord_();
             if (addrBus_.writeWord(dw)) {
-                serial_.putChar(kCmdResponseOk, true);
+                serial_.putChar(kCmdResponseOk);
             } else {
-                serial_.putChar(kCmdResponseNok, true);
+                serial_.putChar(kCmdResponseNok);
             }
             break;
         default:

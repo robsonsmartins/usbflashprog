@@ -17,6 +17,8 @@
 
 #include <cstring>
 
+#include "pico/stdlib.h"
+
 #include "hal/serial.hpp"
 #include "hal/string.hpp"
 

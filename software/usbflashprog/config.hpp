@@ -20,8 +20,9 @@
 
 // ---------------------------------------------------------------------------
 
-#include <QString>
 #include <QtGlobal>
+#include <QtCore>
+#include <QString>
 
 // ---------------------------------------------------------------------------
 
@@ -42,6 +43,12 @@ constexpr const char *kProjectHomePage =
 constexpr const char *kAuthorHomePage = "https://robsonmartins.com/";
 /** @brief GENERAL : Author Name. */
 constexpr const char *kAuthorName = "Robson Martins";
+/** @brief GENERAL : Organization Name. */
+constexpr const char *kOrganizationName = "RobsonMartins";
+/** @brief GENERAL : Organization Domain. */
+constexpr const char *kOrganizationDomain = "robsonmartins.com";
+/** @brief GENERAL : App Name. */
+constexpr const char *kApplicationName = "UsbFlashProg";
 
 /** @brief COMM/USB : Vendor ID. */
 constexpr quint16 kUsbVendorId = 0x2E8A;
@@ -52,5 +59,99 @@ constexpr quint16 kUsbProductId = 0x000A;
 constexpr int kUsbEnumerateInterval = 2000;
 /** @brief COMM/USB : Interval to refresh communication, in milliseconds. */
 constexpr int kUsbRefreshInterval = 500;
+
+/** @brief GENERAL : Log filename. */
+constexpr const char *kLogFileName = "ufprog.log";
+
+/** @brief SETTING : General / LogLevel. */
+constexpr const char *kSettingGeneralLogLevel = "LogLevel";
+/** @brief SETTING : General / Window Position. */
+constexpr const char *kSettingGeneralWindowPos = "WindowPos";
+/** @brief SETTING : General / Window Size. */
+constexpr const char *kSettingGeneralWindowSize = "WindowSize";
+/** @brief SETTING : General / Language. */
+constexpr const char *kSettingGeneralLanguage = "Language";
+
+/** @brief SETTING : Programmer / Selected Device. */
+constexpr const char *kSettingProgDevice = "Prog/Device";
+/** @brief SETTING : Programmer / Device Size. */
+constexpr const char *kSettingProgDeviceSize = "Prog/DeviceSize";
+/** @brief SETTING : Programmer / tWP. */
+constexpr const char *kSettingProgTwp = "Prog/tWP";
+/** @brief SETTING : Programmer / tWC. */
+constexpr const char *kSettingProgTwc = "Prog/tWC";
+/** @brief SETTING : Programmer / VDD to Read. */
+constexpr const char *kSettingProgVddRd = "Prog/VDDToRead";
+/** @brief SETTING : Programmer / VDD to Prog. */
+constexpr const char *kSettingProgVddWr = "Prog/VDDToProg";
+/** @brief SETTING : Programmer / VPP. */
+constexpr const char *kSettingProgVpp = "Prog/VPP";
+/** @brief SETTING : Programmer / VEE. */
+constexpr const char *kSettingProgVee = "Prog/VEE";
+/** @brief SETTING : Programmer / Skip Prog 0xFF. */
+constexpr const char *kSettingProgSkipFF = "Prog/SkipFF";
+/** @brief SETTING : Programmer / Fast Prog/Erase. */
+constexpr const char *kSettingProgFast = "Prog/FastProg";
+/** @brief SETTING : Programmer / Sector Size. */
+constexpr const char *kSettingProgSectorSize = "Prog/SectorSize";
+
+// ---------------------------------------------------------------------------
+/**
+ * @ingroup Software
+ * @brief Stores the programmer settings.
+ */
+typedef struct TProgrammerSettings {
+    /** @brief Device name. */
+    QString device;
+    /** @brief Device size in bytes. */
+    uint32_t size;
+    /** @brief tWP value in microseconds. */
+    uint32_t twp;
+    /** @brief tWC value in microseconds. */
+    uint32_t twc;
+    /** @brief VDD to Read value in volts. */
+    float vddRd;
+    /** @brief VDD to Prog value in volts. */
+    float vddWr;
+    /** @brief VPP value in volts. */
+    float vpp;
+    /** @brief VEE value in volts. */
+    float vee;
+    /** @brief Skip Prog 0xFF. */
+    bool skipFF;
+    /** @brief Fast Prog/Erase. */
+    bool fastProg;
+    /** @brief Sector Size in bytes (0 is byte prog). */
+    uint16_t sectorSize;
+} TProgrammerSettings;
+
+/**
+ * @ingroup Software
+ * @brief Stores the application settings.
+ */
+typedef struct TApplicationSettings {
+    /** @brief The Log Level.
+     * <ul>
+     *  <li>0: Disable (or \< 0) - Default</li>
+     *  <li>1: Fatal</li>
+     *  <li>2: Critical</li>
+     *  <li>3: Warning</li>
+     *  <li>4: Info</li>
+     *  <li>5: Debug (or \> 5)</li>
+     * </ul>
+     */
+    int logLevel;
+    /** @brief The coordinates of the main window. */
+    QPoint windowPos;
+    /** @brief The size of the main window. */
+    QSize windowSize;
+    /** @brief The language of the application.
+     *    Empty is autodetect (default). */
+    QString language;
+    /** @brief Programmer settings. */
+    TProgrammerSettings prog;
+} TApplicationSettings;
+
+// ---------------------------------------------------------------------------
 
 #endif  // CONFIG_HPP_

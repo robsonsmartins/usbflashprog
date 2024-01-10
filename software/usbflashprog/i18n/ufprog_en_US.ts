@@ -525,5 +525,81 @@
         <source>Caution! Check the VDD, VPP and VEE voltages and the size of the device before running, otherwise you will damage it!</source>
         <translation>Caution! Check the VDD, VPP and VEE voltages and the size of the device before running, otherwise you will damage it!</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation>Settings</translation>
+    </message>
+    <message>
+        <source>Data rate: %1</source>
+        <translation>Data rate: %1</translation>
+    </message>
+    <message>
+        <source>Estimated remaining time: %1</source>
+        <translation>Estimated remaining time: %1</translation>
+    </message>
+    <message>
+        <source>%1 hour(s)</source>
+        <translatorcomment>%1 hour(s)</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <source>%1 minute(s)</source>
+        <translation>%1 minute(s)</translation>
+    </message>
+    <message>
+        <source>%1 second(s)</source>
+        <translation>%1 second(s)</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialog</name>
+    <message>
+        <source>USB Flash/EPROM Programmer</source>
+        <translation>USB Flash/EPROM Programmer</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>General</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Language</translation>
+    </message>
+    <message>
+        <source>Autodetect</source>
+        <translation>Autodetect</translation>
+    </message>
+    <message>
+        <source>Log Level</source>
+        <translation>Log Level</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation>Disabled</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Fatal</translation>
+    </message>
+    <message>
+        <source>Critical</source>
+        <translation>Critical</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Warning</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Info</translation>
+    </message>
+    <message>
+        <source>Debug</source>
+        <translation>Debug</translation>
+    </message>
+    <message>
+        <source>Note: The log file can be found at %1</source>
+        <translation>Note: The log file can be found at %1</translation>
+    </message>
 </context>
 </TS>

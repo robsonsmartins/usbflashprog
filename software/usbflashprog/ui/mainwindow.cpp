@@ -8,7 +8,7 @@
 // ---------------------------------------------------------------------------
 /**
  * @ingroup Software
- * @file main/mainwindow.cpp
+ * @file ui/mainwindow.cpp
  * @brief Implementation of the Main Window Class.
  *
  * @author Robson Martins (https://www.robsonmartins.com)
@@ -39,10 +39,11 @@
 #include <cmath>
 
 #include "mainwindow.hpp"
-#include "config.hpp"
 #include "./ui_mainwindow.h"
-#include "backend/opcodes.hpp"
 
+#include "config.hpp"
+#include "settings.hpp"
+#include "backend/opcodes.hpp"
 #include "backend/devices/parallel/dummy.hpp"
 #include "backend/devices/parallel/sram.hpp"
 #include "backend/devices/parallel/eprom.hpp"
@@ -51,29 +52,6 @@
 
 /* @brief Minimum length of dialog labels, in characters. */
 constexpr int kDialogLabelMinLength = 80;
-
-/* @brief Setting: Programmer / Selected Device. */
-constexpr const char *kSettingProgDevice = "Prog/Device";
-/* @brief Setting: Programmer / Device Size. */
-constexpr const char *kSettingProgDeviceSize = "Prog/DeviceSize";
-/* @brief Setting: Programmer / tWP. */
-constexpr const char *kSettingProgTwp = "Prog/tWP";
-/* @brief Setting: Programmer / tWC. */
-constexpr const char *kSettingProgTwc = "Prog/tWC";
-/* @brief Setting: Programmer / VDD to Read. */
-constexpr const char *kSettingProgVddRd = "Prog/VDDToRead";
-/* @brief Setting: Programmer / VDD to Prog. */
-constexpr const char *kSettingProgVddWr = "Prog/VDDToProg";
-/* @brief Setting: Programmer / VPP. */
-constexpr const char *kSettingProgVpp = "Prog/VPP";
-/* @brief Setting: Programmer / VEE. */
-constexpr const char *kSettingProgVee = "Prog/VEE";
-/* @brief Setting: Programmer / Skip Prog 0xFF. */
-constexpr const char *kSettingProgSkipFF = "Prog/SkipFF";
-/* @brief Setting: Programmer / Fast Prog/Erase. */
-constexpr const char *kSettingProgFast = "Prog/FastProg";
-/* @brief Setting: Programmer / Sector Size. */
-constexpr const char *kSettingProgSectorSize = "Prog/SectorSize";
 
 /* @brief CRC32 table for calculation. */
 constexpr uint32_t kCRC32Table[] = {
@@ -165,6 +143,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui_->frameEditor->layout()->setAlignment(Qt::AlignLeft);
     ui_->frameEditor->layout()->addWidget(hexeditor_);
     ui_->frameEditor->layout()->setContentsMargins(0, 0, 20, 20);
+    hexeditor_->setSize(2048);
 
     ui_->actionSave->setEnabled(false);
     connectSignals_();
@@ -174,11 +153,35 @@ MainWindow::MainWindow(QWidget *parent)
     checksumLabel_ = new QLabel();
     ui_->statusbar->addPermanentWidget(checksumLabel_);
 
-    loadSettings_();
+    // restore window position and size
+    QSettings settings;
+    TApplicationSettings app;
+    app.windowPos = settings.value(kSettingGeneralWindowPos).toPoint();
+    app.windowSize = settings.value(kSettingGeneralWindowSize).toSize();
+    if (app.windowPos.x() > 0 || app.windowPos.y() > 0 ||
+        app.windowSize.width() > 0 || app.windowSize.height() > 0) {
+        qDebug() << "Moving and resizing main window ("
+                 << "left = " << app.windowPos.x()
+                 << ", top = " << app.windowPos.y()
+                 << ", width = " << app.windowSize.width()
+                 << ", height = " << app.windowSize.height() << ")";
+        move(app.windowPos);
+        resize(app.windowSize);
+    }
+
+    loadProgSettings_();
     updateCheckSum_();
 }
 
 MainWindow::~MainWindow() {
+    // save window position and size
+    QSettings settings;
+    TApplicationSettings app;
+    app.windowPos = pos();
+    app.windowSize = size();
+    settings.setValue(kSettingGeneralWindowPos, app.windowPos);
+    settings.setValue(kSettingGeneralWindowSize, app.windowSize);
+
     delete progress_;
     if (device_) {
         device_->disconnect();
@@ -279,6 +282,14 @@ void MainWindow::on_actionAuthorHome_triggered(bool checked) {
     QDesktopServices::openUrl(QUrl(kAuthorHomePage));
 }
 
+void MainWindow::on_actionSettings_triggered(bool checked) {
+    SettingsDialog dialog(this);
+    if (dialog.exec() == QDialog::Accepted) {
+        ui_->retranslateUi(this);
+        loadProgSettings_();
+    }
+}
+
 void MainWindow::closeEvent(QCloseEvent *event) {
     static bool readyToClose = false;
     static bool closing = false;
@@ -323,14 +334,20 @@ void MainWindow::onSelectDeviceTriggered(bool checked) {
     ui_->btnProgDevice->setText(action->text());
     createDevice_();
     configureProgControls_();
-    saveSettings_();
+    saveProgSettings_();
     hexeditor_->fill(0xFF);
     noWarningDevice_ = false;
 }
 
+#include <QDateTime>
+
 void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
                                   bool success, bool canceled) {
-    if (!current) progress_->setRange(current, total);
+    static qint64 startTime = 0;
+    if (!current) {
+        progress_->setRange(current, total);
+        startTime = QDateTime::currentMSecsSinceEpoch();
+    }
     if (canceled) {
         progress_->setValue(total);
         QMessageBox::warning(
@@ -349,12 +366,18 @@ void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
                 .arg(QString("%1").arg(current, 6, 16, QChar('0')).toUpper())
                 .leftJustified(kDialogLabelMinLength));
     } else {
+        qint64 elapsedTime = QDateTime::currentMSecsSinceEpoch() - startTime;
         progress_->setValue(current);
         progress_->setLabelText(
             tr("Processing address 0x%1 of 0x%2")
                 .arg(QString("%1").arg(current, 6, 16, QChar('0')).toUpper())
                 .arg(
-                    QString("%1").arg(total - 1, 6, 16, QChar('0')).toUpper()));
+                    QString("%1").arg(total - 1, 6, 16, QChar('0')).toUpper()) +
+            "\n\n" +
+            tr("Data rate: %1").arg(calculateDataRate_(elapsedTime, current)) +
+            " | " +
+            tr("Estimated remaining time: %1")
+                .arg(calculateRemainingTime_(elapsedTime, current, total)));
     }
 }
 
@@ -492,39 +515,39 @@ void MainWindow::on_btnUnprotect_clicked() {
 }
 
 void MainWindow::on_spinBoxProgTWP_valueChanged(int value) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_spinBoxProgTWC_valueChanged(int value) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_spinBoxProgVDDrd_valueChanged(double value) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_spinBoxProgVDDwr_valueChanged(double value) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_spinBoxProgVPP_valueChanged(double value) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_spinBoxProgVEE_valueChanged(double value) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_checkBoxProgSkipFF_toggled(bool checked) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_checkBoxProgFast_toggled(bool checked) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_comboBoxProgSectorSize_currentIndexChanged(int index) {
-    saveSettings_();
+    saveProgSettings_();
 }
 
 void MainWindow::on_comboBoxProgSize_currentIndexChanged(int index) {
@@ -537,71 +560,77 @@ void MainWindow::on_comboBoxProgSize_currentIndexChanged(int index) {
         device_->setSize(size);
         configureProgControls_();
         hexeditor_->fill(0xFF);
-        saveSettings_();
+        saveProgSettings_();
     }
 }
 
-void MainWindow::loadSettings_() {
+void MainWindow::loadProgSettings_() {
     QSettings settings;
-    QString device = settings.value(kSettingProgDevice).toString();
-    uint32_t size = settings.value(kSettingProgDeviceSize).toString().toUInt();
-    uint32_t twp = settings.value(kSettingProgTwp).toString().toUInt();
-    uint32_t twc = settings.value(kSettingProgTwc).toString().toUInt();
-    float vddRd = settings.value(kSettingProgVddRd).toString().toFloat();
-    float vddWr = settings.value(kSettingProgVddWr).toString().toFloat();
-    float vpp = settings.value(kSettingProgVpp).toString().toFloat();
-    float vee = settings.value(kSettingProgVee).toString().toFloat();
-    bool skipFF = settings.value(kSettingProgSkipFF).toString().toInt() != 0;
-    bool fastProg = settings.value(kSettingProgFast).toString().toInt() != 0;
-    uint16_t sectorSize =
+    TProgrammerSettings prog;
+
+    prog.device = settings.value(kSettingProgDevice).toString();
+    prog.size = settings.value(kSettingProgDeviceSize).toString().toUInt();
+    prog.twp = settings.value(kSettingProgTwp).toString().toUInt();
+    prog.twc = settings.value(kSettingProgTwc).toString().toUInt();
+    prog.vddRd = settings.value(kSettingProgVddRd).toString().toFloat();
+    prog.vddWr = settings.value(kSettingProgVddWr).toString().toFloat();
+    prog.vpp = settings.value(kSettingProgVpp).toString().toFloat();
+    prog.vee = settings.value(kSettingProgVee).toString().toFloat();
+    prog.skipFF = settings.value(kSettingProgSkipFF).toString().toInt() != 0;
+    prog.fastProg = settings.value(kSettingProgFast).toString().toInt() != 0;
+    prog.sectorSize =
         settings.value(kSettingProgSectorSize).toString().toUInt();
-    if (!device.isEmpty()) {
-        ui_->btnProgDevice->setText(device);
+
+    if (!prog.device.isEmpty()) {
+        ui_->btnProgDevice->setText(prog.device);
         createDevice_();
-        device_->setSize(size);
-        device_->setTwp(twp);
-        device_->setTwc(twc);
-        device_->setVddRd(vddRd);
-        device_->setVddWr(vddWr);
-        device_->setVpp(vpp);
-        device_->setVee(vee);
-        device_->setSkipFF(skipFF);
-        device_->setFastProg(fastProg);
-        device_->setSectorSize(sectorSize);
+        device_->setSize(prog.size);
+        device_->setTwp(prog.twp);
+        device_->setTwc(prog.twc);
+        device_->setVddRd(prog.vddRd);
+        device_->setVddWr(prog.vddWr);
+        device_->setVpp(prog.vpp);
+        device_->setVee(prog.vee);
+        device_->setSkipFF(prog.skipFF);
+        device_->setFastProg(prog.fastProg);
+        device_->setSectorSize(prog.sectorSize);
     }
     configureProgControls_();
 }
 
-void MainWindow::saveSettings_() {
+void MainWindow::saveProgSettings_() {
     QSettings settings;
-    QString device = ui_->btnProgDevice->text();
-    settings.setValue(kSettingProgDevice, device);
-    uint32_t size = static_cast<uint32_t>(
+    TProgrammerSettings prog;
+
+    prog.device = ui_->btnProgDevice->text();
+    prog.size = static_cast<uint32_t>(
         ceil(powf(2, ui_->comboBoxProgSize->currentIndex()) * 2048.0f));
-    settings.setValue(kSettingProgDeviceSize, QString::number(size));
-    uint32_t twp = ui_->spinBoxProgTWP->value();
-    if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) twp *= 1000;
-    settings.setValue(kSettingProgTwp, QString::number(twp));
-    uint32_t twc = ui_->spinBoxProgTWC->value();
-    if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) twc *= 1000;
-    settings.setValue(kSettingProgTwc, QString::number(twc));
-    float vddRd = ui_->spinBoxProgVDDrd->value();
-    settings.setValue(kSettingProgVddRd, QString::number(vddRd));
-    float vddWr = ui_->spinBoxProgVDDwr->value();
-    settings.setValue(kSettingProgVddWr, QString::number(vddWr));
-    float vpp = ui_->spinBoxProgVPP->value();
-    settings.setValue(kSettingProgVpp, QString::number(vpp));
-    float vee = ui_->spinBoxProgVEE->value();
-    settings.setValue(kSettingProgVee, QString::number(vee));
-    int skipFF = ui_->checkBoxProgSkipFF->isChecked() ? 1 : 0;
-    settings.setValue(kSettingProgSkipFF, QString::number(skipFF));
-    int fastProg = ui_->checkBoxProgFast->isChecked() ? 1 : 0;
-    settings.setValue(kSettingProgFast, QString::number(fastProg));
-    uint16_t sectorSize = 0;
+    prog.twp = ui_->spinBoxProgTWP->value();
+    if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) prog.twp *= 1000;
+    prog.twc = ui_->spinBoxProgTWC->value();
+    if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) prog.twc *= 1000;
+    prog.vddRd = ui_->spinBoxProgVDDrd->value();
+    prog.vddWr = ui_->spinBoxProgVDDwr->value();
+    prog.vpp = ui_->spinBoxProgVPP->value();
+    prog.vee = ui_->spinBoxProgVEE->value();
+    prog.skipFF = ui_->checkBoxProgSkipFF->isChecked();
+    prog.fastProg = ui_->checkBoxProgFast->isChecked();
+    prog.sectorSize = 0;
     if (ui_->comboBoxProgSectorSize->currentIndex() != 0) {
-        sectorSize = ui_->comboBoxProgSectorSize->currentText().toUInt();
+        prog.sectorSize = ui_->comboBoxProgSectorSize->currentText().toUInt();
     }
-    settings.setValue(kSettingProgSectorSize, QString::number(sectorSize));
+
+    settings.setValue(kSettingProgDevice, prog.device);
+    settings.setValue(kSettingProgDeviceSize, QString::number(prog.size));
+    settings.setValue(kSettingProgTwp, QString::number(prog.twp));
+    settings.setValue(kSettingProgTwc, QString::number(prog.twc));
+    settings.setValue(kSettingProgVddRd, QString::number(prog.vddRd));
+    settings.setValue(kSettingProgVddWr, QString::number(prog.vddWr));
+    settings.setValue(kSettingProgVpp, QString::number(prog.vpp));
+    settings.setValue(kSettingProgVee, QString::number(prog.vee));
+    settings.setValue(kSettingProgSkipFF, QString::number(prog.skipFF ? 1 : 0));
+    settings.setValue(kSettingProgFast, QString::number(prog.fastProg ? 1 : 0));
+    settings.setValue(kSettingProgSectorSize, QString::number(prog.sectorSize));
 }
 
 void MainWindow::createDevice_() {
@@ -654,6 +683,7 @@ void MainWindow::createDeviceIfSRAM_(const QString &label) {
         device_->setSize(size);
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
     }
 }
 
@@ -695,10 +725,11 @@ void MainWindow::createDeviceIfEPROM_(const QString &label) {
     if (found) {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_ = new M27xxx(this);
+        device_ = new EPROM27(this);
         device_->setSize(size);
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
     }
     size = 0x800;
     found = false;
@@ -741,10 +772,11 @@ void MainWindow::createDeviceIfEPROM_(const QString &label) {
     if (found) {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_ = new M27Cxxx(this);
+        device_ = new EPROM27C(this);
         device_->setSize(size);
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
     }
     size = 0x800;
     found = false;
@@ -775,10 +807,11 @@ void MainWindow::createDeviceIfEPROM_(const QString &label) {
     if (found) {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_ = new M27C16Bit(this);
+        device_ = new EPROM27C16Bit(this);
         device_->setSize(size);
         hexeditor_->setMode(QHexEditor::Mode16Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
     }
 }
 
@@ -814,13 +847,14 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
     if (found) {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_ = new W27Exxx(this);
+        device_ = new EPROM27E(this);
         device_->setSize(size);
         device_->setVpp(vpp);
         device_->setVee(vee);
         device_->setVddWr(vdd);
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
     }
     found = false;
     vpp = 12.0f;
@@ -846,13 +880,14 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
     if (found) {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_ = new W27Exxx(this);
+        device_ = new EPROM27E(this);
         device_->setSize(size);
         device_->setVpp(vpp);
         device_->setVee(vee);
         device_->setVddWr(vdd);
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(false);
+        ui_->labelProgSize->setEnabled(false);
     }
     found = false;
     vpp = 12.75f;
@@ -873,13 +908,14 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
     if (found) {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_ = new W27Exxx(this);
+        device_ = new EPROM27E(this);
         device_->setSize(size);
         device_->setVpp(vpp);
         device_->setVee(vee);
         device_->setVddWr(vdd);
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(false);
+        ui_->labelProgSize->setEnabled(false);
     }
     found = false;
     vpp = 12.0f;
@@ -902,7 +938,7 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
     if (found) {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
-        device_ = new W27Exxx(this);
+        device_ = new EPROM27E(this);
         device_->setSize(size);
         device_->setVpp(vpp);
         device_->setVee(vee);
@@ -910,6 +946,7 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
         device_->setVddWr(vdd);
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(false);
+        ui_->labelProgSize->setEnabled(false);
     }
 }
 
@@ -1133,6 +1170,33 @@ void MainWindow::refreshPortComboBox_() {
         }
     }
     ui_->pushButtonConnect->setEnabled(!paths.empty());
+}
+
+QString MainWindow::calculateDataRate_(int64_t elapsed, uint32_t amount) {
+    double value = (elapsed ? (amount * 1.0 / elapsed) : 0.0) * 1000.0;
+    if (value >= 1024 * 1024) {  // MB/s
+        return QString("%1 MB/s").arg(
+            static_cast<int>(round(value / 1024.0 / 1024.0)));
+    } else if (value >= 1024) {  // KB/s
+        return QString("%1 KB/s").arg(static_cast<int>(round(value / 1024.0)));
+    } else {  // Byte/s
+        return QString("%1 byte/s").arg(static_cast<int>(round(value)));
+    }
+}
+
+QString MainWindow::calculateRemainingTime_(int64_t elapsed, uint32_t current,
+                                            uint32_t total) {
+    double value =
+        (current ? (elapsed * 1.0 * (total - current) / current) : 0.0) /
+        1000.0;
+    if (value >= 60 * 60) {  // hr
+        return tr("%1 hour(s)")
+            .arg(static_cast<int>(round(value / 60.0 / 60.0)));
+    } else if (value >= 60) {  // min
+        return tr("%1 minute(s)").arg(static_cast<int>(round(value / 60.0)));
+    } else {  // sec
+        return tr("%1 second(s)").arg(static_cast<int>(round(value)));
+    }
 }
 
 // ---------------------------------------------------------------------------

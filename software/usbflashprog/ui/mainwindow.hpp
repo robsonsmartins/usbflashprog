@@ -8,15 +8,15 @@
 // ---------------------------------------------------------------------------
 /**
  * @ingroup Software
- * @file main/mainwindow.hpp
+ * @file ui/mainwindow.hpp
  * @brief Header of the Main Window Class.
  *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
-#ifndef MAIN_MAINWINDOW_HPP_
-#define MAIN_MAINWINDOW_HPP_
+#ifndef UI_MAINWINDOW_HPP_
+#define UI_MAINWINDOW_HPP_
 
 #include <QMainWindow>
 #include <QTimer>
@@ -71,6 +71,7 @@ class MainWindow : public QMainWindow {
     void on_actionAboutQt_triggered(bool checked = false);
     void on_actionProjectHome_triggered(bool checked = false);
     void on_actionAuthorHome_triggered(bool checked = false);
+    void on_actionSettings_triggered(bool checked = false);
     /* programmer */
     void on_comboBoxProgPort_currentIndexChanged(int index);
     void on_actionRead_triggered(bool checked = false);
@@ -178,9 +179,9 @@ class MainWindow : public QMainWindow {
     /* @brief Connects signals of the widgets. */
     void connectSignals_();
     /* @brief Loads configuration settings. */
-    void loadSettings_();
+    void loadProgSettings_();
     /* @brief Saves configuration settings. */
-    void saveSettings_();
+    void saveProgSettings_();
     /* @brief Creates device (Prog). */
     void createDevice_();
     /*
@@ -218,6 +219,23 @@ class MainWindow : public QMainWindow {
      * @return True if it can continue, false otherwise.
      */
     bool showActionWarningDialog_();
+    /*
+     * @brief Calculates the Data Rate (Prog).
+     * @param elapsed Elapsed time, in milliseconds.
+     * @param amount Amount of data, in bytes.
+     * @return String describing the Data Rate, in bytes/sec or KB/s or MB/s.
+     */
+    QString calculateDataRate_(int64_t elapsed, uint32_t amount);
+    /*
+     * @brief Calculates the Remaining Time (Prog).
+     * @param elapsed Elapsed time, in milliseconds.
+     * @param current Current address.
+     * @param total Total addresses.
+     * @return String describing the Remaining Time, in hours
+     *   or minutes or seconds.
+     */
+    QString calculateRemainingTime_(int64_t elapsed, uint32_t current,
+                                    uint32_t total);
     /* @brief Refreshes the port comboboxes (Prog/Diag). */
     void refreshPortComboBox_();
     /*
@@ -256,4 +274,4 @@ class MainWindow : public QMainWindow {
     void dataHexToBin_();
 };
 
-#endif  // MAIN_MAINWINDOW_HPP_
+#endif  // UI_MAINWINDOW_HPP_

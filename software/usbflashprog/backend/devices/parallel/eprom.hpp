@@ -107,7 +107,7 @@ class EPROM : public SRAM {
  * @details The purpose of this class is to program EPROM 27xxx Memories (NMOS).
  * @nosubgrouping
  */
-class M27xxx : public EPROM {
+class EPROM27 : public EPROM {
     Q_OBJECT
 
   public:
@@ -115,9 +115,9 @@ class M27xxx : public EPROM {
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
      */
-    explicit M27xxx(QObject *parent = nullptr);
+    explicit EPROM27(QObject *parent = nullptr);
     /** @brief Destructor. */
-    virtual ~M27xxx();
+    virtual ~EPROM27();
 };
 
 // ---------------------------------------------------------------------------
@@ -129,7 +129,7 @@ class M27xxx : public EPROM {
  *  (CMOS).
  * @nosubgrouping
  */
-class M27Cxxx : public EPROM {
+class EPROM27C : public EPROM {
     Q_OBJECT
 
   public:
@@ -137,9 +137,9 @@ class M27Cxxx : public EPROM {
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
      */
-    explicit M27Cxxx(QObject *parent = nullptr);
+    explicit EPROM27C(QObject *parent = nullptr);
     /** @brief Destructor. */
-    virtual ~M27Cxxx();
+    virtual ~EPROM27C();
 };
 
 // ---------------------------------------------------------------------------
@@ -151,7 +151,7 @@ class M27Cxxx : public EPROM {
  *  (CMOS) 16Bit.
  * @nosubgrouping
  */
-class M27C16Bit : public M27Cxxx {
+class EPROM27C16Bit : public EPROM27C {
     Q_OBJECT
 
   public:
@@ -159,9 +159,9 @@ class M27C16Bit : public M27Cxxx {
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
      */
-    explicit M27C16Bit(QObject *parent = nullptr);
+    explicit EPROM27C16Bit(QObject *parent = nullptr);
     /** @brief Destructor. */
-    virtual ~M27C16Bit();
+    virtual ~EPROM27C16Bit();
 };
 
 // ---------------------------------------------------------------------------
@@ -173,7 +173,7 @@ class M27C16Bit : public M27Cxxx {
  *  (Electrical Erasable).
  * @nosubgrouping
  */
-class W27Exxx : public M27Cxxx {
+class EPROM27E : public EPROM27C {
     Q_OBJECT
 
   public:
@@ -181,9 +181,9 @@ class W27Exxx : public M27Cxxx {
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
      */
-    explicit W27Exxx(QObject *parent = nullptr);
+    explicit EPROM27E(QObject *parent = nullptr);
     /** @brief Destructor. */
-    virtual ~W27Exxx();
+    virtual ~EPROM27E();
     /* Reimplemented */
     virtual bool erase(bool check = false);
     /* Reimplemented */

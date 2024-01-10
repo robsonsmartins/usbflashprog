@@ -15,10 +15,22 @@
  */
 // ---------------------------------------------------------------------------
 
-#include "backend/devices/parallel/sram.hpp"
-
 #include <QByteArray>
 #include <QRandomGenerator>
+#include <QLoggingCategory>
+
+#include "backend/devices/parallel/sram.hpp"
+
+// ---------------------------------------------------------------------------
+// Logging
+
+Q_LOGGING_CATEGORY(deviceParSram, "device.parallel.sram")
+
+#define DEBUG qCDebug(deviceParSram)
+#define INFO qCInfo(deviceParSram)
+#define WARNING qCWarning(deviceParSram)
+#define CRITICAL qCCritical(deviceParSram)
+#define FATAL qCFatal(deviceParSram)
 
 // ---------------------------------------------------------------------------
 
@@ -34,6 +46,7 @@ SRAM::SRAM(QObject *parent) : Device(parent) {
     size_ = 2048;
     resetBusDelay_ = 25;  // 25 uS
     initDelay_ = 30;      // 30 uS
+    DEBUG << info_.toString();
 }
 
 SRAM::~SRAM() {}
@@ -41,9 +54,13 @@ SRAM::~SRAM() {}
 bool SRAM::program(const QByteArray &buffer, bool verify) {
     (void)buffer;
     (void)verify;
+    INFO << "Programming device...";
     canceling_ = false;
     uint32_t current = 0, total = size_;
-    if (!initialize_(kDeviceOpRead)) return false;
+    if (!initialize_(kDeviceOpRead)) {
+        WARNING << "Error programming device";
+        return false;
+    }
     bool error = false;
     if (!doPatternTest_() || !doRandomTest_()) error = true;
     if (!error && runner_.hasError()) {
@@ -51,6 +68,11 @@ bool SRAM::program(const QByteArray &buffer, bool verify) {
     }
     if (!error) emit onProgress(total, total, true);
     finalize_();
+    if (error) {
+        WARNING << "Error programming device";
+    } else {
+        INFO << "Programming device OK";
+    }
     return !error;
 }
 
@@ -77,6 +99,7 @@ bool SRAM::doRandomTest_() {
 }
 
 bool SRAM::resetBus_() {
+    DEBUG << "Reseting Bus...";
     runner_.vddCtrl(false);
     runner_.vppCtrl(false);
     runner_.addrClr();
@@ -90,6 +113,11 @@ bool SRAM::resetBus_() {
     runner_.vppOnWE(false);
     runner_.dataClr();
     runner_.usDelay(resetBusDelay_);
+    if (runner_.hasError()) {
+        WARNING << "Error in Bus Reset";
+    } else {
+        DEBUG << "Bus Reset OK";
+    }
     return !runner_.hasError();
 }
 
@@ -111,48 +139,80 @@ bool SRAM::read_(uint8_t &data) {
 
 bool SRAM::program_(const QByteArray &buffer, uint32_t &current,
                     uint32_t total) {
+    DEBUG << "Programming data...";
     for (const uint8_t &data : buffer) {
         emit onProgress(current, total);
         if (canceling_) {
             emit onProgress(current, total, true, false, true);
+            DEBUG << QString("Program canceled at 0x%1 of 0x%2")
+                         .arg(current, 6, 16, QChar('0'))
+                         .arg(total, 6, 16, QChar('0'));
             return false;
         }
         uint8_t read;
         write_(data);
         read_(read);
-        runner_.addrInc();
         if (runner_.hasError() || read != data) {
             emit onProgress(current, total, true, false);
+            WARNING << QString("Program error at 0x%1 of 0x%2")
+                           .arg(current, 6, 16, QChar('0'))
+                           .arg(total, 6, 16, QChar('0'));
+            if (runner_.hasError()) {
+                WARNING << "Runner status is Error";
+            } else {
+                WARNING << QString("Data to write 0x%1. Data read 0x%2")
+                               .arg(data, 2, 16, QChar('0'))
+                               .arg(read, 2, 16, QChar('0'));
+            }
             return false;
         }
+        runner_.addrInc();
         current++;
     }
+    DEBUG << "Program OK";
     return true;
 }
 
 bool SRAM::verify_(const QByteArray &buffer, uint32_t &current,
                    uint32_t total) {
+    DEBUG << "Verifying data...";
     for (const uint8_t &data : buffer) {
         emit onProgress(current, total);
         if (canceling_) {
             emit onProgress(current, total, true, false, true);
+            DEBUG << QString("Verify canceled at 0x%1 of 0x%2")
+                         .arg(current, 6, 16, QChar('0'))
+                         .arg(total, 6, 16, QChar('0'));
             return false;
         }
         uint8_t read;
         read_(read);
-        runner_.addrInc();
         if (runner_.hasError() || read != data) {
             emit onProgress(current, total, true, false);
+            WARNING << QString("Verify error at 0x%1 of 0x%2")
+                           .arg(current, 6, 16, QChar('0'))
+                           .arg(total, 6, 16, QChar('0'));
+            if (runner_.hasError()) {
+                WARNING << "Runner status is Error";
+            } else {
+                WARNING << QString("Data to write 0x%1. Data read 0x%2")
+                               .arg(data, 2, 16, QChar('0'))
+                               .arg(read, 2, 16, QChar('0'));
+            }
             return false;
         }
         current++;
+        runner_.addrInc();
     }
+    DEBUG << "Verify OK";
     return true;
 }
 
 bool SRAM::initialize_(kDeviceOperation operation) {
+    DEBUG << "Initializing...";
     if (!runner_.open(port_)) {
         emit onProgress(0, size_, true, false);
+        WARNING << "Error opening Serial Port.";
         return false;
     }
     resetBus_();
@@ -175,12 +235,15 @@ bool SRAM::initialize_(kDeviceOperation operation) {
     }
     runner_.usDelay(initDelay_);
     if (runner_.hasError()) return finalize_(0, size_, true, false);
+    DEBUG << "Initialize OK";
     return true;
 }
 
 void SRAM::finalize_() {
+    DEBUG << "Finalizing...";
     resetBus_();
     runner_.close();
+    DEBUG << "Finalize OK";
 }
 
 bool SRAM::finalize_(uint32_t current, uint32_t total, bool done, bool success,
@@ -191,6 +254,7 @@ bool SRAM::finalize_(uint32_t current, uint32_t total, bool done, bool success,
 }
 
 QByteArray SRAM::generateRandomData_() {
+    DEBUG << "Generating Random Data...";
     QByteArray buffer(size_, 0);
     for (int i = 0; i < size_; ++i) {
         buffer[i] = static_cast<char>(QRandomGenerator::global()->generate());
@@ -199,6 +263,7 @@ QByteArray SRAM::generateRandomData_() {
 }
 
 QByteArray SRAM::generatePatternData_() {
+    DEBUG << "Generating Pattern Data...";
     QByteArray buffer(size_, 0);
     uint8_t data = 0x55;
     for (int i = 0; i < size_; ++i) {

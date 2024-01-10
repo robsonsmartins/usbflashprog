@@ -525,5 +525,80 @@
         <source>Caution! Check the VDD, VPP and VEE voltages and the size of the device before running, otherwise you will damage it!</source>
         <translation>Cuidado! Verifique as tensões de VDD, VPP e VEE e o tamanho do dispositivo antes de executar, sob pena de danificá-lo!</translation>
     </message>
+    <message>
+        <source>Settings</source>
+        <translation>Configurações</translation>
+    </message>
+    <message>
+        <source>Data rate: %1</source>
+        <translation>Taxa de dados: %1</translation>
+    </message>
+    <message>
+        <source>Estimated remaining time: %1</source>
+        <translation>Tempo restante estimado: %1</translation>
+    </message>
+    <message>
+        <source>%1 hour(s)</source>
+        <translation>%1 hora(s)</translation>
+    </message>
+    <message>
+        <source>%1 minute(s)</source>
+        <translation>%1 minuto(s)</translation>
+    </message>
+    <message>
+        <source>%1 second(s)</source>
+        <translation>%1 segundo(s)</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialog</name>
+    <message>
+        <source>USB Flash/EPROM Programmer</source>
+        <translation>USB Flash/EPROM Programmer</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation>Geral</translation>
+    </message>
+    <message>
+        <source>Language</source>
+        <translation>Idioma</translation>
+    </message>
+    <message>
+        <source>Autodetect</source>
+        <translation>Autodetectar</translation>
+    </message>
+    <message>
+        <source>Log Level</source>
+        <translation>Nível de Log</translation>
+    </message>
+    <message>
+        <source>Disabled</source>
+        <translation>Desabilitado</translation>
+    </message>
+    <message>
+        <source>Fatal</source>
+        <translation>Fatal</translation>
+    </message>
+    <message>
+        <source>Critical</source>
+        <translation>Crítico</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Alerta</translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation>Informação</translation>
+    </message>
+    <message>
+        <source>Debug</source>
+        <translation>Depuração</translation>
+    </message>
+    <message>
+        <source>Note: The log file can be found at %1</source>
+        <translation>Nota: O arquivo de log pode ser encontrado em %1</translation>
+    </message>
 </context>
 </TS>

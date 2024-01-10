@@ -70,8 +70,6 @@ elseif(NORMAL_BUILD)
           backend/epromfile/qatmelfile.hpp
           backend/epromfile/qepromfile.cpp
           backend/epromfile/qepromfile.hpp
-          ui/qhexeditor.cpp
-          ui/qhexeditor.hpp
           backend/devices/device.cpp
           backend/devices/device.hpp
           backend/devices/parallel/dummy.cpp
@@ -80,10 +78,16 @@ elseif(NORMAL_BUILD)
           backend/devices/parallel/sram.hpp
           backend/devices/parallel/eprom.cpp
           backend/devices/parallel/eprom.hpp
-          main/mainwindow.cpp
-          main/mainwindow.hpp
-          main/mainwindow.ui
+          ui/qhexeditor.cpp
+          ui/qhexeditor.hpp
+          ui/mainwindow.cpp
+          ui/mainwindow.hpp
+          ui/mainwindow.ui
+          ui/settings.cpp
+          ui/settings.hpp
+          ui/settings.ui
           main.cpp
+          main.hpp
   )
 
   set(PROJECT_RESOURCES

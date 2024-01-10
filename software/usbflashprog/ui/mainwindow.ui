@@ -499,6 +499,9 @@
                  </item>
                  <item>
                   <widget class="QLabel" name="labelProgSize">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -512,6 +515,9 @@
                  </item>
                  <item>
                   <widget class="QComboBox" name="comboBoxProgSize">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -3423,6 +3429,8 @@ Wr</string>
     </property>
     <addaction name="actionBuffer"/>
     <addaction name="actionDiagnostics"/>
+    <addaction name="separator"/>
+    <addaction name="actionSettings"/>
    </widget>
    <widget class="QMenu" name="menuBuffer">
     <property name="title">
@@ -4463,6 +4471,14 @@ Wr</string>
    </property>
    <property name="toolTip">
     <string notr="true">EPROM 37VF040</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+0</string>
    </property>
   </action>
  </widget>

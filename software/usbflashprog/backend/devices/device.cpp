@@ -15,7 +15,21 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <QTextStream>
+#include <QLoggingCategory>
+
 #include "backend/devices/device.hpp"
+
+// ---------------------------------------------------------------------------
+// Logging
+
+Q_LOGGING_CATEGORY(device, "device")
+
+#define DEBUG qCDebug(device)
+#define INFO qCInfo(device)
+#define WARNING qCWarning(device)
+#define CRITICAL qCCritical(device)
+#define FATAL qCFatal(device)
 
 // ---------------------------------------------------------------------------
 
@@ -102,6 +116,39 @@ TDeviceCapabilities::TDeviceCapabilities()
 TDeviceInformation::TDeviceInformation()
     : deviceType(kDeviceParallelMemory), name("") {}
 
+QString TDeviceInformation::toString() const {
+    QString result;
+    QTextStream ts(&result);
+    ts << "Name: " << name;
+    ts << "; Type: ";
+    switch (deviceType) {
+        case kDeviceParallelMemory:
+            ts << "Parallel Memory";
+            break;
+        case kDeviceSerialMemory:
+            ts << "Serial Memory";
+            break;
+        default:
+            ts << "Unknown";
+            break;
+    }
+    ts << "; Capabilities: [";
+    ts << "hasProgram=" << (capability.hasProgram ? 1 : 0);
+    ts << ", hasVerify=" << (capability.hasVerify ? 1 : 0);
+    ts << ", hasErase=" << (capability.hasErase ? 1 : 0);
+    ts << ", hasGetId=" << (capability.hasGetId ? 1 : 0);
+    ts << ", hasRead=" << (capability.hasRead ? 1 : 0);
+    ts << ", hasBlankCheck=" << (capability.hasBlankCheck ? 1 : 0);
+    ts << ", hasUnprotect=" << (capability.hasUnprotect ? 1 : 0);
+    ts << ", hasSectorSize=" << (capability.hasSectorSize ? 1 : 0);
+    ts << ", hasFastProg=" << (capability.hasFastProg ? 1 : 0);
+    ts << ", hasSkipFF=" << (capability.hasSkipFF ? 1 : 0);
+    ts << ", hasVDD=" << (capability.hasVDD ? 1 : 0);
+    ts << ", hasVPP=" << (capability.hasVPP ? 1 : 0);
+    ts << "]";
+    return result;
+}
+
 // ---------------------------------------------------------------------------
 
 Device::Device(QObject *parent)
@@ -146,8 +193,10 @@ QString Device::getPort() const {
 }
 
 void Device::setSize(uint32_t value) {
-    if (size_ == value) return;
-    if (value) size_ = value;
+    if (size_ != value) {
+        if (value) size_ = value;
+    }
+    DEBUG << "Size: " << QString("%1").arg(size_);
 }
 
 uint32_t Device::getSize() const {
@@ -155,8 +204,10 @@ uint32_t Device::getSize() const {
 }
 
 void Device::setTwp(uint32_t us) {
-    if (twp_ == us) return;
-    if (us) twp_ = us;
+    if (twp_ != us) {
+        if (us) twp_ = us;
+    }
+    DEBUG << "tWP: " << QString("%1").arg(twp_);
 }
 
 uint32_t Device::getTwp() const {
@@ -164,8 +215,10 @@ uint32_t Device::getTwp() const {
 }
 
 void Device::setTwc(uint32_t us) {
-    if (twc_ == us) return;
-    if (us) twc_ = us;
+    if (twc_ != us) {
+        if (us) twc_ = us;
+    }
+    DEBUG << "tWC: " << QString("%1").arg(twc_);
 }
 
 uint32_t Device::getTwc() const {
@@ -173,8 +226,10 @@ uint32_t Device::getTwc() const {
 }
 
 void Device::setVddRd(float value) {
-    if (vddRd_ == value) return;
-    if (value >= 0.0f) vddRd_ = value;
+    if (vddRd_ != value) {
+        if (value >= 0.0f) vddRd_ = value;
+    }
+    DEBUG << "VDD Read: " << QString("%1").arg(vddRd_, 4, 'f', 2);
 }
 
 float Device::getVddRd() const {
@@ -182,8 +237,10 @@ float Device::getVddRd() const {
 }
 
 void Device::setVddWr(float value) {
-    if (vddWr_ == value) return;
-    if (value >= 0.0f) vddWr_ = value;
+    if (vddWr_ != value) {
+        if (value >= 0.0f) vddWr_ = value;
+    }
+    DEBUG << "VDD Prog: " << QString("%1").arg(vddWr_, 4, 'f', 2);
 }
 
 float Device::getVddWr() const {
@@ -191,8 +248,10 @@ float Device::getVddWr() const {
 }
 
 void Device::setVpp(float value) {
-    if (vpp_ == value) return;
-    if (value >= 0.0f) vpp_ = value;
+    if (vpp_ != value) {
+        if (value >= 0.0f) vpp_ = value;
+    }
+    DEBUG << "VPP: " << QString("%1").arg(vpp_, 4, 'f', 2);
 }
 
 float Device::getVpp() const {
@@ -200,8 +259,10 @@ float Device::getVpp() const {
 }
 
 void Device::setVee(float value) {
-    if (vee_ == value) return;
-    if (value >= 0.0f) vee_ = value;
+    if (vee_ != value) {
+        if (value >= 0.0f) vee_ = value;
+    }
+    DEBUG << "VEE: " << QString("%1").arg(vee_, 4, 'f', 2);
 }
 
 float Device::getVee() const {
@@ -209,8 +270,8 @@ float Device::getVee() const {
 }
 
 void Device::setSkipFF(bool value) {
-    if (skipFF_ == value) return;
-    skipFF_ = value;
+    if (skipFF_ != value) skipFF_ = value;
+    DEBUG << "Skip 0xFF: " << QString("%1").arg(skipFF_ ? 1 : 0);
 }
 
 bool Device::getSkipFF() const {
@@ -218,8 +279,8 @@ bool Device::getSkipFF() const {
 }
 
 void Device::setFastProg(bool value) {
-    if (fastProg_ == value) return;
-    fastProg_ = value;
+    if (fastProg_ != value) fastProg_ = value;
+    DEBUG << "Fast Prog/Erase: " << QString("%1").arg(fastProg_ ? 1 : 0);
 }
 
 bool Device::getFastProg() const {
@@ -227,8 +288,8 @@ bool Device::getFastProg() const {
 }
 
 void Device::setSectorSize(uint16_t value) {
-    if (sectorSize_ == value) return;
-    if (value) sectorSize_ = value;
+    if (sectorSize_ != value) sectorSize_ = value;
+    DEBUG << "Sector Size: " << QString("%1").arg(sectorSize_);
 }
 
 uint16_t Device::getSectorSize() const {

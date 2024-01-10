@@ -416,6 +416,11 @@ class Runner : public QObject {
     uint32_t address_;
     /* @brief Indicates if an error occurred in the last operation. */
     bool error_;
+    /* @brief Sends the command.
+     * @param cmd Command to send (and receive response).
+     * @param retry Number of retry (default is 2).
+     * @return True if success, false otherwise. */
+    bool sendCommand_(TRunnerCommand& cmd, int retry = 2);
     /* @brief Sends data via serial port.
      * @param data Data to send.
      * @return True if success, false otherwise. */

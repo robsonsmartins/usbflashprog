@@ -163,7 +163,7 @@ TEST_F(ChipTest, sram_test) {
 TEST_F(ChipTest, eprom27_test) {
     ChipEPROM *emuChip = new ChipEPROM();
     Emulator::setChip(emuChip);
-    M27xxx *device = new M27xxx();
+    EPROM27 *device = new EPROM27();
     runChipTests(emuChip, device, 0x000800);  // 2KB
     runChipTests(emuChip, device, 0x001000);  // 4KB
     runChipTests(emuChip, device, 0x002000);  // 8KB
@@ -174,7 +174,7 @@ TEST_F(ChipTest, eprom27_test) {
 TEST_F(ChipTest, eprom27C_test) {
     ChipEPROM *emuChip = new ChipEPROM();
     Emulator::setChip(emuChip);
-    M27Cxxx *device = new M27Cxxx();
+    EPROM27C *device = new EPROM27C();
     runChipTests(emuChip, device, 0x000800);  // 2KB
     runChipTests(emuChip, device, 0x001000);  // 4KB
     runChipTests(emuChip, device, 0x002000);  // 8KB
@@ -185,7 +185,7 @@ TEST_F(ChipTest, eprom27C_test) {
 TEST_F(ChipTest, eprom27C16Bit_test) {
     ChipEPROM *emuChip = new ChipEPROM();
     Emulator::setChip(emuChip);
-    M27C16Bit *device = new M27C16Bit();
+    EPROM27C16Bit *device = new EPROM27C16Bit();
     runChipTests(emuChip, device, 0x000800);  // 2KB
     runChipTests(emuChip, device, 0x001000);  // 4KB
     runChipTests(emuChip, device, 0x002000);  // 8KB
@@ -197,7 +197,7 @@ TEST_F(ChipTest, eprom27C16Bit_test) {
 TEST_F(ChipTest, epromW27E_test) {
     ChipEPROM *emuChip = new ChipEPROM();
     Emulator::setChip(emuChip);
-    W27Exxx *device = new W27Exxx();
+    EPROM27E *device = new EPROM27E();
     runChipTests(emuChip, device, 0x000800);  // 2KB
     runChipTests(emuChip, device, 0x001000);  // 4KB
     runChipTests(emuChip, device, 0x002000);  // 8KB

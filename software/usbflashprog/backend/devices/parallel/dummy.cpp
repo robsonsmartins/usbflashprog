@@ -15,8 +15,21 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <QLoggingCategory>
 #include <QRandomGenerator>
+
 #include "backend/devices/parallel/dummy.hpp"
+
+// ---------------------------------------------------------------------------
+// Logging
+
+Q_LOGGING_CATEGORY(deviceParDummy, "device.parallel.dummy")
+
+#define DEBUG qCDebug(deviceParDummy)
+#define INFO qCInfo(deviceParDummy)
+#define WARNING qCWarning(deviceParDummy)
+#define CRITICAL qCCritical(deviceParDummy)
+#define FATAL qCFatal(deviceParDummy)
 
 // ---------------------------------------------------------------------------
 
@@ -41,6 +54,7 @@ Dummy::Dummy(QObject *parent) : Device(parent), protected_(true) {
     vddWr_ = 5.0f;
     vpp_ = 12.0f;
     vee_ = 12.0f;
+    DEBUG << info_.toString();
     setSize(2048);
 }
 
@@ -55,14 +69,17 @@ void Dummy::setSize(uint32_t value) {
 }
 
 bool Dummy::getId(TDeviceID &result) {
+    INFO << "Getting ID from device...";
     canceling_ = false;
     result.manufacturer = 0x01;
     result.device = 0x01;
     emit onProgress(100, 100, true);
+    INFO << "Getting ID from device OK";
     return true;
 }
 
 bool Dummy::read(QByteArray &buffer) {
+    INFO << "Reading device...";
     canceling_ = false;
     int end = buffer_.size();
     buffer.clear();
@@ -70,6 +87,9 @@ bool Dummy::read(QByteArray &buffer) {
         emit onProgress(i, end);
         if (canceling_) {
             emit onProgress(end, end, true, false, true);
+            INFO << QString("Read canceled at 0x%1 of 0x%2")
+                        .arg(i, 6, 16, QChar('0'))
+                        .arg(end, 6, 16, QChar('0'));
             return false;
         }
         buffer.append(buffer_[i]);
@@ -77,10 +97,12 @@ bool Dummy::read(QByteArray &buffer) {
     }
     Runner::usDelay(twc_);
     emit onProgress(end, end, true);
+    INFO << "Reading device OK";
     return true;
 }
 
 bool Dummy::program(const QByteArray &buffer, bool verify) {
+    INFO << "Programming device...";
     canceling_ = false;
     int end = qMin(buffer.size(), buffer_.size());
     if (protected_) {
@@ -91,6 +113,9 @@ bool Dummy::program(const QByteArray &buffer, bool verify) {
         emit onProgress(i, end);
         if (canceling_) {
             emit onProgress(end, end, true, false, true);
+            INFO << QString("Program canceled at 0x%1 of 0x%2")
+                        .arg(i, 6, 16, QChar('0'))
+                        .arg(end, 6, 16, QChar('0'));
             return false;
         }
         if (skipFF_ && buffer[i] == (char)0xFF) continue;
@@ -104,30 +129,43 @@ bool Dummy::program(const QByteArray &buffer, bool verify) {
     } else {
         emit onProgress(end, end, true);
     }
+    INFO << "Programming device OK";
     return true;
 }
 
 bool Dummy::verify(const QByteArray &buffer) {
+    INFO << "Verifying device...";
     canceling_ = false;
     int end = qMin(buffer.size(), buffer_.size());
     for (int i = 0; i < end; ++i) {
         emit onProgress(i, end);
         if (canceling_) {
             emit onProgress(end, end, true, false, true);
+            INFO << QString("Verify canceled at 0x%1 of 0x%2")
+                        .arg(i, 6, 16, QChar('0'))
+                        .arg(end, 6, 16, QChar('0'));
             return false;
         }
         if (buffer[i] != buffer_[i]) {
             emit onProgress(i, end, true, false);
+            WARNING << QString("Verify error at 0x%1 of 0x%2")
+                           .arg(i, 6, 16, QChar('0'))
+                           .arg(end, 6, 16, QChar('0'));
+            WARNING << QString("Data to write 0x%1. Data read 0x%2")
+                           .arg(buffer[i], 2, 16, QChar('0'))
+                           .arg(buffer_[i], 2, 16, QChar('0'));
             return false;
         }
         Runner::usDelay(twp_);
     }
     Runner::usDelay(twc_);
     emit onProgress(end, end, true);
+    INFO << "Verifying device OK";
     return true;
 }
 
 bool Dummy::erase(bool check) {
+    INFO << "Erasing device...";
     canceling_ = false;
     int end = buffer_.size();
     if (protected_) {
@@ -138,6 +176,9 @@ bool Dummy::erase(bool check) {
         emit onProgress(i, end);
         if (canceling_) {
             emit onProgress(end, end, true, false, true);
+            INFO << QString("Erase canceled at 0x%1 of 0x%2")
+                        .arg(i, 6, 16, QChar('0'))
+                        .arg(end, 6, 16, QChar('0'));
             return false;
         }
         if (fastProg_ && buffer_[i] == (char)0xFF) continue;
@@ -150,38 +191,53 @@ bool Dummy::erase(bool check) {
     } else {
         emit onProgress(end, end, true);
     }
+    INFO << "Erasing device OK";
     return true;
 }
 
 bool Dummy::blankCheck() {
+    INFO << "Checking device...";
     canceling_ = false;
     int end = buffer_.size();
     for (int i = 0; i < end; ++i) {
         emit onProgress(i, end);
         if (canceling_) {
             emit onProgress(end, end, true, false, true);
+            INFO << QString("Blank Check canceled at 0x%1 of 0x%2")
+                        .arg(i, 6, 16, QChar('0'))
+                        .arg(end, 6, 16, QChar('0'));
             return false;
         }
         if (buffer_[i] != (char)0xFF) {
             emit onProgress(i, end, true, false);
+            WARNING << QString("Blank Check error at 0x%1 of 0x%2")
+                           .arg(i, 6, 16, QChar('0'))
+                           .arg(end, 6, 16, QChar('0'));
+            WARNING << QString("Data to write 0x%1. Data read 0x%2")
+                           .arg(0xFF, 2, 16, QChar('0'))
+                           .arg(buffer_[i], 2, 16, QChar('0'));
             return false;
         }
         Runner::usDelay(twp_);
     }
     Runner::usDelay(twc_);
     emit onProgress(end, end, true);
+    INFO << "Checking device OK";
     return true;
 }
 
 bool Dummy::unprotect() {
+    INFO << "Unprotecting device...";
     canceling_ = false;
     if (!protected_) {
         emit onProgress(0, 100, true, false);
+        WARNING << "Error on Unprotect: Already unprotected";
         return false;
     }
     protected_ = false;
     Runner::usDelay(twc_);
     emit onProgress(100, 100, true);
+    INFO << "Unprotecting device OK";
     return true;
 }
 
@@ -189,6 +245,7 @@ bool Dummy::unprotect() {
 
 Dummy16Bit::Dummy16Bit(QObject *parent) : Dummy(parent) {
     info_.name = "Dummy (16 bits)";
+    DEBUG << info_.toString();
 }
 
 Dummy16Bit::~Dummy16Bit() {}

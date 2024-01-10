@@ -15,7 +15,19 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <QLoggingCategory>
 #include "backend/devices/parallel/eprom.hpp"
+
+// ---------------------------------------------------------------------------
+// Logging
+
+Q_LOGGING_CATEGORY(deviceParEprom, "device.parallel.eprom")
+
+#define DEBUG qCDebug(deviceParEprom)
+#define INFO qCInfo(deviceParEprom)
+#define WARNING qCWarning(deviceParEprom)
+#define CRITICAL qCCritical(deviceParEprom)
+#define FATAL qCFatal(deviceParEprom)
 
 // ---------------------------------------------------------------------------
 
@@ -39,15 +51,20 @@ EPROM::EPROM(QObject *parent) : SRAM(parent), mode16bit_(false) {
     size_ = 2048;
     maxAttemptsProg_ = 25;
     vppPulseDelay_ = 150;
+    DEBUG << info_.toString();
 }
 
 EPROM::~EPROM() {}
 
 bool EPROM::read(QByteArray &buffer) {
+    INFO << "Reading device...";
     canceling_ = false;
     int total = static_cast<int>(size_);
     // Init pins/bus to Read operation
-    if (!initialize_(kDeviceOpRead)) return false;
+    if (!initialize_(kDeviceOpRead)) {
+        WARNING << "Error reading device";
+        return false;
+    }
     buffer.clear();
     uint16_t data = 0xFFFF;
     // Read entire device
@@ -55,8 +72,10 @@ bool EPROM::read(QByteArray &buffer) {
         emit onProgress(current, total);
         if (canceling_) return finalize_(current, total, true, false, true);
         // Read byte
-        if (!read_(data) || runner_.hasError())
+        if (!read_(data) || runner_.hasError()) {
+            WARNING << "Error reading device";
             return finalize_(current, total, true, false);
+        }
         if (mode16bit_) {
             uint8_t msb = (data & 0xFF00) >> 8;
             uint8_t lsb = data & 0xFF;
@@ -68,15 +87,20 @@ bool EPROM::read(QByteArray &buffer) {
         // Increment Address
         runner_.addrInc();
     }
+    INFO << "Reading device OK";
     // Close resources
     return finalize_(total, total, true);
 }
 
 bool EPROM::program(const QByteArray &buffer, bool verify) {
+    INFO << "Programming device...";
     canceling_ = false;
     int total = qMin(static_cast<int>(size_), buffer.size());
     // Init pins/bus to Prog operation
-    if (!initialize_(kDeviceOpProg)) return false;
+    if (!initialize_(kDeviceOpProg)) {
+        return false;
+        WARNING << "Error programming device";
+    }
     uint32_t current = 0;
     bool error = false;
     // Program the device
@@ -95,7 +119,10 @@ bool EPROM::program(const QByteArray &buffer, bool verify) {
         runner_.addrClr();
         initControlPins_(true);
         runner_.usDelay(initDelay_);
-        if (runner_.hasError()) return finalize_(0, total, true, false);
+        if (runner_.hasError()) {
+            WARNING << "Error programming device";
+            return finalize_(0, total, true, false);
+        }
         current = 0;
         // Read the device and verify (compare) buffer
         if (!verify_(buffer, current, total)) error = true;
@@ -103,14 +130,23 @@ bool EPROM::program(const QByteArray &buffer, bool verify) {
     if (!error) emit onProgress(total, total, true);
     // Close resources
     finalize_();
+    if (error) {
+        WARNING << "Error programming device";
+    } else {
+        INFO << "Programming device OK";
+    }
     return !error;
 }
 
 bool EPROM::verify(const QByteArray &buffer) {
+    INFO << "Verifying device...";
     canceling_ = false;
     int total = static_cast<int>(size_);
     // Init pins/bus to Read operation
-    if (!initialize_(kDeviceOpRead)) return false;
+    if (!initialize_(kDeviceOpRead)) {
+        WARNING << "Error verifying device";
+        return false;
+    }
     uint32_t current = 0;
     bool error = false;
     // Read the device and verify (compare) buffer
@@ -118,6 +154,11 @@ bool EPROM::verify(const QByteArray &buffer) {
     if (!error) emit onProgress(total, total, true);
     // Close resources
     finalize_();
+    if (error) {
+        WARNING << "Error verifying device";
+    } else {
+        INFO << "Verifying device OK";
+    }
     return !error;
 }
 
@@ -129,10 +170,14 @@ bool EPROM::blankCheck() {
 }
 
 bool EPROM::getId(TDeviceID &result) {
+    INFO << "Getting ID from device...";
     canceling_ = false;
     int total = static_cast<int>(size_);
     // Init pins/bus to GetId operation
-    if (!initialize_(kDeviceOpGetId)) return false;
+    if (!initialize_(kDeviceOpGetId)) {
+        WARNING << "Error getting ID from device";
+        return false;
+    }
     bool error = false;
     // Get manufacturer data (byte)
     result.manufacturer = runner_.dataGet();
@@ -142,11 +187,19 @@ bool EPROM::getId(TDeviceID &result) {
     // Get device data (byte)
     result.device = runner_.dataGet();
     // Error
-    if (runner_.hasError()) return finalize_(0, total, true, false);
+    if (runner_.hasError()) {
+        WARNING << "Error getting ID from device";
+        return finalize_(0, total, true, false);
+    }
     // Success
     if (!error) emit onProgress(total, total, true);
     // Close resources
     finalize_();
+    if (error) {
+        WARNING << "Error getting ID from device";
+    } else {
+        INFO << "Getting ID from device OK";
+    }
     return (!error);
 }
 
@@ -189,6 +242,7 @@ bool EPROM::isPgmCePin_() {
 }
 
 bool EPROM::resetBus_() {
+    DEBUG << "Reseting Bus...";
     // VDD off and VPP off
     runner_.vddCtrl(false);
     runner_.vppCtrl(false);
@@ -214,6 +268,11 @@ bool EPROM::resetBus_() {
     // Clear DataBus
     runner_.dataClr();
     runner_.usDelay(resetBusDelay_);
+    if (runner_.hasError()) {
+        WARNING << "Error in Bus Reset";
+    } else {
+        DEBUG << "Bus Reset OK";
+    }
     return !runner_.hasError();
 }
 
@@ -274,8 +333,10 @@ bool EPROM::write_(uint16_t data) {
 }
 
 bool EPROM::initialize_(kDeviceOperation operation) {
+    DEBUG << "Initializing...";
     if (!runner_.open(port_)) {
         emit onProgress(0, size_, true, false);
+        WARNING << "Error opening Serial Port.";
         return false;
     }
     // Init bus and pins
@@ -317,6 +378,7 @@ bool EPROM::initialize_(kDeviceOperation operation) {
     }
     runner_.usDelay(initDelay_);
     if (runner_.hasError()) return finalize_(0, size_, true, false);
+    DEBUG << "Initialize OK";
     return true;
 }
 
@@ -348,6 +410,7 @@ void EPROM::initControlPins_(bool read) {
 
 bool EPROM::program_(const QByteArray &buffer, uint32_t &current,
                      uint32_t total) {
+    DEBUG << "Programming data...";
     uint16_t data, read = 0xFFFF;
     int increment = mode16bit_ ? 2 : 1;
     uint16_t empty = mode16bit_ ? 0xFFFF : 0xFF;
@@ -356,6 +419,9 @@ bool EPROM::program_(const QByteArray &buffer, uint32_t &current,
         emit onProgress(current, total);
         if (canceling_) {
             emit onProgress(current, total, true, false, true);
+            DEBUG << QString("Program canceled at 0x%1 of 0x%2")
+                         .arg(current, 6, 16, QChar('0'))
+                         .arg(total, 6, 16, QChar('0'));
             return false;
         }
         data = buffer[i] & 0xFF;
@@ -376,6 +442,16 @@ bool EPROM::program_(const QByteArray &buffer, uint32_t &current,
             if (runner_.hasError() || j == maxAttemptsProg_ || data == empty) {
                 // Error
                 emit onProgress(current, total, true, false);
+                WARNING << QString("Program error at 0x%1 of 0x%2")
+                               .arg(current, 6, 16, QChar('0'))
+                               .arg(total, 6, 16, QChar('0'));
+                if (runner_.hasError()) {
+                    WARNING << "Runner status is Error";
+                } else {
+                    WARNING << QString("Data to write 0x%1. Data read 0x%2")
+                                   .arg(data, 2, 16, QChar('0'))
+                                   .arg(read, 2, 16, QChar('0'));
+                }
                 return false;
             }
         }
@@ -383,17 +459,22 @@ bool EPROM::program_(const QByteArray &buffer, uint32_t &current,
         runner_.addrInc();
         current += increment;
     }
+    DEBUG << "Program OK";
     return true;
 }
 
 bool EPROM::verify_(const QByteArray &buffer, uint32_t &current,
                     uint32_t total) {
+    DEBUG << "Verifying data...";
     uint16_t data, read = 0xFFFF;
     int increment = mode16bit_ ? 2 : 1;
     for (int i = 0; i < buffer.size(); i += increment) {
         emit onProgress(current, total);
         if (canceling_) {
             emit onProgress(current, total, true, false, true);
+            DEBUG << QString("Verify canceled at 0x%1 of 0x%2")
+                         .arg(current, 6, 16, QChar('0'))
+                         .arg(total, 6, 16, QChar('0'));
             return false;
         }
         data = buffer[i] & 0xFF;
@@ -402,13 +483,24 @@ bool EPROM::verify_(const QByteArray &buffer, uint32_t &current,
             data |= (buffer[i + 1] & 0xFF);  // LSB
         }
         read_(read);
-        runner_.addrInc();
         if (runner_.hasError() || read != data) {
             emit onProgress(current, total, true, false);
+            WARNING << QString("Verify error at 0x%1 of 0x%2")
+                           .arg(current, 6, 16, QChar('0'))
+                           .arg(total, 6, 16, QChar('0'));
+            if (runner_.hasError()) {
+                WARNING << "Runner status is Error";
+            } else {
+                WARNING << QString("Data to write 0x%1. Data read 0x%2")
+                               .arg(data, 2, 16, QChar('0'))
+                               .arg(read, 2, 16, QChar('0'));
+            }
             return false;
         }
+        runner_.addrInc();
         current += increment;
     }
+    DEBUG << "Verify OK";
     return true;
 }
 
@@ -418,7 +510,7 @@ bool EPROM::unprotect() {
 
 // ---------------------------------------------------------------------------
 
-M27xxx::M27xxx(QObject *parent) : EPROM(parent) {
+EPROM27::EPROM27(QObject *parent) : EPROM(parent) {
     info_.name = "EPROM 27xxx";
     twp_ = 50000;
     twc_ = 50;
@@ -427,13 +519,14 @@ M27xxx::M27xxx(QObject *parent) : EPROM(parent) {
     vpp_ = 25.0f;
     vee_ = 12.0f;
     size_ = 2048;
+    DEBUG << info_.toString();
 }
 
-M27xxx::~M27xxx() {}
+EPROM27::~EPROM27() {}
 
 // ---------------------------------------------------------------------------
 
-M27Cxxx::M27Cxxx(QObject *parent) : EPROM(parent) {
+EPROM27C::EPROM27C(QObject *parent) : EPROM(parent) {
     info_.name = "EPROM 27Cxxx";
     twp_ = 500;
     twc_ = 8;
@@ -442,22 +535,24 @@ M27Cxxx::M27Cxxx(QObject *parent) : EPROM(parent) {
     vpp_ = 13.0f;
     vee_ = 12.0f;
     size_ = 2048;
+    DEBUG << info_.toString();
 }
 
-M27Cxxx::~M27Cxxx() {}
+EPROM27C::~EPROM27C() {}
 
 // ---------------------------------------------------------------------------
 
-M27C16Bit::M27C16Bit(QObject *parent) : M27Cxxx(parent) {
+EPROM27C16Bit::EPROM27C16Bit(QObject *parent) : EPROM27C(parent) {
     info_.name = "EPROM 27Cxxx (16Bit)";
     mode16bit_ = true;
+    DEBUG << info_.toString();
 }
 
-M27C16Bit::~M27C16Bit() {}
+EPROM27C16Bit::~EPROM27C16Bit() {}
 
 // ---------------------------------------------------------------------------
 
-W27Exxx::W27Exxx(QObject *parent) : M27Cxxx(parent) {
+EPROM27E::EPROM27E(QObject *parent) : EPROM27C(parent) {
     info_.name = "EPROM W27C/27E/27SF";
     info_.capability.hasErase = true;
     info_.capability.hasBlankCheck = true;
@@ -469,15 +564,20 @@ W27Exxx::W27Exxx(QObject *parent) : M27Cxxx(parent) {
     vee_ = 14.0f;
     size_ = 2048;
     erasePulseDelay_ = 100;  // 100 ms
+    DEBUG << info_.toString();
 }
 
-W27Exxx::~W27Exxx() {}
+EPROM27E::~EPROM27E() {}
 
-bool W27Exxx::erase(bool check) {
+bool EPROM27E::erase(bool check) {
+    INFO << "Erasing device...";
     canceling_ = false;
     int total = static_cast<int>(size_);
     // Init pins/bus to Prog operation
-    if (!initialize_(kDeviceOpErase)) return false;
+    if (!initialize_(kDeviceOpErase)) {
+        WARNING << "Error erasing device";
+        return false;
+    }
     uint32_t current = 0;
     bool error = false;
     // Erase the device
@@ -496,7 +596,10 @@ bool W27Exxx::erase(bool check) {
         runner_.addrClr();
         initControlPins_(true);
         runner_.usDelay(initDelay_);
-        if (runner_.hasError()) return finalize_(0, total, true, false);
+        if (runner_.hasError()) {
+            WARNING << "Error erasing device";
+            return finalize_(0, total, true, false);
+        }
         current = 0;
         // Creates a blank (0xFF) buffer
         QByteArray buffer(size_, 0xFF);
@@ -506,14 +609,23 @@ bool W27Exxx::erase(bool check) {
     if (!error) emit onProgress(total, total, true);
     // Close resources
     finalize_();
+    if (error) {
+        WARNING << "Error erasing device";
+    } else {
+        INFO << "Erasing device OK";
+    }
     return !error;
 }
 
-bool W27Exxx::blankCheck() {
+bool EPROM27E::blankCheck() {
+    INFO << "Checking device...";
     canceling_ = false;
     int total = static_cast<int>(size_);
     // Init pins/bus to Read operation
-    if (!initialize_(kDeviceOpRead)) return false;
+    if (!initialize_(kDeviceOpRead)) {
+        WARNING << "Error checking device";
+        return false;
+    }
     uint32_t current = 0;
     bool error = false;
     // Creates a blank (0xFF) buffer
@@ -523,16 +635,23 @@ bool W27Exxx::blankCheck() {
     if (!error) emit onProgress(total, total, true);
     // Close resources
     finalize_();
+    if (error) {
+        WARNING << "Error checking device";
+    } else {
+        INFO << "Checking device OK";
+    }
     return !error;
 }
 
-bool W27Exxx::initialize_(kDeviceOperation operation) {
+bool EPROM27E::initialize_(kDeviceOperation operation) {
     if (operation != kDeviceOpErase) {
-        return M27Cxxx::initialize_(operation);
+        return EPROM27C::initialize_(operation);
     }
     // Operation == Erase
+    DEBUG << "Initializing...";
     if (!runner_.open(port_)) {
         emit onProgress(0, size_, true, false);
+        WARNING << "Error opening Serial Port.";
         return false;
     }
     // Init bus and pins
@@ -555,10 +674,12 @@ bool W27Exxx::initialize_(kDeviceOperation operation) {
     }
     runner_.usDelay(initDelay_);
     if (runner_.hasError()) return finalize_(0, size_, true, false);
+    DEBUG << "Initialize OK";
     return true;
 }
 
-bool W27Exxx::erase_(uint32_t &current, uint32_t total) {
+bool EPROM27E::erase_(uint32_t &current, uint32_t total) {
+    DEBUG << "Erasing data...";
     uint16_t read = 0xFFFF;
     int increment = mode16bit_ ? 2 : 1;
     uint16_t empty = mode16bit_ ? 0xFFFF : 0xFF;
@@ -599,6 +720,13 @@ bool W27Exxx::erase_(uint32_t &current, uint32_t total) {
         if (isPgmCePin_()) runner_.setWE();
         bool success = true;
         for (int i = 0; i < size_; i += increment) {
+            if (canceling_) {
+                emit onProgress(current, total, true, false, true);
+                DEBUG << QString("Erase canceled at 0x%1 of 0x%2")
+                             .arg(current, 6, 16, QChar('0'))
+                             .arg(total, 6, 16, QChar('0'));
+                return false;
+            }
             // Read byte
             read_(read);
             // Verify
@@ -609,6 +737,16 @@ bool W27Exxx::erase_(uint32_t &current, uint32_t total) {
             if (runner_.hasError() || j == maxAttemptsProg_) {
                 // Error
                 emit onProgress(current, total, true, false);
+                WARNING << QString("Erase error at 0x%1 of 0x%2")
+                               .arg(current, 6, 16, QChar('0'))
+                               .arg(total, 6, 16, QChar('0'));
+                if (runner_.hasError()) {
+                    WARNING << "Runner status is Error";
+                } else {
+                    WARNING << QString("Data to write 0x%1. Data read 0x%2")
+                                   .arg(0xFF, 2, 16, QChar('0'))
+                                   .arg(read, 2, 16, QChar('0'));
+                }
                 return false;
             }
             // Increment Address
@@ -617,5 +755,6 @@ bool W27Exxx::erase_(uint32_t &current, uint32_t total) {
         }
         if (success) break;
     }
+    DEBUG << "Erase OK";
     return true;
 }

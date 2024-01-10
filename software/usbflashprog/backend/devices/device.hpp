@@ -113,6 +113,11 @@ typedef struct TDeviceInformation {
     TDeviceCapabilities capability;
     /** @brief Constructor. */
     TDeviceInformation();
+    /**
+     * @brief Converts contents to string.
+     * @return Device Info as QString.
+     */
+    QString toString() const;
 } TDeviceInformation;
 
 // ---------------------------------------------------------------------------

@@ -65,16 +65,16 @@ void HC595::outputDisable() {
 }
 
 void HC595::writeByte(uint8_t value) {
-    clear();
     if (!value) {
+        clear();
         return;
     }
     writeData(&value, 1);
 }
 
 void HC595::writeWord(uint16_t value) {
-    clear();
     if (!value) {
+        clear();
         return;
     }
     if (value <= 0xFF) {
@@ -88,8 +88,8 @@ void HC595::writeWord(uint16_t value) {
 }
 
 void HC595::writeDWord(uint32_t value) {
-    clear();
     if (!value) {
+        clear();
         return;
     }
     if (value <= 0xFF) {
@@ -117,6 +117,11 @@ void HC595::writeData(const uint8_t* buffer, uint size) {
     if (rckPin_ != 0xFF) {
         gpio_.resetPin(rckPin_);
     }
+    if (clrPin_ != 0xFF) {
+        gpio_.resetPin(clrPin_);
+        sleep_us(pulseTime_);
+        gpio_.setPin(clrPin_);
+    }
     buffer += size - 1;
     for (uint8_t* pData = buffer_.data() + size - 1; size != 0;
          size--, pData--, buffer--) {
@@ -131,11 +136,11 @@ void HC595::writeData(const uint8_t* buffer, uint size) {
                 gpio_.resetPin(clkPin_);
             }
         }
-        if (rckPin_ != 0xFF) {
-            gpio_.setPin(rckPin_);
-            sleep_us(pulseTime_);
-            gpio_.resetPin(rckPin_);
-        }
+    }
+    if (rckPin_ != 0xFF) {
+        gpio_.setPin(rckPin_);
+        sleep_us(pulseTime_);
+        gpio_.resetPin(rckPin_);
     }
 }
 

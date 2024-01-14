@@ -2278,7 +2278,7 @@ Wr</string>
                    <item>
                     <widget class="QCheckBox" name="checkBoxA23">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
@@ -2373,7 +2373,7 @@ Wr</string>
                    <item>
                     <widget class="QCheckBox" name="checkBoxA18">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
@@ -2801,23 +2801,17 @@ Wr</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButtonSetAddr">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
+                  <spacer name="verticalSpacer_3">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
                    </property>
-                   <property name="minimumSize">
+                   <property name="sizeHint" stdset="0">
                     <size>
-                     <width>120</width>
-                     <height>25</height>
+                     <width>20</width>
+                     <height>40</height>
                     </size>
                    </property>
-                   <property name="text">
-                    <string>Set Address</string>
-                   </property>
-                  </widget>
+                  </spacer>
                  </item>
                 </layout>
                </item>
@@ -3291,7 +3285,7 @@ Wr</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButtonSetData">
+                  <widget class="QPushButton" name="pushButtonGetDataW">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -3305,12 +3299,12 @@ Wr</string>
                     </size>
                    </property>
                    <property name="text">
-                    <string>Set Data</string>
+                    <string>Get Word</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButtonGetData">
+                  <widget class="QPushButton" name="pushButtonGetDataB">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -3324,7 +3318,7 @@ Wr</string>
                     </size>
                    </property>
                    <property name="text">
-                    <string>Get Data</string>
+                    <string>Get Byte</string>
                    </property>
                   </widget>
                  </item>
@@ -3936,46 +3930,46 @@ Wr</string>
   </action>
   <action name="actionSRAM_2KB">
    <property name="text">
-    <string notr="true">SRAM 2016/6116</string>
+    <string notr="true">SRAM 20/6116</string>
    </property>
    <property name="iconText">
-    <string notr="true">SRAM 2016/6116</string>
+    <string notr="true">SRAM 20/6116</string>
    </property>
    <property name="toolTip">
-    <string notr="true">SRAM 2016/6116</string>
+    <string notr="true">SRAM 20/6116</string>
    </property>
   </action>
   <action name="actionSRAM_8KB">
    <property name="text">
-    <string notr="true">SRAM 6264</string>
+    <string notr="true">SRAM 61/6264</string>
    </property>
    <property name="iconText">
-    <string notr="true">SRAM 6264</string>
+    <string notr="true">SRAM 61/6264</string>
    </property>
    <property name="toolTip">
-    <string notr="true">SRAM 6264</string>
+    <string notr="true">SRAM 61/6264</string>
    </property>
   </action>
   <action name="actionSRAM_16KB">
    <property name="text">
-    <string notr="true">SRAM 62128</string>
+    <string notr="true">SRAM 61/62128</string>
    </property>
    <property name="iconText">
-    <string notr="true">SRAM 62128</string>
+    <string notr="true">SRAM 61/62128</string>
    </property>
    <property name="toolTip">
-    <string notr="true">SRAM 62128</string>
+    <string notr="true">SRAM 61/62128</string>
    </property>
   </action>
   <action name="actionSRAM_32KB">
    <property name="text">
-    <string notr="true">SRAM 62256</string>
+    <string notr="true">SRAM 61/62256</string>
    </property>
    <property name="iconText">
-    <string notr="true">SRAM 62256</string>
+    <string notr="true">SRAM 61/62256</string>
    </property>
    <property name="toolTip">
-    <string notr="true">SRAM 62256</string>
+    <string notr="true">SRAM 61/62256</string>
    </property>
   </action>
   <action name="actionEPROM27_2KB">
@@ -4526,7 +4520,6 @@ Wr</string>
   <tabstop>checkBoxA1</tabstop>
   <tabstop>checkBoxA0</tabstop>
   <tabstop>spinBoxAddr</tabstop>
-  <tabstop>pushButtonSetAddr</tabstop>
   <tabstop>checkBoxD15</tabstop>
   <tabstop>checkBoxD14</tabstop>
   <tabstop>checkBoxD13</tabstop>
@@ -4544,8 +4537,7 @@ Wr</string>
   <tabstop>checkBoxD1</tabstop>
   <tabstop>checkBoxD0</tabstop>
   <tabstop>spinBoxData</tabstop>
-  <tabstop>pushButtonSetData</tabstop>
-  <tabstop>pushButtonGetData</tabstop>
+  <tabstop>pushButtonGetDataW</tabstop>
   <tabstop>btnOpen</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>

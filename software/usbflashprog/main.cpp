@@ -31,6 +31,13 @@
 #include "main.hpp"
 #include "ui/mainwindow.hpp"
 
+#ifdef Q_OS_WINDOWS
+#include <windows.h>
+#else
+#include <sys/time.h>
+#include <sys/resource.h>
+#endif
+
 // ---------------------------------------------------------------------------
 /**
  * @brief Main routine.
@@ -82,26 +89,26 @@ void initLogging(int level) {
     QString strType;
     switch (level) {
         case 1:  // Fatal
-            rules = "*.fatal=true";
+            rules = "*.critical=false";
             strType = "FATAL";
             break;
         case 2:  // Critical
-            rules = "*.critical=true";
+            rules = "*.warning=false";
             strType = "CRITICAL";
             break;
         case 3:  // Warning
-            rules = "*.warning=true";
+            rules = "*.info=false";
             strType = "WARNING";
             break;
         case 4:  // Info
-            rules = "*.warning=true\nbackend.*.info=true\ndevice.*.info=true";
+            rules = "*.debug=false";
             strType = "INFO";
             break;
         case 5:  // Debug
         default:
             if (level >= 5) {
                 rules =
-                    "*.info=true\nbackend.*.debug=true\ndevice.*.debug=true";
+                    "*.debug=false\nbackend.*.debug=true\ndevice.*.debug=true";
                 strType = "DEBUG";
             }
             break;
@@ -134,19 +141,19 @@ void initLogging(int level) {
                 strType = "DEBUG";
                 break;
         }
-        QString timeStamp =
-            QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz");
-        QString txt = QString("%1 %2 %3 - %4")
-                          .arg(timeStamp)
-                          .arg("[" + QString(context.category) + "]", -25)
-                          .arg(strType, -8)
-                          .arg(localMsg);
         QFile logFile(QDir::homePath() + "/" + QString(kLogFileName));
         logFile.open(QIODevice::WriteOnly | QIODevice::Append);
         QTextStream ts(&logFile);
-        ts << txt << endl;
+        QString timeStamp =
+            QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss.zzz");
+        ts << QString("%1 %2 %3 - %4")
+                  .arg(timeStamp)
+                  .arg("[" + QString(context.category) + "]", -25)
+                  .arg(strType, -8)
+                  .arg(localMsg)
+           << endl;
     });
-    qInfo() << "Setting Log Level: " << strType;
+    qInfo() << "Setting Log Level:" << strType;
 }
 
 void loadLanguage(const QString &language, QApplication *app) {
@@ -203,17 +210,24 @@ void loadLanguage(const QString &language, QApplication *app) {
     }
     if (baseOk) {
         app->installTranslator(baseTranslator);
-        qInfo() << "Installed Qt Base translator for language: " << localeName;
+        qInfo() << "Installed Qt Base translator for language:" << localeName;
     }
     if (customOk) {
         app->installTranslator(customTranslator);
-        qInfo() << "Installed Custom translator for language: " << localeName;
+        qInfo() << "Installed Custom translator for language:" << localeName;
     }
 }
 
 int main(int argc, char *argv[]) {
 #ifdef Q_OS_LINUX
     setenv("XDG_SESSION_TYPE", "x11", 1);
+#endif
+    // elevates priority of process
+#ifdef Q_OS_WINDOWS
+    SetPriorityClass(GetCurrentProcess(), REALTIME_PRIORITY_CLASS);
+#else
+    // only if running as superuser
+    setpriority(PRIO_PROCESS, 0, -20);
 #endif
     // create app
     QApplication app(argc, argv);

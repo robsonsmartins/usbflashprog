@@ -434,18 +434,6 @@
         <translation>Calibrate</translation>
     </message>
     <message>
-        <source>Set Address</source>
-        <translation>Set Address</translation>
-    </message>
-    <message>
-        <source>Set Data</source>
-        <translation>Set Data</translation>
-    </message>
-    <message>
-        <source>Get Data</source>
-        <translation>Get Data</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>File</translation>
     </message>
@@ -550,6 +538,14 @@
         <source>%1 second(s)</source>
         <translation>%1 second(s)</translation>
     </message>
+    <message>
+        <source>Get Word</source>
+        <translation>Get Word</translation>
+    </message>
+    <message>
+        <source>Get Byte</source>
+        <translation>Get Byte</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
@@ -600,6 +596,10 @@
     <message>
         <source>Note: The log file can be found at %1</source>
         <translation>Note: The log file can be found at %1</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Settings</translation>
     </message>
 </context>
 </TS>

@@ -434,18 +434,6 @@
         <translation>Calibrar</translation>
     </message>
     <message>
-        <source>Set Address</source>
-        <translation>Gravar Endereço</translation>
-    </message>
-    <message>
-        <source>Set Data</source>
-        <translation>Gravar Dados</translation>
-    </message>
-    <message>
-        <source>Get Data</source>
-        <translation>Ler Dados</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>Arquivo</translation>
     </message>
@@ -549,6 +537,14 @@
         <source>%1 second(s)</source>
         <translation>%1 segundo(s)</translation>
     </message>
+    <message>
+        <source>Get Word</source>
+        <translation>Ler 16 Bits</translation>
+    </message>
+    <message>
+        <source>Get Byte</source>
+        <translation>Ler 8 Bits</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
@@ -599,6 +595,10 @@
     <message>
         <source>Note: The log file can be found at %1</source>
         <translation>Nota: O arquivo de log pode ser encontrado em %1</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Configurações</translation>
     </message>
 </context>
 </TS>

@@ -339,8 +339,6 @@ void MainWindow::onSelectDeviceTriggered(bool checked) {
     noWarningDevice_ = false;
 }
 
-#include <QDateTime>
-
 void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
                                   bool success, bool canceled) {
     static qint64 startTime = 0;
@@ -1173,14 +1171,17 @@ void MainWindow::refreshPortComboBox_() {
 }
 
 QString MainWindow::calculateDataRate_(int64_t elapsed, uint32_t amount) {
+    // Bytes/s
     double value = (elapsed ? (amount * 1.0 / elapsed) : 0.0) * 1000.0;
-    if (value >= 1024 * 1024) {  // MB/s
-        return QString("%1 MB/s").arg(
-            static_cast<int>(round(value / 1024.0 / 1024.0)));
-    } else if (value >= 1024) {  // KB/s
-        return QString("%1 KB/s").arg(static_cast<int>(round(value / 1024.0)));
-    } else {  // Byte/s
-        return QString("%1 byte/s").arg(static_cast<int>(round(value)));
+    // bps
+    value *= (!device_ || !device_->is16Bit()) ? 8 : 16;
+    if (value >= 1000 * 1000) {  // Mbps
+        return QString("%1 Mbps").arg(
+            static_cast<int>(round(value / 1000.0 / 1000.0)));
+    } else if (value >= 1000) {  // Kbps
+        return QString("%1 Kbps").arg(static_cast<int>(round(value / 1000.0)));
+    } else {  // bps
+        return QString("%1 bps").arg(static_cast<int>(round(value)));
     }
 }
 
@@ -1212,9 +1213,7 @@ void MainWindow::on_pushButtonConnect_clicked() {
 }
 
 void MainWindow::on_pushButtonVddInitCal_clicked() {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     enableDiagControls_(false);
     float measured = 0.0f;
     bool ok = runner_.vddInitCal();
@@ -1254,9 +1253,7 @@ void MainWindow::on_pushButtonVddInitCal_clicked() {
 }
 
 void MainWindow::on_pushButtonVppInitCal_clicked() {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     enableDiagControls_(false);
     float measured = 0.0f;
     bool ok = runner_.vppInitCal();
@@ -1295,125 +1292,81 @@ void MainWindow::on_pushButtonVppInitCal_clicked() {
     enableDiagControls_(true);
 }
 
-void MainWindow::on_pushButtonSetData_clicked() {
-    if (!runner_.isOpen()) {
-        return;
-    }
-    uint16_t data = ui_->spinBoxData->value();
-    if (!runner_.dataSetW(data)) {
-        QMessageBox::critical(
-            this, tr("USB Flash/EPROM Programmer"),
-            tr("The device has been disconnected from the \"%1\" port.")
-                .arg(runner_.getPath())
-                .leftJustified(kDialogLabelMinLength));
-    }
-}
-
-void MainWindow::on_pushButtonGetData_clicked() {
-    if (!runner_.isOpen()) {
-        return;
-    }
+void MainWindow::on_pushButtonGetDataW_clicked() {
+    if (!runner_.isOpen()) return;
     uint16_t value = runner_.dataGetW();
     ui_->spinBoxData->setValue(value);
 }
 
-void MainWindow::on_pushButtonSetAddr_clicked() {
-    if (!runner_.isOpen()) {
-        return;
-    }
-    uint32_t data = ui_->spinBoxAddr->value();
-    runner_.addrSet(data);
+void MainWindow::on_pushButtonGetDataB_clicked() {
+    if (!runner_.isOpen()) return;
+    uint8_t value = runner_.dataGet();
+    ui_->spinBoxData->setValue(value);
 }
 
 void MainWindow::on_checkBoxVddCtrl_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vddCtrl(checked);
 }
 
 void MainWindow::on_checkBoxVppCtrl_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vppCtrl(checked);
 }
 
 void MainWindow::on_checkBoxVddOnVpp_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vddOnVpp(checked);
 }
 
 void MainWindow::on_checkBoxVppOnA9_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vppOnA9(checked);
 }
 
 void MainWindow::on_checkBoxVppOnA18_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vppOnA18(checked);
 }
 
 void MainWindow::on_checkBoxVppOnCE_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vppOnCE(checked);
 }
 
 void MainWindow::on_checkBoxVppOnOE_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vppOnOE(checked);
 }
 
 void MainWindow::on_checkBoxVppOnWE_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.vppOnWE(checked);
 }
 
 void MainWindow::on_checkBoxCE_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.setCE(checked);
 }
 
 void MainWindow::on_checkBoxOE_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.setOE(checked);
 }
 
 void MainWindow::on_checkBoxWE_toggled(bool checked) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     runner_.setWE(checked);
 }
 
 void MainWindow::on_dialVdd_valueChanged(int value) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     float v = value / 10.0f;
     runner_.vddSet(v);
 }
 
 void MainWindow::on_dialVpp_valueChanged(int value) {
-    if (!runner_.isOpen()) {
-        return;
-    }
+    if (!runner_.isOpen()) return;
     float v = value / 10.0f;
     runner_.vppSet(v);
 }
@@ -1463,18 +1416,22 @@ void MainWindow::onRefreshTimerTimeout() {
 
 void MainWindow::onCheckBoxAddressToggled(bool checked) {
     addressBinToHex_();
+    // sendAddrBus_();
 }
 
 void MainWindow::on_spinBoxAddr_valueChanged(int value) {
     addressHexToBin_();
+    sendAddrBus_();
 }
 
 void MainWindow::onCheckBoxDataToggled(bool checked) {
     dataBinToHex_();
+    // sendDataBus_();
 }
 
 void MainWindow::on_spinBoxData_valueChanged(int value) {
     dataHexToBin_();
+    sendDataBus_();
 }
 
 void MainWindow::connect_(bool state) {
@@ -1515,6 +1472,24 @@ void MainWindow::connect_(bool state) {
         }
         enumTimer_.start();
     }
+}
+
+void MainWindow::sendDataBus_() {
+    if (!runner_.isOpen()) return;
+    uint16_t data = ui_->spinBoxData->value();
+    if (!runner_.dataSetW(data)) {
+        QMessageBox::critical(
+            this, tr("USB Flash/EPROM Programmer"),
+            tr("The device has been disconnected from the \"%1\" port.")
+                .arg(runner_.getPath())
+                .leftJustified(kDialogLabelMinLength));
+    }
+}
+
+void MainWindow::sendAddrBus_() {
+    if (!runner_.isOpen()) return;
+    uint32_t data = ui_->spinBoxAddr->value();
+    runner_.addrSet(data);
 }
 
 void MainWindow::enableDiagControls_(bool state) {

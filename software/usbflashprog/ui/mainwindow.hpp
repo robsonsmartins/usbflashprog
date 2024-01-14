@@ -120,9 +120,8 @@ class MainWindow : public QMainWindow {
     void on_pushButtonConnect_clicked();
     void on_pushButtonVddInitCal_clicked();
     void on_pushButtonVppInitCal_clicked();
-    void on_pushButtonSetData_clicked();
-    void on_pushButtonGetData_clicked();
-    void on_pushButtonSetAddr_clicked();
+    void on_pushButtonGetDataW_clicked();
+    void on_pushButtonGetDataB_clicked();
     void on_checkBoxVddCtrl_toggled(bool checked = false);
     void on_checkBoxVppCtrl_toggled(bool checked = false);
     void on_checkBoxVddOnVpp_toggled(bool checked = false);
@@ -259,6 +258,10 @@ class MainWindow : public QMainWindow {
      * @param state True to connect, false to disconnect.
      */
     void connect_(bool state = true);
+
+    void sendDataBus_();
+    void sendAddrBus_();
+
     /*
      * @brief Enables/Disables the controls (Diag).
      * @param state True to enable, false otherwise.

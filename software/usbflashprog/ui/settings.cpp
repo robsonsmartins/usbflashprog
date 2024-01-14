@@ -30,6 +30,7 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     ui_->setupUi(this);
     setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " + tr("Settings"));
     QString logFileInfo = ui_->labelLogFileInfo->text();
     logFileInfo =
         logFileInfo.arg("\n" + QDir::toNativeSeparators(QDir::homePath() + "/" +

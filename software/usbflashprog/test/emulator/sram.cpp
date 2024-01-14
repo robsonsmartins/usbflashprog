@@ -19,7 +19,9 @@
 
 // ---------------------------------------------------------------------------
 
-ChipSRAM::ChipSRAM() : BaseParChip() {}
+ChipSRAM::ChipSRAM() : BaseParChip() {
+    writeToLog("SetChip(%s)", "SRAM");
+}
 
 ChipSRAM::~ChipSRAM() {}
 

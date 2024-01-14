@@ -16,7 +16,22 @@
 // ---------------------------------------------------------------------------
 
 #include <QRandomGenerator>
+#include <QLoggingCategory>
+#include <QString>
+
 #include "chip.hpp"
+#include "main.hpp"
+
+// ---------------------------------------------------------------------------
+// Logging
+
+Q_LOGGING_CATEGORY(emulateChip, "emu.chip")
+
+#define DEBUG qCDebug(emulateChip)
+#define INFO qCInfo(emulateChip)
+#define WARNING qCWarning(emulateChip)
+#define CRITICAL qCCritical(emulateChip)
+#define FATAL qCFatal(emulateChip)
 
 // ---------------------------------------------------------------------------
 
@@ -50,12 +65,14 @@ void BaseChip::setSize(uint32_t size) {
 
 void BaseChip::setVDD(bool state) {
     if (state == f_vdd) return;
+    writeToLog("SetVDD(%d)", static_cast<int>(state));
     f_vdd = state;
     emuChip();
 }
 
 void BaseChip::setVPP(bool state) {
     if (state == f_vpp) return;
+    writeToLog("SetVPP(%d)", static_cast<int>(state));
     f_vpp = state;
     emuChip();
 }
@@ -77,22 +94,43 @@ void BaseChip::read(void) {
     /* checks the params */
     if (f_addr_bus >= f_memory_area.size()) {
         f_data_bus = 0xFFFF;
+        writeToLog("Error in Read(addr=%06.6lX)", f_addr_bus);
         return;
     }
-    static uint32_t last_addr = f_addr_bus;
+    static uint32_t last_addr = -1;
     uint16_t data = f_memory_area[f_addr_bus];
     if (f_data_bus == data && f_addr_bus == last_addr) return;
     /* returns the data from memory area */
     f_data_bus = data;
     /* update last_addr */
     last_addr = f_addr_bus;
+    writeToLog("Read(addr=%06.6lX) = %04.4X", f_addr_bus, f_data_bus);
 }
 
 void BaseChip::write(void) {
     /* checks the params */
-    if (f_addr_bus >= f_memory_area.size()) return;
+    if (f_addr_bus >= f_memory_area.size()) {
+        writeToLog("Error in Write(addr=%06.6lX,data=%04.4X)", f_addr_bus,
+                   f_data_bus);
+        return;
+    }
     /* writes the data to memory area */
     f_memory_area[f_addr_bus] = f_data_bus;
+    writeToLog("Write(addr=%06.6lX,data=%04.4X)", f_addr_bus, f_data_bus);
+}
+
+void BaseChip::writeToLog(const char* msg, ...) {
+    // logLevel == disabled
+    if (kTestLogLevel == 0) return;
+    /* checks the params */
+    if (msg == NULL) return;
+    /* writes the params to log */
+    char log[256];
+    va_list args;
+    va_start(args, msg);
+    vsnprintf(log, sizeof(log), msg, args);
+    va_end(args);
+    DEBUG << log;
 }
 
 // ---------------------------------------------------------------------------
@@ -104,18 +142,21 @@ BaseParChip::~BaseParChip() {}
 
 void BaseParChip::setOE(bool state) {
     if (state == f_oe) return;
+    writeToLog("SetOE(%d)", static_cast<int>(state));
     f_oe = state;
     emuChip();
 }
 
 void BaseParChip::setCE(bool state) {
     if (state == f_ce) return;
+    writeToLog("SetCE(%d)", static_cast<int>(state));
     f_ce = state;
     emuChip();
 }
 
 void BaseParChip::setWE(bool state) {
     if (state == f_we) return;
+    writeToLog("SetWE(%d)", static_cast<int>(state));
     f_we = state;
     emuChip();
 }

@@ -34,6 +34,8 @@ set(PROJECT_SOURCES
     ../backend/runner.hpp
     ../backend/devices/device.hpp
     ../backend/devices/device.cpp
+    ../backend/devices/parallel/pdevice.hpp
+    ../backend/devices/parallel/pdevice.cpp
     ../backend/devices/parallel/sram.hpp
     ../backend/devices/parallel/sram.cpp
     ../backend/devices/parallel/eprom.hpp
@@ -53,6 +55,7 @@ set(PROJECT_SOURCES
     backend/runner_test.cpp
     backend/opcodes_test.hpp
     backend/opcodes_test.cpp
+    main.hpp
     main.cpp
 )
 

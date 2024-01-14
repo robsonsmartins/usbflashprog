@@ -23,7 +23,15 @@
 
 // ---------------------------------------------------------------------------
 
-Runner::Runner() {}
+Runner::Runner() {
+    settings_.twp = 0;
+    settings_.twc = 0;
+    settings_.skipFF = false;
+    settings_.progWithVpp = false;
+    settings_.vppOePin = false;
+    settings_.pgmCePin = false;
+    settings_.pgmPositive = false;
+}
 
 void Runner::init() {
     vgenConfig_.vpp.pwmPin = kVppPwmPin;
@@ -133,6 +141,11 @@ void Runner::runCommand_() {
         runCtrlBusCommand_(code->first);
         runDataBusCommand_(code->first);
         runAddrBusCommand_(code->first);
+
+        runDeviceSettingsCommand_(code->first);
+        runDeviceReadCommand_(code->first);
+        runDeviceWriteCommand_(code->first);
+        runDeviceVerifyCommand_(code->first);
     }
 }
 
@@ -389,6 +402,225 @@ void Runner::runAddrBusCommand_(uint8_t opcode) {
         default:
             break;
     }
+}
+
+void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
+    uint32_t dw;
+    TByteArray response;
+    switch (opcode) {
+        case kCmdDeviceSetTwp:
+            dw = getParamAsDWord_();
+            settings_.twp = dw;
+            serial_.putChar(kCmdResponseOk);
+            break;
+        case kCmdDeviceSetTwc:
+            dw = getParamAsDWord_();
+            settings_.twc = dw;
+            serial_.putChar(kCmdResponseOk);
+            break;
+        case kCmdDeviceSetFlags:
+            dw = getParamAsByte_();
+            // 0 = Skip Write 0xFF
+            // 1 = Prog with VPP on
+            // 2 = VPP/~OE Pin
+            // 3 = ~PGM/~CE Pin
+            // 4 = PGM positive
+            // clang-format off
+            settings_.skipFF      = (dw & 0x01 != 0);
+            settings_.progWithVpp = (dw & 0x02 != 0);
+            settings_.vppOePin    = (dw & 0x04 != 0);
+            settings_.pgmCePin    = (dw & 0x08 != 0);
+            settings_.pgmPositive = (dw & 0x10 != 0);
+            // clang-format on
+            serial_.putChar(kCmdResponseOk);
+            break;
+        default:
+            break;
+    }
+}
+
+void Runner::runDeviceReadCommand_(uint8_t opcode) {
+    uint16_t w;
+    TByteArray response;
+    switch (opcode) {
+        case kCmdDeviceRead:
+            deviceRead_(w, true);
+            if (addrBus_.increment()) {
+                // response
+                response.resize(3);
+                response[0] = kCmdResponseOk;
+                createParamsFromWord_(&response, w);
+                serial_.putBuf(response.data(), response.size());
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdDeviceReadB:
+            deviceRead_(w, false);
+            if (addrBus_.increment()) {
+                // response
+                response.resize(2);
+                response[0] = kCmdResponseOk;
+                createParamsFromByte_(&response, w);
+                serial_.putBuf(response.data(), response.size());
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Runner::runDeviceWriteCommand_(uint8_t opcode) {
+    uint16_t w;
+    TByteArray response;
+    bool success = false;
+    switch (opcode) {
+        case kCmdDeviceWrite:
+            if (deviceWriteAndVerify_(w, true) && addrBus_.increment()) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdDeviceWriteB:
+            if (deviceWriteAndVerify_(w, false) && addrBus_.increment()) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Runner::runDeviceVerifyCommand_(uint8_t opcode) {
+    uint16_t w;
+    TByteArray response;
+    bool success = false;
+    switch (opcode) {
+        case kCmdDeviceVerify:
+            if (deviceVerify_(w, true) && addrBus_.increment()) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdDeviceVerifyB:
+            if (deviceVerify_(w, false) && addrBus_.increment()) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Runner::deviceRead_(uint16_t &data, bool is16bit) {
+    // ~OE/VPP is LO
+    if (settings_.vppOePin) vgen_.vdd.onVpp(false);
+    // ~OE is LO
+    ctrlBus_.setOE(true);
+    // get data
+    if (is16bit) {
+        data = dataBus_.readWord();
+    } else {
+        data = dataBus_.readByte();
+    }
+    // ~OE is HI
+    ctrlBus_.setOE(false);
+    // ~OE/VPP is VDD
+    if (settings_.vppOePin) vgen_.vdd.onVpp(true);
+}
+
+bool Runner::deviceWrite_(uint16_t &data, bool is16bit) {
+    bool success = true;
+    if (settings_.progWithVpp) {
+        // VPP on
+        vgen_.vdd.onVpp(false);
+        vgen_.vpp.on();
+        sleep_us(kStabilizationTime);
+    }
+    // Set DataBus
+    if (is16bit) {
+        data = getParamAsWord_();
+        if (!dataBus_.writeWord(data)) success = false;
+    } else {
+        data = getParamAsByte_();
+        if (!dataBus_.writeByte(data)) success = false;
+    }
+    if (settings_.pgmPositive) {
+        // PGM is HI (start prog pulse)
+        ctrlBus_.setWE(false);
+        sleep_us(settings_.twp);  // tWP uS
+        // PGM is LO (end prog pulse)
+        ctrlBus_.setWE(true);
+    } else {
+        // ~PGM is LO (start prog pulse)
+        ctrlBus_.setWE(true);
+        sleep_us(settings_.twp);  // tWP uS
+        // ~PGM is HI (end prog pulse)
+        ctrlBus_.setWE(false);
+    }
+    sleep_us(settings_.twc);  // tWC uS
+    if (settings_.progWithVpp) {
+        // VPP off
+        vgen_.vpp.off();
+        vgen_.vdd.onVpp(true);
+        sleep_us(kStabilizationTime);
+    }
+    return success;
+}
+
+bool Runner::deviceVerify_(uint16_t &data, bool is16bit) {
+    uint16_t wr, rd;
+    // get parameter
+    if (is16bit) {
+        wr = getParamAsWord_();
+    } else {
+        wr = getParamAsByte_();
+    }
+    // read
+    deviceRead_(rd, is16bit);
+    if (!is16bit) {
+        wr &= 0xFF;
+        rd &= 0xFF;
+    }
+    // verify
+    if (rd == wr) data = rd;
+    return (rd == wr);
+}
+
+bool Runner::deviceWriteAndVerify_(uint16_t &data, bool is16bit) {
+    uint16_t wr, rd;
+    bool emptyData;
+    // get parameter
+    if (is16bit) {
+        wr = getParamAsWord_();
+        emptyData = (wr == 0xFFFF);
+    } else {
+        wr = getParamAsByte_();
+        emptyData = (wr & 0xFF == 0xFF);
+    }
+    // write
+    if (!settings_.skipFF || !emptyData) {
+        if (!deviceWrite_(wr, is16bit)) return false;
+    }
+    // PGM/~CE is LO
+    if (settings_.pgmCePin) ctrlBus_.setWE(true);
+    // read
+    deviceRead_(rd, is16bit);
+    if (!is16bit) {
+        wr &= 0xFF;
+        rd &= 0xFF;
+    }
+    // verify
+    if (rd == wr) data = rd;
+    return (rd == wr);
 }
 
 bool Runner::getParamAsBool_() {

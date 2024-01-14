@@ -129,7 +129,45 @@ enum kCmdOpCodeEnum {
     /** @brief OPCODE / BUS : Opcode Data Get. */
     kCmdBusDataGet = 0x44,
     /** @brief OPCODE / BUS : Opcode Data Get Byte. */
-    kCmdBusDataGetB = 0x45
+    kCmdBusDataGetB = 0x45,
+
+    /** @brief OPCODE / DEVICE : Opcode Device Set tWP. */
+    kCmdDeviceSetTwp = 0x81,
+    /** @brief OPCODE / DEVICE : Opcode Device Set tWC. */
+    kCmdDeviceSetTwc = 0x82,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Set Flags.
+     * @details The parameter (one byte) that represents the flags
+     *   follows the table:
+     * <pre>
+     * +----------------------+
+     * |Bit| Description      |
+     * | 0 | Skip Write 0xFF  |
+     * | 1 | Prog with VPP On |
+     * | 2 | VPP/~OE Pin      |
+     * | 3 | ~PGM/~CE Pin     |
+     * | 4 | PGM positive     |
+     * +----------------------+
+     * </pre>
+     */
+    kCmdDeviceSetFlags = 0x83,
+    /** @brief OPCODE / DEVICE : Opcode Device Read and Increment Address. */
+    kCmdDeviceRead = 0x84,
+    /** @brief OPCODE / DEVICE : Opcode Device Read Byte and
+     *                           Increment Address. */
+    kCmdDeviceReadB = 0x85,
+    /** @brief OPCODE / DEVICE : Opcode Device Write, Verify and
+     *                           Increment Address. */
+    kCmdDeviceWrite = 0x86,
+    /** @brief OPCODE / DEVICE : Opcode Device Write Byte, Verify and
+     *                           Increment Address. */
+    kCmdDeviceWriteB = 0x87,
+    /** @brief OPCODE / DEVICE : Opcode Device Verify and
+     *                           Increment Address. */
+    kCmdDeviceVerify = 0x88,
+    /** @brief OPCODE / DEVICE : Opcode Device Verify Byte and
+     *                           Increment Address. */
+    kCmdDeviceVerifyB = 0x89
 };
 
 // ---------------------------------------------------------------------------
@@ -171,47 +209,60 @@ typedef std::map<kCmdOpCodeEnum, TCmdOpCode> TCmdOpCodeMap;
 
 // ---------------------------------------------------------------------------
 
+// clang-format off
 /** @brief OPCODE : Opcodes group (map). */
 static const TCmdOpCodeMap kCmdOpCodes = {
-    {kCmdNop, {kCmdNop, "Nop", 0, 0}},
+    {kCmdNop           , {kCmdNop           , "Nop"              , 0, 0}},
 
-    {kCmdVddCtrl, {kCmdVddCtrl, "VddCtrl", 1, 0}},
-    {kCmdVddSetV, {kCmdVddSetV, "VddSetV", 2, 0}},
-    {kCmdVddGetV, {kCmdVddGetV, "VddGetV", 0, 2}},
-    {kCmdVddGetDuty, {kCmdVddGetDuty, "VddGetDuty", 0, 2}},
-    {kCmdVddGetCal, {kCmdVddGetCal, "VddGetCal", 0, 2}},
-    {kCmdVddInitCal, {kCmdVddInitCal, "VddInitCal", 0, 0}},
-    {kCmdVddSaveCal, {kCmdVddSaveCal, "VddSaveCal", 2, 0}},
-    {kCmdVddOnVpp, {kCmdVddOnVpp, "VddOnVpp", 1, 0}},
+    {kCmdVddCtrl       , {kCmdVddCtrl       , "Vdd Ctrl"         , 1, 0}},
+    {kCmdVddSetV       , {kCmdVddSetV       , "Vdd SetV"         , 2, 0}},
+    {kCmdVddGetV       , {kCmdVddGetV       , "Vdd GetV"         , 0, 2}},
+    {kCmdVddGetDuty    , {kCmdVddGetDuty    , "Vdd GetDuty"      , 0, 2}},
+    {kCmdVddGetCal     , {kCmdVddGetCal     , "Vdd GetCal"       , 0, 2}},
+    {kCmdVddInitCal    , {kCmdVddInitCal    , "Vdd InitCal"      , 0, 0}},
+    {kCmdVddSaveCal    , {kCmdVddSaveCal    , "Vdd SaveCal"      , 2, 0}},
+    {kCmdVddOnVpp      , {kCmdVddOnVpp      , "Vdd On Vpp"       , 1, 0}},
 
-    {kCmdVppCtrl, {kCmdVppCtrl, "VppCtrl", 1, 0}},
-    {kCmdVppSetV, {kCmdVppSetV, "VppSetV", 2, 0}},
-    {kCmdVppGetV, {kCmdVppGetV, "VppGetV", 0, 2}},
-    {kCmdVppGetDuty, {kCmdVppGetDuty, "VppGetDuty", 0, 2}},
-    {kCmdVppGetCal, {kCmdVppGetCal, "VppGetCal", 0, 2}},
-    {kCmdVppInitCal, {kCmdVppInitCal, "VppInitCal", 0, 0}},
-    {kCmdVppSaveCal, {kCmdVppSaveCal, "VppSaveCal", 2, 0}},
-    {kCmdVppOnA9, {kCmdVppOnA9, "VppOnA9", 1, 0}},
-    {kCmdVppOnA18, {kCmdVppOnA18, "VppOnA18", 1, 0}},
-    {kCmdVppOnCE, {kCmdVppOnCE, "VppOnCE", 1, 0}},
-    {kCmdVppOnOE, {kCmdVppOnOE, "VppOnOE", 1, 0}},
-    {kCmdVppOnWE, {kCmdVppOnWE, "VppOnWE", 1, 0}},
+    {kCmdVppCtrl       , {kCmdVppCtrl       , "Vpp Ctrl"         , 1, 0}},
+    {kCmdVppSetV       , {kCmdVppSetV       , "Vpp SetV"         , 2, 0}},
+    {kCmdVppGetV       , {kCmdVppGetV       , "Vpp GetV"         , 0, 2}},
+    {kCmdVppGetDuty    , {kCmdVppGetDuty    , "Vpp GetDuty"      , 0, 2}},
+    {kCmdVppGetCal     , {kCmdVppGetCal     , "Vpp GetCal"       , 0, 2}},
+    {kCmdVppInitCal    , {kCmdVppInitCal    , "Vpp InitCal"      , 0, 0}},
+    {kCmdVppSaveCal    , {kCmdVppSaveCal    , "Vpp SaveCal"      , 2, 0}},
+    {kCmdVppOnA9       , {kCmdVppOnA9       , "Vpp On A9"        , 1, 0}},
+    {kCmdVppOnA18      , {kCmdVppOnA18      , "Vpp On A18"       , 1, 0}},
+    {kCmdVppOnCE       , {kCmdVppOnCE       , "Vpp On CE"        , 1, 0}},
+    {kCmdVppOnOE       , {kCmdVppOnOE       , "Vpp On OE"        , 1, 0}},
+    {kCmdVppOnWE       , {kCmdVppOnWE       , "Vpp On WE"        , 1, 0}},
 
-    {kCmdBusCE, {kCmdBusCE, "CE", 1, 0}},
-    {kCmdBusOE, {kCmdBusOE, "OE", 1, 0}},
-    {kCmdBusWE, {kCmdBusWE, "WE", 1, 0}},
+    {kCmdBusCE         , {kCmdBusCE         , "Set CE"           , 1, 0}},
+    {kCmdBusOE         , {kCmdBusOE         , "Set OE"           , 1, 0}},
+    {kCmdBusWE         , {kCmdBusWE         , "Set WE"           , 1, 0}},
 
-    {kCmdBusAddrClr, {kCmdBusAddrClr, "AddrClr", 0, 0}},
-    {kCmdBusAddrInc, {kCmdBusAddrInc, "AddrInc", 0, 0}},
-    {kCmdBusAddrSet, {kCmdBusAddrSet, "AddrSet", 3, 0}},
-    {kCmdBusAddrSetB, {kCmdBusAddrSetB, "AddrSetByte", 1, 0}},
-    {kCmdBusAddrSetW, {kCmdBusAddrSetW, "AddrSetWord", 2, 0}},
+    {kCmdBusAddrClr    , {kCmdBusAddrClr    , "Addr Clr"         , 0, 0}},
+    {kCmdBusAddrInc    , {kCmdBusAddrInc    , "Addr Inc"         , 0, 0}},
+    {kCmdBusAddrSet    , {kCmdBusAddrSet    , "Addr Set"         , 3, 0}},
+    {kCmdBusAddrSetB   , {kCmdBusAddrSetB   , "Addr SetByte"     , 1, 0}},
+    {kCmdBusAddrSetW   , {kCmdBusAddrSetW   , "Addr SetWord"     , 2, 0}},
 
-    {kCmdBusDataClr, {kCmdBusDataClr, "DataClr", 0, 0}},
-    {kCmdBusDataSet, {kCmdBusDataSet, "DataSet", 2, 0}},
-    {kCmdBusDataSetB, {kCmdBusDataSetB, "DataSetByte", 1, 0}},
-    {kCmdBusDataGet, {kCmdBusDataGet, "DataGet", 0, 2}},
-    {kCmdBusDataGetB, {kCmdBusDataGetB, "DataGetByte", 0, 1}}};
+    {kCmdBusDataClr    , {kCmdBusDataClr    , "Data Clr"         , 0, 0}},
+    {kCmdBusDataSet    , {kCmdBusDataSet    , "Data Set"         , 2, 0}},
+    {kCmdBusDataSetB   , {kCmdBusDataSetB   , "Data SetByte"     , 1, 0}},
+    {kCmdBusDataGet    , {kCmdBusDataGet    , "Data Get"         , 0, 2}},
+    {kCmdBusDataGetB   , {kCmdBusDataGetB   , "Data GetByte"     , 0, 1}},
+
+    {kCmdDeviceSetTwp  , {kCmdDeviceSetTwp  , "Device Set Twp"   , 4, 0}},
+    {kCmdDeviceSetTwc  , {kCmdDeviceSetTwc  , "Device Set Twc"   , 4, 0}},
+    {kCmdDeviceSetFlags, {kCmdDeviceSetFlags, "Device Set Flags" , 1, 0}},
+    {kCmdDeviceRead    , {kCmdDeviceRead    , "Device Read"      , 0, 2}},
+    {kCmdDeviceReadB   , {kCmdDeviceReadB   , "Device ReadByte"  , 0, 1}},
+    {kCmdDeviceWrite   , {kCmdDeviceWrite   , "Device Write"     , 2, 0}},
+    {kCmdDeviceWriteB  , {kCmdDeviceWriteB  , "Device WriteByte" , 1, 0}},
+    {kCmdDeviceVerify  , {kCmdDeviceVerify  , "Device Verify"    , 2, 0}},
+    {kCmdDeviceVerifyB , {kCmdDeviceVerifyB , "Device VerifyByte", 1, 0}}
+};
+// clang-format on
 
 // ---------------------------------------------------------------------------
 

@@ -22,6 +22,7 @@
 
 #include <vector>
 #include <cstdint>
+#include <cstdarg>
 
 // ---------------------------------------------------------------------------
 
@@ -82,6 +83,10 @@ class BaseChip {
         @param[in] data Data to be filled into memory
      */
     virtual void fillData(uint16_t data);
+    /* Writes the msg and variables to log file.
+       @param[in] msg String message
+       @param[in] ... Variables */
+    virtual void writeToLog(const char* msg, ...);
 };
 
 // ---------------------------------------------------------------------------

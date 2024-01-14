@@ -141,6 +141,12 @@ class Device : public QObject {
     /** @brief Destructor. */
     virtual ~Device();
     /**
+     * @brief Returns if device is 16-Bit.
+     * @return True if device is 16-Bit.
+     *   False if device is 8-Bit.
+     */
+    virtual bool is16Bit() const;
+    /**
      * @brief Sets the device size.
      * @param value Device size, in bytes.
      */
@@ -266,13 +272,13 @@ class Device : public QObject {
      * @param[out] result Reference to TDeviceID structure to receive data.
      * @return True if success, false otherwise.
      */
-    virtual bool getId(TDeviceID &result) = 0;
+    virtual bool getId(TDeviceID &result);
     /**
      * @brief Read the Device.
      * @param[out] buffer Reference to QByteArray to receive data.
      * @return True if success, false otherwise.
      */
-    virtual bool read(QByteArray &buffer) = 0;
+    virtual bool read(QByteArray &buffer);
     /**
      * @brief Program the Device.
      * @param[out] buffer Data to write.
@@ -280,30 +286,30 @@ class Device : public QObject {
      *   Default is false.
      * @return True if success, false otherwise.
      */
-    virtual bool program(const QByteArray &buffer, bool verify = false) = 0;
+    virtual bool program(const QByteArray &buffer, bool verify = false);
     /**
      * @brief Verifies the Device.
      * @param buffer Data to compare.
      * @return True if success, false otherwise.
      */
-    virtual bool verify(const QByteArray &buffer) = 0;
+    virtual bool verify(const QByteArray &buffer);
     /**
      * @brief Erases the Device.
      * @param check If true, calls Device::blankCheck() after erase.
      *   Default is false.
      * @return True if success, false otherwise.
      */
-    virtual bool erase(bool check = false) = 0;
+    virtual bool erase(bool check = false);
     /**
      * @brief Verifies if the Device is blank.
      * @return True if device is blank, false otherwise.
      */
-    virtual bool blankCheck() = 0;
+    virtual bool blankCheck();
     /**
      * @brief Unprotects the Device.
      * @return True if success, false otherwise.
      */
-    virtual bool unprotect() = 0;
+    virtual bool unprotect();
 
   Q_SIGNALS:
     /**
@@ -320,6 +326,11 @@ class Device : public QObject {
                     bool success = true, bool canceled = false);
 
   protected:
+    /* @brief Indicates if is in 16 bit mode.
+         Otherwise is 8 bit mode. */
+    bool is16bit_;
+    /* @brief Maximum attempts to program a byte. */
+    int maxAttemptsProg_;
     /* @brief True if is about the canceling. */
     bool canceling_;
     /* @brief Device size, in bytes. */
@@ -328,6 +339,12 @@ class Device : public QObject {
     uint32_t twp_;
     /* @brief tWC, in microseconds. */
     uint32_t twc_;
+    /* @brief Device settings. */
+#ifndef TEST_BUILD
+    Runner::TDeviceSettings flags_;
+#else
+    Emulator::TDeviceSettings flags_;
+#endif
     /* @brief VDD to Read, in volts. */
     float vddRd_;
     /* @brief VDD to Program, in volts. */

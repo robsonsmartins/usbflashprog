@@ -148,6 +148,21 @@ class Runner : public QObject {
     Q_OBJECT
 
   public:
+    /** @brief Device settings. */
+    typedef struct TDeviceSettings {
+        /** @brief Skip Write 0xFF. */
+        bool skipFF;
+        /** @brief Prog with VPP on. */
+        bool progWithVpp;
+        /** @brief VPP/~OE Pin. */
+        bool vppOePin;
+        /** @brief ~PGM/~CE Pin. */
+        bool pgmCePin;
+        /** @brief PGM positive. */
+        bool pgmPositive;
+    } TDeviceSettings;
+
+  public:
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
@@ -391,6 +406,58 @@ class Runner : public QObject {
      */
     uint16_t dataGetW();
     /**
+     * @brief Runs the Device Set tWP opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool deviceSetTwp(uint32_t value);
+    /**
+     * @brief Runs the Device Set tWC opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool deviceSetTwc(uint32_t value);
+    /**
+     * @brief Runs the Device Set Flags opcode.
+     * @param value Value to set.
+     * @return True if success, false otherwise.
+     */
+    bool deviceSetFlags(const TDeviceSettings& value);
+    /**
+     * @brief Runs the Device Read (Byte) opcode.
+     * @return Read value if success, 0xFF otherwise.
+     */
+    uint8_t deviceRead();
+    /**
+     * @brief Runs the Device Read (Word) opcode.
+     * @return Read value if success, 0xFFFF otherwise.
+     */
+    uint16_t deviceReadW();
+    /**
+     * @brief Runs the Device Write (Byte) opcode.
+     * @param value Value to write.
+     * @return True if success, false otherwise.
+     */
+    bool deviceWrite(uint8_t value);
+    /**
+     * @brief Runs the Device Write (Word) opcode.
+     * @param value Value to write.
+     * @return True if success, false otherwise.
+     */
+    bool deviceWriteW(uint16_t value);
+    /**
+     * @brief Runs the Device Verify (Byte) opcode.
+     * @param value Value to verify.
+     * @return True if success, false otherwise.
+     */
+    bool deviceVerify(uint8_t value);
+    /**
+     * @brief Runs the Device Verify (Word) opcode.
+     * @param value Value to verify.
+     * @return True if success, false otherwise.
+     */
+    bool deviceVerifyW(uint16_t value);
+    /**
      * @brief Pauses the program execution for a specified time
      *   (microsecond precision).
      * @param value Sleep time, in usec.
@@ -402,6 +469,8 @@ class Runner : public QObject {
      * @param value Sleep time, in msec.
      */
     static void msDelay(uint32_t value);
+    /** @brief Process Application Events. */
+    static void processEvents();
 
   private:
     /* @brief Command timeout, in msec. */

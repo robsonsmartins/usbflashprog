@@ -72,6 +72,8 @@ elseif(NORMAL_BUILD)
           backend/epromfile/qepromfile.hpp
           backend/devices/device.cpp
           backend/devices/device.hpp
+          backend/devices/parallel/pdevice.cpp
+          backend/devices/parallel/pdevice.hpp
           backend/devices/parallel/dummy.cpp
           backend/devices/parallel/dummy.hpp
           backend/devices/parallel/sram.cpp

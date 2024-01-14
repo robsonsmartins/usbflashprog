@@ -48,6 +48,21 @@ class Emulator : public QObject {
     Q_OBJECT
 
   public:
+    /** @brief Device settings. */
+    typedef struct TDeviceSettings {
+        /** @brief Skip Write 0xFF. */
+        bool skipFF;
+        /** @brief Prog with VPP on. */
+        bool progWithVpp;
+        /** @brief VPP/~OE Pin. */
+        bool vppOePin;
+        /** @brief ~PGM/~CE Pin. */
+        bool pgmCePin;
+        /** @brief PGM positive. */
+        bool pgmPositive;
+    } TDeviceSettings;
+
+  public:
     /** @copydoc Runner::Runner(QObject*) */
     explicit Emulator(QObject* parent = nullptr);
     /** @copydoc Runner::~Runner() */
@@ -138,10 +153,30 @@ class Emulator : public QObject {
     uint8_t dataGet();
     /** @copydoc Runner::dataGetW() */
     uint16_t dataGetW();
+    /** @copydoc Runner::deviceSetTwp(uint32_t) */
+    bool deviceSetTwp(uint32_t value);
+    /** @copydoc Runner::deviceSetTwc(uint32_t) */
+    bool deviceSetTwc(uint32_t value);
+    /** @copydoc Runner::deviceSetFlags(const TDeviceSettings&) */
+    bool deviceSetFlags(const TDeviceSettings& value);
+    /** @copydoc Runner::deviceRead() */
+    uint8_t deviceRead();
+    /** @copydoc Runner::deviceReadW() */
+    uint16_t deviceReadW();
+    /** @copydoc Runner::deviceWrite(uint8_t) */
+    bool deviceWrite(uint8_t value);
+    /** @copydoc Runner::deviceWriteW(uint16_t) */
+    bool deviceWriteW(uint16_t value);
+    /** @copydoc Runner::deviceVerify(uint8_t) */
+    bool deviceVerify(uint8_t value);
+    /** @copydoc Runner::deviceVerifyW(uint16_t) */
+    bool deviceVerifyW(uint16_t value);
     /** @copydoc Runner::usDelay(uint64_t) */
     static void usDelay(uint64_t value);
     /** @copydoc Runner::msDelay(uint32_t) */
     static void msDelay(uint32_t value);
+    /** @copydoc Runner::processEvents() */
+    static void processEvents();
     /**
      * @brief Sets the chip for emulation (global).
      * @param chip Pointer to instance of the Chip Class.
@@ -169,6 +204,15 @@ class Emulator : public QObject {
     uint32_t address_;
     /* @brief Indicates if an error occurred in the last operation. */
     bool error_;
+    /* @brief tWP Setting (microseconds). */
+    uint32_t twp_;
+    /* @brief tWC Setting (microseconds). */
+    uint32_t twc_;
+    /* @brief Stores device settings. */
+    TDeviceSettings flags_;
+
+    uint16_t deviceRead_(bool is16bit);
+    bool deviceWrite_(uint16_t value, bool is16bit);
 };
 
 #endif  // TEST_EMULATOR_EMULATOR_HPP_

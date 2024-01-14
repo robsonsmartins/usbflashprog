@@ -153,6 +153,8 @@ QString TDeviceInformation::toString() const {
 
 Device::Device(QObject *parent)
     : QObject(parent),
+      is16bit_(false),
+      maxAttemptsProg_(1),
       canceling_(false),
       size_(0),
       twp_(1),
@@ -179,9 +181,18 @@ Device::Device(QObject *parent)
     info_.capability.hasSkipFF = false;
     info_.capability.hasVDD = true;
     info_.capability.hasVPP = false;
+    flags_.skipFF = false;
+    flags_.progWithVpp = false;
+    flags_.vppOePin = false;
+    flags_.pgmCePin = false;
+    flags_.pgmPositive = false;
 }
 
 Device::~Device() {}
+
+bool Device::is16Bit() const {
+    return is16bit_;
+}
 
 void Device::setPort(const QString &path) {
     if (port_ == path) return;
@@ -303,4 +314,38 @@ TDeviceInformation Device::getInfo() const {
 void Device::cancel() {
     if (canceling_) return;
     canceling_ = true;
+}
+
+bool Device::getId(TDeviceID &result) {
+    (void)result;
+    return false;
+}
+
+bool Device::read(QByteArray &buffer) {
+    (void)buffer;
+    return false;
+}
+
+bool Device::program(const QByteArray &buffer, bool verify) {
+    (void)buffer;
+    (void)verify;
+    return false;
+}
+
+bool Device::verify(const QByteArray &buffer) {
+    (void)buffer;
+    return false;
+}
+
+bool Device::erase(bool check) {
+    (void)check;
+    return false;
+}
+
+bool Device::blankCheck() {
+    return false;
+}
+
+bool Device::unprotect() {
+    return false;
 }

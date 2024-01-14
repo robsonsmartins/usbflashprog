@@ -73,6 +73,25 @@ class Runner {
     Serial serial_;
     /* @brief Received command. */
     TByteArray command_;
+    /* @brief Device Settings type. */
+    typedef struct TDeviceSettings {
+        /* @brief tWP Setting (microseconds). */
+        uint32_t twp;
+        /* @brief tWC Setting (microseconds). */
+        uint32_t twc;
+        /* @brief Skip Write 0xFF. */
+        bool skipFF;
+        /* @brief Prog with VPP on. */
+        bool progWithVpp;
+        /* @brief VPP/~OE Pin. */
+        bool vppOePin;
+        /* @brief ~PGM/~CE Pin. */
+        bool pgmCePin;
+        /* @brief PGM positive. */
+        bool pgmPositive;
+    } TDeviceSettings;
+    /* @brief Stores device settings. */
+    TDeviceSettings settings_;
     /*
      * @brief Reads bytes from serial.
      * @param len Number of bytes (default is one).
@@ -161,10 +180,54 @@ class Runner {
      */
     void runDataBusCommand_(uint8_t opcode);
     /*
-     * @brief Runs the received command, if it's a Address Bus opcode.
+     * @brief Runs the received command, if it's an Address Bus opcode.
      * @param opcode Opcode of the command.
      */
     void runAddrBusCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Device Settings opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDeviceSettingsCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Device Read opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDeviceReadCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Device Write opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDeviceWriteCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Device Verify opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDeviceVerifyCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the device read byte/word algorithm.
+     * @param data[out] Output of data read.
+     * @param is16bit If true, indicates a 16-bit device.
+     */
+    void deviceRead_(uint16_t &data, bool is16bit);
+    /*
+     * @brief Runs the device program byte/word algorithm.
+     * @param data[in,out] Output of data to write.
+     * @param is16bit If true, indicates a 16-bit device.
+     */
+    bool deviceWrite_(uint16_t &data, bool is16bit);
+    /*
+     * @brief Runs the device verify byte/word algorithm.
+     * @param data[in,out] Output of data read.
+     * @param is16bit If true, indicates a 16-bit device.
+     */
+    bool deviceVerify_(uint16_t &data, bool is16bit);
+    /*
+     * @brief Runs the device program and verify byte/word algorithm.
+     * @param data[in,out] Output of data to write.
+     * @param is16bit If true, indicates a 16-bit device.
+     */
+    bool deviceWriteAndVerify_(uint16_t &data, bool is16bit);
 };
 
 #endif  // MODULES_RUNNER_HPP_

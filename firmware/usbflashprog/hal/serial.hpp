@@ -18,6 +18,7 @@
 #ifndef HAL_SERIAL_HPP_
 #define HAL_SERIAL_HPP_
 
+#include "pico/stdlib.h"
 #include <string>
 #include <iostream>
 

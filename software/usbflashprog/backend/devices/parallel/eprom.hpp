@@ -24,7 +24,7 @@
 #include <QString>
 #include <QByteArray>
 
-#include "sram.hpp"
+#include "pdevice.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@
  * @details The purpose of this class is to program EPROM Memories.
  * @nosubgrouping
  */
-class EPROM : public SRAM {
+class EPROM : public ParDevice {
     Q_OBJECT
 
   public:
@@ -46,6 +46,8 @@ class EPROM : public SRAM {
     /** @brief Destructor. */
     virtual ~EPROM();
     /* Reimplemented */
+    virtual void setSize(uint32_t value);
+    /* Reimplemented */
     virtual bool read(QByteArray &buffer);
     /* Reimplemented */
     virtual bool program(const QByteArray &buffer, bool verify = false);
@@ -55,48 +57,6 @@ class EPROM : public SRAM {
     virtual bool blankCheck();
     /* Reimplemented */
     virtual bool getId(TDeviceID &result);
-
-  protected:
-    /* @brief If true indicates 16 bit mode (default is false). */
-    bool mode16bit_;
-    /* @brief Maximum attempts to program a byte. */
-    int maxAttemptsProg_;
-    /* @brief Delay after VPP pulse, in usec */
-    uint64_t vppPulseDelay_;
-    /* @brief Returns if the VPP and ~OE pins are unified.
-     * @return True if the VPP and OE pins are unified (VPP/~OE).
-         False if it separate. */
-    virtual bool isOeVppPin_();
-    /* @brief Returns if the PGM pin writes with a positive pulse.
-     * @return True if the PGM pin writes with a positive pulse (HI),
-         false otherwise (LO - is the default). */
-    virtual bool isPositiveProgPulse_();
-    /* @brief Returns if the ~PGM and ~CE pins are unified.
-     * @return True if the PGM and CE pins are unified (~PGM/~CE).
-         False if it separate. */
-    virtual bool isPgmCePin_();
-    /* Reimplemented */
-    virtual bool initialize_(kDeviceOperation operation);
-    /* Reimplemented */
-    virtual bool resetBus_();
-    /* Reimplemented */
-    virtual bool read_(uint16_t &data);
-    /* Reimplemented */
-    virtual bool write_(uint16_t data);
-    /* Reimplemented */
-    virtual bool program_(const QByteArray &buffer, uint32_t &current,
-                          uint32_t total);
-    /* Reimplemented */
-    virtual bool verify_(const QByteArray &buffer, uint32_t &current,
-                         uint32_t total);
-    /* @brief Initialize the control pins.
-     * @param read If true indicates Read operation (default).
-         False otherwise. */
-    virtual void initControlPins_(bool read = true);
-
-  private:
-    /* Reimplemented */
-    virtual bool unprotect();
 };
 
 // ---------------------------------------------------------------------------
@@ -186,19 +146,15 @@ class EPROM27E : public EPROM27C {
     virtual ~EPROM27E();
     /* Reimplemented */
     virtual bool erase(bool check = false);
-    /* Reimplemented */
-    virtual bool blankCheck();
 
   protected:
     /* @brief Delay of Erase pulse, in msec */
     uint32_t erasePulseDelay_;
     /* Reimplemented */
-    virtual bool initialize_(kDeviceOperation operation);
+    virtual bool initDevice(kDeviceOperation operation);
     /* @brief Erase the EPROM.
-     * @param current[in,out] Current progress, in bytes.
-     * @param total Total progress, in bytes.
      * @return True if success, false otherwise. */
-    virtual bool erase_(uint32_t &current, uint32_t total);
+    virtual bool eraseDevice();
 };
 
 #endif  // BACKEND_DEVICES_PARALLEL_EPROM_HPP_

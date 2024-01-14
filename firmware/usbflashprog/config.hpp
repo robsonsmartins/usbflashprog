@@ -164,7 +164,12 @@ constexpr uint kBusAddrRckPin = 1;
 
 // ---------------------------------------------------------------------------
 
-/** @brief COMM : Communication timeout, in miliseconds. */
+/** @brief COMM : Communication timeout, in milliseconds. */
 constexpr uint32_t kCommTimeOut = 50;
+
+// ---------------------------------------------------------------------------
+
+/** @brief GENERAL : Time for stabilization, in microseconds. */
+constexpr uint32_t kStabilizationTime = 150;
 
 #endif  // CONFIG_HPP_

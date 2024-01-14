@@ -20,7 +20,9 @@
 // ---------------------------------------------------------------------------
 
 ChipEPROM::ChipEPROM()
-    : BaseParChip(), f_numWriteFFAddrZero(0), f_numWriteAnother(0) {}
+    : BaseParChip(), f_numWriteFFAddrZero(0), f_numWriteAnother(0) {
+    writeToLog("SetChip(%s)", "EPROM");
+}
 
 ChipEPROM::~ChipEPROM() {}
 
@@ -35,7 +37,11 @@ void ChipEPROM::setSize(uint32_t size) {
 
 void ChipEPROM::write(void) {
     /* checks the params */
-    if (f_addr_bus >= f_memory_area.size()) return;
+    if (f_addr_bus >= f_memory_area.size()) {
+        writeToLog("Error in Write(addr=%06.6lX,data=%04.4X)", f_addr_bus,
+                   f_data_bus);
+        return;
+    }
     static uint32_t last_addr = f_addr_bus;
     if (f_addr_bus == last_addr) {
         /* update full data */
@@ -46,6 +52,7 @@ void ChipEPROM::write(void) {
     }
     /* update last_addr */
     last_addr = f_addr_bus;
+    writeToLog("Write(addr=%06.6lX,data=%04.4X)", f_addr_bus, f_data_bus);
 }
 
 void ChipEPROM::emuChip(void) {
@@ -106,6 +113,7 @@ void ChipEPROM::emuChip(void) {
             // erasing
             fillData(0xFFFF);
             f_numWriteFFAddrZero = 0;
+            writeToLog("Erasing Chip");
         }
         // zering all counters
         if (f_numWriteAnother > 5) {

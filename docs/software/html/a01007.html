@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: QEpromFileBase Class Reference</title>
+<title>USB EPROM/Flash Programmer: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,335 +62,64 @@ $(function() {
 
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="a01004.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">QEpromFileBase Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span><div class="ingroups"><a class="el" href="a00128.html">Software Project</a></div></div>  </div>
+<div class="title">SRAM Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="a01007.html" title="QEpromFileBase Class.">QEpromFileBase</a> Class.  
- <a href="a01007.html#details">More...</a></p>
-
-<p><code>#include &lt;qepromfilebase.hpp&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for QEpromFileBase:</div>
-<div class="dyncontent">
-<div class="center"><img src="a01006.png" border="0" usemap="#aQEpromFileBase_inherit__map" alt="Inheritance graph"/></div>
-<map name="aQEpromFileBase_inherit__map" id="aQEpromFileBase_inherit__map">
-<area shape="rect" title="QEpromFileBase Class." alt="" coords="277,5,431,171"/>
-<area shape="rect" href="a00995.html" title="Atmel Generic Files Stream Class." alt="" coords="5,219,124,340"/>
-<area shape="rect" href="a00999.html" title="Raw Binary Files Stream Class." alt="" coords="148,219,267,340"/>
-<area shape="rect" href="a01003.html" title="QEpromFile Class." alt="" coords="291,219,417,340"/>
-<area shape="rect" href="a01011.html" title="Intel Hex Files Stream Class." alt="" coords="441,219,560,340"/>
-<area shape="rect" href="a01015.html" title="Motorola SREC Files Stream Class." alt="" coords="584,219,703,340"/>
-</map>
-</div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr class="memitem:ae4aa770a0a10026deed6fbd583119275"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275">QEpromFileType</a> { <a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275a47f597a569a7df996ab7aa21626262aa">EpromFileBin</a>
-, <a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275a5dca193da7cb7162baf854bf71fdf6c0">EpromFileSRec</a>
-, <a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275a8bf265990d6230ee20fd1b68b948e2de">EpromFileHex</a>
-, <a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275a4adb6e0016cd7fe295e87359cab38e4a">EpromFileAtmel</a>
- }</td></tr>
-<tr class="memdesc:ae4aa770a0a10026deed6fbd583119275"><td class="mdescLeft">&#160;</td><td class="mdescRight">Eprom File Types.  <a href="a01007.html#ae4aa770a0a10026deed6fbd583119275">More...</a><br /></td></tr>
-<tr class="separator:ae4aa770a0a10026deed6fbd583119275"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:aa9628c54553f207dbc5182051dc29f51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01007.html#aa9628c54553f207dbc5182051dc29f51">QEpromFileBase</a> (QObject *parent=nullptr)</td></tr>
-<tr class="memdesc:aa9628c54553f207dbc5182051dc29f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="a01007.html#aa9628c54553f207dbc5182051dc29f51">More...</a><br /></td></tr>
-<tr class="separator:aa9628c54553f207dbc5182051dc29f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14b89e4b94167c472425243abe35c5fa"><td class="memItemLeft" align="right" valign="top">virtual QByteArray&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01007.html#a14b89e4b94167c472425243abe35c5fa">read</a> (const QString &amp;filename, qint32 size)=0</td></tr>
-<tr class="memdesc:a14b89e4b94167c472425243abe35c5fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads data from a file.  <a href="a01007.html#a14b89e4b94167c472425243abe35c5fa">More...</a><br /></td></tr>
-<tr class="separator:a14b89e4b94167c472425243abe35c5fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d590d7e9b5a5166b2216ab76eb6551d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01007.html#a8d590d7e9b5a5166b2216ab76eb6551d">write</a> (<a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275">QEpromFileType</a> type, const QString &amp;filename, const QByteArray &amp;data)=0</td></tr>
-<tr class="memdesc:a8d590d7e9b5a5166b2216ab76eb6551d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes data to a file.  <a href="a01007.html#a8d590d7e9b5a5166b2216ab76eb6551d">More...</a><br /></td></tr>
-<tr class="separator:a8d590d7e9b5a5166b2216ab76eb6551d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a266a829e3274a1778e1bbdf18fbf7bce"><td class="memItemLeft" align="right" valign="top">virtual QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01007.html#a266a829e3274a1778e1bbdf18fbf7bce">getFilename</a> (void) const</td></tr>
-<tr class="memdesc:a266a829e3274a1778e1bbdf18fbf7bce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the filename used to read or write the file.  <a href="a01007.html#a266a829e3274a1778e1bbdf18fbf7bce">More...</a><br /></td></tr>
-<tr class="separator:a266a829e3274a1778e1bbdf18fbf7bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7606fb890f999572aa75ada12c9c7bde"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275">QEpromFileType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01007.html#a7606fb890f999572aa75ada12c9c7bde">getType</a> (void) const</td></tr>
-<tr class="memdesc:a7606fb890f999572aa75ada12c9c7bde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the type of the file opened/saved.  <a href="a01007.html#a7606fb890f999572aa75ada12c9c7bde">More...</a><br /></td></tr>
-<tr class="separator:a7606fb890f999572aa75ada12c9c7bde"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7022bf97fd2d2ccc84b5cbe2b1dcfd37"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01007.html#a7022bf97fd2d2ccc84b5cbe2b1dcfd37">isReadable</a> (const QString &amp;filename)</td></tr>
-<tr class="memdesc:a7022bf97fd2d2ccc84b5cbe2b1dcfd37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if file is readable in this format.  <a href="a01007.html#a7022bf97fd2d2ccc84b5cbe2b1dcfd37">More...</a><br /></td></tr>
-<tr class="separator:a7022bf97fd2d2ccc84b5cbe2b1dcfd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="a01007.html" title="QEpromFileBase Class.">QEpromFileBase</a> Class. </p>
-<p>The purpose of this class is to be an interface to all the <a class="el" href="a00971.html" title="Parallel EPROM Class.">EPROM</a> File Manipulator classes. </p>
-</div><h2 class="groupheader">Member Enumeration Documentation</h2>
-<a id="ae4aa770a0a10026deed6fbd583119275"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4aa770a0a10026deed6fbd583119275">&#9670;&nbsp;</a></span>QEpromFileType</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275">QEpromFileType</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Eprom File Types. </p>
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ae4aa770a0a10026deed6fbd583119275a47f597a569a7df996ab7aa21626262aa"></a>EpromFileBin&#160;</td><td class="fielddoc"><p>Binary file (raw). </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ae4aa770a0a10026deed6fbd583119275a5dca193da7cb7162baf854bf71fdf6c0"></a>EpromFileSRec&#160;</td><td class="fielddoc"><p>Motorola S-REC file. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ae4aa770a0a10026deed6fbd583119275a8bf265990d6230ee20fd1b68b948e2de"></a>EpromFileHex&#160;</td><td class="fielddoc"><p>Intel Hex file. </p>
-</td></tr>
-<tr><td class="fieldname"><a id="ae4aa770a0a10026deed6fbd583119275a4adb6e0016cd7fe295e87359cab38e4a"></a>EpromFileAtmel&#160;</td><td class="fielddoc"><p>Atmel Generic file. </p>
-</td></tr>
-</table>
-
-</div>
-</div>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa9628c54553f207dbc5182051dc29f51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa9628c54553f207dbc5182051dc29f51">&#9670;&nbsp;</a></span>QEpromFileBase()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01007.html">QEpromFileBase</a> </td>
-          <td>(</td>
-          <td class="paramtype">QObject *&#160;</td>
-          <td class="paramname"><em>parent</em> = <code>nullptr</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructor. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">parent</td><td>Pointer to parent object (default = nullptr). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7022bf97fd2d2ccc84b5cbe2b1dcfd37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7022bf97fd2d2ccc84b5cbe2b1dcfd37">&#9670;&nbsp;</a></span>isReadable()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool isReadable </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>filename</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns if file is readable in this format. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>Filename (with path). </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="a14b89e4b94167c472425243abe35c5fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14b89e4b94167c472425243abe35c5fa">&#9670;&nbsp;</a></span>read()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual QByteArray read </td>
-          <td>(</td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">qint32&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Reads data from a file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filename</td><td>Filename (with path). </td></tr>
-    <tr><td class="paramname">size</td><td>Size of data to be read (in bytes). If file is smaller than this parameter, data is filled with 0xFF. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Byte array with data, or empty if an error occurs. </dd></dl>
-
-<p>Implemented in <a class="el" href="a01015.html#acf3a15ec58822e5829667b6271670552">QSrecFile</a>, <a class="el" href="a01011.html#acf3a15ec58822e5829667b6271670552">QHexFile</a>, <a class="el" href="a01003.html#acf3a15ec58822e5829667b6271670552">QEpromFile</a>, <a class="el" href="a00999.html#acf3a15ec58822e5829667b6271670552">QBinFile</a>, and <a class="el" href="a00995.html#acf3a15ec58822e5829667b6271670552">QAtmelFile</a>.</p>
-
-</div>
-</div>
-<a id="a8d590d7e9b5a5166b2216ab76eb6551d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d590d7e9b5a5166b2216ab76eb6551d">&#9670;&nbsp;</a></span>write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool write </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275">QEpromFileType</a>&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const QString &amp;&#160;</td>
-          <td class="paramname"><em>filename</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const QByteArray &amp;&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Writes data to a file. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">type</td><td>Type of the file to write. </td></tr>
-    <tr><td class="paramname">filename</td><td>Filename (with path). </td></tr>
-    <tr><td class="paramname">data</td><td>Data to write. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
-
-<p>Implemented in <a class="el" href="a01015.html#a2de68466bce667fafdd97b7001c70a0f">QSrecFile</a>, <a class="el" href="a01011.html#a2de68466bce667fafdd97b7001c70a0f">QHexFile</a>, <a class="el" href="a01003.html#a2de68466bce667fafdd97b7001c70a0f">QEpromFile</a>, <a class="el" href="a00999.html#a2de68466bce667fafdd97b7001c70a0f">QBinFile</a>, and <a class="el" href="a00995.html#a2de68466bce667fafdd97b7001c70a0f">QAtmelFile</a>.</p>
-
-</div>
-</div>
-<a id="a266a829e3274a1778e1bbdf18fbf7bce"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a266a829e3274a1778e1bbdf18fbf7bce">&#9670;&nbsp;</a></span>getFilename()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">QString getFilename </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets the filename used to read or write the file. </p>
-<dl class="section return"><dt>Returns</dt><dd>The filename, or empty if file wasn't saved/opened yet. </dd></dl>
-
-</div>
-</div>
-<a id="a7606fb890f999572aa75ada12c9c7bde"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7606fb890f999572aa75ada12c9c7bde">&#9670;&nbsp;</a></span>getType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="a01007.html#ae4aa770a0a10026deed6fbd583119275">QEpromFileBase::QEpromFileType</a> getType </td>
-          <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets the type of the file opened/saved. </p>
-<dl class="section return"><dt>Returns</dt><dd>Type of the file. </dd></dl>
-
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="a00047.html">qepromfilebase.hpp</a></li>
-<li><a class="el" href="a00044.html">qepromfilebase.cpp</a></li>
-</ul>
-</div><!-- contents -->
+<p>This is the complete list of members for <a class="el" href="a01010.html">SRAM</a>, including all inherited members.</p>
+<table class="directory">
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#ae7becb0d7629ccaaef28c25adbf3d543">blankCheck</a>()</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a02d5fa6b14e221f3012a794b905be166">cancel</a>()</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#aa1dc05d7f9221b355fba4027753131b3">Device</a>(QObject *parent=nullptr)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#af4e5a226802d72489f995a015e4a3305">erase</a>(bool check=false)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01006.html#afcd40116d94e472075d83cf93ae56f04">finalizeDevice</a>(uint32_t current, uint32_t total, bool done=false, bool success=true, bool canceled=false)</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#a8330dfa8617745654fcdc5216dde880f">finalizeDevice</a>()</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#abf7075141a5749d76986659d644d2674">getFastProg</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a8fa67aab3166fd24509d54dfaa5b803d">getId</a>(TDeviceID &amp;result)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a6ecca44e24a4ad9eee0fa4341b1ffab5">getInfo</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#af23a81318a3cd9319847bbf698839450">getPort</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a8ec57d2dc3a241b86f6bea8103a5dbd1">getSectorSize</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a27a45c5814b1e0163427b3f1f165668e">getSize</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a713ec3e199e24ba79e028db901cdf4a5">getSkipFF</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#aaf2e90de40658fca4dec7a75f4403470">getTwc</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a923966f40943ffad73bcd739def6698b">getTwp</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a9127ae08082faa73dc8e7c93b5cec340">getVddRd</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#ad3a83b46a20c291e2288ab3b031b7a0d">getVddWr</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a099c6c43026815b1f5c1c97dd9a4b090">getVee</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#ae25698e49f182abbf577e70f79ebe3e0">getVpp</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#aebf58b7872e4f737117e646baf4f845c">initDevice</a>(kDeviceOperation operation)</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a33cb145a5621041674597603b619d1da">is16Bit</a>() const</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2aee3f9d8c438ce0ce2cbdc9a984db9d21">kDeviceOpErase</a> enum value</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2">kDeviceOperation</a> enum name</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2af2fe89a40fe1b84f906a4113592f62da">kDeviceOpGetId</a> enum value</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2a89b84d459b52ef31d8e2c5d5b615add6">kDeviceOpProg</a> enum value</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2ad30676a036a31cdd864e3132ad8ccb0b">kDeviceOpRead</a> enum value</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a3190edd71325794b18fb739df2c70a7e">onProgress</a>(uint32_t current=0, uint32_t total=0, bool done=false, bool success=true, bool canceled=false)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">signal</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#ad54d16d6d8c8b9120f9e66659c58dc57">ParDevice</a>(QObject *parent=nullptr)</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01010.html#a799925db4676fdcefbc65078f63b860a">program</a>(const QByteArray &amp;buffer, bool verify=false)</td><td class="entry"><a class="el" href="a01010.html">SRAM</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#a8cfeabc483945f0a92f98688b4459e94">programDevice</a>(const QByteArray &amp;buffer)</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#ab2e6abd0442f83e56a0f26289557f43e">read</a>(QByteArray &amp;buffer)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01006.html#a5b5d76fdc8ed99ba2c1322cc542d374f">readDevice</a>(QByteArray &amp;buffer)</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a2361a3779314c0a2864d505cbc8eba6f">setFastProg</a>(bool value=true)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a789b2164e10c58a795a697704430551a">setPort</a>(const QString &amp;path)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a0688eb09592699d0fcb9d0b0b2d54893">setSectorSize</a>(uint16_t value)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#ab11f392ccca895305587946e122b4aed">setSize</a>(uint32_t value)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a453c4ea828bf3f06bbb061335c040fb0">setSkipFF</a>(bool value=true)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#aafad0334998d7134bbc72aceb03b4014">setTwc</a>(uint32_t us)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a16fb7778a522c0fe1548b92ebf0b8503">setTwp</a>(uint32_t us)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#afb3a64fa1e05efeee1804a96a732bc92">setVddRd</a>(float value)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#a21149f8f230b03d7e19a657015ef5fce">setVddWr</a>(float value)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#af3cced03dfda09feced54c2c5bf2591f">setVee</a>(float value)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#ad08c963740f85061c5d0439385a57ba2">setVpp</a>(float value)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01010.html#a79be16fae0bda39afff2943332e956af">SRAM</a>(QObject *parent=nullptr)</td><td class="entry"><a class="el" href="a01010.html">SRAM</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a00974.html#aca783e40e70784fb52389b414965d3eb">unprotect</a>()</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a3d6090bc1c80e2c37792bdf057113a04">verify</a>(const QByteArray &amp;buffer)</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01006.html#a387398cbde3f0379493675bcbde626a2">verifyDevice</a>(const QByteArray &amp;buffer)</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">protected</span><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a00974.html#a3b1601f6f775f47420713f755d1ef320">~Device</a>()</td><td class="entry"><a class="el" href="a00974.html">Device</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="a01006.html#a055a82c4defdf9b4a00500f4b7d7ab03">~ParDevice</a>()</td><td class="entry"><a class="el" href="a01006.html">ParDevice</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="a01010.html#a28d511ec0a18d1bf56ad56afad48d349">~SRAM</a>()</td><td class="entry"><a class="el" href="a01010.html">SRAM</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+</table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

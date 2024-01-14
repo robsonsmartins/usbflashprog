@@ -1,4 +1,30 @@
 var searchData=
 [
-  ['manufacturer_600',['manufacturer',['../a00947.html#ae77497dfafe239d6455bed1daad3aed0',1,'TDeviceID']]]
+  ['kapplicationname_715',['kApplicationName',['../a00080.html#a2496c221ca3b18635dc6d0bcc3763e06',1,'config.hpp']]],
+  ['kauthorhomepage_716',['kAuthorHomePage',['../a00080.html#afd686b0c747f93dc8811f33f7eeb350f',1,'config.hpp']]],
+  ['kauthorname_717',['kAuthorName',['../a00080.html#a1c90f4d75009e5aeaafb1ba2b5296e1f',1,'config.hpp']]],
+  ['klogfilename_718',['kLogFileName',['../a00080.html#ae67329bb64313218f0f492f58d7ccae3',1,'config.hpp']]],
+  ['korganizationdomain_719',['kOrganizationDomain',['../a00080.html#ac050aa38cdaf6c9d58ecc4178fbb4d43',1,'config.hpp']]],
+  ['korganizationname_720',['kOrganizationName',['../a00080.html#a6a6d1acf913956dcf09e701d0bcacc7b',1,'config.hpp']]],
+  ['kprojecthomepage_721',['kProjectHomePage',['../a00080.html#a503ba82f2918b39a81ecbfbf1b8372a3',1,'config.hpp']]],
+  ['ksettinggenerallanguage_722',['kSettingGeneralLanguage',['../a00080.html#aee42e54137d8f96bed535c1431e0fc4f',1,'config.hpp']]],
+  ['ksettinggeneralloglevel_723',['kSettingGeneralLogLevel',['../a00080.html#a32505cb3e3cb91235d1fb45f9c8fd91b',1,'config.hpp']]],
+  ['ksettinggeneralwindowpos_724',['kSettingGeneralWindowPos',['../a00080.html#a7147e228424bec1b5720276f5d299dc0',1,'config.hpp']]],
+  ['ksettinggeneralwindowsize_725',['kSettingGeneralWindowSize',['../a00080.html#aac604e274f320ec8b6077634a6013a4b',1,'config.hpp']]],
+  ['ksettingprogdevice_726',['kSettingProgDevice',['../a00080.html#afbebc20a91acc06005db7620e0e5746c',1,'config.hpp']]],
+  ['ksettingprogdevicesize_727',['kSettingProgDeviceSize',['../a00080.html#a5871c7a5ce76f5e9e74040e4601bb536',1,'config.hpp']]],
+  ['ksettingprogfast_728',['kSettingProgFast',['../a00080.html#a37ceb6a7a8a6c7cb43ec62e00bc4cb95',1,'config.hpp']]],
+  ['ksettingprogsectorsize_729',['kSettingProgSectorSize',['../a00080.html#aef7d099c83469d26a8df05c2a426057f',1,'config.hpp']]],
+  ['ksettingprogskipff_730',['kSettingProgSkipFF',['../a00080.html#a614e35517821b8766d174b4fd94c4ede',1,'config.hpp']]],
+  ['ksettingprogtwc_731',['kSettingProgTwc',['../a00080.html#afc3b51eaae756170d0f89720005d321f',1,'config.hpp']]],
+  ['ksettingprogtwp_732',['kSettingProgTwp',['../a00080.html#abd789d5ea2dd4b8d422fdab0e7e4e009',1,'config.hpp']]],
+  ['ksettingprogvddrd_733',['kSettingProgVddRd',['../a00080.html#a4300b133cae10931bb4624d078885739',1,'config.hpp']]],
+  ['ksettingprogvddwr_734',['kSettingProgVddWr',['../a00080.html#aee6b1c35d51759f459aa42b63d18e0c8',1,'config.hpp']]],
+  ['ksettingprogvee_735',['kSettingProgVee',['../a00080.html#af907b97835f626ff6db913791625d19e',1,'config.hpp']]],
+  ['ksettingprogvpp_736',['kSettingProgVpp',['../a00080.html#ad186367817c65f0b658c06b6d0878d15',1,'config.hpp']]],
+  ['ktestloglevel_737',['kTestLogLevel',['../a00144.html#ga9085f210821caeaa4163f9eb8564a285',1,'main.hpp']]],
+  ['kusbenumerateinterval_738',['kUsbEnumerateInterval',['../a00080.html#af1a4c6761009677e2542e68497426cd0',1,'config.hpp']]],
+  ['kusbproductid_739',['kUsbProductId',['../a00080.html#a6837f08bc0f8ee437f856c4c1199cf5c',1,'config.hpp']]],
+  ['kusbrefreshinterval_740',['kUsbRefreshInterval',['../a00080.html#a96b75885bb2a5ee2e41e9e78b07366af',1,'config.hpp']]],
+  ['kusbvendorid_741',['kUsbVendorId',['../a00080.html#a8b22c3e3a01cbba6193ec96944230d81',1,'config.hpp']]]
 ];

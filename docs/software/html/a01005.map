@@ -1,0 +1,10 @@
+<map id="ParDevice" name="ParDevice">
+<area shape="rect" id="node1" title="Parallel Device Base Class." alt="" coords="122,424,319,721"/>
+<area shape="rect" id="node3" href="$a00986.html" title="Parallel EPROM Class." alt="" coords="79,769,202,949"/>
+<area shape="rect" id="node8" href="$a01010.html" title="Parallel SRAM Class." alt="" coords="227,791,377,927"/>
+<area shape="rect" id="node2" href="$a00974.html" title="Device Base Class." alt="" coords="139,5,302,376"/>
+<area shape="rect" id="node4" href="$a00990.html" title="Parallel EPROM 27xxx (NMOS) Class." alt="" coords="5,997,127,1089"/>
+<area shape="rect" id="node5" href="$a00994.html" title="Parallel EPROM 27Cxxx (CMOS) Class." alt="" coords="151,997,282,1089"/>
+<area shape="rect" id="node6" href="$a00998.html" title="Parallel EPROM 27Cxxx 16Bit (CMOS) Class." alt="" coords="44,1159,208,1251"/>
+<area shape="rect" id="node7" href="$a01002.html" title="Parallel EPROM W27Exxx Class." alt="" coords="232,1137,385,1273"/>
+</map>

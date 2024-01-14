@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: mainwindow.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: runner.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,103 +62,66 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_5c982d53a68cdbcd421152b4020263a9.html">main</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_8c739bbef76d64b22d6b0911c526dd76.html">backend</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle">
-<div class="title">mainwindow.cpp File Reference<div class="ingroups"><a class="el" href="a00128.html">Software Project</a></div></div>  </div>
+<div class="title">runner.hpp File Reference<div class="ingroups"><a class="el" href="a00143.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Main Window Class.  
+<p>Header of the <a class="el" href="a01050.html" title="Runner Class.">Runner</a> Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QtGlobal&gt;</code><br />
-<code>#include &lt;QMessageBox&gt;</code><br />
-<code>#include &lt;QInputDialog&gt;</code><br />
-<code>#include &lt;QTimer&gt;</code><br />
-<code>#include &lt;QThread&gt;</code><br />
-<code>#include &lt;QStyle&gt;</code><br />
-<code>#include &lt;QScreen&gt;</code><br />
-<code>#include &lt;QWindow&gt;</code><br />
-<code>#include &lt;QDesktopWidget&gt;</code><br />
-<code>#include &lt;QDesktopServices&gt;</code><br />
-<code>#include &lt;QFileDialog&gt;</code><br />
-<code>#include &lt;QFileInfo&gt;</code><br />
-<code>#include &lt;QMenu&gt;</code><br />
-<code>#include &lt;QAction&gt;</code><br />
-<code>#include &lt;QSettings&gt;</code><br />
-<code>#include &lt;QSignalBlocker&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;locale&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00080.html">mainwindow.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00074.html">config.hpp</a>&quot;</code><br />
-<code>#include &quot;./ui_mainwindow.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00065.html">backend/opcodes.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00011.html">backend/devices/parallel/dummy.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01419.html">backend/devices/parallel/sram.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01404.html">backend/devices/parallel/eprom.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;QObject&gt;</code><br />
+<code>#include &lt;QString&gt;</code><br />
+<code>#include &lt;QList&gt;</code><br />
+<code>#include &lt;QByteArray&gt;</code><br />
+<code>#include &lt;QSerialPort&gt;</code><br />
+<code>#include &lt;QSerialPortInfo&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00071.html">backend/opcodes.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for mainwindow.cpp:</div>
+Include dependency graph for runner.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00078.png" border="0" usemap="#amainwindow_8cpp" alt=""/></div>
-<map name="amainwindow_8cpp" id="amainwindow_8cpp">
-<area shape="rect" title="Implementation of the Main Window Class." alt="" coords="2435,5,2566,32"/>
-<area shape="rect" title=" " alt="" coords="5,177,84,203"/>
-<area shape="rect" title=" " alt="" coords="1950,87,2065,114"/>
-<area shape="rect" title=" " alt="" coords="2089,87,2195,114"/>
-<area shape="rect" title=" " alt="" coords="1753,177,1824,203"/>
-<area shape="rect" title=" " alt="" coords="2219,87,2297,114"/>
-<area shape="rect" title=" " alt="" coords="2321,87,2387,114"/>
-<area shape="rect" title=" " alt="" coords="2411,87,2487,114"/>
-<area shape="rect" title=" " alt="" coords="2511,87,2595,114"/>
-<area shape="rect" title=" " alt="" coords="2619,87,2751,114"/>
-<area shape="rect" title=" " alt="" coords="2775,87,2917,114"/>
-<area shape="rect" title=" " alt="" coords="2941,87,3039,114"/>
-<area shape="rect" title=" " alt="" coords="3063,87,3143,114"/>
-<area shape="rect" title=" " alt="" coords="3168,87,3236,114"/>
-<area shape="rect" title=" " alt="" coords="3260,87,3333,114"/>
-<area shape="rect" title=" " alt="" coords="3358,87,3443,114"/>
-<area shape="rect" title=" " alt="" coords="3467,87,3587,114"/>
-<area shape="rect" title=" " alt="" coords="3611,87,3673,114"/>
-<area shape="rect" title=" " alt="" coords="3697,87,3763,114"/>
-<area shape="rect" title=" " alt="" coords="1875,483,1934,509"/>
-<area shape="rect" title=" " alt="" coords="3787,87,3849,114"/>
-<area shape="rect" title=" " alt="" coords="3873,87,3936,114"/>
-<area shape="rect" href="a00080.html" title="Header of the Main Window Class." alt="" coords="1379,87,1511,114"/>
-<area shape="rect" href="a00065.html" title="Opcodes for communication." alt="" coords="1713,408,1875,435"/>
-<area shape="rect" href="a00074.html" title="Configuration of UsbFlashProg." alt="" coords="143,87,232,114"/>
-<area shape="rect" title=" " alt="" coords="3960,87,4103,114"/>
-<area shape="rect" href="a00011.html" title="Class of a Parallel Dummy Device." alt="" coords="327,169,509,211"/>
-<area shape="rect" href="a01419.html" title="Class of a Parallel SRAM." alt="" coords="680,169,863,211"/>
-<area shape="rect" href="a01404.html" title="Classes of the Parallel EPROM." alt="" coords="680,80,863,121"/>
-<area shape="rect" title=" " alt="" coords="1613,177,1729,203"/>
-<area shape="rect" title=" " alt="" coords="1117,177,1223,203"/>
-<area shape="rect" title=" " alt="" coords="1458,177,1589,203"/>
-<area shape="rect" href="a00125.html" title="Header of the QHexEditor Class." alt="" coords="1299,177,1433,203"/>
-<area shape="rect" href="a00071.html" title="Header of the Runner Class." alt="" coords="1349,333,1498,360"/>
-<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="669,259,874,285"/>
-<area shape="rect" title=" " alt="" coords="1319,259,1413,285"/>
-<area shape="rect" title=" " alt="" coords="1437,259,1533,285"/>
-<area shape="rect" href="a00041.html" title="Header of the QEpromFile Class." alt="" coords="899,259,1143,285"/>
-<area shape="rect" title=" " alt="" coords="645,408,719,435"/>
-<area shape="rect" title=" " alt="" coords="419,408,489,435"/>
-<area shape="rect" title=" " alt="" coords="1012,408,1109,435"/>
-<area shape="rect" title=" " alt="" coords="1098,333,1223,360"/>
-<area shape="rect" href="a00047.html" title="Header of the QEpromFileBase Class." alt="" coords="720,333,871,360"/>
-<area shape="rect" title=" " alt="" coords="1396,408,1451,435"/>
-<area shape="rect" title=" " alt="" coords="1475,408,1569,435"/>
-<area shape="rect" title=" " alt="" coords="1251,408,1371,435"/>
-<area shape="rect" title=" " alt="" coords="1769,483,1835,509"/>
-<area shape="rect" title=" " alt="" coords="1694,483,1745,509"/>
-<area shape="rect" title=" " alt="" coords="109,177,189,203"/>
+<div class="center"><img src="a00078.png" border="0" usemap="#arunner_8hpp" alt=""/></div>
+<map name="arunner_8hpp" id="arunner_8hpp">
+<area shape="rect" title="Header of the Runner Class." alt="" coords="281,5,372,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" title=" " alt="" coords="105,80,175,107"/>
+<area shape="rect" title=" " alt="" coords="199,80,254,107"/>
+<area shape="rect" title=" " alt="" coords="278,80,375,107"/>
+<area shape="rect" title=" " alt="" coords="399,80,494,107"/>
+<area shape="rect" title=" " alt="" coords="519,80,639,107"/>
+<area shape="rect" href="a00071.html" title="Opcodes for communication." alt="" coords="663,80,825,107"/>
+<area shape="rect" title=" " alt="" coords="624,155,691,181"/>
+<area shape="rect" title=" " alt="" coords="715,155,773,181"/>
+<area shape="rect" title=" " alt="" coords="797,155,848,181"/>
 </map>
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Main Window Class. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01046.html">TRunnerCommand</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a command to be run and its response.  <a href="a01046.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01050.html">Runner</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a01050.html" title="Runner Class.">Runner</a> Class.  <a href="a01050.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01054.html">TDeviceSettings</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00974.html" title="Device Base Class.">Device</a> settings.  <a href="a01054.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:gabf714a37d284d2dd5538b09a3e45f988"><td class="memItemLeft" align="right" valign="top">typedef QList&lt; QSerialPortInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00143.html#gabf714a37d284d2dd5538b09a3e45f988">TSerialPortList</a></td></tr>
+<tr class="memdesc:gabf714a37d284d2dd5538b09a3e45f988"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of serial ports info.  <a href="a00143.html#gabf714a37d284d2dd5538b09a3e45f988">More...</a><br /></td></tr>
+<tr class="separator:gabf714a37d284d2dd5538b09a3e45f988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header of the <a class="el" href="a01050.html" title="Runner Class.">Runner</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

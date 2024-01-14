@@ -1,5 +1,0 @@
-<map id="ChipEPROM" name="ChipEPROM">
-<area shape="rect" id="node1" title="EPROM Chip Emulator Class." alt="" coords="5,608,192,759"/>
-<area shape="rect" id="node2" href="$a01055.html" title="Parallel Chip Emulator Base Abstract Class." alt="" coords="29,351,168,560"/>
-<area shape="rect" id="node3" href="$a01051.html" title="Chip Emulator Base Abstract Class." alt="" coords="25,5,172,303"/>
-</map>

@@ -1,10 +1,4 @@
-<map id="opcodes_test.cpp" name="opcodes_test.cpp">
-<area shape="rect" id="node1" title="Implementation of Unit Test for OpCode Handling Classes." alt="" coords="197,5,331,32"/>
-<area shape="rect" id="node2" href="$a00098.html" title="Header of Unit Test for OpCode Handling Classes." alt="" coords="5,80,141,107"/>
-<area shape="rect" id="node4" href="$a00065.html" title="Opcodes for communication." alt="" coords="171,80,357,107"/>
-<area shape="rect" id="node8" title=" " alt="" coords="381,80,448,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="19,155,123,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="147,155,213,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="237,155,296,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="320,155,371,181"/>
+<map id="chip_test.hpp" name="chip_test.hpp">
+<area shape="rect" id="node1" title="Header of Unit Test for Device (Chip) Classes." alt="" coords="5,5,115,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="8,80,112,107"/>
 </map>

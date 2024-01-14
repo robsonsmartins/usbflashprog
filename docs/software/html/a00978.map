@@ -1,8 +1,0 @@
-<map id="M27Cxxx" name="M27Cxxx">
-<area shape="rect" id="node1" title="Parallel EPROM 27Cxxx (CMOS) Class." alt="" coords="93,1305,212,1397"/>
-<area shape="rect" id="node5" href="$a00983.html" title="Parallel EPROM 27Cxxx 16Bit (CMOS) Class." alt="" coords="5,1475,135,1567"/>
-<area shape="rect" id="node6" href="$a00987.html" title="Parallel EPROM W27Exxx Class." alt="" coords="159,1445,312,1596"/>
-<area shape="rect" id="node2" href="$a00971.html" title="Parallel EPROM Class." alt="" coords="62,901,243,1257"/>
-<area shape="rect" id="node3" href="$a00991.html" title="Parallel SRAM Class." alt="" coords="54,468,251,853"/>
-<area shape="rect" id="node4" href="$a00959.html" title="Device Base Class." alt="" coords="95,5,211,420"/>
-</map>

@@ -1,6 +1,6 @@
-<map id="qsrecfile.hpp" name="qsrecfile.hpp">
-<area shape="rect" id="node1" title="Header of the QSrecFile Class." alt="" coords="87,5,193,32"/>
-<area shape="rect" id="node2" href="$a00047.html" title="Header of the QEpromFileBase Class." alt="" coords="65,80,215,107"/>
+<map id="qhexfile.hpp" name="qhexfile.hpp">
+<area shape="rect" id="node1" title="Header of the QHexFile Class." alt="" coords="89,5,191,32"/>
+<area shape="rect" id="node2" href="$a00053.html" title="Header of the QEpromFileBase Class." alt="" coords="65,80,215,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
 <area shape="rect" id="node4" title=" " alt="" coords="105,155,175,181"/>
 <area shape="rect" id="node5" title=" " alt="" coords="199,155,297,181"/>

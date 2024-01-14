@@ -65,7 +65,7 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">main.cpp File Reference<div class="ingroups"><a class="el" href="a00128.html">Software Project</a></div></div>  </div>
+<div class="title">main.cpp File Reference<div class="ingroups"><a class="el" href="a00143.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -75,46 +75,64 @@ $(function() {
 <code>#include &lt;QLibraryInfo&gt;</code><br />
 <code>#include &lt;QLocale&gt;</code><br />
 <code>#include &lt;QTranslator&gt;</code><br />
+<code>#include &lt;QDir&gt;</code><br />
+<code>#include &lt;QFile&gt;</code><br />
+<code>#include &lt;QDebug&gt;</code><br />
+<code>#include &lt;QTextStream&gt;</code><br />
+<code>#include &lt;QLoggingCategory&gt;</code><br />
+<code>#include &lt;QSettings&gt;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00074.html">config.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00080.html">main/mainwindow.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00086.html">main.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00128.html">ui/mainwindow.hpp</a>&quot;</code><br />
+<code>#include &lt;sys/time.h&gt;</code><br />
+<code>#include &lt;sys/resource.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="a00084.png" border="0" usemap="#amain_8cpp" alt=""/></div>
 <map name="amain_8cpp" id="amain_8cpp">
-<area shape="rect" title="Implementation of the Main Routine." alt="" coords="367,5,450,32"/>
+<area shape="rect" title="Implementation of the Main Routine." alt="" coords="746,5,829,32"/>
 <area shape="rect" title=" " alt="" coords="5,80,111,107"/>
 <area shape="rect" title=" " alt="" coords="135,80,237,107"/>
 <area shape="rect" title=" " alt="" coords="262,80,337,107"/>
 <area shape="rect" title=" " alt="" coords="361,80,457,107"/>
-<area shape="rect" title=" " alt="" coords="481,80,547,107"/>
-<area shape="rect" href="a00074.html" title="Configuration of UsbFlashProg." alt="" coords="571,80,660,107"/>
-<area shape="rect" href="a00080.html" title="Header of the Main Window Class." alt="" coords="1005,80,1175,107"/>
-<area shape="rect" title=" " alt="" coords="1288,379,1359,405"/>
-<area shape="rect" title=" " alt="" coords="524,155,603,181"/>
-<area shape="rect" title=" " alt="" coords="627,155,707,181"/>
-<area shape="rect" title=" " alt="" coords="732,155,848,181"/>
-<area shape="rect" title=" " alt="" coords="872,155,943,181"/>
-<area shape="rect" title=" " alt="" coords="967,155,1072,181"/>
-<area shape="rect" title=" " alt="" coords="1095,155,1226,181"/>
-<area shape="rect" href="a00125.html" title="Header of the QHexEditor Class." alt="" coords="1251,155,1385,181"/>
-<area shape="rect" href="a00071.html" title="Header of the Runner Class." alt="" coords="1638,304,1787,331"/>
-<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="1447,229,1653,256"/>
-<area shape="rect" title=" " alt="" coords="902,229,995,256"/>
-<area shape="rect" title=" " alt="" coords="1019,229,1115,256"/>
-<area shape="rect" href="a00041.html" title="Header of the QEpromFile Class." alt="" coords="1140,229,1384,256"/>
-<area shape="rect" title=" " alt="" coords="1391,379,1466,405"/>
-<area shape="rect" title=" " alt="" coords="1491,379,1588,405"/>
-<area shape="rect" title=" " alt="" coords="1161,304,1286,331"/>
-<area shape="rect" href="a00047.html" title="Header of the QEpromFileBase Class." alt="" coords="1361,304,1512,331"/>
-<area shape="rect" title=" " alt="" coords="1612,379,1667,405"/>
-<area shape="rect" title=" " alt="" coords="1691,379,1785,405"/>
-<area shape="rect" title=" " alt="" coords="1810,379,1930,405"/>
-<area shape="rect" href="a00065.html" title="Opcodes for communication." alt="" coords="1954,379,2117,405"/>
-<area shape="rect" title=" " alt="" coords="1915,453,1982,480"/>
-<area shape="rect" title=" " alt="" coords="2006,453,2065,480"/>
-<area shape="rect" title=" " alt="" coords="2089,453,2139,480"/>
+<area shape="rect" title=" " alt="" coords="481,80,531,107"/>
+<area shape="rect" title=" " alt="" coords="556,80,611,107"/>
+<area shape="rect" title=" " alt="" coords="635,80,710,107"/>
+<area shape="rect" title=" " alt="" coords="734,80,841,107"/>
+<area shape="rect" title=" " alt="" coords="865,80,1008,107"/>
+<area shape="rect" title=" " alt="" coords="1033,80,1118,107"/>
+<area shape="rect" title=" " alt="" coords="1143,80,1208,107"/>
+<area shape="rect" href="a00086.html" title="Header of the Main Routine." alt="" coords="1233,80,1315,107"/>
+<area shape="rect" href="a00128.html" title="Header of the Main Window Class." alt="" coords="1340,80,1488,107"/>
+<area shape="rect" title=" " alt="" coords="1513,80,1603,107"/>
+<area shape="rect" title=" " alt="" coords="1628,80,1744,107"/>
+<area shape="rect" href="a00080.html" title="Configuration of UsbFlashProg." alt="" coords="723,155,812,181"/>
+<area shape="rect" title=" " alt="" coords="832,229,911,256"/>
+<area shape="rect" title=" " alt="" coords="586,229,653,256"/>
+<area shape="rect" title=" " alt="" coords="1121,379,1192,405"/>
+<area shape="rect" title=" " alt="" coords="727,229,807,256"/>
+<area shape="rect" title=" " alt="" coords="1297,155,1413,181"/>
+<area shape="rect" title=" " alt="" coords="1437,155,1508,181"/>
+<area shape="rect" title=" " alt="" coords="1532,155,1637,181"/>
+<area shape="rect" title=" " alt="" coords="1661,155,1791,181"/>
+<area shape="rect" href="a00134.html" title="Header of the QHexEditor Class." alt="" coords="1087,155,1221,181"/>
+<area shape="rect" href="a00077.html" title="Header of the Runner Class." alt="" coords="1573,304,1722,331"/>
+<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="1441,229,1646,256"/>
+<area shape="rect" title=" " alt="" coords="1323,229,1417,256"/>
+<area shape="rect" title=" " alt="" coords="1203,229,1299,256"/>
+<area shape="rect" href="a00047.html" title="Header of the QEpromFile Class." alt="" coords="935,229,1179,256"/>
+<area shape="rect" title=" " alt="" coords="1395,379,1470,405"/>
+<area shape="rect" title=" " alt="" coords="1272,379,1369,405"/>
+<area shape="rect" title=" " alt="" coords="994,304,1119,331"/>
+<area shape="rect" href="a00053.html" title="Header of the QEpromFileBase Class." alt="" coords="1245,304,1396,331"/>
+<area shape="rect" title=" " alt="" coords="1825,379,1880,405"/>
+<area shape="rect" title=" " alt="" coords="1904,379,1999,405"/>
+<area shape="rect" title=" " alt="" coords="1494,379,1614,405"/>
+<area shape="rect" href="a00071.html" title="Opcodes for communication." alt="" coords="1638,379,1801,405"/>
+<area shape="rect" title=" " alt="" coords="1599,453,1666,480"/>
+<area shape="rect" title=" " alt="" coords="1690,453,1749,480"/>
+<area shape="rect" title=" " alt="" coords="1773,453,1823,480"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -126,6 +144,15 @@ Functions</h2></td></tr>
 <tr class="memitem:ac99aacda81f414a498962d83f33e5bd0"><td class="memItemLeft" align="right" valign="top">QMainWindow *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00083.html#ac99aacda81f414a498962d83f33e5bd0">createWindow</a> (const int &amp;argc, char *argv[])</td></tr>
 <tr class="memdesc:ac99aacda81f414a498962d83f33e5bd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a QMainWindow object, according to the arguments passed on the command line.  <a href="a00083.html#ac99aacda81f414a498962d83f33e5bd0">More...</a><br /></td></tr>
 <tr class="separator:ac99aacda81f414a498962d83f33e5bd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a803570ef757aad083c4bcdeb11a4db8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a01062.html">TApplicationSettings</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00083.html#a803570ef757aad083c4bcdeb11a4db8a">loadSettings</a> ()</td></tr>
+<tr class="memdesc:a803570ef757aad083c4bcdeb11a4db8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads application settings.  <a href="a00083.html#a803570ef757aad083c4bcdeb11a4db8a">More...</a><br /></td></tr>
+<tr class="separator:a803570ef757aad083c4bcdeb11a4db8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64b9a9147494a4b2066fc0f53e2f9081"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00083.html#a64b9a9147494a4b2066fc0f53e2f9081">initLogging</a> (int level)</td></tr>
+<tr class="memdesc:a64b9a9147494a4b2066fc0f53e2f9081"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the logging feature.  <a href="a00083.html#a64b9a9147494a4b2066fc0f53e2f9081">More...</a><br /></td></tr>
+<tr class="separator:a64b9a9147494a4b2066fc0f53e2f9081"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d17483cd383ca318218037b3e3c4fe0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00083.html#a8d17483cd383ca318218037b3e3c4fe0">loadLanguage</a> (const QString &amp;language, QApplication *app)</td></tr>
+<tr class="memdesc:a8d17483cd383ca318218037b3e3c4fe0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the language strings.  <a href="a00083.html#a8d17483cd383ca318218037b3e3c4fe0">More...</a><br /></td></tr>
+<tr class="separator:a8d17483cd383ca318218037b3e3c4fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the Main Routine. </p>
@@ -204,6 +231,89 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the QMainWindow object. </dd></dl>
+
+</div>
+</div>
+<a id="a803570ef757aad083c4bcdeb11a4db8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a803570ef757aad083c4bcdeb11a4db8a">&#9670;&nbsp;</a></span>loadSettings()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a01062.html">TApplicationSettings</a> loadSettings </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads application settings. </p>
+<dl class="section return"><dt>Returns</dt><dd>Application settings. </dd></dl>
+
+</div>
+</div>
+<a id="a64b9a9147494a4b2066fc0f53e2f9081"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64b9a9147494a4b2066fc0f53e2f9081">&#9670;&nbsp;</a></span>initLogging()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void initLogging </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>level</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the logging feature. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">level</td><td>The log level (&lt;= 0 is disabled, 1 is FATAL, 2 is CRITICAL, etc). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8d17483cd383ca318218037b3e3c4fe0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d17483cd383ca318218037b3e3c4fe0">&#9670;&nbsp;</a></span>loadLanguage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void loadLanguage </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>language</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QApplication *&#160;</td>
+          <td class="paramname"><em>app</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the language strings. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">language</td><td>The language (en_US, or another). </td></tr>
+    <tr><td class="paramname">app</td><td>Pointer to the QApplication instance. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

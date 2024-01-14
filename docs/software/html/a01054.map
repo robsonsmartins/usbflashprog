@@ -1,6 +1,0 @@
-<map id="BaseParChip" name="BaseParChip">
-<area shape="rect" id="node1" title="Parallel Chip Emulator Base Abstract Class." alt="" coords="119,351,257,560"/>
-<area shape="rect" id="node3" href="$a01063.html" title="EPROM Chip Emulator Class." alt="" coords="5,608,192,759"/>
-<area shape="rect" id="node4" href="$a01067.html" title="SRAM Chip Emulator Class." alt="" coords="216,615,341,751"/>
-<area shape="rect" id="node2" href="$a01051.html" title="Chip Emulator Base Abstract Class." alt="" coords="115,5,261,303"/>
-</map>

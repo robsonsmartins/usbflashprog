@@ -1,12 +1,12 @@
-<map id="qsrecfile.cpp" name="qsrecfile.cpp">
-<area shape="rect" id="node1" title="Implementation of the QSrecFile Class." alt="" coords="167,5,271,32"/>
+<map id="qhexfile.cpp" name="qhexfile.cpp">
+<area shape="rect" id="node1" title="Implementation of the QHexFile Class." alt="" coords="169,5,270,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,60,107"/>
 <area shape="rect" id="node3" title=" " alt="" coords="85,80,165,107"/>
 <area shape="rect" id="node4" title=" " alt="" coords="189,80,250,107"/>
-<area shape="rect" id="node5" href="$a00059.html" title="Header of the QSrecFile Class." alt="" coords="275,80,380,107"/>
-<area shape="rect" id="node10" title=" " alt="" coords="404,80,563,107"/>
-<area shape="rect" id="node6" href="$a00047.html" title="Header of the QEpromFileBase Class." alt="" coords="252,155,403,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="193,229,267,256"/>
-<area shape="rect" id="node8" title=" " alt="" coords="292,229,363,256"/>
-<area shape="rect" id="node9" title=" " alt="" coords="387,229,484,256"/>
+<area shape="rect" id="node5" href="$a00059.html" title="Header of the QHexFile Class." alt="" coords="275,80,377,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="402,80,541,107"/>
+<area shape="rect" id="node6" href="$a00053.html" title="Header of the QEpromFileBase Class." alt="" coords="251,155,401,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="191,229,266,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="291,229,361,256"/>
+<area shape="rect" id="node9" title=" " alt="" coords="385,229,483,256"/>
 </map>

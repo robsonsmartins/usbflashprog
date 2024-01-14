@@ -104,15 +104,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a38f921d6a183e6f7d15e75d0c60c305b"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01072.html#a38f921d6a183e6f7d15e75d0c60c305b">readWord</a> (void)</td></tr>
 <tr class="memdesc:a38f921d6a183e6f7d15e75d0c60c305b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a word from the Data Bus.  <a href="a01072.html#a38f921d6a183e6f7d15e75d0c60c305b">More...</a><br /></td></tr>
 <tr class="separator:a38f921d6a183e6f7d15e75d0c60c305b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71a5db477dba9fef3a304dc547435d53"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01072.html#a71a5db477dba9fef3a304dc547435d53">setBit</a> (uint bit, bool value=true)</td></tr>
-<tr class="memdesc:a71a5db477dba9fef3a304dc547435d53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets a bit into Data Bus.  <a href="a01072.html#a71a5db477dba9fef3a304dc547435d53">More...</a><br /></td></tr>
-<tr class="separator:a71a5db477dba9fef3a304dc547435d53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9d83b2fff29c90763ee8611c1f92b5c8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01072.html#a9d83b2fff29c90763ee8611c1f92b5c8">toggleBit</a> (uint bit)</td></tr>
-<tr class="memdesc:a9d83b2fff29c90763ee8611c1f92b5c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles a bit into Data Bus.  <a href="a01072.html#a9d83b2fff29c90763ee8611c1f92b5c8">More...</a><br /></td></tr>
-<tr class="separator:a9d83b2fff29c90763ee8611c1f92b5c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba60c4645d52825902eb4c733d1bd555"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01072.html#aba60c4645d52825902eb4c733d1bd555">getBit</a> (uint bit)</td></tr>
-<tr class="memdesc:aba60c4645d52825902eb4c733d1bd555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a bit from the Data Bus.  <a href="a01072.html#aba60c4645d52825902eb4c733d1bd555">More...</a><br /></td></tr>
-<tr class="separator:aba60c4645d52825902eb4c733d1bd555"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Data Bus Class. </p>
@@ -331,98 +322,6 @@ Public Member Functions</h2></td></tr>
 
 <p>Reads a word from the Data Bus. </p>
 <dl class="section return"><dt>Returns</dt><dd>Readed value or 0 if an error occurs. </dd></dl>
-
-</div>
-</div>
-<a id="a71a5db477dba9fef3a304dc547435d53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71a5db477dba9fef3a304dc547435d53">&#9670;&nbsp;</a></span>setBit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool setBit </td>
-          <td>(</td>
-          <td class="paramtype">uint&#160;</td>
-          <td class="paramname"><em>bit</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>value</em> = <code>true</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Sets a bit into Data Bus. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bit</td><td>Bit number to set. </td></tr>
-    <tr><td class="paramname">value</td><td>Value to set. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if success. False otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="a9d83b2fff29c90763ee8611c1f92b5c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9d83b2fff29c90763ee8611c1f92b5c8">&#9670;&nbsp;</a></span>toggleBit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool toggleBit </td>
-          <td>(</td>
-          <td class="paramtype">uint&#160;</td>
-          <td class="paramname"><em>bit</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Toggles a bit into Data Bus. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bit</td><td>Bit number to toggle. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if success. False otherwise. </dd></dl>
-
-</div>
-</div>
-<a id="aba60c4645d52825902eb4c733d1bd555"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aba60c4645d52825902eb4c733d1bd555">&#9670;&nbsp;</a></span>getBit()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool getBit </td>
-          <td>(</td>
-          <td class="paramtype">uint&#160;</td>
-          <td class="paramname"><em>bit</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Gets a bit from the Data Bus. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">bit</td><td>Bit number to get. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Value of the bit, or false if an error occurs. </dd></dl>
 
 </div>
 </div>

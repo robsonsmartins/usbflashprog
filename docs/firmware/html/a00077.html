@@ -160,6 +160,17 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17ab9ded789778df2bf2b5836dbb6456ee7">kCmdBusDataGet</a> = 0x44
 , <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17a7e27eb7516125b87735dc285e6c8a1f1">kCmdBusDataGetB</a> = 0x45
+, <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17a3a3ece640261aa327a87b5e8fbb7e8b7">kCmdDeviceSetTwp</a> = 0x81
+, <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17a4b0ea9cb34e4f0704d50e935a02cc9e1">kCmdDeviceSetTwc</a> = 0x82
+, <br />
+&#160;&#160;<a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17adf30e3586be60d923119031d1a208a03">kCmdDeviceSetFlags</a> = 0x83
+, <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17a65b90d65436925948bacf84f52143559">kCmdDeviceRead</a> = 0x84
+, <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17acefe6b6d4846827a9e223db9a5aa3d73">kCmdDeviceReadB</a> = 0x85
+, <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17a0d7b7b9049c6ddfe769989c61b395bfc">kCmdDeviceWrite</a> = 0x86
+, <br />
+&#160;&#160;<a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17ae4c4d7f8c203369cee387e8e15bdf693">kCmdDeviceWriteB</a> = 0x87
+, <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17a44df96ac29286368eb7719248bddae3f">kCmdDeviceVerify</a> = 0x88
+, <a class="el" href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17ac4cc34e0a0a2714cfce03fd787a3611c">kCmdDeviceVerifyB</a> = 0x89
 <br />
  }</td></tr>
 <tr class="memdesc:a9d169aaae39d9f86c725f5ee0fccec17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of the OpCodes.  <a href="a00077.html#a9d169aaae39d9f86c725f5ee0fccec17">More...</a><br /></td></tr>
@@ -311,6 +322,33 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17ab9ded789778df2bf2b5836dbb6456ee7"></a>kCmdBusDataGet&#160;</td><td class="fielddoc"><p>OPCODE / BUS : Opcode Data Get. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17a7e27eb7516125b87735dc285e6c8a1f1"></a>kCmdBusDataGetB&#160;</td><td class="fielddoc"><p>OPCODE / BUS : Opcode Data Get Byte. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17a3a3ece640261aa327a87b5e8fbb7e8b7"></a>kCmdDeviceSetTwp&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Set tWP. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17a4b0ea9cb34e4f0704d50e935a02cc9e1"></a>kCmdDeviceSetTwc&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Set tWC. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17adf30e3586be60d923119031d1a208a03"></a>kCmdDeviceSetFlags&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Set Flags. </p>
+<p>The parameter (one byte) that represents the flags follows the table: </p><pre>
++----------------------+
+|Bit| Description      |
+| 0 | Skip Write 0xFF  |
+| 1 | Prog with VPP On |
+| 2 | VPP/~OE Pin      |
+| 3 | ~PGM/~CE Pin     |
+| 4 | PGM positive     |
++----------------------+
+</pre> </td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17a65b90d65436925948bacf84f52143559"></a>kCmdDeviceRead&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Read and Increment Address. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17acefe6b6d4846827a9e223db9a5aa3d73"></a>kCmdDeviceReadB&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Read Byte and Increment Address. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17a0d7b7b9049c6ddfe769989c61b395bfc"></a>kCmdDeviceWrite&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Write, Verify and Increment Address. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17ae4c4d7f8c203369cee387e8e15bdf693"></a>kCmdDeviceWriteB&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Write Byte, Verify and Increment Address. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17a44df96ac29286368eb7719248bddae3f"></a>kCmdDeviceVerify&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Verify and Increment Address. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9d169aaae39d9f86c725f5ee0fccec17ac4cc34e0a0a2714cfce03fd787a3611c"></a>kCmdDeviceVerifyB&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode Device Verify Byte and Increment Address. </p>
 </td></tr>
 </table>
 

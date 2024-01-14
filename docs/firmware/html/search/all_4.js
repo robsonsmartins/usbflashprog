@@ -8,7 +8,7 @@ var searchData=
   ['dc2dc_5ftest_2ecpp_46',['dc2dc_test.cpp',['../a00107.html',1,'']]],
   ['dc2dc_5ftest_2ehpp_47',['dc2dc_test.hpp',['../a00110.html',1,'']]],
   ['dc2dcconfig_48',['Dc2DcConfig',['../a01020.html',1,'Dc2DcConfig'],['../a01020.html#a517e36c2387ed0aceb942e088f959fbd',1,'Dc2DcConfig::Dc2DcConfig()'],['../a01020.html#aea8e36e528027aa642e9ddd922ef395f',1,'Dc2DcConfig::Dc2DcConfig(uint pwmPin, uint adcChannel, float divider=1.0f, uint32_t pwmFreq=Pwm::kPwmDefaultFreq, float adcVref=Adc::kAdcDefaultVRef, float pwmMinDuty=kPwmMinDutyCycleDefault, float pwmMaxDuty=kPwmMaxDutyCycleDefault, float pwmSlowStepDuty=kPwmSlowStepDutyCycleDefault, float pwmFastStepDuty=kPwmFastStepDutyCycleDefault, float pwmToleranceToFast=kPwmToleranceToFastDefault, float vTolerance=kDc2DcVoutToleranceDefault)']]],
-  ['dc2dctest_49',['Dc2DcTest',['../a01128.html#a8e7652810f10bb0e6446cdb74791da93',1,'Dc2DcTest::Dc2DcTest()'],['../a01128.html',1,'Dc2DcTest']]],
+  ['dc2dctest_49',['Dc2DcTest',['../a01132.html#a8e7652810f10bb0e6446cdb74791da93',1,'Dc2DcTest::Dc2DcTest()'],['../a01132.html',1,'Dc2DcTest']]],
   ['dclkpin_50',['dClkPin',['../a01060.html#a398582cccc088c5bdafe43605e177cc1',1,'DataBusConfig']]],
   ['dclrpin_51',['dClrPin',['../a01060.html#a353fb24e965e9bfc23b8eb83419af483',1,'DataBusConfig']]],
   ['descr_52',['descr',['../a01080.html#a117568e09b5d120257560c5d11e98d60',1,'TCmdOpCode']]],

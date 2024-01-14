@@ -1,4 +1,5 @@
-<map id="VddGenerator" name="VddGenerator">
-<area shape="rect" id="node1" title="Voltage (VDD) Generator Class." alt="" coords="17,395,156,545"/>
-<area shape="rect" id="node2" href="$a01104.html" title="Generic Voltage Generator Class." alt="" coords="5,5,168,347"/>
+<map id="GenericGenerator" name="GenericGenerator">
+<area shape="rect" id="node1" title="Generic Voltage Generator Class." alt="" coords="75,5,237,347"/>
+<area shape="rect" id="node2" href="$a01112.html" title="Voltage (VDD) Generator Class." alt="" coords="5,468,144,619"/>
+<area shape="rect" id="node3" href="$a01116.html" title="Voltage (VPP) Generator Class." alt="" coords="168,395,307,692"/>
 </map>

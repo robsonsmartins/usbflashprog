@@ -43,9 +43,13 @@ QString TDeviceID::getManufacturerName(void) const {
             return "Macronix";
         case 0x04:
             return "Fujitsu";
+        case 0x07:
+            return "Maxwell";
         case 0x0C:  // to validate
         case 0x29:
-            return "Microchip Technology";
+            return "Microchip";
+        case 0x15:
+            return "NXP/Philips/Signetics";
         case 0x1C:  // to validate
             return "EON";
         case 0x1E:
@@ -56,7 +60,7 @@ QString TDeviceID::getManufacturerName(void) const {
         case 0x31:
             return "Catalyst";
         case 0x37:  // to validate
-            return "AMIC Technology";
+            return "AMIC";
         case 0x38:  // to validate
             return "Winbond";
         case 0x40:
@@ -65,15 +69,16 @@ QString TDeviceID::getManufacturerName(void) const {
         case 0x49:  // to validate
             return "Toshiba";
         case 0x4A:  // to validate
-            return "Macronix";
+        case 0xC2:
+            return "Macronix/MXIC";
         case 0x50:  // to validate
             return "Spansion";
         case 0x7F:  // to validate
-            return "Adesto Technologies";
+            return "Adesto";
         case 0x89:
-            return "Intel";
+            return "Intel/Texas Instruments";
         case 0x8F:
-            return "National Semiconductor";
+            return "Fairchild/National";
         case 0x9D:  // to validate
             return "Xicor";
         case 0xAD:
@@ -82,8 +87,6 @@ QString TDeviceID::getManufacturerName(void) const {
             return "Sharp";
         case 0xBF:
             return "SST";
-        case 0xC2:
-            return "MXIC";
         case 0xC8:  // to validate
             return "GigaDevice";
         case 0xDA:

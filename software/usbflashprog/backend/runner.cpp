@@ -689,7 +689,8 @@ bool Runner::sendCommand_(TRunnerCommand& cmd, int retry) {
     }
     if (!cmd.responseIsOk()) {
         WARNING << "Response NOK."
-                << "Command" << cmd.opcode.descr.c_str();
+                << "Command" << cmd.opcode.descr.c_str() << ". Response"
+                << "[ 0x" + QString(cmd.response.toHex()) << "]";
         error_ = true;
         return false;
     } else {

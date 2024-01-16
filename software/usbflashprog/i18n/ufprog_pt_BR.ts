@@ -545,6 +545,14 @@
         <source>Get Byte</source>
         <translation>Ler 8 Bits</translation>
     </message>
+    <message>
+        <source>Device is blank</source>
+        <translation>Dispositivo está vazio</translation>
+    </message>
+    <message>
+        <source>Device is not blank</source>
+        <translation>Dispositivo não está vazio</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

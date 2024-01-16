@@ -430,7 +430,17 @@ void MainWindow::on_actionDoErase_triggered(bool checked) {
     if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionDoErase->text());
-    device_->erase();
+    if (device_->erase()) {
+        progress_->hide();
+        QMessageBox::information(
+            this, progress_->windowTitle(),
+            tr("Device is blank").leftJustified(kDialogLabelMinLength));
+    } else {
+        progress_->hide();
+        QMessageBox::critical(
+            this, progress_->windowTitle(),
+            tr("Device is not blank").leftJustified(kDialogLabelMinLength));
+    }
 }
 
 void MainWindow::on_actionEraseAndBlankCheck_triggered(bool checked) {
@@ -441,7 +451,17 @@ void MainWindow::on_actionEraseAndBlankCheck_triggered(bool checked) {
     if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionEraseAndBlankCheck->text());
-    device_->erase(true);
+    if (device_->erase(true)) {
+        progress_->hide();
+        QMessageBox::information(
+            this, progress_->windowTitle(),
+            tr("Device is blank").leftJustified(kDialogLabelMinLength));
+    } else {
+        progress_->hide();
+        QMessageBox::critical(
+            this, progress_->windowTitle(),
+            tr("Device is not blank").leftJustified(kDialogLabelMinLength));
+    }
 }
 
 void MainWindow::on_actionBlankCheck_triggered(bool checked) {
@@ -449,7 +469,17 @@ void MainWindow::on_actionBlankCheck_triggered(bool checked) {
     if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionBlankCheck->text());
-    device_->blankCheck();
+    if (device_->blankCheck()) {
+        progress_->hide();
+        QMessageBox::information(
+            this, progress_->windowTitle(),
+            tr("Device is blank").leftJustified(kDialogLabelMinLength));
+    } else {
+        progress_->hide();
+        QMessageBox::critical(
+            this, progress_->windowTitle(),
+            tr("Device is not blank").leftJustified(kDialogLabelMinLength));
+    }
 }
 
 void MainWindow::on_actionGetID_triggered(bool checked) {
@@ -459,6 +489,7 @@ void MainWindow::on_actionGetID_triggered(bool checked) {
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionGetID->text());
     if (device_->getId(deviceId)) {
+        progress_->hide();
         QMessageBox::information(
             this, progress_->windowTitle(),
             tr("Manufacturer: 0x%1 (%2)")

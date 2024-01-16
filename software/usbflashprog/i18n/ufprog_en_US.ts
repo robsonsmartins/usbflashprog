@@ -546,6 +546,14 @@
         <source>Get Byte</source>
         <translation>Get Byte</translation>
     </message>
+    <message>
+        <source>Device is blank</source>
+        <translation>Device is blank</translation>
+    </message>
+    <message>
+        <source>Device is not blank</source>
+        <translation>Device is not blank</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

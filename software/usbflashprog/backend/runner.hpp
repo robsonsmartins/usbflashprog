@@ -32,7 +32,7 @@
 #include "test/mock/qserialport.hpp"
 #endif
 
-#include "backend/opcodes.hpp"
+#include "opcodes.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -41,6 +41,10 @@
  * @brief List of serial ports info.
  */
 typedef QList<QSerialPortInfo> TSerialPortList;
+
+// ---------------------------------------------------------------------------
+// Forward
+struct TDeviceID;
 
 // ---------------------------------------------------------------------------
 
@@ -424,6 +428,17 @@ class Runner : public QObject {
      */
     bool deviceSetFlags(const TDeviceSettings& value);
     /**
+     * @brief Runs the Device Setup Bus opcode.
+     * @param operation Operation to realize.
+     * @return True if success, false otherwise.
+     */
+    bool deviceSetupBus(kCmdDeviceOperationEnum operation);
+    /**
+     * @brief Runs the Device Setup Bus opcode, with operation Reset.
+     * @return True if success, false otherwise.
+     */
+    bool deviceResetBus();
+    /**
      * @brief Runs the Device Read (Byte) opcode.
      * @return Read value if success, 0xFF otherwise.
      */
@@ -457,6 +472,16 @@ class Runner : public QObject {
      * @return True if success, false otherwise.
      */
     bool deviceVerifyW(uint16_t value);
+    /**
+     * @brief Runs the Device Get ID opcode.
+     * @return Device/Manufacturer ID if success, zero values otherwise.
+     */
+    TDeviceID deviceGetId();
+    /**
+     * @brief Runs the Device Erase opcode.
+     * @return True if success, false otherwise.
+     */
+    bool deviceErase();
     /**
      * @brief Pauses the program execution for a specified time
      *   (microsecond precision).

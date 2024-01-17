@@ -19,6 +19,7 @@
 #include <chrono>
 #include <thread>
 
+#include "../../backend/devices/device.hpp"
 #include "emulator.hpp"
 
 // ---------------------------------------------------------------------------
@@ -426,6 +427,18 @@ bool Emulator::deviceSetFlags(const TDeviceSettings& value) {
     return true;
 }
 
+bool Emulator::deviceSetupBus(kCmdDeviceOperationEnum operation) {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    return deviceSetupBus_(operation);
+}
+
+bool Emulator::deviceResetBus() {
+    return deviceSetupBus(kCmdDeviceOperationReset);
+}
+
 uint8_t Emulator::deviceRead() {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
@@ -514,6 +527,24 @@ bool Emulator::deviceVerifyW(uint16_t value) {
     return true;
 }
 
+TDeviceID Emulator::deviceGetId() {
+    TDeviceID result;
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return result;
+    }
+    result = deviceGetId_();
+    return result;
+}
+
+bool Emulator::deviceErase() {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    return deviceErase_();
+}
+
 void Emulator::usDelay(uint64_t value) {
     (void)value;
     return;
@@ -597,4 +628,142 @@ bool Emulator::deviceWrite_(uint16_t value, bool is16bit) {
         if (error_) return false;
     }
     return true;
+}
+
+bool Emulator::deviceSetupBus_(kCmdDeviceOperationEnum operation) {
+    // reset bus
+    // VDD off and VPP off
+    vddCtrl(false);
+    vppCtrl(false);
+    vddOnVpp(false);
+    // Clear AddrBus
+    addrClr();
+    // ~OE is HI
+    setOE(false);
+    // ~CE is HI
+    setCE(false);
+    if (flags_.pgmPositive) {
+        // PGM is LO (no prog pulse)
+        setWE(true);
+    } else {
+        // ~PGM is HI (no prog pulse)
+        setWE(false);
+    }
+    // VPP on xx disabled
+    vppOnA9(false);
+    vppOnA18(false);
+    vppOnCE(false);
+    vppOnOE(false);
+    vppOnWE(false);
+    // Clear DataBus
+    dataClr();
+
+    // setupbus
+    switch (operation) {
+        case kCmdDeviceOperationRead:
+            // VDD Rd on
+            vddCtrl(true);
+            // VDD Rd on VPP
+            vddOnVpp(true);
+            if (flags_.pgmCePin) {
+                // PGM/~CE is LO
+                setWE(true);
+            } else {
+                // ~PGM is HI
+                setWE(false);
+            }
+            // ~CE is LO (if pin connected)
+            setCE(true);
+            break;
+        case kCmdDeviceOperationProg:
+            // VDD Wr on
+            vddCtrl(true);
+            if (flags_.pgmPositive) {
+                // PGM is LO
+                setWE(true);
+            } else {
+                // ~PGM is HI
+                setWE(false);
+            }
+            // ~CE is LO (if pin connected)
+            setCE(true);
+            break;
+        case kCmdDeviceOperationGetId:
+            // VDD Rd on
+            vddCtrl(true);
+            if (flags_.pgmCePin) {
+                // PGM/~CE is LO
+                setWE(true);
+            } else {
+                // ~PGM is HI
+                setWE(false);
+            }
+            // ~CE is LO (if pin connected)
+            setCE(true);
+            if (!flags_.vppOePin) {
+                // VDD Rd on VPP
+                vddOnVpp(true);
+            }
+            // ~OE is LO
+            setOE(true);
+            // VPP on A9
+            vppOnA9(true);
+            break;
+        case kCmdDeviceOperationReset:
+        default:
+            break;
+    }
+    usDelay(150);  // 150 uS
+    return !error_;
+}
+
+TDeviceID Emulator::deviceGetId_() {
+    TDeviceID result;
+    // Setup bus
+    if (!deviceSetupBus_(kCmdDeviceOperationGetId)) return result;
+    uint8_t manufacturer, device;
+    // Get manufacturer data (byte)
+    manufacturer = dataGet();
+    // Increment Address (0x01)
+    addrInc();
+    // Get device data (byte)
+    device = dataGet();
+    // If success, return data
+    if (!error_) {
+        result.manufacturer = manufacturer;
+        result.device = device;
+    }
+    // Close resources
+    deviceSetupBus_(kCmdDeviceOperationReset);
+    return result;
+}
+
+bool Emulator::deviceErase_() {
+    // Erase entire chip
+    // 27E Algorithm
+    // Addr = 0
+    addrClr();
+    // Data = 0xFF
+    dataSetW(0xFFFF);
+    // VPP on A9
+    vppOnA9(true);
+    if (flags_.pgmPositive) {
+        // PGM is HI (start erase pulse)
+        setWE(false);
+        msDelay(100);  // Erase Pulse
+        // PGM is LO (end erase pulse)
+        setWE(true);
+    } else {
+        // ~PGM is LO (start erase pulse)
+        setWE(true);
+        msDelay(100);  // Erase Pulse
+        // ~PGM is HI (end erase pulse)
+        setWE(false);
+    }
+    usDelay(twc_);  // tWC uS
+    // VPP on A9 off
+    vppOnA9(false);
+    // PGM/~CE is LO
+    if (flags_.pgmCePin) setWE(true);
+    return !error_;
 }

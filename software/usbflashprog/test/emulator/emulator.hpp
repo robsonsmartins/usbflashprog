@@ -27,6 +27,8 @@
 #include "mock/qserialport.hpp"
 #include "chip.hpp"
 
+#include "../../backend/opcodes.hpp"
+
 // ---------------------------------------------------------------------------
 
 /**
@@ -34,6 +36,10 @@
  * @brief List of serial ports info.
  */
 typedef QList<QSerialPortInfo> TSerialPortList;
+
+// ---------------------------------------------------------------------------
+// Forward
+struct TDeviceID;
 
 // ---------------------------------------------------------------------------
 
@@ -159,6 +165,10 @@ class Emulator : public QObject {
     bool deviceSetTwc(uint32_t value);
     /** @copydoc Runner::deviceSetFlags(const TDeviceSettings&) */
     bool deviceSetFlags(const TDeviceSettings& value);
+    /** @copydoc Runner::deviceSetupBus(kCmdDeviceOperationEnum) */
+    bool deviceSetupBus(kCmdDeviceOperationEnum operation);
+    /** @copydoc Runner::deviceResetBus() */
+    bool deviceResetBus();
     /** @copydoc Runner::deviceRead() */
     uint8_t deviceRead();
     /** @copydoc Runner::deviceReadW() */
@@ -171,6 +181,10 @@ class Emulator : public QObject {
     bool deviceVerify(uint8_t value);
     /** @copydoc Runner::deviceVerifyW(uint16_t) */
     bool deviceVerifyW(uint16_t value);
+    /** @copydoc Runner::deviceGetId() */
+    TDeviceID deviceGetId();
+    /** @copydoc Runner::deviceErase() */
+    bool deviceErase();
     /** @copydoc Runner::usDelay(uint64_t) */
     static void usDelay(uint64_t value);
     /** @copydoc Runner::msDelay(uint32_t) */
@@ -210,9 +224,25 @@ class Emulator : public QObject {
     uint32_t twc_;
     /* @brief Stores device settings. */
     TDeviceSettings flags_;
-
+    /* @brief Device Read Algorithm.
+     * @param is16bit True if device is 16-bit. Device is 8-bit otherwise.
+     * @return Read value or 0xFF/0xFFFF if error. */
     uint16_t deviceRead_(bool is16bit);
+    /* @brief Device Write Algorithm.
+     * @param value Value to write.
+     * @param is16bit True if device is 16-bit. Device is 8-bit otherwise.
+     * @return True if success, false otherwise. */
     bool deviceWrite_(uint16_t value, bool is16bit);
+    /* @brief Device Setup Bus Algorithm.
+     * @param operation Operation to perform.
+     * @return True if success, false otherwise. */
+    bool deviceSetupBus_(kCmdDeviceOperationEnum operation);
+    /* @brief Device Get ID Algorithm.
+     * @return Device/Manufacturer ID if success, zero values otherwise. */
+    TDeviceID deviceGetId_();
+    /* @brief Device Erase Algorithm.
+     * @return True if success, false otherwise. */
+    bool deviceErase_();
 };
 
 #endif  // TEST_EMULATOR_EMULATOR_HPP_

@@ -146,6 +146,8 @@ void Runner::runCommand_() {
         runDeviceReadCommand_(code->first);
         runDeviceWriteCommand_(code->first);
         runDeviceVerifyCommand_(code->first);
+        runDeviceGetIdCommand_(code->first);
+        runDeviceEraseCommand_(code->first);
     }
 }
 
@@ -289,7 +291,6 @@ void Runner::runVppCommand_(uint8_t opcode) {
 
 void Runner::runCtrlBusCommand_(uint8_t opcode) {
     bool b;
-    TByteArray response;
     switch (opcode) {
         case kCmdBusCE:
             b = getParamAsBool_();
@@ -359,7 +360,6 @@ void Runner::runDataBusCommand_(uint8_t opcode) {
 
 void Runner::runAddrBusCommand_(uint8_t opcode) {
     uint32_t dw;
-    TByteArray response;
     switch (opcode) {
         case kCmdBusAddrClr:
             if (addrBus_.writeByte(0)) {
@@ -406,7 +406,6 @@ void Runner::runAddrBusCommand_(uint8_t opcode) {
 
 void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
     uint32_t dw;
-    TByteArray response;
     switch (opcode) {
         case kCmdDeviceSetTwp:
             dw = getParamAsDWord_();
@@ -426,13 +425,21 @@ void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
             // 3 = ~PGM/~CE Pin
             // 4 = PGM positive
             // clang-format off
-            settings_.skipFF      = (dw & 0x01 != 0);
-            settings_.progWithVpp = (dw & 0x02 != 0);
-            settings_.vppOePin    = (dw & 0x04 != 0);
-            settings_.pgmCePin    = (dw & 0x08 != 0);
-            settings_.pgmPositive = (dw & 0x10 != 0);
+            settings_.skipFF      = (dw & 0x01) != 0;
+            settings_.progWithVpp = (dw & 0x02) != 0;
+            settings_.vppOePin    = (dw & 0x04) != 0;
+            settings_.pgmCePin    = (dw & 0x08) != 0;
+            settings_.pgmPositive = (dw & 0x10) != 0;
             // clang-format on
             serial_.putChar(kCmdResponseOk);
+            break;
+        case kCmdDeviceSetupBus:
+            dw = getParamAsByte_();
+            if (deviceSetupBus_(dw)) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
             break;
         default:
             break;
@@ -474,8 +481,6 @@ void Runner::runDeviceReadCommand_(uint8_t opcode) {
 
 void Runner::runDeviceWriteCommand_(uint8_t opcode) {
     uint16_t w;
-    TByteArray response;
-    bool success = false;
     switch (opcode) {
         case kCmdDeviceWrite:
             if (deviceWriteAndVerify_(w, true) && addrBus_.increment()) {
@@ -498,8 +503,6 @@ void Runner::runDeviceWriteCommand_(uint8_t opcode) {
 
 void Runner::runDeviceVerifyCommand_(uint8_t opcode) {
     uint16_t w;
-    TByteArray response;
-    bool success = false;
     switch (opcode) {
         case kCmdDeviceVerify:
             if (deviceVerify_(w, true) && addrBus_.increment()) {
@@ -510,6 +513,41 @@ void Runner::runDeviceVerifyCommand_(uint8_t opcode) {
             break;
         case kCmdDeviceVerifyB:
             if (deviceVerify_(w, false) && addrBus_.increment()) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Runner::runDeviceGetIdCommand_(uint8_t opcode) {
+    uint16_t w;
+    TByteArray response;
+    switch (opcode) {
+        case kCmdDeviceGetId:
+            if (deviceGetId_(w)) {
+                // response
+                response.resize(3);
+                response[0] = kCmdResponseOk;
+                createParamsFromWord_(&response, w);
+                serial_.putBuf(response.data(), response.size());
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+void Runner::runDeviceEraseCommand_(uint8_t opcode) {
+    switch (opcode) {
+        case kCmdDeviceErase:
+            if (deviceErase_()) {
+                // response
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -621,6 +659,147 @@ bool Runner::deviceWriteAndVerify_(uint16_t &data, bool is16bit) {
     // verify
     if (rd == wr) data = rd;
     return (rd == wr);
+}
+
+bool Runner::deviceSetupBus_(uint8_t operation) {
+    bool success = true;
+    // reset bus
+    // VDD off and VPP off
+    vgen_.vdd.off();
+    vgen_.vpp.off();
+    vgen_.vdd.onVpp(false);
+    // Clear AddrBus
+    if (!addrBus_.writeDWord(0)) success = false;
+    // ~OE is HI
+    ctrlBus_.setOE(false);
+    // ~CE is HI
+    ctrlBus_.setCE(false);
+    if (settings_.pgmPositive) {
+        // PGM is LO (no prog pulse)
+        ctrlBus_.setWE(true);
+    } else {
+        // ~PGM is HI (no prog pulse)
+        ctrlBus_.setWE(false);
+    }
+    // VPP on xx disabled
+    vgen_.vpp.onA9(false);
+    vgen_.vpp.onA18(false);
+    vgen_.vpp.onCE(false);
+    vgen_.vpp.onOE(false);
+    vgen_.vpp.onWE(false);
+    // Clear DataBus
+    if (!dataBus_.writeWord(0)) success = false;
+
+    // setupbus
+    switch (operation) {
+        case kCmdDeviceOperationRead:
+            // VDD Rd on
+            vgen_.vdd.on();
+            // VDD Rd on VPP
+            vgen_.vdd.onVpp();
+            if (settings_.pgmCePin) {
+                // PGM/~CE is LO
+                ctrlBus_.setWE(true);
+            } else {
+                // ~PGM is HI
+                ctrlBus_.setWE(false);
+            }
+            // ~CE is LO (if pin connected)
+            ctrlBus_.setCE(true);
+            break;
+        case kCmdDeviceOperationProg:
+            // VDD Wr on
+            vgen_.vdd.on();
+            if (settings_.pgmPositive) {
+                // PGM is LO
+                ctrlBus_.setWE(true);
+            } else {
+                // ~PGM is HI
+                ctrlBus_.setWE(false);
+            }
+            // ~CE is LO (if pin connected)
+            ctrlBus_.setCE(true);
+            break;
+        case kCmdDeviceOperationGetId:
+            // VDD Rd on
+            vgen_.vdd.on();
+            if (settings_.pgmCePin) {
+                // PGM/~CE is LO
+                ctrlBus_.setWE(true);
+            } else {
+                // ~PGM is HI
+                ctrlBus_.setWE(false);
+            }
+            // ~CE is LO (if pin connected)
+            ctrlBus_.setCE(true);
+            if (!settings_.vppOePin) {
+                // VDD Rd on VPP
+                vgen_.vdd.onVpp(true);
+            }
+            // ~OE is LO
+            ctrlBus_.setOE(true);
+            // VPP on A9
+            vgen_.vpp.onA9(true);
+            break;
+        case kCmdDeviceOperationReset:
+        default:
+            break;
+    }
+    sleep_us(kStabilizationTime);
+    return success;
+}
+
+bool Runner::deviceGetId_(uint16_t &data) {
+    // Setup bus
+    if (!deviceSetupBus_(kCmdDeviceOperationGetId)) return false;
+    bool success = true;
+    uint8_t manufacturer, device;
+    // Get manufacturer data (byte)
+    manufacturer = dataBus_.readByte();
+    // Increment Address (0x01)
+    if (!addrBus_.increment()) success = false;
+    // Get device data (byte)
+    device = dataBus_.readByte();
+    // If success, return data
+    if (success) {
+        data = manufacturer;
+        data <<= 8;
+        data |= device;
+    }
+    // Close resources
+    deviceSetupBus_(kCmdDeviceOperationReset);
+    return success;
+}
+
+bool Runner::deviceErase_() {
+    bool success = true;
+    // Erase entire chip
+    // 27E Algorithm
+    // Addr = 0
+    if (!addrBus_.writeDWord(0)) success = false;
+    // Data = 0xFF
+    if (!dataBus_.writeWord(0xFFFF)) success = false;
+    // VPP on A9
+    vgen_.vpp.onA9(true);
+    if (settings_.pgmPositive) {
+        // PGM is HI (start erase pulse)
+        ctrlBus_.setWE(false);
+        sleep_ms(kErasePulseDuration);  // Erase Pulse
+        // PGM is LO (end erase pulse)
+        ctrlBus_.setWE(true);
+    } else {
+        // ~PGM is LO (start erase pulse)
+        ctrlBus_.setWE(true);
+        sleep_ms(kErasePulseDuration);  // Erase Pulse
+        // ~PGM is HI (end erase pulse)
+        ctrlBus_.setWE(false);
+    }
+    sleep_us(settings_.twc);  // tWC uS
+    // VPP on A9 off
+    vgen_.vpp.onA9(false);
+    // PGM/~CE is LO
+    if (settings_.pgmCePin) ctrlBus_.setWE(true);
+    return success;
 }
 
 bool Runner::getParamAsBool_() {

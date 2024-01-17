@@ -47,16 +47,6 @@ class EPROM : public ParDevice {
     virtual ~EPROM();
     /* Reimplemented */
     virtual void setSize(uint32_t value);
-    /* Reimplemented */
-    virtual bool read(QByteArray &buffer);
-    /* Reimplemented */
-    virtual bool program(const QByteArray &buffer, bool verify = false);
-    /* Reimplemented */
-    virtual bool verify(const QByteArray &buffer);
-    /* Reimplemented */
-    virtual bool blankCheck();
-    /* Reimplemented */
-    virtual bool getId(TDeviceID &result);
 };
 
 // ---------------------------------------------------------------------------
@@ -144,17 +134,6 @@ class EPROM27E : public EPROM27C {
     explicit EPROM27E(QObject *parent = nullptr);
     /** @brief Destructor. */
     virtual ~EPROM27E();
-    /* Reimplemented */
-    virtual bool erase(bool check = false);
-
-  protected:
-    /* @brief Delay of Erase pulse, in msec */
-    uint32_t erasePulseDelay_;
-    /* Reimplemented */
-    virtual bool initDevice(kDeviceOperation operation);
-    /* @brief Erase the EPROM.
-     * @return True if success, false otherwise. */
-    virtual bool eraseDevice();
 };
 
 #endif  // BACKEND_DEVICES_PARALLEL_EPROM_HPP_

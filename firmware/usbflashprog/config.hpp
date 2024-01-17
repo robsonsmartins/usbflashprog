@@ -171,5 +171,7 @@ constexpr uint32_t kCommTimeOut = 50;
 
 /** @brief GENERAL : Time for stabilization, in microseconds. */
 constexpr uint32_t kStabilizationTime = 150;
+/** @brief GENERAL : Erase pulse duration, in milliseconds. */
+constexpr uint32_t kErasePulseDuration = 100;
 
 #endif  // CONFIG_HPP_

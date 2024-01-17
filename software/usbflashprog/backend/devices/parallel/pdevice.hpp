@@ -46,10 +46,24 @@ class ParDevice : public Device {
     explicit ParDevice(QObject *parent = nullptr);
     /** @brief Destructor. */
     virtual ~ParDevice();
+    /* Reimplemented */
+    virtual bool read(QByteArray &buffer);
+    /* Reimplemented */
+    virtual bool program(const QByteArray &buffer, bool verify = false);
+    /* Reimplemented */
+    virtual bool verify(const QByteArray &buffer);
+    /* Reimplemented */
+    virtual bool erase(bool check = false);
+    /* Reimplemented */
+    virtual bool blankCheck();
+    /* Reimplemented */
+    virtual bool getId(TDeviceID &result);
 
   protected:
     /** @brief Device Operation. */
     enum kDeviceOperation {
+        /** @brief Device Reset Operation. */
+        kDeviceOpReset,
         /** @brief Device Read Operation. */
         kDeviceOpRead,
         /** @brief Device Prog Operation. */
@@ -78,6 +92,17 @@ class ParDevice : public Device {
      */
     virtual bool readDevice(QByteArray &buffer);
     /**
+     * @brief Get ID of the device.
+     * @param deviceId[out] Device ID to get.
+     * @return True if success, false otherwise.
+     */
+    virtual bool getIdDevice(TDeviceID &deviceId);
+    /**
+     * @brief Erase the device.
+     * @return True if success, false otherwise.
+     */
+    virtual bool eraseDevice();
+    /**
      * @brief Open and init resources.
      * @param operation Device operation.
      * @return True if success, false otherwise.
@@ -100,10 +125,6 @@ class ParDevice : public Device {
     virtual void finalizeDevice();
 
   protected:
-    /* @brief Delay after reset bus, in usec. */
-    uint64_t resetBusDelay_;
-    /* @brief Delay after initialize, in usec. */
-    uint64_t initDelay_;
     /* @brief Reads one byte/word from the device at the current address.
      * @param data[out] Data read.
      * @return True if success, false otherwise. */
@@ -116,13 +137,6 @@ class ParDevice : public Device {
      * @param data Data to verify.
      * @return True if success, false otherwise. */
     virtual bool verifyData_(uint16_t data);
-    /* @brief Resets (and initializes) the bus (address, data, control).
-     * @return True if success, false otherwise. */
-    virtual bool resetBus_();
-    /* @brief Initialize the control pins.
-     * @param read If true indicates Read operation (default).
-         False otherwise. */
-    virtual void initControlPins_(bool read = true);
     /* @brief Generates a buffer with random data.
      * @return Buffer with random data. */
     virtual QByteArray generateRandomData_();

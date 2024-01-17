@@ -205,6 +205,16 @@ class Runner {
      */
     void runDeviceVerifyCommand_(uint8_t opcode);
     /*
+     * @brief Runs the received command, if it's a Device Get ID opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDeviceGetIdCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Device Erase opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDeviceEraseCommand_(uint8_t opcode);
+    /*
      * @brief Runs the device read byte/word algorithm.
      * @param data[out] Output of data read.
      * @param is16bit If true, indicates a 16-bit device.
@@ -214,20 +224,40 @@ class Runner {
      * @brief Runs the device program byte/word algorithm.
      * @param data[in,out] Output of data to write.
      * @param is16bit If true, indicates a 16-bit device.
+     * @return True if sucessfull. False otherwise.
      */
     bool deviceWrite_(uint16_t &data, bool is16bit);
     /*
      * @brief Runs the device verify byte/word algorithm.
      * @param data[in,out] Output of data read.
      * @param is16bit If true, indicates a 16-bit device.
+     * @return True if sucessfull. False otherwise.
      */
     bool deviceVerify_(uint16_t &data, bool is16bit);
     /*
      * @brief Runs the device program and verify byte/word algorithm.
      * @param data[in,out] Output of data to write.
      * @param is16bit If true, indicates a 16-bit device.
+     * @return True if sucessfull. False otherwise.
      */
     bool deviceWriteAndVerify_(uint16_t &data, bool is16bit);
+    /*
+     * @brief Runs the device setup bus algorithm.
+     * @param operation Operation parameter.
+     * @return True if sucessfull. False otherwise.
+     */
+    bool deviceSetupBus_(uint8_t operation);
+    /*
+     * @brief Runs the device get ID algorithm.
+     * @param data[out] Output (MSB: Manufacturer ID, LSB: Device ID).
+     * @return True if sucessfull. False otherwise.
+     */
+    bool deviceGetId_(uint16_t &data);
+    /*
+     * @brief Runs the device erase algorithm.
+     * @return True if sucessfull. False otherwise.
+     */
+    bool deviceErase_();
 };
 
 #endif  // MODULES_RUNNER_HPP_

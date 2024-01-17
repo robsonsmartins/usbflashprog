@@ -38,12 +38,149 @@ ParDevice::ParDevice(QObject *parent) : Device(parent) {
     info_.deviceType = kDeviceParallelMemory;
     info_.name = "Parallel Device";
     size_ = 2048;
-    resetBusDelay_ = 25;  // 25 uS
-    initDelay_ = 30;      // 30 uS
     DEBUG << info_.toString();
 }
 
 ParDevice::~ParDevice() {}
+
+bool ParDevice::read(QByteArray &buffer) {
+    INFO << "Reading device...";
+    uint32_t total = size_;
+    if (is16bit_) total /= 2;
+    canceling_ = false;
+    // Init pins/bus to Read operation
+    if (!initDevice(kDeviceOpRead)) {
+        WARNING << "Error reading device";
+        return false;
+    }
+    bool error = false;
+    // Read the device
+    if (!readDevice(buffer)) error = true;
+    if (!error) emit onProgress(total, total, true);
+    // Close resources
+    finalizeDevice();
+    if (error) {
+        WARNING << "Error reading device";
+    } else {
+        INFO << "Reading device OK";
+    }
+    return !error;
+}
+
+bool ParDevice::program(const QByteArray &buffer, bool verify) {
+    INFO << "Programming device...";
+    uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
+    if (is16bit_) total /= 2;
+    canceling_ = false;
+    // Init pins/bus to Prog operation
+    if (!initDevice(kDeviceOpProg)) {
+        WARNING << "Error programming device";
+        return false;
+    }
+    bool error = false;
+    // Program the device
+    if (!programDevice(buffer)) error = true;
+    // Close resources
+    finalizeDevice();
+    // If error, returns
+    if (error) {
+        WARNING << "Error programming device";
+        return false;
+    }
+    // If no error and verify flag is disabled, return
+    if (!verify) {
+        emit onProgress(total, total, true);
+        INFO << "Programming device OK";
+        return true;
+    }
+    // If verify flag is enabled, verify device
+    return this->verify(buffer);
+}
+
+bool ParDevice::verify(const QByteArray &buffer) {
+    INFO << "Verifying device...";
+    uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
+    if (is16bit_) total /= 2;
+    canceling_ = false;
+    // Init pins/bus to Read operation
+    if (!initDevice(kDeviceOpRead)) {
+        WARNING << "Error verifying device";
+        return false;
+    }
+    bool error = false;
+    // Read the device and verify (compare) buffer
+    if (!verifyDevice(buffer)) error = true;
+    if (!error) emit onProgress(total, total, true);
+    // Close resources
+    finalizeDevice();
+    if (error) {
+        WARNING << "Error verifying device";
+    } else {
+        INFO << "Verifying device OK";
+    }
+    return !error;
+}
+
+bool ParDevice::erase(bool check) {
+    INFO << "Erasing device...";
+    uint32_t total = size_;
+    if (is16bit_) total /= 2;
+    canceling_ = false;
+    // Init pins/bus to Erase operation
+    if (!initDevice(kDeviceOpErase)) {
+        WARNING << "Error erasing device";
+        return false;
+    }
+    bool error = false;
+    // Erase the device
+    if (!eraseDevice()) error = true;
+    // Close resources
+    finalizeDevice();
+    // If error, returns
+    if (error) {
+        WARNING << "Error erasing device";
+        return false;
+    }
+    // If no error and check flag is disabled, return
+    if (!check) {
+        emit onProgress(total, total, true);
+        INFO << "Erasing device OK";
+        return true;
+    }
+    // If check flag is enabled, verify device
+    return blankCheck();
+}
+
+bool ParDevice::blankCheck() {
+    // Create a blank (0xFF) buffer
+    QByteArray data = QByteArray(size_, (char)0xFF);
+    // Verify
+    return verify(data);
+}
+
+bool ParDevice::getId(TDeviceID &result) {
+    INFO << "Getting device ID...";
+    uint32_t total = size_;
+    if (is16bit_) total /= 2;
+    canceling_ = false;
+    // Init pins/bus to Get ID operation
+    if (!initDevice(kDeviceOpGetId)) {
+        WARNING << "Error getting device ID";
+        return false;
+    }
+    bool error = false;
+    // Getting the device ID
+    if (!getIdDevice(result)) error = true;
+    if (!error) emit onProgress(total, total, true);
+    // Close resources
+    finalizeDevice();
+    if (error) {
+        WARNING << "Error getting device ID";
+    } else {
+        INFO << "Getting device ID OK";
+    }
+    return !error;
+}
 
 bool ParDevice::programDevice(const QByteArray &buffer) {
     DEBUG << "Programming data...";
@@ -51,10 +188,9 @@ bool ParDevice::programDevice(const QByteArray &buffer) {
     uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
     if (is16bit_) total /= 2;
     int increment = is16bit_ ? 2 : 1;
-    if (!runner_.deviceSetFlags(flags_) || !runner_.deviceSetTwp(twp_) ||
-        !runner_.deviceSetTwc(twc_)) {
+    if (!runner_.deviceSetTwp(twp_) || !runner_.deviceSetTwc(twc_)) {
         emit onProgress(current, total, true, false);
-        WARNING << "Program error: setting tWP, tWC or device flags";
+        WARNING << "Program error: setting tWP or tWC";
         return false;
     }
     for (int i = 0; i < buffer.size(); i += increment) {
@@ -100,11 +236,6 @@ bool ParDevice::verifyDevice(const QByteArray &buffer) {
     uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
     if (is16bit_) total /= 2;
     int increment = is16bit_ ? 2 : 1;
-    if (!runner_.deviceSetFlags(flags_)) {
-        emit onProgress(current, total, true, false);
-        WARNING << "Verify error: setting device flags";
-        return false;
-    }
     for (int i = 0; i < buffer.size(); i += increment) {
         if (i % 0x100 == 0) emit onProgress(current, total);
         runner_.processEvents();
@@ -141,11 +272,6 @@ bool ParDevice::readDevice(QByteArray &buffer) {
     uint32_t total = size_;
     if (is16bit_) total /= 2;
     int increment = is16bit_ ? 2 : 1;
-    if (!runner_.deviceSetFlags(flags_)) {
-        emit onProgress(current, total, true, false);
-        WARNING << "Verify error: setting device flags";
-        return false;
-    }
     buffer.clear();
     for (current = 0; current < total; current++) {
         if (current % 0x100 == 0) emit onProgress(current, total);
@@ -178,59 +304,131 @@ bool ParDevice::readDevice(QByteArray &buffer) {
     return true;
 }
 
+bool ParDevice::getIdDevice(TDeviceID &deviceId) {
+    DEBUG << "Getting ID...";
+    uint32_t current = 0;
+    uint32_t total = size_;
+    if (is16bit_) total /= 2;
+    // Getting ID
+    deviceId = runner_.deviceGetId();
+    // Error
+    if (runner_.hasError()) {
+        emit onProgress(current, total, true, false);
+        WARNING << "Error getting ID";
+        return false;
+    }
+    DEBUG << "Get ID OK";
+    return true;
+}
+
+bool ParDevice::eraseDevice() {
+    DEBUG << "Erasing data...";
+    uint32_t current = 0;
+    uint32_t total = size_;
+    if (is16bit_) total /= 2;
+    uint16_t empty = is16bit_ ? 0xFFFF : 0xFF;
+    if (!runner_.deviceSetTwp(twp_) || !runner_.deviceSetTwc(twc_)) {
+        emit onProgress(current, total, true, false);
+        WARNING << "Erase error: setting tWP or tWC";
+        return false;
+    }
+    // VPP on
+    runner_.vppCtrl(true);
+    // Repeat for n max attempts
+    for (int j = 1; j <= maxAttemptsProg_; j++) {
+        // Erase entire chip
+        bool success = true;
+        if (!runner_.deviceErase()) success = false;
+        for (current = 0; current < total; current++) {
+            if (canceling_) {
+                emit onProgress(current, total, true, false, true);
+                DEBUG << QString("Erase canceled at 0x%1 of 0x%2")
+                             .arg(current, 6, 16, QChar('0'))
+                             .arg(total, 6, 16, QChar('0'));
+                return false;
+            }
+            // Verify data
+            if (success && !verifyData_(empty)) {
+                success = false;
+            }
+            if (success && runner_.hasError()) success = false;
+            if (!success && j == maxAttemptsProg_) {
+                // Error
+                emit onProgress(current, total, true, false);
+                WARNING
+                    << QString(
+                           "Erase error at 0x%1 of 0x%2. Expected data 0x%3")
+                           .arg(current, 6, 16, QChar('0'))
+                           .arg(total, 6, 16, QChar('0'))
+                           .arg(empty, is16bit_ ? 4 : 2, 16, QChar('0'));
+                return false;
+            }
+            if (!success) break;
+        }
+        if (success) break;
+    }
+    DEBUG << "Erase OK";
+    return true;
+}
+
 bool ParDevice::initDevice(kDeviceOperation operation) {
     DEBUG << "Initializing...";
     if (!runner_.open(port_)) {
         emit onProgress(0, size_, true, false);
-        WARNING << "Error opening Serial Port";
+        WARNING << "Error opening serial port";
         return false;
     }
-    // Init bus and pins
-    resetBus_();
+    if (!runner_.deviceSetFlags(flags_)) {
+        emit onProgress(0, size_, true, false);
+        WARNING << "Error setting device flags";
+        return false;
+    }
+    bool success = true;
     switch (operation) {
+        case kDeviceOpRead:
+            // VDD Rd
+            if (!runner_.vddSet(vddRd_) ||
+                !runner_.deviceSetupBus(kCmdDeviceOperationRead)) {
+                success = false;
+            }
+            break;
         case kDeviceOpProg:
-            // VDD Wr on
-            runner_.vddSet(vddWr_);
-            runner_.vddCtrl();
-            initControlPins_(false);
-            // VPP set
-            runner_.vppSet(vpp_);
+            // VDD Wr / VPP
+            if (!runner_.vddSet(vddWr_) || !runner_.vppSet(vpp_) ||
+                !runner_.deviceSetupBus(kCmdDeviceOperationProg)) {
+                success = false;
+            }
+            break;
+        case kDeviceOpErase:
+            // VDD Wr / VEE
+            if (!runner_.vddSet(vddWr_) || !runner_.vppSet(vee_) ||
+                !runner_.deviceSetupBus(kCmdDeviceOperationProg)) {
+                success = false;
+            }
             break;
         case kDeviceOpGetId:
-            // VDD Rd on
-            runner_.vddSet(vddRd_);
-            runner_.vddCtrl();
-            initControlPins_(true);
-            // VPP set with VEE
-            runner_.vppSet(vee_);
-            if (!flags_.vppOePin) {
-                // VDD Rd on VPP
-                runner_.vddOnVpp();
+            // VDD Rd / VEE
+            if (!runner_.vddSet(vddRd_) || !runner_.vppSet(vee_) ||
+                !runner_.deviceResetBus()) {
+                success = false;
             }
-            // ~OE is LO
-            runner_.setOE();
-            // VPP on A9
-            runner_.vppOnA9();
             break;
-        case kDeviceOpRead:
+        case kDeviceOpReset:
         default:
-            // VDD Rd on
-            runner_.vddSet(vddRd_);
-            runner_.vddCtrl();
-            initControlPins_(true);
-            // VDD Rd on VPP
-            runner_.vddOnVpp();
+            if (!runner_.deviceResetBus()) success = false;
             break;
     }
-    runner_.usDelay(initDelay_);
-    if (runner_.hasError()) return finalizeDevice(0, size_, true, false);
-    DEBUG << "Initialize OK";
-    return true;
+    if (success) {
+        DEBUG << "Initialize OK";
+    } else {
+        DEBUG << "Error initializing device";
+    }
+    return success;
 }
 
 void ParDevice::finalizeDevice() {
     DEBUG << "Finalizing...";
-    resetBus_();
+    runner_.deviceResetBus();
     runner_.close();
     DEBUG << "Finalize OK";
 }
@@ -265,67 +463,6 @@ bool ParDevice::verifyData_(uint16_t data) {
     } else {
         return runner_.deviceVerify(data & 0xFF);
     }
-}
-
-bool ParDevice::resetBus_() {
-    DEBUG << "Reseting Bus...";
-    // VDD off and VPP off
-    runner_.vddCtrl(false);
-    runner_.vppCtrl(false);
-    // Clear AddrBus
-    runner_.addrClr();
-    // ~OE is HI
-    runner_.setOE(false);
-    // ~CE is HI
-    runner_.setCE(false);
-    if (flags_.pgmPositive) {
-        // PGM is LO (no prog pulse)
-        runner_.setWE();
-    } else {
-        // ~PGM is HI (no prog pulse)
-        runner_.setWE(false);
-    }
-    // VPP on xx disabled
-    runner_.vppOnA9(false);
-    runner_.vppOnA18(false);
-    runner_.vppOnCE(false);
-    runner_.vppOnOE(false);
-    runner_.vppOnWE(false);
-    // Clear DataBus
-    runner_.dataClr();
-    runner_.usDelay(resetBusDelay_);
-    if (runner_.hasError()) {
-        WARNING << "Error in Bus Reset";
-    } else {
-        DEBUG << "Bus Reset OK";
-    }
-    return !runner_.hasError();
-}
-
-void ParDevice::initControlPins_(bool read) {
-    // ~CE is LO (if pin connected)
-    runner_.setCE();
-    if (read) {
-        // Read
-        if (flags_.pgmCePin) {
-            // PGM/~CE is LO
-            runner_.setWE();
-        } else {
-            // ~PGM is HI
-            runner_.setWE(false);
-        }
-    } else {
-        // Prog
-        if (flags_.pgmPositive) {
-            // PGM is LO
-            runner_.setWE();
-        } else {
-            // ~PGM is HI
-            runner_.setWE(false);
-        }
-    }
-    // ~OE is HI
-    runner_.setOE(false);
 }
 
 QByteArray ParDevice::generateRandomData_() {

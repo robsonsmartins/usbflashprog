@@ -98,9 +98,11 @@ void ChipEPROM::emuChip(void) {
     }
     if (f_vdd && f_ce && !pgm && f_oe) {
         // Read : VDD = 1; VPP = X; CE = 1; PGM = 0; OE = 1;
+        writeToLog("About to Read...");
         read();
     } else if (f_vdd && f_vpp && f_ce && pgm && !f_oe) {
         // Write: VDD = 1; VPP = 1; CE = 1; PGM = 1; OE = 0;
+        writeToLog("About to Write...");
         write();
         // Writing 0xFF more than 5 times at address 0x00 represents an
         // attempt to erase the memory

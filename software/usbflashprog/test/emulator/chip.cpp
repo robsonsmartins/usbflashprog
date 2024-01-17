@@ -15,6 +15,8 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <cstdio>
+
 #include <QRandomGenerator>
 #include <QLoggingCategory>
 #include <QString>
@@ -61,6 +63,7 @@ void BaseChip::setSize(uint32_t size) {
     if (size == f_memory_area.size()) return;
     /* sets the chip size */
     f_memory_area.resize(size);
+    writeToLog("SetSize(%d)", size);
 }
 
 void BaseChip::setVDD(bool state) {
@@ -125,12 +128,17 @@ void BaseChip::writeToLog(const char* msg, ...) {
     /* checks the params */
     if (msg == NULL) return;
     /* writes the params to log */
-    char log[256];
-    va_list args;
+    va_list args, args_copy;
     va_start(args, msg);
-    vsnprintf(log, sizeof(log), msg, args);
+    va_copy(args_copy, args);
+    int len = vsnprintf(nullptr, 0, msg, args_copy);
+    if (len > 0) {
+        std::vector<char> buffer(len + 1);
+        vsnprintf(&buffer[0], buffer.size(), msg, args);
+        DEBUG << (std::string(&buffer[0], len)).c_str();
+    }
+    va_end(args_copy);
     va_end(args);
-    DEBUG << log;
 }
 
 // ---------------------------------------------------------------------------

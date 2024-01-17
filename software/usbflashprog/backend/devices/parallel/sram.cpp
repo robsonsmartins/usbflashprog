@@ -43,8 +43,6 @@ SRAM::SRAM(QObject *parent) : ParDevice(parent) {
     vddRd_ = 5.0f;
     vddWr_ = 5.0f;
     size_ = 2048;
-    resetBusDelay_ = 25;  // 25 uS
-    initDelay_ = 30;      // 30 uS
     DEBUG << info_.toString();
 }
 

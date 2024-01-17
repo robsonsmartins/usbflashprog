@@ -137,7 +137,7 @@ enum kCmdOpCodeEnum {
     kCmdDeviceSetTwc = 0x82,
     /**
      * @brief OPCODE / DEVICE : Opcode Device Set Flags.
-     * @details The parameter (one byte) that represents the flags
+     * @details The parameter (one byte) represents the flags, and
      *   follows the table:
      * <pre>
      * +----------------------+
@@ -151,23 +151,74 @@ enum kCmdOpCodeEnum {
      * </pre>
      */
     kCmdDeviceSetFlags = 0x83,
-    /** @brief OPCODE / DEVICE : Opcode Device Read and Increment Address. */
-    kCmdDeviceRead = 0x84,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Setup Bus.
+     * @details The parameter (one byte) represents the operation, and
+     *   follows the table:
+     * <pre>
+     * +-----------------------------------------+
+     * |Operation| Description                   |
+     * |  0x00   | Reset Bus (VDD/VPP ignored)   |
+     * |  0x01   | Prepare to Read (VPP ignored) |
+     * |  0x02   | Prepare to Program            |
+     * +-----------------------------------------+
+     * </pre>
+     * @see kCmdDeviceOperationEnum
+     */
+    kCmdDeviceSetupBus = 0x84,
+    /** @brief OPCODE / DEVICE : Opcode Device Read Word and
+     *                           Increment Address. */
+    kCmdDeviceRead = 0x85,
     /** @brief OPCODE / DEVICE : Opcode Device Read Byte and
      *                           Increment Address. */
-    kCmdDeviceReadB = 0x85,
-    /** @brief OPCODE / DEVICE : Opcode Device Write, Verify and
+    kCmdDeviceReadB = 0x86,
+    /** @brief OPCODE / DEVICE : Opcode Device Write Word, Verify and
      *                           Increment Address. */
-    kCmdDeviceWrite = 0x86,
+    kCmdDeviceWrite = 0x87,
     /** @brief OPCODE / DEVICE : Opcode Device Write Byte, Verify and
      *                           Increment Address. */
-    kCmdDeviceWriteB = 0x87,
-    /** @brief OPCODE / DEVICE : Opcode Device Verify and
+    kCmdDeviceWriteB = 0x88,
+    /** @brief OPCODE / DEVICE : Opcode Device Verify Word and
      *                           Increment Address. */
-    kCmdDeviceVerify = 0x88,
+    kCmdDeviceVerify = 0x89,
     /** @brief OPCODE / DEVICE : Opcode Device Verify Byte and
      *                           Increment Address. */
-    kCmdDeviceVerifyB = 0x89
+    kCmdDeviceVerifyB = 0x8A,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Get ID.
+     * @details The result (two bytes) represents Manufacturer/Device ID,
+     *  following the table:
+     * <pre>
+     * +-------------------------------+
+     * |Response      | Description    |
+     * | First (MSB)  | Manufacurer ID |
+     * | Second (LSB) | Device ID      |
+     * +-------------------------------+
+     * </pre>
+     */
+    kCmdDeviceGetId = 0x8B,
+    /** @brief OPCODE / DEVICE : Opcode Device Erase. */
+    kCmdDeviceErase = 0x8C
+};
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @brief Enumeration of the Device Operations.
+ * @see kCmdDeviceSetupBus
+ */
+enum kCmdDeviceOperationEnum {
+    /** @brief CMD / DEVICE : Defines a operation Reset. */
+    kCmdDeviceOperationReset = 0x00,
+    /** @brief CMD / DEVICE : Defines a operation Read. */
+    kCmdDeviceOperationRead = 0x01,
+    /** @brief CMD / DEVICE : Defines a operation Program. */
+    kCmdDeviceOperationProg = 0x02
+#ifdef TEST_BUILD
+    ,
+    /* @brief CMD / DEVICE : Defines a operation Get ID. */
+    kCmdDeviceOperationGetId = 0x03
+#endif
 };
 
 // ---------------------------------------------------------------------------
@@ -255,12 +306,16 @@ static const TCmdOpCodeMap kCmdOpCodes = {
     {kCmdDeviceSetTwp  , {kCmdDeviceSetTwp  , "Device Set Twp"   , 4, 0}},
     {kCmdDeviceSetTwc  , {kCmdDeviceSetTwc  , "Device Set Twc"   , 4, 0}},
     {kCmdDeviceSetFlags, {kCmdDeviceSetFlags, "Device Set Flags" , 1, 0}},
+    {kCmdDeviceSetupBus, {kCmdDeviceSetupBus, "Device Setup Bus" , 1, 0}},
     {kCmdDeviceRead    , {kCmdDeviceRead    , "Device Read"      , 0, 2}},
     {kCmdDeviceReadB   , {kCmdDeviceReadB   , "Device ReadByte"  , 0, 1}},
     {kCmdDeviceWrite   , {kCmdDeviceWrite   , "Device Write"     , 2, 0}},
     {kCmdDeviceWriteB  , {kCmdDeviceWriteB  , "Device WriteByte" , 1, 0}},
     {kCmdDeviceVerify  , {kCmdDeviceVerify  , "Device Verify"    , 2, 0}},
-    {kCmdDeviceVerifyB , {kCmdDeviceVerifyB , "Device VerifyByte", 1, 0}}
+    {kCmdDeviceVerifyB , {kCmdDeviceVerifyB , "Device VerifyByte", 1, 0}},
+    {kCmdDeviceGetId   , {kCmdDeviceGetId   , "Device Get ID"    , 0, 2}},
+    {kCmdDeviceErase   , {kCmdDeviceErase   , "Device Erase"     , 0, 0}}
+
 };
 // clang-format on
 

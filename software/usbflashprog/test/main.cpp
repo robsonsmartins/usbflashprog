@@ -56,7 +56,8 @@ void initLogging() {
         default:
             if (level >= 5) {
                 rules =
-                    "*.debug=false\nbackend.*.debug=true\ndevice.*.debug=true";
+                    "*.debug=false\nbackend.*.debug=true\n"
+                    "device.*.debug=true\nemu.*.debug=true";
             }
             break;
     }

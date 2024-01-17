@@ -23,6 +23,7 @@
 #include <thread>
 
 #include "backend/runner.hpp"
+#include "devices/device.hpp"
 #include "config.hpp"
 
 #ifdef Q_OS_WINDOWS
@@ -508,6 +509,17 @@ bool Runner::deviceSetTwc(uint32_t value) {
     return true;
 }
 
+bool Runner::deviceSetupBus(kCmdDeviceOperationEnum operation) {
+    TRunnerCommand cmd;
+    cmd.setByte(kCmdDeviceSetupBus, operation);
+    if (!sendCommand_(cmd)) return false;
+    return true;
+}
+
+bool Runner::deviceResetBus() {
+    return deviceSetupBus(kCmdDeviceOperationReset);
+}
+
 uint8_t Runner::deviceRead() {
     TRunnerCommand cmd;
     cmd.set(kCmdDeviceReadB);
@@ -613,6 +625,24 @@ bool Runner::deviceVerifyW(uint16_t value) {
         if (!sendCommand_(cmd, 0)) return false;
     }
     address_++;
+    return true;
+}
+
+TDeviceID Runner::deviceGetId() {
+    TDeviceID result;
+    TRunnerCommand cmd;
+    cmd.set(kCmdDeviceGetId);
+    if (!sendCommand_(cmd)) return result;
+    uint16_t rawCode = cmd.responseAsWord();
+    result.manufacturer = (rawCode & 0xFF00) >> 8;
+    result.device = (rawCode & 0xFF);
+    return result;
+}
+
+bool Runner::deviceErase() {
+    TRunnerCommand cmd;
+    cmd.set(kCmdDeviceErase);
+    if (!sendCommand_(cmd)) return false;
     return true;
 }
 

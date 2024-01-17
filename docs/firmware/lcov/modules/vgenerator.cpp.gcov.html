@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - "38959e8" - modules/vgenerator.cpp</title>
+  <title>LCOV - "afc6460" - modules/vgenerator.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">&quot;38959e8&quot;</td>
+            <td class="headerValue">&quot;afc6460&quot;</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">248</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-14 14:29:56</td>
+            <td class="headerValue">2024-01-17 17:42:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">58</td>
@@ -235,9 +235,9 @@
 <a name="165"><span class="lineNum">     165 </span><span class="lineCov">         12 :     dc2dc_.stop();</span></a>
 <a name="166"><span class="lineNum">     166 </span><span class="lineCov">         12 : }</span></a>
 <a name="167"><span class="lineNum">     167 </span>            : </a>
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">     226208 : void GenericGenerator::adjust_() {</span></a>
-<a name="169"><span class="lineNum">     169 </span><span class="lineCov">     226208 :     dc2dc_.adjust();</span></a>
-<a name="170"><span class="lineNum">     170 </span><span class="lineCov">     226208 : }</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">     224880 : void GenericGenerator::adjust_() {</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">     224880 :     dc2dc_.adjust();</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">     224880 : }</span></a>
 <a name="171"><span class="lineNum">     171 </span>            : </a>
 <a name="172"><span class="lineNum">     172 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="173"><span class="lineNum">     173 </span>            : </a>
@@ -383,8 +383,8 @@
 <a name="313"><span class="lineNum">     313 </span><span class="lineCov">          6 :     multicore_.launch();</span></a>
 <a name="314"><span class="lineNum">     314 </span><span class="lineCov">          6 :     multicore_.putParam(reinterpret_cast&lt;uintptr_t&gt;(&amp;vpp));</span></a>
 <a name="315"><span class="lineNum">     315 </span><span class="lineCov">          6 :     multicore_.putParam(reinterpret_cast&lt;uintptr_t&gt;(&amp;vdd));</span></a>
-<a name="316"><span class="lineNum">     316 </span><span class="lineCov">        112 :     while (status_ == MultiCore::csStarting) {</span></a>
-<a name="317"><span class="lineNum">     317 </span><span class="lineCov">        106 :         MultiCore::usleep(1);</span></a>
+<a name="316"><span class="lineNum">     316 </span><span class="lineCov">        110 :     while (status_ == MultiCore::csStarting) {</span></a>
+<a name="317"><span class="lineNum">     317 </span><span class="lineCov">        104 :         MultiCore::usleep(1);</span></a>
 <a name="318"><span class="lineNum">     318 </span>            :     }</a>
 <a name="319"><span class="lineNum">     319 </span><span class="lineCov">          6 :     MultiCore::msleep(200);</span></a>
 <a name="320"><span class="lineNum">     320 </span><span class="lineCov">          6 :     return (vppRes &amp;&amp; vddRes);</span></a>
@@ -468,9 +468,9 @@
 <a name="398"><span class="lineNum">     398 </span><span class="lineCov">          6 :     core.lock();</span></a>
 <a name="399"><span class="lineNum">     399 </span><span class="lineCov">          6 :     vpp-&gt;owner_-&gt;status_ = MultiCore::csRunning;</span></a>
 <a name="400"><span class="lineNum">     400 </span><span class="lineCov">          6 :     core.unlock();</span></a>
-<a name="401"><span class="lineNum">     401 </span><span class="lineCov">     113110 :     while (!core.isStopRequested()) {</span></a>
-<a name="402"><span class="lineNum">     402 </span><span class="lineCov">     113104 :         vpp-&gt;adjust_();</span></a>
-<a name="403"><span class="lineNum">     403 </span><span class="lineCov">     113104 :         vdd-&gt;adjust_();</span></a>
+<a name="401"><span class="lineNum">     401 </span><span class="lineCov">     112446 :     while (!core.isStopRequested()) {</span></a>
+<a name="402"><span class="lineNum">     402 </span><span class="lineCov">     112440 :         vpp-&gt;adjust_();</span></a>
+<a name="403"><span class="lineNum">     403 </span><span class="lineCov">     112440 :         vdd-&gt;adjust_();</span></a>
 <a name="404"><span class="lineNum">     404 </span>            :     }</a>
 <a name="405"><span class="lineNum">     405 </span><span class="lineCov">          6 :     core.lock();</span></a>
 <a name="406"><span class="lineNum">     406 </span><span class="lineCov">          6 :     vpp-&gt;owner_-&gt;status_ = MultiCore::csStopped;</span></a>

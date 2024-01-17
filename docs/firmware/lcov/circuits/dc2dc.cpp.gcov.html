@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - "38959e8" - circuits/dc2dc.cpp</title>
+  <title>LCOV - "afc6460" - circuits/dc2dc.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">&quot;38959e8&quot;</td>
+            <td class="headerValue">&quot;afc6460&quot;</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">137</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-14 14:29:56</td>
+            <td class="headerValue">2024-01-17 17:42:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">22</td>
@@ -202,9 +202,9 @@
 <a name="132"><span class="lineNum">     132 </span><span class="lineCov">         14 :     return true;</span></a>
 <a name="133"><span class="lineNum">     133 </span>            : }</a>
 <a name="134"><span class="lineNum">     134 </span>            : </a>
-<a name="135"><span class="lineNum">     135 </span><span class="lineCov">     226393 : bool Dc2Dc::isRunning() const {</span></a>
-<a name="136"><span class="lineNum">     136 </span><span class="lineCov">     226393 :     if (!pwm_) { return false; }</span></a>
-<a name="137"><span class="lineNum">     137 </span><span class="lineCov">     226270 :     return pwm_-&gt;isRunning();</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineCov">     225064 : bool Dc2Dc::isRunning() const {</span></a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineCov">     225064 :     if (!pwm_) { return false; }</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineCov">     224941 :     return pwm_-&gt;isRunning();</span></a>
 <a name="138"><span class="lineNum">     138 </span>            : }</a>
 <a name="139"><span class="lineNum">     139 </span>            : </a>
 <a name="140"><span class="lineNum">     140 </span><span class="lineCov">         89 : void Dc2Dc::setCalibration(float value) {</span></a>
@@ -215,30 +215,30 @@
 <a name="145"><span class="lineNum">     145 </span><span class="lineCov">          6 :     return calibration_;</span></a>
 <a name="146"><span class="lineNum">     146 </span>            : }</a>
 <a name="147"><span class="lineNum">     147 </span>            : </a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineCov">     226213 : void Dc2Dc::adjust() {</span></a>
-<a name="149"><span class="lineNum">     149 </span><span class="lineCov">     226213 :     if (!isRunning()) {</span></a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">          3 :         vActual_ = 0.0f;</span></a>
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          3 :         dutyActual_ = 0.0f;</span></a>
-<a name="152"><span class="lineNum">     152 </span><span class="lineCov">          3 :         return;</span></a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">     224885 : void Dc2Dc::adjust() {</span></a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">     224885 :     if (!isRunning()) {</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">          5 :         vActual_ = 0.0f;</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          5 :         dutyActual_ = 0.0f;</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">          5 :         return;</span></a>
 <a name="153"><span class="lineNum">     153 </span>            :     }</a>
-<a name="154"><span class="lineNum">     154 </span><span class="lineCov">     226210 :     vActual_ = measureV_();</span></a>
-<a name="155"><span class="lineNum">     155 </span><span class="lineCov">     226210 :     float duty = dutyActual_;</span></a>
-<a name="156"><span class="lineNum">     156 </span><span class="lineCov">     226210 :     float vTargetMin = vTarget_ * (1.0f - config_.vTolerance);</span></a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">     226210 :     float vTargetMax = vTarget_ * (1.0f + config_.vTolerance);</span></a>
-<a name="158"><span class="lineNum">     158 </span><span class="lineCov">     226210 :     if (vActual_ &lt; vTargetMin * (1.0f - config_.pwmToleranceToFast)) {</span></a>
-<a name="159"><span class="lineNum">     159 </span><span class="lineCov">       1766 :         duty += config_.pwmFastStepDuty;</span></a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">     224444 :     } else if (vActual_ &gt; vTargetMax * (1.0f + config_.pwmToleranceToFast)) {</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">     220889 :         duty -= config_.pwmFastStepDuty;</span></a>
-<a name="162"><span class="lineNum">     162 </span><span class="lineCov">       3555 :     } else if (vActual_ &lt; vTargetMin) {</span></a>
-<a name="163"><span class="lineNum">     163 </span><span class="lineCov">       1766 :         duty += config_.pwmSlowStepDuty;</span></a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineCov">       1789 :     } else if (vActual_ &gt; vTargetMax) {</span></a>
-<a name="165"><span class="lineNum">     165 </span><span class="lineCov">       1764 :         duty -= config_.pwmSlowStepDuty;</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">     224880 :     vActual_ = measureV_();</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">     224880 :     float duty = dutyActual_;</span></a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">     224880 :     float vTargetMin = vTarget_ * (1.0f - config_.vTolerance);</span></a>
+<a name="157"><span class="lineNum">     157 </span><span class="lineCov">     224880 :     float vTargetMax = vTarget_ * (1.0f + config_.vTolerance);</span></a>
+<a name="158"><span class="lineNum">     158 </span><span class="lineCov">     224880 :     if (vActual_ &lt; vTargetMin * (1.0f - config_.pwmToleranceToFast)) {</span></a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">       1758 :         duty += config_.pwmFastStepDuty;</span></a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">     223122 :     } else if (vActual_ &gt; vTargetMax * (1.0f + config_.pwmToleranceToFast)) {</span></a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">     219585 :         duty -= config_.pwmFastStepDuty;</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">       3537 :     } else if (vActual_ &lt; vTargetMin) {</span></a>
+<a name="163"><span class="lineNum">     163 </span><span class="lineCov">       1757 :         duty += config_.pwmSlowStepDuty;</span></a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">       1780 :     } else if (vActual_ &gt; vTargetMax) {</span></a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">       1756 :         duty -= config_.pwmSlowStepDuty;</span></a>
 <a name="166"><span class="lineNum">     166 </span>            :     }</a>
-<a name="167"><span class="lineNum">     167 </span><span class="lineCov">     226210 :     if (duty &gt; config_.pwmMaxDuty) { duty = config_.pwmMaxDuty; }</span></a>
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">     226210 :     if (duty &lt; config_.pwmMinDuty) { duty = config_.pwmMinDuty; }</span></a>
-<a name="169"><span class="lineNum">     169 </span><span class="lineCov">     226210 :     if (duty != dutyActual_) {</span></a>
-<a name="170"><span class="lineNum">     170 </span><span class="lineCov">       1971 :         dutyActual_ = duty;</span></a>
-<a name="171"><span class="lineNum">     171 </span><span class="lineCov">       1971 :         pwm_-&gt;setDuty(dutyActual_);</span></a>
+<a name="167"><span class="lineNum">     167 </span><span class="lineCov">     224880 :     if (duty &gt; config_.pwmMaxDuty) { duty = config_.pwmMaxDuty; }</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">     224880 :     if (duty &lt; config_.pwmMinDuty) { duty = config_.pwmMinDuty; }</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">     224880 :     if (duty != dutyActual_) {</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">       1965 :         dutyActual_ = duty;</span></a>
+<a name="171"><span class="lineNum">     171 </span><span class="lineCov">       1965 :         pwm_-&gt;setDuty(dutyActual_);</span></a>
 <a name="172"><span class="lineNum">     172 </span>            :     }</a>
 <a name="173"><span class="lineNum">     173 </span>            : }</a>
 <a name="174"><span class="lineNum">     174 </span>            : </a>
@@ -270,9 +270,9 @@
 <a name="200"><span class="lineNum">     200 </span><span class="lineCov">         56 :             &amp;&amp; config_.adcChannel != 0xFF);</span></a>
 <a name="201"><span class="lineNum">     201 </span>            : }</a>
 <a name="202"><span class="lineNum">     202 </span>            : </a>
-<a name="203"><span class="lineNum">     203 </span><span class="lineCov">     226210 : float Dc2Dc::measureV_() const {</span></a>
-<a name="204"><span class="lineNum">     204 </span><span class="lineCov">     226210 :     return (adc_-&gt;capture(config_.adcChannel, kDc2DcDefaultAdcBufferSize)</span></a>
-<a name="205"><span class="lineNum">     205 </span><span class="lineCov">     226210 :         * config_.divider + calibration_);</span></a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineCov">     224880 : float Dc2Dc::measureV_() const {</span></a>
+<a name="204"><span class="lineNum">     204 </span><span class="lineCov">     224880 :     return (adc_-&gt;capture(config_.adcChannel, kDc2DcDefaultAdcBufferSize)</span></a>
+<a name="205"><span class="lineNum">     205 </span><span class="lineCov">     224880 :         * config_.divider + calibration_);</span></a>
 <a name="206"><span class="lineNum">     206 </span>            : }</a>
 </pre>
       </td>

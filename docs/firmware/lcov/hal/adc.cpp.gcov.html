@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - "38959e8" - hal/adc.cpp</title>
+  <title>LCOV - "afc6460" - hal/adc.cpp</title>
   <link rel="stylesheet" type="text/css" href="../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">&quot;38959e8&quot;</td>
+            <td class="headerValue">&quot;afc6460&quot;</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">45</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-14 14:29:56</td>
+            <td class="headerValue">2024-01-17 17:42:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">8</td>
@@ -120,14 +120,14 @@
 <a name="50"><span class="lineNum">      50 </span><span class="lineCov">          2 :     return calculate_(adc_read());</span></a>
 <a name="51"><span class="lineNum">      51 </span>            : }</a>
 <a name="52"><span class="lineNum">      52 </span>            : </a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineCov">     226211 : float Adc::capture(uint channel, size_t size) {</span></a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineCov">     226211 :     if (!size || !initChannel_(channel)) {</span></a>
+<a name="53"><span class="lineNum">      53 </span><span class="lineCov">     224881 : float Adc::capture(uint channel, size_t size) {</span></a>
+<a name="54"><span class="lineNum">      54 </span><span class="lineCov">     224881 :     if (!size || !initChannel_(channel)) {</span></a>
 <a name="55"><span class="lineNum">      55 </span><span class="lineNoCov">          0 :         return -1.0f;</span></a>
 <a name="56"><span class="lineNum">      56 </span>            :     }</a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineCov">     226211 :     adc_select_input(channel);</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">     226211 :     std::vector&lt;uint16_t&gt; raw(size);</span></a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">     226211 :     return calculate_(adc_capture(channel, raw.data(), size));</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">     226211 : }</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">     224881 :     adc_select_input(channel);</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">     224881 :     std::vector&lt;uint16_t&gt; raw(size);</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">     224881 :     return calculate_(adc_capture(channel, raw.data(), size));</span></a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineCov">     224881 : }</span></a>
 <a name="61"><span class="lineNum">      61 </span>            : </a>
 <a name="62"><span class="lineNum">      62 </span><span class="lineCov">          1 : float Adc::capture(uint channel, float *buf, size_t size) {</span></a>
 <a name="63"><span class="lineNum">      63 </span><span class="lineCov">          1 :     if (!size || !buf || !initChannel_(channel)) {</span></a>
@@ -142,12 +142,12 @@
 <a name="72"><span class="lineNum">      72 </span><span class="lineCov">          1 :     return result;</span></a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">          1 : }</span></a>
 <a name="74"><span class="lineNum">      74 </span>            : </a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">     226214 : bool Adc::initChannel_(uint channel) {</span></a>
-<a name="76"><span class="lineNum">      76 </span><span class="lineCov">     226214 :     if (channel &gt; kAdcMaxChannel) {</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">     224884 : bool Adc::initChannel_(uint channel) {</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">     224884 :     if (channel &gt; kAdcMaxChannel) {</span></a>
 <a name="77"><span class="lineNum">      77 </span><span class="lineNoCov">          0 :         return false;</span></a>
 <a name="78"><span class="lineNum">      78 </span>            :     }</a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">     226214 :     if (initChannels_.find(channel) != initChannels_.end()) {</span></a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineCov">     226203 :         return true;</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">     224884 :     if (initChannels_.find(channel) != initChannels_.end()) {</span></a>
+<a name="80"><span class="lineNum">      80 </span><span class="lineCov">     224873 :         return true;</span></a>
 <a name="81"><span class="lineNum">      81 </span>            :     }</a>
 <a name="82"><span class="lineNum">      82 </span>            :     // Make sure GPIO is high-impedance, no pullups etc</a>
 <a name="83"><span class="lineNum">      83 </span><span class="lineCov">         11 :     adc_gpio_init(channel + kGpioPinAdcChannel0);</span></a>
@@ -155,26 +155,26 @@
 <a name="85"><span class="lineNum">      85 </span><span class="lineCov">         11 :     return true;</span></a>
 <a name="86"><span class="lineNum">      86 </span>            : }</a>
 <a name="87"><span class="lineNum">      87 </span>            : </a>
-<a name="88"><span class="lineNum">      88 </span><span class="lineCov">     226726 : float Adc::calculate_(uint16_t value) const {</span></a>
-<a name="89"><span class="lineNum">      89 </span><span class="lineCov">     226726 :     float result = value * vref_ / (1 &lt;&lt; 12);</span></a>
-<a name="90"><span class="lineNum">      90 </span><span class="lineCov">     226726 :     return result;</span></a>
+<a name="88"><span class="lineNum">      88 </span><span class="lineCov">     225396 : float Adc::calculate_(uint16_t value) const {</span></a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">     225396 :     float result = value * vref_ / (1 &lt;&lt; 12);</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">     225396 :     return result;</span></a>
 <a name="91"><span class="lineNum">      91 </span>            : }</a>
 <a name="92"><span class="lineNum">      92 </span>            : </a>
 <a name="93"><span class="lineNum">      93 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="94"><span class="lineNum">      94 </span>            : </a>
 <a name="95"><span class="lineNum">      95 </span>            : /** @cond */</a>
-<a name="96"><span class="lineNum">      96 </span><span class="lineCov">     226212 : float __not_in_flash_func(adc_capture)(uint channel, uint16_t *buf,</span></a>
+<a name="96"><span class="lineNum">      96 </span><span class="lineCov">     224882 : float __not_in_flash_func(adc_capture)(uint channel, uint16_t *buf,</span></a>
 <a name="97"><span class="lineNum">      97 </span>            :                                        size_t size) {</a>
-<a name="98"><span class="lineNum">      98 </span><span class="lineCov">     226212 :     adc_fifo_setup(true, false, 0, false, false);</span></a>
-<a name="99"><span class="lineNum">      99 </span><span class="lineCov">     226212 :     adc_run(true);</span></a>
-<a name="100"><span class="lineNum">     100 </span><span class="lineCov">     226212 :     float mbuf = 0.0f;</span></a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineCov">  226437748 :     for (int i = 0; i &lt; size; i = i + 1) {</span></a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">  226211536 :         buf[i] = adc_fifo_get_blocking();</span></a>
-<a name="103"><span class="lineNum">     103 </span><span class="lineCov">  226211536 :         mbuf += buf[i];</span></a>
+<a name="98"><span class="lineNum">      98 </span><span class="lineCov">     224882 :     adc_fifo_setup(true, false, 0, false, false);</span></a>
+<a name="99"><span class="lineNum">      99 </span><span class="lineCov">     224882 :     adc_run(true);</span></a>
+<a name="100"><span class="lineNum">     100 </span><span class="lineCov">     224882 :     float mbuf = 0.0f;</span></a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">  225106418 :     for (int i = 0; i &lt; size; i = i + 1) {</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">  224881536 :         buf[i] = adc_fifo_get_blocking();</span></a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">  224881536 :         mbuf += buf[i];</span></a>
 <a name="104"><span class="lineNum">     104 </span>            :     }</a>
-<a name="105"><span class="lineNum">     105 </span><span class="lineCov">     226212 :     adc_run(false);</span></a>
-<a name="106"><span class="lineNum">     106 </span><span class="lineCov">     226212 :     adc_fifo_drain();</span></a>
-<a name="107"><span class="lineNum">     107 </span><span class="lineCov">     226212 :     return (mbuf / size);</span></a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">     224882 :     adc_run(false);</span></a>
+<a name="106"><span class="lineNum">     106 </span><span class="lineCov">     224882 :     adc_fifo_drain();</span></a>
+<a name="107"><span class="lineNum">     107 </span><span class="lineCov">     224882 :     return (mbuf / size);</span></a>
 <a name="108"><span class="lineNum">     108 </span>            : }</a>
 <a name="109"><span class="lineNum">     109 </span>            : /** @endcond */</a>
 </pre>

@@ -9,6 +9,8 @@ A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to
 [![Test Firmware][test-firmware-shield]][test-firmware-url]
 [![CodeQL][codeql-shield]][codeql-url]
 
+![Screenshot](images/screenshot-v0.2a.png)
+
 ## Contents
 
 * [About the Project](#about-the-project)
@@ -114,6 +116,10 @@ Please read [CONTRIBUTING](https://github.com/robsonsmartins/usbflashprog/blob/m
 Distributed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa]. 
 
 See [LICENSE](https://github.com/robsonsmartins/usbflashprog/blob/main/LICENSE) file for more information.
+
+Some components used in this project are available under other licenses. Check each license file distributed with third-party components.
+
+Some brands mentioned are registered and are the property of the respective deteiners/manufacturers.
 
 The same "Terms and Conditions" and "Privacy Policy" of the [Robson Martins Home Page](https://www.robsonmartins.com) apply here:
 

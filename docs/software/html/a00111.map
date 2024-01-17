@@ -1,11 +1,12 @@
 <map id="chip.cpp" name="chip.cpp">
-<area shape="rect" id="node1" title="Implementation of Chip Emulation Base Classes." alt="" coords="344,5,420,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,80,156,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="180,80,323,107"/>
-<area shape="rect" id="node4" title=" " alt="" coords="347,80,417,107"/>
-<area shape="rect" id="node5" href="$a00113.html" title="Header of Chip Emulation Base Classes." alt="" coords="442,80,519,107"/>
-<area shape="rect" id="node9" title=" " alt="" coords="543,80,626,107"/>
-<area shape="rect" id="node6" title=" " alt="" coords="360,155,423,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="447,155,514,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="539,155,609,181"/>
+<area shape="rect" id="node1" title="Implementation of Chip Emulation Base Classes." alt="" coords="365,5,441,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,67,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="91,80,242,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="266,80,409,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="433,80,503,107"/>
+<area shape="rect" id="node6" href="$a00113.html" title="Header of Chip Emulation Base Classes." alt="" coords="528,80,605,107"/>
+<area shape="rect" id="node10" title=" " alt="" coords="629,80,712,107"/>
+<area shape="rect" id="node7" title=" " alt="" coords="446,155,509,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="533,155,600,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="625,155,695,181"/>
 </map>

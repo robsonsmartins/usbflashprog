@@ -82,13 +82,13 @@ Inheritance diagram for EPROM:</div>
 <div class="dyncontent">
 <div class="center"><img src="a00985.png" border="0" usemap="#aEPROM_inherit__map" alt="Inheritance graph"/></div>
 <map name="aEPROM_inherit__map" id="aEPROM_inherit__map">
-<area shape="rect" title="Parallel EPROM Class." alt="" coords="79,769,202,949"/>
+<area shape="rect" title="Parallel EPROM Class." alt="" coords="88,843,193,949"/>
 <area shape="rect" href="a00990.html" title="Parallel EPROM 27xxx (NMOS) Class." alt="" coords="5,997,127,1089"/>
 <area shape="rect" href="a00994.html" title="Parallel EPROM 27Cxxx (CMOS) Class." alt="" coords="151,997,282,1089"/>
-<area shape="rect" href="a01006.html" title="Parallel Device Base Class." alt="" coords="42,424,239,721"/>
+<area shape="rect" href="a01006.html" title="Parallel Device Base Class." alt="" coords="42,424,239,795"/>
 <area shape="rect" href="a00974.html" title="Device Base Class." alt="" coords="59,5,222,376"/>
-<area shape="rect" href="a00998.html" title="Parallel EPROM 27Cxxx 16Bit (CMOS) Class." alt="" coords="44,1159,208,1251"/>
-<area shape="rect" href="a01002.html" title="Parallel EPROM W27Exxx Class." alt="" coords="232,1137,385,1273"/>
+<area shape="rect" href="a00998.html" title="Parallel EPROM 27Cxxx 16Bit (CMOS) Class." alt="" coords="49,1137,213,1229"/>
+<area shape="rect" href="a01002.html" title="Parallel EPROM W27Exxx Class." alt="" coords="237,1137,367,1229"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -109,20 +109,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab11f392ccca895305587946e122b4aed"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00986.html#ab11f392ccca895305587946e122b4aed">setSize</a> (uint32_t value)</td></tr>
 <tr class="memdesc:ab11f392ccca895305587946e122b4aed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the device size.  <a href="a00986.html#ab11f392ccca895305587946e122b4aed">More...</a><br /></td></tr>
 <tr class="separator:ab11f392ccca895305587946e122b4aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2e6abd0442f83e56a0f26289557f43e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00986.html#ab2e6abd0442f83e56a0f26289557f43e">read</a> (QByteArray &amp;buffer)</td></tr>
-<tr class="memdesc:ab2e6abd0442f83e56a0f26289557f43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a00986.html#ab2e6abd0442f83e56a0f26289557f43e">More...</a><br /></td></tr>
+<tr class="memitem:ab2e6abd0442f83e56a0f26289557f43e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#ab2e6abd0442f83e56a0f26289557f43e">read</a> (QByteArray &amp;buffer)</td></tr>
+<tr class="memdesc:ab2e6abd0442f83e56a0f26289557f43e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a01006.html#ab2e6abd0442f83e56a0f26289557f43e">More...</a><br /></td></tr>
 <tr class="separator:ab2e6abd0442f83e56a0f26289557f43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a799925db4676fdcefbc65078f63b860a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00986.html#a799925db4676fdcefbc65078f63b860a">program</a> (const QByteArray &amp;buffer, bool <a class="el" href="a00986.html#a3d6090bc1c80e2c37792bdf057113a04">verify</a>=false)</td></tr>
-<tr class="memdesc:a799925db4676fdcefbc65078f63b860a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a00986.html#a799925db4676fdcefbc65078f63b860a">More...</a><br /></td></tr>
+<tr class="memitem:a799925db4676fdcefbc65078f63b860a"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a799925db4676fdcefbc65078f63b860a">program</a> (const QByteArray &amp;buffer, bool <a class="el" href="a01006.html#a3d6090bc1c80e2c37792bdf057113a04">verify</a>=false)</td></tr>
+<tr class="memdesc:a799925db4676fdcefbc65078f63b860a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a01006.html#a799925db4676fdcefbc65078f63b860a">More...</a><br /></td></tr>
 <tr class="separator:a799925db4676fdcefbc65078f63b860a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3d6090bc1c80e2c37792bdf057113a04"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00986.html#a3d6090bc1c80e2c37792bdf057113a04">verify</a> (const QByteArray &amp;buffer)</td></tr>
-<tr class="memdesc:a3d6090bc1c80e2c37792bdf057113a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a00986.html#a3d6090bc1c80e2c37792bdf057113a04">More...</a><br /></td></tr>
+<tr class="memitem:a3d6090bc1c80e2c37792bdf057113a04"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a3d6090bc1c80e2c37792bdf057113a04">verify</a> (const QByteArray &amp;buffer)</td></tr>
+<tr class="memdesc:a3d6090bc1c80e2c37792bdf057113a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a01006.html#a3d6090bc1c80e2c37792bdf057113a04">More...</a><br /></td></tr>
 <tr class="separator:a3d6090bc1c80e2c37792bdf057113a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae7becb0d7629ccaaef28c25adbf3d543"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00986.html#ae7becb0d7629ccaaef28c25adbf3d543">blankCheck</a> ()</td></tr>
-<tr class="memdesc:ae7becb0d7629ccaaef28c25adbf3d543"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the <a class="el" href="a00974.html" title="Device Base Class.">Device</a> is blank.  <a href="a00986.html#ae7becb0d7629ccaaef28c25adbf3d543">More...</a><br /></td></tr>
+<tr class="memitem:af4e5a226802d72489f995a015e4a3305"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#af4e5a226802d72489f995a015e4a3305">erase</a> (bool check=false)</td></tr>
+<tr class="memdesc:af4e5a226802d72489f995a015e4a3305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a01006.html#af4e5a226802d72489f995a015e4a3305">More...</a><br /></td></tr>
+<tr class="separator:af4e5a226802d72489f995a015e4a3305"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7becb0d7629ccaaef28c25adbf3d543"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#ae7becb0d7629ccaaef28c25adbf3d543">blankCheck</a> ()</td></tr>
+<tr class="memdesc:ae7becb0d7629ccaaef28c25adbf3d543"><td class="mdescLeft">&#160;</td><td class="mdescRight">Verifies if the <a class="el" href="a00974.html" title="Device Base Class.">Device</a> is blank.  <a href="a01006.html#ae7becb0d7629ccaaef28c25adbf3d543">More...</a><br /></td></tr>
 <tr class="separator:ae7becb0d7629ccaaef28c25adbf3d543"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fa67aab3166fd24509d54dfaa5b803d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00986.html#a8fa67aab3166fd24509d54dfaa5b803d">getId</a> (<a class="el" href="a00962.html">TDeviceID</a> &amp;result)</td></tr>
-<tr class="memdesc:a8fa67aab3166fd24509d54dfaa5b803d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="a00974.html" title="Device Base Class.">Device</a> ID.  <a href="a00986.html#a8fa67aab3166fd24509d54dfaa5b803d">More...</a><br /></td></tr>
+<tr class="memitem:a8fa67aab3166fd24509d54dfaa5b803d"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a8fa67aab3166fd24509d54dfaa5b803d">getId</a> (<a class="el" href="a00962.html">TDeviceID</a> &amp;result)</td></tr>
+<tr class="memdesc:a8fa67aab3166fd24509d54dfaa5b803d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the <a class="el" href="a00974.html" title="Device Base Class.">Device</a> ID.  <a href="a01006.html#a8fa67aab3166fd24509d54dfaa5b803d">More...</a><br /></td></tr>
 <tr class="separator:a8fa67aab3166fd24509d54dfaa5b803d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33cb145a5621041674597603b619d1da"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00974.html#a33cb145a5621041674597603b619d1da">is16Bit</a> () const</td></tr>
 <tr class="memdesc:a33cb145a5621041674597603b619d1da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns if device is 16-Bit.  <a href="a00974.html#a33cb145a5621041674597603b619d1da">More...</a><br /></td></tr>
@@ -196,19 +199,20 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a02d5fa6b14e221f3012a794b905be166"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00974.html#a02d5fa6b14e221f3012a794b905be166">cancel</a> ()</td></tr>
 <tr class="memdesc:a02d5fa6b14e221f3012a794b905be166"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancels the active operation (if any).  <a href="a00974.html#a02d5fa6b14e221f3012a794b905be166">More...</a><br /></td></tr>
 <tr class="separator:a02d5fa6b14e221f3012a794b905be166"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4e5a226802d72489f995a015e4a3305"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00974.html#af4e5a226802d72489f995a015e4a3305">erase</a> (bool check=false)</td></tr>
-<tr class="memdesc:af4e5a226802d72489f995a015e4a3305"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erases the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a00974.html#af4e5a226802d72489f995a015e4a3305">More...</a><br /></td></tr>
-<tr class="separator:af4e5a226802d72489f995a015e4a3305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca783e40e70784fb52389b414965d3eb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00974.html#aca783e40e70784fb52389b414965d3eb">unprotect</a> ()</td></tr>
 <tr class="memdesc:aca783e40e70784fb52389b414965d3eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unprotects the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a00974.html#aca783e40e70784fb52389b414965d3eb">More...</a><br /></td></tr>
 <tr class="separator:aca783e40e70784fb52389b414965d3eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-types"></a>
 Protected Types</h2></td></tr>
-<tr class="memitem:a4ce040dc01f012bccf9248438de67cf2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2">kDeviceOperation</a> { <a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2ad30676a036a31cdd864e3132ad8ccb0b">kDeviceOpRead</a>
+<tr class="memitem:a4ce040dc01f012bccf9248438de67cf2"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2">kDeviceOperation</a> { <br />
+&#160;&#160;<a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2a72d9e0f2143fa0ca2b86130269dcc914">kDeviceOpReset</a>
+, <a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2ad30676a036a31cdd864e3132ad8ccb0b">kDeviceOpRead</a>
 , <a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2a89b84d459b52ef31d8e2c5d5b615add6">kDeviceOpProg</a>
 , <a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2aee3f9d8c438ce0ce2cbdc9a984db9d21">kDeviceOpErase</a>
-, <a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2af2fe89a40fe1b84f906a4113592f62da">kDeviceOpGetId</a>
+, <br />
+&#160;&#160;<a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2af2fe89a40fe1b84f906a4113592f62da">kDeviceOpGetId</a>
+<br />
  }</td></tr>
 <tr class="memdesc:a4ce040dc01f012bccf9248438de67cf2"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00974.html" title="Device Base Class.">Device</a> Operation.  <a href="a01006.html#a4ce040dc01f012bccf9248438de67cf2">More...</a><br /></td></tr>
 <tr class="separator:a4ce040dc01f012bccf9248438de67cf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,6 +228,12 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a5b5d76fdc8ed99ba2c1322cc542d374f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a5b5d76fdc8ed99ba2c1322cc542d374f">readDevice</a> (QByteArray &amp;buffer)</td></tr>
 <tr class="memdesc:a5b5d76fdc8ed99ba2c1322cc542d374f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the device.  <a href="a01006.html#a5b5d76fdc8ed99ba2c1322cc542d374f">More...</a><br /></td></tr>
 <tr class="separator:a5b5d76fdc8ed99ba2c1322cc542d374f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfb6d440e137689dcf7573b98d352c85"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#adfb6d440e137689dcf7573b98d352c85">getIdDevice</a> (<a class="el" href="a00962.html">TDeviceID</a> &amp;deviceId)</td></tr>
+<tr class="memdesc:adfb6d440e137689dcf7573b98d352c85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get ID of the device.  <a href="a01006.html#adfb6d440e137689dcf7573b98d352c85">More...</a><br /></td></tr>
+<tr class="separator:adfb6d440e137689dcf7573b98d352c85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b7f7bfb3464ffbd4ddd4f5f4127d1a5"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#a5b7f7bfb3464ffbd4ddd4f5f4127d1a5">eraseDevice</a> ()</td></tr>
+<tr class="memdesc:a5b7f7bfb3464ffbd4ddd4f5f4127d1a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erase the device.  <a href="a01006.html#a5b7f7bfb3464ffbd4ddd4f5f4127d1a5">More...</a><br /></td></tr>
+<tr class="separator:a5b7f7bfb3464ffbd4ddd4f5f4127d1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebf58b7872e4f737117e646baf4f845c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01006.html#aebf58b7872e4f737117e646baf4f845c">initDevice</a> (<a class="el" href="a01006.html#a4ce040dc01f012bccf9248438de67cf2">kDeviceOperation</a> operation)</td></tr>
 <tr class="memdesc:aebf58b7872e4f737117e646baf4f845c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open and init resources.  <a href="a01006.html#aebf58b7872e4f737117e646baf4f845c">More...</a><br /></td></tr>
 <tr class="separator:aebf58b7872e4f737117e646baf4f845c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -260,7 +270,9 @@ Protected Member Functions</h2></td></tr>
 
 <p><a class="el" href="a00974.html" title="Device Base Class.">Device</a> Operation. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4ce040dc01f012bccf9248438de67cf2ad30676a036a31cdd864e3132ad8ccb0b"></a>kDeviceOpRead&#160;</td><td class="fielddoc"><p><a class="el" href="a00974.html" title="Device Base Class.">Device</a> Read Operation. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a4ce040dc01f012bccf9248438de67cf2a72d9e0f2143fa0ca2b86130269dcc914"></a>kDeviceOpReset&#160;</td><td class="fielddoc"><p><a class="el" href="a00974.html" title="Device Base Class.">Device</a> Reset Operation. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4ce040dc01f012bccf9248438de67cf2ad30676a036a31cdd864e3132ad8ccb0b"></a>kDeviceOpRead&#160;</td><td class="fielddoc"><p><a class="el" href="a00974.html" title="Device Base Class.">Device</a> Read Operation. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a4ce040dc01f012bccf9248438de67cf2a89b84d459b52ef31d8e2c5d5b615add6"></a>kDeviceOpProg&#160;</td><td class="fielddoc"><p><a class="el" href="a00974.html" title="Device Base Class.">Device</a> Prog Operation. </p>
 </td></tr>
@@ -390,7 +402,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -437,7 +449,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -453,6 +465,8 @@ Protected Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="a00974.html#a799925db4676fdcefbc65078f63b860a">Device</a>.</p>
+
+<p>Reimplemented in <a class="el" href="a01010.html#a799925db4676fdcefbc65078f63b860a">SRAM</a>.</p>
 
 </div>
 </div>
@@ -475,7 +489,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -490,6 +504,43 @@ Protected Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="a00974.html#a3d6090bc1c80e2c37792bdf057113a04">Device</a>.</p>
+
+</div>
+</div>
+<a id="af4e5a226802d72489f995a015e4a3305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4e5a226802d72489f995a015e4a3305">&#9670;&nbsp;</a></span>erase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool erase </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>check</em> = <code>false</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Erases the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">check</td><td>If true, calls <a class="el" href="a00974.html#ae7becb0d7629ccaaef28c25adbf3d543" title="Verifies if the Device is blank.">Device::blankCheck()</a> after erase. Default is false. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="a00974.html#af4e5a226802d72489f995a015e4a3305">Device</a>.</p>
 
 </div>
 </div>
@@ -511,7 +562,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -542,7 +593,7 @@ Protected Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -665,6 +716,69 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="adfb6d440e137689dcf7573b98d352c85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfb6d440e137689dcf7573b98d352c85">&#9670;&nbsp;</a></span>getIdDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool getIdDevice </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="a00962.html">TDeviceID</a> &amp;&#160;</td>
+          <td class="paramname"><em>deviceId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get ID of the device. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">deviceId[out]</td><td><a class="el" href="a00974.html" title="Device Base Class.">Device</a> ID to get. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+</div>
+</div>
+<a id="a5b7f7bfb3464ffbd4ddd4f5f4127d1a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b7f7bfb3464ffbd4ddd4f5f4127d1a5">&#9670;&nbsp;</a></span>eraseDevice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool eraseDevice </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Erase the device. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
+
+</div>
+</div>
 <a id="aebf58b7872e4f737117e646baf4f845c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aebf58b7872e4f737117e646baf4f845c">&#9670;&nbsp;</a></span>initDevice()</h2>
 
@@ -697,8 +811,6 @@ Protected Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
-
-<p>Reimplemented in <a class="el" href="a01002.html#aebf58b7872e4f737117e646baf4f845c">EPROM27E</a>.</p>
 
 </div>
 </div>
@@ -1524,43 +1636,6 @@ Protected Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cancels the active operation (if any). </p>
-
-</div>
-</div>
-<a id="af4e5a226802d72489f995a015e4a3305"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4e5a226802d72489f995a015e4a3305">&#9670;&nbsp;</a></span>erase()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool erase </td>
-          <td>(</td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>check</em> = <code>false</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Erases the <a class="el" href="a00974.html" title="Device Base Class.">Device</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">check</td><td>If true, calls <a class="el" href="a00974.html#ae7becb0d7629ccaaef28c25adbf3d543" title="Verifies if the Device is blank.">Device::blankCheck()</a> after erase. Default is false. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>True if success, false otherwise. </dd></dl>
-
-<p>Reimplemented in <a class="el" href="a01002.html#af4e5a226802d72489f995a015e4a3305">EPROM27E</a>, and <a class="el" href="a00978.html#af4e5a226802d72489f995a015e4a3305">Dummy</a>.</p>
 
 </div>
 </div>

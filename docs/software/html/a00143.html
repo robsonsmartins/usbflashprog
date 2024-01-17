@@ -340,13 +340,17 @@ Enumerations</h2></td></tr>
 , <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a4b0ea9cb34e4f0704d50e935a02cc9e1">kCmdDeviceSetTwc</a> = 0x82
 , <br />
 &#160;&#160;<a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17adf30e3586be60d923119031d1a208a03">kCmdDeviceSetFlags</a> = 0x83
-, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a65b90d65436925948bacf84f52143559">kCmdDeviceRead</a> = 0x84
-, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17acefe6b6d4846827a9e223db9a5aa3d73">kCmdDeviceReadB</a> = 0x85
-, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a0d7b7b9049c6ddfe769989c61b395bfc">kCmdDeviceWrite</a> = 0x86
+, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17aa536fda169aa2da5ed353df1818ef9de">kCmdDeviceSetupBus</a> = 0x84
+, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a65b90d65436925948bacf84f52143559">kCmdDeviceRead</a> = 0x85
+, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17acefe6b6d4846827a9e223db9a5aa3d73">kCmdDeviceReadB</a> = 0x86
 , <br />
-&#160;&#160;<a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17ae4c4d7f8c203369cee387e8e15bdf693">kCmdDeviceWriteB</a> = 0x87
-, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a44df96ac29286368eb7719248bddae3f">kCmdDeviceVerify</a> = 0x88
-, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17ac4cc34e0a0a2714cfce03fd787a3611c">kCmdDeviceVerifyB</a> = 0x89
+&#160;&#160;<a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a0d7b7b9049c6ddfe769989c61b395bfc">kCmdDeviceWrite</a> = 0x87
+, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17ae4c4d7f8c203369cee387e8e15bdf693">kCmdDeviceWriteB</a> = 0x88
+, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a44df96ac29286368eb7719248bddae3f">kCmdDeviceVerify</a> = 0x89
+, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17ac4cc34e0a0a2714cfce03fd787a3611c">kCmdDeviceVerifyB</a> = 0x8A
+, <br />
+&#160;&#160;<a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17a3d54c911ba6670fa09adf5945cc1ccd7">kCmdDeviceGetId</a> = 0x8B
+, <a class="el" href="a00143.html#gga9d169aaae39d9f86c725f5ee0fccec17aac903462659bc52c88be9e76ce658014">kCmdDeviceErase</a> = 0x8C
 <br />
  }</td></tr>
 <tr class="memdesc:ga9d169aaae39d9f86c725f5ee0fccec17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of the OpCodes.  <a href="a00143.html#ga9d169aaae39d9f86c725f5ee0fccec17">More...</a><br /></td></tr>
@@ -525,7 +529,7 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a4b0ea9cb34e4f0704d50e935a02cc9e1"></a>kCmdDeviceSetTwc&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Set tWC. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17adf30e3586be60d923119031d1a208a03"></a>kCmdDeviceSetFlags&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Set Flags. </p>
-<p>The parameter (one byte) that represents the flags follows the table: </p><pre>
+<p>The parameter (one byte) represents the flags, and follows the table: </p><pre>
 +----------------------+
 |Bit| Description      |
 | 0 | Skip Write 0xFF  |
@@ -535,17 +539,37 @@ Enumerations</h2></td></tr>
 | 4 | PGM positive     |
 +----------------------+
 </pre> </td></tr>
-<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a65b90d65436925948bacf84f52143559"></a>kCmdDeviceRead&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Read and Increment Address. </p>
+<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17aa536fda169aa2da5ed353df1818ef9de"></a>kCmdDeviceSetupBus&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Setup Bus. </p>
+<p>The parameter (one byte) represents the operation, and follows the table: </p><pre>
++-----------------------------------------+
+|Operation| Description                   |
+|  0x00   | Reset Bus (VDD/VPP ignored)   |
+|  0x01   | Prepare to Read (VPP ignored) |
+|  0x02   | Prepare to Program            |
++-----------------------------------------+
+</pre> <dl class="section see"><dt>See also</dt><dd><a class="el" href="a00071.html#adf6d651a11eee20ee5994083e3b98d77" title="Enumeration of the Device Operations.">kCmdDeviceOperationEnum</a> </dd></dl>
+</td></tr>
+<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a65b90d65436925948bacf84f52143559"></a>kCmdDeviceRead&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Read Word and Increment Address. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17acefe6b6d4846827a9e223db9a5aa3d73"></a>kCmdDeviceReadB&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Read Byte and Increment Address. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a0d7b7b9049c6ddfe769989c61b395bfc"></a>kCmdDeviceWrite&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Write, Verify and Increment Address. </p>
+<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a0d7b7b9049c6ddfe769989c61b395bfc"></a>kCmdDeviceWrite&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Write Word, Verify and Increment Address. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17ae4c4d7f8c203369cee387e8e15bdf693"></a>kCmdDeviceWriteB&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Write Byte, Verify and Increment Address. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a44df96ac29286368eb7719248bddae3f"></a>kCmdDeviceVerify&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Verify and Increment Address. </p>
+<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a44df96ac29286368eb7719248bddae3f"></a>kCmdDeviceVerify&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Verify Word and Increment Address. </p>
 </td></tr>
 <tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17ac4cc34e0a0a2714cfce03fd787a3611c"></a>kCmdDeviceVerifyB&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Verify Byte and Increment Address. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17a3d54c911ba6670fa09adf5945cc1ccd7"></a>kCmdDeviceGetId&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Get ID. </p>
+<p>The result (two bytes) represents Manufacturer/Device ID, following the table: </p><pre>
++-------------------------------+
+|Response      | Description    |
+| First (MSB)  | Manufacurer ID |
+| Second (LSB) | <a class="el" href="a00974.html" title="Device Base Class.">Device</a> ID      |
++-------------------------------+
+</pre> </td></tr>
+<tr><td class="fieldname"><a id="gga9d169aaae39d9f86c725f5ee0fccec17aac903462659bc52c88be9e76ce658014"></a>kCmdDeviceErase&#160;</td><td class="fielddoc"><p>OPCODE / DEVICE : Opcode <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Erase. </p>
 </td></tr>
 </table>
 

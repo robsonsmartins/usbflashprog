@@ -71,6 +71,8 @@ constexpr const char *kSettingGeneralWindowPos = "WindowPos";
 constexpr const char *kSettingGeneralWindowSize = "WindowSize";
 /** @brief SETTING : General / Language. */
 constexpr const char *kSettingGeneralLanguage = "Language";
+/** @brief SETTING : General / Last Directory. */
+constexpr const char *kSettingGeneralLastDir = "LastDir";
 
 /** @brief SETTING : Programmer / Selected Device. */
 constexpr const char *kSettingProgDevice = "Prog/Device";
@@ -148,6 +150,8 @@ typedef struct TApplicationSettings {
     /** @brief The language of the application.
      *    Empty is autodetect (default). */
     QString language;
+    /** @brief The last opened directory. */
+    QString lastDir;
     /** @brief Programmer settings. */
     TProgrammerSettings prog;
 } TApplicationSettings;

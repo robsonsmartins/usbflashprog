@@ -554,6 +554,10 @@
         <source>Device is not blank</source>
         <translation>Device is not blank</translation>
     </message>
+    <message>
+        <source>Device doesn&apos;t support getting ID</source>
+        <translation>Device doesn&apos;t support getting ID</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

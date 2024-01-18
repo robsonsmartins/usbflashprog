@@ -504,6 +504,11 @@ void MainWindow::on_actionGetID_triggered(bool checked) {
                              .arg(deviceId.device, 2, 16, QChar('0'))
                              .toUpper())
                     .leftJustified(kDialogLabelMinLength));
+    } else {
+        progress_->hide();
+        QMessageBox::critical(this, progress_->windowTitle(),
+                              tr("Device doesn't support getting ID")
+                                  .leftJustified(kDialogLabelMinLength));
     }
 }
 
@@ -1671,16 +1676,23 @@ void MainWindow::dataHexToBin_() {
 
 void MainWindow::on_actionOpen_triggered(bool checked) {
     if (hexeditor_->isChanged()) {
-        if (!showDialogFileChanged_()) {
-            return;
-        }
+        if (!showDialogFileChanged_()) return;
     }
+    // load last dir setting
+    QSettings settings;
+    TApplicationSettings app;
+    app.lastDir = settings.value(kSettingGeneralLastDir).toString();
+
     QEpromFile::QEpromFileType type;
     QString filename = QFileDialog::getOpenFileName(
-        this, tr("Open Binary File"), "", getOpenDialogFilter_());
-    if (filename.isEmpty()) {
-        return;
-    }
+        this, tr("Open Binary File"), app.lastDir, getOpenDialogFilter_());
+
+    if (filename.isEmpty()) return;
+
+    // save last dir setting
+    app.lastDir = QFileInfo(filename).absoluteFilePath();
+    settings.setValue(kSettingGeneralLastDir, app.lastDir);
+
     if (!hexeditor_->open(filename)) {
         QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
                               tr("Error reading file \"%1\".")
@@ -1701,17 +1713,30 @@ void MainWindow::on_actionSave_triggered(bool checked) {
                                   .leftJustified(kDialogLabelMinLength));
         return;
     }
+    ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
+    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
+                   QFileInfo(hexeditor_->filename()).fileName());
 }
 
 void MainWindow::on_actionSaveAs_triggered(bool checked) {
     QString selectedFilter;
     QEpromFile::QEpromFileType type;
+
+    // load last dir setting
+    QSettings settings;
+    TApplicationSettings app;
+    app.lastDir = settings.value(kSettingGeneralLastDir).toString();
+
     QString filename =
-        QFileDialog::getSaveFileName(this, tr("Save Binary File"), "",
+        QFileDialog::getSaveFileName(this, tr("Save Binary File"), app.lastDir,
                                      getSaveDialogFilter_(), &selectedFilter);
-    if (filename.isEmpty()) {
-        return;
-    }
+
+    if (filename.isEmpty()) return;
+
+    // save last dir setting
+    app.lastDir = QFileInfo(filename).absoluteFilePath();
+    settings.setValue(kSettingGeneralLastDir, app.lastDir);
+
     type = QEpromFile::typeFromStr(selectedFilter);
     if (!hexeditor_->saveAs(type, filename)) {
         QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
@@ -1720,6 +1745,9 @@ void MainWindow::on_actionSaveAs_triggered(bool checked) {
                                   .leftJustified(kDialogLabelMinLength));
         return;
     }
+    ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
+    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
+                   QFileInfo(filename).fileName());
 }
 
 void MainWindow::on_actionFillFF_triggered(bool checked) {

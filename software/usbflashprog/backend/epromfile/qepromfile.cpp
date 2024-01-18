@@ -28,43 +28,49 @@ QEpromFile::QEpromFile(QObject *parent)
     : QEpromFileBase(parent), eepromFile_(nullptr) {}
 
 QByteArray QEpromFile::read(const QString &filename, qint32 size) {
+    QByteArray result;
     if (QAtmelFile::isReadable(filename)) {
         type_ = EpromFileAtmel;
         eepromFile_.reset(new QAtmelFile());
-        return eepromFile_->read(filename, size);
+        result = eepromFile_->read(filename, size);
     } else if (QSrecFile::isReadable(filename)) {
         type_ = EpromFileSRec;
         eepromFile_.reset(new QSrecFile());
-        return eepromFile_->read(filename, size);
+        result = eepromFile_->read(filename, size);
     } else if (QHexFile::isReadable(filename)) {
         type_ = EpromFileHex;
         eepromFile_.reset(new QHexFile());
-        return eepromFile_->read(filename, size);
+        result = eepromFile_->read(filename, size);
     } else {
         type_ = EpromFileBin;
         eepromFile_.reset(new QBinFile());
-        return eepromFile_->read(filename, size);
+        result = eepromFile_->read(filename, size);
     }
+    filename_ = eepromFile_->getFilename();
+    return result;
 }
 
 bool QEpromFile::write(QEpromFile::QEpromFileType type, const QString &filename,
                        const QByteArray &data) {
     switch (type) {
-    case EpromFileSRec:
-        eepromFile_.reset(new QSrecFile());
-        break;
-    case EpromFileHex:
-        eepromFile_.reset(new QHexFile());
-        break;
-    case EpromFileAtmel:
-        eepromFile_.reset(new QAtmelFile());
-        break;
-    case EpromFileBin:
-    default:
-        eepromFile_.reset(new QBinFile());
-        break;
+        case EpromFileSRec:
+            eepromFile_.reset(new QSrecFile());
+            break;
+        case EpromFileHex:
+            eepromFile_.reset(new QHexFile());
+            break;
+        case EpromFileAtmel:
+            eepromFile_.reset(new QAtmelFile());
+            break;
+        case EpromFileBin:
+        default:
+            eepromFile_.reset(new QBinFile());
+            break;
     }
-    return eepromFile_->write(type, filename, data);
+    bool result = eepromFile_->write(type, filename, data);
+    filename_ = eepromFile_->getFilename();
+    type_ = eepromFile_->getType();
+    return result;
 }
 
 QEpromFile::QEpromFileType QEpromFile::typeFromStr(const QString &src) {

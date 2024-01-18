@@ -553,6 +553,10 @@
         <source>Device is not blank</source>
         <translation>Dispositivo não está vazio</translation>
     </message>
+    <message>
+        <source>Device doesn&apos;t support getting ID</source>
+        <translation>Dispositivo não suporta obtenção de ID</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

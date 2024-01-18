@@ -265,7 +265,15 @@ bool Runner::vddInitCal() {
 bool Runner::vddSaveCal(float value) {
     TRunnerCommand cmd;
     cmd.setFloat(kCmdVddSaveCal, value);
-    if (!sendCommand_(cmd)) return false;
+    // no retry
+    if (!sendCommand_(cmd, 0)) {
+        DEBUG << "Error in vddSaveCal()"
+              << "Trying use vddInitCal() and retrying.";
+        // error, use vddInitCal
+        if (!vddInitCal()) return false;
+        // retry
+        if (!sendCommand_(cmd, 0)) return false;
+    }
     return true;
 }
 
@@ -314,7 +322,15 @@ bool Runner::vppInitCal() {
 bool Runner::vppSaveCal(float value) {
     TRunnerCommand cmd;
     cmd.setFloat(kCmdVppSaveCal, value);
-    if (!sendCommand_(cmd)) return false;
+    // no retry
+    if (!sendCommand_(cmd, 0)) {
+        DEBUG << "Error in vppSaveCal()"
+              << "Trying use vppInitCal() and retrying.";
+        // error, use vppInitCal
+        if (!vppInitCal()) return false;
+        // retry
+        if (!sendCommand_(cmd, 0)) return false;
+    }
     return true;
 }
 

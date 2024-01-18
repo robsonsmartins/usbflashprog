@@ -1250,6 +1250,7 @@ void MainWindow::on_pushButtonConnect_clicked() {
 
 void MainWindow::on_pushButtonVddInitCal_clicked() {
     if (!runner_.isOpen()) return;
+    refreshTimer_.stop();
     enableDiagControls_(false);
     float measured = 0.0f;
     bool ok = runner_.vddInitCal();
@@ -1281,16 +1282,16 @@ void MainWindow::on_pushButtonVddInitCal_clicked() {
     if (!ok) {
         QMessageBox::critical(
             this, tr("USB Flash/EPROM Programmer"),
-            tr("The device has been disconnected from the \"%1\" port.")
-                .arg(runner_.getPath())
-                .leftJustified(kDialogLabelMinLength));
+            tr("Error calibrating VDD").leftJustified(kDialogLabelMinLength));
     }
     enableDiagControls_(true);
+    refreshTimer_.start();
 }
 
 void MainWindow::on_pushButtonVppInitCal_clicked() {
     if (!runner_.isOpen()) return;
     enableDiagControls_(false);
+    refreshTimer_.stop();
     float measured = 0.0f;
     bool ok = runner_.vppInitCal();
     if (ok) {
@@ -1321,11 +1322,10 @@ void MainWindow::on_pushButtonVppInitCal_clicked() {
     if (!ok) {
         QMessageBox::critical(
             this, tr("USB Flash/EPROM Programmer"),
-            tr("The device has been disconnected from the \"%1\" port.")
-                .arg(runner_.getPath())
-                .leftJustified(kDialogLabelMinLength));
+            tr("Error calibrating VPP").leftJustified(kDialogLabelMinLength));
     }
     enableDiagControls_(true);
+    refreshTimer_.start();
 }
 
 void MainWindow::on_pushButtonGetDataW_clicked() {
@@ -1452,7 +1452,6 @@ void MainWindow::onRefreshTimerTimeout() {
 
 void MainWindow::onCheckBoxAddressToggled(bool checked) {
     addressBinToHex_();
-    // sendAddrBus_();
 }
 
 void MainWindow::on_spinBoxAddr_valueChanged(int value) {
@@ -1462,7 +1461,6 @@ void MainWindow::on_spinBoxAddr_valueChanged(int value) {
 
 void MainWindow::onCheckBoxDataToggled(bool checked) {
     dataBinToHex_();
-    // sendDataBus_();
 }
 
 void MainWindow::on_spinBoxData_valueChanged(int value) {

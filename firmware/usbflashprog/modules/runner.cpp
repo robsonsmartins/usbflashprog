@@ -196,9 +196,10 @@ void Runner::runVddCommand_(uint8_t opcode) {
             break;
         case kCmdVddSaveCal:
             v = getParamAsFloat_();
+            serial_.putChar(kCmdResponseOk, true);
             vgen_.vdd.saveCalibration(v);
             vgen_.vdd.setV(kVddInitial);
-            serial_.putChar(kCmdResponseOk);
+            sleep_ms(1);  // 1 ms
             break;
         case kCmdVddOnVpp:
             b = getParamAsBool_();
@@ -255,9 +256,10 @@ void Runner::runVppCommand_(uint8_t opcode) {
             break;
         case kCmdVppSaveCal:
             v = getParamAsFloat_();
+            serial_.putChar(kCmdResponseOk, true);
             vgen_.vpp.saveCalibration(v);
             vgen_.vpp.setV(kVppInitial);
-            serial_.putChar(kCmdResponseOk);
+            sleep_ms(1);  // 1 ms
             break;
         case kCmdVppOnA9:
             b = getParamAsBool_();

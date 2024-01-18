@@ -557,6 +557,14 @@
         <source>Device doesn&apos;t support getting ID</source>
         <translation>Dispositivo não suporta obtenção de ID</translation>
     </message>
+    <message>
+        <source>Error calibrating VDD</source>
+        <translation>Erro na calibração de VDD</translation>
+    </message>
+    <message>
+        <source>Error calibrating VPP</source>
+        <translation>Erro na calibração de VPP</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

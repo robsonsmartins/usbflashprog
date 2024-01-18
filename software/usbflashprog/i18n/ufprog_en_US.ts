@@ -558,6 +558,14 @@
         <source>Device doesn&apos;t support getting ID</source>
         <translation>Device doesn&apos;t support getting ID</translation>
     </message>
+    <message>
+        <source>Error calibrating VDD</source>
+        <translation>Error calibrating VDD</translation>
+    </message>
+    <message>
+        <source>Error calibrating VPP</source>
+        <translation>Error calibrating VPP</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>

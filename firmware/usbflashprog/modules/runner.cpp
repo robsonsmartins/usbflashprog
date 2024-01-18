@@ -760,13 +760,26 @@ bool Runner::deviceGetId_(uint16_t &data) {
     if (!addrBus_.increment()) success = false;
     // Get device data (byte)
     device = dataBus_.readByte();
+
+    // Check if returned values is valid (not false positive)
+    // Prepare to Read
+    if (!deviceSetupBus_(kCmdDeviceOperationRead)) success = false;
+    uint16_t rd1 = 0xFF, rd2 = 0xFF;
+    // Set Address 0x200 (A9 bit on)
+    if (!addrBus_.writeDWord(0x200)) success = false;
+    // Check if equals data at address 0x200/0x201
+    deviceRead_(rd1, false);
+    if (!addrBus_.increment()) success = false;
+    deviceRead_(rd2, false);
+    if ((rd1 & 0xFF) == manufacturer && (rd2 & 0xFF) == device) success = false;
+
     // If success, return data
     if (success) {
         data = manufacturer;
         data <<= 8;
         data |= device;
     }
-    // Close resources
+    // Reset Bus
     deviceSetupBus_(kCmdDeviceOperationReset);
     return success;
 }

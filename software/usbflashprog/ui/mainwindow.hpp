@@ -118,8 +118,6 @@ class MainWindow : public QMainWindow {
     void on_btnFillRandom_clicked();
     /* diagnostics */
     void on_pushButtonConnect_clicked();
-    void on_pushButtonVddInitCal_clicked();
-    void on_pushButtonVppInitCal_clicked();
     void on_pushButtonGetDataW_clicked();
     void on_pushButtonGetDataB_clicked();
     void on_checkBoxVddCtrl_toggled(bool checked = false);
@@ -148,6 +146,8 @@ class MainWindow : public QMainWindow {
     void onActionProgress(uint32_t current = 0, uint32_t total = 0,
                           bool done = false, bool success = true,
                           bool canceled = false);
+    void onBtnVddCalClicked();
+    void onBtnVppCalClicked();
 
   protected:
     /*

@@ -126,10 +126,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>USB Flash/EPROM Programmer</source>
-        <translation>USB Flash/EPROM Programmer</translation>
-    </message>
-    <message>
         <source>Board Diagnostics</source>
         <translation>Diagnósticos da Placa</translation>
     </message>
@@ -430,10 +426,6 @@
         <translation>Conectar</translation>
     </message>
     <message>
-        <source>Calibrate</source>
-        <translation>Calibrar</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>Arquivo</translation>
     </message>
@@ -565,13 +557,13 @@
         <source>Error calibrating VPP</source>
         <translation>Erro na calibração de VPP</translation>
     </message>
+    <message>
+        <source>Unknown</source>
+        <translation>Desconhecido</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
-    <message>
-        <source>USB Flash/EPROM Programmer</source>
-        <translation>USB Flash/EPROM Programmer</translation>
-    </message>
     <message>
         <source>General</source>
         <translation>Geral</translation>
@@ -619,6 +611,22 @@
     <message>
         <source>Settings</source>
         <translation>Configurações</translation>
+    </message>
+    <message>
+        <source>Calibrate</source>
+        <translation>Calibrar</translation>
+    </message>
+    <message>
+        <source>VDD Voltage</source>
+        <translation>Tensão de VDD</translation>
+    </message>
+    <message>
+        <source>VPP Voltage</source>
+        <translation>Tensão de VPP</translation>
+    </message>
+    <message>
+        <source>Board</source>
+        <translation>Placa</translation>
     </message>
 </context>
 </TS>

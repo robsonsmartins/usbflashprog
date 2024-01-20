@@ -44,15 +44,26 @@ class SettingsDialog : public QDialog {
     /**
      * @brief Constructor.
      * @param parent Pointer to parent object. Default is nullptr.
+     * @param enableBtnCal If true, enables VDD/VPP calibration buttons.
+     *   False otherwise.
      */
-    explicit SettingsDialog(QWidget *parent = nullptr);
+    explicit SettingsDialog(QWidget *parent = nullptr,
+                            bool enableBtnCal = true);
     /** @brief Destructor. */
     ~SettingsDialog();
+
+  Q_SIGNALS:
+    /** @brief Triggered when VDD Calibration button is clicked. */
+    void onBtnVddCalClicked();
+    /** @brief Triggered when VPP Calibration button is clicked. */
+    void onBtnVppCalClicked();
 
   private slots:
     /* auto slots */
     void on_buttonBox_accepted();
     void on_comboBoxLogLevel_currentIndexChanged(int index);
+    void on_pushButtonVddInitCal_clicked();
+    void on_pushButtonVppInitCal_clicked();
 
   private:
     /* @brief Pointer to UI object. */

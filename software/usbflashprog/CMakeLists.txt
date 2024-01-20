@@ -50,6 +50,7 @@ elseif(NORMAL_BUILD)
   set(TS_FILES
           i18n/ufprog_en_US.ts
           i18n/ufprog_pt_BR.ts
+          i18n/ufprog_es_ES.ts
   )
 
   set(PROJECT_SOURCES

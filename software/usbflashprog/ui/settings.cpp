@@ -25,17 +25,26 @@
 
 // ---------------------------------------------------------------------------
 
-SettingsDialog::SettingsDialog(QWidget *parent)
+SettingsDialog::SettingsDialog(QWidget *parent, bool enableBtnCal)
     : QDialog(parent), ui_(new Ui::SettingsDialog) {
     ui_->setupUi(this);
     setWindowFlag(Qt::MSWindowsFixedSizeDialogHint);
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " + tr("Settings"));
+    setWindowTitle(QString(kApplicationFullName) + " - " + tr("Settings"));
     QString logFileInfo = ui_->labelLogFileInfo->text();
     logFileInfo =
         logFileInfo.arg("\n" + QDir::toNativeSeparators(QDir::homePath() + "/" +
                                                         QString(kLogFileName)));
     ui_->labelLogFileInfo->setText(logFileInfo);
+    ui_->pushButtonVddInitCal->setEnabled(enableBtnCal);
+    ui_->pushButtonVppInitCal->setEnabled(enableBtnCal);
+    size_t count = sizeof(kAppSupportedLanguages) / sizeof(TLanguageSettings);
+    ui_->comboBoxLanguage->clear();
+    for (size_t i = 0; i < count; i++) {
+        TLanguageSettings lang = kAppSupportedLanguages[i];
+        if (i == 0) lang.desc = tr("Autodetect");
+        ui_->comboBoxLanguage->addItem(lang.desc);
+    }
     loadSettings_();
 }
 
@@ -54,6 +63,14 @@ void SettingsDialog::on_comboBoxLogLevel_currentIndexChanged(int index) {
     ui_->labelLogFileInfo->setVisible(index != 0);
 }
 
+void SettingsDialog::on_pushButtonVddInitCal_clicked() {
+    emit onBtnVddCalClicked();
+}
+
+void SettingsDialog::on_pushButtonVppInitCal_clicked() {
+    emit onBtnVppCalClicked();
+}
+
 TApplicationSettings SettingsDialog::loadSettings_() {
     QSettings settings;
     TApplicationSettings app = loadSettings();
@@ -68,12 +85,15 @@ TApplicationSettings SettingsDialog::loadSettings_() {
         ui_->comboBoxLogLevel->setCurrentIndex(0);
         ui_->labelLogFileInfo->setVisible(false);
     }
-    if (app.language.toLower() == "pt_br") {
-        ui_->comboBoxLanguage->setCurrentIndex(2);
-    } else if (app.language.toLower() == "en_us") {
-        ui_->comboBoxLanguage->setCurrentIndex(1);
-    } else {
-        ui_->comboBoxLanguage->setCurrentIndex(0);
+
+    ui_->comboBoxLanguage->setCurrentIndex(0);
+    size_t count = sizeof(kAppSupportedLanguages) / sizeof(TLanguageSettings);
+    for (size_t i = 0; i < count; i++) {
+        TLanguageSettings lang = kAppSupportedLanguages[i];
+        if (lang.code.toLower() == app.language.toLower()) {
+            ui_->comboBoxLanguage->setCurrentIndex(i);
+            break;
+        }
     }
     return app;
 }
@@ -83,17 +103,9 @@ TApplicationSettings SettingsDialog::saveSettings_() {
     TApplicationSettings app;
 
     app.logLevel = ui_->comboBoxLogLevel->currentIndex();
-    switch (ui_->comboBoxLanguage->currentIndex()) {
-        case 2:
-            app.language = "pt_BR";
-            break;
-        case 1:
-            app.language = "en_US";
-            break;
-        default:
-            app.language = "";
-            break;
-    }
+    TLanguageSettings lang =
+        kAppSupportedLanguages[ui_->comboBoxLanguage->currentIndex()];
+    app.language = lang.code;
 
     settings.setValue(kSettingGeneralLogLevel, QString::number(app.logLevel));
     settings.setValue(kSettingGeneralLanguage, app.language);

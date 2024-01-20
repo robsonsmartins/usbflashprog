@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/i18n">
-        <file>ufprog_pt_BR.qm</file>
         <file>ufprog_en_US.qm</file>
+        <file>ufprog_pt_BR.qm</file>
+        <file>ufprog_es_ES.qm</file>
     </qresource>
 </RCC>

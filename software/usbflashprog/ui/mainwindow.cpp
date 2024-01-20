@@ -261,7 +261,7 @@ void MainWindow::on_actionExit_triggered(bool checked) {
 
 void MainWindow::on_actionAbout_triggered(bool checked) {
     QMessageBox::about(
-        this, tr("USB Flash/EPROM Programmer"),
+        this, kApplicationFullName,
         tr("A memory device programmer (Flash/EPROM/E2PROM) board and software,"
            "connected to PC by USB port.") +
             "\n\n" + tr("Version") + " " + kAppVersion + "\n\n" +
@@ -283,10 +283,16 @@ void MainWindow::on_actionAuthorHome_triggered(bool checked) {
 }
 
 void MainWindow::on_actionSettings_triggered(bool checked) {
-    SettingsDialog dialog(this);
+    QString port = ui_->comboBoxPort->currentText();
+    SettingsDialog dialog(this, !port.isEmpty());
+    connect(&dialog, &SettingsDialog::onBtnVddCalClicked, this,
+            &MainWindow::onBtnVddCalClicked);
+    connect(&dialog, &SettingsDialog::onBtnVppCalClicked, this,
+            &MainWindow::onBtnVppCalClicked);
     if (dialog.exec() == QDialog::Accepted) {
         ui_->retranslateUi(this);
         loadProgSettings_();
+        updateCheckSum_();
     }
 }
 
@@ -376,6 +382,116 @@ void MainWindow::onActionProgress(uint32_t current, uint32_t total, bool done,
             " | " +
             tr("Estimated remaining time: %1")
                 .arg(calculateRemainingTime_(elapsedTime, current, total)));
+    }
+}
+
+void MainWindow::onBtnVddCalClicked() {
+    if (!runner_.isOpen()) {
+        QString port = ui_->comboBoxPort->currentText();
+        if (port.isEmpty() || !runner_.open(port)) {
+            QMessageBox::critical(
+                this, kApplicationFullName,
+                tr("Error opening the \"%1\" port.")
+                    .arg(port.isEmpty() ? tr("Unknown") : port)
+                    .leftJustified(kDialogLabelMinLength));
+            return;
+        }
+    }
+    bool isRefreshTimerActive = refreshTimer_.isActive();
+    if (isRefreshTimerActive) {
+        refreshTimer_.stop();
+        enableDiagControls_(false);
+    }
+    float measured = 0.0f;
+    bool ok = runner_.vddInitCal();
+    if (ok) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+        measured = QInputDialog::getDouble(
+            this, tr("VDD Calibration"),
+            tr("Voltage measured on the VDD:")
+                .leftJustified(kDialogLabelMinLength),
+            5.0f, 3.0f, 7.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint);
+#else
+        measured = QInputDialog::getDouble(
+            this, tr("VDD Calibration"),
+            tr("Voltage measured on the VDD:")
+                .leftJustified(kDialogLabelMinLength),
+            5.0f, 3.0f, 7.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint,
+            0.1f);
+#endif
+        if (ok) {
+            ok = runner_.vddSaveCal(measured);
+        } else {
+            ok = true;
+        }
+    }
+    if (!ok) {
+        QMessageBox::critical(
+            this, kApplicationFullName,
+            tr("Error calibrating VDD").leftJustified(kDialogLabelMinLength));
+    }
+    if (isRefreshTimerActive) {
+        enableDiagControls_(true);
+        refreshTimer_.start();
+    }
+}
+
+void MainWindow::onBtnVppCalClicked() {
+    if (!runner_.isOpen()) {
+        QString port = ui_->comboBoxPort->currentText();
+        if (port.isEmpty() || !runner_.open(port)) {
+            QMessageBox::critical(
+                this, kApplicationFullName,
+                tr("Error opening the \"%1\" port.")
+                    .arg(port.isEmpty() ? tr("Unknown") : port)
+                    .leftJustified(kDialogLabelMinLength));
+            return;
+        }
+    }
+    bool isRefreshTimerActive = refreshTimer_.isActive();
+    if (isRefreshTimerActive) {
+        refreshTimer_.stop();
+        enableDiagControls_(false);
+    }
+    float measured = 0.0f;
+    bool ok = runner_.vppInitCal();
+    if (ok) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+        measured = QInputDialog::getDouble(
+            this, tr("VPP Calibration"),
+            tr("Voltage measured on the VPP:")
+                .leftJustified(kDialogLabelMinLength),
+            12.0f, 10.0f, 14.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint);
+#else
+        measured = QInputDialog::getDouble(
+            this, tr("VPP Calibration"),
+            tr("Voltage measured on the VPP:")
+                .leftJustified(kDialogLabelMinLength),
+            12.0f, 10.0f, 14.0f, 2, &ok,
+            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
+                Qt::MSWindowsFixedSizeDialogHint,
+            0.1f);
+#endif
+        if (ok) {
+            ok = runner_.vppSaveCal(measured);
+        } else {
+            ok = true;
+        }
+    }
+    if (!ok) {
+        QMessageBox::critical(
+            this, kApplicationFullName,
+            tr("Error calibrating VPP").leftJustified(kDialogLabelMinLength));
+    }
+    if (isRefreshTimerActive) {
+        enableDiagControls_(true);
+        refreshTimer_.start();
     }
 }
 
@@ -1126,7 +1242,7 @@ void MainWindow::configureDeviceFromControls_() {
 }
 
 void MainWindow::showDialogActionProgress_(const QString &msg) {
-    progress_->setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " + msg);
+    progress_->setWindowTitle(QString(kApplicationFullName) + " - " + msg);
     progress_->setCancelButtonText(tr("Cancel"));
     progress_->setRange(0, 100);
     progress_->setAutoClose(true);
@@ -1138,7 +1254,7 @@ void MainWindow::showDialogActionProgress_(const QString &msg) {
 bool MainWindow::showDifferentSizeDialog_(const QByteArray &data) {
     if (data.size() != device_->getSize()) {
         if (QMessageBox::question(
-                this, tr("USB Flash/EPROM Programmer"),
+                this, kApplicationFullName,
                 tr("The amount of data in the buffer is different from the "
                    "device size.")
                         .leftJustified(kDialogLabelMinLength) +
@@ -1155,7 +1271,7 @@ bool MainWindow::showDifferentSizeDialog_(const QByteArray &data) {
 bool MainWindow::showActionWarningDialog_() {
     if (noWarningDevice_) return true;
     if (QMessageBox::warning(
-            this, tr("USB Flash/EPROM Programmer"),
+            this, kApplicationFullName,
             tr("Caution! Check the VDD, VPP and VEE voltages and the size of "
                "the device before running, otherwise you will damage it!")
                     .leftJustified(kDialogLabelMinLength) +
@@ -1248,86 +1364,6 @@ void MainWindow::on_pushButtonConnect_clicked() {
     noWarningDevice_ = false;
 }
 
-void MainWindow::on_pushButtonVddInitCal_clicked() {
-    if (!runner_.isOpen()) return;
-    refreshTimer_.stop();
-    enableDiagControls_(false);
-    float measured = 0.0f;
-    bool ok = runner_.vddInitCal();
-    if (ok) {
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-        measured = QInputDialog::getDouble(
-            this, tr("VDD Calibration"),
-            tr("Voltage measured on the VDD:")
-                .leftJustified(kDialogLabelMinLength),
-            5.0f, 3.0f, 7.0f, 2, &ok,
-            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
-                Qt::MSWindowsFixedSizeDialogHint);
-#else
-        measured = QInputDialog::getDouble(
-            this, tr("VDD Calibration"),
-            tr("Voltage measured on the VDD:")
-                .leftJustified(kDialogLabelMinLength),
-            5.0f, 3.0f, 7.0f, 2, &ok,
-            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
-                Qt::MSWindowsFixedSizeDialogHint,
-            0.1f);
-#endif
-        if (ok) {
-            ok = runner_.vddSaveCal(measured);
-        } else {
-            ok = true;
-        }
-    }
-    if (!ok) {
-        QMessageBox::critical(
-            this, tr("USB Flash/EPROM Programmer"),
-            tr("Error calibrating VDD").leftJustified(kDialogLabelMinLength));
-    }
-    enableDiagControls_(true);
-    refreshTimer_.start();
-}
-
-void MainWindow::on_pushButtonVppInitCal_clicked() {
-    if (!runner_.isOpen()) return;
-    enableDiagControls_(false);
-    refreshTimer_.stop();
-    float measured = 0.0f;
-    bool ok = runner_.vppInitCal();
-    if (ok) {
-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
-        measured = QInputDialog::getDouble(
-            this, tr("VPP Calibration"),
-            tr("Voltage measured on the VPP:")
-                .leftJustified(kDialogLabelMinLength),
-            12.0f, 10.0f, 14.0f, 2, &ok,
-            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
-                Qt::MSWindowsFixedSizeDialogHint);
-#else
-        measured = QInputDialog::getDouble(
-            this, tr("VPP Calibration"),
-            tr("Voltage measured on the VPP:")
-                .leftJustified(kDialogLabelMinLength),
-            12.0f, 10.0f, 14.0f, 2, &ok,
-            Qt::WindowSystemMenuHint | Qt::WindowTitleHint |
-                Qt::MSWindowsFixedSizeDialogHint,
-            0.1f);
-#endif
-        if (ok) {
-            ok = runner_.vppSaveCal(measured);
-        } else {
-            ok = true;
-        }
-    }
-    if (!ok) {
-        QMessageBox::critical(
-            this, tr("USB Flash/EPROM Programmer"),
-            tr("Error calibrating VPP").leftJustified(kDialogLabelMinLength));
-    }
-    enableDiagControls_(true);
-    refreshTimer_.start();
-}
-
 void MainWindow::on_pushButtonGetDataW_clicked() {
     if (!runner_.isOpen()) return;
     uint16_t value = runner_.dataGetW();
@@ -1414,7 +1450,7 @@ void MainWindow::onRefreshTimerTimeout() {
         connect_(false);
         enableDiagControls_(false);
         QMessageBox::critical(
-            this, tr("USB Flash/EPROM Programmer"),
+            this, kApplicationFullName,
             tr("The device has been disconnected from the \"%1\" port.")
                 .arg(port)
                 .leftJustified(kDialogLabelMinLength));
@@ -1470,17 +1506,19 @@ void MainWindow::on_spinBoxData_valueChanged(int value) {
 
 void MainWindow::connect_(bool state) {
     if (state) {
-        if (runner_.open(ui_->comboBoxPort->currentText())) {
+        QString port = ui_->comboBoxPort->currentText();
+        if (runner_.open(port)) {
             enableDiagControls_();
             ui_->dialVdd->setValue(50);
             ui_->dialVpp->setValue(120);
             enumTimer_.stop();
             refreshTimer_.start(kUsbRefreshInterval);
         } else {
-            QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
-                                  tr("Error opening the \"%1\" port.")
-                                      .arg(ui_->comboBoxPort->currentText())
-                                      .leftJustified(kDialogLabelMinLength));
+            QMessageBox::critical(
+                this, kApplicationFullName,
+                tr("Error opening the \"%1\" port.")
+                    .arg(port.isEmpty() ? tr("Unknown") : port)
+                    .leftJustified(kDialogLabelMinLength));
         }
     }
     if (runner_.isOpen()) {
@@ -1513,7 +1551,7 @@ void MainWindow::sendDataBus_() {
     uint16_t data = ui_->spinBoxData->value();
     if (!runner_.dataSetW(data)) {
         QMessageBox::critical(
-            this, tr("USB Flash/EPROM Programmer"),
+            this, kApplicationFullName,
             tr("The device has been disconnected from the \"%1\" port.")
                 .arg(runner_.getPath())
                 .leftJustified(kDialogLabelMinLength));
@@ -1688,31 +1726,31 @@ void MainWindow::on_actionOpen_triggered(bool checked) {
     if (filename.isEmpty()) return;
 
     // save last dir setting
-    app.lastDir = QFileInfo(filename).absoluteFilePath();
+    app.lastDir = QFileInfo(filename).absolutePath();
     settings.setValue(kSettingGeneralLastDir, app.lastDir);
 
     if (!hexeditor_->open(filename)) {
-        QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
+        QMessageBox::critical(this, kApplicationFullName,
                               tr("Error reading file \"%1\".")
                                   .arg(filename)
                                   .leftJustified(kDialogLabelMinLength));
         return;
     }
     ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
-    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
+    setWindowTitle(QString(kApplicationFullName) + " - " +
                    QFileInfo(filename).fileName());
 }
 
 void MainWindow::on_actionSave_triggered(bool checked) {
     if (!hexeditor_->save()) {
-        QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
+        QMessageBox::critical(this, kApplicationFullName,
                               tr("Error writing file \"%1\".")
                                   .arg(hexeditor_->filename())
                                   .leftJustified(kDialogLabelMinLength));
         return;
     }
     ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
-    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
+    setWindowTitle(QString(kApplicationFullName) + " - " +
                    QFileInfo(hexeditor_->filename()).fileName());
 }
 
@@ -1732,19 +1770,19 @@ void MainWindow::on_actionSaveAs_triggered(bool checked) {
     if (filename.isEmpty()) return;
 
     // save last dir setting
-    app.lastDir = QFileInfo(filename).absoluteFilePath();
+    app.lastDir = QFileInfo(filename).absolutePath();
     settings.setValue(kSettingGeneralLastDir, app.lastDir);
 
     type = QEpromFile::typeFromStr(selectedFilter);
     if (!hexeditor_->saveAs(type, filename)) {
-        QMessageBox::critical(this, tr("USB Flash/EPROM Programmer"),
+        QMessageBox::critical(this, kApplicationFullName,
                               tr("Error writing file \"%1\".")
                                   .arg(filename)
                                   .leftJustified(kDialogLabelMinLength));
         return;
     }
     ui_->tabWidget->setCurrentWidget(ui_->tabBuffer);
-    setWindowTitle(tr("USB Flash/EPROM Programmer") + " - " +
+    setWindowTitle(QString(kApplicationFullName) + " - " +
                    QFileInfo(filename).fileName());
 }
 
@@ -1810,7 +1848,7 @@ void MainWindow::on_btnFillRandom_clicked() {
 }
 
 void MainWindow::onDataChanged(bool status) {
-    QString title = tr("USB Flash/EPROM Programmer");
+    QString title = kApplicationFullName;
     if (!hexeditor_->filename().isEmpty()) {
         title += " - " + QFileInfo(hexeditor_->filename()).fileName();
         ui_->actionSave->setEnabled(status);
@@ -1861,7 +1899,7 @@ void MainWindow::enableEditorControls_(bool state) {
 
 bool MainWindow::showDialogFileChanged_() {
     return QMessageBox::question(
-               this, tr("USB Flash/EPROM Programmer"),
+               this, kApplicationFullName,
                tr("There is unsaved data in the editor.")
                        .leftJustified(kDialogLabelMinLength) +
                    "\n" +

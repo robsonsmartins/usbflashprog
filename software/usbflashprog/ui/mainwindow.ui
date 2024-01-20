@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>USB Flash/EPROM Programmer</string>
+   <string notr="true">USB Flash/EPROM Programmer</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../resources/resources.qrc">
@@ -1632,46 +1632,6 @@ Wr</string>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButtonVddInitCal">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>150</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>16777215</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="baseSize">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Calibrate</string>
-                 </property>
-                 <property name="checkable">
-                  <bool>false</bool>
-                 </property>
-                 <property name="autoRepeatInterval">
-                  <number>100</number>
-                 </property>
-                 <property name="flat">
-                  <bool>false</bool>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <spacer name="horizontalSpacer_5">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
@@ -1897,25 +1857,6 @@ Wr</string>
                  </property>
                  <property name="text">
                   <string>Duty (%)</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButtonVppInitCal">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>150</width>
-                   <height>25</height>
-                  </size>
-                 </property>
-                 <property name="text">
-                  <string>Calibrate</string>
                  </property>
                 </widget>
                </item>
@@ -4482,11 +4423,9 @@ Wr</string>
   <tabstop>pushButtonConnect</tabstop>
   <tabstop>checkBoxVddCtrl</tabstop>
   <tabstop>dialVdd</tabstop>
-  <tabstop>pushButtonVddInitCal</tabstop>
   <tabstop>checkBoxVddOnVpp</tabstop>
   <tabstop>checkBoxVppCtrl</tabstop>
   <tabstop>dialVpp</tabstop>
-  <tabstop>pushButtonVppInitCal</tabstop>
   <tabstop>checkBoxVppOnA9</tabstop>
   <tabstop>checkBoxVppOnA18</tabstop>
   <tabstop>checkBoxVppOnCE</tabstop>

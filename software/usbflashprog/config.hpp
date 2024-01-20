@@ -49,6 +49,8 @@ constexpr const char *kOrganizationName = "RobsonMartins";
 constexpr const char *kOrganizationDomain = "robsonmartins.com";
 /** @brief GENERAL : App Name. */
 constexpr const char *kApplicationName = "UsbFlashProg";
+/** @brief GENERAL : App Full Name. */
+constexpr const char *kApplicationFullName = "USB Flash/EPROM Programmer";
 
 /** @brief COMM/USB : Vendor ID. */
 constexpr quint16 kUsbVendorId = 0x2E8A;
@@ -62,6 +64,8 @@ constexpr int kUsbRefreshInterval = 500;
 
 /** @brief GENERAL : Log filename. */
 constexpr const char *kLogFileName = "ufprog.log";
+
+// ---------------------------------------------------------------------------
 
 /** @brief SETTING : General / LogLevel. */
 constexpr const char *kSettingGeneralLogLevel = "LogLevel";
@@ -155,6 +159,34 @@ typedef struct TApplicationSettings {
     /** @brief Programmer settings. */
     TProgrammerSettings prog;
 } TApplicationSettings;
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
+ * @brief Stores the language settings.
+ */
+typedef struct TLanguageSettings {
+    /** @brief Language code. */
+    QString code;
+    /** @brief Language Description. */
+    QString desc;
+} TLanguageSettings;
+
+/**
+ * @ingroup Software
+ * @brief List of supported Languages.
+ */
+// clang-format off
+const TLanguageSettings kAppSupportedLanguages[] = {
+    /* translate description */
+    {"", "Autodetect"},
+    /* no translate description */
+    {"en_US", "English (en_US)"},
+    {"pt_BR", "Portugu\u00EAs Brasileiro (pt_BR)"},
+    {"es_ES", "Español (es_ES)"}
+};
+// clang-format on
 
 // ---------------------------------------------------------------------------
 

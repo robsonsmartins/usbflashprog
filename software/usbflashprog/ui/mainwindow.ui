@@ -4212,13 +4212,13 @@ Wr</string>
   </action>
   <action name="actionEPROMW27_32KB">
    <property name="text">
-    <string notr="true">EPROM W27x256</string>
+    <string notr="true">EPROM W27x256/257</string>
    </property>
    <property name="iconText">
-    <string notr="true">EPROM W27x256</string>
+    <string notr="true">EPROM W27x256/257</string>
    </property>
    <property name="toolTip">
-    <string notr="true">EPROM W27x256</string>
+    <string notr="true">EPROM W27x256/257</string>
    </property>
   </action>
   <action name="actionEPROMW27_64KB">

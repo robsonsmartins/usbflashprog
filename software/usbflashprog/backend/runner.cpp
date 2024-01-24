@@ -529,6 +529,7 @@ bool Runner::deviceSetupBus(kCmdDeviceOperationEnum operation) {
     TRunnerCommand cmd;
     cmd.setByte(kCmdDeviceSetupBus, operation);
     if (!sendCommand_(cmd)) return false;
+    address_ = 0;
     return true;
 }
 

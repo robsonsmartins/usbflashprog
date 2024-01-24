@@ -141,6 +141,8 @@ EPROM27C16Bit::~EPROM27C16Bit() {}
 EPROM27E::EPROM27E(QObject *parent) : EPROM27C(parent) {
     info_.name = "EPROM W27C/27E/27SF";
     info_.capability.hasErase = true;
+    info_.capability.hasFastProg = true;
+    fastProg_ = true;
     twp_ = 100;
     twc_ = 15;
     vddRd_ = 5.0f;

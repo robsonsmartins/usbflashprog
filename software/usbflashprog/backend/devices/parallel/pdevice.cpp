@@ -340,6 +340,8 @@ bool ParDevice::eraseDevice() {
         bool success = true;
         if (!runner_.deviceErase()) success = false;
         for (current = 0; current < total; current++) {
+            if (current % 0x100 == 0) emit onProgress(current, total);
+            runner_.processEvents();
             if (canceling_) {
                 emit onProgress(current, total, true, false, true);
                 DEBUG << QString("Erase canceled at 0x%1 of 0x%2")
@@ -347,20 +349,23 @@ bool ParDevice::eraseDevice() {
                              .arg(total, 6, 16, QChar('0'));
                 return false;
             }
-            // Verify data
-            if (success && !verifyData_(empty)) {
-                success = false;
+            // Verify data, if not in Fast Erase mode
+            if (!fastProg_) {
+                if (success && !verifyData_(empty)) {
+                    success = false;
+                }
             }
             if (success && runner_.hasError()) success = false;
+            if (fastProg_ && success) break;
             if (!success && j == maxAttemptsProg_) {
                 // Error
                 emit onProgress(current, total, true, false);
-                WARNING
-                    << QString(
-                           "Erase error at 0x%1 of 0x%2. Expected data 0x%3")
-                           .arg(current, 6, 16, QChar('0'))
-                           .arg(total, 6, 16, QChar('0'))
-                           .arg(empty, is16bit_ ? 4 : 2, 16, QChar('0'));
+                WARNING << QString(
+                               "Erase error at 0x%1 of 0x%2. Expected data "
+                               "0x%3")
+                               .arg(current, 6, 16, QChar('0'))
+                               .arg(total, 6, 16, QChar('0'))
+                               .arg(empty, is16bit_ ? 4 : 2, 16, QChar('0'));
                 return false;
             }
             if (!success) break;

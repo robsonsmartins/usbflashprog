@@ -157,17 +157,17 @@ void Runner::runVddCommand_(uint8_t opcode) {
     TByteArray response;
     switch (opcode) {
         case kCmdVddCtrl:
+            serial_.putChar(kCmdResponseOk, true);
             if (getParamAsBool_()) {
                 vgen_.vdd.on();
             } else {
                 vgen_.vdd.off();
             }
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVddSetV:
+            serial_.putChar(kCmdResponseOk, true);
             v = getParamAsFloat_();
             vgen_.vdd.setV(v);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVddGetV:
             v = vgen_.vdd.getV();
@@ -191,20 +191,20 @@ void Runner::runVddCommand_(uint8_t opcode) {
             serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVddInitCal:
+            serial_.putChar(kCmdResponseOk, true);
             vgen_.vdd.initCalibration();
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVddSaveCal:
-            v = getParamAsFloat_();
             serial_.putChar(kCmdResponseOk, true);
+            v = getParamAsFloat_();
             vgen_.vdd.saveCalibration(v);
             vgen_.vdd.setV(kVddInitial);
             sleep_ms(1);  // 1 ms
             break;
         case kCmdVddOnVpp:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             vgen_.vdd.onVpp(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         default:
             break;
@@ -217,17 +217,17 @@ void Runner::runVppCommand_(uint8_t opcode) {
     TByteArray response;
     switch (opcode) {
         case kCmdVppCtrl:
+            serial_.putChar(kCmdResponseOk, true);
             if (getParamAsBool_()) {
                 vgen_.vpp.on();
             } else {
                 vgen_.vpp.off();
             }
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppSetV:
+            serial_.putChar(kCmdResponseOk, true);
             v = getParamAsFloat_();
             vgen_.vpp.setV(v);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppGetV:
             v = vgen_.vpp.getV();
@@ -251,40 +251,40 @@ void Runner::runVppCommand_(uint8_t opcode) {
             serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVppInitCal:
+            serial_.putChar(kCmdResponseOk, true);
             vgen_.vpp.initCalibration();
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppSaveCal:
-            v = getParamAsFloat_();
             serial_.putChar(kCmdResponseOk, true);
+            v = getParamAsFloat_();
             vgen_.vpp.saveCalibration(v);
             vgen_.vpp.setV(kVppInitial);
             sleep_ms(1);  // 1 ms
             break;
         case kCmdVppOnA9:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             vgen_.vpp.onA9(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnA18:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             vgen_.vpp.onA18(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnCE:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             vgen_.vpp.onCE(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnOE:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             vgen_.vpp.onOE(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdVppOnWE:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             vgen_.vpp.onWE(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         default:
             break;
@@ -295,19 +295,19 @@ void Runner::runCtrlBusCommand_(uint8_t opcode) {
     bool b;
     switch (opcode) {
         case kCmdBusCE:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             ctrlBus_.setCE(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdBusOE:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             ctrlBus_.setOE(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdBusWE:
+            serial_.putChar(kCmdResponseOk, true);
             b = getParamAsBool_();
             ctrlBus_.setWE(b);
-            serial_.putChar(kCmdResponseOk);
             break;
         default:
             break;
@@ -410,16 +410,17 @@ void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
     uint32_t dw;
     switch (opcode) {
         case kCmdDeviceSetTwp:
+            serial_.putChar(kCmdResponseOk, true);
             dw = getParamAsDWord_();
             settings_.twp = dw;
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdDeviceSetTwc:
+            serial_.putChar(kCmdResponseOk, true);
             dw = getParamAsDWord_();
             settings_.twc = dw;
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdDeviceSetFlags:
+            serial_.putChar(kCmdResponseOk, true);
             dw = getParamAsByte_();
             // 0 = Skip Write 0xFF
             // 1 = Prog with VPP on
@@ -433,7 +434,6 @@ void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
             settings_.pgmCePin    = (dw & 0x08) != 0;
             settings_.pgmPositive = (dw & 0x10) != 0;
             // clang-format on
-            serial_.putChar(kCmdResponseOk);
             break;
         case kCmdDeviceSetupBus:
             dw = getParamAsByte_();
@@ -583,7 +583,6 @@ bool Runner::deviceWrite_(uint16_t &data, bool is16bit) {
         // VPP on
         vgen_.vdd.onVpp(false);
         vgen_.vpp.on();
-        sleep_us(kStabilizationTime);
     }
     // Set DataBus
     if (is16bit) {
@@ -611,7 +610,6 @@ bool Runner::deviceWrite_(uint16_t &data, bool is16bit) {
         // VPP off
         vgen_.vpp.off();
         vgen_.vdd.onVpp(true);
-        sleep_us(kStabilizationTime);
     }
     return success;
 }
@@ -644,7 +642,7 @@ bool Runner::deviceWriteAndVerify_(uint16_t &data, bool is16bit) {
         emptyData = (wr == 0xFFFF);
     } else {
         wr = getParamAsByte_();
-        emptyData = (wr & 0xFF == 0xFF);
+        emptyData = ((wr & 0xFF) == 0xFF);
     }
     // write
     if (!settings_.skipFF || !emptyData) {
@@ -654,11 +652,13 @@ bool Runner::deviceWriteAndVerify_(uint16_t &data, bool is16bit) {
     if (settings_.pgmCePin) ctrlBus_.setWE(true);
     // read
     deviceRead_(rd, is16bit);
+    // PGM/~CE is HI
+    if (settings_.pgmCePin) ctrlBus_.setWE(false);
+    // verify
     if (!is16bit) {
         wr &= 0xFF;
         rd &= 0xFF;
     }
-    // verify
     if (rd == wr) data = rd;
     return (rd == wr);
 }
@@ -712,6 +712,10 @@ bool Runner::deviceSetupBus_(uint8_t operation) {
         case kCmdDeviceOperationProg:
             // VDD Wr on
             vgen_.vdd.on();
+            if (settings_.vppOePin) {
+                // VDD Wr on VPP
+                vgen_.vdd.onVpp(true);
+            }
             if (settings_.pgmPositive) {
                 // PGM is LO
                 ctrlBus_.setWE(true);
@@ -769,10 +773,12 @@ bool Runner::deviceGetId_(uint16_t &data) {
     uint16_t rd1 = 0xFF, rd2 = 0xFF;
     // Set Address 0x200 (A9 bit on)
     if (!addrBus_.writeDWord(0x200)) success = false;
-    // Check if equals data at address 0x200/0x201
+    // Read Data at Address 0x200
     deviceRead_(rd1, false);
+    // Read Data at Address 0x201
     if (!addrBus_.increment()) success = false;
     deviceRead_(rd2, false);
+    // Check if equals data at address 0x200/0x201
     if ((rd1 & 0xFF) == manufacturer && (rd2 & 0xFF) == device) success = false;
 
     // If success, return data

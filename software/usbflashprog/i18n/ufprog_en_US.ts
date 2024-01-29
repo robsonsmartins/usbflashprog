@@ -294,10 +294,6 @@
         <translation>Parallel Memory</translation>
     </message>
     <message>
-        <source>SRAM</source>
-        <translation>SRAM</translation>
-    </message>
-    <message>
         <source>I2C Memory</source>
         <translation>I2C Memory</translation>
     </message>
@@ -308,10 +304,6 @@
     <message>
         <source>EPROM (Electrical Erasable)</source>
         <translation>EPROM (Electrical Erasable)</translation>
-    </message>
-    <message>
-        <source>EEPROM</source>
-        <translation>EEPROM</translation>
     </message>
     <message>
         <source>Flash</source>
@@ -562,6 +554,26 @@
         <source>Unknown</source>
         <translation>Unknown</translation>
     </message>
+    <message>
+        <source>Device is unprotected</source>
+        <translation>Device is unprotected</translation>
+    </message>
+    <message>
+        <source>Unprotect failure</source>
+        <translation>Unprotect failure</translation>
+    </message>
+    <message>
+        <source>Protect</source>
+        <translation>Protect</translation>
+    </message>
+    <message>
+        <source>Device is protected</source>
+        <translation>Device is protected</translation>
+    </message>
+    <message>
+        <source>Protect failure</source>
+        <translation>Protect failure</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
@@ -628,6 +640,18 @@
     <message>
         <source>Board</source>
         <translation>Board</translation>
+    </message>
+    <message>
+        <source>Buffer Size (Bytes)</source>
+        <translation>Buffer Size (Bytes)</translation>
+    </message>
+    <message>
+        <source>Note: Performance may be low if the buffer size is smaller than 16 bytes</source>
+        <translation>Note: Performance may be low if the buffer size is smaller than 16 bytes</translation>
+    </message>
+    <message>
+        <source>64 (default)</source>
+        <translation>64 (default)</translation>
     </message>
 </context>
 </TS>

@@ -351,11 +351,34 @@
           <string>Unprotect</string>
          </property>
          <property name="text">
-          <string/>
+          <string notr="true"/>
          </property>
          <property name="icon">
           <iconset resource="../resources/resources.qrc">
            <normaloff>:/toolicons/action-unprotect.ico</normaloff>:/toolicons/action-unprotect.ico</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="btnProtect">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="toolTip">
+          <string>Protect</string>
+         </property>
+         <property name="text">
+          <string notr="true"/>
+         </property>
+         <property name="icon">
+          <iconset resource="../resources/resources.qrc">
+           <normaloff>:/toolicons/action-protect.ico</normaloff>:/toolicons/action-protect.ico</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -531,8 +554,18 @@
                     </size>
                    </property>
                    <property name="currentText">
-                    <string notr="true">2KB</string>
+                    <string notr="true">512</string>
                    </property>
+                   <item>
+                    <property name="text">
+                     <string notr="true">512</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">1KB</string>
+                    </property>
+                   </item>
                    <item>
                     <property name="text">
                      <string notr="true">2KB</string>
@@ -1191,6 +1224,16 @@ Wr</string>
                    <item>
                     <property name="text">
                      <string>0 - Byte Programming</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">16</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string notr="true">32</string>
                     </property>
                    </item>
                    <item>
@@ -3388,7 +3431,7 @@ Wr</string>
      </property>
      <widget class="QMenu" name="menuSRAM">
       <property name="title">
-       <string>SRAM</string>
+       <string notr="true">SRAM</string>
       </property>
       <addaction name="actionSRAM_2KB"/>
       <addaction name="actionSRAM_8KB"/>
@@ -3494,10 +3537,54 @@ Wr</string>
       <addaction name="separator"/>
       <addaction name="actionEPROM27Exxx"/>
      </widget>
+     <widget class="QMenu" name="menuEEPROM">
+      <property name="title">
+       <string notr="true">EEPROM</string>
+      </property>
+      <widget class="QMenu" name="menuEEPROM28">
+       <property name="title">
+        <string notr="true">EEPROM X28/28C</string>
+       </property>
+       <addaction name="actionEEPROM28X_512"/>
+       <addaction name="actionEEPROM28X_1KB"/>
+       <addaction name="actionEEPROM28X_2KB"/>
+       <addaction name="actionEEPROM28X_8KB"/>
+       <addaction name="separator"/>
+       <addaction name="actionEEPROM28C_2KB"/>
+       <addaction name="actionEEPROM28C_8KB"/>
+       <addaction name="actionEEPROM28C_16KB"/>
+       <addaction name="actionEEPROM28C_32KB"/>
+       <addaction name="actionEEPROM28C_64KB"/>
+       <addaction name="actionEEPROM28C_128KB"/>
+       <addaction name="actionEEPROM28C_256KB"/>
+       <addaction name="actionEEPROM28C_512KB"/>
+       <addaction name="separator"/>
+       <addaction name="actionEEPROM28CAT_8KB"/>
+       <addaction name="separator"/>
+       <addaction name="actionEEPROM28xxx"/>
+      </widget>
+      <widget class="QMenu" name="menuEEPROMAT28">
+       <property name="title">
+        <string notr="true">EEPROM AT28C</string>
+       </property>
+       <addaction name="actionEEPROMAT28_2KB"/>
+       <addaction name="actionEEPROMAT28_8KB"/>
+       <addaction name="actionEEPROMAT28_16KB"/>
+       <addaction name="actionEEPROMAT28_32KB"/>
+       <addaction name="actionEEPROMAT28_64KB"/>
+       <addaction name="actionEEPROMAT28_128KB"/>
+       <addaction name="actionEEPROMAT28_256KB"/>
+       <addaction name="actionEEPROMAT28_512KB"/>
+       <addaction name="separator"/>
+       <addaction name="actionEEPROMAT28xxx"/>
+      </widget>
+      <addaction name="menuEEPROM28"/>
+      <addaction name="menuEEPROMAT28"/>
+     </widget>
      <addaction name="menuSRAM"/>
      <addaction name="menuEPROM"/>
      <addaction name="menuEPROMElectricalErasable"/>
-     <addaction name="actionEEPROM"/>
+     <addaction name="menuEEPROM"/>
      <addaction name="actionFlash"/>
      <addaction name="actionDummy"/>
      <addaction name="actionDummy16Bit"/>
@@ -3539,6 +3626,7 @@ Wr</string>
     <addaction name="separator"/>
     <addaction name="actionGetID"/>
     <addaction name="actionUnprotect"/>
+    <addaction name="actionProtect"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuBuffer"/>
@@ -3784,17 +3872,6 @@ Wr</string>
    </property>
    <property name="text">
     <string>SPI Memory</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionEEPROM">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>EEPROM</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -4414,6 +4491,270 @@ Wr</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+0</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28xxx">
+   <property name="text">
+    <string notr="true">EEPROM 28xxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28xxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28xxx</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_2KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C16/17</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C16/17</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C16/17</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28X_512">
+   <property name="text">
+    <string notr="true">EEPROM X2804</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM X2804</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM X2804</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28X_1KB">
+   <property name="text">
+    <string notr="true">EEPROM X2808</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM X2808</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM X2808</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28X_2KB">
+   <property name="text">
+    <string notr="true">EEPROM X2816</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM X2816</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM X2816</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28X_8KB">
+   <property name="text">
+    <string notr="true">EEPROM X28x64</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM X28x64</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM X28x64</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_2KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C16</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C16</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C16</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_8KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C64/65</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C64/65</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C64/65</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_16KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C128</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C128</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C128</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_32KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C256</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_64KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C512</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_128KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C010</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_256KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C020</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28C_512KB">
+   <property name="text">
+    <string notr="true">EEPROM 28C040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM 28C040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM 28C040</string>
+   </property>
+  </action>
+  <action name="actionEEPROM28CAT_8KB">
+   <property name="text">
+    <string notr="true">EEPROM CAT28C64/65</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM CAT28C64/65</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM CAT28C64/65</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_8KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C64</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C64</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C64</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_16KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C128</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C128</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C128</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_32KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C256</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_64KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C512/513</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C512/513</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C512/513</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_128KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C010</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_256KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C020</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28_512KB">
+   <property name="text">
+    <string notr="true">EEPROM AT28C040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28C040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28C040</string>
+   </property>
+  </action>
+  <action name="actionEEPROMAT28xxx">
+   <property name="text">
+    <string notr="true">EEPROM AT28Cxxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">EEPROM AT28Cxxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">EEPROM AT28Cxxx</string>
+   </property>
+  </action>
+  <action name="actionProtect">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Protect</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Ctrl+T</string>
    </property>
   </action>
  </widget>

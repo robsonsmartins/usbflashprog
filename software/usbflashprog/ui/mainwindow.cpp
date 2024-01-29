@@ -41,63 +41,17 @@
 #include "mainwindow.hpp"
 #include "./ui_mainwindow.h"
 
-#include "config.hpp"
 #include "settings.hpp"
 #include "backend/opcodes.hpp"
 #include "backend/devices/parallel/dummy.hpp"
 #include "backend/devices/parallel/sram.hpp"
 #include "backend/devices/parallel/eprom.hpp"
+#include "backend/devices/parallel/eeprom.hpp"
 
 // ---------------------------------------------------------------------------
 
 /* @brief Minimum length of dialog labels, in characters. */
 constexpr int kDialogLabelMinLength = 80;
-
-/* @brief CRC32 table for calculation. */
-constexpr uint32_t kCRC32Table[] = {
-    0x00000000, 0x77073096, 0xEE0E612C, 0x990951BA, 0x076DC419, 0x706AF48F,
-    0xE963A535, 0x9E6495A3, 0x0EDB8832, 0x79DCB8A4, 0xE0D5E91E, 0x97D2D988,
-    0x09B64C2B, 0x7EB17CBD, 0xE7B82D07, 0x90BF1D91, 0x1DB71064, 0x6AB020F2,
-    0xF3B97148, 0x84BE41DE, 0x1ADAD47D, 0x6DDDE4EB, 0xF4D4B551, 0x83D385C7,
-    0x136C9856, 0x646BA8C0, 0xFD62F97A, 0x8A65C9EC, 0x14015C4F, 0x63066CD9,
-    0xFA0F3D63, 0x8D080DF5, 0x3B6E20C8, 0x4C69105E, 0xD56041E4, 0xA2677172,
-    0x3C03E4D1, 0x4B04D447, 0xD20D85FD, 0xA50AB56B, 0x35B5A8FA, 0x42B2986C,
-    0xDBBBC9D6, 0xACBCF940, 0x32D86CE3, 0x45DF5C75, 0xDCD60DCF, 0xABD13D59,
-    0x26D930AC, 0x51DE003A, 0xC8D75180, 0xBFD06116, 0x21B4F4B5, 0x56B3C423,
-    0xCFBA9599, 0xB8BDA50F, 0x2802B89E, 0x5F058808, 0xC60CD9B2, 0xB10BE924,
-    0x2F6F7C87, 0x58684C11, 0xC1611DAB, 0xB6662D3D, 0x76DC4190, 0x01DB7106,
-    0x98D220BC, 0xEFD5102A, 0x71B18589, 0x06B6B51F, 0x9FBFE4A5, 0xE8B8D433,
-    0x7807C9A2, 0x0F00F934, 0x9609A88E, 0xE10E9818, 0x7F6A0DBB, 0x086D3D2D,
-    0x91646C97, 0xE6635C01, 0x6B6B51F4, 0x1C6C6162, 0x856530D8, 0xF262004E,
-    0x6C0695ED, 0x1B01A57B, 0x8208F4C1, 0xF50FC457, 0x65B0D9C6, 0x12B7E950,
-    0x8BBEB8EA, 0xFCB9887C, 0x62DD1DDF, 0x15DA2D49, 0x8CD37CF3, 0xFBD44C65,
-    0x4DB26158, 0x3AB551CE, 0xA3BC0074, 0xD4BB30E2, 0x4ADFA541, 0x3DD895D7,
-    0xA4D1C46D, 0xD3D6F4FB, 0x4369E96A, 0x346ED9FC, 0xAD678846, 0xDA60B8D0,
-    0x44042D73, 0x33031DE5, 0xAA0A4C5F, 0xDD0D7CC9, 0x5005713C, 0x270241AA,
-    0xBE0B1010, 0xC90C2086, 0x5768B525, 0x206F85B3, 0xB966D409, 0xCE61E49F,
-    0x5EDEF90E, 0x29D9C998, 0xB0D09822, 0xC7D7A8B4, 0x59B33D17, 0x2EB40D81,
-    0xB7BD5C3B, 0xC0BA6CAD, 0xEDB88320, 0x9ABFB3B6, 0x03B6E20C, 0x74B1D29A,
-    0xEAD54739, 0x9DD277AF, 0x04DB2615, 0x73DC1683, 0xE3630B12, 0x94643B84,
-    0x0D6D6A3E, 0x7A6A5AA8, 0xE40ECF0B, 0x9309FF9D, 0x0A00AE27, 0x7D079EB1,
-    0xF00F9344, 0x8708A3D2, 0x1E01F268, 0x6906C2FE, 0xF762575D, 0x806567CB,
-    0x196C3671, 0x6E6B06E7, 0xFED41B76, 0x89D32BE0, 0x10DA7A5A, 0x67DD4ACC,
-    0xF9B9DF6F, 0x8EBEEFF9, 0x17B7BE43, 0x60B08ED5, 0xD6D6A3E8, 0xA1D1937E,
-    0x38D8C2C4, 0x4FDFF252, 0xD1BB67F1, 0xA6BC5767, 0x3FB506DD, 0x48B2364B,
-    0xD80D2BDA, 0xAF0A1B4C, 0x36034AF6, 0x41047A60, 0xDF60EFC3, 0xA867DF55,
-    0x316E8EEF, 0x4669BE79, 0xCB61B38C, 0xBC66831A, 0x256FD2A0, 0x5268E236,
-    0xCC0C7795, 0xBB0B4703, 0x220216B9, 0x5505262F, 0xC5BA3BBE, 0xB2BD0B28,
-    0x2BB45A92, 0x5CB36A04, 0xC2D7FFA7, 0xB5D0CF31, 0x2CD99E8B, 0x5BDEAE1D,
-    0x9B64C2B0, 0xEC63F226, 0x756AA39C, 0x026D930A, 0x9C0906A9, 0xEB0E363F,
-    0x72076785, 0x05005713, 0x95BF4A82, 0xE2B87A14, 0x7BB12BAE, 0x0CB61B38,
-    0x92D28E9B, 0xE5D5BE0D, 0x7CDCEFB7, 0x0BDBDF21, 0x86D3D2D4, 0xF1D4E242,
-    0x68DDB3F8, 0x1FDA836E, 0x81BE16CD, 0xF6B9265B, 0x6FB077E1, 0x18B74777,
-    0x88085AE6, 0xFF0F6A70, 0x66063BCA, 0x11010B5C, 0x8F659EFF, 0xF862AE69,
-    0x616BFFD3, 0x166CCF45, 0xA00AE278, 0xD70DD2EE, 0x4E048354, 0x3903B3C2,
-    0xA7672661, 0xD06016F7, 0x4969474D, 0x3E6E77DB, 0xAED16A4A, 0xD9D65ADC,
-    0x40DF0B66, 0x37D83BF0, 0xA9BCAE53, 0xDEBB9EC5, 0x47B2CF7F, 0x30B5FFE9,
-    0xBDBDF21C, 0xCABAC28A, 0x53B39330, 0x24B4A3A6, 0xBAD03605, 0xCDD70693,
-    0x54DE5729, 0x23D967BF, 0xB3667A2E, 0xC4614AB8, 0x5D681B02, 0x2A6F2B94,
-    0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B, 0x2D02EF8D};
 
 // ---------------------------------------------------------------------------
 // General
@@ -153,34 +107,28 @@ MainWindow::MainWindow(QWidget *parent)
     checksumLabel_ = new QLabel();
     ui_->statusbar->addPermanentWidget(checksumLabel_);
 
+    // load settings
+    loadSettings_();
+
     // restore window position and size
-    QSettings settings;
-    TApplicationSettings app;
-    app.windowPos = settings.value(kSettingGeneralWindowPos).toPoint();
-    app.windowSize = settings.value(kSettingGeneralWindowSize).toSize();
-    if (app.windowPos.x() > 0 || app.windowPos.y() > 0 ||
-        app.windowSize.width() > 0 || app.windowSize.height() > 0) {
+    if (settings_.windowPos.x() > 0 || settings_.windowPos.y() > 0 ||
+        settings_.windowSize.width() > 0 || settings_.windowSize.height() > 0) {
         qDebug() << "Moving and resizing main window ("
-                 << "left = " << app.windowPos.x()
-                 << ", top = " << app.windowPos.y()
-                 << ", width = " << app.windowSize.width()
-                 << ", height = " << app.windowSize.height() << ")";
-        move(app.windowPos);
-        resize(app.windowSize);
+                 << "left = " << settings_.windowPos.x()
+                 << ", top = " << settings_.windowPos.y()
+                 << ", width = " << settings_.windowSize.width()
+                 << ", height = " << settings_.windowSize.height() << ")";
+        move(settings_.windowPos);
+        resize(settings_.windowSize);
     }
 
-    loadProgSettings_();
+    // update checksum and size
     updateCheckSum_();
 }
 
 MainWindow::~MainWindow() {
-    // save window position and size
-    QSettings settings;
-    TApplicationSettings app;
-    app.windowPos = pos();
-    app.windowSize = size();
-    settings.setValue(kSettingGeneralWindowPos, app.windowPos);
-    settings.setValue(kSettingGeneralWindowSize, app.windowSize);
+    // save settings
+    saveSettings_();
 
     delete progress_;
     if (device_) {
@@ -291,7 +239,7 @@ void MainWindow::on_actionSettings_triggered(bool checked) {
             &MainWindow::onBtnVppCalClicked);
     if (dialog.exec() == QDialog::Accepted) {
         ui_->retranslateUi(this);
-        loadProgSettings_();
+        loadSettings_();
         updateCheckSum_();
     }
 }
@@ -340,7 +288,7 @@ void MainWindow::onSelectDeviceTriggered(bool checked) {
     ui_->btnProgDevice->setText(action->text());
     createDevice_();
     configureProgControls_();
-    saveProgSettings_();
+    saveSettings_();
     hexeditor_->fill(0xFF);
     noWarningDevice_ = false;
 }
@@ -633,7 +581,35 @@ void MainWindow::on_actionUnprotect_triggered(bool checked) {
     if (!showActionWarningDialog_()) return;
     configureDeviceFromControls_();
     showDialogActionProgress_(ui_->actionUnprotect->text());
-    device_->unprotect();
+    if (device_->unprotect()) {
+        progress_->hide();
+        QMessageBox::information(
+            this, progress_->windowTitle(),
+            tr("Device is unprotected").leftJustified(kDialogLabelMinLength));
+    } else {
+        progress_->hide();
+        QMessageBox::critical(
+            this, progress_->windowTitle(),
+            tr("Unprotect failure").leftJustified(kDialogLabelMinLength));
+    }
+}
+
+void MainWindow::on_actionProtect_triggered(bool checked) {
+    if (!device_ || !device_->getInfo().capability.hasProtect) return;
+    if (!showActionWarningDialog_()) return;
+    configureDeviceFromControls_();
+    showDialogActionProgress_(ui_->actionProtect->text());
+    if (device_->protect()) {
+        progress_->hide();
+        QMessageBox::information(
+            this, progress_->windowTitle(),
+            tr("Device is protected").leftJustified(kDialogLabelMinLength));
+    } else {
+        progress_->hide();
+        QMessageBox::critical(
+            this, progress_->windowTitle(),
+            tr("Protect failure").leftJustified(kDialogLabelMinLength));
+    }
 }
 
 void MainWindow::on_btnRead_clicked() {
@@ -664,40 +640,44 @@ void MainWindow::on_btnUnprotect_clicked() {
     on_actionUnprotect_triggered();
 }
 
+void MainWindow::on_btnProtect_clicked() {
+    on_actionProtect_triggered();
+}
+
 void MainWindow::on_spinBoxProgTWP_valueChanged(int value) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_spinBoxProgTWC_valueChanged(int value) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_spinBoxProgVDDrd_valueChanged(double value) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_spinBoxProgVDDwr_valueChanged(double value) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_spinBoxProgVPP_valueChanged(double value) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_spinBoxProgVEE_valueChanged(double value) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_checkBoxProgSkipFF_toggled(bool checked) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_checkBoxProgFast_toggled(bool checked) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_comboBoxProgSectorSize_currentIndexChanged(int index) {
-    saveProgSettings_();
+    saveSettings_();
 }
 
 void MainWindow::on_comboBoxProgSize_currentIndexChanged(int index) {
@@ -706,81 +686,120 @@ void MainWindow::on_comboBoxProgSize_currentIndexChanged(int index) {
             if (!showDialogFileChanged_()) return;
         }
         uint32_t size = static_cast<uint32_t>(
-            ceil(powf(2, ui_->comboBoxProgSize->currentIndex()) * 2048.0f));
+            ceil(powf(2, ui_->comboBoxProgSize->currentIndex()) * 512.0f));
         device_->setSize(size);
         configureProgControls_();
         hexeditor_->fill(0xFF);
-        saveProgSettings_();
+        saveSettings_();
     }
 }
 
-void MainWindow::loadProgSettings_() {
-    QSettings settings;
-    TProgrammerSettings prog;
+void MainWindow::loadSettings_() {
+    QSettings configurator;
 
-    prog.device = settings.value(kSettingProgDevice).toString();
-    prog.size = settings.value(kSettingProgDeviceSize).toString().toUInt();
-    prog.twp = settings.value(kSettingProgTwp).toString().toUInt();
-    prog.twc = settings.value(kSettingProgTwc).toString().toUInt();
-    prog.vddRd = settings.value(kSettingProgVddRd).toString().toFloat();
-    prog.vddWr = settings.value(kSettingProgVddWr).toString().toFloat();
-    prog.vpp = settings.value(kSettingProgVpp).toString().toFloat();
-    prog.vee = settings.value(kSettingProgVee).toString().toFloat();
-    prog.skipFF = settings.value(kSettingProgSkipFF).toString().toInt() != 0;
-    prog.fastProg = settings.value(kSettingProgFast).toString().toInt() != 0;
-    prog.sectorSize =
-        settings.value(kSettingProgSectorSize).toString().toUInt();
+    settings_.windowPos =
+        configurator.value(kSettingGeneralWindowPos).toPoint();
+    settings_.windowSize =
+        configurator.value(kSettingGeneralWindowSize).toSize();
 
-    if (!prog.device.isEmpty()) {
-        ui_->btnProgDevice->setText(prog.device);
-        createDevice_();
-        device_->setSize(prog.size);
-        device_->setTwp(prog.twp);
-        device_->setTwc(prog.twc);
-        device_->setVddRd(prog.vddRd);
-        device_->setVddWr(prog.vddWr);
-        device_->setVpp(prog.vpp);
-        device_->setVee(prog.vee);
-        device_->setSkipFF(prog.skipFF);
-        device_->setFastProg(prog.fastProg);
-        device_->setSectorSize(prog.sectorSize);
+    settings_.prog.device = configurator.value(kSettingProgDevice).toString();
+    settings_.prog.size =
+        configurator.value(kSettingProgDeviceSize).toString().toUInt();
+    settings_.prog.twp =
+        configurator.value(kSettingProgTwp).toString().toUInt();
+    settings_.prog.twc =
+        configurator.value(kSettingProgTwc).toString().toUInt();
+    settings_.prog.vddRd =
+        configurator.value(kSettingProgVddRd).toString().toFloat();
+    settings_.prog.vddWr =
+        configurator.value(kSettingProgVddWr).toString().toFloat();
+    settings_.prog.vpp =
+        configurator.value(kSettingProgVpp).toString().toFloat();
+    settings_.prog.vee =
+        configurator.value(kSettingProgVee).toString().toFloat();
+    settings_.prog.skipFF =
+        configurator.value(kSettingProgSkipFF).toString().toInt() != 0;
+    settings_.prog.fastProg =
+        configurator.value(kSettingProgFast).toString().toInt() != 0;
+    settings_.prog.sectorSize =
+        configurator.value(kSettingProgSectorSize).toString().toUInt();
+    settings_.prog.bufferSize =
+        configurator.value(kSettingProgBufferSize).toString().toUInt();
+
+    if (!settings_.prog.bufferSize) {
+        settings_.prog.bufferSize = kDefaultDeviceBufferSize;
     }
+
+    if (!settings_.prog.device.isEmpty()) {
+        ui_->btnProgDevice->setText(settings_.prog.device);
+        createDevice_();
+        device_->setSize(settings_.prog.size);
+        device_->setTwp(settings_.prog.twp);
+        device_->setTwc(settings_.prog.twc);
+        device_->setVddRd(settings_.prog.vddRd);
+        device_->setVddWr(settings_.prog.vddWr);
+        device_->setVpp(settings_.prog.vpp);
+        device_->setVee(settings_.prog.vee);
+        device_->setSkipFF(settings_.prog.skipFF);
+        device_->setFastProg(settings_.prog.fastProg);
+        device_->setSectorSize(settings_.prog.sectorSize);
+        device_->setBufferSize(settings_.prog.bufferSize);
+    }
+
     configureProgControls_();
 }
 
-void MainWindow::saveProgSettings_() {
-    QSettings settings;
-    TProgrammerSettings prog;
+void MainWindow::saveSettings_() {
+    QSettings configurator;
 
-    prog.device = ui_->btnProgDevice->text();
-    prog.size = static_cast<uint32_t>(
-        ceil(powf(2, ui_->comboBoxProgSize->currentIndex()) * 2048.0f));
-    prog.twp = ui_->spinBoxProgTWP->value();
-    if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) prog.twp *= 1000;
-    prog.twc = ui_->spinBoxProgTWC->value();
-    if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) prog.twc *= 1000;
-    prog.vddRd = ui_->spinBoxProgVDDrd->value();
-    prog.vddWr = ui_->spinBoxProgVDDwr->value();
-    prog.vpp = ui_->spinBoxProgVPP->value();
-    prog.vee = ui_->spinBoxProgVEE->value();
-    prog.skipFF = ui_->checkBoxProgSkipFF->isChecked();
-    prog.fastProg = ui_->checkBoxProgFast->isChecked();
-    prog.sectorSize = 0;
+    settings_.windowPos = pos();
+    settings_.windowSize = size();
+
+    settings_.prog.device = ui_->btnProgDevice->text();
+    settings_.prog.size = static_cast<uint32_t>(
+        ceil(powf(2, ui_->comboBoxProgSize->currentIndex()) * 512.0f));
+    settings_.prog.twp = ui_->spinBoxProgTWP->value();
+    if (ui_->comboBoxProgTWPUnit->currentIndex() == 1) {
+        settings_.prog.twp *= 1000;
+    }
+    settings_.prog.twc = ui_->spinBoxProgTWC->value();
+    if (ui_->comboBoxProgTWCUnit->currentIndex() == 1) {
+        settings_.prog.twc *= 1000;
+    }
+    settings_.prog.vddRd = ui_->spinBoxProgVDDrd->value();
+    settings_.prog.vddWr = ui_->spinBoxProgVDDwr->value();
+    settings_.prog.vpp = ui_->spinBoxProgVPP->value();
+    settings_.prog.vee = ui_->spinBoxProgVEE->value();
+    settings_.prog.skipFF = ui_->checkBoxProgSkipFF->isChecked();
+    settings_.prog.fastProg = ui_->checkBoxProgFast->isChecked();
+    settings_.prog.sectorSize = 0;
     if (ui_->comboBoxProgSectorSize->currentIndex() != 0) {
-        prog.sectorSize = ui_->comboBoxProgSectorSize->currentText().toUInt();
+        settings_.prog.sectorSize =
+            ui_->comboBoxProgSectorSize->currentText().toUInt();
     }
 
-    settings.setValue(kSettingProgDevice, prog.device);
-    settings.setValue(kSettingProgDeviceSize, QString::number(prog.size));
-    settings.setValue(kSettingProgTwp, QString::number(prog.twp));
-    settings.setValue(kSettingProgTwc, QString::number(prog.twc));
-    settings.setValue(kSettingProgVddRd, QString::number(prog.vddRd));
-    settings.setValue(kSettingProgVddWr, QString::number(prog.vddWr));
-    settings.setValue(kSettingProgVpp, QString::number(prog.vpp));
-    settings.setValue(kSettingProgVee, QString::number(prog.vee));
-    settings.setValue(kSettingProgSkipFF, QString::number(prog.skipFF ? 1 : 0));
-    settings.setValue(kSettingProgFast, QString::number(prog.fastProg ? 1 : 0));
-    settings.setValue(kSettingProgSectorSize, QString::number(prog.sectorSize));
+    configurator.setValue(kSettingGeneralWindowPos, settings_.windowPos);
+    configurator.setValue(kSettingGeneralWindowSize, settings_.windowSize);
+
+    configurator.setValue(kSettingProgDevice, settings_.prog.device);
+    configurator.setValue(kSettingProgDeviceSize,
+                          QString::number(settings_.prog.size));
+    configurator.setValue(kSettingProgTwp, QString::number(settings_.prog.twp));
+    configurator.setValue(kSettingProgTwc, QString::number(settings_.prog.twc));
+    configurator.setValue(kSettingProgVddRd,
+                          QString::number(settings_.prog.vddRd));
+    configurator.setValue(kSettingProgVddWr,
+                          QString::number(settings_.prog.vddWr));
+    configurator.setValue(kSettingProgVpp, QString::number(settings_.prog.vpp));
+    configurator.setValue(kSettingProgVee, QString::number(settings_.prog.vee));
+    configurator.setValue(kSettingProgSkipFF,
+                          QString::number(settings_.prog.skipFF ? 1 : 0));
+    configurator.setValue(kSettingProgFast,
+                          QString::number(settings_.prog.fastProg ? 1 : 0));
+    configurator.setValue(kSettingProgSectorSize,
+                          QString::number(settings_.prog.sectorSize));
+    configurator.setValue(kSettingProgBufferSize,
+                          QString::number(settings_.prog.bufferSize));
 }
 
 void MainWindow::createDevice_() {
@@ -792,6 +811,7 @@ void MainWindow::createDevice_() {
     createDeviceIfSRAM_(ui_->btnProgDevice->text());
     createDeviceIfEPROM_(ui_->btnProgDevice->text());
     createDeviceIfErasableEPROM_(ui_->btnProgDevice->text());
+    createDeviceIfEEPROM_(ui_->btnProgDevice->text());
     if (!device_) {
         if (ui_->btnProgDevice->text() == ui_->actionDummy->text()) {
             device_ = new Dummy(this);
@@ -804,6 +824,7 @@ void MainWindow::createDevice_() {
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
     }
+    device_->setBufferSize(settings_.prog.bufferSize);
     connect(device_, &Device::onProgress, this, &MainWindow::onActionProgress);
 }
 
@@ -1100,6 +1121,112 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
     }
 }
 
+void MainWindow::createDeviceIfEEPROM_(const QString &label) {
+    uint32_t size = 0x800;
+    bool found = false, custom = false;
+    // X28
+    if (label == ui_->actionEEPROM28X_512->text()) {
+        size = 0x200;
+        found = true;
+    } else if (label == ui_->actionEEPROM28X_1KB->text()) {
+        size = 0x400;
+        found = true;
+    } else if (label == ui_->actionEEPROM28X_2KB->text()) {
+        size = 0x800;
+        found = true;
+    } else if (label == ui_->actionEEPROM28X_8KB->text()) {
+        size = 0x2000;
+        found = true;
+
+    } else if (label == ui_->actionEEPROM28C_2KB->text()) {
+        // 28C
+        size = 0x800;
+        found = true;
+    } else if (label == ui_->actionEEPROM28C_8KB->text()) {
+        size = 0x2000;
+        found = true;
+    } else if (label == ui_->actionEEPROM28C_16KB->text()) {
+        size = 0x4000;
+        found = true;
+    } else if (label == ui_->actionEEPROM28C_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionEEPROM28C_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionEEPROM28C_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEEPROM28C_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEEPROM28C_512KB->text()) {
+        size = 0x80000;
+        found = true;
+
+    } else if (label == ui_->actionEEPROM28CAT_8KB->text()) {
+        // CAT28C
+        size = 0x2000;
+        found = true;
+
+    } else if (label == ui_->actionEEPROM28xxx->text()) {
+        // Custom 28C
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new EEPROM28C(this);
+        device_->setSize(size);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+    }
+    size = 0x800;
+    found = false;
+    custom = false;
+    // AT28C
+    if (label == ui_->actionEEPROMAT28_2KB->text()) {
+        size = 0x800;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28_8KB->text()) {
+        size = 0x2000;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28_16KB->text()) {
+        size = 0x4000;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionEEPROMAT28xxx->text()) {
+        // Custom AT28C
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new EEPROM28AT(this);
+        device_->setSize(size);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+    }
+}
+
 void MainWindow::configureProgControls_() {
     ui_->spinBoxProgTWP->blockSignals(true);
     ui_->comboBoxProgTWPUnit->blockSignals(true);
@@ -1137,6 +1264,7 @@ void MainWindow::configureProgControls_() {
     ui_->actionBlankCheck->setEnabled(capability.hasBlankCheck && port);
     ui_->actionGetID->setEnabled(capability.hasGetId && port);
     ui_->actionUnprotect->setEnabled(capability.hasUnprotect && port);
+    ui_->actionProtect->setEnabled(capability.hasProtect && port);
 
     ui_->btnRead->setEnabled(ui_->actionRead->isEnabled());
     ui_->btnProgram->setEnabled(ui_->actionDoProgram->isEnabled());
@@ -1145,6 +1273,7 @@ void MainWindow::configureProgControls_() {
     ui_->btnBlankCheck->setEnabled(ui_->actionBlankCheck->isEnabled());
     ui_->btnGetID->setEnabled(ui_->actionGetID->isEnabled());
     ui_->btnUnprotect->setEnabled(ui_->actionUnprotect->isEnabled());
+    ui_->btnProtect->setEnabled(ui_->actionProtect->isEnabled());
 
     ui_->spinBoxProgVDDrd->setEnabled(capability.hasVDD && port);
     ui_->labelProgVDDrd->setEnabled(ui_->spinBoxProgVDDrd->isEnabled());
@@ -1152,10 +1281,10 @@ void MainWindow::configureProgControls_() {
     ui_->labelProgVDDwr->setEnabled(ui_->spinBoxProgVDDwr->isEnabled());
     ui_->spinBoxProgVPP->setEnabled(capability.hasVPP && port);
     ui_->labelProgVPP->setEnabled(ui_->spinBoxProgVPP->isEnabled());
-    ui_->spinBoxProgVEE->setEnabled(capability.hasVPP && port &&
-                                    (capability.hasErase ||
-                                     capability.hasGetId ||
-                                     capability.hasUnprotect));
+    ui_->spinBoxProgVEE->setEnabled(
+        capability.hasVPP && port &&
+        (capability.hasErase || capability.hasGetId ||
+         capability.hasUnprotect || capability.hasProtect));
     ui_->labelProgVEE->setEnabled(ui_->spinBoxProgVEE->isEnabled());
 
     if (device_) {
@@ -1187,7 +1316,7 @@ void MainWindow::configureProgControls_() {
         uint16_t sectorSize = device_->getSectorSize();
         int currentIndex = 0;
         if (sectorSize != 0) {
-            currentIndex = static_cast<int>(ceil(log2(sectorSize / 64.0))) + 1;
+            currentIndex = static_cast<int>(ceil(log2(sectorSize / 16.0))) + 1;
             currentIndex = qMax(0, currentIndex);
             currentIndex =
                 qMin(ui_->comboBoxProgSectorSize->count() - 1, currentIndex);
@@ -1197,7 +1326,7 @@ void MainWindow::configureProgControls_() {
         uint32_t size = device_->getSize();
         currentIndex = 0;
         if (size != 0) {
-            currentIndex = static_cast<int>(ceil(log2(size / 2048.0)));
+            currentIndex = static_cast<int>(ceil(log2(size / 512.0)));
             currentIndex = qMax(0, currentIndex);
             currentIndex =
                 qMin(ui_->comboBoxProgSize->count() - 1, currentIndex);
@@ -1272,7 +1401,8 @@ bool MainWindow::showActionWarningDialog_() {
     if (noWarningDevice_) return true;
     if (QMessageBox::warning(
             this, kApplicationFullName,
-            tr("Caution! Check the VDD, VPP and VEE voltages and the size of "
+            tr("Caution! Check the VDD, VPP and VEE voltages and the size "
+               "of "
                "the device before running, otherwise you will damage it!")
                     .leftJustified(kDialogLabelMinLength) +
                 "\n\n" +
@@ -1861,25 +1991,20 @@ void MainWindow::onDataChanged(bool status) {
 }
 
 void MainWindow::updateCheckSum_() {
-    uint32_t sum16 = 0, crc32 = 0xFFFFFFFF;
-    QByteArray data = hexeditor_->getData();
-    for (const auto &d : data) {
-        sum16 += d;
-        sum16 &= 0xFFFF;
-        crc32 = (crc32 >> 8) ^ kCRC32Table[(crc32 ^ d) & 0xFF];
-    }
-    crc32 ^= 0xFFFFFFFF;
-    QString size;
-    if (data.size() >= 1024 * 1024) {
-        size = QString("%1 MB").arg(ceilf(data.size() / (1024.0f * 1024.0f)));
-    } else if (data.size() >= 1024) {
-        size = QString("%1 KB").arg(ceilf(data.size() / 1024.0f));
+    uint32_t sum16 = hexeditor_->getAdd16();
+    uint32_t crc32 = hexeditor_->getCrc32();
+    qint32 size = hexeditor_->size();
+    QString sizeString;
+    if (size >= 1024 * 1024) {
+        sizeString = QString("%1 MB").arg(ceilf(size / (1024.0f * 1024.0f)));
+    } else if (size >= 1024) {
+        sizeString = QString("%1 KB").arg(ceilf(size / 1024.0f));
     } else {
-        size = QString("%1 Bytes").arg(data.size());
+        sizeString = QString("%1 Bytes").arg(size);
     }
     checksumLabel_->setText(
         tr("Size: %1 | Checksum: 0x%2 [ADD16] | 0x%3 [CRC32]")
-            .arg(size)
+            .arg(sizeString)
             .arg(QString("%1").arg(sum16, 4, 16, QChar('0')).toUpper())
             .arg(QString("%1").arg(crc32, 8, 16, QChar('0')).toUpper()));
 }

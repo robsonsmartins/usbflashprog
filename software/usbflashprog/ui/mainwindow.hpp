@@ -26,6 +26,7 @@
 #include "ui/qhexeditor.hpp"
 #include "backend/runner.hpp"
 #include "backend/devices/device.hpp"
+#include "config.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -83,6 +84,7 @@ class MainWindow : public QMainWindow {
     void on_actionBlankCheck_triggered(bool checked = false);
     void on_actionGetID_triggered(bool checked = false);
     void on_actionUnprotect_triggered(bool checked = false);
+    void on_actionProtect_triggered(bool checked = false);
     void on_btnRead_clicked();
     void on_btnProgram_clicked();
     void on_btnVerify_clicked();
@@ -90,6 +92,7 @@ class MainWindow : public QMainWindow {
     void on_btnBlankCheck_clicked();
     void on_btnGetID_clicked();
     void on_btnUnprotect_clicked();
+    void on_btnProtect_clicked();
     void on_spinBoxProgTWP_valueChanged(int value);
     void on_spinBoxProgTWC_valueChanged(int value);
     void on_spinBoxProgVDDrd_valueChanged(double value);
@@ -157,6 +160,8 @@ class MainWindow : public QMainWindow {
     void closeEvent(QCloseEvent *event);
 
   private:
+    /* @brief Application settings. */
+    TApplicationSettings settings_;
     /* @brief Pointer to UI object. */
     Ui::MainWindow *ui_;
     /* @brief Pointer to QHexEditor widget. */
@@ -178,9 +183,9 @@ class MainWindow : public QMainWindow {
     /* @brief Connects signals of the widgets. */
     void connectSignals_();
     /* @brief Loads configuration settings. */
-    void loadProgSettings_();
+    void loadSettings_();
     /* @brief Saves configuration settings. */
-    void saveProgSettings_();
+    void saveSettings_();
     /* @brief Creates device (Prog). */
     void createDevice_();
     /*
@@ -198,6 +203,11 @@ class MainWindow : public QMainWindow {
      * @param label The triggered action text.
      */
     void createDeviceIfErasableEPROM_(const QString &label);
+    /*
+     * @brief Creates device if it's an EEPROM (Prog).
+     * @param label The triggered action text.
+     */
+    void createDeviceIfEEPROM_(const QString &label);
     /* @brief Enables/Disables the controls (Prog). */
     void configureProgControls_();
     /* @brief Configures the device based in the ui values (Prog). */
@@ -258,10 +268,10 @@ class MainWindow : public QMainWindow {
      * @param state True to connect, false to disconnect.
      */
     void connect_(bool state = true);
-
+    /* @brief Sends value to data bus (Diag). */
     void sendDataBus_();
+    /* @brief Sends value to address bus (Diag). */
     void sendAddrBus_();
-
     /*
      * @brief Enables/Disables the controls (Diag).
      * @param state True to enable, false otherwise.

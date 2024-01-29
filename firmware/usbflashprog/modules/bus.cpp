@@ -244,6 +244,10 @@ bool AddrBus::increment() {
     return true;
 }
 
+uint32_t AddrBus::get() const {
+    return address_;
+}
+
 bool AddrBus::isValidConfig_() const {
     return (config_.aClkPin != 0xFF && config_.aClrPin != 0xFF &&
             config_.aRckPin != 0xFF && config_.aSinPin != 0xFF);

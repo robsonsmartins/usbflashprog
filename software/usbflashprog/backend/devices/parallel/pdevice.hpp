@@ -58,6 +58,10 @@ class ParDevice : public Device {
     virtual bool blankCheck();
     /* Reimplemented */
     virtual bool getId(TDeviceID &result);
+    /* Reimplemented */
+    virtual bool unprotect();
+    /* Reimplemented */
+    virtual bool protect();
 
   protected:
     /** @brief Device Operation. */
@@ -103,6 +107,18 @@ class ParDevice : public Device {
      */
     virtual bool eraseDevice();
     /**
+     * @brief Blank Check the device.
+     * @return True if success, false otherwise.
+     */
+    virtual bool blankCheckDevice();
+    /**
+     * @brief Protect/Unprotect the device.
+     * @param protect If true, protects the device.
+     *   Otherwise, unprotects the device.
+     * @return True if success, false otherwise.
+     */
+    virtual bool protectDevice(bool protect);
+    /**
      * @brief Open and init resources.
      * @param operation Device operation.
      * @return True if success, false otherwise.
@@ -125,18 +141,6 @@ class ParDevice : public Device {
     virtual void finalizeDevice();
 
   protected:
-    /* @brief Reads one byte/word from the device at the current address.
-     * @param data[out] Data read.
-     * @return True if success, false otherwise. */
-    virtual bool readData_(uint16_t &data);
-    /* @brief Writes one byte/word to the device at the current address.
-     * @param data Data to write.
-     * @return True if success, false otherwise. */
-    virtual bool writeData_(uint16_t data);
-    /* @brief Verifies one byte/word from the device at the current address.
-     * @param data Data to verify.
-     * @return True if success, false otherwise. */
-    virtual bool verifyData_(uint16_t data);
     /* @brief Generates a buffer with random data.
      * @return Buffer with random data. */
     virtual QByteArray generateRandomData_();

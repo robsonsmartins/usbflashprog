@@ -348,6 +348,11 @@ class AddrBus {
      * @return True if success. False otherwise.
      */
     bool increment();
+    /**
+     * @brief Gets the current address.
+     * @return Current address value.
+     */
+    uint32_t get() const;
 
   private:
     /* @brief Stores current address. */

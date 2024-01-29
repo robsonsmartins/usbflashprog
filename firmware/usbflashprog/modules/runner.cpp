@@ -23,71 +23,10 @@
 
 // ---------------------------------------------------------------------------
 
-Runner::Runner() {
-    settings_.twp = 0;
-    settings_.twc = 0;
-    settings_.skipFF = false;
-    settings_.progWithVpp = false;
-    settings_.vppOePin = false;
-    settings_.pgmCePin = false;
-    settings_.pgmPositive = false;
-}
+Runner::Runner() {}
 
 void Runner::init() {
-    vgenConfig_.vpp.pwmPin = kVppPwmPin;
-    vgenConfig_.vpp.pwmFreq = kVppPwmFreq;
-    vgenConfig_.vpp.pwmMinDuty = kVppPwmMinDuty;
-    vgenConfig_.vpp.pwmMaxDuty = kVppPwmMaxDuty;
-    vgenConfig_.vpp.pwmSlowStepDuty = kVppPwmSlowStepDuty;
-    vgenConfig_.vpp.pwmFastStepDuty = kVppPwmFastStepDuty;
-    vgenConfig_.vpp.pwmToleranceToFast = kVppPwmToleranceToFast;
-    vgenConfig_.vpp.adcChannel = kVppAdcChannel;
-    vgenConfig_.vpp.adcVref = kVppAdcVRef;
-    vgenConfig_.vpp.divider = kVppDivider;
-    vgenConfig_.vpp.vTolerance = kVppVoutTolerance;
-    vgenConfig_.vpp.ctrlPin = kVppCtrlPin;
-    vgenConfig_.vpp.vcSinPin = kVppVcSinPin;
-    vgenConfig_.vpp.vcClkPin = kVppVcClkPin;
-    vgenConfig_.vpp.vcClrPin = kVppVcClrPin;
-    vgenConfig_.vpp.vcRckPin = kVppVcRckPin;
-
-    vgenConfig_.vdd.pwmPin = kVddPwmPin;
-    vgenConfig_.vdd.pwmFreq = kVddPwmFreq;
-    vgenConfig_.vdd.pwmMinDuty = kVddPwmMinDuty;
-    vgenConfig_.vdd.pwmMaxDuty = kVddPwmMaxDuty;
-    vgenConfig_.vdd.pwmSlowStepDuty = kVddPwmSlowStepDuty;
-    vgenConfig_.vdd.pwmFastStepDuty = kVddPwmFastStepDuty;
-    vgenConfig_.vdd.pwmToleranceToFast = kVddPwmToleranceToFast;
-    vgenConfig_.vdd.adcChannel = kVddAdcChannel;
-    vgenConfig_.vdd.adcVref = kVddAdcVRef;
-    vgenConfig_.vdd.divider = kVddDivider;
-    vgenConfig_.vdd.vTolerance = kVddVoutTolerance;
-    vgenConfig_.vdd.ctrlPin = kVddCtrlPin;
-    vgenConfig_.vdd.onVppPin = kVddOnVppPin;
-
-    ctrlBusConfig_.cePin = kBusCEPin;
-    ctrlBusConfig_.oePin = kBusOEPin;
-    ctrlBusConfig_.wePin = kBusWEPin;
-
-    dataBusConfig_.dSinPin = kBusDataSinPin;
-    dataBusConfig_.dSoutPin = kBusDataSoutPin;
-    dataBusConfig_.dClkPin = kBusDataClkPin;
-    dataBusConfig_.dClrPin = kBusDataClrPin;
-    dataBusConfig_.dRckPin = kBusDataRckPin;
-
-    addrBusConfig_.aSinPin = kBusAddrSinPin;
-    addrBusConfig_.aClkPin = kBusAddrClkPin;
-    addrBusConfig_.aClrPin = kBusAddrClrPin;
-    addrBusConfig_.aRckPin = kBusAddrRckPin;
-
-    vgen_.configure(vgenConfig_);
-    vgen_.vpp.setV(kVppInitial);
-    vgen_.vdd.setV(kVddInitial);
-    vgen_.start();
-
-    dataBus_.configure(dataBusConfig_);
-    addrBus_.configure(addrBusConfig_);
-    ctrlBus_.configure(ctrlBusConfig_);
+    device_.init();
 }
 
 void Runner::loop() {
@@ -139,8 +78,8 @@ void Runner::runCommand_() {
         runVddCommand_(code->first);
         runVppCommand_(code->first);
         runCtrlBusCommand_(code->first);
-        runDataBusCommand_(code->first);
         runAddrBusCommand_(code->first);
+        runDataBusCommand_(code->first);
 
         runDeviceSettingsCommand_(code->first);
         runDeviceReadCommand_(code->first);
@@ -148,43 +87,38 @@ void Runner::runCommand_() {
         runDeviceVerifyCommand_(code->first);
         runDeviceGetIdCommand_(code->first);
         runDeviceEraseCommand_(code->first);
+        runDeviceProtectCommand_(code->first);
     }
 }
 
 void Runner::runVddCommand_(uint8_t opcode) {
     float v;
-    bool b;
     TByteArray response;
     switch (opcode) {
         case kCmdVddCtrl:
             serial_.putChar(kCmdResponseOk, true);
-            if (getParamAsBool_()) {
-                vgen_.vdd.on();
-            } else {
-                vgen_.vdd.off();
-            }
+            device_.vddCtrl(getParamAsBool_());
             break;
         case kCmdVddSetV:
             serial_.putChar(kCmdResponseOk, true);
-            v = getParamAsFloat_();
-            vgen_.vdd.setV(v);
+            device_.vddSetV(getParamAsFloat_());
             break;
         case kCmdVddGetV:
-            v = vgen_.vdd.getV();
+            v = device_.vddGetV();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
             serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVddGetDuty:
-            v = vgen_.vdd.getDuty();
+            v = device_.vddGetDuty();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
             serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVddGetCal:
-            v = vgen_.vdd.getCalibration();
+            v = device_.vddGetCal();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
@@ -192,19 +126,15 @@ void Runner::runVddCommand_(uint8_t opcode) {
             break;
         case kCmdVddInitCal:
             serial_.putChar(kCmdResponseOk, true);
-            vgen_.vdd.initCalibration();
+            device_.vddInitCal();
             break;
         case kCmdVddSaveCal:
             serial_.putChar(kCmdResponseOk, true);
-            v = getParamAsFloat_();
-            vgen_.vdd.saveCalibration(v);
-            vgen_.vdd.setV(kVddInitial);
-            sleep_ms(1);  // 1 ms
+            device_.vddSaveCal(getParamAsFloat_());
             break;
         case kCmdVddOnVpp:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            vgen_.vdd.onVpp(b);
+            device_.vddOnVpp(getParamAsBool_());
             break;
         default:
             break;
@@ -213,38 +143,32 @@ void Runner::runVddCommand_(uint8_t opcode) {
 
 void Runner::runVppCommand_(uint8_t opcode) {
     float v;
-    bool b;
     TByteArray response;
     switch (opcode) {
         case kCmdVppCtrl:
             serial_.putChar(kCmdResponseOk, true);
-            if (getParamAsBool_()) {
-                vgen_.vpp.on();
-            } else {
-                vgen_.vpp.off();
-            }
+            device_.vppCtrl(getParamAsBool_());
             break;
         case kCmdVppSetV:
             serial_.putChar(kCmdResponseOk, true);
-            v = getParamAsFloat_();
-            vgen_.vpp.setV(v);
+            device_.vppSetV(getParamAsFloat_());
             break;
         case kCmdVppGetV:
-            v = vgen_.vpp.getV();
+            v = device_.vppGetV();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
             serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVppGetDuty:
-            v = vgen_.vpp.getDuty();
+            v = device_.vppGetDuty();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
             serial_.putBuf(response.data(), response.size());
             break;
         case kCmdVppGetCal:
-            v = vgen_.vpp.getCalibration();
+            v = device_.vppGetCal();
             response.resize(3);
             response[0] = kCmdResponseOk;
             createParamsFromFloat_(&response, v);
@@ -252,39 +176,31 @@ void Runner::runVppCommand_(uint8_t opcode) {
             break;
         case kCmdVppInitCal:
             serial_.putChar(kCmdResponseOk, true);
-            vgen_.vpp.initCalibration();
+            device_.vppInitCal();
             break;
         case kCmdVppSaveCal:
             serial_.putChar(kCmdResponseOk, true);
-            v = getParamAsFloat_();
-            vgen_.vpp.saveCalibration(v);
-            vgen_.vpp.setV(kVppInitial);
-            sleep_ms(1);  // 1 ms
+            device_.vppSaveCal(getParamAsFloat_());
             break;
         case kCmdVppOnA9:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            vgen_.vpp.onA9(b);
+            device_.vppOnA9(getParamAsBool_());
             break;
         case kCmdVppOnA18:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            vgen_.vpp.onA18(b);
+            device_.vppOnA18(getParamAsBool_());
             break;
         case kCmdVppOnCE:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            vgen_.vpp.onCE(b);
+            device_.vppOnCE(getParamAsBool_());
             break;
         case kCmdVppOnOE:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            vgen_.vpp.onOE(b);
+            device_.vppOnOE(getParamAsBool_());
             break;
         case kCmdVppOnWE:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            vgen_.vpp.onWE(b);
+            device_.vppOnWE(getParamAsBool_());
             break;
         default:
             break;
@@ -292,22 +208,60 @@ void Runner::runVppCommand_(uint8_t opcode) {
 }
 
 void Runner::runCtrlBusCommand_(uint8_t opcode) {
-    bool b;
     switch (opcode) {
         case kCmdBusCE:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            ctrlBus_.setCE(b);
+            device_.setCE(getParamAsBool_());
             break;
         case kCmdBusOE:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            ctrlBus_.setOE(b);
+            device_.setOE(getParamAsBool_());
             break;
         case kCmdBusWE:
             serial_.putChar(kCmdResponseOk, true);
-            b = getParamAsBool_();
-            ctrlBus_.setWE(b);
+            device_.setWE(getParamAsBool_());
+            break;
+        default:
+            break;
+    }
+}
+
+void Runner::runAddrBusCommand_(uint8_t opcode) {
+    switch (opcode) {
+        case kCmdBusAddrClr:
+            if (device_.addrClr()) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdBusAddrInc:
+            if (device_.addrInc()) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdBusAddrSet:
+            if (device_.addrSet(getParamAsDWord_())) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdBusAddrSetB:
+            if (device_.addrSetB(getParamAsByte_())) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdBusAddrSetW:
+            if (device_.addrSetW(getParamAsWord_())) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
             break;
         default:
             break;
@@ -319,87 +273,39 @@ void Runner::runDataBusCommand_(uint8_t opcode) {
     TByteArray response;
     switch (opcode) {
         case kCmdBusDataClr:
-            if (dataBus_.writeByte(0)) {
+            if (device_.dataClr()) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusDataSet:
-            w = getParamAsWord_();
-            if (dataBus_.writeWord(w)) {
+            if (device_.dataSet(getParamAsByte_())) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
             }
             break;
-        case kCmdBusDataSetB:
-            w = getParamAsByte_();
-            if (dataBus_.writeByte(w)) {
+        case kCmdBusDataSetW:
+            if (device_.dataSetW(getParamAsWord_())) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
             }
             break;
         case kCmdBusDataGet:
-            w = dataBus_.readWord();
-            response.resize(3);
-            response[0] = kCmdResponseOk;
-            createParamsFromWord_(&response, w);
-            serial_.putBuf(response.data(), response.size());
-            break;
-        case kCmdBusDataGetB:
-            w = dataBus_.readByte();
+            w = device_.dataGet();
             response.resize(2);
             response[0] = kCmdResponseOk;
             createParamsFromByte_(&response, w);
             serial_.putBuf(response.data(), response.size());
             break;
-        default:
-            break;
-    }
-}
-
-void Runner::runAddrBusCommand_(uint8_t opcode) {
-    uint32_t dw;
-    switch (opcode) {
-        case kCmdBusAddrClr:
-            if (addrBus_.writeByte(0)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdBusAddrInc:
-            if (addrBus_.increment()) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdBusAddrSet:
-            dw = getParamAsDWord_();
-            if (addrBus_.writeDWord(dw)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdBusAddrSetB:
-            dw = getParamAsByte_();
-            if (addrBus_.writeByte(dw)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdBusAddrSetW:
-            dw = getParamAsWord_();
-            if (addrBus_.writeWord(dw)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
+        case kCmdBusDataGetW:
+            w = device_.dataGetW();
+            response.resize(3);
+            response[0] = kCmdResponseOk;
+            createParamsFromWord_(&response, w);
+            serial_.putBuf(response.data(), response.size());
             break;
         default:
             break;
@@ -407,38 +313,23 @@ void Runner::runAddrBusCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
-    uint32_t dw;
     switch (opcode) {
         case kCmdDeviceSetTwp:
             serial_.putChar(kCmdResponseOk, true);
-            dw = getParamAsDWord_();
-            settings_.twp = dw;
+            device_.setTwp(getParamAsDWord_());
             break;
         case kCmdDeviceSetTwc:
             serial_.putChar(kCmdResponseOk, true);
-            dw = getParamAsDWord_();
-            settings_.twc = dw;
+            device_.setTwc(getParamAsDWord_());
             break;
         case kCmdDeviceSetFlags:
             serial_.putChar(kCmdResponseOk, true);
-            dw = getParamAsByte_();
-            // 0 = Skip Write 0xFF
-            // 1 = Prog with VPP on
-            // 2 = VPP/~OE Pin
-            // 3 = ~PGM/~CE Pin
-            // 4 = PGM positive
-            // clang-format off
-            settings_.skipFF      = (dw & 0x01) != 0;
-            settings_.progWithVpp = (dw & 0x02) != 0;
-            settings_.vppOePin    = (dw & 0x04) != 0;
-            settings_.pgmCePin    = (dw & 0x08) != 0;
-            settings_.pgmPositive = (dw & 0x10) != 0;
-            // clang-format on
+            device_.setFlags(getParamAsByte_());
             break;
         case kCmdDeviceSetupBus:
-            dw = getParamAsByte_();
-            if (deviceSetupBus_(dw)) {
-                serial_.putChar(kCmdResponseOk);
+            if (device_.setupBus(getParamAsByte_())) {
+                serial_.putChar(kCmdResponseOk, true);
+                sleep_ms(kStabilizationTime);
             } else {
                 serial_.putChar(kCmdResponseNok);
             }
@@ -449,28 +340,24 @@ void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceReadCommand_(uint8_t opcode) {
-    uint16_t w;
     TByteArray response;
+    uint8_t blockSize;
     switch (opcode) {
         case kCmdDeviceRead:
-            deviceRead_(w, true);
-            if (addrBus_.increment()) {
-                // response
-                response.resize(3);
-                response[0] = kCmdResponseOk;
-                createParamsFromWord_(&response, w);
+            blockSize = getParamAsByte_();
+            response = device_.read(blockSize);
+            if (response.size() == blockSize) {
+                response.insert(response.begin(), kCmdResponseOk);
                 serial_.putBuf(response.data(), response.size());
             } else {
                 serial_.putChar(kCmdResponseNok);
             }
             break;
-        case kCmdDeviceReadB:
-            deviceRead_(w, false);
-            if (addrBus_.increment()) {
-                // response
-                response.resize(2);
-                response[0] = kCmdResponseOk;
-                createParamsFromByte_(&response, w);
+        case kCmdDeviceReadW:
+            blockSize = getParamAsByte_();
+            response = device_.readW(blockSize / 2);
+            if (response.size() == blockSize) {
+                response.insert(response.begin(), kCmdResponseOk);
                 serial_.putBuf(response.data(), response.size());
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -482,17 +369,40 @@ void Runner::runDeviceReadCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceWriteCommand_(uint8_t opcode) {
-    uint16_t w;
+    TByteArray buffer;
+    uint16_t sectorSize;
     switch (opcode) {
         case kCmdDeviceWrite:
-            if (deviceWriteAndVerify_(w, true) && addrBus_.increment()) {
+            sectorSize = getParamAsByte_();
+            buffer = readByte_(sectorSize);
+            if (device_.write(buffer, sectorSize, true)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
             }
             break;
-        case kCmdDeviceWriteB:
-            if (deviceWriteAndVerify_(w, false) && addrBus_.increment()) {
+        case kCmdDeviceWriteW:
+            sectorSize = getParamAsByte_();
+            buffer = readByte_(sectorSize);
+            if (device_.writeW(buffer, sectorSize / 2, true)) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdDeviceWriteSector:
+            sectorSize = getParamAsWord_();
+            buffer = readByte_(sectorSize);
+            if (device_.writeSector(buffer, sectorSize, true)) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdDeviceWriteSectorW:
+            sectorSize = getParamAsWord_();
+            buffer = readByte_(sectorSize);
+            if (device_.writeSectorW(buffer, sectorSize / 2, true)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -504,17 +414,38 @@ void Runner::runDeviceWriteCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceVerifyCommand_(uint8_t opcode) {
-    uint16_t w;
+    TByteArray buffer;
+    uint8_t blockSize;
     switch (opcode) {
         case kCmdDeviceVerify:
-            if (deviceVerify_(w, true) && addrBus_.increment()) {
+            blockSize = getParamAsByte_();
+            buffer = readByte_(blockSize);
+            if (device_.verify(buffer, blockSize)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
             }
             break;
-        case kCmdDeviceVerifyB:
-            if (deviceVerify_(w, false) && addrBus_.increment()) {
+        case kCmdDeviceVerifyW:
+            blockSize = getParamAsByte_();
+            buffer = readByte_(blockSize);
+            if (device_.verifyW(buffer, blockSize / 2)) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdDeviceBlankCheck:
+            blockSize = getParamAsByte_();
+            if (device_.blankCheck(blockSize)) {
+                serial_.putChar(kCmdResponseOk);
+            } else {
+                serial_.putChar(kCmdResponseNok);
+            }
+            break;
+        case kCmdDeviceBlankCheckW:
+            blockSize = getParamAsByte_();
+            if (device_.blankCheckW(blockSize / 2)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -530,7 +461,7 @@ void Runner::runDeviceGetIdCommand_(uint8_t opcode) {
     TByteArray response;
     switch (opcode) {
         case kCmdDeviceGetId:
-            if (deviceGetId_(w)) {
+            if (device_.getId(w)) {
                 // response
                 response.resize(3);
                 response[0] = kCmdResponseOk;
@@ -546,9 +477,11 @@ void Runner::runDeviceGetIdCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceEraseCommand_(uint8_t opcode) {
+    uint8_t algo;
     switch (opcode) {
         case kCmdDeviceErase:
-            if (deviceErase_()) {
+            algo = getParamAsByte_();
+            if (device_.erase(algo)) {
                 // response
                 serial_.putChar(kCmdResponseOk);
             } else {
@@ -560,267 +493,30 @@ void Runner::runDeviceEraseCommand_(uint8_t opcode) {
     }
 }
 
-void Runner::deviceRead_(uint16_t &data, bool is16bit) {
-    // ~OE/VPP is LO
-    if (settings_.vppOePin) vgen_.vdd.onVpp(false);
-    // ~OE is LO
-    ctrlBus_.setOE(true);
-    // get data
-    if (is16bit) {
-        data = dataBus_.readWord();
-    } else {
-        data = dataBus_.readByte();
-    }
-    // ~OE is HI
-    ctrlBus_.setOE(false);
-    // ~OE/VPP is VDD
-    if (settings_.vppOePin) vgen_.vdd.onVpp(true);
-}
-
-bool Runner::deviceWrite_(uint16_t &data, bool is16bit) {
-    bool success = true;
-    if (settings_.progWithVpp) {
-        // VPP on
-        vgen_.vdd.onVpp(false);
-        vgen_.vpp.on();
-    }
-    // Set DataBus
-    if (is16bit) {
-        data = getParamAsWord_();
-        if (!dataBus_.writeWord(data)) success = false;
-    } else {
-        data = getParamAsByte_();
-        if (!dataBus_.writeByte(data)) success = false;
-    }
-    if (settings_.pgmPositive) {
-        // PGM is HI (start prog pulse)
-        ctrlBus_.setWE(false);
-        sleep_us(settings_.twp);  // tWP uS
-        // PGM is LO (end prog pulse)
-        ctrlBus_.setWE(true);
-    } else {
-        // ~PGM is LO (start prog pulse)
-        ctrlBus_.setWE(true);
-        sleep_us(settings_.twp);  // tWP uS
-        // ~PGM is HI (end prog pulse)
-        ctrlBus_.setWE(false);
-    }
-    sleep_us(settings_.twc);  // tWC uS
-    if (settings_.progWithVpp) {
-        // VPP off
-        vgen_.vpp.off();
-        vgen_.vdd.onVpp(true);
-    }
-    return success;
-}
-
-bool Runner::deviceVerify_(uint16_t &data, bool is16bit) {
-    uint16_t wr, rd;
-    // get parameter
-    if (is16bit) {
-        wr = getParamAsWord_();
-    } else {
-        wr = getParamAsByte_();
-    }
-    // read
-    deviceRead_(rd, is16bit);
-    if (!is16bit) {
-        wr &= 0xFF;
-        rd &= 0xFF;
-    }
-    // verify
-    if (rd == wr) data = rd;
-    return (rd == wr);
-}
-
-bool Runner::deviceWriteAndVerify_(uint16_t &data, bool is16bit) {
-    uint16_t wr, rd;
-    bool emptyData;
-    // get parameter
-    if (is16bit) {
-        wr = getParamAsWord_();
-        emptyData = (wr == 0xFFFF);
-    } else {
-        wr = getParamAsByte_();
-        emptyData = ((wr & 0xFF) == 0xFF);
-    }
-    // write
-    if (!settings_.skipFF || !emptyData) {
-        if (!deviceWrite_(wr, is16bit)) return false;
-    }
-    // PGM/~CE is LO
-    if (settings_.pgmCePin) ctrlBus_.setWE(true);
-    // read
-    deviceRead_(rd, is16bit);
-    // PGM/~CE is HI
-    if (settings_.pgmCePin) ctrlBus_.setWE(false);
-    // verify
-    if (!is16bit) {
-        wr &= 0xFF;
-        rd &= 0xFF;
-    }
-    if (rd == wr) data = rd;
-    return (rd == wr);
-}
-
-bool Runner::deviceSetupBus_(uint8_t operation) {
-    bool success = true;
-    // reset bus
-    // VDD off and VPP off
-    vgen_.vdd.off();
-    vgen_.vpp.off();
-    vgen_.vdd.onVpp(false);
-    // Clear AddrBus
-    if (!addrBus_.writeDWord(0)) success = false;
-    // ~OE is HI
-    ctrlBus_.setOE(false);
-    // ~CE is HI
-    ctrlBus_.setCE(false);
-    if (settings_.pgmPositive) {
-        // PGM is LO (no prog pulse)
-        ctrlBus_.setWE(true);
-    } else {
-        // ~PGM is HI (no prog pulse)
-        ctrlBus_.setWE(false);
-    }
-    // VPP on xx disabled
-    vgen_.vpp.onA9(false);
-    vgen_.vpp.onA18(false);
-    vgen_.vpp.onCE(false);
-    vgen_.vpp.onOE(false);
-    vgen_.vpp.onWE(false);
-    // Clear DataBus
-    if (!dataBus_.writeWord(0)) success = false;
-
-    // setupbus
-    switch (operation) {
-        case kCmdDeviceOperationRead:
-            // VDD Rd on
-            vgen_.vdd.on();
-            // VDD Rd on VPP
-            vgen_.vdd.onVpp();
-            if (settings_.pgmCePin) {
-                // PGM/~CE is LO
-                ctrlBus_.setWE(true);
+void Runner::runDeviceProtectCommand_(uint8_t opcode) {
+    uint8_t algo;
+    switch (opcode) {
+        case kCmdDeviceProtect:
+            algo = getParamAsByte_();
+            if (device_.protect(algo)) {
+                // response
+                serial_.putChar(kCmdResponseOk);
             } else {
-                // ~PGM is HI
-                ctrlBus_.setWE(false);
+                serial_.putChar(kCmdResponseNok);
             }
-            // ~CE is LO (if pin connected)
-            ctrlBus_.setCE(true);
             break;
-        case kCmdDeviceOperationProg:
-            // VDD Wr on
-            vgen_.vdd.on();
-            if (settings_.vppOePin) {
-                // VDD Wr on VPP
-                vgen_.vdd.onVpp(true);
-            }
-            if (settings_.pgmPositive) {
-                // PGM is LO
-                ctrlBus_.setWE(true);
+        case kCmdDeviceUnprotect:
+            algo = getParamAsByte_();
+            if (device_.unprotect(algo)) {
+                // response
+                serial_.putChar(kCmdResponseOk);
             } else {
-                // ~PGM is HI
-                ctrlBus_.setWE(false);
+                serial_.putChar(kCmdResponseNok);
             }
-            // ~CE is LO (if pin connected)
-            ctrlBus_.setCE(true);
             break;
-        case kCmdDeviceOperationGetId:
-            // VDD Rd on
-            vgen_.vdd.on();
-            if (settings_.pgmCePin) {
-                // PGM/~CE is LO
-                ctrlBus_.setWE(true);
-            } else {
-                // ~PGM is HI
-                ctrlBus_.setWE(false);
-            }
-            // ~CE is LO (if pin connected)
-            ctrlBus_.setCE(true);
-            if (!settings_.vppOePin) {
-                // VDD Rd on VPP
-                vgen_.vdd.onVpp(true);
-            }
-            // ~OE is LO
-            ctrlBus_.setOE(true);
-            // VPP on A9
-            vgen_.vpp.onA9(true);
-            break;
-        case kCmdDeviceOperationReset:
         default:
             break;
     }
-    sleep_us(kStabilizationTime);
-    return success;
-}
-
-bool Runner::deviceGetId_(uint16_t &data) {
-    // Setup bus
-    if (!deviceSetupBus_(kCmdDeviceOperationGetId)) return false;
-    bool success = true;
-    uint8_t manufacturer, device;
-    // Get manufacturer data (byte)
-    manufacturer = dataBus_.readByte();
-    // Increment Address (0x01)
-    if (!addrBus_.increment()) success = false;
-    // Get device data (byte)
-    device = dataBus_.readByte();
-
-    // Check if returned values is valid (not false positive)
-    // Prepare to Read
-    if (!deviceSetupBus_(kCmdDeviceOperationRead)) success = false;
-    uint16_t rd1 = 0xFF, rd2 = 0xFF;
-    // Set Address 0x200 (A9 bit on)
-    if (!addrBus_.writeDWord(0x200)) success = false;
-    // Read Data at Address 0x200
-    deviceRead_(rd1, false);
-    // Read Data at Address 0x201
-    if (!addrBus_.increment()) success = false;
-    deviceRead_(rd2, false);
-    // Check if equals data at address 0x200/0x201
-    if ((rd1 & 0xFF) == manufacturer && (rd2 & 0xFF) == device) success = false;
-
-    // If success, return data
-    if (success) {
-        data = manufacturer;
-        data <<= 8;
-        data |= device;
-    }
-    // Reset Bus
-    deviceSetupBus_(kCmdDeviceOperationReset);
-    return success;
-}
-
-bool Runner::deviceErase_() {
-    bool success = true;
-    // Erase entire chip
-    // 27E Algorithm
-    // Addr = 0
-    if (!addrBus_.writeDWord(0)) success = false;
-    // Data = 0xFF
-    if (!dataBus_.writeWord(0xFFFF)) success = false;
-    // VPP on A9
-    vgen_.vpp.onA9(true);
-    if (settings_.pgmPositive) {
-        // PGM is HI (start erase pulse)
-        ctrlBus_.setWE(false);
-        sleep_ms(kErasePulseDuration);  // Erase Pulse
-        // PGM is LO (end erase pulse)
-        ctrlBus_.setWE(true);
-    } else {
-        // ~PGM is LO (start erase pulse)
-        ctrlBus_.setWE(true);
-        sleep_ms(kErasePulseDuration);  // Erase Pulse
-        // ~PGM is HI (end erase pulse)
-        ctrlBus_.setWE(false);
-    }
-    sleep_us(settings_.twc);  // tWC uS
-    // VPP on A9 off
-    vgen_.vpp.onA9(false);
-    // PGM/~CE is LO
-    if (settings_.pgmCePin) ctrlBus_.setWE(true);
-    return success;
 }
 
 bool Runner::getParamAsBool_() {

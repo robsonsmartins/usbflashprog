@@ -18,12 +18,10 @@
 #ifndef MODULES_RUNNER_HPP_
 #define MODULES_RUNNER_HPP_
 
-#include <string>
 #include <vector>
 #include "hal/serial.hpp"
 #include "hal/gpio.hpp"
-#include "modules/vgenerator.hpp"
-#include "modules/bus.hpp"
+#include "modules/device.hpp"
 #include "modules/opcodes.hpp"
 
 // ---------------------------------------------------------------------------
@@ -37,6 +35,10 @@
  */
 class Runner {
   public:
+    /** @brief Type of byte array. */
+    typedef std::vector<uint8_t> TByteArray;
+
+  public:
     /** @brief Constructor. */
     Runner();
     /** @brief Starts the runner. */
@@ -49,49 +51,14 @@ class Runner {
     void loop();
 
   private:
-    /* @brief Type of byte array. */
-    typedef std::vector<uint8_t> TByteArray;
-    /* @brief VGenerator instance. */
-    VGenerator vgen_;
-    /* @brief VGenerator configuration. */
-    VGenConfig vgenConfig_;
-    /* @brief Control Bus instance. */
-    CtrlBus ctrlBus_;
-    /* @brief Control Bus configuration. */
-    CtrlBusConfig ctrlBusConfig_;
-    /* @brief Data Bus instance. */
-    DataBus dataBus_;
-    /* @brief Address Bus instance. */
-    AddrBus addrBus_;
-    /* @brief Data Bus configuration. */
-    DataBusConfig dataBusConfig_;
-    /* @brief Address Bus configuration. */
-    AddrBusConfig addrBusConfig_;
     /* @brief Gpio Handler instance. */
     Gpio gpio_;
     /* @brief Serial Comm instance. */
     Serial serial_;
     /* @brief Received command. */
     TByteArray command_;
-    /* @brief Device Settings type. */
-    typedef struct TDeviceSettings {
-        /* @brief tWP Setting (microseconds). */
-        uint32_t twp;
-        /* @brief tWC Setting (microseconds). */
-        uint32_t twc;
-        /* @brief Skip Write 0xFF. */
-        bool skipFF;
-        /* @brief Prog with VPP on. */
-        bool progWithVpp;
-        /* @brief VPP/~OE Pin. */
-        bool vppOePin;
-        /* @brief ~PGM/~CE Pin. */
-        bool pgmCePin;
-        /* @brief PGM positive. */
-        bool pgmPositive;
-    } TDeviceSettings;
-    /* @brief Stores device settings. */
-    TDeviceSettings settings_;
+    /* @brief Device Handler instance. */
+    Device device_;
     /*
      * @brief Reads bytes from serial.
      * @param len Number of bytes (default is one).
@@ -175,15 +142,15 @@ class Runner {
      */
     void runCtrlBusCommand_(uint8_t opcode);
     /*
-     * @brief Runs the received command, if it's a Data Bus opcode.
-     * @param opcode Opcode of the command.
-     */
-    void runDataBusCommand_(uint8_t opcode);
-    /*
      * @brief Runs the received command, if it's an Address Bus opcode.
      * @param opcode Opcode of the command.
      */
     void runAddrBusCommand_(uint8_t opcode);
+    /*
+     * @brief Runs the received command, if it's a Data Bus opcode.
+     * @param opcode Opcode of the command.
+     */
+    void runDataBusCommand_(uint8_t opcode);
     /*
      * @brief Runs the received command, if it's a Device Settings opcode.
      * @param opcode Opcode of the command.
@@ -215,49 +182,11 @@ class Runner {
      */
     void runDeviceEraseCommand_(uint8_t opcode);
     /*
-     * @brief Runs the device read byte/word algorithm.
-     * @param data[out] Output of data read.
-     * @param is16bit If true, indicates a 16-bit device.
+     * @brief Runs the received command, if it's a Device
+     *   Protect/Unprotect opcode.
+     * @param opcode Opcode of the command.
      */
-    void deviceRead_(uint16_t &data, bool is16bit);
-    /*
-     * @brief Runs the device program byte/word algorithm.
-     * @param data[in,out] Output of data to write.
-     * @param is16bit If true, indicates a 16-bit device.
-     * @return True if sucessfull. False otherwise.
-     */
-    bool deviceWrite_(uint16_t &data, bool is16bit);
-    /*
-     * @brief Runs the device verify byte/word algorithm.
-     * @param data[in,out] Output of data read.
-     * @param is16bit If true, indicates a 16-bit device.
-     * @return True if sucessfull. False otherwise.
-     */
-    bool deviceVerify_(uint16_t &data, bool is16bit);
-    /*
-     * @brief Runs the device program and verify byte/word algorithm.
-     * @param data[in,out] Output of data to write.
-     * @param is16bit If true, indicates a 16-bit device.
-     * @return True if sucessfull. False otherwise.
-     */
-    bool deviceWriteAndVerify_(uint16_t &data, bool is16bit);
-    /*
-     * @brief Runs the device setup bus algorithm.
-     * @param operation Operation parameter.
-     * @return True if sucessfull. False otherwise.
-     */
-    bool deviceSetupBus_(uint8_t operation);
-    /*
-     * @brief Runs the device get ID algorithm.
-     * @param data[out] Output (MSB: Manufacturer ID, LSB: Device ID).
-     * @return True if sucessfull. False otherwise.
-     */
-    bool deviceGetId_(uint16_t &data);
-    /*
-     * @brief Runs the device erase algorithm.
-     * @return True if sucessfull. False otherwise.
-     */
-    bool deviceErase_();
+    void runDeviceProtectCommand_(uint8_t opcode);
 };
 
 #endif  // MODULES_RUNNER_HPP_

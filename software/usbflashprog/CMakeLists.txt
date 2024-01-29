@@ -81,6 +81,8 @@ elseif(NORMAL_BUILD)
           backend/devices/parallel/sram.hpp
           backend/devices/parallel/eprom.cpp
           backend/devices/parallel/eprom.hpp
+          backend/devices/parallel/eeprom.cpp
+          backend/devices/parallel/eeprom.hpp
           ui/qhexeditor.cpp
           ui/qhexeditor.hpp
           ui/mainwindow.cpp

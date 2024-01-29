@@ -21,6 +21,7 @@
 
 #include <chrono>
 #include <thread>
+#include <cstring>
 
 #include "backend/runner.hpp"
 #include "devices/device.hpp"
@@ -52,7 +53,7 @@ bool QSerialPort::connected = false;
 /* @brief Timeout (in milliseconds) to consider disconnect. */
 constexpr int kDisconnectTimeOut = 5000;
 /* @brief Timeout (in milliseconds) to read byte. */
-constexpr int kReadTimeOut = 200;
+constexpr int kReadTimeOut = 3000;
 
 // ---------------------------------------------------------------------------
 
@@ -141,7 +142,8 @@ Runner::Runner(QObject* parent)
       timeout_(kReadTimeOut),
       running_(false),
       error_(false),
-      address_(0) {}
+      address_(0),
+      bufferSize_(1) {}
 
 Runner::~Runner() {
     close();
@@ -218,6 +220,26 @@ void Runner::setTimeOut(uint32_t value) {
     if (timeout_ == value) return;
     timeout_ = value;
     DEBUG << "Setting timeout:" << QString("%1").arg(value);
+}
+
+uint8_t Runner::getBufferSize() const {
+    return bufferSize_;
+}
+
+void Runner::setBufferSize(uint8_t value) {
+    if (!value) value = 1;
+    // rounds to next power of two
+    if (value & (value - 1)) {
+        uint32_t exp = 1;
+        // clang-format off
+        for (exp = 1; (1 << exp) < value; exp++) {}
+        // clang-format on
+        if (exp > 7) exp = 7;  // max 128
+        value = 1 << exp;
+    }
+    if (bufferSize_ == value) return;
+    bufferSize_ = value;
+    DEBUG << "Setting buffer size:" << QString("%1").arg(value);
 }
 
 bool Runner::nop() {
@@ -469,7 +491,7 @@ bool Runner::dataClr() {
 bool Runner::dataSet(uint8_t value) {
     if (!value) return dataClr();
     TRunnerCommand cmd;
-    cmd.setByte(kCmdBusDataSetB, value);
+    cmd.setByte(kCmdBusDataSet, value);
     if (!sendCommand_(cmd)) return false;
     return true;
 }
@@ -477,21 +499,21 @@ bool Runner::dataSet(uint8_t value) {
 bool Runner::dataSetW(uint16_t value) {
     if (!value) return dataClr();
     TRunnerCommand cmd;
-    cmd.setWord(kCmdBusDataSet, value);
+    cmd.setWord(kCmdBusDataSetW, value);
     if (!sendCommand_(cmd)) return false;
     return true;
 }
 
 uint8_t Runner::dataGet() {
     TRunnerCommand cmd;
-    cmd.set(kCmdBusDataGetB);
+    cmd.set(kCmdBusDataGet);
     if (!sendCommand_(cmd)) return 0xFF;
     return cmd.responseAsByte();
 }
 
 uint16_t Runner::dataGetW() {
     TRunnerCommand cmd;
-    cmd.set(kCmdBusDataGet);
+    cmd.set(kCmdBusDataGetW);
     if (!sendCommand_(cmd)) return 0xFFFF;
     return cmd.responseAsWord();
 }
@@ -515,6 +537,11 @@ bool Runner::deviceSetTwp(uint32_t value) {
     TRunnerCommand cmd;
     cmd.setDWord(kCmdDeviceSetTwp, value);
     if (!sendCommand_(cmd)) return false;
+    // adjust timeout
+    uint32_t calculatedTime = (value * 2048) / 1000;  // 2KB
+    if (calculatedTime > timeout_) {
+        timeout_ = calculatedTime * 2;
+    }
     return true;
 }
 
@@ -522,6 +549,11 @@ bool Runner::deviceSetTwc(uint32_t value) {
     TRunnerCommand cmd;
     cmd.setDWord(kCmdDeviceSetTwc, value);
     if (!sendCommand_(cmd)) return false;
+    // adjust timeout
+    uint32_t calculatedTime = (value * 2048) / 1000;  // 2KB
+    if (calculatedTime > timeout_) {
+        timeout_ = calculatedTime * 2;
+    }
     return true;
 }
 
@@ -537,9 +569,12 @@ bool Runner::deviceResetBus() {
     return deviceSetupBus(kCmdDeviceOperationReset);
 }
 
-uint8_t Runner::deviceRead() {
+QByteArray Runner::deviceRead() {
+    QByteArray result;
     TRunnerCommand cmd;
-    cmd.set(kCmdDeviceReadB);
+    cmd.setByte(kCmdDeviceRead, bufferSize_);
+    // setup expected response size
+    cmd.opcode.result = bufferSize_;
     // no retry
     if (!sendCommand_(cmd, 0)) {
         DEBUG << "Error in deviceRead(). Last address:"
@@ -547,17 +582,25 @@ uint8_t Runner::deviceRead() {
               << "Trying use addrSet()";
         // error
         // use addrSet
-        if (!addrSet(address_)) return 0xFF;
+        if (!addrSet(address_)) return result;
         // call deviceRead already
-        if (!sendCommand_(cmd, 0)) return 0xFF;
+        if (!sendCommand_(cmd, 0)) return result;
     }
-    address_++;
-    return cmd.responseAsByte();
+    // set data
+    result.resize(bufferSize_);
+    memset(result.data(), 0xFF, bufferSize_);
+    memcpy(result.data(), cmd.response.data() + 1,
+           qMin(cmd.response.size() - 1, static_cast<int>(bufferSize_)));
+    address_ += bufferSize_;
+    return result;
 }
 
-uint16_t Runner::deviceReadW() {
+QByteArray Runner::deviceReadW() {
+    QByteArray result;
     TRunnerCommand cmd;
-    cmd.set(kCmdDeviceRead);
+    cmd.setByte(kCmdDeviceReadW, bufferSize_);
+    // setup expected response size
+    cmd.opcode.result = bufferSize_;
     // no retry
     if (!sendCommand_(cmd, 0)) {
         DEBUG << "Error in deviceReadW(). Last address:"
@@ -565,17 +608,27 @@ uint16_t Runner::deviceReadW() {
               << "Trying use addrSet()";
         // error
         // use addrSet
-        if (!addrSet(address_)) return 0xFFFF;
+        if (!addrSet(address_)) return result;
         // call deviceReadW already
-        if (!sendCommand_(cmd, 0)) return 0xFFFF;
+        if (!sendCommand_(cmd, 0)) return result;
     }
-    address_++;
-    return cmd.responseAsWord();
+    // set data
+    result.resize(bufferSize_);
+    memset(result.data(), 0xFF, bufferSize_);
+    memcpy(result.data(), cmd.response.data() + 1,
+           qMin(cmd.response.size() - 1, static_cast<int>(bufferSize_)));
+    address_ += (bufferSize_ / 2);
+    return result;
 }
 
-bool Runner::deviceWrite(uint8_t value) {
+bool Runner::deviceWrite(const QByteArray& data) {
     TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceWriteB, value);
+    cmd.setByte(kCmdDeviceWrite, bufferSize_);
+    // set data
+    cmd.params.resize(bufferSize_ + 2);
+    memset(cmd.params.data() + 2, 0xFF, bufferSize_);
+    memcpy(cmd.params.data() + 2, data.data(),
+           qMin(data.size(), static_cast<int>(bufferSize_)));
     // no retry
     if (!sendCommand_(cmd, 0)) {
         DEBUG << "Error in deviceWrite(). Last address:"
@@ -587,13 +640,18 @@ bool Runner::deviceWrite(uint8_t value) {
         // call deviceWrite already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_++;
+    address_ += bufferSize_;
     return true;
 }
 
-bool Runner::deviceWriteW(uint16_t value) {
+bool Runner::deviceWriteW(const QByteArray& data) {
     TRunnerCommand cmd;
-    cmd.setWord(kCmdDeviceWrite, value);
+    cmd.setByte(kCmdDeviceWriteW, bufferSize_);
+    // set data
+    cmd.params.resize(bufferSize_ + 2);
+    memset(cmd.params.data() + 2, 0xFF, bufferSize_);
+    memcpy(cmd.params.data() + 2, data.data(),
+           qMin(data.size(), static_cast<int>(bufferSize_)));
     // no retry
     if (!sendCommand_(cmd, 0)) {
         DEBUG << "Error in deviceWriteW(). Last address:"
@@ -605,13 +663,64 @@ bool Runner::deviceWriteW(uint16_t value) {
         // call deviceWriteW already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_++;
+    address_ += (bufferSize_ / 2);
     return true;
 }
 
-bool Runner::deviceVerify(uint8_t value) {
+bool Runner::deviceWriteSector(const QByteArray& data, uint16_t sectorSize) {
     TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceVerifyB, value);
+    cmd.setWord(kCmdDeviceWriteSector, sectorSize);
+    // set data
+    cmd.params.resize(sectorSize + 3);
+    memset(cmd.params.data() + 3, 0xFF, sectorSize);
+    memcpy(cmd.params.data() + 3, data.data(),
+           qMin(data.size(), static_cast<int>(sectorSize)));
+    // no retry
+    if (!sendCommand_(cmd, 0)) {
+        DEBUG << "Error in deviceWriteSector(). Last address:"
+              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
+              << "Trying use addrSet()";
+        // error
+        // use addrSet
+        if (!addrSet(address_)) return false;
+        // call deviceWriteSector already
+        if (!sendCommand_(cmd, 0)) return false;
+    }
+    address_ += sectorSize;
+    return true;
+}
+
+bool Runner::deviceWriteSectorW(const QByteArray& data, uint16_t sectorSize) {
+    TRunnerCommand cmd;
+    cmd.setWord(kCmdDeviceWriteSectorW, sectorSize);
+    // set data
+    cmd.params.resize(sectorSize + 3);
+    memset(cmd.params.data() + 3, 0xFF, sectorSize);
+    memcpy(cmd.params.data() + 3, data.data(),
+           qMin(data.size(), static_cast<int>(sectorSize)));
+    // no retry
+    if (!sendCommand_(cmd, 0)) {
+        DEBUG << "Error in deviceWriteSectorW(). Last address:"
+              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
+              << "Trying use addrSet()";
+        // error
+        // use addrSet
+        if (!addrSet(address_)) return false;
+        // call deviceWriteSectorW already
+        if (!sendCommand_(cmd, 0)) return false;
+    }
+    address_ += (sectorSize / 2);
+    return true;
+}
+
+bool Runner::deviceVerify(const QByteArray& data) {
+    TRunnerCommand cmd;
+    cmd.setByte(kCmdDeviceVerify, bufferSize_);
+    // set data
+    cmd.params.resize(bufferSize_ + 2);
+    memset(cmd.params.data() + 2, 0xFF, bufferSize_);
+    memcpy(cmd.params.data() + 2, data.data(),
+           qMin(data.size(), static_cast<int>(bufferSize_)));
     // no retry
     if (!sendCommand_(cmd, 0)) {
         DEBUG << "Error in deviceVerify(). Last address:"
@@ -623,13 +732,18 @@ bool Runner::deviceVerify(uint8_t value) {
         // call deviceVerify already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_++;
+    address_ += bufferSize_;
     return true;
 }
 
-bool Runner::deviceVerifyW(uint16_t value) {
+bool Runner::deviceVerifyW(const QByteArray& data) {
     TRunnerCommand cmd;
-    cmd.setWord(kCmdDeviceVerify, value);
+    cmd.setByte(kCmdDeviceVerifyW, bufferSize_);
+    // set data
+    cmd.params.resize(bufferSize_ + 2);
+    memset(cmd.params.data() + 2, 0xFF, bufferSize_);
+    memcpy(cmd.params.data() + 2, data.data(),
+           qMin(data.size(), static_cast<int>(bufferSize_)));
     // no retry
     if (!sendCommand_(cmd, 0)) {
         DEBUG << "Error in deviceVerifyW(). Last address:"
@@ -641,7 +755,43 @@ bool Runner::deviceVerifyW(uint16_t value) {
         // call deviceVerifyW already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_++;
+    address_ += (bufferSize_ / 2);
+    return true;
+}
+
+bool Runner::deviceBlankCheck() {
+    TRunnerCommand cmd;
+    cmd.setByte(kCmdDeviceBlankCheck, bufferSize_);
+    // no retry
+    if (!sendCommand_(cmd, 0)) {
+        DEBUG << "Error in deviceBlankCheck(). Last address:"
+              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
+              << "Trying use addrSet()";
+        // error
+        // use addrSet
+        if (!addrSet(address_)) return false;
+        // call deviceBlankCheck already
+        if (!sendCommand_(cmd, 0)) return false;
+    }
+    address_ += bufferSize_;
+    return true;
+}
+
+bool Runner::deviceBlankCheckW() {
+    TRunnerCommand cmd;
+    cmd.setByte(kCmdDeviceBlankCheckW, bufferSize_);
+    // no retry
+    if (!sendCommand_(cmd, 0)) {
+        DEBUG << "Error in deviceBlankCheckW(). Last address:"
+              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
+              << "Trying use addrSet()";
+        // error
+        // use addrSet
+        if (!addrSet(address_)) return false;
+        // call deviceBlankCheckW already
+        if (!sendCommand_(cmd, 0)) return false;
+    }
+    address_ += (bufferSize_ / 2);
     return true;
 }
 
@@ -656,9 +806,23 @@ TDeviceID Runner::deviceGetId() {
     return result;
 }
 
-bool Runner::deviceErase() {
+bool Runner::deviceErase(kCmdDeviceAlgorithmEnum algo) {
     TRunnerCommand cmd;
-    cmd.set(kCmdDeviceErase);
+    cmd.setByte(kCmdDeviceErase, algo);
+    if (!sendCommand_(cmd)) return false;
+    return true;
+}
+
+bool Runner::deviceUnprotect(kCmdDeviceAlgorithmEnum algo) {
+    TRunnerCommand cmd;
+    cmd.setByte(kCmdDeviceUnprotect, algo);
+    if (!sendCommand_(cmd)) return false;
+    return true;
+}
+
+bool Runner::deviceProtect(kCmdDeviceAlgorithmEnum algo) {
+    TRunnerCommand cmd;
+    cmd.setByte(kCmdDeviceProtect, algo);
     if (!sendCommand_(cmd)) return false;
     return true;
 }
@@ -687,12 +851,16 @@ void Runner::msDelay(uint32_t value) {
     auto end = start;
     int64_t elapsed = 0;
     do {
+#ifdef Q_OS_WINDOWS
+        Sleep(1);
+#else
         std::this_thread::sleep_for(std::chrono::milliseconds(1));
+#endif
         end = std::chrono::steady_clock::now();
         elapsed =
             std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
                 .count();
-        if (value > 50) processEvents();
+        if (value > 50 && (elapsed % 50) == 0) processEvents();
     } while (elapsed < value);
 }
 
@@ -757,7 +925,27 @@ bool Runner::read_(QByteArray* data, uint32_t size) {
     if (data == nullptr || !size) return true;
     data->clear();
     while (data->size() < size) {
-        if (!serial_.waitForReadyRead(timeout_)) {
+        auto start = std::chrono::steady_clock::now();
+        auto end = start;
+        int64_t elapsed = 0;
+        bool hasData = false;
+        do {
+            if (serial_.waitForReadyRead(1)) {
+                hasData = true;
+                break;
+            }
+#ifdef Q_OS_WINDOWS
+            Sleep(1);
+#else
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
+#endif
+            end = std::chrono::steady_clock::now();
+            elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+                          end - start)
+                          .count();
+            if (timeout_ > 50 && (elapsed % 50) == 0) processEvents();
+        } while (elapsed < timeout_);
+        if (!hasData) {
             DEBUG << "Error reading serial port: timeout";
             checkAlive_();
             return false;

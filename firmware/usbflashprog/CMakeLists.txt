@@ -46,6 +46,7 @@ elseif(NORMAL_BUILD)
         modules/vgenerator.cpp
         modules/bus.cpp
         modules/opcodes.cpp
+        modules/device.cpp
         modules/runner.cpp
         main.cpp
   )

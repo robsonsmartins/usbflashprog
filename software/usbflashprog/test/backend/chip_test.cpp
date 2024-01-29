@@ -130,6 +130,7 @@ void runChipTests(BaseChip *emuChip, Device *device, uint32_t size) {
     device->setPort("COM1");
     emuChip->setSize(size);
     device->setSize(size);
+    device->setBufferSize(64);
     Emulator::randomizeBuffer(buffer, size);
 
     TDeviceInformation info = device->getInfo();

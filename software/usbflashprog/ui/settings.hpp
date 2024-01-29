@@ -64,6 +64,7 @@ class SettingsDialog : public QDialog {
     void on_comboBoxLogLevel_currentIndexChanged(int index);
     void on_pushButtonVddInitCal_clicked();
     void on_pushButtonVppInitCal_clicked();
+    void on_comboBoxBufferSize_currentIndexChanged(int index);
 
   private:
     /* @brief Pointer to UI object. */

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>379</width>
-    <height>211</height>
+    <height>230</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -254,6 +254,83 @@
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLabel" name="labelBufferSize">
+             <property name="text">
+              <string>Buffer Size (Bytes)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboBoxBufferSize">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>180</width>
+               <height>25</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string notr="true">1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">4</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">8</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">16</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">32</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>64 (default)</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string notr="true">128</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QLabel" name="labelBufferSizeInfo">
+           <property name="text">
+            <string>Note: Performance may be low if the buffer size is smaller than 16 bytes</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="verticalSpacer_2">

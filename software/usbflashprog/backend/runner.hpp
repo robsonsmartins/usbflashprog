@@ -215,6 +215,16 @@ class Runner : public QObject {
      */
     void setTimeOut(uint32_t value);
     /**
+     * @brief Returns the current buffer size value for buffer operations.
+     * @return Buffer size, in bytes.
+     */
+    uint8_t getBufferSize() const;
+    /**
+     * @brief Sets the buffer size value for buffer operations.
+     * @param value Buffer size, in bytes.
+     */
+    void setBufferSize(uint8_t value);
+    /**
      * @brief Runs the NOP opcode.
      * @return True if success, false otherwise.
      */
@@ -394,7 +404,7 @@ class Runner : public QObject {
      */
     bool dataSet(uint8_t value);
     /**
-     * @brief Runs the Data Set (Word) opcode.
+     * @brief Runs the Data Set Word opcode.
      * @param value Value to set.
      * @return True if success, false otherwise.
      */
@@ -405,7 +415,7 @@ class Runner : public QObject {
      */
     uint8_t dataGet();
     /**
-     * @brief Runs the Data Get opcode.
+     * @brief Runs the Data Get Word opcode.
      * @return Data value if success, 0xFFFF otherwise.
      */
     uint16_t dataGetW();
@@ -439,39 +449,63 @@ class Runner : public QObject {
      */
     bool deviceResetBus();
     /**
-     * @brief Runs the Device Read (Byte) opcode.
-     * @return Read value if success, 0xFF otherwise.
+     * @brief Runs the Device Read Buffer (Byte) opcode.
+     * @return Read buffer if success, empty otherwise.
      */
-    uint8_t deviceRead();
+    QByteArray deviceRead();
     /**
-     * @brief Runs the Device Read (Word) opcode.
-     * @return Read value if success, 0xFFFF otherwise.
+     * @brief Runs the Device Read Buffer (Word) opcode.
+     * @return Read buffer if success, empty otherwise.
      */
-    uint16_t deviceReadW();
+    QByteArray deviceReadW();
     /**
-     * @brief Runs the Device Write (Byte) opcode.
-     * @param value Value to write.
+     * @brief Runs the Device Write Buffer (Byte) opcode.
+     * @param data Data to write.
      * @return True if success, false otherwise.
      */
-    bool deviceWrite(uint8_t value);
+    bool deviceWrite(const QByteArray& data);
     /**
-     * @brief Runs the Device Write (Word) opcode.
-     * @param value Value to write.
+     * @brief Runs the Device Write Buffer (Word) opcode.
+     * @param data Data to write.
      * @return True if success, false otherwise.
      */
-    bool deviceWriteW(uint16_t value);
+    bool deviceWriteW(const QByteArray& data);
     /**
-     * @brief Runs the Device Verify (Byte) opcode.
-     * @param value Value to verify.
+     * @brief Runs the Device Write Sector (Byte) opcode.
+     * @param data Data to write.
+     * @param sectorSize Size of sector to write, in bytes.
      * @return True if success, false otherwise.
      */
-    bool deviceVerify(uint8_t value);
+    bool deviceWriteSector(const QByteArray& data, uint16_t sectorSize);
     /**
-     * @brief Runs the Device Verify (Word) opcode.
-     * @param value Value to verify.
+     * @brief Runs the Device Write Sector (Word) opcode.
+     * @param data Data to write.
+     * @param sectorSize Size of sector to write, in bytes.
      * @return True if success, false otherwise.
      */
-    bool deviceVerifyW(uint16_t value);
+    bool deviceWriteSectorW(const QByteArray& data, uint16_t sectorSize);
+    /**
+     * @brief Runs the Device Verify Buffer (Byte) opcode.
+     * @param data Data to verify.
+     * @return True if success, false otherwise.
+     */
+    bool deviceVerify(const QByteArray& data);
+    /**
+     * @brief Runs the Device Verify Buffer (Word) opcode.
+     * @param data Data to verify.
+     * @return True if success, false otherwise.
+     */
+    bool deviceVerifyW(const QByteArray& data);
+    /**
+     * @brief Runs the Device Blank Check Buffer (Byte) opcode.
+     * @return True if success, false otherwise.
+     */
+    bool deviceBlankCheck();
+    /**
+     * @brief Runs the Device Blank Check Buffer (Word) opcode.
+     * @return True if success, false otherwise.
+     */
+    bool deviceBlankCheckW();
     /**
      * @brief Runs the Device Get ID opcode.
      * @return Device/Manufacturer ID if success, zero values otherwise.
@@ -479,9 +513,22 @@ class Runner : public QObject {
     TDeviceID deviceGetId();
     /**
      * @brief Runs the Device Erase opcode.
+     * @param algo Device algorithm.
      * @return True if success, false otherwise.
      */
-    bool deviceErase();
+    bool deviceErase(kCmdDeviceAlgorithmEnum algo);
+    /**
+     * @brief Runs the Device Unprotect opcode.
+     * @param algo Device algorithm.
+     * @return True if success, false otherwise.
+     */
+    bool deviceUnprotect(kCmdDeviceAlgorithmEnum algo);
+    /**
+     * @brief Runs the Device Protect opcode.
+     * @param algo Device algorithm.
+     * @return True if success, false otherwise.
+     */
+    bool deviceProtect(kCmdDeviceAlgorithmEnum algo);
     /**
      * @brief Pauses the program execution for a specified time
      *   (microsecond precision).
@@ -508,6 +555,8 @@ class Runner : public QObject {
     qint64 aliveTick_;
     /* @brief Stores the last address. */
     uint32_t address_;
+    /* @brief Buffer size, in bytes. */
+    uint8_t bufferSize_;
     /* @brief Indicates if an error occurred in the last operation. */
     bool error_;
     /* @brief Sends the command.

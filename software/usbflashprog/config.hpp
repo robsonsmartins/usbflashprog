@@ -100,6 +100,8 @@ constexpr const char *kSettingProgSkipFF = "Prog/SkipFF";
 constexpr const char *kSettingProgFast = "Prog/FastProg";
 /** @brief SETTING : Programmer / Sector Size. */
 constexpr const char *kSettingProgSectorSize = "Prog/SectorSize";
+/** @brief SETTING : Programmer / Buffer Size. */
+constexpr const char *kSettingProgBufferSize = "Prog/BufferSize";
 
 // ---------------------------------------------------------------------------
 /**
@@ -129,6 +131,8 @@ typedef struct TProgrammerSettings {
     bool fastProg;
     /** @brief Sector Size in bytes (0 is byte prog). */
     uint16_t sectorSize;
+    /** @brief Buffer Size in bytes. */
+    uint16_t bufferSize;
 } TProgrammerSettings;
 
 /**

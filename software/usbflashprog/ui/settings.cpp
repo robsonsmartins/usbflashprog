@@ -22,6 +22,7 @@
 #include "settings.hpp"
 #include "main.hpp"
 #include "./ui_settings.h"
+#include "backend/devices/device.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -71,9 +72,19 @@ void SettingsDialog::on_pushButtonVppInitCal_clicked() {
     emit onBtnVppCalClicked();
 }
 
+void SettingsDialog::on_comboBoxBufferSize_currentIndexChanged(int index) {
+    ui_->labelBufferSizeInfo->setVisible(index < 4);
+}
+
 TApplicationSettings SettingsDialog::loadSettings_() {
     QSettings settings;
     TApplicationSettings app = loadSettings();
+    app.prog.bufferSize =
+        settings.value(kSettingProgBufferSize).toString().toUInt();
+    if (!app.prog.bufferSize) {
+        // Default
+        app.prog.bufferSize = kDefaultDeviceBufferSize;
+    }
 
     if (app.logLevel >= 0 && app.logLevel <= 5) {
         ui_->comboBoxLogLevel->setCurrentIndex(app.logLevel);
@@ -95,6 +106,11 @@ TApplicationSettings SettingsDialog::loadSettings_() {
             break;
         }
     }
+
+    int index = static_cast<int>(std::log2(app.prog.bufferSize));
+    ui_->comboBoxBufferSize->setCurrentIndex(index);
+    ui_->labelBufferSizeInfo->setVisible(index < 4);
+
     return app;
 }
 
@@ -106,8 +122,13 @@ TApplicationSettings SettingsDialog::saveSettings_() {
     TLanguageSettings lang =
         kAppSupportedLanguages[ui_->comboBoxLanguage->currentIndex()];
     app.language = lang.code;
+    app.prog.bufferSize = static_cast<uint16_t>(
+        std::pow(2, ui_->comboBoxBufferSize->currentIndex()));
 
     settings.setValue(kSettingGeneralLogLevel, QString::number(app.logLevel));
     settings.setValue(kSettingGeneralLanguage, app.language);
+    settings.setValue(kSettingProgBufferSize,
+                      QString::number(app.prog.bufferSize));
+
     return app;
 }

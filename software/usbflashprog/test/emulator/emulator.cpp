@@ -28,6 +28,33 @@ static BaseParChip* globalEmuParChip_ = nullptr;
 
 // ---------------------------------------------------------------------------
 
+/* @brief Defines a command to send to a device. */
+typedef struct TDeviceCommand {
+    /* @brief Address. */
+    uint32_t addr;
+    /* @brief Data value. */
+    uint16_t data;
+} TDeviceCommand;
+
+// ---------------------------------------------------------------------------
+
+/* @brief Command sequence to Unprotect an EEPROM 28C/X28 (ST/Atmel/Xicor). */
+// clang-format off
+constexpr TDeviceCommand kDeviceCmdUnprotect28C[] = {
+    {0x1555, 0xAA}, {0xAAA, 0x55}, {0x1555, 0x80},
+    {0x1555, 0xAA}, {0xAAA, 0x55}, {0x1555, 0x20}
+};
+// clang-format on
+
+/* @brief Command sequence to Protect an EEPROM 28C/X28 (ST/Atmel/Xicor). */
+// clang-format off
+constexpr TDeviceCommand kDeviceCmdProtect28C[] = {
+    {0x1555, 0xAA}, {0xAAA, 0x55}, {0x1555, 0xA0}
+};
+// clang-format on
+
+// ---------------------------------------------------------------------------
+
 Emulator::Emulator(QObject* parent)
     : vdd_(5.0f),
       vpp_(12.0f),
@@ -35,6 +62,7 @@ Emulator::Emulator(QObject* parent)
       running_(false),
       error_(false),
       address_(0),
+      bufferSize_(1),
       twp_(1),
       twc_(1) {
     // clang-format off
@@ -88,6 +116,25 @@ uint32_t Emulator::getTimeOut() const {
 void Emulator::setTimeOut(uint32_t value) {
     if (timeout_ == value) return;
     timeout_ = value;
+}
+
+uint8_t Emulator::getBufferSize() const {
+    return bufferSize_;
+}
+
+void Emulator::setBufferSize(uint8_t value) {
+    if (!value) value = 1;
+    // rounds to next power of two
+    if (value & (value - 1)) {
+        uint32_t exp = 1;
+        // clang-format off
+        for (exp = 1; (1 << exp) < value; exp++) {}
+        // clang-format on
+        if (exp > 7) exp = 7;  // max 128
+        value = 1 << exp;
+    }
+    if (bufferSize_ == value) return;
+    bufferSize_ = value;
 }
 
 bool Emulator::nop() {
@@ -439,91 +486,262 @@ bool Emulator::deviceResetBus() {
     return deviceSetupBus(kCmdDeviceOperationReset);
 }
 
-uint8_t Emulator::deviceRead() {
+QByteArray Emulator::deviceRead() {
+    QByteArray result;
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
-        return 0xff;
+        return result;
     }
-    uint8_t data = deviceRead_(false);
-    // inc address
-    addrInc();
-    if (error_) return 0xff;
-    return data;
+    uint8_t data;
+    for (int i = 0; i < bufferSize_; i++) {
+        data = deviceRead_(false);
+        // inc address
+        addrInc();
+        if (error_) {
+            result.clear();
+            break;
+        }
+        result.append(data);
+    }
+    return result;
 }
 
-uint16_t Emulator::deviceReadW() {
+QByteArray Emulator::deviceReadW() {
+    QByteArray result;
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
-        return 0xffff;
+        return result;
     }
-    uint16_t data = deviceRead_(true);
-    // inc address
-    addrInc();
-    if (error_) return 0xffff;
-    return data;
+    uint16_t data;
+    for (int i = 0; i < bufferSize_; i += 2) {
+        data = deviceRead_(true);
+        // inc address
+        addrInc();
+        if (error_) {
+            result.clear();
+            break;
+        }
+        result.append((data & 0xFF00) >> 8);
+        result.append(data & 0xFF);
+    }
+    return result;
 }
 
-bool Emulator::deviceWrite(uint8_t value) {
+bool Emulator::deviceWrite(const QByteArray& data) {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    if (!deviceWrite_(value, false)) return false;
+    if (data.size() != bufferSize_) return false;
+    uint32_t startAddr = addrGet();
+    uint8_t rd, wr;
+    for (int i = 0; i < bufferSize_; i++) {
+        wr = data[i] & 0xFF;
+        if (!deviceWrite_(wr, false)) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
     // PGM/~CE is LO
     if (flags_.pgmCePin) setWE(true);
-    // read
-    uint8_t rd = deviceRead_(false);
-    // verify
-    if (error_ || rd != value) return false;
-    // inc address
-    addrInc();
+    addrSet(startAddr);
+    for (int i = 0; i < bufferSize_; i++) {
+        wr = data[i] & 0xFF;
+        // read
+        rd = deviceRead_(false);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
     if (error_) return false;
     return true;
 }
 
-bool Emulator::deviceWriteW(uint16_t value) {
+bool Emulator::deviceWriteW(const QByteArray& data) {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    if (!deviceWrite_(value, true)) return false;
+    if (data.size() != bufferSize_) return false;
+    uint32_t startAddr = addrGet();
+    uint16_t rd, wr;
+    for (int i = 0; i < bufferSize_; i += 2) {
+        wr = data[i] & 0xFF;
+        wr <<= 8;
+        wr |= (data[i + 1] & 0xFF);
+        if (!deviceWrite_(wr, true)) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
     // PGM/~CE is LO
     if (flags_.pgmCePin) setWE(true);
-    // read
-    uint16_t rd = deviceRead_(true);
-    // verify
-    if (error_ || rd != value) return false;
-    // inc address
-    addrInc();
+    addrSet(startAddr);
+    for (int i = 0; i < bufferSize_; i += 2) {
+        wr = data[i] & 0xFF;
+        wr <<= 8;
+        wr |= (data[i + 1] & 0xFF);
+        // read
+        rd = deviceRead_(true);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
     if (error_) return false;
     return true;
 }
 
-bool Emulator::deviceVerify(uint8_t value) {
+bool Emulator::deviceWriteSector(const QByteArray& data, uint16_t sectorSize) {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    // read
-    uint8_t rd = deviceRead_(false);
-    // verify
-    if (error_ || rd != value) return false;
-    // inc address
-    addrInc();
+    if (data.size() != sectorSize) return false;
+    uint32_t startAddr = addrGet();
+    uint8_t rd, wr;
+    for (int i = 0; i < sectorSize; i++) {
+        wr = data[i] & 0xFF;
+        if (!deviceWrite_(wr, false)) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
+    // PGM/~CE is LO
+    if (flags_.pgmCePin) setWE(true);
+    addrSet(startAddr);
+    for (int i = 0; i < sectorSize; i++) {
+        wr = data[i] & 0xFF;
+        // read
+        rd = deviceRead_(false);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
     return true;
 }
 
-bool Emulator::deviceVerifyW(uint16_t value) {
+bool Emulator::deviceWriteSectorW(const QByteArray& data, uint16_t sectorSize) {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    // read
-    uint16_t rd = deviceRead_(true);
-    // verify
-    if (error_ || rd != value) return false;
-    // inc address
-    addrInc();
+    if (data.size() != sectorSize) return false;
+    uint32_t startAddr = addrGet();
+    uint16_t rd, wr;
+    for (int i = 0; i < sectorSize; i += 2) {
+        wr = data[i] & 0xFF;
+        wr <<= 8;
+        wr |= (data[i + 1] & 0xFF);
+        if (!deviceWrite_(wr, true)) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
+    // PGM/~CE is LO
+    if (flags_.pgmCePin) setWE(true);
+    addrSet(startAddr);
+    for (int i = 0; i < sectorSize; i += 2) {
+        wr = data[i] & 0xFF;
+        wr <<= 8;
+        wr |= (data[i + 1] & 0xFF);
+        // read
+        rd = deviceRead_(true);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
+    return true;
+}
+
+bool Emulator::deviceVerify(const QByteArray& data) {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    if (data.size() != bufferSize_) return false;
+    uint8_t rd, wr;
+    // PGM/~CE is LO
+    if (flags_.pgmCePin) setWE(true);
+    for (int i = 0; i < bufferSize_; i++) {
+        wr = data[i] & 0xFF;
+        // read
+        rd = deviceRead_(false);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
+    return true;
+}
+
+bool Emulator::deviceVerifyW(const QByteArray& data) {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    if (data.size() != bufferSize_) return false;
+    uint16_t rd, wr;
+    // PGM/~CE is LO
+    if (flags_.pgmCePin) setWE(true);
+    for (int i = 0; i < bufferSize_; i += 2) {
+        wr = data[i] & 0xFF;
+        wr <<= 8;
+        wr |= (data[i + 1] & 0xFF);
+        // read
+        rd = deviceRead_(true);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
+    return true;
+}
+
+bool Emulator::deviceBlankCheck() {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    uint8_t rd, wr = 0xFF;
+    // PGM/~CE is LO
+    if (flags_.pgmCePin) setWE(true);
+    for (int i = 0; i < bufferSize_; i++) {
+        // read
+        rd = deviceRead_(false);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
+    return true;
+}
+
+bool Emulator::deviceBlankCheckW() {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    uint16_t rd, wr = 0xFFFF;
+    // PGM/~CE is LO
+    if (flags_.pgmCePin) setWE(true);
+    for (int i = 0; i < bufferSize_; i += 2) {
+        // read
+        rd = deviceRead_(true);
+        // verify
+        if (error_ || rd != wr) return false;
+        // inc address
+        addrInc();
+    }
+    if (error_) return false;
     return true;
 }
 
@@ -537,12 +755,28 @@ TDeviceID Emulator::deviceGetId() {
     return result;
 }
 
-bool Emulator::deviceErase() {
+bool Emulator::deviceErase(kCmdDeviceAlgorithmEnum algo) {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    return deviceErase_();
+    return deviceErase_(algo);
+}
+
+bool Emulator::deviceUnprotect(kCmdDeviceAlgorithmEnum algo) {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    return deviceProtect_(algo, false);
+}
+
+bool Emulator::deviceProtect(kCmdDeviceAlgorithmEnum algo) {
+    if (error_ || !running_ || !globalEmuParChip_) {
+        error_ = true;
+        return false;
+    }
+    return deviceProtect_(algo, true);
 }
 
 void Emulator::usDelay(uint64_t value) {
@@ -591,10 +825,10 @@ uint16_t Emulator::deviceRead_(bool is16bit) {
     return data;
 }
 
-bool Emulator::deviceWrite_(uint16_t value, bool is16bit) {
+bool Emulator::deviceWrite_(uint16_t value, bool is16bit, bool disableSkipFF) {
     bool emptyData = is16bit ? (value == 0xFFFF) : (value == 0xFF);
     // write
-    if (!flags_.skipFF || !emptyData) {
+    if (!flags_.skipFF || !emptyData || disableSkipFF) {
         if (flags_.progWithVpp) {
             // VPP on
             vddOnVpp(false);
@@ -628,6 +862,15 @@ bool Emulator::deviceWrite_(uint16_t value, bool is16bit) {
         if (error_) return false;
     }
     return true;
+}
+
+bool Emulator::writeAtAddr_(uint32_t addr, uint16_t data, bool is16bit) {
+    bool success = true;
+    if (!addrSet(addr)) success = false;
+    if (!deviceWrite_(data, is16bit, true)) success = false;
+    // sleep tWP
+    usDelay(twp_);
+    return success;
 }
 
 bool Emulator::deviceSetupBus_(kCmdDeviceOperationEnum operation) {
@@ -738,7 +981,16 @@ TDeviceID Emulator::deviceGetId_() {
     return result;
 }
 
-bool Emulator::deviceErase_() {
+bool Emulator::deviceErase_(kCmdDeviceAlgorithmEnum algo) {
+    switch (algo) {
+        case kCmdDeviceAlgorithm27E:
+            return deviceErase27E_();
+        default:
+            return false;
+    }
+}
+
+bool Emulator::deviceErase27E_() {
     // Erase entire chip
     // 27E Algorithm
     // Addr = 0
@@ -766,4 +1018,41 @@ bool Emulator::deviceErase_() {
     // PGM/~CE is LO
     if (flags_.pgmCePin) setWE(true);
     return !error_;
+}
+
+bool Emulator::deviceProtect_(kCmdDeviceAlgorithmEnum algo, bool protect) {
+    switch (algo) {
+        case kCmdDeviceAlgorithm28C:
+            return deviceProtect28C_(protect);
+        default:
+            return false;
+    }
+}
+
+bool Emulator::deviceProtect28C_(bool protect) {
+    // EEPROM 28C/X28/AT28 Algorithm
+    bool success = true;
+    // ~CE is LO
+    setCE(true);
+    // write command
+    if (protect) {
+        for (const TDeviceCommand& cmd : kDeviceCmdProtect28C) {
+            if (!writeAtAddr_(cmd.addr, cmd.data)) {
+                success = false;
+                break;
+            }
+        }
+    } else {
+        for (const TDeviceCommand& cmd : kDeviceCmdUnprotect28C) {
+            if (!writeAtAddr_(cmd.addr, cmd.data)) {
+                success = false;
+                break;
+            }
+        }
+    }
+    // sleep tWC
+    usDelay(twc_);
+    // ~CE is HI
+    setCE(false);
+    return success;
 }

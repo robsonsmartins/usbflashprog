@@ -89,6 +89,10 @@ class Emulator : public QObject {
     uint32_t getTimeOut() const;
     /** @copydoc Runner::setTimeOut(uint32_t) */
     void setTimeOut(uint32_t value);
+    /** @copydoc Runner::getBufferSize() */
+    uint8_t getBufferSize() const;
+    /** @copydoc Runner::setBufferSize(uint8_t) */
+    void setBufferSize(uint8_t value);
     /** @copydoc Runner::nop() */
     bool nop();
     /** @copydoc Runner::vddCtrl(bool) */
@@ -170,21 +174,33 @@ class Emulator : public QObject {
     /** @copydoc Runner::deviceResetBus() */
     bool deviceResetBus();
     /** @copydoc Runner::deviceRead() */
-    uint8_t deviceRead();
+    QByteArray deviceRead();
     /** @copydoc Runner::deviceReadW() */
-    uint16_t deviceReadW();
-    /** @copydoc Runner::deviceWrite(uint8_t) */
-    bool deviceWrite(uint8_t value);
-    /** @copydoc Runner::deviceWriteW(uint16_t) */
-    bool deviceWriteW(uint16_t value);
-    /** @copydoc Runner::deviceVerify(uint8_t) */
-    bool deviceVerify(uint8_t value);
-    /** @copydoc Runner::deviceVerifyW(uint16_t) */
-    bool deviceVerifyW(uint16_t value);
+    QByteArray deviceReadW();
+    /** @copydoc Runner::deviceWrite(const QByteArray&) */
+    bool deviceWrite(const QByteArray& data);
+    /** @copydoc Runner::deviceWriteW(const QByteArray&) */
+    bool deviceWriteW(const QByteArray& data);
+    /** @copydoc Runner::deviceWriteSector(const QByteArray&, uint16_t) */
+    bool deviceWriteSector(const QByteArray& data, uint16_t sectorSize);
+    /** @copydoc Runner::deviceWriteSectorW(const QByteArray&, uint16_t) */
+    bool deviceWriteSectorW(const QByteArray& data, uint16_t sectorSize);
+    /** @copydoc Runner::deviceVerify(const QByteArray&) */
+    bool deviceVerify(const QByteArray& data);
+    /** @copydoc Runner::deviceVerifyW(const QByteArray&) */
+    bool deviceVerifyW(const QByteArray& data);
+    /** @copydoc Runner::deviceBlankCheck() */
+    bool deviceBlankCheck();
+    /** @copydoc Runner::deviceBlankCheckW() */
+    bool deviceBlankCheckW();
     /** @copydoc Runner::deviceGetId() */
     TDeviceID deviceGetId();
-    /** @copydoc Runner::deviceErase() */
-    bool deviceErase();
+    /** @copydoc Runner::deviceErase(kCmdDeviceAlgorithmEnum) */
+    bool deviceErase(kCmdDeviceAlgorithmEnum algo);
+    /** @copydoc Runner::deviceUnprotect(kCmdDeviceAlgorithmEnum) */
+    bool deviceUnprotect(kCmdDeviceAlgorithmEnum algo);
+    /** @copydoc Runner::deviceProtect(kCmdDeviceAlgorithmEnum) */
+    bool deviceProtect(kCmdDeviceAlgorithmEnum algo);
     /** @copydoc Runner::usDelay(uint64_t) */
     static void usDelay(uint64_t value);
     /** @copydoc Runner::msDelay(uint32_t) */
@@ -216,6 +232,8 @@ class Emulator : public QObject {
     bool running_;
     /* @brief Stores the last address. */
     uint32_t address_;
+    /* @brief Buffer size, in bytes. */
+    uint8_t bufferSize_;
     /* @brief Indicates if an error occurred in the last operation. */
     bool error_;
     /* @brief tWP Setting (microseconds). */
@@ -231,8 +249,18 @@ class Emulator : public QObject {
     /* @brief Device Write Algorithm.
      * @param value Value to write.
      * @param is16bit True if device is 16-bit. Device is 8-bit otherwise.
+     * @param disableSkipFF True to disable skip 0xFF feature.
      * @return True if success, false otherwise. */
-    bool deviceWrite_(uint16_t value, bool is16bit);
+    bool deviceWrite_(uint16_t value, bool is16bit, bool disableSkipFF = false);
+    /*
+     * @brief Write one byte/word into device, at specified address.
+     * @param addr Address to write.
+     * @param data Data value to write.
+     * @param is16bit If true, indicates a 16-bit device.
+     *   False (default) indicates a 8-bit device.
+     * @return True if sucessfull. False otherwise.
+     */
+    bool writeAtAddr_(uint32_t addr, uint16_t data, bool is16bit = false);
     /* @brief Device Setup Bus Algorithm.
      * @param operation Operation to perform.
      * @return True if success, false otherwise. */
@@ -241,8 +269,21 @@ class Emulator : public QObject {
      * @return Device/Manufacturer ID if success, zero values otherwise. */
     TDeviceID deviceGetId_();
     /* @brief Device Erase Algorithm.
+     * @param algo Device algorithm.
      * @return True if success, false otherwise. */
-    bool deviceErase_();
+    bool deviceErase_(kCmdDeviceAlgorithmEnum algo);
+    /* @brief Runs the Device Protect/Unprotect algorithm.
+     * @param algo Device algorithm.
+     * @param protect Protect/Unprotect device.
+     * @return True if success, false otherwise. */
+    bool deviceProtect_(kCmdDeviceAlgorithmEnum algo, bool protect);
+    /* @brief Device Erase 27E Algorithm.
+     * @return True if success, false otherwise. */
+    bool deviceErase27E_();
+    /* @brief Device Protect/Unprotect 28C Algorithm.
+     * @param protect Protect/Unprotect device.
+     * @return True if success, false otherwise. */
+    bool deviceProtect28C_(bool protect);
 };
 
 #endif  // TEST_EMULATOR_EMULATOR_HPP_

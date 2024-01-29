@@ -126,6 +126,21 @@ class QHexEditor : public QHexView {
      * @brief Shows the Replace Dialog.
      */
     void showReplaceDialog(void);
+    /**
+     * @brief Returns the checksum (ADD16) of the data.
+     * @return Checksum of the data.
+     */
+    uint32_t getAdd16(void) const;
+    /**
+     * @brief Returns the checksum (CRC32) of the data.
+     * @return Checksum of the data.
+     */
+    uint32_t getCrc32(void) const;
+    /**
+     * @brief Returns if is full filled with 0xFF.
+     * @return True if full data is 0xFF. False otherwise.
+     */
+    bool isFullFF(void) const;
 
   Q_SIGNALS:
     /**
@@ -160,9 +175,17 @@ class QHexEditor : public QHexView {
     QEpromFile::QEpromFileType type_;
     /* @brief Editor mode. */
     QHexEditorMode mode_;
+    /* @brief ADD16 Checksum. */
+    uint32_t add16_;
+    /* @brief CRC32 Checksum. */
+    uint32_t crc32_;
+    /* @brief If true indicates 0xFF in full contents. */
+    bool isFullFF_;
     /* @brief Set the group length
      * @param l length, in bytes */
     void setGroupLength(unsigned int l);
+    /* @brief Calculates the checksum. */
+    void calculateChecksum(void);
 };
 
 #endif  // UI_QHEXEDITOR_HPP_

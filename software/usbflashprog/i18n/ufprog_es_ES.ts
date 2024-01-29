@@ -294,10 +294,6 @@
         <translation>Memoria Paralela</translation>
     </message>
     <message>
-        <source>SRAM</source>
-        <translation>SRAM</translation>
-    </message>
-    <message>
         <source>I2C Memory</source>
         <translation>Memoria I2C</translation>
     </message>
@@ -308,10 +304,6 @@
     <message>
         <source>EPROM (Electrical Erasable)</source>
         <translation>EPROM (Borrado Eléctrico)</translation>
-    </message>
-    <message>
-        <source>EEPROM</source>
-        <translation>EEPROM</translation>
     </message>
     <message>
         <source>Flash</source>
@@ -561,6 +553,26 @@
         <source>Unknown</source>
         <translation>Desconocido</translation>
     </message>
+    <message>
+        <source>Device is unprotected</source>
+        <translation>El dispositivo está desprotegido</translation>
+    </message>
+    <message>
+        <source>Unprotect failure</source>
+        <translation>Error al desproteger el dispositivo</translation>
+    </message>
+    <message>
+        <source>Protect</source>
+        <translation>Proteger</translation>
+    </message>
+    <message>
+        <source>Device is protected</source>
+        <translation>El dispositivo está protegido</translation>
+    </message>
+    <message>
+        <source>Protect failure</source>
+        <translation>Error al proteger el dispositivo</translation>
+    </message>
 </context>
 <context>
     <name>SettingsDialog</name>
@@ -627,6 +639,18 @@
     <message>
         <source>Board</source>
         <translation>Tarjeta</translation>
+    </message>
+    <message>
+        <source>Buffer Size (Bytes)</source>
+        <translation>Tamaño del búfer (Bytes)</translation>
+    </message>
+    <message>
+        <source>Note: Performance may be low if the buffer size is smaller than 16 bytes</source>
+        <translation>Nota: El rendimiento puede verse afectado si el tamaño del búfer es inferior a 16 bytes</translation>
+    </message>
+    <message>
+        <source>64 (default)</source>
+        <translation>64 (predeterminado)</translation>
     </message>
 </context>
 </TS>

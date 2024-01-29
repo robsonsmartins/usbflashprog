@@ -122,18 +122,26 @@ enum kCmdOpCodeEnum {
 
     /** @brief OPCODE / BUS : Opcode Data Clear. */
     kCmdBusDataClr = 0x41,
-    /** @brief OPCODE / BUS : Opcode Data Set. */
-    kCmdBusDataSet = 0x42,
     /** @brief OPCODE / BUS : Opcode Data Set Byte. */
-    kCmdBusDataSetB = 0x43,
-    /** @brief OPCODE / BUS : Opcode Data Get. */
-    kCmdBusDataGet = 0x44,
+    kCmdBusDataSet = 0x42,
+    /** @brief OPCODE / BUS : Opcode Data Set Word. */
+    kCmdBusDataSetW = 0x43,
     /** @brief OPCODE / BUS : Opcode Data Get Byte. */
-    kCmdBusDataGetB = 0x45,
+    kCmdBusDataGet = 0x44,
+    /** @brief OPCODE / BUS : Opcode Data Get Word. */
+    kCmdBusDataGetW = 0x45,
 
-    /** @brief OPCODE / DEVICE : Opcode Device Set tWP. */
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Set tWP.
+     * @details The parameter (four bytes) represents the tWP value
+     *   in microseconds.
+     */
     kCmdDeviceSetTwp = 0x81,
-    /** @brief OPCODE / DEVICE : Opcode Device Set tWC. */
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Set tWC.
+     * @details The parameter (four bytes) represents the tWC value
+     *   in microseconds.
+     */
     kCmdDeviceSetTwc = 0x82,
     /**
      * @brief OPCODE / DEVICE : Opcode Device Set Flags.
@@ -156,34 +164,94 @@ enum kCmdOpCodeEnum {
      * @details The parameter (one byte) represents the operation, and
      *   follows the table:
      * <pre>
-     * +-----------------------------------------+
-     * |Operation| Description                   |
-     * |  0x00   | Reset Bus (VDD/VPP ignored)   |
-     * |  0x01   | Prepare to Read (VPP ignored) |
-     * |  0x02   | Prepare to Program            |
-     * +-----------------------------------------+
+     * +------------------------------+
+     * |Operation| Description        |
+     * |  0x00   | Reset Bus          |
+     * |  0x01   | Prepare to Read    |
+     * |  0x02   | Prepare to Program |
+     * +------------------------------+
      * </pre>
      * @see kCmdDeviceOperationEnum
      */
     kCmdDeviceSetupBus = 0x84,
-    /** @brief OPCODE / DEVICE : Opcode Device Read Word and
-     *                           Increment Address. */
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Read Byte buffer
+     *   and Increment Address.
+     * @details The parameter (one byte) represents the buffer size,
+     *   in bytes.<br/>
+     *   The return is [size] bytes.
+     */
     kCmdDeviceRead = 0x85,
-    /** @brief OPCODE / DEVICE : Opcode Device Read Byte and
-     *                           Increment Address. */
-    kCmdDeviceReadB = 0x86,
-    /** @brief OPCODE / DEVICE : Opcode Device Write Word, Verify and
-     *                           Increment Address. */
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Read Word buffer
+     *   and Increment Address.
+     * @details The parameter (one byte) represents the buffer size,
+     *   in bytes.<br/>
+     *   The return is [size] bytes. MSB first.
+     */
+    kCmdDeviceReadW = 0x86,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Write Byte buffer,
+     *   verify and Increment Address.
+     * @details The first parameter (one byte) represents the buffer size,
+     *   in bytes.<br/>
+     *   The second parameter ([size] bytes) is the data to write.
+     */
     kCmdDeviceWrite = 0x87,
-    /** @brief OPCODE / DEVICE : Opcode Device Write Byte, Verify and
-     *                           Increment Address. */
-    kCmdDeviceWriteB = 0x88,
-    /** @brief OPCODE / DEVICE : Opcode Device Verify Word and
-     *                           Increment Address. */
-    kCmdDeviceVerify = 0x89,
-    /** @brief OPCODE / DEVICE : Opcode Device Verify Byte and
-     *                           Increment Address. */
-    kCmdDeviceVerifyB = 0x8A,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Write Word buffer,
+     *   verify and Increment Address.
+     * @details The first parameter (one byte) represents the buffer size,
+     *   in bytes.<br/>
+     *   The second parameter ([size] bytes) is the data to write. MSB first.
+     */
+    kCmdDeviceWriteW = 0x88,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Write Byte sector,
+     *   verify and Increment Address.
+     * @details The first parameter (two bytes) represents the sector size,
+     *   in bytes.<br/>
+     *   The second parameter ([size] bytes) is the data to write.
+     */
+    kCmdDeviceWriteSector = 0x89,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Write Word sector,
+     *   verify and Increment Address.
+     * @details The first parameter (two bytes) represents the sector size,
+     *   in bytes. The following are data to write (size is specified).
+     *   MSB first.
+     */
+    kCmdDeviceWriteSectorW = 0x8A,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Verify Byte buffer
+     *   and Increment Address.
+     * @details The first parameter (one byte) represents the buffer size,
+     *   in bytes.<br/>
+     *   The second parameter ([size] bytes) is the data to verify.
+     */
+    kCmdDeviceVerify = 0x8B,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Verify Word buffer
+     *   and Increment Address.
+     * @details The first parameter (one byte) represents the buffer size,
+     *   in bytes.<br/>
+     *   The second parameter ([size] bytes) is the data to verify. MSB first.
+     */
+    kCmdDeviceVerifyW = 0x8C,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Check if Byte buffer is Blank
+     *   and Increment Address.
+     * @details The parameter (one byte) represents the buffer size,
+     *   in bytes.
+     */
+    kCmdDeviceBlankCheck = 0x8D,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Check if Word buffer is Blank
+     *   and Increment Address.
+     * @details The parameter (one byte) represents the buffer size,
+     *   in bytes.
+     */
+    kCmdDeviceBlankCheckW = 0x8E,
     /**
      * @brief OPCODE / DEVICE : Opcode Device Get ID.
      * @details The result (two bytes) represents Manufacturer/Device ID,
@@ -196,9 +264,49 @@ enum kCmdOpCodeEnum {
      * +-------------------------------+
      * </pre>
      */
-    kCmdDeviceGetId = 0x8B,
-    /** @brief OPCODE / DEVICE : Opcode Device Erase. */
-    kCmdDeviceErase = 0x8C
+    kCmdDeviceGetId = 0x8F,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Erase.
+     * @details The parameter (one byte) represents the algorithm, and
+     *   follows the table:
+     * <pre>
+     * +------------------------------+
+     * |Algorithm| Description        |
+     * |  0x01   | EPROM 27E/W27/27SF |
+     * |  0x02   | EEPROM 28C         |
+     * +------------------------------+
+     * </pre>
+     * @see kCmdDeviceAlgorithmEnum
+     */
+    kCmdDeviceErase = 0x90,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Unprotect.
+     * @details The parameter (one byte) represents the algorithm, and
+     *   follows the table:
+     * <pre>
+     * +------------------------------+
+     * |Algorithm| Description        |
+     * |  0x01   | EPROM 27E/W27/27SF |
+     * |  0x02   | EEPROM 28C         |
+     * +------------------------------+
+     * </pre>
+     * @see kCmdDeviceAlgorithmEnum
+     */
+    kCmdDeviceUnprotect = 0x91,
+    /**
+     * @brief OPCODE / DEVICE : Opcode Device Protect.
+     * @details The parameter (one byte) represents the algorithm, and
+     *   follows the table:
+     * <pre>
+     * +------------------------------+
+     * |Algorithm| Description        |
+     * |  0x01   | EPROM 27E/W27/27SF |
+     * |  0x02   | EEPROM 28C         |
+     * +------------------------------+
+     * </pre>
+     * @see kCmdDeviceAlgorithmEnum
+     */
+    kCmdDeviceProtect = 0x92
 };
 
 // ---------------------------------------------------------------------------
@@ -219,6 +327,22 @@ enum kCmdDeviceOperationEnum {
     /* @brief CMD / DEVICE : Defines a operation Get ID. */
     kCmdDeviceOperationGetId = 0x03
 #endif
+};
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @brief Enumeration of the Device Algorithms.
+ * @see kCmdDeviceErase
+ * @see kCmdDeviceUnprotect
+ */
+enum kCmdDeviceAlgorithmEnum {
+    /** @brief CMD / DEVICE : Defines an unknown algorithm. */
+    kCmdDeviceAlgorithmUnknown = 0x00,
+    /** @brief CMD / DEVICE : Defines an algorithm EPROM 27E/SF/W27. */
+    kCmdDeviceAlgorithm27E = 0x01,
+    /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C. */
+    kCmdDeviceAlgorithm28C = 0x02
 };
 
 // ---------------------------------------------------------------------------
@@ -263,58 +387,64 @@ typedef std::map<kCmdOpCodeEnum, TCmdOpCode> TCmdOpCodeMap;
 // clang-format off
 /** @brief OPCODE : Opcodes group (map). */
 static const TCmdOpCodeMap kCmdOpCodes = {
-    {kCmdNop           , {kCmdNop           , "Nop"              , 0, 0}},
+    {kCmdNop                  , {kCmdNop                  , "Nop"                    , 0, 0}},
 
-    {kCmdVddCtrl       , {kCmdVddCtrl       , "Vdd Ctrl"         , 1, 0}},
-    {kCmdVddSetV       , {kCmdVddSetV       , "Vdd SetV"         , 2, 0}},
-    {kCmdVddGetV       , {kCmdVddGetV       , "Vdd GetV"         , 0, 2}},
-    {kCmdVddGetDuty    , {kCmdVddGetDuty    , "Vdd GetDuty"      , 0, 2}},
-    {kCmdVddGetCal     , {kCmdVddGetCal     , "Vdd GetCal"       , 0, 2}},
-    {kCmdVddInitCal    , {kCmdVddInitCal    , "Vdd InitCal"      , 0, 0}},
-    {kCmdVddSaveCal    , {kCmdVddSaveCal    , "Vdd SaveCal"      , 2, 0}},
-    {kCmdVddOnVpp      , {kCmdVddOnVpp      , "Vdd On Vpp"       , 1, 0}},
+    {kCmdVddCtrl              , {kCmdVddCtrl              , "Vdd Ctrl"               , 1, 0}},
+    {kCmdVddSetV              , {kCmdVddSetV              , "Vdd SetV"               , 2, 0}},
+    {kCmdVddGetV              , {kCmdVddGetV              , "Vdd GetV"               , 0, 2}},
+    {kCmdVddGetDuty           , {kCmdVddGetDuty           , "Vdd GetDuty"            , 0, 2}},
+    {kCmdVddGetCal            , {kCmdVddGetCal            , "Vdd GetCal"             , 0, 2}},
+    {kCmdVddInitCal           , {kCmdVddInitCal           , "Vdd InitCal"            , 0, 0}},
+    {kCmdVddSaveCal           , {kCmdVddSaveCal           , "Vdd SaveCal"            , 2, 0}},
+    {kCmdVddOnVpp             , {kCmdVddOnVpp             , "Vdd On Vpp"             , 1, 0}},
 
-    {kCmdVppCtrl       , {kCmdVppCtrl       , "Vpp Ctrl"         , 1, 0}},
-    {kCmdVppSetV       , {kCmdVppSetV       , "Vpp SetV"         , 2, 0}},
-    {kCmdVppGetV       , {kCmdVppGetV       , "Vpp GetV"         , 0, 2}},
-    {kCmdVppGetDuty    , {kCmdVppGetDuty    , "Vpp GetDuty"      , 0, 2}},
-    {kCmdVppGetCal     , {kCmdVppGetCal     , "Vpp GetCal"       , 0, 2}},
-    {kCmdVppInitCal    , {kCmdVppInitCal    , "Vpp InitCal"      , 0, 0}},
-    {kCmdVppSaveCal    , {kCmdVppSaveCal    , "Vpp SaveCal"      , 2, 0}},
-    {kCmdVppOnA9       , {kCmdVppOnA9       , "Vpp On A9"        , 1, 0}},
-    {kCmdVppOnA18      , {kCmdVppOnA18      , "Vpp On A18"       , 1, 0}},
-    {kCmdVppOnCE       , {kCmdVppOnCE       , "Vpp On CE"        , 1, 0}},
-    {kCmdVppOnOE       , {kCmdVppOnOE       , "Vpp On OE"        , 1, 0}},
-    {kCmdVppOnWE       , {kCmdVppOnWE       , "Vpp On WE"        , 1, 0}},
+    {kCmdVppCtrl              , {kCmdVppCtrl              , "Vpp Ctrl"               , 1, 0}},
+    {kCmdVppSetV              , {kCmdVppSetV              , "Vpp SetV"               , 2, 0}},
+    {kCmdVppGetV              , {kCmdVppGetV              , "Vpp GetV"               , 0, 2}},
+    {kCmdVppGetDuty           , {kCmdVppGetDuty           , "Vpp GetDuty"            , 0, 2}},
+    {kCmdVppGetCal            , {kCmdVppGetCal            , "Vpp GetCal"             , 0, 2}},
+    {kCmdVppInitCal           , {kCmdVppInitCal           , "Vpp InitCal"            , 0, 0}},
+    {kCmdVppSaveCal           , {kCmdVppSaveCal           , "Vpp SaveCal"            , 2, 0}},
+    {kCmdVppOnA9              , {kCmdVppOnA9              , "Vpp On A9"              , 1, 0}},
+    {kCmdVppOnA18             , {kCmdVppOnA18             , "Vpp On A18"             , 1, 0}},
+    {kCmdVppOnCE              , {kCmdVppOnCE              , "Vpp On CE"              , 1, 0}},
+    {kCmdVppOnOE              , {kCmdVppOnOE              , "Vpp On OE"              , 1, 0}},
+    {kCmdVppOnWE              , {kCmdVppOnWE              , "Vpp On WE"              , 1, 0}},
 
-    {kCmdBusCE         , {kCmdBusCE         , "Set CE"           , 1, 0}},
-    {kCmdBusOE         , {kCmdBusOE         , "Set OE"           , 1, 0}},
-    {kCmdBusWE         , {kCmdBusWE         , "Set WE"           , 1, 0}},
+    {kCmdBusCE                , {kCmdBusCE                , "Set CE"                 , 1, 0}},
+    {kCmdBusOE                , {kCmdBusOE                , "Set OE"                 , 1, 0}},
+    {kCmdBusWE                , {kCmdBusWE                , "Set WE"                 , 1, 0}},
 
-    {kCmdBusAddrClr    , {kCmdBusAddrClr    , "Addr Clr"         , 0, 0}},
-    {kCmdBusAddrInc    , {kCmdBusAddrInc    , "Addr Inc"         , 0, 0}},
-    {kCmdBusAddrSet    , {kCmdBusAddrSet    , "Addr Set"         , 3, 0}},
-    {kCmdBusAddrSetB   , {kCmdBusAddrSetB   , "Addr SetByte"     , 1, 0}},
-    {kCmdBusAddrSetW   , {kCmdBusAddrSetW   , "Addr SetWord"     , 2, 0}},
+    {kCmdBusAddrClr           , {kCmdBusAddrClr           , "Addr Clr"               , 0, 0}},
+    {kCmdBusAddrInc           , {kCmdBusAddrInc           , "Addr Inc"               , 0, 0}},
+    {kCmdBusAddrSet           , {kCmdBusAddrSet           , "Addr Set"               , 3, 0}},
+    {kCmdBusAddrSetB          , {kCmdBusAddrSetB          , "Addr SetByte"           , 1, 0}},
+    {kCmdBusAddrSetW          , {kCmdBusAddrSetW          , "Addr SetWord"           , 2, 0}},
 
-    {kCmdBusDataClr    , {kCmdBusDataClr    , "Data Clr"         , 0, 0}},
-    {kCmdBusDataSet    , {kCmdBusDataSet    , "Data Set"         , 2, 0}},
-    {kCmdBusDataSetB   , {kCmdBusDataSetB   , "Data SetByte"     , 1, 0}},
-    {kCmdBusDataGet    , {kCmdBusDataGet    , "Data Get"         , 0, 2}},
-    {kCmdBusDataGetB   , {kCmdBusDataGetB   , "Data GetByte"     , 0, 1}},
+    {kCmdBusDataClr           , {kCmdBusDataClr           , "Data Clr"               , 0, 0}},
+    {kCmdBusDataSet           , {kCmdBusDataSet           , "Data Set"               , 1, 0}},
+    {kCmdBusDataSetW          , {kCmdBusDataSetW          , "Data SetWord"           , 2, 0}},
+    {kCmdBusDataGet           , {kCmdBusDataGet           , "Data Get"               , 0, 1}},
+    {kCmdBusDataGetW          , {kCmdBusDataGetW          , "Data GetWord"           , 0, 2}},
 
-    {kCmdDeviceSetTwp  , {kCmdDeviceSetTwp  , "Device Set Twp"   , 4, 0}},
-    {kCmdDeviceSetTwc  , {kCmdDeviceSetTwc  , "Device Set Twc"   , 4, 0}},
-    {kCmdDeviceSetFlags, {kCmdDeviceSetFlags, "Device Set Flags" , 1, 0}},
-    {kCmdDeviceSetupBus, {kCmdDeviceSetupBus, "Device Setup Bus" , 1, 0}},
-    {kCmdDeviceRead    , {kCmdDeviceRead    , "Device Read"      , 0, 2}},
-    {kCmdDeviceReadB   , {kCmdDeviceReadB   , "Device ReadByte"  , 0, 1}},
-    {kCmdDeviceWrite   , {kCmdDeviceWrite   , "Device Write"     , 2, 0}},
-    {kCmdDeviceWriteB  , {kCmdDeviceWriteB  , "Device WriteByte" , 1, 0}},
-    {kCmdDeviceVerify  , {kCmdDeviceVerify  , "Device Verify"    , 2, 0}},
-    {kCmdDeviceVerifyB , {kCmdDeviceVerifyB , "Device VerifyByte", 1, 0}},
-    {kCmdDeviceGetId   , {kCmdDeviceGetId   , "Device Get ID"    , 0, 2}},
-    {kCmdDeviceErase   , {kCmdDeviceErase   , "Device Erase"     , 0, 0}}
+    {kCmdDeviceSetTwp         , {kCmdDeviceSetTwp         , "Device Set Twp"         , 4, 0}},
+    {kCmdDeviceSetTwc         , {kCmdDeviceSetTwc         , "Device Set Twc"         , 4, 0}},
+    {kCmdDeviceSetFlags       , {kCmdDeviceSetFlags       , "Device Set Flags"       , 1, 0}},
+    {kCmdDeviceSetupBus       , {kCmdDeviceSetupBus       , "Device Setup Bus"       , 1, 0}},
+    {kCmdDeviceRead           , {kCmdDeviceRead           , "Device Read"            , 1, 0}},
+    {kCmdDeviceReadW          , {kCmdDeviceReadW          , "Device ReadWord"        , 1, 0}},
+    {kCmdDeviceWrite          , {kCmdDeviceWrite          , "Device Write"           , 1, 0}},
+    {kCmdDeviceWriteW         , {kCmdDeviceWriteW         , "Device WriteWord"       , 1, 0}},
+    {kCmdDeviceWriteSector    , {kCmdDeviceWriteSector    , "Device WriteSector"     , 2, 0}},
+    {kCmdDeviceWriteSectorW   , {kCmdDeviceWriteSectorW   , "Device WriteSectorWord" , 2, 0}},
+    {kCmdDeviceVerify         , {kCmdDeviceVerify         , "Device Verify"          , 1, 0}},
+    {kCmdDeviceVerifyW        , {kCmdDeviceVerifyW        , "Device VerifyWord"      , 1, 0}},
+    {kCmdDeviceBlankCheck     , {kCmdDeviceBlankCheck     , "Device BlankCheck"      , 1, 0}},
+    {kCmdDeviceBlankCheckW    , {kCmdDeviceBlankCheckW    , "Device BlankCheckWord"  , 1, 0}},
+    {kCmdDeviceGetId          , {kCmdDeviceGetId          , "Device GetID"           , 0, 2}},
+    {kCmdDeviceErase          , {kCmdDeviceErase          , "Device Erase"           , 1, 0}},
+    {kCmdDeviceUnprotect      , {kCmdDeviceUnprotect      , "Device Unprotect"       , 1, 0}},
+    {kCmdDeviceProtect        , {kCmdDeviceProtect        , "Device Protect"         , 1, 0}}
 
 };
 // clang-format on

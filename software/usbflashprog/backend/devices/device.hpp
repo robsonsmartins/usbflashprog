@@ -34,6 +34,15 @@
 
 /**
  * @ingroup Software
+ * @brief Default size of buffer of the device commands (write, read, verify,
+ *   blank check), in bytes.
+ */
+constexpr uint8_t kDefaultDeviceBufferSize = 64;
+
+// ---------------------------------------------------------------------------
+
+/**
+ * @ingroup Software
  * @brief Enumeration of the device types.
  */
 enum kDeviceTypeEnum {
@@ -84,6 +93,8 @@ typedef struct TDeviceCapabilities {
     bool hasBlankCheck;
     /** @brief Device has Unprotect function. */
     bool hasUnprotect;
+    /** @brief Device has Protect function. */
+    bool hasProtect;
     /** @brief Device has Sector Size configuration. */
     bool hasSectorSize;
     /** @brief Device has Fast Prog/Erase configuration. */
@@ -166,6 +177,16 @@ class Device : public QObject {
      * @return Path of serial port, or empty if none.
      */
     virtual QString getPort() const;
+    /**
+     * @brief Returns the current buffer size value for buffer operations.
+     * @return Buffer size, in bytes.
+     */
+    uint8_t getBufferSize() const;
+    /**
+     * @brief Sets the buffer size value for buffer operations.
+     * @param value Buffer size, in bytes.
+     */
+    void setBufferSize(uint8_t value);
     /**
      * @brief Sets the tWP.
      * @param us tWP value, in microseconds.
@@ -310,6 +331,11 @@ class Device : public QObject {
      * @return True if success, false otherwise.
      */
     virtual bool unprotect();
+    /**
+     * @brief Protects the Device.
+     * @return True if success, false otherwise.
+     */
+    virtual bool protect();
 
   Q_SIGNALS:
     /**
@@ -359,6 +385,10 @@ class Device : public QObject {
     bool fastProg_;
     /* @brief Sector size, in bytes (0 = byte mode). */
     uint16_t sectorSize_;
+    /* @brief Erase algorithm. */
+    kCmdDeviceAlgorithmEnum eraseAlgo_;
+    /* @brief Protect/Unprotect algorithm. */
+    kCmdDeviceAlgorithmEnum protectAlgo_;
     /* @brief Serial port path. */
     QString port_;
     /* @brief The Runner instance. */

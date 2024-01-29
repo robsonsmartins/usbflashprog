@@ -99,7 +99,7 @@ void EPROM::setSize(uint32_t value) {
 // ---------------------------------------------------------------------------
 
 EPROM27::EPROM27(QObject *parent) : EPROM(parent) {
-    info_.name = "EPROM 27xxx";
+    info_.name = "EPROM 27 (NMOS)";
     twp_ = 50000;
     twc_ = 50;
     vddRd_ = 5.0f;
@@ -114,7 +114,7 @@ EPROM27::~EPROM27() {}
 // ---------------------------------------------------------------------------
 
 EPROM27C::EPROM27C(QObject *parent) : EPROM(parent) {
-    info_.name = "EPROM 27Cxxx";
+    info_.name = "EPROM 27C";
     twp_ = 500;
     twc_ = 8;
     vddRd_ = 5.0f;
@@ -129,7 +129,7 @@ EPROM27C::~EPROM27C() {}
 // ---------------------------------------------------------------------------
 
 EPROM27C16Bit::EPROM27C16Bit(QObject *parent) : EPROM27C(parent) {
-    info_.name = "EPROM 27Cxxx (16Bit)";
+    info_.name = "EPROM 27C (16Bit)";
     is16bit_ = true;
     DEBUG << info_.toString();
 }
@@ -149,6 +149,7 @@ EPROM27E::EPROM27E(QObject *parent) : EPROM27C(parent) {
     vddWr_ = 5.0f;
     vpp_ = 12.0f;
     vee_ = 14.0f;
+    eraseAlgo_ = kCmdDeviceAlgorithm27E;
     DEBUG << info_.toString();
 }
 

@@ -108,6 +108,7 @@ TDeviceCapabilities::TDeviceCapabilities()
       hasRead(false),
       hasBlankCheck(false),
       hasUnprotect(false),
+      hasProtect(false),
       hasSectorSize(false),
       hasFastProg(false),
       hasSkipFF(false),
@@ -143,6 +144,7 @@ QString TDeviceInformation::toString() const {
     ts << ", hasRead=" << (capability.hasRead ? 1 : 0);
     ts << ", hasBlankCheck=" << (capability.hasBlankCheck ? 1 : 0);
     ts << ", hasUnprotect=" << (capability.hasUnprotect ? 1 : 0);
+    ts << ", hasProtect=" << (capability.hasProtect ? 1 : 0);
     ts << ", hasSectorSize=" << (capability.hasSectorSize ? 1 : 0);
     ts << ", hasFastProg=" << (capability.hasFastProg ? 1 : 0);
     ts << ", hasSkipFF=" << (capability.hasSkipFF ? 1 : 0);
@@ -169,6 +171,8 @@ Device::Device(QObject *parent)
       skipFF_(false),
       fastProg_(false),
       sectorSize_(0),
+      eraseAlgo_(kCmdDeviceAlgorithmUnknown),
+      protectAlgo_(kCmdDeviceAlgorithmUnknown),
       runner_(this) {
     info_.deviceType = kDeviceParallelMemory;
     info_.name = "Device";
@@ -179,6 +183,7 @@ Device::Device(QObject *parent)
     info_.capability.hasRead = false;
     info_.capability.hasBlankCheck = false;
     info_.capability.hasUnprotect = false;
+    info_.capability.hasProtect = false;
     info_.capability.hasSectorSize = false;
     info_.capability.hasFastProg = false;
     info_.capability.hasSkipFF = false;
@@ -204,6 +209,14 @@ void Device::setPort(const QString &path) {
 
 QString Device::getPort() const {
     return port_;
+}
+
+uint8_t Device::getBufferSize() const {
+    return runner_.getBufferSize();
+}
+
+void Device::setBufferSize(uint8_t value) {
+    runner_.setBufferSize(value);
 }
 
 void Device::setSize(uint32_t value) {
@@ -350,5 +363,9 @@ bool Device::blankCheck() {
 }
 
 bool Device::unprotect() {
+    return false;
+}
+
+bool Device::protect() {
     return false;
 }

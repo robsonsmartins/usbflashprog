@@ -17,5 +17,6 @@
         <file>toolicons/action-blank-check.ico</file>
         <file>toolicons/action-getid.ico</file>
         <file>toolicons/action-unprotect.ico</file>
+        <file>toolicons/action-protect.ico</file>
     </qresource>
 </RCC>

@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # USB EPROM/Flash Programmer
 #
-# Copyright (2022) Robson Martins
+# Copyright (2024) Robson Martins
 #
 # This work is licensed under a Creative Commons Attribution-NonCommercial-
 # ShareAlike 4.0 International License.
@@ -29,7 +29,7 @@ jobs:
       # Checkout the sources
       # ------------------------------------------------------------------------
       - name: Checkout the Sources
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
     
       # ------------------------------------------------------------------------
       # Install MinGW (Windows)
@@ -73,7 +73,7 @@ jobs:
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
         name: Cache Qt (Windows 64-bits)
         id: cache-qt-win64
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ../QtCacheWin64
           key: ${{ runner.os }}-QtCacheWin64
@@ -97,7 +97,7 @@ jobs:
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Cache Qt (Windows 32-bits)
         id: cache-qt-win32
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ../QtCacheWin32
           key: ${{ runner.os }}-QtCacheWin32
@@ -251,28 +251,28 @@ jobs:
       # ------------------------------------------------------------------------
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86_64'
         name: Upload the Installer (Windows 64-bits)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*setup.exe"
           name: "ufprog-win64-installer"
 
       - if: matrix.os == 'windows-latest' && matrix.arch == 'x86'
         name: Upload the Installer (Windows 32-bits)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*setup.exe"
           name: "ufprog-win32-installer"
 
       - if: matrix.os == 'ubuntu-latest' && matrix.arch == 'x86_64'
         name: Upload the Packages (Linux 64-bits)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-*.*"
           name: "ufprog-linux64-packages"
 
       - if: matrix.os == 'macos-latest' && matrix.arch == 'x86_64'
         name: Upload the Installer (MacOS)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*.dmg"
           name: "ufprog-macos-installer"
@@ -327,7 +327,7 @@ jobs:
       # Upload the Installer
       # ------------------------------------------------------------------------
       - name: Upload the Package (FreeBSD)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: "${{env.SOFTWARE_PROJECT_DIR}}/build/ufprog-*-*.*"
           name: "ufprog-freebsd_amd64-package"

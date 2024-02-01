@@ -26,6 +26,16 @@
 
 // ---------------------------------------------------------------------------
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+// clang-format off
+namespace Qt {
+    static auto endl = ::endl;
+}
+// clang-format on
+#endif
+
+// ---------------------------------------------------------------------------
+
 // clang-format off
 const double kAppVersionArray[] = {
 #   include "VERSION"

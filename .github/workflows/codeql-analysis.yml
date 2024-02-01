@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # USB EPROM/Flash Programmer
 #
-# Copyright (2022) Robson Martins
+# Copyright (2024) Robson Martins
 #
 # This work is licensed under a Creative Commons Attribution-NonCommercial-
 # ShareAlike 4.0 International License.
@@ -42,7 +42,7 @@ jobs:
     # Checkout the sources
     # ------------------------------------------------------------------------
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     # ------------------------------------------------------------------------
     # Install Prerequisites
@@ -69,4 +69,4 @@ jobs:
     # Perform Analysis
     # ------------------------------------------------------------------------
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2    
+      uses: github/codeql-action/analyze@v2

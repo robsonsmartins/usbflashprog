@@ -7,8 +7,8 @@
   (paper "A5")
   (title_block
     (title "USB Flash/EPROM Programmer - EzoFlash+ Cross Adapter")
-    (date "2024-01-25")
-    (rev "v0.2.0")
+    (date "2024-02-01")
+    (rev "v0.3.0")
     (company "Robson Martins")
     (comment 1 "https://usbflashprog.robsonmartins.com")
   )

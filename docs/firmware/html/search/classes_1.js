@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ctrlbus_409',['CtrlBus',['../a01068.html',1,'']]],
-  ['ctrlbusconfig_410',['CtrlBusConfig',['../a01056.html',1,'']]]
+  ['ctrlbus_483',['CtrlBus',['../a01074.html',1,'']]],
+  ['ctrlbusconfig_484',['CtrlBusConfig',['../a01062.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['name_765',['name',['../a00970.html#abc29e461e01cc0c712944f8f47f91331',1,'TDeviceInformation']]]
+  ['manufacturer_845',['manufacturer',['../a00968.html#ae77497dfafe239d6455bed1daad3aed0',1,'TDeviceID']]]
 ];

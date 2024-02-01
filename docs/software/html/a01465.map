@@ -1,7 +1,0 @@
-<map id="sram.hpp" name="sram.hpp">
-<area shape="rect" id="node1" title="Header of SRAM Chip Emulation." alt="" coords="85,5,167,32"/>
-<area shape="rect" id="node2" href="$a00113.html" title="Header of Chip Emulation Base Classes." alt="" coords="87,80,165,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,68,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="93,155,159,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="184,155,255,181"/>
-</map>

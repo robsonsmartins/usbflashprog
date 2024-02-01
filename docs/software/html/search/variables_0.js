@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['capability_717',['capability',['../a00970.html#a5882d4b3aca545fedecfe3cab4ebb0db',1,'TDeviceInformation']]],
-  ['code_718',['code',['../a01038.html#a26a6dc09ff9c0c706991e3bb163a1f25',1,'TCmdOpCode']]]
+  ['buffersize_789',['bufferSize',['../a01076.html#ad1859b3438b8d5562f5c3c0ecbe760d4',1,'TProgrammerSettings']]]
 ];

@@ -44,7 +44,7 @@
 #endif
 
 #ifndef VERSION
-# define VERSION "0.2"
+# define VERSION "0.3"
 #endif
 
 ; ------------------------------------------------------------------------------

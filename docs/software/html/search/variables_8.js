@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['opcode_766',['opcode',['../a01046.html#a061932bab6caa48bdabcedd4c4c00f8f',1,'TRunnerCommand']]]
+  ['name_846',['name',['../a00976.html#abc29e461e01cc0c712944f8f47f91331',1,'TDeviceInformation']]]
 ];

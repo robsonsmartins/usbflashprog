@@ -37,7 +37,7 @@ In a future release, programming of some microcontroller families (eg. Microchip
 
 The current status of this project is:
 
-![Current Revision](https://img.shields.io/badge/Current%20Version-v0.2.0--rev.A-blue?style=plastic)
+![Current Revision](https://img.shields.io/badge/Current%20Version-v0.3.0--rev.A-blue?style=plastic)
 ![Specifications](https://img.shields.io/badge/Specifications-almost%20stable-green?style=plastic)
 ![Hardware Design SCH](https://img.shields.io/badge/Hardware%20Design%20(Schematics)-almost%20stable-yellowgreen?style=plastic)
 ![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-not%20started%20yet-red?style=plastic)
@@ -54,17 +54,17 @@ The releases of this project are here: [Releases of the USB Flash/EPROM Programm
 
 Downloads of the latest version of the project are available here:
 
-*USB Flash/EPROM Programmer 0.2*:
+*USB Flash/EPROM Programmer 0.3*:
 
-* [Specifications](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/specs.pdf) (PDF format, ~617KB)
-* [Schematics](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/usbflashprog_sch.pdf) (PDF format, ~142KB)
-* [Bill of Materials](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/usbflashprog_bom.pdf) (PDF format, ~52KB)
-* [Firmware Binary (UF2 to Raspberry Pi Pico)](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-uf2-firmware.zip) (ZIP format, ~207KB)
-* [Software Installer - Microsoft Windows© 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-win64-installer.zip) (ZIP format, ~10MB)
-* [Software Installer - Microsoft Windows© 32 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-win32-installer.zip) (ZIP format, ~10MB)
-* [Software Installer - Apple macOS© 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-macos-installer.zip) (ZIP format, ~21MB)
-* [Software Installer - GNU/Linux 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-linux64-packages.zip) (ZIP format, ~473KB)
-* [Software Installer - FreeBSD 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.2.0/ufprog-freebsd_amd64-package.zip) (ZIP format, ~177KB)
+* [Specifications](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/specs.pdf) (PDF format, ~2,51MB)
+* [Schematics](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/usbflashprog_sch.pdf) (PDF format, ~148KB)
+* [Bill of Materials](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/usbflashprog_bom.pdf) (PDF format, ~52KB)
+* [Firmware Binary (UF2 to Raspberry Pi Pico)](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/ufprog-uf2-firmware.zip) (ZIP format, ~215KB)
+* [Software Installer - Microsoft Windows© 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/ufprog-win64-installer.zip) (ZIP format, ~10MB)
+* [Software Installer - Microsoft Windows© 32 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/ufprog-win32-installer.zip) (ZIP format, ~10MB)
+* [Software Installer - Apple macOS© 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/ufprog-macos-installer.zip) (ZIP format, ~21MB)
+* [Software Installer - GNU/Linux 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/ufprog-linux64-packages.zip) (ZIP format, ~647KB)
+* [Software Installer - FreeBSD 64 bits](https://github.com/robsonsmartins/usbflashprog/releases/download/v0.3.0/ufprog-freebsd_amd64-package.zip) (ZIP format, ~241KB)
 
 ## Operating Systems
 

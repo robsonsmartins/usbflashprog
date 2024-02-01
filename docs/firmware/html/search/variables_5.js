@@ -1,11 +1,5 @@
 var searchData=
 [
-  ['params_756',['params',['../a01080.html#a96e1c5b43beea49a173a0c4cdc04e57f',1,'TCmdOpCode']]],
-  ['pwmfaststepduty_757',['pwmFastStepDuty',['../a01020.html#a027e662a047eb0ef4449fd7007c82d3c',1,'Dc2DcConfig']]],
-  ['pwmfreq_758',['pwmFreq',['../a01020.html#a64365cdbb645b67255b681020ced5fc7',1,'Dc2DcConfig']]],
-  ['pwmmaxduty_759',['pwmMaxDuty',['../a01020.html#acaaf6af9f3de5eb3751db1246a2c2801',1,'Dc2DcConfig']]],
-  ['pwmminduty_760',['pwmMinDuty',['../a01020.html#aeecaca1a800c10860c408fceefac71cc',1,'Dc2DcConfig']]],
-  ['pwmpin_761',['pwmPin',['../a01020.html#af3ce447000148bcbe2b8286a616f2b74',1,'Dc2DcConfig']]],
-  ['pwmslowstepduty_762',['pwmSlowStepDuty',['../a01020.html#a031737551e954696de687d63f2af8eb7',1,'Dc2DcConfig']]],
-  ['pwmtolerancetofast_763',['pwmToleranceToFast',['../a01020.html#a92c5e75794f37affaa9286c2d4df0e97',1,'Dc2DcConfig']]]
+  ['oepin_885',['oePin',['../a01062.html#af84e70c1e6fd65a54a7ea1c8a69a8705',1,'CtrlBusConfig']]],
+  ['onvpppin_886',['onVppPin',['../a01114.html#a61bed480c9613c5ca1fc696e17f01dd0',1,'VddConfig']]]
 ];

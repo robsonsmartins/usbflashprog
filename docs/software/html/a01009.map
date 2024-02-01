@@ -1,5 +1,0 @@
-<map id="SRAM" name="SRAM">
-<area shape="rect" id="node1" title="Parallel SRAM Class." alt="" coords="29,843,179,979"/>
-<area shape="rect" id="node2" href="$a01006.html" title="Parallel Device Base Class." alt="" coords="5,424,203,795"/>
-<area shape="rect" id="node3" href="$a00974.html" title="Device Base Class." alt="" coords="23,5,185,376"/>
-</map>

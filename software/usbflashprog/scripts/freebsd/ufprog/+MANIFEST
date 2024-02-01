@@ -1,5 +1,5 @@
 name: ufprog
-version: "0.2"
+version: "0.3"
 origin: science/ufprog
 comment: "USB EPROM/Flash Programmer"
 desc: "A memory device programmer (Flash/EPROM/E2PROM) board and software, connected to PC by USB port."

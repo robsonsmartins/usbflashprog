@@ -1,5 +1,5 @@
-<map id="pwm_test.hpp" name="pwm_test.hpp">
-<area shape="rect" id="node1" title="Header of Unit Test for Pico PWM Class." alt="" coords="64,5,179,32"/>
+<map id="multicore_test.hpp" name="multicore_test.hpp">
+<area shape="rect" id="node1" title="Header of Unit Test for Pico Multi Core Class." alt="" coords="57,5,201,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,109,107"/>
-<area shape="rect" id="node3" href="$a00050.html" title="Header of the Pico PWM Class." alt="" coords="133,80,240,107"/>
+<area shape="rect" id="node3" href="$a00044.html" title="Header of the Pico Multi Core Class." alt="" coords="133,80,269,107"/>
 </map>

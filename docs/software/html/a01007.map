@@ -1,0 +1,6 @@
+<map id="EPROM27" name="EPROM27">
+<area shape="rect" id="node1" title="Parallel EPROM 27xxx (NMOS) Class." alt="" coords="43,1012,165,1104"/>
+<area shape="rect" id="node2" href="$a01004.html" title="Parallel EPROM Class." alt="" coords="51,857,157,964"/>
+<area shape="rect" id="node3" href="$a01024.html" title="Parallel Device Base Class." alt="" coords="5,424,203,809"/>
+<area shape="rect" id="node4" href="$a00980.html" title="Device Base Class." alt="" coords="23,5,185,376"/>
+</map>

@@ -1,11 +1,12 @@
 var searchData=
 [
-  ['tapplicationsettings_447',['TApplicationSettings',['../a01062.html',1,'']]],
-  ['tcmdopcode_448',['TCmdOpCode',['../a01038.html',1,'']]],
-  ['tdevicecapabilities_449',['TDeviceCapabilities',['../a00966.html',1,'']]],
-  ['tdeviceid_450',['TDeviceID',['../a00962.html',1,'']]],
-  ['tdeviceinformation_451',['TDeviceInformation',['../a00970.html',1,'']]],
-  ['tdevicesettings_452',['TDeviceSettings',['../a01054.html',1,'']]],
-  ['tprogrammersettings_453',['TProgrammerSettings',['../a01058.html',1,'']]],
-  ['trunnercommand_454',['TRunnerCommand',['../a01046.html',1,'']]]
+  ['tapplicationsettings_494',['TApplicationSettings',['../a01080.html',1,'']]],
+  ['tcmdopcode_495',['TCmdOpCode',['../a01056.html',1,'']]],
+  ['tdevicecapabilities_496',['TDeviceCapabilities',['../a00972.html',1,'']]],
+  ['tdeviceid_497',['TDeviceID',['../a00968.html',1,'']]],
+  ['tdeviceinformation_498',['TDeviceInformation',['../a00976.html',1,'']]],
+  ['tdevicesettings_499',['TDeviceSettings',['../a01072.html',1,'']]],
+  ['tlanguagesettings_500',['TLanguageSettings',['../a01084.html',1,'']]],
+  ['tprogrammersettings_501',['TProgrammerSettings',['../a01076.html',1,'']]],
+  ['trunnercommand_502',['TRunnerCommand',['../a01064.html',1,'']]]
 ];

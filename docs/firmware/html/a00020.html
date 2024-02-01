@@ -65,7 +65,7 @@ $(function() {
   <div class="summary">
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">config.hpp File Reference<div class="ingroups"><a class="el" href="a00194.html">Firmware Project</a></div></div>  </div>
+<div class="title">config.hpp File Reference<div class="ingroups"><a class="el" href="a00200.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -74,7 +74,7 @@ $(function() {
 <div class="textblock"><code>#include &quot;pico/stdlib.h&quot;</code><br />
 <code>#include &quot;<a class="el" href="a00026.html">hal/adc.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="a00050.html">hal/pwm.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00089.html">modules/vgenerator.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00095.html">modules/vgenerator.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for config.hpp:</div>
 <div class="dyncontent">
@@ -83,7 +83,7 @@ Include dependency graph for config.hpp:</div>
 <area shape="rect" title="Configuration of UsbFlashProg." alt="" coords="48,5,137,32"/>
 <area shape="rect" href="a00026.html" title="Header of the Pico ADC Class." alt="" coords="5,229,103,256"/>
 <area shape="rect" href="a00050.html" title="Header of the Pico PWM Class." alt="" coords="127,229,234,256"/>
-<area shape="rect" href="a00089.html" title="Header of the Voltage Generator Classes." alt="" coords="216,80,396,107"/>
+<area shape="rect" href="a00095.html" title="Header of the Voltage Generator Classes." alt="" coords="216,80,396,107"/>
 <area shape="rect" title=" " alt="" coords="161,304,203,331"/>
 <area shape="rect" href="a00038.html" title="Header of the Pico GPIO Class." alt="" coords="259,229,361,256"/>
 <area shape="rect" href="a00044.html" title="Header of the Pico Multi Core Class." alt="" coords="525,155,661,181"/>
@@ -98,28 +98,28 @@ Variables</h2></td></tr>
 <tr class="memitem:a2c2767995be0266fc3179b6cda81b7db"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a2c2767995be0266fc3179b6cda81b7db">kVddPwmPin</a> = 20</td></tr>
 <tr class="memdesc:a2c2767995be0266fc3179b6cda81b7db"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : Assigned PWM GPIO pin.  <a href="a00020.html#a2c2767995be0266fc3179b6cda81b7db">More...</a><br /></td></tr>
 <tr class="separator:a2c2767995be0266fc3179b6cda81b7db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9482b4f8060f560b760f3cc2a17f27db"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a9482b4f8060f560b760f3cc2a17f27db">kVddPwmFreq</a> = <a class="el" href="a01044.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td></tr>
+<tr class="memitem:a9482b4f8060f560b760f3cc2a17f27db"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a9482b4f8060f560b760f3cc2a17f27db">kVddPwmFreq</a> = <a class="el" href="a01050.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td></tr>
 <tr class="memdesc:a9482b4f8060f560b760f3cc2a17f27db"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Frequency, in Hertz.  <a href="a00020.html#a9482b4f8060f560b760f3cc2a17f27db">More...</a><br /></td></tr>
 <tr class="separator:a9482b4f8060f560b760f3cc2a17f27db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab1681e67e2d8ebaf8fe4cae874e60b08"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ab1681e67e2d8ebaf8fe4cae874e60b08">kVddPwmMinDuty</a> = <a class="el" href="a01020.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td></tr>
+<tr class="memitem:ab1681e67e2d8ebaf8fe4cae874e60b08"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ab1681e67e2d8ebaf8fe4cae874e60b08">kVddPwmMinDuty</a> = <a class="el" href="a01026.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td></tr>
 <tr class="memdesc:ab1681e67e2d8ebaf8fe4cae874e60b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Min Duty Cycle, in Percent.  <a href="a00020.html#ab1681e67e2d8ebaf8fe4cae874e60b08">More...</a><br /></td></tr>
 <tr class="separator:ab1681e67e2d8ebaf8fe4cae874e60b08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a991a7f9980e4b48602ea8ec70aa7b689"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a991a7f9980e4b48602ea8ec70aa7b689">kVddPwmMaxDuty</a> = <a class="el" href="a01020.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td></tr>
+<tr class="memitem:a991a7f9980e4b48602ea8ec70aa7b689"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a991a7f9980e4b48602ea8ec70aa7b689">kVddPwmMaxDuty</a> = <a class="el" href="a01026.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td></tr>
 <tr class="memdesc:a991a7f9980e4b48602ea8ec70aa7b689"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Max Duty Cycle, in Percent.  <a href="a00020.html#a991a7f9980e4b48602ea8ec70aa7b689">More...</a><br /></td></tr>
 <tr class="separator:a991a7f9980e4b48602ea8ec70aa7b689"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa539ab7c2d309f7777d7542eef84aae6"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aa539ab7c2d309f7777d7542eef84aae6">kVddPwmSlowStepDuty</a> = <a class="el" href="a01020.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td></tr>
+<tr class="memitem:aa539ab7c2d309f7777d7542eef84aae6"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aa539ab7c2d309f7777d7542eef84aae6">kVddPwmSlowStepDuty</a> = <a class="el" href="a01026.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td></tr>
 <tr class="memdesc:aa539ab7c2d309f7777d7542eef84aae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Slow Step Duty Cycle, in Percent.  <a href="a00020.html#aa539ab7c2d309f7777d7542eef84aae6">More...</a><br /></td></tr>
 <tr class="separator:aa539ab7c2d309f7777d7542eef84aae6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada165a1a6115912ae9bda7a377447478"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ada165a1a6115912ae9bda7a377447478">kVddPwmFastStepDuty</a> = <a class="el" href="a01020.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td></tr>
+<tr class="memitem:ada165a1a6115912ae9bda7a377447478"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ada165a1a6115912ae9bda7a377447478">kVddPwmFastStepDuty</a> = <a class="el" href="a01026.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td></tr>
 <tr class="memdesc:ada165a1a6115912ae9bda7a377447478"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Fast Step Duty Cycle, in Percent.  <a href="a00020.html#ada165a1a6115912ae9bda7a377447478">More...</a><br /></td></tr>
 <tr class="separator:ada165a1a6115912ae9bda7a377447478"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3af9dea81b49226edaf8978235f378ec"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a3af9dea81b49226edaf8978235f378ec">kVddPwmToleranceToFast</a> = <a class="el" href="a01020.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td></tr>
+<tr class="memitem:a3af9dea81b49226edaf8978235f378ec"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a3af9dea81b49226edaf8978235f378ec">kVddPwmToleranceToFast</a> = <a class="el" href="a01026.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td></tr>
 <tr class="memdesc:a3af9dea81b49226edaf8978235f378ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/PWM : PWM Voltage Tolerance to use Fast Step, in Percent.  <a href="a00020.html#a3af9dea81b49226edaf8978235f378ec">More...</a><br /></td></tr>
 <tr class="separator:a3af9dea81b49226edaf8978235f378ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ace4ce5577c12d92d0dcf33d7316a3a16"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ace4ce5577c12d92d0dcf33d7316a3a16">kVddAdcChannel</a> = 0</td></tr>
 <tr class="memdesc:ace4ce5577c12d92d0dcf33d7316a3a16"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/ADC : Assigned ADC channel.  <a href="a00020.html#ace4ce5577c12d92d0dcf33d7316a3a16">More...</a><br /></td></tr>
 <tr class="separator:ace4ce5577c12d92d0dcf33d7316a3a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af642a6460c9a4e40c4571bb67420f6ab"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#af642a6460c9a4e40c4571bb67420f6ab">kVddAdcVRef</a> = <a class="el" href="a01028.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td></tr>
+<tr class="memitem:af642a6460c9a4e40c4571bb67420f6ab"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#af642a6460c9a4e40c4571bb67420f6ab">kVddAdcVRef</a> = <a class="el" href="a01034.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td></tr>
 <tr class="memdesc:af642a6460c9a4e40c4571bb67420f6ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/ADC : ADC Reference Voltage, in Volts.  <a href="a00020.html#af642a6460c9a4e40c4571bb67420f6ab">More...</a><br /></td></tr>
 <tr class="separator:af642a6460c9a4e40c4571bb67420f6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a16b40b2c2fca9dff215a0fcc942ae462"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a16b40b2c2fca9dff215a0fcc942ae462">kVddFbR1</a> = 470.0f</td></tr>
@@ -131,7 +131,7 @@ Variables</h2></td></tr>
 <tr class="memitem:a227585148747b1bfd4fbf2a4c29fd248"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a227585148747b1bfd4fbf2a4c29fd248">kVddDivider</a> = (<a class="el" href="a00020.html#a16b40b2c2fca9dff215a0fcc942ae462">kVddFbR1</a> + <a class="el" href="a00020.html#a66951e94c4b4df665e0087bca31349f0">kVddFbR2</a>) / <a class="el" href="a00020.html#a66951e94c4b4df665e0087bca31349f0">kVddFbR2</a></td></tr>
 <tr class="memdesc:a227585148747b1bfd4fbf2a4c29fd248"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0.  <a href="a00020.html#a227585148747b1bfd4fbf2a4c29fd248">More...</a><br /></td></tr>
 <tr class="separator:a227585148747b1bfd4fbf2a4c29fd248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ade9dc8fce22ea9da84836bd90cc3587a"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ade9dc8fce22ea9da84836bd90cc3587a">kVddVoutTolerance</a> = <a class="el" href="a01020.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td></tr>
+<tr class="memitem:ade9dc8fce22ea9da84836bd90cc3587a"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ade9dc8fce22ea9da84836bd90cc3587a">kVddVoutTolerance</a> = <a class="el" href="a01026.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td></tr>
 <tr class="memdesc:ade9dc8fce22ea9da84836bd90cc3587a"><td class="mdescLeft">&#160;</td><td class="mdescRight">VDD/VC : Output Voltage Tolerance, in percent.  <a href="a00020.html#ade9dc8fce22ea9da84836bd90cc3587a">More...</a><br /></td></tr>
 <tr class="separator:ade9dc8fce22ea9da84836bd90cc3587a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b5ef4177e186db08f2378d3393f11d3"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a8b5ef4177e186db08f2378d3393f11d3">kVddCtrlPin</a> = 22</td></tr>
@@ -143,28 +143,28 @@ Variables</h2></td></tr>
 <tr class="memitem:ae8e819108a0a98ae0530e6742529211f"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ae8e819108a0a98ae0530e6742529211f">kVppPwmPin</a> = 21</td></tr>
 <tr class="memdesc:ae8e819108a0a98ae0530e6742529211f"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : Assigned PWM GPIO pin.  <a href="a00020.html#ae8e819108a0a98ae0530e6742529211f">More...</a><br /></td></tr>
 <tr class="separator:ae8e819108a0a98ae0530e6742529211f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a074a8a514d3f4d2aad525543b9dc31aa"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a074a8a514d3f4d2aad525543b9dc31aa">kVppPwmFreq</a> = <a class="el" href="a01044.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td></tr>
+<tr class="memitem:a074a8a514d3f4d2aad525543b9dc31aa"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a074a8a514d3f4d2aad525543b9dc31aa">kVppPwmFreq</a> = <a class="el" href="a01050.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td></tr>
 <tr class="memdesc:a074a8a514d3f4d2aad525543b9dc31aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Frequency, in Hertz.  <a href="a00020.html#a074a8a514d3f4d2aad525543b9dc31aa">More...</a><br /></td></tr>
 <tr class="separator:a074a8a514d3f4d2aad525543b9dc31aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a740d7ba06a6e04f57dcb2d4885598349"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a740d7ba06a6e04f57dcb2d4885598349">kVppPwmMinDuty</a> = <a class="el" href="a01020.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td></tr>
+<tr class="memitem:a740d7ba06a6e04f57dcb2d4885598349"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a740d7ba06a6e04f57dcb2d4885598349">kVppPwmMinDuty</a> = <a class="el" href="a01026.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td></tr>
 <tr class="memdesc:a740d7ba06a6e04f57dcb2d4885598349"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Min Duty Cycle, in Percent.  <a href="a00020.html#a740d7ba06a6e04f57dcb2d4885598349">More...</a><br /></td></tr>
 <tr class="separator:a740d7ba06a6e04f57dcb2d4885598349"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aab4b448e47ba8b1acbc898f3199ccc9d"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aab4b448e47ba8b1acbc898f3199ccc9d">kVppPwmMaxDuty</a> = <a class="el" href="a01020.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td></tr>
+<tr class="memitem:aab4b448e47ba8b1acbc898f3199ccc9d"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aab4b448e47ba8b1acbc898f3199ccc9d">kVppPwmMaxDuty</a> = <a class="el" href="a01026.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td></tr>
 <tr class="memdesc:aab4b448e47ba8b1acbc898f3199ccc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Max Duty Cycle, in Percent.  <a href="a00020.html#aab4b448e47ba8b1acbc898f3199ccc9d">More...</a><br /></td></tr>
 <tr class="separator:aab4b448e47ba8b1acbc898f3199ccc9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeaab9cc383be6c746b83b78894cebf1f"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aeaab9cc383be6c746b83b78894cebf1f">kVppPwmSlowStepDuty</a> = <a class="el" href="a01020.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td></tr>
+<tr class="memitem:aeaab9cc383be6c746b83b78894cebf1f"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aeaab9cc383be6c746b83b78894cebf1f">kVppPwmSlowStepDuty</a> = <a class="el" href="a01026.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td></tr>
 <tr class="memdesc:aeaab9cc383be6c746b83b78894cebf1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Slow Step Duty Cycle, in Percent.  <a href="a00020.html#aeaab9cc383be6c746b83b78894cebf1f">More...</a><br /></td></tr>
 <tr class="separator:aeaab9cc383be6c746b83b78894cebf1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55ab545ae59af6abcc1dc86e58c40a70"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a55ab545ae59af6abcc1dc86e58c40a70">kVppPwmFastStepDuty</a> = <a class="el" href="a01020.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td></tr>
+<tr class="memitem:a55ab545ae59af6abcc1dc86e58c40a70"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a55ab545ae59af6abcc1dc86e58c40a70">kVppPwmFastStepDuty</a> = <a class="el" href="a01026.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td></tr>
 <tr class="memdesc:a55ab545ae59af6abcc1dc86e58c40a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Fast Step Duty Cycle, in Percent.  <a href="a00020.html#a55ab545ae59af6abcc1dc86e58c40a70">More...</a><br /></td></tr>
 <tr class="separator:a55ab545ae59af6abcc1dc86e58c40a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8bdcc00f820bd719230a97f16fce58ad"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a8bdcc00f820bd719230a97f16fce58ad">kVppPwmToleranceToFast</a> = <a class="el" href="a01020.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td></tr>
+<tr class="memitem:a8bdcc00f820bd719230a97f16fce58ad"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a8bdcc00f820bd719230a97f16fce58ad">kVppPwmToleranceToFast</a> = <a class="el" href="a01026.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td></tr>
 <tr class="memdesc:a8bdcc00f820bd719230a97f16fce58ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/PWM : PWM Voltage Tolerance to use Fast Step, in Percent.  <a href="a00020.html#a8bdcc00f820bd719230a97f16fce58ad">More...</a><br /></td></tr>
 <tr class="separator:a8bdcc00f820bd719230a97f16fce58ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30c006ca2b7370564cd352fb0930efa8"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a30c006ca2b7370564cd352fb0930efa8">kVppAdcChannel</a> = 1</td></tr>
 <tr class="memdesc:a30c006ca2b7370564cd352fb0930efa8"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/ADC : Assigned ADC channel.  <a href="a00020.html#a30c006ca2b7370564cd352fb0930efa8">More...</a><br /></td></tr>
 <tr class="separator:a30c006ca2b7370564cd352fb0930efa8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab3885112ea18c7aa35400cc41930c06b"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ab3885112ea18c7aa35400cc41930c06b">kVppAdcVRef</a> = <a class="el" href="a01028.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td></tr>
+<tr class="memitem:ab3885112ea18c7aa35400cc41930c06b"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ab3885112ea18c7aa35400cc41930c06b">kVppAdcVRef</a> = <a class="el" href="a01034.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td></tr>
 <tr class="memdesc:ab3885112ea18c7aa35400cc41930c06b"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/ADC : ADC Reference Voltage, in Volts.  <a href="a00020.html#ab3885112ea18c7aa35400cc41930c06b">More...</a><br /></td></tr>
 <tr class="separator:ab3885112ea18c7aa35400cc41930c06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fed1da116f2679be46a22198ea713a9"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a4fed1da116f2679be46a22198ea713a9">kVppFbR1</a> = 3900.0f</td></tr>
@@ -176,7 +176,7 @@ Variables</h2></td></tr>
 <tr class="memitem:aeb4f5deb9af7dc3ef460298cf9cb6300"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aeb4f5deb9af7dc3ef460298cf9cb6300">kVppDivider</a> = (<a class="el" href="a00020.html#a4fed1da116f2679be46a22198ea713a9">kVppFbR1</a> + <a class="el" href="a00020.html#a80dfca556aabc65268d701917fc4cf67">kVppFbR2</a>) / <a class="el" href="a00020.html#a80dfca556aabc65268d701917fc4cf67">kVppFbR2</a></td></tr>
 <tr class="memdesc:aeb4f5deb9af7dc3ef460298cf9cb6300"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/VC : Voltage Converter Feedback Divisor, from 0.0 to 1.0.  <a href="a00020.html#aeb4f5deb9af7dc3ef460298cf9cb6300">More...</a><br /></td></tr>
 <tr class="separator:aeb4f5deb9af7dc3ef460298cf9cb6300"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf2806555054f6cf25d5362a5788e653"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aaf2806555054f6cf25d5362a5788e653">kVppVoutTolerance</a> = <a class="el" href="a01020.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td></tr>
+<tr class="memitem:aaf2806555054f6cf25d5362a5788e653"><td class="memItemLeft" align="right" valign="top">constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#aaf2806555054f6cf25d5362a5788e653">kVppVoutTolerance</a> = <a class="el" href="a01026.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td></tr>
 <tr class="memdesc:aaf2806555054f6cf25d5362a5788e653"><td class="mdescLeft">&#160;</td><td class="mdescRight">VPP/VC : Output Voltage Tolerance, in percent.  <a href="a00020.html#aaf2806555054f6cf25d5362a5788e653">More...</a><br /></td></tr>
 <tr class="separator:aaf2806555054f6cf25d5362a5788e653"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae6af6ae8184aca1b0ce54f51bc9acb03"><td class="memItemLeft" align="right" valign="top">constexpr uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#ae6af6ae8184aca1b0ce54f51bc9acb03">kVppCtrlPin</a> = 28</td></tr>
@@ -254,8 +254,8 @@ Variables</h2></td></tr>
 <tr class="memitem:a694c1f8d2caafb76c7c941cbc0a9c321"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a694c1f8d2caafb76c7c941cbc0a9c321">kCommTimeOut</a> = 50</td></tr>
 <tr class="memdesc:a694c1f8d2caafb76c7c941cbc0a9c321"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM : Communication timeout, in milliseconds.  <a href="a00020.html#a694c1f8d2caafb76c7c941cbc0a9c321">More...</a><br /></td></tr>
 <tr class="separator:a694c1f8d2caafb76c7c941cbc0a9c321"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a676232c713c0df72d41f8fa0f762bf7e"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a676232c713c0df72d41f8fa0f762bf7e">kStabilizationTime</a> = 150</td></tr>
-<tr class="memdesc:a676232c713c0df72d41f8fa0f762bf7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Time for stabilization, in microseconds.  <a href="a00020.html#a676232c713c0df72d41f8fa0f762bf7e">More...</a><br /></td></tr>
+<tr class="memitem:a676232c713c0df72d41f8fa0f762bf7e"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#a676232c713c0df72d41f8fa0f762bf7e">kStabilizationTime</a> = 200</td></tr>
+<tr class="memdesc:a676232c713c0df72d41f8fa0f762bf7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Time for stabilization, in milliseconds.  <a href="a00020.html#a676232c713c0df72d41f8fa0f762bf7e">More...</a><br /></td></tr>
 <tr class="separator:a676232c713c0df72d41f8fa0f762bf7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcfd65d3d7842f233aa5ac044f96ff36"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00020.html#afcfd65d3d7842f233aa5ac044f96ff36">kErasePulseDuration</a> = 100</td></tr>
 <tr class="memdesc:afcfd65d3d7842f233aa5ac044f96ff36"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Erase pulse duration, in milliseconds.  <a href="a00020.html#afcfd65d3d7842f233aa5ac044f96ff36">More...</a><br /></td></tr>
@@ -299,7 +299,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr uint32_t kVddPwmFreq = <a class="el" href="a01044.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td>
+          <td class="memname">constexpr uint32_t kVddPwmFreq = <a class="el" href="a01050.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td>
         </tr>
       </table>
   </td>
@@ -323,7 +323,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVddPwmMinDuty = <a class="el" href="a01020.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVddPwmMinDuty = <a class="el" href="a01026.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -347,7 +347,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVddPwmMaxDuty = <a class="el" href="a01020.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVddPwmMaxDuty = <a class="el" href="a01026.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -371,7 +371,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVddPwmSlowStepDuty = <a class="el" href="a01020.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVddPwmSlowStepDuty = <a class="el" href="a01026.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -395,7 +395,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVddPwmFastStepDuty = <a class="el" href="a01020.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVddPwmFastStepDuty = <a class="el" href="a01026.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -419,7 +419,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVddPwmToleranceToFast = <a class="el" href="a01020.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td>
+          <td class="memname">constexpr float kVddPwmToleranceToFast = <a class="el" href="a01026.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td>
         </tr>
       </table>
   </td>
@@ -467,7 +467,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVddAdcVRef = <a class="el" href="a01028.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td>
+          <td class="memname">constexpr float kVddAdcVRef = <a class="el" href="a01034.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td>
         </tr>
       </table>
   </td>
@@ -563,7 +563,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVddVoutTolerance = <a class="el" href="a01020.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td>
+          <td class="memname">constexpr float kVddVoutTolerance = <a class="el" href="a01026.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td>
         </tr>
       </table>
   </td>
@@ -659,7 +659,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr uint32_t kVppPwmFreq = <a class="el" href="a01044.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td>
+          <td class="memname">constexpr uint32_t kVppPwmFreq = <a class="el" href="a01050.html#a4807dd02dca56dbbe149f054c97f196a">Pwm::kPwmDefaultFreq</a></td>
         </tr>
       </table>
   </td>
@@ -683,7 +683,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVppPwmMinDuty = <a class="el" href="a01020.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVppPwmMinDuty = <a class="el" href="a01026.html#a2c439c5ecec49fe60cb05aaf7967650c">VddConfig::kPwmMinDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -707,7 +707,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVppPwmMaxDuty = <a class="el" href="a01020.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVppPwmMaxDuty = <a class="el" href="a01026.html#a23fcc83f43d692235b926318e37e4049">VddConfig::kPwmMaxDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -731,7 +731,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVppPwmSlowStepDuty = <a class="el" href="a01020.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVppPwmSlowStepDuty = <a class="el" href="a01026.html#aa33ccc796c3f9b78ee934f70218a57b9">VddConfig::kPwmSlowStepDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -755,7 +755,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVppPwmFastStepDuty = <a class="el" href="a01020.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td>
+          <td class="memname">constexpr float kVppPwmFastStepDuty = <a class="el" href="a01026.html#a8837115407843ceb0b31a82159210062">VddConfig::kPwmFastStepDutyCycleDefault</a></td>
         </tr>
       </table>
   </td>
@@ -779,7 +779,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVppPwmToleranceToFast = <a class="el" href="a01020.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td>
+          <td class="memname">constexpr float kVppPwmToleranceToFast = <a class="el" href="a01026.html#a6dae993b5c66bed63363652113cf50a3">VddConfig::kPwmToleranceToFastDefault</a></td>
         </tr>
       </table>
   </td>
@@ -827,7 +827,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVppAdcVRef = <a class="el" href="a01028.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td>
+          <td class="memname">constexpr float kVppAdcVRef = <a class="el" href="a01034.html#a1e188ecf327a586430cd0ef963a809f6">Adc::kAdcDefaultVRef</a></td>
         </tr>
       </table>
   </td>
@@ -923,7 +923,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr float kVppVoutTolerance = <a class="el" href="a01020.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td>
+          <td class="memname">constexpr float kVppVoutTolerance = <a class="el" href="a01026.html#aa093fe3a3046efe138436ac550f1f7d1">VddConfig::kDc2DcVoutToleranceDefault</a></td>
         </tr>
       </table>
   </td>
@@ -1547,7 +1547,7 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr uint32_t kStabilizationTime = 150</td>
+          <td class="memname">constexpr uint32_t kStabilizationTime = 200</td>
         </tr>
       </table>
   </td>
@@ -1557,7 +1557,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>GENERAL : Time for stabilization, in microseconds. </p>
+<p>GENERAL : Time for stabilization, in milliseconds. </p>
 
 </div>
 </div>

@@ -1,10 +1,12 @@
 var searchData=
 [
-  ['teardown_633',['TearDown',['../a01128.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'HC595Test::TearDown()'],['../a01172.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'VGeneratorTest::TearDown()'],['../a01168.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'OpCodeTest::TearDown()'],['../a01160.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'StringTest::TearDown()'],['../a01156.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'SerialTest::TearDown()'],['../a01152.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'PwmTest::TearDown()'],['../a01148.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'MultiCoreTest::TearDown()'],['../a01144.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'GpioTest::TearDown()'],['../a01140.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'FlashTest::TearDown()'],['../a01136.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'AdcTest::TearDown()'],['../a01132.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'Dc2DcTest::TearDown()'],['../a01124.html#ac4fca95dc3b93372ce7f2078baf8e8b6',1,'HC165Test::TearDown()']]],
-  ['tofloat_634',['toFloat',['../a01052.html#aca12e0dd746ab2c2095c0869fe9bd700',1,'StringUtils']]],
-  ['toggle_635',['toggle',['../a01108.html#ad277193b2dca0bab1e0ad24d45407dc3',1,'GenericGenerator']]],
-  ['togglebit_636',['toggleBit',['../a01016.html#ad1e527258a4fef33244368bfa4fcb5ec',1,'HC595']]],
-  ['togglepin_637',['togglePin',['../a01036.html#a1c3b9f8756bf4dff69c62b70c5cd3a1e',1,'Gpio']]],
-  ['toint_638',['toInt',['../a01052.html#a5298aa76f6b4e7d968beb0734797a96f',1,'StringUtils']]],
-  ['trim_639',['trim',['../a01052.html#a98da230b15f694f50cf371d4f0057933',1,'StringUtils']]]
+  ['read_701',['read',['../a01038.html#a88ae7eb101fddc5b4deaa847db4c6d8b',1,'Flash::read()'],['../a01086.html#a3154c3a098bc2f0a7915fc0156343a2a',1,'Device::read()']]],
+  ['readbyte_702',['readByte',['../a01018.html#a0596a7954047603ea8fd95924b859930',1,'HC165::readByte()'],['../a01078.html#adc57c563b87d63e818c6c27b46c1121a',1,'DataBus::readByte()']]],
+  ['readdata_703',['readData',['../a01018.html#a2df875f24d6d5725c7836af1d54d663c',1,'HC165']]],
+  ['readdword_704',['readDWord',['../a01018.html#afea0b6b71a0ca8c95bdee6efabbb23c3',1,'HC165']]],
+  ['readw_705',['readW',['../a01086.html#a2e67e0e910984a03639d8266b4629ddb',1,'Device']]],
+  ['readword_706',['readWord',['../a01018.html#a6d2cd96558c11f8980cdff5dd2ba6c9d',1,'HC165::readWord()'],['../a01078.html#a38f921d6a183e6f7d15e75d0c60c305b',1,'DataBus::readWord()']]],
+  ['resetbit_707',['resetBit',['../a01022.html#a6c7039212405b09322959a8237c59413',1,'HC595']]],
+  ['resetpin_708',['resetPin',['../a01042.html#ab27c0877384e6c463f77b574f65c5dfe',1,'Gpio']]],
+  ['runner_709',['Runner',['../a01110.html#a6a95e6fb518e68f8e1ea92cec3f3837c',1,'Runner']]]
 ];

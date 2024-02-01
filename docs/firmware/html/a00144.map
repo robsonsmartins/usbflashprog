@@ -1,8 +1,6 @@
-<map id="serial_test.cpp" name="serial_test.cpp">
-<area shape="rect" id="node1" title="Implementation of Unit Test for Serial Communication Class." alt="" coords="87,5,204,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,229,64,256"/>
-<area shape="rect" id="node3" title=" " alt="" coords="88,229,168,256"/>
-<area shape="rect" id="node4" href="$a00146.html" title="Header of Unit Test for Serial Communication Class." alt="" coords="86,80,205,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="161,155,265,181"/>
-<area shape="rect" id="node6" href="$a00056.html" title="Header of the Pico Serial Communication Class." alt="" coords="26,155,137,181"/>
+<map id="pwm_test.cpp" name="pwm_test.cpp">
+<area shape="rect" id="node1" title="Implementation of Unit Test for Pico PWM Class." alt="" coords="65,5,178,32"/>
+<area shape="rect" id="node2" href="$a00146.html" title="Header of Unit Test for Pico PWM Class." alt="" coords="64,80,179,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,109,181"/>
+<area shape="rect" id="node4" href="$a00050.html" title="Header of the Pico PWM Class." alt="" coords="133,155,240,181"/>
 </map>

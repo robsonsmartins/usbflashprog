@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - "bf9628e" - backend/devices/device.cpp</title>
+  <title>LCOV - "1c86347" - backend/devices/device.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">&quot;bf9628e&quot;</td>
+            <td class="headerValue">&quot;1c86347&quot;</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">211</td>
-            <td class="headerCovTableEntry">233</td>
-            <td class="headerCovTableEntryHi">90.6 %</td>
+            <td class="headerCovTableEntry">221</td>
+            <td class="headerCovTableEntry">245</td>
+            <td class="headerCovTableEntryHi">90.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-17 17:47:09</td>
+            <td class="headerValue">2024-02-01 18:46:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">32</td>
-            <td class="headerCovTableEntry">41</td>
-            <td class="headerCovTableEntryMed">78.0 %</td>
+            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntryMed">77.3 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -93,7 +93,7 @@
 <a name="23"><span class="lineNum">      23 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="24"><span class="lineNum">      24 </span>            : // Logging</a>
 <a name="25"><span class="lineNum">      25 </span>            : </a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        418 : Q_LOGGING_CATEGORY(device, &quot;device&quot;)</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        430 : Q_LOGGING_CATEGORY(device, &quot;device&quot;)</span></a>
 <a name="27"><span class="lineNum">      27 </span>            : </a>
 <a name="28"><span class="lineNum">      28 </span>            : #define DEBUG qCDebug(device)</a>
 <a name="29"><span class="lineNum">      29 </span>            : #define INFO qCInfo(device)</a>
@@ -178,250 +178,267 @@
 <a name="108"><span class="lineNum">     108 </span><span class="lineCov">          5 :       hasRead(false),</span></a>
 <a name="109"><span class="lineNum">     109 </span><span class="lineCov">          5 :       hasBlankCheck(false),</span></a>
 <a name="110"><span class="lineNum">     110 </span><span class="lineCov">          5 :       hasUnprotect(false),</span></a>
-<a name="111"><span class="lineNum">     111 </span><span class="lineCov">          5 :       hasSectorSize(false),</span></a>
-<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          5 :       hasFastProg(false),</span></a>
-<a name="113"><span class="lineNum">     113 </span><span class="lineCov">          5 :       hasSkipFF(false),</span></a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          5 :       hasVDD(false),</span></a>
-<a name="115"><span class="lineNum">     115 </span><span class="lineCov">          5 :       hasVPP(false) {}</span></a>
-<a name="116"><span class="lineNum">     116 </span>            : </a>
-<a name="117"><span class="lineNum">     117 </span>            : // ---------------------------------------------------------------------------</a>
-<a name="118"><span class="lineNum">     118 </span>            : </a>
-<a name="119"><span class="lineNum">     119 </span><span class="lineCov">          5 : TDeviceInformation::TDeviceInformation()</span></a>
-<a name="120"><span class="lineNum">     120 </span><span class="lineCov">          5 :     : deviceType(kDeviceParallelMemory), name(&quot;&quot;) {}</span></a>
-<a name="121"><span class="lineNum">     121 </span>            : </a>
-<a name="122"><span class="lineNum">     122 </span><span class="lineCov">         16 : QString TDeviceInformation::toString() const {</span></a>
-<a name="123"><span class="lineNum">     123 </span><span class="lineCov">         16 :     QString result;</span></a>
-<a name="124"><span class="lineNum">     124 </span><span class="lineCov">         16 :     QTextStream ts(&amp;result);</span></a>
-<a name="125"><span class="lineNum">     125 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;Name: &quot; &lt;&lt; name;</span></a>
-<a name="126"><span class="lineNum">     126 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;; Type: &quot;;</span></a>
-<a name="127"><span class="lineNum">     127 </span><span class="lineCov">         16 :     switch (deviceType) {</span></a>
-<a name="128"><span class="lineNum">     128 </span><span class="lineCov">         16 :         case kDeviceParallelMemory:</span></a>
-<a name="129"><span class="lineNum">     129 </span><span class="lineCov">         16 :             ts &lt;&lt; &quot;Parallel Memory&quot;;</span></a>
-<a name="130"><span class="lineNum">     130 </span><span class="lineCov">         16 :             break;</span></a>
-<a name="131"><span class="lineNum">     131 </span><span class="lineNoCov">          0 :         case kDeviceSerialMemory:</span></a>
-<a name="132"><span class="lineNum">     132 </span><span class="lineNoCov">          0 :             ts &lt;&lt; &quot;Serial Memory&quot;;</span></a>
-<a name="133"><span class="lineNum">     133 </span><span class="lineNoCov">          0 :             break;</span></a>
-<a name="134"><span class="lineNum">     134 </span><span class="lineNoCov">          0 :         default:</span></a>
-<a name="135"><span class="lineNum">     135 </span><span class="lineNoCov">          0 :             ts &lt;&lt; &quot;Unknown&quot;;</span></a>
-<a name="136"><span class="lineNum">     136 </span><span class="lineNoCov">          0 :             break;</span></a>
-<a name="137"><span class="lineNum">     137 </span>            :     }</a>
-<a name="138"><span class="lineNum">     138 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;; Capabilities: [&quot;;</span></a>
-<a name="139"><span class="lineNum">     139 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;hasProgram=&quot; &lt;&lt; (capability.hasProgram ? 1 : 0);</span></a>
-<a name="140"><span class="lineNum">     140 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasVerify=&quot; &lt;&lt; (capability.hasVerify ? 1 : 0);</span></a>
-<a name="141"><span class="lineNum">     141 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasErase=&quot; &lt;&lt; (capability.hasErase ? 1 : 0);</span></a>
-<a name="142"><span class="lineNum">     142 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasGetId=&quot; &lt;&lt; (capability.hasGetId ? 1 : 0);</span></a>
-<a name="143"><span class="lineNum">     143 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasRead=&quot; &lt;&lt; (capability.hasRead ? 1 : 0);</span></a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasBlankCheck=&quot; &lt;&lt; (capability.hasBlankCheck ? 1 : 0);</span></a>
-<a name="145"><span class="lineNum">     145 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasUnprotect=&quot; &lt;&lt; (capability.hasUnprotect ? 1 : 0);</span></a>
-<a name="146"><span class="lineNum">     146 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasSectorSize=&quot; &lt;&lt; (capability.hasSectorSize ? 1 : 0);</span></a>
-<a name="147"><span class="lineNum">     147 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasFastProg=&quot; &lt;&lt; (capability.hasFastProg ? 1 : 0);</span></a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasSkipFF=&quot; &lt;&lt; (capability.hasSkipFF ? 1 : 0);</span></a>
-<a name="149"><span class="lineNum">     149 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasVDD=&quot; &lt;&lt; (capability.hasVDD ? 1 : 0);</span></a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasVPP=&quot; &lt;&lt; (capability.hasVPP ? 1 : 0);</span></a>
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;]&quot;;</span></a>
-<a name="152"><span class="lineNum">     152 </span><span class="lineCov">         32 :     return result;</span></a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">         16 : }</span></a>
-<a name="154"><span class="lineNum">     154 </span>            : </a>
-<a name="155"><span class="lineNum">     155 </span>            : // ---------------------------------------------------------------------------</a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineCov">          5 :       hasProtect(false),</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">          5 :       hasSectorSize(false),</span></a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineCov">          5 :       hasFastProg(false),</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">          5 :       hasSkipFF(false),</span></a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineCov">          5 :       hasVDD(false),</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">          5 :       hasVPP(false) {}</span></a>
+<a name="117"><span class="lineNum">     117 </span>            : </a>
+<a name="118"><span class="lineNum">     118 </span>            : // ---------------------------------------------------------------------------</a>
+<a name="119"><span class="lineNum">     119 </span>            : </a>
+<a name="120"><span class="lineNum">     120 </span><span class="lineCov">          5 : TDeviceInformation::TDeviceInformation()</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          5 :     : deviceType(kDeviceParallelMemory), name(&quot;&quot;) {}</span></a>
+<a name="122"><span class="lineNum">     122 </span>            : </a>
+<a name="123"><span class="lineNum">     123 </span><span class="lineCov">         16 : QString TDeviceInformation::toString() const {</span></a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineCov">         16 :     QString result;</span></a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">         16 :     QTextStream ts(&amp;result);</span></a>
+<a name="126"><span class="lineNum">     126 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;Name: &quot; &lt;&lt; name;</span></a>
+<a name="127"><span class="lineNum">     127 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;; Type: &quot;;</span></a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">         16 :     switch (deviceType) {</span></a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">         16 :         case kDeviceParallelMemory:</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">         16 :             ts &lt;&lt; &quot;Parallel Memory&quot;;</span></a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineCov">         16 :             break;</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineNoCov">          0 :         case kDeviceSerialMemory:</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineNoCov">          0 :             ts &lt;&lt; &quot;Serial Memory&quot;;</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineNoCov">          0 :             break;</span></a>
+<a name="135"><span class="lineNum">     135 </span><span class="lineNoCov">          0 :         default:</span></a>
+<a name="136"><span class="lineNum">     136 </span><span class="lineNoCov">          0 :             ts &lt;&lt; &quot;Unknown&quot;;</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineNoCov">          0 :             break;</span></a>
+<a name="138"><span class="lineNum">     138 </span>            :     }</a>
+<a name="139"><span class="lineNum">     139 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;; Capabilities: [&quot;;</span></a>
+<a name="140"><span class="lineNum">     140 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;hasProgram=&quot; &lt;&lt; (capability.hasProgram ? 1 : 0);</span></a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasVerify=&quot; &lt;&lt; (capability.hasVerify ? 1 : 0);</span></a>
+<a name="142"><span class="lineNum">     142 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasErase=&quot; &lt;&lt; (capability.hasErase ? 1 : 0);</span></a>
+<a name="143"><span class="lineNum">     143 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasGetId=&quot; &lt;&lt; (capability.hasGetId ? 1 : 0);</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasRead=&quot; &lt;&lt; (capability.hasRead ? 1 : 0);</span></a>
+<a name="145"><span class="lineNum">     145 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasBlankCheck=&quot; &lt;&lt; (capability.hasBlankCheck ? 1 : 0);</span></a>
+<a name="146"><span class="lineNum">     146 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasUnprotect=&quot; &lt;&lt; (capability.hasUnprotect ? 1 : 0);</span></a>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasProtect=&quot; &lt;&lt; (capability.hasProtect ? 1 : 0);</span></a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasSectorSize=&quot; &lt;&lt; (capability.hasSectorSize ? 1 : 0);</span></a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasFastProg=&quot; &lt;&lt; (capability.hasFastProg ? 1 : 0);</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasSkipFF=&quot; &lt;&lt; (capability.hasSkipFF ? 1 : 0);</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasVDD=&quot; &lt;&lt; (capability.hasVDD ? 1 : 0);</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;, hasVPP=&quot; &lt;&lt; (capability.hasVPP ? 1 : 0);</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">         16 :     ts &lt;&lt; &quot;]&quot;;</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">         32 :     return result;</span></a>
+<a name="155"><span class="lineNum">     155 </span><span class="lineCov">         16 : }</span></a>
 <a name="156"><span class="lineNum">     156 </span>            : </a>
-<a name="157"><span class="lineNum">     157 </span><span class="lineCov">          5 : Device::Device(QObject *parent)</span></a>
-<a name="158"><span class="lineNum">     158 </span>            :     : QObject(parent),</a>
-<a name="159"><span class="lineNum">     159 </span><span class="lineCov">          5 :       is16bit_(false),</span></a>
-<a name="160"><span class="lineNum">     160 </span><span class="lineCov">          5 :       maxAttemptsProg_(1),</span></a>
-<a name="161"><span class="lineNum">     161 </span><span class="lineCov">          5 :       canceling_(false),</span></a>
-<a name="162"><span class="lineNum">     162 </span><span class="lineCov">          5 :       size_(0),</span></a>
-<a name="163"><span class="lineNum">     163 </span><span class="lineCov">          5 :       twp_(1),</span></a>
-<a name="164"><span class="lineNum">     164 </span><span class="lineCov">          5 :       twc_(1),</span></a>
-<a name="165"><span class="lineNum">     165 </span><span class="lineCov">          5 :       vddRd_(5.0f),</span></a>
-<a name="166"><span class="lineNum">     166 </span><span class="lineCov">          5 :       vddWr_(5.0f),</span></a>
-<a name="167"><span class="lineNum">     167 </span><span class="lineCov">          5 :       vpp_(12.0f),</span></a>
-<a name="168"><span class="lineNum">     168 </span><span class="lineCov">          5 :       vee_(12.0f),</span></a>
-<a name="169"><span class="lineNum">     169 </span><span class="lineCov">          5 :       skipFF_(false),</span></a>
-<a name="170"><span class="lineNum">     170 </span><span class="lineCov">          5 :       fastProg_(false),</span></a>
-<a name="171"><span class="lineNum">     171 </span><span class="lineCov">          5 :       sectorSize_(0),</span></a>
-<a name="172"><span class="lineNum">     172 </span><span class="lineCov">          5 :       runner_(this) {</span></a>
-<a name="173"><span class="lineNum">     173 </span><span class="lineCov">          5 :     info_.deviceType = kDeviceParallelMemory;</span></a>
-<a name="174"><span class="lineNum">     174 </span><span class="lineCov">          5 :     info_.name = &quot;Device&quot;;</span></a>
-<a name="175"><span class="lineNum">     175 </span><span class="lineCov">          5 :     info_.capability.hasProgram = false;</span></a>
-<a name="176"><span class="lineNum">     176 </span><span class="lineCov">          5 :     info_.capability.hasVerify = false;</span></a>
-<a name="177"><span class="lineNum">     177 </span><span class="lineCov">          5 :     info_.capability.hasErase = false;</span></a>
-<a name="178"><span class="lineNum">     178 </span><span class="lineCov">          5 :     info_.capability.hasGetId = false;</span></a>
-<a name="179"><span class="lineNum">     179 </span><span class="lineCov">          5 :     info_.capability.hasRead = false;</span></a>
-<a name="180"><span class="lineNum">     180 </span><span class="lineCov">          5 :     info_.capability.hasBlankCheck = false;</span></a>
-<a name="181"><span class="lineNum">     181 </span><span class="lineCov">          5 :     info_.capability.hasUnprotect = false;</span></a>
-<a name="182"><span class="lineNum">     182 </span><span class="lineCov">          5 :     info_.capability.hasSectorSize = false;</span></a>
-<a name="183"><span class="lineNum">     183 </span><span class="lineCov">          5 :     info_.capability.hasFastProg = false;</span></a>
-<a name="184"><span class="lineNum">     184 </span><span class="lineCov">          5 :     info_.capability.hasSkipFF = false;</span></a>
-<a name="185"><span class="lineNum">     185 </span><span class="lineCov">          5 :     info_.capability.hasVDD = true;</span></a>
-<a name="186"><span class="lineNum">     186 </span><span class="lineCov">          5 :     info_.capability.hasVPP = false;</span></a>
-<a name="187"><span class="lineNum">     187 </span><span class="lineCov">          5 :     flags_.skipFF = false;</span></a>
-<a name="188"><span class="lineNum">     188 </span><span class="lineCov">          5 :     flags_.progWithVpp = false;</span></a>
-<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          5 :     flags_.vppOePin = false;</span></a>
-<a name="190"><span class="lineNum">     190 </span><span class="lineCov">          5 :     flags_.pgmCePin = false;</span></a>
-<a name="191"><span class="lineNum">     191 </span><span class="lineCov">          5 :     flags_.pgmPositive = false;</span></a>
-<a name="192"><span class="lineNum">     192 </span><span class="lineCov">          5 : }</span></a>
-<a name="193"><span class="lineNum">     193 </span>            : </a>
-<a name="194"><span class="lineNum">     194 </span><span class="lineCov">          5 : Device::~Device() {}</span></a>
-<a name="195"><span class="lineNum">     195 </span>            : </a>
-<a name="196"><span class="lineNum">     196 </span><span class="lineNoCov">          0 : bool Device::is16Bit() const {</span></a>
-<a name="197"><span class="lineNum">     197 </span><span class="lineNoCov">          0 :     return is16bit_;</span></a>
-<a name="198"><span class="lineNum">     198 </span>            : }</a>
-<a name="199"><span class="lineNum">     199 </span>            : </a>
-<a name="200"><span class="lineNum">     200 </span><span class="lineCov">         16 : void Device::setPort(const QString &amp;path) {</span></a>
-<a name="201"><span class="lineNum">     201 </span><span class="lineCov">         16 :     if (port_ == path) return;</span></a>
-<a name="202"><span class="lineNum">     202 </span><span class="lineCov">          5 :     port_ = path;</span></a>
+<a name="157"><span class="lineNum">     157 </span>            : // ---------------------------------------------------------------------------</a>
+<a name="158"><span class="lineNum">     158 </span>            : </a>
+<a name="159"><span class="lineNum">     159 </span><span class="lineCov">          5 : Device::Device(QObject *parent)</span></a>
+<a name="160"><span class="lineNum">     160 </span>            :     : QObject(parent),</a>
+<a name="161"><span class="lineNum">     161 </span><span class="lineCov">          5 :       is16bit_(false),</span></a>
+<a name="162"><span class="lineNum">     162 </span><span class="lineCov">          5 :       maxAttemptsProg_(1),</span></a>
+<a name="163"><span class="lineNum">     163 </span><span class="lineCov">          5 :       canceling_(false),</span></a>
+<a name="164"><span class="lineNum">     164 </span><span class="lineCov">          5 :       size_(0),</span></a>
+<a name="165"><span class="lineNum">     165 </span><span class="lineCov">          5 :       twp_(1),</span></a>
+<a name="166"><span class="lineNum">     166 </span><span class="lineCov">          5 :       twc_(1),</span></a>
+<a name="167"><span class="lineNum">     167 </span><span class="lineCov">          5 :       vddRd_(5.0f),</span></a>
+<a name="168"><span class="lineNum">     168 </span><span class="lineCov">          5 :       vddWr_(5.0f),</span></a>
+<a name="169"><span class="lineNum">     169 </span><span class="lineCov">          5 :       vpp_(12.0f),</span></a>
+<a name="170"><span class="lineNum">     170 </span><span class="lineCov">          5 :       vee_(12.0f),</span></a>
+<a name="171"><span class="lineNum">     171 </span><span class="lineCov">          5 :       skipFF_(false),</span></a>
+<a name="172"><span class="lineNum">     172 </span><span class="lineCov">          5 :       fastProg_(false),</span></a>
+<a name="173"><span class="lineNum">     173 </span><span class="lineCov">          5 :       sectorSize_(0),</span></a>
+<a name="174"><span class="lineNum">     174 </span><span class="lineCov">          5 :       eraseAlgo_(kCmdDeviceAlgorithmUnknown),</span></a>
+<a name="175"><span class="lineNum">     175 </span><span class="lineCov">          5 :       protectAlgo_(kCmdDeviceAlgorithmUnknown),</span></a>
+<a name="176"><span class="lineNum">     176 </span><span class="lineCov">          5 :       runner_(this) {</span></a>
+<a name="177"><span class="lineNum">     177 </span><span class="lineCov">          5 :     info_.deviceType = kDeviceParallelMemory;</span></a>
+<a name="178"><span class="lineNum">     178 </span><span class="lineCov">          5 :     info_.name = &quot;Device&quot;;</span></a>
+<a name="179"><span class="lineNum">     179 </span><span class="lineCov">          5 :     info_.capability.hasProgram = false;</span></a>
+<a name="180"><span class="lineNum">     180 </span><span class="lineCov">          5 :     info_.capability.hasVerify = false;</span></a>
+<a name="181"><span class="lineNum">     181 </span><span class="lineCov">          5 :     info_.capability.hasErase = false;</span></a>
+<a name="182"><span class="lineNum">     182 </span><span class="lineCov">          5 :     info_.capability.hasGetId = false;</span></a>
+<a name="183"><span class="lineNum">     183 </span><span class="lineCov">          5 :     info_.capability.hasRead = false;</span></a>
+<a name="184"><span class="lineNum">     184 </span><span class="lineCov">          5 :     info_.capability.hasBlankCheck = false;</span></a>
+<a name="185"><span class="lineNum">     185 </span><span class="lineCov">          5 :     info_.capability.hasUnprotect = false;</span></a>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">          5 :     info_.capability.hasProtect = false;</span></a>
+<a name="187"><span class="lineNum">     187 </span><span class="lineCov">          5 :     info_.capability.hasSectorSize = false;</span></a>
+<a name="188"><span class="lineNum">     188 </span><span class="lineCov">          5 :     info_.capability.hasFastProg = false;</span></a>
+<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          5 :     info_.capability.hasSkipFF = false;</span></a>
+<a name="190"><span class="lineNum">     190 </span><span class="lineCov">          5 :     info_.capability.hasVDD = true;</span></a>
+<a name="191"><span class="lineNum">     191 </span><span class="lineCov">          5 :     info_.capability.hasVPP = false;</span></a>
+<a name="192"><span class="lineNum">     192 </span><span class="lineCov">          5 :     flags_.skipFF = false;</span></a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">          5 :     flags_.progWithVpp = false;</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineCov">          5 :     flags_.vppOePin = false;</span></a>
+<a name="195"><span class="lineNum">     195 </span><span class="lineCov">          5 :     flags_.pgmCePin = false;</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">          5 :     flags_.pgmPositive = false;</span></a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">          5 : }</span></a>
+<a name="198"><span class="lineNum">     198 </span>            : </a>
+<a name="199"><span class="lineNum">     199 </span><span class="lineCov">          5 : Device::~Device() {}</span></a>
+<a name="200"><span class="lineNum">     200 </span>            : </a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineNoCov">          0 : bool Device::is16Bit() const {</span></a>
+<a name="202"><span class="lineNum">     202 </span><span class="lineNoCov">          0 :     return is16bit_;</span></a>
 <a name="203"><span class="lineNum">     203 </span>            : }</a>
 <a name="204"><span class="lineNum">     204 </span>            : </a>
-<a name="205"><span class="lineNum">     205 </span><span class="lineCov">         16 : QString Device::getPort() const {</span></a>
-<a name="206"><span class="lineNum">     206 </span><span class="lineCov">         16 :     return port_;</span></a>
-<a name="207"><span class="lineNum">     207 </span>            : }</a>
-<a name="208"><span class="lineNum">     208 </span>            : </a>
-<a name="209"><span class="lineNum">     209 </span><span class="lineCov">         17 : void Device::setSize(uint32_t value) {</span></a>
-<a name="210"><span class="lineNum">     210 </span><span class="lineCov">         17 :     if (size_ != value) {</span></a>
-<a name="211"><span class="lineNum">     211 </span><span class="lineCov">         11 :         if (value) size_ = value;</span></a>
-<a name="212"><span class="lineNum">     212 </span>            :     }</a>
-<a name="213"><span class="lineNum">     213 </span><span class="lineCov">         34 :     DEBUG &lt;&lt; &quot;Size: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(size_);</span></a>
-<a name="214"><span class="lineNum">     214 </span><span class="lineCov">         17 : }</span></a>
-<a name="215"><span class="lineNum">     215 </span>            : </a>
-<a name="216"><span class="lineNum">     216 </span><span class="lineCov">         16 : uint32_t Device::getSize() const {</span></a>
-<a name="217"><span class="lineNum">     217 </span><span class="lineCov">         16 :     return size_;</span></a>
-<a name="218"><span class="lineNum">     218 </span>            : }</a>
-<a name="219"><span class="lineNum">     219 </span>            : </a>
-<a name="220"><span class="lineNum">     220 </span><span class="lineCov">         16 : void Device::setTwp(uint32_t us) {</span></a>
-<a name="221"><span class="lineNum">     221 </span><span class="lineCov">         16 :     if (twp_ != us) {</span></a>
-<a name="222"><span class="lineNum">     222 </span><span class="lineCov">          4 :         if (us) twp_ = us;</span></a>
-<a name="223"><span class="lineNum">     223 </span>            :     }</a>
-<a name="224"><span class="lineNum">     224 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;tWP: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(twp_);</span></a>
-<a name="225"><span class="lineNum">     225 </span><span class="lineCov">         16 : }</span></a>
-<a name="226"><span class="lineNum">     226 </span>            : </a>
-<a name="227"><span class="lineNum">     227 </span><span class="lineCov">         16 : uint32_t Device::getTwp() const {</span></a>
-<a name="228"><span class="lineNum">     228 </span><span class="lineCov">         16 :     return twp_;</span></a>
-<a name="229"><span class="lineNum">     229 </span>            : }</a>
-<a name="230"><span class="lineNum">     230 </span>            : </a>
-<a name="231"><span class="lineNum">     231 </span><span class="lineCov">         16 : void Device::setTwc(uint32_t us) {</span></a>
-<a name="232"><span class="lineNum">     232 </span><span class="lineCov">         16 :     if (twc_ != us) {</span></a>
-<a name="233"><span class="lineNum">     233 </span><span class="lineCov">          4 :         if (us) twc_ = us;</span></a>
-<a name="234"><span class="lineNum">     234 </span>            :     }</a>
-<a name="235"><span class="lineNum">     235 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;tWC: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(twc_);</span></a>
-<a name="236"><span class="lineNum">     236 </span><span class="lineCov">         16 : }</span></a>
-<a name="237"><span class="lineNum">     237 </span>            : </a>
-<a name="238"><span class="lineNum">     238 </span><span class="lineCov">         16 : uint32_t Device::getTwc() const {</span></a>
-<a name="239"><span class="lineNum">     239 </span><span class="lineCov">         16 :     return twc_;</span></a>
-<a name="240"><span class="lineNum">     240 </span>            : }</a>
-<a name="241"><span class="lineNum">     241 </span>            : </a>
-<a name="242"><span class="lineNum">     242 </span><span class="lineCov">         16 : void Device::setVddRd(float value) {</span></a>
-<a name="243"><span class="lineNum">     243 </span><span class="lineCov">         16 :     if (vddRd_ != value) {</span></a>
-<a name="244"><span class="lineNum">     244 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vddRd_ = value;</span></a>
-<a name="245"><span class="lineNum">     245 </span>            :     }</a>
-<a name="246"><span class="lineNum">     246 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VDD Read: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vddRd_, 4, 'f', 2);</span></a>
-<a name="247"><span class="lineNum">     247 </span><span class="lineCov">         16 : }</span></a>
-<a name="248"><span class="lineNum">     248 </span>            : </a>
-<a name="249"><span class="lineNum">     249 </span><span class="lineCov">         16 : float Device::getVddRd() const {</span></a>
-<a name="250"><span class="lineNum">     250 </span><span class="lineCov">         16 :     return vddRd_;</span></a>
-<a name="251"><span class="lineNum">     251 </span>            : }</a>
-<a name="252"><span class="lineNum">     252 </span>            : </a>
-<a name="253"><span class="lineNum">     253 </span><span class="lineCov">         16 : void Device::setVddWr(float value) {</span></a>
-<a name="254"><span class="lineNum">     254 </span><span class="lineCov">         16 :     if (vddWr_ != value) {</span></a>
-<a name="255"><span class="lineNum">     255 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vddWr_ = value;</span></a>
-<a name="256"><span class="lineNum">     256 </span>            :     }</a>
-<a name="257"><span class="lineNum">     257 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VDD Prog: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vddWr_, 4, 'f', 2);</span></a>
-<a name="258"><span class="lineNum">     258 </span><span class="lineCov">         16 : }</span></a>
-<a name="259"><span class="lineNum">     259 </span>            : </a>
-<a name="260"><span class="lineNum">     260 </span><span class="lineCov">         16 : float Device::getVddWr() const {</span></a>
-<a name="261"><span class="lineNum">     261 </span><span class="lineCov">         16 :     return vddWr_;</span></a>
-<a name="262"><span class="lineNum">     262 </span>            : }</a>
-<a name="263"><span class="lineNum">     263 </span>            : </a>
-<a name="264"><span class="lineNum">     264 </span><span class="lineCov">         16 : void Device::setVpp(float value) {</span></a>
-<a name="265"><span class="lineNum">     265 </span><span class="lineCov">         16 :     if (vpp_ != value) {</span></a>
-<a name="266"><span class="lineNum">     266 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vpp_ = value;</span></a>
-<a name="267"><span class="lineNum">     267 </span>            :     }</a>
-<a name="268"><span class="lineNum">     268 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VPP: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vpp_, 4, 'f', 2);</span></a>
-<a name="269"><span class="lineNum">     269 </span><span class="lineCov">         16 : }</span></a>
-<a name="270"><span class="lineNum">     270 </span>            : </a>
-<a name="271"><span class="lineNum">     271 </span><span class="lineCov">         16 : float Device::getVpp() const {</span></a>
-<a name="272"><span class="lineNum">     272 </span><span class="lineCov">         16 :     return vpp_;</span></a>
-<a name="273"><span class="lineNum">     273 </span>            : }</a>
-<a name="274"><span class="lineNum">     274 </span>            : </a>
-<a name="275"><span class="lineNum">     275 </span><span class="lineCov">         16 : void Device::setVee(float value) {</span></a>
-<a name="276"><span class="lineNum">     276 </span><span class="lineCov">         16 :     if (vee_ != value) {</span></a>
-<a name="277"><span class="lineNum">     277 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vee_ = value;</span></a>
-<a name="278"><span class="lineNum">     278 </span>            :     }</a>
-<a name="279"><span class="lineNum">     279 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VEE: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vee_, 4, 'f', 2);</span></a>
-<a name="280"><span class="lineNum">     280 </span><span class="lineCov">         16 : }</span></a>
-<a name="281"><span class="lineNum">     281 </span>            : </a>
-<a name="282"><span class="lineNum">     282 </span><span class="lineCov">         16 : float Device::getVee() const {</span></a>
-<a name="283"><span class="lineNum">     283 </span><span class="lineCov">         16 :     return vee_;</span></a>
-<a name="284"><span class="lineNum">     284 </span>            : }</a>
-<a name="285"><span class="lineNum">     285 </span>            : </a>
-<a name="286"><span class="lineNum">     286 </span><span class="lineCov">         32 : void Device::setSkipFF(bool value) {</span></a>
-<a name="287"><span class="lineNum">     287 </span><span class="lineCov">         32 :     if (skipFF_ != value) skipFF_ = value;</span></a>
-<a name="288"><span class="lineNum">     288 </span><span class="lineCov">         64 :     DEBUG &lt;&lt; &quot;Skip 0xFF: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(skipFF_ ? 1 : 0);</span></a>
-<a name="289"><span class="lineNum">     289 </span><span class="lineCov">         32 : }</span></a>
-<a name="290"><span class="lineNum">     290 </span>            : </a>
-<a name="291"><span class="lineNum">     291 </span><span class="lineCov">         16 : bool Device::getSkipFF() const {</span></a>
-<a name="292"><span class="lineNum">     292 </span><span class="lineCov">         16 :     return skipFF_;</span></a>
-<a name="293"><span class="lineNum">     293 </span>            : }</a>
+<a name="205"><span class="lineNum">     205 </span><span class="lineCov">         16 : void Device::setPort(const QString &amp;path) {</span></a>
+<a name="206"><span class="lineNum">     206 </span><span class="lineCov">         16 :     if (port_ == path) return;</span></a>
+<a name="207"><span class="lineNum">     207 </span><span class="lineCov">          5 :     port_ = path;</span></a>
+<a name="208"><span class="lineNum">     208 </span>            : }</a>
+<a name="209"><span class="lineNum">     209 </span>            : </a>
+<a name="210"><span class="lineNum">     210 </span><span class="lineCov">         16 : QString Device::getPort() const {</span></a>
+<a name="211"><span class="lineNum">     211 </span><span class="lineCov">         16 :     return port_;</span></a>
+<a name="212"><span class="lineNum">     212 </span>            : }</a>
+<a name="213"><span class="lineNum">     213 </span>            : </a>
+<a name="214"><span class="lineNum">     214 </span><span class="lineCov">        140 : uint8_t Device::getBufferSize() const {</span></a>
+<a name="215"><span class="lineNum">     215 </span><span class="lineCov">        140 :     return runner_.getBufferSize();</span></a>
+<a name="216"><span class="lineNum">     216 </span>            : }</a>
+<a name="217"><span class="lineNum">     217 </span>            : </a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">         16 : void Device::setBufferSize(uint8_t value) {</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">         16 :     runner_.setBufferSize(value);</span></a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineCov">         16 : }</span></a>
+<a name="221"><span class="lineNum">     221 </span>            : </a>
+<a name="222"><span class="lineNum">     222 </span><span class="lineCov">         17 : void Device::setSize(uint32_t value) {</span></a>
+<a name="223"><span class="lineNum">     223 </span><span class="lineCov">         17 :     if (size_ != value) {</span></a>
+<a name="224"><span class="lineNum">     224 </span><span class="lineCov">         11 :         if (value) size_ = value;</span></a>
+<a name="225"><span class="lineNum">     225 </span>            :     }</a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">         34 :     DEBUG &lt;&lt; &quot;Size: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(size_);</span></a>
+<a name="227"><span class="lineNum">     227 </span><span class="lineCov">         17 : }</span></a>
+<a name="228"><span class="lineNum">     228 </span>            : </a>
+<a name="229"><span class="lineNum">     229 </span><span class="lineCov">         16 : uint32_t Device::getSize() const {</span></a>
+<a name="230"><span class="lineNum">     230 </span><span class="lineCov">         16 :     return size_;</span></a>
+<a name="231"><span class="lineNum">     231 </span>            : }</a>
+<a name="232"><span class="lineNum">     232 </span>            : </a>
+<a name="233"><span class="lineNum">     233 </span><span class="lineCov">         16 : void Device::setTwp(uint32_t us) {</span></a>
+<a name="234"><span class="lineNum">     234 </span><span class="lineCov">         16 :     if (twp_ != us) {</span></a>
+<a name="235"><span class="lineNum">     235 </span><span class="lineCov">          4 :         if (us) twp_ = us;</span></a>
+<a name="236"><span class="lineNum">     236 </span>            :     }</a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;tWP: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(twp_);</span></a>
+<a name="238"><span class="lineNum">     238 </span><span class="lineCov">         16 : }</span></a>
+<a name="239"><span class="lineNum">     239 </span>            : </a>
+<a name="240"><span class="lineNum">     240 </span><span class="lineCov">         16 : uint32_t Device::getTwp() const {</span></a>
+<a name="241"><span class="lineNum">     241 </span><span class="lineCov">         16 :     return twp_;</span></a>
+<a name="242"><span class="lineNum">     242 </span>            : }</a>
+<a name="243"><span class="lineNum">     243 </span>            : </a>
+<a name="244"><span class="lineNum">     244 </span><span class="lineCov">         16 : void Device::setTwc(uint32_t us) {</span></a>
+<a name="245"><span class="lineNum">     245 </span><span class="lineCov">         16 :     if (twc_ != us) {</span></a>
+<a name="246"><span class="lineNum">     246 </span><span class="lineCov">          4 :         if (us) twc_ = us;</span></a>
+<a name="247"><span class="lineNum">     247 </span>            :     }</a>
+<a name="248"><span class="lineNum">     248 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;tWC: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(twc_);</span></a>
+<a name="249"><span class="lineNum">     249 </span><span class="lineCov">         16 : }</span></a>
+<a name="250"><span class="lineNum">     250 </span>            : </a>
+<a name="251"><span class="lineNum">     251 </span><span class="lineCov">         16 : uint32_t Device::getTwc() const {</span></a>
+<a name="252"><span class="lineNum">     252 </span><span class="lineCov">         16 :     return twc_;</span></a>
+<a name="253"><span class="lineNum">     253 </span>            : }</a>
+<a name="254"><span class="lineNum">     254 </span>            : </a>
+<a name="255"><span class="lineNum">     255 </span><span class="lineCov">         16 : void Device::setVddRd(float value) {</span></a>
+<a name="256"><span class="lineNum">     256 </span><span class="lineCov">         16 :     if (vddRd_ != value) {</span></a>
+<a name="257"><span class="lineNum">     257 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vddRd_ = value;</span></a>
+<a name="258"><span class="lineNum">     258 </span>            :     }</a>
+<a name="259"><span class="lineNum">     259 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VDD Read: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vddRd_, 4, 'f', 2);</span></a>
+<a name="260"><span class="lineNum">     260 </span><span class="lineCov">         16 : }</span></a>
+<a name="261"><span class="lineNum">     261 </span>            : </a>
+<a name="262"><span class="lineNum">     262 </span><span class="lineCov">         16 : float Device::getVddRd() const {</span></a>
+<a name="263"><span class="lineNum">     263 </span><span class="lineCov">         16 :     return vddRd_;</span></a>
+<a name="264"><span class="lineNum">     264 </span>            : }</a>
+<a name="265"><span class="lineNum">     265 </span>            : </a>
+<a name="266"><span class="lineNum">     266 </span><span class="lineCov">         16 : void Device::setVddWr(float value) {</span></a>
+<a name="267"><span class="lineNum">     267 </span><span class="lineCov">         16 :     if (vddWr_ != value) {</span></a>
+<a name="268"><span class="lineNum">     268 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vddWr_ = value;</span></a>
+<a name="269"><span class="lineNum">     269 </span>            :     }</a>
+<a name="270"><span class="lineNum">     270 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VDD Prog: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vddWr_, 4, 'f', 2);</span></a>
+<a name="271"><span class="lineNum">     271 </span><span class="lineCov">         16 : }</span></a>
+<a name="272"><span class="lineNum">     272 </span>            : </a>
+<a name="273"><span class="lineNum">     273 </span><span class="lineCov">         16 : float Device::getVddWr() const {</span></a>
+<a name="274"><span class="lineNum">     274 </span><span class="lineCov">         16 :     return vddWr_;</span></a>
+<a name="275"><span class="lineNum">     275 </span>            : }</a>
+<a name="276"><span class="lineNum">     276 </span>            : </a>
+<a name="277"><span class="lineNum">     277 </span><span class="lineCov">         16 : void Device::setVpp(float value) {</span></a>
+<a name="278"><span class="lineNum">     278 </span><span class="lineCov">         16 :     if (vpp_ != value) {</span></a>
+<a name="279"><span class="lineNum">     279 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vpp_ = value;</span></a>
+<a name="280"><span class="lineNum">     280 </span>            :     }</a>
+<a name="281"><span class="lineNum">     281 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VPP: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vpp_, 4, 'f', 2);</span></a>
+<a name="282"><span class="lineNum">     282 </span><span class="lineCov">         16 : }</span></a>
+<a name="283"><span class="lineNum">     283 </span>            : </a>
+<a name="284"><span class="lineNum">     284 </span><span class="lineCov">         16 : float Device::getVpp() const {</span></a>
+<a name="285"><span class="lineNum">     285 </span><span class="lineCov">         16 :     return vpp_;</span></a>
+<a name="286"><span class="lineNum">     286 </span>            : }</a>
+<a name="287"><span class="lineNum">     287 </span>            : </a>
+<a name="288"><span class="lineNum">     288 </span><span class="lineCov">         16 : void Device::setVee(float value) {</span></a>
+<a name="289"><span class="lineNum">     289 </span><span class="lineCov">         16 :     if (vee_ != value) {</span></a>
+<a name="290"><span class="lineNum">     290 </span><span class="lineCov">          5 :         if (value &gt;= 0.0f) vee_ = value;</span></a>
+<a name="291"><span class="lineNum">     291 </span>            :     }</a>
+<a name="292"><span class="lineNum">     292 </span><span class="lineCov">         32 :     DEBUG &lt;&lt; &quot;VEE: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(vee_, 4, 'f', 2);</span></a>
+<a name="293"><span class="lineNum">     293 </span><span class="lineCov">         16 : }</span></a>
 <a name="294"><span class="lineNum">     294 </span>            : </a>
-<a name="295"><span class="lineNum">     295 </span><span class="lineCov">         32 : void Device::setFastProg(bool value) {</span></a>
-<a name="296"><span class="lineNum">     296 </span><span class="lineCov">         32 :     if (fastProg_ != value) fastProg_ = value;</span></a>
-<a name="297"><span class="lineNum">     297 </span><span class="lineCov">         64 :     DEBUG &lt;&lt; &quot;Fast Prog/Erase: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(fastProg_ ? 1 : 0);</span></a>
-<a name="298"><span class="lineNum">     298 </span><span class="lineCov">         32 : }</span></a>
-<a name="299"><span class="lineNum">     299 </span>            : </a>
-<a name="300"><span class="lineNum">     300 </span><span class="lineCov">         16 : bool Device::getFastProg() const {</span></a>
-<a name="301"><span class="lineNum">     301 </span><span class="lineCov">         16 :     return fastProg_;</span></a>
-<a name="302"><span class="lineNum">     302 </span>            : }</a>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">         16 : float Device::getVee() const {</span></a>
+<a name="296"><span class="lineNum">     296 </span><span class="lineCov">         16 :     return vee_;</span></a>
+<a name="297"><span class="lineNum">     297 </span>            : }</a>
+<a name="298"><span class="lineNum">     298 </span>            : </a>
+<a name="299"><span class="lineNum">     299 </span><span class="lineCov">         32 : void Device::setSkipFF(bool value) {</span></a>
+<a name="300"><span class="lineNum">     300 </span><span class="lineCov">         32 :     if (skipFF_ != value) skipFF_ = value;</span></a>
+<a name="301"><span class="lineNum">     301 </span><span class="lineCov">         64 :     DEBUG &lt;&lt; &quot;Skip 0xFF: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(skipFF_ ? 1 : 0);</span></a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineCov">         32 : }</span></a>
 <a name="303"><span class="lineNum">     303 </span>            : </a>
-<a name="304"><span class="lineNum">     304 </span><span class="lineCov">         32 : void Device::setSectorSize(uint16_t value) {</span></a>
-<a name="305"><span class="lineNum">     305 </span><span class="lineCov">         32 :     if (sectorSize_ != value) sectorSize_ = value;</span></a>
-<a name="306"><span class="lineNum">     306 </span><span class="lineCov">         64 :     DEBUG &lt;&lt; &quot;Sector Size: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(sectorSize_);</span></a>
-<a name="307"><span class="lineNum">     307 </span><span class="lineCov">         32 : }</span></a>
-<a name="308"><span class="lineNum">     308 </span>            : </a>
-<a name="309"><span class="lineNum">     309 </span><span class="lineCov">         16 : uint16_t Device::getSectorSize() const {</span></a>
-<a name="310"><span class="lineNum">     310 </span><span class="lineCov">         16 :     return sectorSize_;</span></a>
-<a name="311"><span class="lineNum">     311 </span>            : }</a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">         16 : bool Device::getSkipFF() const {</span></a>
+<a name="305"><span class="lineNum">     305 </span><span class="lineCov">         16 :     return skipFF_;</span></a>
+<a name="306"><span class="lineNum">     306 </span>            : }</a>
+<a name="307"><span class="lineNum">     307 </span>            : </a>
+<a name="308"><span class="lineNum">     308 </span><span class="lineCov">         38 : void Device::setFastProg(bool value) {</span></a>
+<a name="309"><span class="lineNum">     309 </span><span class="lineCov">         38 :     if (fastProg_ != value) fastProg_ = value;</span></a>
+<a name="310"><span class="lineNum">     310 </span><span class="lineCov">         76 :     DEBUG &lt;&lt; &quot;Fast Prog/Erase: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(fastProg_ ? 1 : 0);</span></a>
+<a name="311"><span class="lineNum">     311 </span><span class="lineCov">         38 : }</span></a>
 <a name="312"><span class="lineNum">     312 </span>            : </a>
-<a name="313"><span class="lineNum">     313 </span><span class="lineCov">         16 : TDeviceInformation Device::getInfo() const {</span></a>
-<a name="314"><span class="lineNum">     314 </span><span class="lineCov">         16 :     return info_;</span></a>
+<a name="313"><span class="lineNum">     313 </span><span class="lineCov">         16 : bool Device::getFastProg() const {</span></a>
+<a name="314"><span class="lineNum">     314 </span><span class="lineCov">         16 :     return fastProg_;</span></a>
 <a name="315"><span class="lineNum">     315 </span>            : }</a>
 <a name="316"><span class="lineNum">     316 </span>            : </a>
-<a name="317"><span class="lineNum">     317 </span><span class="lineCov">         16 : void Device::cancel() {</span></a>
-<a name="318"><span class="lineNum">     318 </span><span class="lineCov">         16 :     if (canceling_) return;</span></a>
-<a name="319"><span class="lineNum">     319 </span><span class="lineCov">         16 :     canceling_ = true;</span></a>
-<a name="320"><span class="lineNum">     320 </span>            : }</a>
+<a name="317"><span class="lineNum">     317 </span><span class="lineCov">         32 : void Device::setSectorSize(uint16_t value) {</span></a>
+<a name="318"><span class="lineNum">     318 </span><span class="lineCov">         32 :     if (sectorSize_ != value) sectorSize_ = value;</span></a>
+<a name="319"><span class="lineNum">     319 </span><span class="lineCov">         64 :     DEBUG &lt;&lt; &quot;Sector Size: &quot; &lt;&lt; QString(&quot;%1&quot;).arg(sectorSize_);</span></a>
+<a name="320"><span class="lineNum">     320 </span><span class="lineCov">         32 : }</span></a>
 <a name="321"><span class="lineNum">     321 </span>            : </a>
-<a name="322"><span class="lineNum">     322 </span><span class="lineNoCov">          0 : bool Device::getId(TDeviceID &amp;result) {</span></a>
-<a name="323"><span class="lineNum">     323 </span>            :     (void)result;</a>
-<a name="324"><span class="lineNum">     324 </span><span class="lineNoCov">          0 :     return false;</span></a>
-<a name="325"><span class="lineNum">     325 </span>            : }</a>
-<a name="326"><span class="lineNum">     326 </span>            : </a>
-<a name="327"><span class="lineNum">     327 </span><span class="lineNoCov">          0 : bool Device::read(QByteArray &amp;buffer) {</span></a>
-<a name="328"><span class="lineNum">     328 </span>            :     (void)buffer;</a>
-<a name="329"><span class="lineNum">     329 </span><span class="lineNoCov">          0 :     return false;</span></a>
-<a name="330"><span class="lineNum">     330 </span>            : }</a>
-<a name="331"><span class="lineNum">     331 </span>            : </a>
-<a name="332"><span class="lineNum">     332 </span><span class="lineNoCov">          0 : bool Device::program(const QByteArray &amp;buffer, bool verify) {</span></a>
-<a name="333"><span class="lineNum">     333 </span>            :     (void)buffer;</a>
-<a name="334"><span class="lineNum">     334 </span>            :     (void)verify;</a>
-<a name="335"><span class="lineNum">     335 </span><span class="lineNoCov">          0 :     return false;</span></a>
-<a name="336"><span class="lineNum">     336 </span>            : }</a>
-<a name="337"><span class="lineNum">     337 </span>            : </a>
-<a name="338"><span class="lineNum">     338 </span><span class="lineNoCov">          0 : bool Device::verify(const QByteArray &amp;buffer) {</span></a>
-<a name="339"><span class="lineNum">     339 </span>            :     (void)buffer;</a>
-<a name="340"><span class="lineNum">     340 </span><span class="lineNoCov">          0 :     return false;</span></a>
-<a name="341"><span class="lineNum">     341 </span>            : }</a>
-<a name="342"><span class="lineNum">     342 </span>            : </a>
-<a name="343"><span class="lineNum">     343 </span><span class="lineNoCov">          0 : bool Device::erase(bool check) {</span></a>
-<a name="344"><span class="lineNum">     344 </span>            :     (void)check;</a>
-<a name="345"><span class="lineNum">     345 </span><span class="lineNoCov">          0 :     return false;</span></a>
-<a name="346"><span class="lineNum">     346 </span>            : }</a>
-<a name="347"><span class="lineNum">     347 </span>            : </a>
-<a name="348"><span class="lineNum">     348 </span><span class="lineNoCov">          0 : bool Device::blankCheck() {</span></a>
-<a name="349"><span class="lineNum">     349 </span><span class="lineNoCov">          0 :     return false;</span></a>
-<a name="350"><span class="lineNum">     350 </span>            : }</a>
-<a name="351"><span class="lineNum">     351 </span>            : </a>
-<a name="352"><span class="lineNum">     352 </span><span class="lineNoCov">          0 : bool Device::unprotect() {</span></a>
+<a name="322"><span class="lineNum">     322 </span><span class="lineCov">         16 : uint16_t Device::getSectorSize() const {</span></a>
+<a name="323"><span class="lineNum">     323 </span><span class="lineCov">         16 :     return sectorSize_;</span></a>
+<a name="324"><span class="lineNum">     324 </span>            : }</a>
+<a name="325"><span class="lineNum">     325 </span>            : </a>
+<a name="326"><span class="lineNum">     326 </span><span class="lineCov">         16 : TDeviceInformation Device::getInfo() const {</span></a>
+<a name="327"><span class="lineNum">     327 </span><span class="lineCov">         16 :     return info_;</span></a>
+<a name="328"><span class="lineNum">     328 </span>            : }</a>
+<a name="329"><span class="lineNum">     329 </span>            : </a>
+<a name="330"><span class="lineNum">     330 </span><span class="lineCov">         16 : void Device::cancel() {</span></a>
+<a name="331"><span class="lineNum">     331 </span><span class="lineCov">         16 :     if (canceling_) return;</span></a>
+<a name="332"><span class="lineNum">     332 </span><span class="lineCov">         16 :     canceling_ = true;</span></a>
+<a name="333"><span class="lineNum">     333 </span>            : }</a>
+<a name="334"><span class="lineNum">     334 </span>            : </a>
+<a name="335"><span class="lineNum">     335 </span><span class="lineNoCov">          0 : bool Device::getId(TDeviceID &amp;result) {</span></a>
+<a name="336"><span class="lineNum">     336 </span>            :     (void)result;</a>
+<a name="337"><span class="lineNum">     337 </span><span class="lineNoCov">          0 :     return false;</span></a>
+<a name="338"><span class="lineNum">     338 </span>            : }</a>
+<a name="339"><span class="lineNum">     339 </span>            : </a>
+<a name="340"><span class="lineNum">     340 </span><span class="lineNoCov">          0 : bool Device::read(QByteArray &amp;buffer) {</span></a>
+<a name="341"><span class="lineNum">     341 </span>            :     (void)buffer;</a>
+<a name="342"><span class="lineNum">     342 </span><span class="lineNoCov">          0 :     return false;</span></a>
+<a name="343"><span class="lineNum">     343 </span>            : }</a>
+<a name="344"><span class="lineNum">     344 </span>            : </a>
+<a name="345"><span class="lineNum">     345 </span><span class="lineNoCov">          0 : bool Device::program(const QByteArray &amp;buffer, bool verify) {</span></a>
+<a name="346"><span class="lineNum">     346 </span>            :     (void)buffer;</a>
+<a name="347"><span class="lineNum">     347 </span>            :     (void)verify;</a>
+<a name="348"><span class="lineNum">     348 </span><span class="lineNoCov">          0 :     return false;</span></a>
+<a name="349"><span class="lineNum">     349 </span>            : }</a>
+<a name="350"><span class="lineNum">     350 </span>            : </a>
+<a name="351"><span class="lineNum">     351 </span><span class="lineNoCov">          0 : bool Device::verify(const QByteArray &amp;buffer) {</span></a>
+<a name="352"><span class="lineNum">     352 </span>            :     (void)buffer;</a>
 <a name="353"><span class="lineNum">     353 </span><span class="lineNoCov">          0 :     return false;</span></a>
 <a name="354"><span class="lineNum">     354 </span>            : }</a>
+<a name="355"><span class="lineNum">     355 </span>            : </a>
+<a name="356"><span class="lineNum">     356 </span><span class="lineNoCov">          0 : bool Device::erase(bool check) {</span></a>
+<a name="357"><span class="lineNum">     357 </span>            :     (void)check;</a>
+<a name="358"><span class="lineNum">     358 </span><span class="lineNoCov">          0 :     return false;</span></a>
+<a name="359"><span class="lineNum">     359 </span>            : }</a>
+<a name="360"><span class="lineNum">     360 </span>            : </a>
+<a name="361"><span class="lineNum">     361 </span><span class="lineNoCov">          0 : bool Device::blankCheck() {</span></a>
+<a name="362"><span class="lineNum">     362 </span><span class="lineNoCov">          0 :     return false;</span></a>
+<a name="363"><span class="lineNum">     363 </span>            : }</a>
+<a name="364"><span class="lineNum">     364 </span>            : </a>
+<a name="365"><span class="lineNum">     365 </span><span class="lineNoCov">          0 : bool Device::unprotect() {</span></a>
+<a name="366"><span class="lineNum">     366 </span><span class="lineNoCov">          0 :     return false;</span></a>
+<a name="367"><span class="lineNum">     367 </span>            : }</a>
+<a name="368"><span class="lineNum">     368 </span>            : </a>
+<a name="369"><span class="lineNum">     369 </span><span class="lineNoCov">          0 : bool Device::protect() {</span></a>
+<a name="370"><span class="lineNum">     370 </span><span class="lineNoCov">          0 :     return false;</span></a>
+<a name="371"><span class="lineNum">     371 </span>            : }</a>
 </pre>
       </td>
     </tr>

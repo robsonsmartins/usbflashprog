@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: runner.hpp File Reference</title>
+<title>USB EPROM/Flash Programmer: opcodes.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -68,62 +68,213 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#typedef-members">Typedefs</a>  </div>
+<a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle">
-<div class="title">runner.hpp File Reference<div class="ingroups"><a class="el" href="a00143.html">Software Project</a></div></div>  </div>
+<div class="title">opcodes.hpp File Reference<div class="ingroups"><a class="el" href="a00149.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header of the <a class="el" href="a01050.html" title="Runner Class.">Runner</a> Class.  
+<p>Opcodes for communication.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QObject&gt;</code><br />
-<code>#include &lt;QString&gt;</code><br />
-<code>#include &lt;QList&gt;</code><br />
-<code>#include &lt;QByteArray&gt;</code><br />
-<code>#include &lt;QSerialPort&gt;</code><br />
-<code>#include &lt;QSerialPortInfo&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00071.html">opcodes.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for runner.hpp:</div>
+Include dependency graph for opcodes.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00078.png" border="0" usemap="#arunner_8hpp" alt=""/></div>
-<map name="arunner_8hpp" id="arunner_8hpp">
-<area shape="rect" title="Header of the Runner Class." alt="" coords="281,5,372,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
-<area shape="rect" title=" " alt="" coords="105,80,175,107"/>
-<area shape="rect" title=" " alt="" coords="199,80,254,107"/>
-<area shape="rect" title=" " alt="" coords="278,80,375,107"/>
-<area shape="rect" title=" " alt="" coords="399,80,494,107"/>
-<area shape="rect" title=" " alt="" coords="519,80,639,107"/>
-<area shape="rect" href="a00071.html" title="Opcodes for communication." alt="" coords="663,80,767,107"/>
-<area shape="rect" title=" " alt="" coords="595,155,661,181"/>
-<area shape="rect" title=" " alt="" coords="685,155,744,181"/>
-<area shape="rect" title=" " alt="" coords="768,155,819,181"/>
+<div class="center"><img src="a00078.png" border="0" usemap="#aopcodes_8hpp" alt=""/></div>
+<map name="aopcodes_8hpp" id="aopcodes_8hpp">
+<area shape="rect" title="Opcodes for communication." alt="" coords="73,5,177,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,72,107"/>
+<area shape="rect" title=" " alt="" coords="96,80,155,107"/>
+<area shape="rect" title=" " alt="" coords="179,80,229,107"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01046.html">TRunnerCommand</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a command to be run and its response.  <a href="a01046.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01056.html">TCmdOpCode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines an opcode to run.  <a href="a01056.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01050.html">Runner</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a01050.html" title="Runner Class.">Runner</a> Class.  <a href="a01050.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01054.html">TDeviceSettings</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00974.html" title="Device Base Class.">Device</a> settings.  <a href="a01054.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01060.html">OpCode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opcode Manager Class.  <a href="a01060.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:gabf714a37d284d2dd5538b09a3e45f988"><td class="memItemLeft" align="right" valign="top">typedef QList&lt; QSerialPortInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00143.html#gabf714a37d284d2dd5538b09a3e45f988">TSerialPortList</a></td></tr>
-<tr class="memdesc:gabf714a37d284d2dd5538b09a3e45f988"><td class="mdescLeft">&#160;</td><td class="mdescRight">List of serial ports info.  <a href="a00143.html#gabf714a37d284d2dd5538b09a3e45f988">More...</a><br /></td></tr>
-<tr class="separator:gabf714a37d284d2dd5538b09a3e45f988"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d0819bd5ce78d8988003ea66a0085e2"><td class="memItemLeft" align="right" valign="top">typedef std::map&lt; <a class="el" href="a00149.html#ga9d169aaae39d9f86c725f5ee0fccec17">kCmdOpCodeEnum</a>, <a class="el" href="a01056.html">TCmdOpCode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html#a6d0819bd5ce78d8988003ea66a0085e2">TCmdOpCodeMap</a></td></tr>
+<tr class="memdesc:a6d0819bd5ce78d8988003ea66a0085e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of opcodes group (map).  <a href="a00077.html#a6d0819bd5ce78d8988003ea66a0085e2">More...</a><br /></td></tr>
+<tr class="separator:a6d0819bd5ce78d8988003ea66a0085e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:ga97f7be15bdca512128e3b9d46efc2066"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00149.html#ga97f7be15bdca512128e3b9d46efc2066">kCmdParamValueEnum</a> { <a class="el" href="a00149.html#gga97f7be15bdca512128e3b9d46efc2066a37bcc407378dd6a591f677db857ac72a">kCmdParamOff</a> = 0x00
+, <a class="el" href="a00149.html#gga97f7be15bdca512128e3b9d46efc2066ae58020ec8e43672dd53046ed886f8eea">kCmdParamOn</a> = 0x01
+ }</td></tr>
+<tr class="memdesc:ga97f7be15bdca512128e3b9d46efc2066"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of the param values.  <a href="a00149.html#ga97f7be15bdca512128e3b9d46efc2066">More...</a><br /></td></tr>
+<tr class="separator:ga97f7be15bdca512128e3b9d46efc2066"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga20a6fc05d4d98ac9d07a64d1674afb55"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00149.html#ga20a6fc05d4d98ac9d07a64d1674afb55">kCmdResponseValueEnum</a> { <a class="el" href="a00149.html#gga20a6fc05d4d98ac9d07a64d1674afb55ab3d16bbb3575d410c407f19ed9555af6">kCmdResponseNok</a> = 0xA0
+, <a class="el" href="a00149.html#gga20a6fc05d4d98ac9d07a64d1674afb55ad5ffa2c18643cdc38a1d0d240de5f532">kCmdResponseOk</a> = 0xA1
+ }</td></tr>
+<tr class="memdesc:ga20a6fc05d4d98ac9d07a64d1674afb55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of the response values.  <a href="a00149.html#ga20a6fc05d4d98ac9d07a64d1674afb55">More...</a><br /></td></tr>
+<tr class="separator:ga20a6fc05d4d98ac9d07a64d1674afb55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9d169aaae39d9f86c725f5ee0fccec17"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00149.html#ga9d169aaae39d9f86c725f5ee0fccec17">kCmdOpCodeEnum</a> { <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a8d9aa3737db6bd72b12f41110b56c0fa">kCmdNop</a> = 0x00
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a775a3b92333cbc7205a0c4cda52d5889">kCmdVddCtrl</a> = 0x01
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17adf0ff519a7b9295705e00ce343274383">kCmdVddSetV</a> = 0x02
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ab084b7f34250ab07810d59ad488ac668">kCmdVddGetV</a> = 0x03
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a721754b72bd8407a817b9f60035f1925">kCmdVddGetDuty</a> = 0x04
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a73fb601d54c76c0730eddda28ba87f5c">kCmdVddGetCal</a> = 0x05
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ae126e4574cc898ed6613dd8bad8c5ba0">kCmdVddInitCal</a> = 0x06
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17af6493b06ed66d0e5210bfe6d9829b731">kCmdVddSaveCal</a> = 0x07
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17aded5e7d35f702f861be60b9eb47b16e2">kCmdVddOnVpp</a> = 0x08
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17aa2353b92c30d85ab97d2868c40b850bf">kCmdVppCtrl</a> = 0x11
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a28c407e46739bf4e251a6aa4cfc16e96">kCmdVppSetV</a> = 0x12
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17af9a1976abad74586739f1d100e9f17a4">kCmdVppGetV</a> = 0x13
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a9a113fa9f23e802e6288029f58a34dbf">kCmdVppGetDuty</a> = 0x14
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17af22a9d69edb72f37b50d9c81294c9874">kCmdVppGetCal</a> = 0x15
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a9cadf7d61e1ad9475dcc755cad056ebb">kCmdVppInitCal</a> = 0x16
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a53e9bdc5917b2ebe22d06aadf5bca1b2">kCmdVppSaveCal</a> = 0x17
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a302010cf06ed4f7adc50596f14c08190">kCmdVppOnA9</a> = 0x18
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ac531dbaac8990e8f24f0f44809a846c3">kCmdVppOnA18</a> = 0x19
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a65a27b36f73d23cdd57951b74725ff45">kCmdVppOnCE</a> = 0x1A
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a45b1e6b379d260e8fc043a457de1d7cf">kCmdVppOnOE</a> = 0x1B
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a20b424d831bb060199c46652bb750093">kCmdVppOnWE</a> = 0x1C
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a11eb45e894ce715b1e04dffb636bb152">kCmdBusCE</a> = 0x21
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17aad5508cd69949fbe087117d77c64a9f7">kCmdBusOE</a> = 0x22
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17abb457a99176280cf33a4074b3c4c3b85">kCmdBusWE</a> = 0x23
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a8de22a05f629b459575a399a243504b5">kCmdBusAddrClr</a> = 0x31
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a21a274f247cbaaea7fee73f1142d0711">kCmdBusAddrInc</a> = 0x32
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ad65091ce54b48f8436da5ae4ea0463ab">kCmdBusAddrSet</a> = 0x33
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a139b80e6fd238c9aecb78f40b11c5d9e">kCmdBusAddrSetB</a> = 0x34
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ab3e5e83d61a77b8ac1d6a2994a764b4e">kCmdBusAddrSetW</a> = 0x35
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ab454da8c7f1cf409ab91ce5dd31df35e">kCmdBusDataClr</a> = 0x41
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a298c1ab6d421d3b5a27e45b3f5225c3c">kCmdBusDataSet</a> = 0x42
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ad0e364196eb4446e5b155d02aecd425f">kCmdBusDataSetW</a> = 0x43
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ab9ded789778df2bf2b5836dbb6456ee7">kCmdBusDataGet</a> = 0x44
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a184342643d1e5ac802f7ddca1e8be9ea">kCmdBusDataGetW</a> = 0x45
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a3a3ece640261aa327a87b5e8fbb7e8b7">kCmdDeviceSetTwp</a> = 0x81
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a4b0ea9cb34e4f0704d50e935a02cc9e1">kCmdDeviceSetTwc</a> = 0x82
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17adf30e3586be60d923119031d1a208a03">kCmdDeviceSetFlags</a> = 0x83
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17aa536fda169aa2da5ed353df1818ef9de">kCmdDeviceSetupBus</a> = 0x84
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a65b90d65436925948bacf84f52143559">kCmdDeviceRead</a> = 0x85
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ab988aaeefc923ea1d56ade331f28a4a0">kCmdDeviceReadW</a> = 0x86
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a0d7b7b9049c6ddfe769989c61b395bfc">kCmdDeviceWrite</a> = 0x87
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a1f6a1a500b912fca7aa505d3ab16e91d">kCmdDeviceWriteW</a> = 0x88
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a0a3ee09a41c0744fe6658a16ed0364e4">kCmdDeviceWriteSector</a> = 0x89
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17afa3994623fe9bbd9d45b822bb7b83bba">kCmdDeviceWriteSectorW</a> = 0x8A
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a44df96ac29286368eb7719248bddae3f">kCmdDeviceVerify</a> = 0x8B
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ae3314364e6d1b5fb160070e2c1c93721">kCmdDeviceVerifyW</a> = 0x8C
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a6bfc8615036948c5f36a99a13b3051e6">kCmdDeviceBlankCheck</a> = 0x8D
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17ae10be89db41be8c268435c3fcb0925d3">kCmdDeviceBlankCheckW</a> = 0x8E
+, <br />
+&#160;&#160;<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17a3d54c911ba6670fa09adf5945cc1ccd7">kCmdDeviceGetId</a> = 0x8F
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17aac903462659bc52c88be9e76ce658014">kCmdDeviceErase</a> = 0x90
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17afe1417fb953569d6459c269cbb9f3d6a">kCmdDeviceUnprotect</a> = 0x91
+, <a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17af5dee8bb07a662e9e5bd8d033821b910">kCmdDeviceProtect</a> = 0x92
+<br />
+ }</td></tr>
+<tr class="memdesc:ga9d169aaae39d9f86c725f5ee0fccec17"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of the OpCodes.  <a href="a00149.html#ga9d169aaae39d9f86c725f5ee0fccec17">More...</a><br /></td></tr>
+<tr class="separator:ga9d169aaae39d9f86c725f5ee0fccec17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf6d651a11eee20ee5994083e3b98d77"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html#adf6d651a11eee20ee5994083e3b98d77">kCmdDeviceOperationEnum</a> { <a class="el" href="a00077.html#adf6d651a11eee20ee5994083e3b98d77a06c85c4cc6a32f4eecfb5a348c6cc4ba">kCmdDeviceOperationReset</a> = 0x00
+, <a class="el" href="a00077.html#adf6d651a11eee20ee5994083e3b98d77a2a7edb40033503b42f80088952030dc5">kCmdDeviceOperationRead</a> = 0x01
+, <a class="el" href="a00077.html#adf6d651a11eee20ee5994083e3b98d77adcf50d16f015962b0ca7416216a4387d">kCmdDeviceOperationProg</a> = 0x02
+ }</td></tr>
+<tr class="memdesc:adf6d651a11eee20ee5994083e3b98d77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of the <a class="el" href="a00980.html" title="Device Base Class.">Device</a> Operations.  <a href="a00077.html#adf6d651a11eee20ee5994083e3b98d77">More...</a><br /></td></tr>
+<tr class="separator:adf6d651a11eee20ee5994083e3b98d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9ce92aeee79d5b70dc9cf5f677b84ba"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00077.html#ac9ce92aeee79d5b70dc9cf5f677b84ba">kCmdDeviceAlgorithmEnum</a> { <a class="el" href="a00077.html#ac9ce92aeee79d5b70dc9cf5f677b84baaa5f36b885b33de6593d860a625ca3e4a">kCmdDeviceAlgorithmUnknown</a> = 0x00
+, <a class="el" href="a00077.html#ac9ce92aeee79d5b70dc9cf5f677b84baa43406823e463c8fb8290076b1a01e081">kCmdDeviceAlgorithm27E</a> = 0x01
+, <a class="el" href="a00077.html#ac9ce92aeee79d5b70dc9cf5f677b84baa5deaa2e5637916e0fbc3b2598d5dd889">kCmdDeviceAlgorithm28C</a> = 0x02
+ }</td></tr>
+<tr class="memdesc:ac9ce92aeee79d5b70dc9cf5f677b84ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enumeration of the <a class="el" href="a00980.html" title="Device Base Class.">Device</a> Algorithms.  <a href="a00077.html#ac9ce92aeee79d5b70dc9cf5f677b84ba">More...</a><br /></td></tr>
+<tr class="separator:ac9ce92aeee79d5b70dc9cf5f677b84ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header of the <a class="el" href="a01050.html" title="Runner Class.">Runner</a> Class. </p>
+<div class="textblock"><p>Opcodes for communication. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Typedef Documentation</h2>
+<a id="a6d0819bd5ce78d8988003ea66a0085e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d0819bd5ce78d8988003ea66a0085e2">&#9670;&nbsp;</a></span>TCmdOpCodeMap</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::map&lt;<a class="el" href="a00149.html#ga9d169aaae39d9f86c725f5ee0fccec17">kCmdOpCodeEnum</a>, <a class="el" href="a01056.html">TCmdOpCode</a>&gt; <a class="el" href="a00077.html#a6d0819bd5ce78d8988003ea66a0085e2">TCmdOpCodeMap</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Type of opcodes group (map). </p>
+
+</div>
+</div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="adf6d651a11eee20ee5994083e3b98d77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf6d651a11eee20ee5994083e3b98d77">&#9670;&nbsp;</a></span>kCmdDeviceOperationEnum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a00077.html#adf6d651a11eee20ee5994083e3b98d77">kCmdDeviceOperationEnum</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumeration of the <a class="el" href="a00980.html" title="Device Base Class.">Device</a> Operations. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17aa536fda169aa2da5ed353df1818ef9de" title="OPCODE / DEVICE : Opcode Device Setup Bus.">kCmdDeviceSetupBus</a> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="adf6d651a11eee20ee5994083e3b98d77a06c85c4cc6a32f4eecfb5a348c6cc4ba"></a>kCmdDeviceOperationReset&#160;</td><td class="fielddoc"><p>CMD / DEVICE : Defines a operation Reset. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="adf6d651a11eee20ee5994083e3b98d77a2a7edb40033503b42f80088952030dc5"></a>kCmdDeviceOperationRead&#160;</td><td class="fielddoc"><p>CMD / DEVICE : Defines a operation Read. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="adf6d651a11eee20ee5994083e3b98d77adcf50d16f015962b0ca7416216a4387d"></a>kCmdDeviceOperationProg&#160;</td><td class="fielddoc"><p>CMD / DEVICE : Defines a operation Program. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+<a id="ac9ce92aeee79d5b70dc9cf5f677b84ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9ce92aeee79d5b70dc9cf5f677b84ba">&#9670;&nbsp;</a></span>kCmdDeviceAlgorithmEnum</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="a00077.html#ac9ce92aeee79d5b70dc9cf5f677b84ba">kCmdDeviceAlgorithmEnum</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Enumeration of the <a class="el" href="a00980.html" title="Device Base Class.">Device</a> Algorithms. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17aac903462659bc52c88be9e76ce658014" title="OPCODE / DEVICE : Opcode Device Erase.">kCmdDeviceErase</a> </dd>
+<dd>
+<a class="el" href="a00149.html#gga9d169aaae39d9f86c725f5ee0fccec17afe1417fb953569d6459c269cbb9f3d6a" title="OPCODE / DEVICE : Opcode Device Unprotect.">kCmdDeviceUnprotect</a> </dd></dl>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac9ce92aeee79d5b70dc9cf5f677b84baaa5f36b885b33de6593d860a625ca3e4a"></a>kCmdDeviceAlgorithmUnknown&#160;</td><td class="fielddoc"><p>CMD / DEVICE : Defines an unknown algorithm. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac9ce92aeee79d5b70dc9cf5f677b84baa43406823e463c8fb8290076b1a01e081"></a>kCmdDeviceAlgorithm27E&#160;</td><td class="fielddoc"><p>CMD / DEVICE : Defines an algorithm <a class="el" href="a01004.html" title="Parallel EPROM Class.">EPROM</a> 27E/SF/W27. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ac9ce92aeee79d5b70dc9cf5f677b84baa5deaa2e5637916e0fbc3b2598d5dd889"></a>kCmdDeviceAlgorithm28C&#160;</td><td class="fielddoc"><p>CMD / DEVICE : Defines an algorithm <a class="el" href="a00992.html" title="Parallel EEPROM Class.">EEPROM</a> 28C. </p>
+</td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

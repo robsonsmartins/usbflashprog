@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['launch_569',['launch',['../a01040.html#a0f3d8663defce2dbc704aaaa789d7046',1,'MultiCore']]],
-  ['load_570',['load',['../a01012.html#a78f61ac2dd03bcba8e09ca20cd7d68e3',1,'HC165']]],
-  ['lock_571',['lock',['../a01040.html#aa81aed607133209dade63a226818224d',1,'MultiCore']]],
-  ['loop_572',['loop',['../a01088.html#afe461d27b9c48d5921c00d521181f12f',1,'Runner']]],
-  ['lower_573',['lower',['../a01052.html#a4d797d0d58aa36d0386223bdbcdeec41',1,'StringUtils']]]
+  ['hc165_646',['HC165',['../a01018.html#a19e485d9c17878219d5395a619d7368a',1,'HC165::HC165()'],['../a01018.html#a5f2b7bc402052148b702b9e9c070eba0',1,'HC165::HC165(uint plPin, uint clkPin=0xFF, uint cePin=0xFF, uint q7Pin=0xFF, uint nq7Pin=0xFF, uint pulseTime=kDefaultPulseTime)']]],
+  ['hc165test_647',['HC165Test',['../a01142.html#ad3ca95e7173f40afa4fdcf4057333c1d',1,'HC165Test']]],
+  ['hc595_648',['HC595',['../a01022.html#a5710a093e9ee47d3979785289350a23e',1,'HC595::HC595()'],['../a01022.html#a85f6fa7dc4d11cf76eadf3ea7e22758f',1,'HC595::HC595(uint sinPin, uint clkPin=0xFF, uint clrPin=0xFF, uint rckPin=0xFF, uint oePin=0xFF, uint pulseTime=kDefaultPulseTime)']]],
+  ['hc595test_649',['HC595Test',['../a01146.html#a45ff84c762f66cbf7774eddc55f615ae',1,'HC595Test']]]
 ];

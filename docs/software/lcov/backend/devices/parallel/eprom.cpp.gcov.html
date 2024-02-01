@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - "bf9628e" - backend/devices/parallel/eprom.cpp</title>
+  <title>LCOV - "1c86347" - backend/devices/parallel/eprom.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">&quot;bf9628e&quot;</td>
+            <td class="headerValue">&quot;1c86347&quot;</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">86</td>
-            <td class="headerCovTableEntry">86</td>
+            <td class="headerCovTableEntry">89</td>
+            <td class="headerCovTableEntry">89</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2024-01-17 17:47:09</td>
+            <td class="headerValue">2024-02-01 18:46:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">16</td>
@@ -169,7 +169,7 @@
 <a name="99"><span class="lineNum">      99 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="100"><span class="lineNum">     100 </span>            : </a>
 <a name="101"><span class="lineNum">     101 </span><span class="lineCov">          1 : EPROM27::EPROM27(QObject *parent) : EPROM(parent) {</span></a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">          1 :     info_.name = &quot;EPROM 27xxx&quot;;</span></a>
+<a name="102"><span class="lineNum">     102 </span><span class="lineCov">          1 :     info_.name = &quot;EPROM 27 (NMOS)&quot;;</span></a>
 <a name="103"><span class="lineNum">     103 </span><span class="lineCov">          1 :     twp_ = 50000;</span></a>
 <a name="104"><span class="lineNum">     104 </span><span class="lineCov">          1 :     twc_ = 50;</span></a>
 <a name="105"><span class="lineNum">     105 </span><span class="lineCov">          1 :     vddRd_ = 5.0f;</span></a>
@@ -184,7 +184,7 @@
 <a name="114"><span class="lineNum">     114 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="115"><span class="lineNum">     115 </span>            : </a>
 <a name="116"><span class="lineNum">     116 </span><span class="lineCov">          3 : EPROM27C::EPROM27C(QObject *parent) : EPROM(parent) {</span></a>
-<a name="117"><span class="lineNum">     117 </span><span class="lineCov">          3 :     info_.name = &quot;EPROM 27Cxxx&quot;;</span></a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">          3 :     info_.name = &quot;EPROM 27C&quot;;</span></a>
 <a name="118"><span class="lineNum">     118 </span><span class="lineCov">          3 :     twp_ = 500;</span></a>
 <a name="119"><span class="lineNum">     119 </span><span class="lineCov">          3 :     twc_ = 8;</span></a>
 <a name="120"><span class="lineNum">     120 </span><span class="lineCov">          3 :     vddRd_ = 5.0f;</span></a>
@@ -199,7 +199,7 @@
 <a name="129"><span class="lineNum">     129 </span>            : // ---------------------------------------------------------------------------</a>
 <a name="130"><span class="lineNum">     130 </span>            : </a>
 <a name="131"><span class="lineNum">     131 </span><span class="lineCov">          1 : EPROM27C16Bit::EPROM27C16Bit(QObject *parent) : EPROM27C(parent) {</span></a>
-<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          1 :     info_.name = &quot;EPROM 27Cxxx (16Bit)&quot;;</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          1 :     info_.name = &quot;EPROM 27C (16Bit)&quot;;</span></a>
 <a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :     is16bit_ = true;</span></a>
 <a name="134"><span class="lineNum">     134 </span><span class="lineCov">          2 :     DEBUG &lt;&lt; info_.toString();</span></a>
 <a name="135"><span class="lineNum">     135 </span><span class="lineCov">          1 : }</span></a>
@@ -211,16 +211,19 @@
 <a name="141"><span class="lineNum">     141 </span><span class="lineCov">          1 : EPROM27E::EPROM27E(QObject *parent) : EPROM27C(parent) {</span></a>
 <a name="142"><span class="lineNum">     142 </span><span class="lineCov">          1 :     info_.name = &quot;EPROM W27C/27E/27SF&quot;;</span></a>
 <a name="143"><span class="lineNum">     143 </span><span class="lineCov">          1 :     info_.capability.hasErase = true;</span></a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">          1 :     twp_ = 100;</span></a>
-<a name="145"><span class="lineNum">     145 </span><span class="lineCov">          1 :     twc_ = 15;</span></a>
-<a name="146"><span class="lineNum">     146 </span><span class="lineCov">          1 :     vddRd_ = 5.0f;</span></a>
-<a name="147"><span class="lineNum">     147 </span><span class="lineCov">          1 :     vddWr_ = 5.0f;</span></a>
-<a name="148"><span class="lineNum">     148 </span><span class="lineCov">          1 :     vpp_ = 12.0f;</span></a>
-<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          1 :     vee_ = 14.0f;</span></a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">          2 :     DEBUG &lt;&lt; info_.toString();</span></a>
-<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          1 : }</span></a>
-<a name="152"><span class="lineNum">     152 </span>            : </a>
-<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          2 : EPROM27E::~EPROM27E() {}</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineCov">          1 :     info_.capability.hasFastProg = true;</span></a>
+<a name="145"><span class="lineNum">     145 </span><span class="lineCov">          1 :     fastProg_ = true;</span></a>
+<a name="146"><span class="lineNum">     146 </span><span class="lineCov">          1 :     twp_ = 100;</span></a>
+<a name="147"><span class="lineNum">     147 </span><span class="lineCov">          1 :     twc_ = 15;</span></a>
+<a name="148"><span class="lineNum">     148 </span><span class="lineCov">          1 :     vddRd_ = 5.0f;</span></a>
+<a name="149"><span class="lineNum">     149 </span><span class="lineCov">          1 :     vddWr_ = 5.0f;</span></a>
+<a name="150"><span class="lineNum">     150 </span><span class="lineCov">          1 :     vpp_ = 12.0f;</span></a>
+<a name="151"><span class="lineNum">     151 </span><span class="lineCov">          1 :     vee_ = 14.0f;</span></a>
+<a name="152"><span class="lineNum">     152 </span><span class="lineCov">          1 :     eraseAlgo_ = kCmdDeviceAlgorithm27E;</span></a>
+<a name="153"><span class="lineNum">     153 </span><span class="lineCov">          2 :     DEBUG &lt;&lt; info_.toString();</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineCov">          1 : }</span></a>
+<a name="155"><span class="lineNum">     155 </span>            : </a>
+<a name="156"><span class="lineNum">     156 </span><span class="lineCov">          2 : EPROM27E::~EPROM27E() {}</span></a>
 </pre>
       </td>
     </tr>

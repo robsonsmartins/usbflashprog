@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['twc_777',['twc',['../a01058.html#a23c4345bb80d772dcce96500ab606efa',1,'TProgrammerSettings']]],
-  ['twp_778',['twp',['../a01058.html#aad5d79cb23f0fa7aa738d4443b18598f',1,'TProgrammerSettings']]]
+  ['sectorsize_855',['sectorSize',['../a01076.html#aa6b8b207d152add680d43fd5303352d4',1,'TProgrammerSettings']]],
+  ['size_856',['size',['../a01076.html#ab2c6b258f02add8fdf4cfc7c371dd772',1,'TProgrammerSettings']]],
+  ['skipff_857',['skipFF',['../a01072.html#a86a539042a7753cfb1a9b4109f04b1ee',1,'TDeviceSettings::skipFF()'],['../a01076.html#a86a539042a7753cfb1a9b4109f04b1ee',1,'TProgrammerSettings::skipFF()']]]
 ];

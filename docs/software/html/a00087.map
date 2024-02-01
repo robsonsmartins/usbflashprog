@@ -1,8 +1,7 @@
-<map id="main.hpp" name="main.hpp">
-<area shape="rect" id="node1" title="Header of the Main Routine." alt="" coords="147,5,230,32"/>
-<area shape="rect" id="node2" href="$a00080.html" title="Configuration of UsbFlashProg." alt="" coords="144,80,233,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,84,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="109,155,175,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="200,155,271,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="295,155,375,181"/>
+<map id="config.hpp" name="config.hpp">
+<area shape="rect" id="node1" title="Configuration of UsbFlashProg." alt="" coords="144,5,233,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,84,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="109,80,175,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="200,80,271,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="295,80,375,107"/>
 </map>

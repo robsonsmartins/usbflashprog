@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: vgenerator.hpp File Reference</title>
+<title>USB EPROM/Flash Programmer: runner.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,59 +69,51 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle">
-<div class="title">vgenerator.hpp File Reference<div class="ingroups"><a class="el" href="a00194.html">Firmware Project</a></div></div>  </div>
+<div class="title">runner.hpp File Reference<div class="ingroups"><a class="el" href="a00200.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Header of the Voltage Generator Classes.  
+<p>Header of the Communication <a class="el" href="a01110.html" title="Communication Runner Class.">Runner</a> Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00038.html">hal/gpio.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00044.html">hal/multicore.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00017.html">circuits/dc2dc.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00011.html">circuits/74hc595.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00056.html">hal/serial.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00038.html">hal/gpio.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00077.html">modules/device.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00083.html">modules/opcodes.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for vgenerator.hpp:</div>
+Include dependency graph for runner.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00090.png" border="0" usemap="#avgenerator_8hpp" alt=""/></div>
-<map name="avgenerator_8hpp" id="avgenerator_8hpp">
-<area shape="rect" title="Header of the Voltage Generator Classes." alt="" coords="117,5,237,32"/>
-<area shape="rect" href="a00038.html" title="Header of the Pico GPIO Class." alt="" coords="105,155,207,181"/>
-<area shape="rect" href="a00044.html" title="Header of the Pico Multi Core Class." alt="" coords="24,80,160,107"/>
-<area shape="rect" href="a00017.html" title="Header of the DC To DC Converter Class." alt="" coords="365,80,504,107"/>
-<area shape="rect" href="a00011.html" title="Header of the 74HC595 Class." alt="" coords="185,80,341,107"/>
-<area shape="rect" title=" " alt="" coords="240,229,283,256"/>
-<area shape="rect" href="a00026.html" title="Header of the Pico ADC Class." alt="" coords="318,155,415,181"/>
-<area shape="rect" href="a00050.html" title="Header of the Pico PWM Class." alt="" coords="440,155,547,181"/>
-<area shape="rect" title=" " alt="" coords="231,155,294,181"/>
+<div class="center"><img src="a00090.png" border="0" usemap="#arunner_8hpp" alt=""/></div>
+<map name="arunner_8hpp" id="arunner_8hpp">
+<area shape="rect" title="Header of the Communication Runner Class." alt="" coords="625,5,716,32"/>
+<area shape="rect" title=" " alt="" coords="23,304,86,331"/>
+<area shape="rect" href="a00056.html" title="Header of the Pico Serial Communication Class." alt="" coords="896,80,1007,107"/>
+<area shape="rect" href="a00038.html" title="Header of the Pico GPIO Class." alt="" coords="380,304,483,331"/>
+<area shape="rect" href="a00077.html" title="Header of the Device Operation Class." alt="" coords="295,80,448,107"/>
+<area shape="rect" href="a00083.html" title="Opcodes for communication." alt="" coords="708,80,872,107"/>
+<area shape="rect" title=" " alt="" coords="834,155,893,181"/>
+<area shape="rect" title=" " alt="" coords="917,155,997,181"/>
+<area shape="rect" title=" " alt="" coords="626,379,669,405"/>
+<area shape="rect" href="a00095.html" title="Header of the Voltage Generator Classes." alt="" coords="424,155,604,181"/>
+<area shape="rect" href="a00071.html" title="Header of the Bus Classes." alt="" coords="214,155,348,181"/>
+<area shape="rect" href="a00044.html" title="Header of the Pico Multi Core Class." alt="" coords="446,229,582,256"/>
+<area shape="rect" href="a00017.html" title="Header of the DC To DC Converter Class." alt="" coords="708,229,846,256"/>
+<area shape="rect" href="a00011.html" title="Header of the 74HC595 Class." alt="" coords="266,229,422,256"/>
+<area shape="rect" href="a00026.html" title="Header of the Pico ADC Class." alt="" coords="728,304,826,331"/>
+<area shape="rect" href="a00050.html" title="Header of the Pico PWM Class." alt="" coords="597,304,704,331"/>
+<area shape="rect" href="a00005.html" title="Header of the 74HC165 Class." alt="" coords="34,229,190,256"/>
+<area shape="rect" title=" " alt="" coords="760,155,810,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01096.html">VddConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the configuration fields for a <a class="el" href="a01112.html" title="Voltage (VDD) Generator Class.">VddGenerator</a> class.  <a href="a01096.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01100.html">VppConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the configuration fields for a <a class="el" href="a01116.html" title="Voltage (VPP) Generator Class.">VppGenerator</a> class.  <a href="a01100.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01104.html">VGenConfig</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the configuration fields for a <a class="el" href="a01120.html" title="Voltage (VPP/VDD) Generator Class.">VGenerator</a> class.  <a href="a01104.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01108.html">GenericGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generic Voltage Generator Class.  <a href="a01108.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01112.html">VddGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voltage (VDD) Generator Class.  <a href="a01112.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01116.html">VppGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voltage (VPP) Generator Class.  <a href="a01116.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01120.html">VGenerator</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Voltage (VPP/VDD) Generator Class.  <a href="a01120.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01110.html">Runner</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Communication <a class="el" href="a01110.html" title="Communication Runner Class.">Runner</a> Class.  <a href="a01110.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header of the Voltage Generator Classes. </p>
+<div class="textblock"><p>Header of the Communication <a class="el" href="a01110.html" title="Communication Runner Class.">Runner</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

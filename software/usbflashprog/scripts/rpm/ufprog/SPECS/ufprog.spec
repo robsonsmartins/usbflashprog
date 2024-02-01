@@ -5,7 +5,7 @@
 
 Summary: USB EPROM/Flash Programmer
 Name: ufprog
-Version: 0.2
+Version: 0.3
 Release: 0
 License: CC-BY-NC-SA 4.0
 BuildArch: x86_64
@@ -76,6 +76,8 @@ rm -f /opt/ufprog/*~ 2>/dev/null || true
 /*
 
 %changelog
+* Wed Jan 31 2024  Robson Martins <robson@robsonmartins.com> 0.3
+- Release 0.3
 * Fri Dec 22 2023  Robson Martins <robson@robsonmartins.com> 0.2
 - Release 0.2
 * Tue Jun 28 2022  Robson Martins <robson@robsonmartins.com> 0.1

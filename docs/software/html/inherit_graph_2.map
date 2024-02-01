@@ -1,12 +1,15 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$a00974.html" title="Device Base Class." alt="" coords="5,31,72,57"/>
-<area shape="rect" id="node2" href="$a00978.html" title="Parallel Dummy Device Class." alt="" coords="126,5,201,32"/>
-<area shape="rect" id="node4" href="$a01006.html" title="Parallel Device Base Class." alt="" coords="120,56,207,83"/>
-<area shape="rect" id="node3" href="$a00982.html" title="Parallel Dummy 16 Bit Device Class." alt="" coords="255,5,363,32"/>
-<area shape="rect" id="node5" href="$a00986.html" title="Parallel EPROM Class." alt="" coords="274,56,343,83"/>
-<area shape="rect" id="node10" href="$a01010.html" title="Parallel SRAM Class." alt="" coords="279,107,339,133"/>
-<area shape="rect" id="node6" href="$a00990.html" title="Parallel EPROM 27xxx (NMOS) Class." alt="" coords="415,31,501,57"/>
-<area shape="rect" id="node7" href="$a00994.html" title="Parallel EPROM 27Cxxx (CMOS) Class." alt="" coords="411,81,505,108"/>
-<area shape="rect" id="node8" href="$a00998.html" title="Parallel EPROM 27Cxxx 16Bit (CMOS) Class." alt="" coords="553,56,681,83"/>
-<area shape="rect" id="node9" href="$a01002.html" title="Parallel EPROM W27Exxx Class." alt="" coords="571,107,664,133"/>
+<area shape="rect" id="node1" href="$a00980.html" title="Device Base Class." alt="" coords="5,56,72,83"/>
+<area shape="rect" id="node2" href="$a00984.html" title="Parallel Dummy Device Class." alt="" coords="126,19,201,45"/>
+<area shape="rect" id="node4" href="$a01024.html" title="Parallel Device Base Class." alt="" coords="120,81,207,108"/>
+<area shape="rect" id="node3" href="$a00988.html" title="Parallel Dummy 16 Bit Device Class." alt="" coords="255,5,363,32"/>
+<area shape="rect" id="node5" href="$a00992.html" title="Parallel EEPROM Class." alt="" coords="270,56,347,83"/>
+<area shape="rect" id="node8" href="$a01004.html" title="Parallel EPROM Class." alt="" coords="274,107,343,133"/>
+<area shape="rect" id="node13" href="$a01028.html" title="Parallel SRAM Class." alt="" coords="279,157,339,184"/>
+<area shape="rect" id="node6" href="$a01000.html" title="Parallel EEPROM AT28Cxxx Class." alt="" coords="411,5,520,32"/>
+<area shape="rect" id="node7" href="$a00996.html" title="Parallel EEPROM 28Cxxx Class." alt="" coords="414,56,517,83"/>
+<area shape="rect" id="node9" href="$a01008.html" title="Parallel EPROM 27xxx (NMOS) Class." alt="" coords="423,107,508,133"/>
+<area shape="rect" id="node10" href="$a01012.html" title="Parallel EPROM 27Cxxx (CMOS) Class." alt="" coords="418,157,513,184"/>
+<area shape="rect" id="node11" href="$a01016.html" title="Parallel EPROM 27Cxxx 16Bit (CMOS) Class." alt="" coords="568,132,696,159"/>
+<area shape="rect" id="node12" href="$a01020.html" title="Parallel EPROM W27Exxx Class." alt="" coords="585,183,679,209"/>
 </map>

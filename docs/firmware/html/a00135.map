@@ -1,5 +1,6 @@
-<map id="multicore_test.hpp" name="multicore_test.hpp">
-<area shape="rect" id="node1" title="Header of Unit Test for Pico Multi Core Class." alt="" coords="57,5,201,32"/>
+<map id="gpio_test.hpp" name="gpio_test.hpp">
+<area shape="rect" id="node1" title="Header of Unit Test for Pico GPIO Class." alt="" coords="66,5,177,32"/>
 <area shape="rect" id="node2" title=" " alt="" coords="5,80,109,107"/>
-<area shape="rect" id="node3" href="$a00044.html" title="Header of the Pico Multi Core Class." alt="" coords="133,80,269,107"/>
+<area shape="rect" id="node3" href="$a00038.html" title="Header of the Pico GPIO Class." alt="" coords="134,80,237,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="164,155,207,181"/>
 </map>

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: config.hpp File Reference</title>
+<title>USB EPROM/Flash Programmer: runner.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -60,776 +60,103 @@ $(function() {
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_8c739bbef76d64b22d6b0911c526dd76.html">backend</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">config.hpp File Reference<div class="ingroups"><a class="el" href="a00143.html">Software Project</a></div></div>  </div>
+<div class="title">runner.cpp File Reference<div class="ingroups"><a class="el" href="a00149.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Configuration of UsbFlashProg.  
+<p>Implementation of the <a class="el" href="a01068.html" title="Runner Class.">Runner</a> Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QtGlobal&gt;</code><br />
-<code>#include &lt;QtCore&gt;</code><br />
-<code>#include &lt;QString&gt;</code><br />
-<code>#include &quot;VERSION&quot;</code><br />
+<div class="textblock"><code>#include &lt;QDateTime&gt;</code><br />
+<code>#include &lt;QApplication&gt;</code><br />
+<code>#include &lt;QLoggingCategory&gt;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;cstring&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00083.html">backend/runner.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00005.html">devices/device.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00086.html">config.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for config.hpp:</div>
+Include dependency graph for runner.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00081.png" border="0" usemap="#aconfig_8hpp" alt=""/></div>
-<map name="aconfig_8hpp" id="aconfig_8hpp">
-<area shape="rect" title="Configuration of UsbFlashProg." alt="" coords="144,5,233,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,84,107"/>
-<area shape="rect" title=" " alt="" coords="109,80,175,107"/>
-<area shape="rect" title=" " alt="" coords="200,80,271,107"/>
-<area shape="rect" title=" " alt="" coords="295,80,375,107"/>
+<div class="center"><img src="a00081.png" border="0" usemap="#arunner_8cpp" alt=""/></div>
+<map name="arunner_8cpp" id="arunner_8cpp">
+<area shape="rect" title="Implementation of the Runner Class." alt="" coords="500,5,591,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,101,107"/>
+<area shape="rect" title=" " alt="" coords="126,80,231,107"/>
+<area shape="rect" title=" " alt="" coords="255,80,398,107"/>
+<area shape="rect" title=" " alt="" coords="423,80,489,107"/>
+<area shape="rect" title=" " alt="" coords="513,80,577,107"/>
+<area shape="rect" title=" " alt="" coords="601,80,668,107"/>
+<area shape="rect" href="a00083.html" title="Header of the Runner Class." alt="" coords="747,155,896,181"/>
+<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="692,80,839,107"/>
+<area shape="rect" href="a00086.html" title="Configuration of UsbFlashProg." alt="" coords="1139,80,1229,107"/>
+<area shape="rect" title=" " alt="" coords="421,229,496,256"/>
+<area shape="rect" title=" " alt="" coords="1113,229,1183,256"/>
+<area shape="rect" title=" " alt="" coords="1034,229,1089,256"/>
+<area shape="rect" title=" " alt="" coords="521,229,618,256"/>
+<area shape="rect" title=" " alt="" coords="642,229,737,256"/>
+<area shape="rect" title=" " alt="" coords="761,229,881,256"/>
+<area shape="rect" href="a00077.html" title="Opcodes for communication." alt="" coords="905,229,1009,256"/>
+<area shape="rect" title=" " alt="" coords="837,304,904,331"/>
+<area shape="rect" title=" " alt="" coords="928,304,987,331"/>
+<area shape="rect" title=" " alt="" coords="1011,304,1061,331"/>
+<area shape="rect" title=" " alt="" coords="1145,155,1223,181"/>
+<area shape="rect" title=" " alt="" coords="1248,155,1315,181"/>
+<area shape="rect" title=" " alt="" coords="1339,155,1419,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01058.html">TProgrammerSettings</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the programmer settings.  <a href="a01058.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01062.html">TApplicationSettings</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the application settings.  <a href="a01062.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:a3fe77dfef1f90d4552bf76a3d9df67f1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a3fe77dfef1f90d4552bf76a3d9df67f1">kAppVersion</a>&#160;&#160;&#160;QString::number(kAppVersionArray[0], 'f', 1).toStdString().c_str()</td></tr>
-<tr class="memdesc:a3fe77dfef1f90d4552bf76a3d9df67f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : App Version.  <a href="a00080.html#a3fe77dfef1f90d4552bf76a3d9df67f1">More...</a><br /></td></tr>
-<tr class="separator:a3fe77dfef1f90d4552bf76a3d9df67f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a503ba82f2918b39a81ecbfbf1b8372a3"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a503ba82f2918b39a81ecbfbf1b8372a3">kProjectHomePage</a></td></tr>
-<tr class="memdesc:a503ba82f2918b39a81ecbfbf1b8372a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Project Home Page.  <a href="a00080.html#a503ba82f2918b39a81ecbfbf1b8372a3">More...</a><br /></td></tr>
-<tr class="separator:a503ba82f2918b39a81ecbfbf1b8372a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afd686b0c747f93dc8811f33f7eeb350f"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#afd686b0c747f93dc8811f33f7eeb350f">kAuthorHomePage</a> = &quot;https://robsonmartins.com/&quot;</td></tr>
-<tr class="memdesc:afd686b0c747f93dc8811f33f7eeb350f"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Author Home Page.  <a href="a00080.html#afd686b0c747f93dc8811f33f7eeb350f">More...</a><br /></td></tr>
-<tr class="separator:afd686b0c747f93dc8811f33f7eeb350f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c90f4d75009e5aeaafb1ba2b5296e1f"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a1c90f4d75009e5aeaafb1ba2b5296e1f">kAuthorName</a> = &quot;Robson Martins&quot;</td></tr>
-<tr class="memdesc:a1c90f4d75009e5aeaafb1ba2b5296e1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Author Name.  <a href="a00080.html#a1c90f4d75009e5aeaafb1ba2b5296e1f">More...</a><br /></td></tr>
-<tr class="separator:a1c90f4d75009e5aeaafb1ba2b5296e1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a6d1acf913956dcf09e701d0bcacc7b"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a6a6d1acf913956dcf09e701d0bcacc7b">kOrganizationName</a> = &quot;RobsonMartins&quot;</td></tr>
-<tr class="memdesc:a6a6d1acf913956dcf09e701d0bcacc7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Organization Name.  <a href="a00080.html#a6a6d1acf913956dcf09e701d0bcacc7b">More...</a><br /></td></tr>
-<tr class="separator:a6a6d1acf913956dcf09e701d0bcacc7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac050aa38cdaf6c9d58ecc4178fbb4d43"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ac050aa38cdaf6c9d58ecc4178fbb4d43">kOrganizationDomain</a> = &quot;robsonmartins.com&quot;</td></tr>
-<tr class="memdesc:ac050aa38cdaf6c9d58ecc4178fbb4d43"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Organization Domain.  <a href="a00080.html#ac050aa38cdaf6c9d58ecc4178fbb4d43">More...</a><br /></td></tr>
-<tr class="separator:ac050aa38cdaf6c9d58ecc4178fbb4d43"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2496c221ca3b18635dc6d0bcc3763e06"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a2496c221ca3b18635dc6d0bcc3763e06">kApplicationName</a> = &quot;UsbFlashProg&quot;</td></tr>
-<tr class="memdesc:a2496c221ca3b18635dc6d0bcc3763e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : App Name.  <a href="a00080.html#a2496c221ca3b18635dc6d0bcc3763e06">More...</a><br /></td></tr>
-<tr class="separator:a2496c221ca3b18635dc6d0bcc3763e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b22c3e3a01cbba6193ec96944230d81"><td class="memItemLeft" align="right" valign="top">constexpr quint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a8b22c3e3a01cbba6193ec96944230d81">kUsbVendorId</a> = 0x2E8A</td></tr>
-<tr class="memdesc:a8b22c3e3a01cbba6193ec96944230d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM/USB : Vendor ID.  <a href="a00080.html#a8b22c3e3a01cbba6193ec96944230d81">More...</a><br /></td></tr>
-<tr class="separator:a8b22c3e3a01cbba6193ec96944230d81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6837f08bc0f8ee437f856c4c1199cf5c"><td class="memItemLeft" align="right" valign="top">constexpr quint16&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a6837f08bc0f8ee437f856c4c1199cf5c">kUsbProductId</a> = 0x000A</td></tr>
-<tr class="memdesc:a6837f08bc0f8ee437f856c4c1199cf5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM/USB : Product ID.  <a href="a00080.html#a6837f08bc0f8ee437f856c4c1199cf5c">More...</a><br /></td></tr>
-<tr class="separator:a6837f08bc0f8ee437f856c4c1199cf5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1a4c6761009677e2542e68497426cd0"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#af1a4c6761009677e2542e68497426cd0">kUsbEnumerateInterval</a> = 2000</td></tr>
-<tr class="memdesc:af1a4c6761009677e2542e68497426cd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM/USB : Interval to enumerate USB, in milliseconds.  <a href="a00080.html#af1a4c6761009677e2542e68497426cd0">More...</a><br /></td></tr>
-<tr class="separator:af1a4c6761009677e2542e68497426cd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96b75885bb2a5ee2e41e9e78b07366af"><td class="memItemLeft" align="right" valign="top">constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a96b75885bb2a5ee2e41e9e78b07366af">kUsbRefreshInterval</a> = 500</td></tr>
-<tr class="memdesc:a96b75885bb2a5ee2e41e9e78b07366af"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMM/USB : Interval to refresh communication, in milliseconds.  <a href="a00080.html#a96b75885bb2a5ee2e41e9e78b07366af">More...</a><br /></td></tr>
-<tr class="separator:a96b75885bb2a5ee2e41e9e78b07366af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae67329bb64313218f0f492f58d7ccae3"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ae67329bb64313218f0f492f58d7ccae3">kLogFileName</a> = &quot;ufprog.log&quot;</td></tr>
-<tr class="memdesc:ae67329bb64313218f0f492f58d7ccae3"><td class="mdescLeft">&#160;</td><td class="mdescRight">GENERAL : Log filename.  <a href="a00080.html#ae67329bb64313218f0f492f58d7ccae3">More...</a><br /></td></tr>
-<tr class="separator:ae67329bb64313218f0f492f58d7ccae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32505cb3e3cb91235d1fb45f9c8fd91b"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a32505cb3e3cb91235d1fb45f9c8fd91b">kSettingGeneralLogLevel</a> = &quot;LogLevel&quot;</td></tr>
-<tr class="memdesc:a32505cb3e3cb91235d1fb45f9c8fd91b"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : General / LogLevel.  <a href="a00080.html#a32505cb3e3cb91235d1fb45f9c8fd91b">More...</a><br /></td></tr>
-<tr class="separator:a32505cb3e3cb91235d1fb45f9c8fd91b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7147e228424bec1b5720276f5d299dc0"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a7147e228424bec1b5720276f5d299dc0">kSettingGeneralWindowPos</a> = &quot;WindowPos&quot;</td></tr>
-<tr class="memdesc:a7147e228424bec1b5720276f5d299dc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : General / Window Position.  <a href="a00080.html#a7147e228424bec1b5720276f5d299dc0">More...</a><br /></td></tr>
-<tr class="separator:a7147e228424bec1b5720276f5d299dc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac604e274f320ec8b6077634a6013a4b"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aac604e274f320ec8b6077634a6013a4b">kSettingGeneralWindowSize</a> = &quot;WindowSize&quot;</td></tr>
-<tr class="memdesc:aac604e274f320ec8b6077634a6013a4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : General / Window Size.  <a href="a00080.html#aac604e274f320ec8b6077634a6013a4b">More...</a><br /></td></tr>
-<tr class="separator:aac604e274f320ec8b6077634a6013a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee42e54137d8f96bed535c1431e0fc4f"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aee42e54137d8f96bed535c1431e0fc4f">kSettingGeneralLanguage</a> = &quot;Language&quot;</td></tr>
-<tr class="memdesc:aee42e54137d8f96bed535c1431e0fc4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : General / Language.  <a href="a00080.html#aee42e54137d8f96bed535c1431e0fc4f">More...</a><br /></td></tr>
-<tr class="separator:aee42e54137d8f96bed535c1431e0fc4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afbebc20a91acc06005db7620e0e5746c"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#afbebc20a91acc06005db7620e0e5746c">kSettingProgDevice</a> = &quot;Prog/<a class="el" href="a00974.html">Device</a>&quot;</td></tr>
-<tr class="memdesc:afbebc20a91acc06005db7620e0e5746c"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / Selected <a class="el" href="a00974.html" title="Device Base Class.">Device</a>.  <a href="a00080.html#afbebc20a91acc06005db7620e0e5746c">More...</a><br /></td></tr>
-<tr class="separator:afbebc20a91acc06005db7620e0e5746c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5871c7a5ce76f5e9e74040e4601bb536"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a5871c7a5ce76f5e9e74040e4601bb536">kSettingProgDeviceSize</a> = &quot;Prog/DeviceSize&quot;</td></tr>
-<tr class="memdesc:a5871c7a5ce76f5e9e74040e4601bb536"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Size.  <a href="a00080.html#a5871c7a5ce76f5e9e74040e4601bb536">More...</a><br /></td></tr>
-<tr class="separator:a5871c7a5ce76f5e9e74040e4601bb536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd789d5ea2dd4b8d422fdab0e7e4e009"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#abd789d5ea2dd4b8d422fdab0e7e4e009">kSettingProgTwp</a> = &quot;Prog/tWP&quot;</td></tr>
-<tr class="memdesc:abd789d5ea2dd4b8d422fdab0e7e4e009"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / tWP.  <a href="a00080.html#abd789d5ea2dd4b8d422fdab0e7e4e009">More...</a><br /></td></tr>
-<tr class="separator:abd789d5ea2dd4b8d422fdab0e7e4e009"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc3b51eaae756170d0f89720005d321f"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#afc3b51eaae756170d0f89720005d321f">kSettingProgTwc</a> = &quot;Prog/tWC&quot;</td></tr>
-<tr class="memdesc:afc3b51eaae756170d0f89720005d321f"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / tWC.  <a href="a00080.html#afc3b51eaae756170d0f89720005d321f">More...</a><br /></td></tr>
-<tr class="separator:afc3b51eaae756170d0f89720005d321f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4300b133cae10931bb4624d078885739"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a4300b133cae10931bb4624d078885739">kSettingProgVddRd</a> = &quot;Prog/VDDToRead&quot;</td></tr>
-<tr class="memdesc:a4300b133cae10931bb4624d078885739"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / VDD to Read.  <a href="a00080.html#a4300b133cae10931bb4624d078885739">More...</a><br /></td></tr>
-<tr class="separator:a4300b133cae10931bb4624d078885739"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee6b1c35d51759f459aa42b63d18e0c8"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aee6b1c35d51759f459aa42b63d18e0c8">kSettingProgVddWr</a> = &quot;Prog/VDDToProg&quot;</td></tr>
-<tr class="memdesc:aee6b1c35d51759f459aa42b63d18e0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / VDD to Prog.  <a href="a00080.html#aee6b1c35d51759f459aa42b63d18e0c8">More...</a><br /></td></tr>
-<tr class="separator:aee6b1c35d51759f459aa42b63d18e0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad186367817c65f0b658c06b6d0878d15"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ad186367817c65f0b658c06b6d0878d15">kSettingProgVpp</a> = &quot;Prog/VPP&quot;</td></tr>
-<tr class="memdesc:ad186367817c65f0b658c06b6d0878d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / VPP.  <a href="a00080.html#ad186367817c65f0b658c06b6d0878d15">More...</a><br /></td></tr>
-<tr class="separator:ad186367817c65f0b658c06b6d0878d15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af907b97835f626ff6db913791625d19e"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#af907b97835f626ff6db913791625d19e">kSettingProgVee</a> = &quot;Prog/VEE&quot;</td></tr>
-<tr class="memdesc:af907b97835f626ff6db913791625d19e"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / VEE.  <a href="a00080.html#af907b97835f626ff6db913791625d19e">More...</a><br /></td></tr>
-<tr class="separator:af907b97835f626ff6db913791625d19e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a614e35517821b8766d174b4fd94c4ede"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a614e35517821b8766d174b4fd94c4ede">kSettingProgSkipFF</a> = &quot;Prog/SkipFF&quot;</td></tr>
-<tr class="memdesc:a614e35517821b8766d174b4fd94c4ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / Skip Prog 0xFF.  <a href="a00080.html#a614e35517821b8766d174b4fd94c4ede">More...</a><br /></td></tr>
-<tr class="separator:a614e35517821b8766d174b4fd94c4ede"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37ceb6a7a8a6c7cb43ec62e00bc4cb95"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a37ceb6a7a8a6c7cb43ec62e00bc4cb95">kSettingProgFast</a> = &quot;Prog/FastProg&quot;</td></tr>
-<tr class="memdesc:a37ceb6a7a8a6c7cb43ec62e00bc4cb95"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / Fast Prog/Erase.  <a href="a00080.html#a37ceb6a7a8a6c7cb43ec62e00bc4cb95">More...</a><br /></td></tr>
-<tr class="separator:a37ceb6a7a8a6c7cb43ec62e00bc4cb95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef7d099c83469d26a8df05c2a426057f"><td class="memItemLeft" align="right" valign="top">constexpr const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#aef7d099c83469d26a8df05c2a426057f">kSettingProgSectorSize</a> = &quot;Prog/SectorSize&quot;</td></tr>
-<tr class="memdesc:aef7d099c83469d26a8df05c2a426057f"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTING : Programmer / Sector Size.  <a href="a00080.html#aef7d099c83469d26a8df05c2a426057f">More...</a><br /></td></tr>
-<tr class="separator:aef7d099c83469d26a8df05c2a426057f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a647dbe717558569de52b11ddd71f76e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a647dbe717558569de52b11ddd71f76e7">operator==</a> (const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;a, const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;b)</td></tr>
+<tr class="separator:a647dbe717558569de52b11ddd71f76e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Configuration of UsbFlashProg. </p>
+<div class="textblock"><p>Implementation of the <a class="el" href="a01068.html" title="Runner Class.">Runner</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a3fe77dfef1f90d4552bf76a3d9df67f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fe77dfef1f90d4552bf76a3d9df67f1">&#9670;&nbsp;</a></span>kAppVersion</h2>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a647dbe717558569de52b11ddd71f76e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a647dbe717558569de52b11ddd71f76e7">&#9670;&nbsp;</a></span>operator==()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">#define kAppVersion&#160;&#160;&#160;QString::number(kAppVersionArray[0], 'f', 1).toStdString().c_str()</td>
+          <td class="memname">bool operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
         </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>GENERAL : App Version. </p>
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a503ba82f2918b39a81ecbfbf1b8372a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a503ba82f2918b39a81ecbfbf1b8372a3">&#9670;&nbsp;</a></span>kProjectHomePage</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">constexpr const char* kProjectHomePage</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">=</div>
-<div class="line">    <span class="stringliteral">&quot;https://usbflashprog.robsonmartins.com/&quot;</span></div>
-</div><!-- fragment -->
-<p>GENERAL : Project Home Page. </p>
-
-</div>
-</div>
-<a id="afd686b0c747f93dc8811f33f7eeb350f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd686b0c747f93dc8811f33f7eeb350f">&#9670;&nbsp;</a></span>kAuthorHomePage</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">constexpr const char* kAuthorHomePage = &quot;https://robsonmartins.com/&quot;</td>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
-
-<p>GENERAL : Author Home Page. </p>
-
-</div>
-</div>
-<a id="a1c90f4d75009e5aeaafb1ba2b5296e1f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c90f4d75009e5aeaafb1ba2b5296e1f">&#9670;&nbsp;</a></span>kAuthorName</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kAuthorName = &quot;Robson Martins&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>GENERAL : Author Name. </p>
-
-</div>
-</div>
-<a id="a6a6d1acf913956dcf09e701d0bcacc7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a6d1acf913956dcf09e701d0bcacc7b">&#9670;&nbsp;</a></span>kOrganizationName</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kOrganizationName = &quot;RobsonMartins&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>GENERAL : Organization Name. </p>
-
-</div>
-</div>
-<a id="ac050aa38cdaf6c9d58ecc4178fbb4d43"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac050aa38cdaf6c9d58ecc4178fbb4d43">&#9670;&nbsp;</a></span>kOrganizationDomain</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kOrganizationDomain = &quot;robsonmartins.com&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>GENERAL : Organization Domain. </p>
-
-</div>
-</div>
-<a id="a2496c221ca3b18635dc6d0bcc3763e06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2496c221ca3b18635dc6d0bcc3763e06">&#9670;&nbsp;</a></span>kApplicationName</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kApplicationName = &quot;UsbFlashProg&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>GENERAL : App Name. </p>
-
-</div>
-</div>
-<a id="a8b22c3e3a01cbba6193ec96944230d81"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b22c3e3a01cbba6193ec96944230d81">&#9670;&nbsp;</a></span>kUsbVendorId</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr quint16 kUsbVendorId = 0x2E8A</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>COMM/USB : Vendor ID. </p>
-
-</div>
-</div>
-<a id="a6837f08bc0f8ee437f856c4c1199cf5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6837f08bc0f8ee437f856c4c1199cf5c">&#9670;&nbsp;</a></span>kUsbProductId</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr quint16 kUsbProductId = 0x000A</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>COMM/USB : Product ID. </p>
-
-</div>
-</div>
-<a id="af1a4c6761009677e2542e68497426cd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1a4c6761009677e2542e68497426cd0">&#9670;&nbsp;</a></span>kUsbEnumerateInterval</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr int kUsbEnumerateInterval = 2000</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>COMM/USB : Interval to enumerate USB, in milliseconds. </p>
-
-</div>
-</div>
-<a id="a96b75885bb2a5ee2e41e9e78b07366af"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96b75885bb2a5ee2e41e9e78b07366af">&#9670;&nbsp;</a></span>kUsbRefreshInterval</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr int kUsbRefreshInterval = 500</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>COMM/USB : Interval to refresh communication, in milliseconds. </p>
-
-</div>
-</div>
-<a id="ae67329bb64313218f0f492f58d7ccae3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae67329bb64313218f0f492f58d7ccae3">&#9670;&nbsp;</a></span>kLogFileName</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kLogFileName = &quot;ufprog.log&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>GENERAL : Log filename. </p>
-
-</div>
-</div>
-<a id="a32505cb3e3cb91235d1fb45f9c8fd91b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32505cb3e3cb91235d1fb45f9c8fd91b">&#9670;&nbsp;</a></span>kSettingGeneralLogLevel</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingGeneralLogLevel = &quot;LogLevel&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : General / LogLevel. </p>
-
-</div>
-</div>
-<a id="a7147e228424bec1b5720276f5d299dc0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7147e228424bec1b5720276f5d299dc0">&#9670;&nbsp;</a></span>kSettingGeneralWindowPos</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingGeneralWindowPos = &quot;WindowPos&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : General / Window Position. </p>
-
-</div>
-</div>
-<a id="aac604e274f320ec8b6077634a6013a4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac604e274f320ec8b6077634a6013a4b">&#9670;&nbsp;</a></span>kSettingGeneralWindowSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingGeneralWindowSize = &quot;WindowSize&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : General / Window Size. </p>
-
-</div>
-</div>
-<a id="aee42e54137d8f96bed535c1431e0fc4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee42e54137d8f96bed535c1431e0fc4f">&#9670;&nbsp;</a></span>kSettingGeneralLanguage</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingGeneralLanguage = &quot;Language&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : General / Language. </p>
-
-</div>
-</div>
-<a id="afbebc20a91acc06005db7620e0e5746c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afbebc20a91acc06005db7620e0e5746c">&#9670;&nbsp;</a></span>kSettingProgDevice</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgDevice = &quot;Prog/<a class="el" href="a00974.html">Device</a>&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / Selected <a class="el" href="a00974.html" title="Device Base Class.">Device</a>. </p>
-
-</div>
-</div>
-<a id="a5871c7a5ce76f5e9e74040e4601bb536"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5871c7a5ce76f5e9e74040e4601bb536">&#9670;&nbsp;</a></span>kSettingProgDeviceSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgDeviceSize = &quot;Prog/DeviceSize&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / <a class="el" href="a00974.html" title="Device Base Class.">Device</a> Size. </p>
-
-</div>
-</div>
-<a id="abd789d5ea2dd4b8d422fdab0e7e4e009"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd789d5ea2dd4b8d422fdab0e7e4e009">&#9670;&nbsp;</a></span>kSettingProgTwp</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgTwp = &quot;Prog/tWP&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / tWP. </p>
-
-</div>
-</div>
-<a id="afc3b51eaae756170d0f89720005d321f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc3b51eaae756170d0f89720005d321f">&#9670;&nbsp;</a></span>kSettingProgTwc</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgTwc = &quot;Prog/tWC&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / tWC. </p>
-
-</div>
-</div>
-<a id="a4300b133cae10931bb4624d078885739"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4300b133cae10931bb4624d078885739">&#9670;&nbsp;</a></span>kSettingProgVddRd</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgVddRd = &quot;Prog/VDDToRead&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / VDD to Read. </p>
-
-</div>
-</div>
-<a id="aee6b1c35d51759f459aa42b63d18e0c8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee6b1c35d51759f459aa42b63d18e0c8">&#9670;&nbsp;</a></span>kSettingProgVddWr</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgVddWr = &quot;Prog/VDDToProg&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / VDD to Prog. </p>
-
-</div>
-</div>
-<a id="ad186367817c65f0b658c06b6d0878d15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad186367817c65f0b658c06b6d0878d15">&#9670;&nbsp;</a></span>kSettingProgVpp</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgVpp = &quot;Prog/VPP&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / VPP. </p>
-
-</div>
-</div>
-<a id="af907b97835f626ff6db913791625d19e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af907b97835f626ff6db913791625d19e">&#9670;&nbsp;</a></span>kSettingProgVee</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgVee = &quot;Prog/VEE&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / VEE. </p>
-
-</div>
-</div>
-<a id="a614e35517821b8766d174b4fd94c4ede"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a614e35517821b8766d174b4fd94c4ede">&#9670;&nbsp;</a></span>kSettingProgSkipFF</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgSkipFF = &quot;Prog/SkipFF&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / Skip Prog 0xFF. </p>
-
-</div>
-</div>
-<a id="a37ceb6a7a8a6c7cb43ec62e00bc4cb95"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37ceb6a7a8a6c7cb43ec62e00bc4cb95">&#9670;&nbsp;</a></span>kSettingProgFast</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgFast = &quot;Prog/FastProg&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / Fast Prog/Erase. </p>
-
-</div>
-</div>
-<a id="aef7d099c83469d26a8df05c2a426057f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef7d099c83469d26a8df05c2a426057f">&#9670;&nbsp;</a></span>kSettingProgSectorSize</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr const char* kSettingProgSectorSize = &quot;Prog/SectorSize&quot;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>SETTING : Programmer / Sector Size. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">a</td><td>One object. </td></tr>
+    <tr><td class="paramname">b</td><td>Another object. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the objects contain equal values, false otherwise. </dd></dl>
 
 </div>
 </div>

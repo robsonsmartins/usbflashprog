@@ -43,6 +43,7 @@ Dummy::Dummy(QObject *parent) : Device(parent), protected_(true) {
     info_.capability.hasRead = true;
     info_.capability.hasBlankCheck = true;
     info_.capability.hasUnprotect = true;
+    info_.capability.hasProtect = true;
     info_.capability.hasSectorSize = true;
     info_.capability.hasFastProg = true;
     info_.capability.hasSkipFF = true;
@@ -241,10 +242,26 @@ bool Dummy::unprotect() {
     return true;
 }
 
+bool Dummy::protect() {
+    INFO << "Protecting device...";
+    canceling_ = false;
+    if (protected_) {
+        emit onProgress(0, 100, true, false);
+        WARNING << "Error on Protect: Already protected";
+        return false;
+    }
+    protected_ = true;
+    Runner::usDelay(twc_);
+    emit onProgress(100, 100, true);
+    INFO << "Protecting device OK";
+    return true;
+}
+
 // ---------------------------------------------------------------------------
 
 Dummy16Bit::Dummy16Bit(QObject *parent) : Dummy(parent) {
     info_.name = "Dummy (16 bits)";
+    is16bit_ = true;
     DEBUG << info_.toString();
 }
 

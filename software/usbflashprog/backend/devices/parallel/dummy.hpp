@@ -61,6 +61,8 @@ class Dummy : public Device {
     virtual bool blankCheck();
     /* Reimplemented */
     virtual bool unprotect();
+    /* Reimplemented */
+    virtual bool protect();
 
   protected:
     /* @brief The internal buffer. */

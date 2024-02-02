@@ -823,6 +823,8 @@ void MainWindow::createDevice_() {
         device_->setSize(2048);
         ui_->actionDoProgram->setText(tr("Program"));
         ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        ui_->comboBoxProgSize->setEnabled(true);
+        ui_->labelProgSize->setEnabled(true);
     }
     device_->setBufferSize(settings_.prog.bufferSize);
     connect(device_, &Device::onProgress, this, &MainWindow::onActionProgress);

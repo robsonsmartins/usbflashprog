@@ -134,7 +134,38 @@ class ChipEEPROM28C : public BaseParChip {
     virtual void SetSize(unsigned long size);
 
   protected:
+    /* stores the step of current special command */
+    int f_commandStep;
+    /* stores what is the special command */
+    TChipCommandOperation f_commandOp;
     /* emulates the chip */
+    virtual void EmuChip(void);
+    /* check if received special command */
+    virtual bool SpecialCommand(void);
+};
+
+// ---------------------------------------------------------------------------
+
+/** @ingroup chip
+    @brief   EEPROM 28Cxxx Chip Emulator Class.
+    @details Emulates a EEPROM 28Cxxx Chip.<br/>
+      This class implements a workaround to fix the bug found in
+      0.98D10 and 0.98D12 versions: after AT28C protect/unprotect command,
+      the programmer sends incorrect addresses in write commands.
+ */
+class ChipEEPROM28CWorkaround : public ChipEEPROM28C {
+  public:
+    /** Default Constructor. */
+    ChipEEPROM28CWorkaround();
+    /** Destructor. */
+    virtual ~ChipEEPROM28CWorkaround();
+
+  protected:
+    /* stores the current address */
+    unsigned long f_address;
+    /* stores the sequencial read count */
+    int f_readCount;
+    /* reimplemented */
     virtual void EmuChip(void);
 };
 

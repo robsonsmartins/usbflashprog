@@ -39,7 +39,7 @@
 
 #define PCB3_PROGRAM "epr097ja.exe"
 #define PCB45_PROGRAM "epr098d5.exe"
-#define PCB50_PROGRAM "epr098d10.exe"
+#define PCB50_PROGRAM "epr098d12.exe"
 
 // ---------------------------------------------------------------------------
 

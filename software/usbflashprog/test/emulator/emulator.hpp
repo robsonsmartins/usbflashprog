@@ -282,8 +282,10 @@ class Emulator : public QObject {
     bool deviceErase27E_();
     /* @brief Device Protect/Unprotect 28C Algorithm.
      * @param protect Protect/Unprotect device.
+     * @param is256 If true, uses the 28C256 algorithm.
+     *   Otherwise, uses the 28C64 algorithm.
      * @return True if success, false otherwise. */
-    bool deviceProtect28C_(bool protect);
+    bool deviceProtect28C_(bool protect, bool is256);
 };
 
 #endif  // TEST_EMULATOR_EMULATOR_HPP_

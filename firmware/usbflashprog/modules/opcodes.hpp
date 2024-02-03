@@ -260,11 +260,12 @@ enum kCmdOpCodeEnum {
      * @details The parameter (one byte) represents the algorithm, and
      *   follows the table:
      * <pre>
-     * +------------------------------+
-     * |Algorithm| Description        |
-     * |  0x01   | EPROM 27E/W27/27SF |
-     * |  0x02   | EEPROM 28C         |
-     * +------------------------------+
+     * +-------------------------------+
+     * |Algorithm| Description         |
+     * |  0x01   | EPROM 27E/W27/27SF  |
+     * |  0x02   | EEPROM 28C64        |
+     * |  0x03   | EEPROM 28C256/upper |
+     * +-------------------------------+
      * </pre>
      * @see kCmdDeviceAlgorithmEnum
      */
@@ -274,11 +275,12 @@ enum kCmdOpCodeEnum {
      * @details The parameter (one byte) represents the algorithm, and
      *   follows the table:
      * <pre>
-     * +------------------------------+
-     * |Algorithm| Description        |
-     * |  0x01   | EPROM 27E/W27/27SF |
-     * |  0x02   | EEPROM 28C         |
-     * +------------------------------+
+     * +-------------------------------+
+     * |Algorithm| Description         |
+     * |  0x01   | EPROM 27E/W27/27SF  |
+     * |  0x02   | EEPROM 28C64        |
+     * |  0x03   | EEPROM 28C256/upper |
+     * +-------------------------------+
      * </pre>
      * @see kCmdDeviceAlgorithmEnum
      */
@@ -288,11 +290,12 @@ enum kCmdOpCodeEnum {
      * @details The parameter (one byte) represents the algorithm, and
      *   follows the table:
      * <pre>
-     * +------------------------------+
-     * |Algorithm| Description        |
-     * |  0x01   | EPROM 27E/W27/27SF |
-     * |  0x02   | EEPROM 28C         |
-     * +------------------------------+
+     * +-------------------------------+
+     * |Algorithm| Description         |
+     * |  0x01   | EPROM 27E/W27/27SF  |
+     * |  0x02   | EEPROM 28C64        |
+     * |  0x03   | EEPROM 28C256/upper |
+     * +-------------------------------+
      * </pre>
      * @see kCmdDeviceAlgorithmEnum
      */
@@ -328,8 +331,10 @@ enum kCmdDeviceAlgorithmEnum {
     kCmdDeviceAlgorithmUnknown = 0x00,
     /** @brief CMD / DEVICE : Defines an algorithm EPROM 27E/SF/W27. */
     kCmdDeviceAlgorithm27E = 0x01,
-    /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C. */
-    kCmdDeviceAlgorithm28C = 0x02
+    /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C64. */
+    kCmdDeviceAlgorithm28C64 = 0x02,
+    /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C256 or upper. */
+    kCmdDeviceAlgorithm28C256 = 0x03
 };
 
 // ---------------------------------------------------------------------------

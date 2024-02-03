@@ -421,9 +421,11 @@ class Device {
     /*
      * @brief Runs the device protect/unprotect (EEPROM 28C algorithm).
      * @param protect If true, protects device. Otherwise, unprotects device.
+     * @param is256 If true, uses the 28C256 algorithm.
+     *   Otherwise, uses the 28C64 algorithm.
      * @return True if sucessfull. False otherwise.
      */
-    bool protect28C_(bool protect);
+    bool protect28C_(bool protect, bool is256);
 
   private:
     /*

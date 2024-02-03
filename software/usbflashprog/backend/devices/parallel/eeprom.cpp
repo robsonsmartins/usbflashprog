@@ -46,7 +46,7 @@ EEPROM::EEPROM(QObject *parent) : ParDevice(parent) {
     size_ = 2048;
     twp_ = 2;
     twc_ = 10000;
-    protectAlgo_ = kCmdDeviceAlgorithm28C;
+    protectAlgo_ = kCmdDeviceAlgorithm28C64;
     maxAttemptsProg_ = 3;
     DEBUG << info_.toString();
 }
@@ -55,6 +55,8 @@ EEPROM::~EEPROM() {}
 
 void EEPROM::setSize(uint32_t value) {
     ParDevice::setSize(value);
+    protectAlgo_ = (size_ <= 0x2000) ? kCmdDeviceAlgorithm28C64
+                                     : kCmdDeviceAlgorithm28C256;
     bool oldValue = info_.capability.hasUnprotect;
     bool newValue = (size_ >= 0x2000);  // >= 8KB
     if (oldValue != newValue) {
@@ -96,11 +98,28 @@ EEPROM28AT::~EEPROM28AT() {}
 
 void EEPROM28AT::setSize(uint32_t value) {
     EEPROM::setSize(value);
+    switch (size_) {
+        case 0x02000:  //   8KB
+        case 0x04000:  //  16KB
+        case 0x08000:  //  32KB
+            sectorSize_ = 64;
+            break;
+        case 0x10000:  //  64KB
+        case 0x20000:  // 128KB
+            sectorSize_ = 128;
+            break;
+        case 0x40000:  // 256KB
+            sectorSize_ = 256;
+            break;
+        default:
+            if (size_ < 0x02000) sectorSize_ = 0;
+            if (size_ > 0x40000) sectorSize_ = 256;
+            break;
+    }
     bool oldValue = info_.capability.hasSectorSize;
     bool newValue = (size_ >= 0x2000);  // >= 8KB
     if (oldValue != newValue) {
         info_.capability.hasSectorSize = newValue;
-        sectorSize_ = newValue ? 64 : 0;
         DEBUG << info_.toString();
     }
 }

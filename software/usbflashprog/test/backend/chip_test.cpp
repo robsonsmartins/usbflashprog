@@ -25,10 +25,12 @@
 #include "emulator/emulator.hpp"
 #include "emulator/sram.hpp"
 #include "emulator/eprom.hpp"
+#include "emulator/eeprom.hpp"
 
 #include "../../backend/devices/device.hpp"
 #include "../../backend/devices/parallel/sram.hpp"
 #include "../../backend/devices/parallel/eprom.hpp"
+#include "../../backend/devices/parallel/eeprom.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -119,6 +121,28 @@ TEST_F(ChipTest, epromW27E_test) {
     runChipTests(emuChip, device, 0x000800);  // 2KB
     runChipTests(emuChip, device, 0x001000);  // 4KB
     runChipTests(emuChip, device, 0x002000);  // 8KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, eeprom28C_test) {
+    ChipEEPROM *emuChip = new ChipEEPROM();
+    Emulator::setChip(emuChip);
+    EEPROM28C *device = new EEPROM28C();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, eeprom28AT_test) {
+    ChipEEPROM *emuChip = new ChipEEPROM();
+    Emulator::setChip(emuChip);
+    EEPROM28AT *device = new EEPROM28AT();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
     delete emuChip;
     delete device;
 }
@@ -229,6 +253,24 @@ void runChipTests(BaseChip *emuChip, Device *device, uint32_t size) {
         GTEST_COUT << "Fast Program" << std::endl;
         EXPECT_EQ(device->program(buffer), true);
         device->setFastProg(false);
+    }
+    if (cap.hasProtect || cap.hasUnprotect) {
+        if (cap.hasProtect) {
+            GTEST_COUT << "Protect" << std::endl;
+            EXPECT_EQ(device->protect(), true);
+        }
+        if (cap.hasProgram) {
+            GTEST_COUT << "Program" << std::endl;
+            EXPECT_EQ(device->program(buffer), true);
+        }
+        if (cap.hasUnprotect) {
+            GTEST_COUT << "Unprotect" << std::endl;
+            EXPECT_EQ(device->unprotect(), true);
+        }
+        if (cap.hasProgram) {
+            GTEST_COUT << "Program" << std::endl;
+            EXPECT_EQ(device->program(buffer), true);
+        }
     }
     if (cap.hasSectorSize && cap.hasProgram && cap.hasErase) {
         device->setSectorSize(64);

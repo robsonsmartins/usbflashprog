@@ -27,35 +27,22 @@ FetchContent_MakeAvailable(googletest)
 set(PROJ_NAME ufprog_test)
 
 set(PROJECT_SOURCES
-    ../config.hpp
     ../backend/opcodes.cpp
-    ../backend/opcodes.hpp
     ../backend/runner.cpp
-    ../backend/runner.hpp
-    ../backend/devices/device.hpp
     ../backend/devices/device.cpp
-    ../backend/devices/parallel/pdevice.hpp
     ../backend/devices/parallel/pdevice.cpp
-    ../backend/devices/parallel/sram.hpp
     ../backend/devices/parallel/sram.cpp
-    ../backend/devices/parallel/eprom.hpp
     ../backend/devices/parallel/eprom.cpp
+    ../backend/devices/parallel/eeprom.cpp
     mock/qserialport.hpp
     emulator/emulator.cpp
-    emulator/emulator.hpp
     emulator/chip.cpp
-    emulator/chip.hpp
     emulator/sram.cpp
-    emulator/sram.hpp
     emulator/eprom.cpp
-    emulator/eprom.hpp
-    backend/chip_test.hpp
+    emulator/eeprom.cpp
     backend/chip_test.cpp
-    backend/runner_test.hpp
     backend/runner_test.cpp
-    backend/opcodes_test.hpp
     backend/opcodes_test.cpp
-    main.hpp
     main.cpp
 )
 

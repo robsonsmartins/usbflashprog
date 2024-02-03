@@ -22,19 +22,34 @@
 
 // ---------------------------------------------------------------------------
 
-/* @brief Command sequence to Unprotect an EEPROM 28C/X28 (ST/Atmel/Xicor). */
 // clang-format off
-constexpr Device::TDeviceCommand kDeviceCmdUnprotect28C[] = {
-    {0x1555, 0xAA}, {0xAAA, 0x55}, {0x1555, 0x80},
-    {0x1555, 0xAA}, {0xAAA, 0x55}, {0x1555, 0x20}
-};
-// clang-format on
 
-/* @brief Command sequence to Protect an EEPROM 28C/X28 (ST/Atmel/Xicor). */
-// clang-format off
-constexpr Device::TDeviceCommand kDeviceCmdProtect28C[] = {
-    {0x1555, 0xAA}, {0xAAA, 0x55}, {0x1555, 0xA0}
+/* @brief Command sequence to Unprotect an EEPROM 28C/X28 64
+     (ST/Atmel/Xicor). */
+constexpr Device::TDeviceCommand kDeviceCmdUnprotect28C64[] = {
+    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0x80},
+    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0x20}
 };
+
+/* @brief Command sequence to Protect an EEPROM 28C/X28 64
+     (ST/Atmel/Xicor). */
+constexpr Device::TDeviceCommand kDeviceCmdProtect28C64[] = {
+    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0xA0}
+};
+
+/* @brief Command sequence to Unprotect an EEPROM 28C/X28 256
+     (ST/Atmel/Xicor). */
+constexpr Device::TDeviceCommand kDeviceCmdUnprotect28C256[] = {
+    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0x80},
+    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0x20}
+};
+
+/* @brief Command sequence to Protect an EEPROM 28C/X28 256
+     (ST/Atmel/Xicor). */
+constexpr Device::TDeviceCommand kDeviceCmdProtect28C256[] = {
+    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0xA0}
+};
+
 // clang-format on
 
 // ---------------------------------------------------------------------------
@@ -488,8 +503,10 @@ bool Device::erase27E_() {
 bool Device::unprotect(uint8_t algo) {
     // Unprotect entire chip
     switch (algo) {
-        case kCmdDeviceAlgorithm28C:
-            return protect28C_(false);
+        case kCmdDeviceAlgorithm28C64:
+            return protect28C_(false, false);
+        case kCmdDeviceAlgorithm28C256:
+            return protect28C_(false, true);
         default:
             return false;
     }
@@ -498,28 +515,44 @@ bool Device::unprotect(uint8_t algo) {
 bool Device::protect(uint8_t algo) {
     // Protect entire chip
     switch (algo) {
-        case kCmdDeviceAlgorithm28C:
-            return protect28C_(true);
+        case kCmdDeviceAlgorithm28C64:
+            return protect28C_(true, false);
+        case kCmdDeviceAlgorithm28C256:
+            return protect28C_(true, true);
         default:
             return false;
     }
 }
 
-bool Device::protect28C_(bool protect) {
+bool Device::protect28C_(bool protect, bool is256) {
     // EEPROM 28C/X28/AT28 Algorithm
     bool success = true;
     // ~CE is LO
     setCE(true);
     // write command
-    if (protect) {
-        for (const TDeviceCommand& cmd : kDeviceCmdProtect28C) {
+    if (protect && !is256) {
+        for (const TDeviceCommand& cmd : kDeviceCmdProtect28C64) {
             if (!writeAtAddr_(cmd.addr, cmd.data)) {
                 success = false;
                 break;
             }
         }
-    } else {
-        for (const TDeviceCommand& cmd : kDeviceCmdUnprotect28C) {
+    } else if (protect && is256) {
+        for (const TDeviceCommand& cmd : kDeviceCmdProtect28C256) {
+            if (!writeAtAddr_(cmd.addr, cmd.data)) {
+                success = false;
+                break;
+            }
+        }
+    } else if (!protect && !is256) {
+        for (const TDeviceCommand& cmd : kDeviceCmdUnprotect28C64) {
+            if (!writeAtAddr_(cmd.addr, cmd.data)) {
+                success = false;
+                break;
+            }
+        }
+    } else if (!protect && is256) {
+        for (const TDeviceCommand& cmd : kDeviceCmdUnprotect28C256) {
             if (!writeAtAddr_(cmd.addr, cmd.data)) {
                 success = false;
                 break;

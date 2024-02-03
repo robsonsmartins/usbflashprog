@@ -27,6 +27,32 @@
 // ---------------------------------------------------------------------------
 
 /** @ingroup UnitTests
+    @brief   Chip Special Command Structure. */
+typedef struct TChipCommand {
+    /** @brief Command Address. */
+    unsigned long addr;
+    /** @brief Command Data. */
+    unsigned char data;
+} TChipCommand;
+
+// ---------------------------------------------------------------------------
+
+/** @ingroup UnitTests
+    @brief   Chip Special Command Operation. */
+enum TChipCommandOperation {
+    /** @brief Unknown Operation. */
+    ChipOperationUnknown,
+    /** @brief Erase Operation. */
+    ChipOperationErase,
+    /** @brief Unprotect Operation. */
+    ChipOperationUnprotect,
+    /** @brief Protect Operation. */
+    ChipOperationProtect
+};
+
+// ---------------------------------------------------------------------------
+
+/** @ingroup UnitTests
     @brief   Chip Emulator Base Abstract Class.
     @details This is a base class for Chip Emulator.<br>
         Provides all abstract methods need for a chip emulator.

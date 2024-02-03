@@ -54,45 +54,26 @@ elseif(NORMAL_BUILD)
   )
 
   set(PROJECT_SOURCES
-          config.hpp
           backend/opcodes.cpp
-          backend/opcodes.hpp
           backend/runner.cpp
-          backend/runner.hpp
           backend/epromfile/qepromfilebase.cpp
-          backend/epromfile/qepromfilebase.hpp
           backend/epromfile/qbinfile.cpp
-          backend/epromfile/qbinfile.hpp
           backend/epromfile/qsrecfile.cpp
-          backend/epromfile/qsrecfile.hpp
           backend/epromfile/qhexfile.cpp
-          backend/epromfile/qhexfile.hpp
           backend/epromfile/qatmelfile.cpp
-          backend/epromfile/qatmelfile.hpp
           backend/epromfile/qepromfile.cpp
-          backend/epromfile/qepromfile.hpp
           backend/devices/device.cpp
-          backend/devices/device.hpp
           backend/devices/parallel/pdevice.cpp
-          backend/devices/parallel/pdevice.hpp
           backend/devices/parallel/dummy.cpp
-          backend/devices/parallel/dummy.hpp
           backend/devices/parallel/sram.cpp
-          backend/devices/parallel/sram.hpp
           backend/devices/parallel/eprom.cpp
-          backend/devices/parallel/eprom.hpp
           backend/devices/parallel/eeprom.cpp
-          backend/devices/parallel/eeprom.hpp
           ui/qhexeditor.cpp
-          ui/qhexeditor.hpp
           ui/mainwindow.cpp
-          ui/mainwindow.hpp
           ui/mainwindow.ui
           ui/settings.cpp
-          ui/settings.hpp
           ui/settings.ui
           main.cpp
-          main.hpp
   )
 
   set(PROJECT_RESOURCES

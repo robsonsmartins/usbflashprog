@@ -1,22 +1,22 @@
 // ---------------------------------------------------------------------------
 // USB EPROM/Flash Programmer
 //
-// Copyright (2022) Robson Martins
+// Copyright (2024) Robson Martins
 //
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
- * @ingroup lib_chip_eprom
- * @file    eprom.hpp
- * @brief   Header file (C++) for EPROM 27xxx Chip Emulation Library
+ * @ingroup lib_chip_flash28f
+ * @file    flash28sst.hpp
+ * @brief   Header file (C++) for Flash SST 28Fxxx Chip Emulation Library
  *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
-#ifndef CHIP_EPROM_HPP_  // NOLINT
-#define CHIP_EPROM_HPP_
+#ifndef CHIP_FLASH_28SST_HPP_  // NOLINT
+#define CHIP_FLASH_28SST_HPP_
 
 // ---------------------------------------------------------------------------
 /* headers */
@@ -34,83 +34,83 @@
 // ---------------------------------------------------------------------------
 /* exported functions */
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set Memory Size.
     @param[in] size Memory size (number of addressable positions)
  */
 DLLEXPORT void SetSize(uint32_t size);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset VDD (main power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SetVDD(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset VPP (high voltage programming power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SetVPP(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset OE (Output Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SetOE(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset CE (Chip Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SetCE(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset WE (Write Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SetWE(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Write a Address Bus value.
     @param[in] addr Address to be writed in bus
  */
 DLLEXPORT void SetAddrBus(uint32_t addr);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Write a value to Data Bus.
     @param[in] data Data to be writed in bus
  */
 DLLEXPORT void SetDataBus(uint16_t data);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Read a value from Data Bus.
     @return Data readed from bus. */
 DLLEXPORT uint16_t GetDataBus(void);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset Serial CS (Chip Select) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SerialSetCS(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset Serial Clock pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SerialSetClk(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Set/Reset Serial Data pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
 DLLEXPORT void SerialSetData(uint8_t state);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Read Serial Data pin current state (1 or 0) from chip.
     @return Pin level (high or low). */
 DLLEXPORT uint8_t SerialGetData(void);
 
-/** @ingroup lib_chip_eprom
+/** @ingroup lib_chip_flash28f
     Library Entry point for MS Windows.
     @param hInst Library Instance
     @param reason Reason of the call
@@ -122,26 +122,32 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID reserved);
 /* internal classes */
 
 /** @ingroup chip
-    @brief   EPROM 27xxx Chip Emulator Class.
-    @details Emulates a EPROM 27xxx Chip. */
-class ChipEPROM : public BaseParChip {
+    @brief   Flash SST 28Fxxx Chip Emulator Class.
+    @details Emulates a Flash SST 28Fxxx Chip. */
+class ChipFlashSST28F : public BaseParChip {
   public:
     /** Default Constructor. */
-    ChipEPROM();
+    ChipFlashSST28F();
     /** Destructor. */
-    virtual ~ChipEPROM();
+    virtual ~ChipFlashSST28F();
     /* reimplemented */
     virtual void SetSize(uint32_t size);
+    /* reimplemented */
+    virtual void SetVDD(bool state);
 
   protected:
-    /* count n writes 0xFF to addr zero */
-    int f_numWriteFFAddrZero;
-    /* count n writes another data */
-    int f_numWriteAnother;
+    /* stores the step of current special command */
+    int f_commandStep;
+    /* write protected */
+    bool f_protected;
+    /* stores what is the special command */
+    TChipCommandOperation f_operation;
     /* reimplemented */
-    virtual void Write(void);
+    virtual void Read(void);
     /* emulates the chip */
     virtual void EmuChip(void);
+    /* check if received special command */
+    virtual bool SpecialCommand(void);
 };
 
-#endif  // CHIP_EPROM_HPP_
+#endif  // CHIP_FLASH_28SST_HPP_

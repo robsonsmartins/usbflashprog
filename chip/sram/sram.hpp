@@ -38,77 +38,77 @@
     Set Memory Size.
     @param[in] size Memory size (number of addressable positions)
  */
-DLLEXPORT void SetSize(unsigned long size);
+DLLEXPORT void SetSize(uint32_t size);
 
 /** @ingroup lib_chip_sram
     Set/Reset VDD (main power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetVDD(unsigned char state);
+DLLEXPORT void SetVDD(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Set/Reset VPP (high voltage programming power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetVPP(unsigned char state);
+DLLEXPORT void SetVPP(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Set/Reset OE (Output Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetOE(unsigned char state);
+DLLEXPORT void SetOE(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Set/Reset CE (Chip Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetCE(unsigned char state);
+DLLEXPORT void SetCE(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Set/Reset WE (Write Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetWE(unsigned char state);
+DLLEXPORT void SetWE(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Write a Address Bus value.
     @param[in] addr Address to be writed in bus
  */
-DLLEXPORT void SetAddrBus(unsigned long addr);
+DLLEXPORT void SetAddrBus(uint32_t addr);
 
 /** @ingroup lib_chip_sram
     Write a value to Data Bus.
     @param[in] data Data to be writed in bus
  */
-DLLEXPORT void SetDataBus(unsigned short data);
+DLLEXPORT void SetDataBus(uint16_t data);
 
 /** @ingroup lib_chip_sram
     Read a value from Data Bus.
     @return Data readed from bus. */
-DLLEXPORT unsigned short GetDataBus(void);
+DLLEXPORT uint16_t GetDataBus(void);
 
 /** @ingroup lib_chip_sram
     Set/Reset Serial CS (Chip Select) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SerialSetCS(unsigned char state);
+DLLEXPORT void SerialSetCS(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Set/Reset Serial Clock pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SerialSetClk(unsigned char state);
+DLLEXPORT void SerialSetClk(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Set/Reset Serial Data pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SerialSetData(unsigned char state);
+DLLEXPORT void SerialSetData(uint8_t state);
 
 /** @ingroup lib_chip_sram
     Read Serial Data pin current state (1 or 0) from chip.
     @return Pin level (high or low). */
-DLLEXPORT unsigned char SerialGetData(void);
+DLLEXPORT uint8_t SerialGetData(void);
 
 /** @ingroup lib_chip_sram
     Library Entry point for MS Windows.
@@ -131,7 +131,7 @@ class ChipSRAM : public BaseParChip {
     /** Destructor. */
     virtual ~ChipSRAM();
     /* reimplemented */
-    virtual void SetSize(unsigned long size);
+    virtual void SetSize(uint32_t size);
     virtual void SetVDD(bool state);
 
   protected:

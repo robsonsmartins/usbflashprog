@@ -47,7 +47,7 @@ BaseProg::BaseProg()
 
 BaseProg::~BaseProg() {}
 
-void BaseProg::SetPort(unsigned short int addr, unsigned char data) {  // NOLINT
+void BaseProg::SetPort(uint16_t addr, uint8_t data) {  // NOLINT
     /* evaluates the address */
     switch (addr) {
         /* data port */
@@ -74,7 +74,7 @@ void BaseProg::SetPort(unsigned short int addr, unsigned char data) {  // NOLINT
     }
 }
 
-unsigned char BaseProg::GetPort(unsigned short int addr) {  // NOLINT
+uint8_t BaseProg::GetPort(uint16_t addr) {  // NOLINT
     /* evaluates the address */
     switch (addr) {
         /* data port */

@@ -36,19 +36,19 @@
 /* types */
 
 /* Functions imported from Chip Lib */
-typedef DLLIMPORT void (*PSetSize)(unsigned long size);
-typedef DLLIMPORT void (*PSetVDD)(unsigned char state);
-typedef DLLIMPORT void (*PSetVPP)(unsigned char state);
-typedef DLLIMPORT void (*PSetOE)(unsigned char state);
-typedef DLLIMPORT void (*PSetCE)(unsigned char state);
-typedef DLLIMPORT void (*PSetWE)(unsigned char state);
-typedef DLLIMPORT void (*PSetAddrBus)(unsigned long addr);
-typedef DLLIMPORT void (*PSetDataBus)(unsigned short data);
-typedef DLLIMPORT unsigned short (*PGetDataBus)(void);
-typedef DLLIMPORT void (*PSerialSetCS)(unsigned char state);
-typedef DLLIMPORT void (*PSerialSetClk)(unsigned char state);
-typedef DLLIMPORT void (*PSerialSetData)(unsigned char state);
-typedef DLLIMPORT unsigned char (*PSerialGetData)(void);
+typedef DLLIMPORT void (*PSetSize)(uint32_t size);
+typedef DLLIMPORT void (*PSetVDD)(uint8_t state);
+typedef DLLIMPORT void (*PSetVPP)(uint8_t state);
+typedef DLLIMPORT void (*PSetOE)(uint8_t state);
+typedef DLLIMPORT void (*PSetCE)(uint8_t state);
+typedef DLLIMPORT void (*PSetWE)(uint8_t state);
+typedef DLLIMPORT void (*PSetAddrBus)(uint32_t addr);
+typedef DLLIMPORT void (*PSetDataBus)(uint16_t data);
+typedef DLLIMPORT uint16_t (*PGetDataBus)(void);
+typedef DLLIMPORT void (*PSerialSetCS)(uint8_t state);
+typedef DLLIMPORT void (*PSerialSetClk)(uint8_t state);
+typedef DLLIMPORT void (*PSerialSetData)(uint8_t state);
+typedef DLLIMPORT uint8_t (*PSerialGetData)(void);
 
 // ---------------------------------------------------------------------------
 /* global vars */
@@ -153,7 +153,7 @@ static void _Unload(void);
 // ---------------------------------------------------------------------------
 /* implementation */
 
-DLLEXPORT void SetPort(unsigned short int addr, unsigned char data) {  // NOLINT
+DLLEXPORT void SetPort(uint16_t addr, uint8_t data) {  // NOLINT
     /* initialize objects */
     if (!_Load() || !objProgrammer) {
         return;
@@ -162,7 +162,7 @@ DLLEXPORT void SetPort(unsigned short int addr, unsigned char data) {  // NOLINT
     objProgrammer->SetPort(addr, data);
 }
 
-DLLEXPORT unsigned char GetPort(unsigned short int addr) {  // NOLINT
+DLLEXPORT uint8_t GetPort(uint16_t addr) {  // NOLINT
     /* initialize objects */
     if (!_Load() || !objProgrammer) {
         return 0xFF;
@@ -282,7 +282,7 @@ bool _Load(void) {
         return false;
     } else {
         /* ok, sets the chip size and does CE = 1; */
-        SetSize(static_cast<unsigned long>(dwChipSize));
+        SetSize(static_cast<uint32_t>(dwChipSize));
         SetCE(1);
     }
     /* returns */
@@ -329,9 +329,9 @@ SivavaPCB45Prog::SivavaPCB45Prog() : BaseProg() {
 
 SivavaPCB45Prog::~SivavaPCB45Prog() {}
 
-void SivavaPCB45Prog::EmuCtrlPort(unsigned char data) {
+void SivavaPCB45Prog::EmuCtrlPort(uint8_t data) {
     /* evaluates port changes and parse the programmer commands */
-    unsigned char port_old, port_new;
+    uint8_t port_old, port_new;
     bool flag_old, flag_new;
     /* old value */
     port_old = f_control_port;
@@ -383,10 +383,10 @@ void SivavaPCB45Prog::EmuCtrlPort(unsigned char data) {
     /*------------ /serial device -------------------*/
 }
 
-void SivavaPCB45Prog::EmuDataPort(unsigned char data) {
+void SivavaPCB45Prog::EmuDataPort(uint8_t data) {
     /* evaluates port changes and parse the programmer commands */
     bool serial_data_forced = false; /* indicates serial data bit port in 0 */
-    unsigned char port_old, port_new;
+    uint8_t port_old, port_new;
     bool flag_old, flag_new;
     /* old value */
     port_old = f_data_port;

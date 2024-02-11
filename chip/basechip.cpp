@@ -43,9 +43,9 @@ static const auto START_SYSTEM_TICK = std::chrono::high_resolution_clock::now();
 // ---------------------------------------------------------------------------
 /* functions */
 
-/* Generates a random unsigned short number.
+/* Generates a random uint16_t number.
    @return Random number (in range: 0 to 65535). */
-static unsigned short GenRandomUShort(void);
+static uint16_t GenRandomUShort(void);
 /* Creates the logfile. */
 static FILE* CreateLogFile(void);
 
@@ -82,10 +82,10 @@ BaseChip::~BaseChip() {
     if (f_logfile) fclose(f_logfile);
 }
 
-void BaseChip::SetSize(unsigned long size) {
+void BaseChip::SetSize(uint32_t size) {
     if (size == f_memory_area.size()) return;
     /* log */
-    WriteToLog("SetSize(%lu)", size);
+    WriteToLog("SetSize(%lu) bytes", size);
     /* sets the chip size */
     if (f_memory_area.size() != size) {
         f_memory_area.resize(size);
@@ -114,20 +114,16 @@ void BaseChip::RandomizeData(void) {
     generate(f_memory_area.begin(), f_memory_area.end(), GenRandomUShort);
 }
 
-void BaseChip::FillData(unsigned short data) {
+void BaseChip::FillData(uint16_t data) {
     /* fills memory area with specified data */
     fill(f_memory_area.begin(), f_memory_area.end(), data);
 }
 
 void BaseChip::Read(void) {
-    /* checks the params */
-    if (f_addr_bus >= f_memory_area.size()) {
-        WriteToLog("Error in Read(addr=%06.6lX)", f_addr_bus);
-        f_data_bus = 0xFFFF;
-        return;
-    }
-    static unsigned long last_addr = f_addr_bus;
-    unsigned short data = f_memory_area[f_addr_bus];
+    static uint32_t last_addr = static_cast<uint32_t>(-1);
+    uint16_t data = (f_addr_bus < f_memory_area.size())
+                        ? f_memory_area[f_addr_bus]
+                        : 0xFFFF;
     if (f_data_bus == data && f_addr_bus == last_addr) return;
     /* returns the data from memory area */
     f_data_bus = data;
@@ -140,8 +136,8 @@ void BaseChip::Read(void) {
 void BaseChip::Write(void) {
     /* checks the params */
     if (f_addr_bus >= f_memory_area.size()) {
-        WriteToLog("Error in Write(addr=%06.6lX,data=%04.4X)", f_addr_bus,
-                   f_data_bus);
+        WriteToLog("Write: address out of range(addr=%06.6lX,data=%04.4X)",
+                   f_addr_bus, f_data_bus);
         return;
     }
     /* writes the data to memory area */
@@ -154,10 +150,9 @@ void BaseChip::WriteToLog(const char* msg, ...) {
     /* checks the params */
     if (f_logfile == NULL || msg == NULL) return;
     const auto current_tick = std::chrono::high_resolution_clock::now();
-    unsigned long long diff =
-        std::chrono::duration_cast<std::chrono::microseconds>(current_tick -
-                                                              START_SYSTEM_TICK)
-            .count();
+    uint64_t diff = std::chrono::duration_cast<std::chrono::microseconds>(
+                        current_tick - START_SYSTEM_TICK)
+                        .count();
     /* writes a timestamp to log */
     fprintf(f_logfile, "%10.10llu ", diff);
     /* writes the params to log */
@@ -201,15 +196,13 @@ void BaseParChip::SetWE(bool state) {
     EmuChip();
 }
 
-void BaseParChip::SetAddrBus(unsigned long addr) {
-    /* calculates the valid address (into memory area) */
-    unsigned long addr_new = (addr & (f_memory_area.size() - 1));
-    if (f_addr_bus == addr_new) return;
+void BaseParChip::SetAddrBus(uint32_t addr) {
+    if (f_addr_bus == addr) return;
     /* set addr bus */
-    f_addr_bus = addr_new;
+    f_addr_bus = addr;
 }
 
-void BaseParChip::SetDataBus(unsigned short data) {
+void BaseParChip::SetDataBus(uint16_t data) {
     if (f_data_bus == data) return;
     /* changes the data bus */
     f_data_bus = data;
@@ -217,7 +210,7 @@ void BaseParChip::SetDataBus(unsigned short data) {
     EmuChip();
 }
 
-unsigned short BaseParChip::GetDataBus(void) {
+uint16_t BaseParChip::GetDataBus(void) {
     /* reads data */
     EmuChip();
     /* returns the data bus */
@@ -261,9 +254,9 @@ bool BaseSerChip::SerialGetData(void) {
 // ---------------------------------------------------------------------------
 /* internal functions */
 
-unsigned short GenRandomUShort(void) {
-    /* generates a random unsigned short number */
-    return static_cast<unsigned short>(65536.0 * rand() / (RAND_MAX + 1.0));
+uint16_t GenRandomUShort(void) {
+    /* generates a random uint16_t number */
+    return static_cast<uint16_t>(65536.0 * rand() / (RAND_MAX + 1.0));
 }
 
 FILE* CreateLogFile(void) {

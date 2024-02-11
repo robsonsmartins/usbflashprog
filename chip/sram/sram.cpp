@@ -33,7 +33,7 @@ static void _Unload(void);
 // ---------------------------------------------------------------------------
 /* implementation */
 
-DLLEXPORT void SetSize(unsigned long size) {
+DLLEXPORT void SetSize(uint32_t size) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -42,7 +42,7 @@ DLLEXPORT void SetSize(unsigned long size) {
     objChip->SetSize(size);
 }
 
-DLLEXPORT void SetVDD(unsigned char state) {
+DLLEXPORT void SetVDD(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -51,7 +51,7 @@ DLLEXPORT void SetVDD(unsigned char state) {
     objChip->SetVDD(state);
 }
 
-DLLEXPORT void SetVPP(unsigned char state) {
+DLLEXPORT void SetVPP(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -60,7 +60,7 @@ DLLEXPORT void SetVPP(unsigned char state) {
     objChip->SetVPP(state);
 }
 
-DLLEXPORT void SetOE(unsigned char state) {
+DLLEXPORT void SetOE(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -69,7 +69,7 @@ DLLEXPORT void SetOE(unsigned char state) {
     objChip->SetOE(state);
 }
 
-DLLEXPORT void SetCE(unsigned char state) {
+DLLEXPORT void SetCE(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -78,7 +78,7 @@ DLLEXPORT void SetCE(unsigned char state) {
     objChip->SetCE(state);
 }
 
-DLLEXPORT void SetWE(unsigned char state) {
+DLLEXPORT void SetWE(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -87,7 +87,7 @@ DLLEXPORT void SetWE(unsigned char state) {
     objChip->SetWE(state);
 }
 
-DLLEXPORT void SetAddrBus(unsigned long addr) {
+DLLEXPORT void SetAddrBus(uint32_t addr) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -96,7 +96,7 @@ DLLEXPORT void SetAddrBus(unsigned long addr) {
     objChip->SetAddrBus(addr);
 }
 
-DLLEXPORT void SetDataBus(unsigned short data) {
+DLLEXPORT void SetDataBus(uint16_t data) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -105,7 +105,7 @@ DLLEXPORT void SetDataBus(unsigned short data) {
     objChip->SetDataBus(data);
 }
 
-DLLEXPORT unsigned short GetDataBus(void) {
+DLLEXPORT uint16_t GetDataBus(void) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return 0xFFFF;
@@ -114,7 +114,7 @@ DLLEXPORT unsigned short GetDataBus(void) {
     return (objChip->GetDataBus());
 }
 
-DLLEXPORT void SerialSetCS(unsigned char state) {
+DLLEXPORT void SerialSetCS(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -124,7 +124,7 @@ DLLEXPORT void SerialSetCS(unsigned char state) {
     // objChip->SerialSetCS(state);
 }
 
-DLLEXPORT void SerialSetClk(unsigned char state) {
+DLLEXPORT void SerialSetClk(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -134,7 +134,7 @@ DLLEXPORT void SerialSetClk(unsigned char state) {
     // objChip->SerialSetClk(state);
 }
 
-DLLEXPORT void SerialSetData(unsigned char state) {
+DLLEXPORT void SerialSetData(uint8_t state) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return;
@@ -144,7 +144,7 @@ DLLEXPORT void SerialSetData(unsigned char state) {
     // objChip->SerialSetData(state);
 }
 
-DLLEXPORT unsigned char SerialGetData(void) {
+DLLEXPORT uint8_t SerialGetData(void) {
     /* initialize objects */
     if (!_Load() || objChip == NULL) {
         return 1;
@@ -213,7 +213,7 @@ ChipSRAM::ChipSRAM() : BaseParChip() {
 
 ChipSRAM::~ChipSRAM() {}
 
-void ChipSRAM::SetSize(unsigned long size) {
+void ChipSRAM::SetSize(uint32_t size) {
     if (size == f_memory_area.size()) return;
     /* inherited */
     BaseParChip::SetSize(size);

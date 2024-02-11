@@ -38,13 +38,13 @@
     @param addr Port Address
     @param data Writed data byte
   */
-DLLEXPORT void SetPort(unsigned short int addr, unsigned char data);  // NOLINT
+DLLEXPORT void SetPort(uint16_t addr, uint8_t data);  // NOLINT
 
 /** @ingroup lib_prog_pcb45
     Wrapper for a hardware port read byte operation.
     @param addr Port Address
     @return Data byte required by read operation. */
-DLLEXPORT unsigned char GetPort(unsigned short int addr);  // NOLINT
+DLLEXPORT uint8_t GetPort(uint16_t addr);  // NOLINT
 
 /** @ingroup lib_prog_pcb45
     Library Entry point for MS Windows. */
@@ -68,8 +68,8 @@ class SivavaPCB45Prog : public BaseProg {
   protected:
     /* emulates the programmer */
     /* data is a byte from/to register */
-    virtual void EmuCtrlPort(unsigned char data);
-    virtual void EmuDataPort(unsigned char data);
+    virtual void EmuCtrlPort(uint8_t data);
+    virtual void EmuDataPort(uint8_t data);
 };
 
 #endif  // PROG_PCB45_HPP_

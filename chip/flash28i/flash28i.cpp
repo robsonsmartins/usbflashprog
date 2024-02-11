@@ -1,28 +1,29 @@
 // ---------------------------------------------------------------------------
 // USB EPROM/Flash Programmer
 //
-// Copyright (2022) Robson Martins
+// Copyright (2024) Robson Martins
 //
 // This work is licensed under a Creative Commons Attribution-NonCommercial-
 // ShareAlike 4.0 International License.
 // ---------------------------------------------------------------------------
 /**
- * @ingroup lib_chip_eeprom28c
- * @file    eeprom28c.cpp
- * @brief   Implementation file (C++) for EEPROM 28Cxxx Chip Emulation Library
+ * @ingroup lib_chip_flash28i
+ * @file    flash28i.cpp
+ * @brief   Implementation file (C++) for Flash Intel 28Fxxx Chip Emulation
+ *          Library
  *
  * @author Robson Martins (https://www.robsonmartins.com)
  */
 // ---------------------------------------------------------------------------
 
-#include "eeprom28c.hpp"
+#include "flash28i.hpp"
 
 // ---------------------------------------------------------------------------
 /* internal */
 
 /* global vars */
 /* Chip object */
-static ChipEEPROM28C* objChip = NULL;
+static ChipFlashIntel28F* objChip = NULL;
 
 // ---------------------------------------------------------------------------
 /* functions */
@@ -183,7 +184,7 @@ bool _Load(void) {
     }
     /* creates a Chip object */
     try {
-        objChip = new ChipEEPROM28CWorkaround();
+        objChip = new ChipFlashIntel28F();
     } catch (std::bad_alloc&) {
         objChip = NULL;
     }
@@ -206,167 +207,164 @@ void _Unload(void) {
 
 // ---------------------------------------------------------------------------
 
-/* @brief Protect command sequence size. */
-constexpr int kProtectCommandSize = 3;
-/* @brief Unprotect command sequence size. */
-constexpr int kUnprotectCommandSize = 6;
+/* @brief Hardcoded (emulated) Manufacturer ID: Intel. */
+constexpr uint8_t kChipManufacturerId = 0x89;
+/* @brief Hardcoded (emulated) Device ID: 28F001BX-T. */
+constexpr uint8_t kChipDeviceId = 0x94;
+/* @brief Hardcoded (emulated) Chip Status Byte. */
+constexpr uint8_t kChipStatusByte = 0x80;
 
 // clang-format off
-/* @brief Command sequence to Protect an EEPROM 28C/X28 64
-     (ST/Atmel/Xicor). */
-constexpr TChipCommand kProtectCommandV1[kProtectCommandSize] = {
-    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0xA0}
-};
 
-/* @brief Command sequence to Unprotect an EEPROM 28C/X28 64
-     (ST/Atmel/Xicor). */
-constexpr TChipCommand kUnprotectCommandV1[kUnprotectCommandSize] = {
-    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0x80},
-    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0x20}
-};
+/* Intel 28F Chip commands. */
+/* @brief Intel 28F Read command. */
+constexpr uint8_t kReadCmd28i [] = { 0xFF };
+/* @brief Intel 28F Write command. */
+constexpr uint8_t kWriteCmd28i[] = { 0x40 };
+/* @brief Intel 28F Erase device command. */
+constexpr uint8_t kEraseCmd28i[] = { 0x20, 0xD0 };
+/* @brief Intel 28F GetID command. */
+constexpr uint8_t kGetIdCmd28i[] = { 0x90 };
 
-/* @brief Command sequence to Protect an EEPROM 28C/X28 256
-     (ST/Atmel/Xicor). */
-constexpr TChipCommand kProtectCommandV2[kProtectCommandSize] = {
-    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0xA0}
-};
-
-/* @brief Command sequence to Unprotect an EEPROM 28C/X28 256
-     (ST/Atmel/Xicor). */
-constexpr TChipCommand kUnprotectCommandV2[kUnprotectCommandSize] = {
-    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0x80},
-    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0x20}
-};
 // clang-format on
 
 // ---------------------------------------------------------------------------
 
-ChipEEPROM28C::ChipEEPROM28C()
-    : BaseParChip(), f_commandStep(-1), f_commandOp(ChipOperationUnknown) {
-    WriteToLog("SetChip(%s)", "EEPROM 28C");
+ChipFlashIntel28F::ChipFlashIntel28F()
+    : BaseParChip(), f_commandStep(-1), f_operation(ChipOperationRead) {
+    WriteToLog("SetChip(%s)", "Flash i28F");
 }
 
-ChipEEPROM28C::~ChipEEPROM28C() {}
+ChipFlashIntel28F::~ChipFlashIntel28F() {}
 
-void ChipEEPROM28C::SetSize(uint32_t size) {
+void ChipFlashIntel28F::SetSize(uint32_t size) {
     if (size == f_memory_area.size()) return;
     /* inherited */
     BaseParChip::SetSize(size);
     /* initialize with 0xFF */
     FillData(0xFF);
+    f_commandStep = -1;
+    f_operation = ChipOperationRead;
 }
 
-void ChipEEPROM28C::EmuChip(void) {
+uint16_t ChipFlashIntel28F::GetDataBus(void) {
+    // updates the data bus
+    UpdateDataBus(false);
+    // returns the data bus
+    return f_data_bus;
+}
+
+bool ChipFlashIntel28F::UpdateDataBus(bool readMemory) {
+    bool isExecuteCmd = (f_commandStep == 0xFF);
+    bool isGetId = (f_operation == ChipOperationGetId);
+    bool isWrite = (f_operation == ChipOperationWrite);
+    bool isErase = (f_operation == ChipOperationErase);
     if (f_vdd && f_ce && !f_we && f_oe) {
-        /* Read : VDD = 1; VPP = X; CE = 1; WE = 0; OE = 1; */
-        Read();
+        /* Read/GetID/Read StatusByte:
+           VDD = 1; VPP = X; CE = 1; WE = 0; OE = 1; */
+        if (isExecuteCmd && isGetId) {
+            // GetID
+            if (f_addr_bus == 0x00 && f_data_bus != kChipManufacturerId) {
+                // return manufacturer ID
+                f_data_bus = kChipManufacturerId;
+                WriteToLog("Manufacturer ID = %02X", f_data_bus);
+            } else if (f_addr_bus == 0x01 && f_data_bus != kChipDeviceId) {
+                // reutrn device ID
+                f_data_bus = kChipDeviceId;
+                WriteToLog("Device ID = %02X", f_data_bus);
+                return true;
+            }
+        } else if (isExecuteCmd && (isWrite || isErase)) {
+            // Write or Erase
+            // return Status Byte
+            f_data_bus = kChipStatusByte;
+            WriteToLog("Status Byte = %02X", f_data_bus);
+            return true;
+        } else if (readMemory) {
+            // Read
+            Read();
+            return true;
+        }
+    }
+    return false;
+}
+
+void ChipFlashIntel28F::EmuChip(void) {
+    bool isExecuteCmd = (f_commandStep == 0xFF);
+    bool isWrite = (f_operation == ChipOperationWrite);
+    if (f_vdd && f_ce && !f_we && f_oe) {
+        /* Read/GetID/Read StatusByte:
+           VDD = 1; VPP = X; CE = 1; WE = 0; OE = 1; */
+        // Update DataBus/Read
+        if (UpdateDataBus()) {
+            f_commandStep = -1;
+            f_operation = ChipOperationRead;
+        }
     } else if (f_vdd && f_ce && f_we) {
-        /* Write: VDD = 1; VPP = X; CE = 1; WE = 1; OE = X; */
-        // execute if special command or write
-        if (!SpecialCommand()) Write();
+        /* Command/Write/Erase:
+           VDD = 1; VPP = X; CE = 1; WE = 1; OE = X; */
+        if (isExecuteCmd && isWrite) {
+            // Write
+            Write();
+        } else {
+            // Handle special commands
+            if (!SpecialCommand()) Write();
+        }
     } else if (!f_vdd || !f_ce) {
         /* VDD = 0 OR CE = 0 */
         // reset special command state
         if (f_commandStep != -1) {
-            WriteToLog("End of Special Command");
             f_commandStep = -1;
-            f_commandOp = ChipOperationUnknown;
+            f_operation = ChipOperationRead;
         }
     }
 }
 
-bool ChipEEPROM28C::SpecialCommand(void) {
-    bool isCommand = false;
-    int i = ((f_commandStep == 0xFF) ? -1 : f_commandStep) + 1;
+bool ChipFlashIntel28F::SpecialCommand(void) {
+    if (f_commandStep == 0xFF) f_commandStep = -1;
+    unsigned int index = f_commandStep + 1;
+    uint8_t data = f_data_bus & 0xFF;
 
-    bool isUnprotect = (f_addr_bus == kUnprotectCommandV1[i].addr &&
-                        f_data_bus == kUnprotectCommandV1[i].data) ||
-                       (f_addr_bus == kUnprotectCommandV2[i].addr &&
-                        f_data_bus == kUnprotectCommandV2[i].data);
+    bool isRead = (index < sizeof(kReadCmd28i) && data == kReadCmd28i[index]);
+    bool isWrite =
+        (index < sizeof(kWriteCmd28i) && data == kWriteCmd28i[index]);
+    bool isGetId =
+        (index < sizeof(kGetIdCmd28i) && data == kGetIdCmd28i[index]);
+    bool isErase =
+        (index < sizeof(kEraseCmd28i) && data == kEraseCmd28i[index]);
 
-    bool isProtect = (f_addr_bus == kProtectCommandV1[i].addr &&
-                      f_data_bus == kProtectCommandV1[i].data) ||
-                     (f_addr_bus == kProtectCommandV2[i].addr &&
-                      f_data_bus == kProtectCommandV2[i].data);
-
-    if (isUnprotect) {
-        f_commandOp = ChipOperationUnprotect;
-        isCommand = true;
-    } else if (isProtect) {
-        f_commandOp = ChipOperationProtect;
-        isCommand = true;
+    if (isRead) {
+        WriteToLog("Command: %02X (Read)", data);
+        f_operation = ChipOperationRead;
+        f_commandStep = 0xFF;
+        return true;
     }
-    if (isCommand) {
-        if (f_commandStep != 0xFF) f_commandStep++;
-        WriteToLog("Special Command (addr %06X, data %02X)", f_addr_bus,
-                   f_data_bus);
+    if (isWrite) {
+        WriteToLog("Command: %02X (Write)", data);
+        f_operation = ChipOperationWrite;
+        f_commandStep = 0xFF;
+        return true;
     }
-    switch (f_commandOp) {
-        case ChipOperationUnprotect:
-            if (f_commandStep == (kUnprotectCommandSize - 1)) {
-                // unprotect
-                WriteToLog("Special Command: Unprotect");
-                f_commandStep = 0xFF;
-                f_commandOp = ChipOperationUnknown;
-            }
-            break;
-        case ChipOperationProtect:
-            if (f_commandStep == (kProtectCommandSize - 1)) {
-                // protect
-                WriteToLog("Special Command: Protect");
-                f_commandStep = 0xFF;
-                f_commandOp = ChipOperationUnknown;
-            }
-            break;
-        default:
-            break;
+    if (isGetId) {
+        WriteToLog("Command: %02X (GetID)", data);
+        f_operation = ChipOperationGetId;
+        f_commandStep = 0xFF;
+        return true;
     }
-    return isCommand;
-}
-
-// ---------------------------------------------------------------------------
-
-ChipEEPROM28CWorkaround::ChipEEPROM28CWorkaround()
-    : ChipEEPROM28C(), f_address(0), f_readCount(0) {}
-
-ChipEEPROM28CWorkaround::~ChipEEPROM28CWorkaround() {}
-
-void ChipEEPROM28CWorkaround::EmuChip(void) {
-    if (f_vdd && f_ce && !f_we && f_oe) {
-        /* Read : VDD = 1; VPP = X; CE = 1; WE = 0; OE = 1; */
-        Read();
-        // count reads
-        f_readCount++;
-        // if sequencial reads up to 64
-        if (f_readCount == 65) {
-            // reset the special command state
-            WriteToLog("End of Special Command");
-            f_commandStep = -1;
-            f_commandOp = ChipOperationUnknown;
+    if (isErase) {
+        f_operation = ChipOperationErase;
+        if (index == 0) {
+            WriteToLog("Write Command (cycle #1): %02X", data);
+            f_commandStep++;
+        } else if (index == 1) {
+            WriteToLog("Command: %02X (Erase)", data);
+            // Erase chip
+            WriteToLog("Erasing chip...");
+            FillData(0xFF);
+            f_commandStep = 0xFF;
         }
-    } else if (f_vdd && f_ce && f_we) {
-        /* Write: VDD = 1; VPP = X; CE = 1; WE = 1; OE = X; */
-        // check if is special command
-        bool isCommand = (f_addr_bus == kProtectCommandV1[0].addr ||
-                          f_addr_bus == kProtectCommandV2[0].addr) &&
-                         (f_commandStep == 0xFF);
-        // if is special command, fix the address
-        if (isCommand) f_addr_bus = f_address;
-        // execute if special command or write
-        if (!SpecialCommand()) Write();
-        // if is special command, increment the (fixup) address
-        if (isCommand) f_address++;
-        // reset read counter (because is a write)
-        f_readCount = 0;
-    } else if (!f_vdd || !f_ce) {
-        /* VDD = 0 OR CE = 0 */
-        // reset special command state
-        if (f_commandStep != -1) {
-            WriteToLog("End of Special Command");
-            f_commandStep = -1;
-            f_commandOp = ChipOperationUnknown;
-            // reset the (fixup) address
-            f_address = 0;
-        }
+        return true;
     }
+    WriteToLog("Write Command: %02X (Invalid)", data);
+    return false;
 }

@@ -24,6 +24,7 @@
 #include <vector>
 #include <cstdio>
 #include <cstdarg>
+#include <cstdint>
 
 // ---------------------------------------------------------------------------
 
@@ -31,9 +32,9 @@
     @brief   Chip Special Command Structure. */
 typedef struct TChipCommand {
     /** @brief Command Address. */
-    unsigned long addr;
+    uint32_t addr;
     /** @brief Command Data. */
-    unsigned char data;
+    uint8_t data;
 } TChipCommand;
 
 // ---------------------------------------------------------------------------
@@ -43,12 +44,24 @@ typedef struct TChipCommand {
 enum TChipCommandOperation {
     /** @brief Unknown Operation. */
     ChipOperationUnknown,
+    /** @brief Read Operation. */
+    ChipOperationRead,
+    /** @brief Write Operation. */
+    ChipOperationWrite,
+    /** @brief Verify Operation. */
+    ChipOperationVerify,
     /** @brief Erase Operation. */
     ChipOperationErase,
+    /** @brief Blank Check Operation. */
+    ChipOperationBlankCheck,
+    /** @brief GetID Operation. */
+    ChipOperationGetId,
     /** @brief Unprotect Operation. */
     ChipOperationUnprotect,
     /** @brief Protect Operation. */
-    ChipOperationProtect
+    ChipOperationProtect,
+    /** @brief Reset Operation. */
+    ChipOperationReset
 };
 
 // ---------------------------------------------------------------------------
@@ -77,7 +90,7 @@ class BaseChip {
     /** Set Memory Size.
         @param[in] size Memory size (number of addressable positions)
      */
-    virtual void SetSize(unsigned long size);
+    virtual void SetSize(uint32_t size);
     /** Set/Reset VDD (main power) pin.
         @param[in] state If true (default), set pin; else, clear pin
      */
@@ -91,11 +104,11 @@ class BaseChip {
     /* control signals */
     bool f_vdd, f_vpp;
     /* address bus */
-    unsigned long f_addr_bus;
+    uint32_t f_addr_bus;
     /* data bus */
-    unsigned short f_data_bus;
+    uint16_t f_data_bus;
     /* memory area */
-    std::vector<unsigned short> f_memory_area;
+    std::vector<uint16_t> f_memory_area;
     /* logfile stream */
     FILE* f_logfile;
     /* Writes the msg and variables to log file.
@@ -116,7 +129,7 @@ class BaseChip {
     /** Fills the entire memory area with a data.
         @param[in] data Data to be filled into memory
      */
-    virtual void FillData(unsigned short data);
+    virtual void FillData(uint16_t data);
 };
 
 // ---------------------------------------------------------------------------
@@ -146,14 +159,14 @@ class BaseParChip : public BaseChip {
     /** Write a Address Bus value.
         @param[in] addr Address to be writed in bus
      */
-    virtual void SetAddrBus(unsigned long addr);
+    virtual void SetAddrBus(uint32_t addr);
     /** Write a value to Data Bus.
         @param[in] data Data to be writed in bus
      */
-    virtual void SetDataBus(unsigned short data);
+    virtual void SetDataBus(uint16_t data);
     /** Read a value from Data Bus.
         @return Data readed from bus. */
-    virtual unsigned short GetDataBus(void);
+    virtual uint16_t GetDataBus(void);
 
   protected:
     /* control signals */

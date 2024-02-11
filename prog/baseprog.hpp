@@ -18,6 +18,8 @@
 #ifndef PROG_BASE_HPP_  // NOLINT
 #define PROG_BASE_HPP_
 
+#include <cstdint>
+
 // ---------------------------------------------------------------------------
 /** @ingroup prog
     @brief   Programmer Emulator Base Abstract Class.
@@ -34,30 +36,30 @@ class BaseProg {
         @param[in] addr I/O Port Address
         @param[in] data Data to write
      */
-    virtual void SetPort(unsigned short int addr,
-                         unsigned char data);  // NOLINT
+    virtual void SetPort(uint16_t addr,
+                         uint8_t data);  // NOLINT
     /** Read byte from port by address.
         @param[in] addr I/O Port Address
         @return Readed Data. */
-    virtual unsigned char GetPort(unsigned short int addr);  // NOLINT
+    virtual uint8_t GetPort(uint16_t addr);  // NOLINT
 
   protected:
     /* parallel port mirror registers */
-    unsigned char f_data_port;
-    unsigned char f_status_port;
-    unsigned char f_control_port;
+    uint8_t f_data_port;
+    uint8_t f_status_port;
+    uint8_t f_control_port;
     /* address bus serial shift register */
-    unsigned long f_addr_serial_sr;
+    uint32_t f_addr_serial_sr;
     /* data bus serial shift register */
-    unsigned char f_data_serial_sr;
+    uint8_t f_data_serial_sr;
     /** Emulates hardware Control Port response.
         @param[in] data Data written to Control Port register
      */
-    virtual void EmuCtrlPort(unsigned char data) = 0;
+    virtual void EmuCtrlPort(uint8_t data) = 0;
     /** Emulates hardware Data Port response.
         @param[in] data Data written to Data Port register
      */
-    virtual void EmuDataPort(unsigned char data) = 0;
+    virtual void EmuDataPort(uint8_t data) = 0;
 };
 
 #endif  // PROG_BASE_HPP_

@@ -35,10 +35,10 @@
 /* types */
 
 /* SetPort function imported from Prog Lib */
-typedef DLLIMPORT void (*PSetPort)(unsigned short int addr,  // NOLINT
-                                   unsigned char data);
+typedef DLLIMPORT void (*PSetPort)(uint16_t addr,  // NOLINT
+                                   uint8_t data);
 /* GetPort function imported from Prog Lib */
-typedef DLLIMPORT unsigned char (*PGetPort)(unsigned short int addr);  // NOLINT
+typedef DLLIMPORT uint8_t (*PGetPort)(uint16_t addr);  // NOLINT
 
 // ---------------------------------------------------------------------------
 /* global vars */
@@ -65,7 +65,7 @@ DLLEXPORT void PortOut(short int Port, char Data) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return;
     /* set port data */
-    SetPort((unsigned short int)Port, (unsigned char)Data);  // NOLINT
+    SetPort((uint16_t)Port, (uint8_t)Data);  // NOLINT
 }
 
 DLLEXPORT void PortWordOut(short int /*Port*/, short int /*Data*/) {  // NOLINT
@@ -80,8 +80,7 @@ DLLEXPORT char PortIn(short int Port) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return static_cast<char>(0xFF);
     /* get port data */
-    return static_cast<char>(
-        GetPort(static_cast<unsigned short int>(Port)));  // NOLINT
+    return static_cast<char>(GetPort(static_cast<uint16_t>(Port)));  // NOLINT
 }
 
 DLLEXPORT short int PortWordIn(short int /*Port*/) {  // NOLINT
@@ -98,44 +97,40 @@ DLLEXPORT void SetPortBit(short int Port, char Bit) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return;
     /* get port data */
-    unsigned char tmp =
-        GetPort(static_cast<unsigned short int>(Port));  // NOLINT
+    uint8_t tmp = GetPort(static_cast<uint16_t>(Port));  // NOLINT
     /* calculate new data */
     tmp |= (0x01 << Bit);
     /* set port data */
-    SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+    SetPort(static_cast<uint16_t>(Port), tmp);  // NOLINT
 }
 
 DLLEXPORT void ClrPortBit(short int Port, char Bit) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return;
     /* get port data */
-    unsigned char tmp =
-        GetPort(static_cast<unsigned short int>(Port));  // NOLINT
+    uint8_t tmp = GetPort(static_cast<uint16_t>(Port));  // NOLINT
     /* calculate new data */
     tmp &= ~(0x01 << Bit);
     /* set port data */
-    SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+    SetPort(static_cast<uint16_t>(Port), tmp);  // NOLINT
 }
 
 DLLEXPORT void NotPortBit(short int Port, char Bit) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return;
     /* get port data */
-    unsigned char tmp =
-        GetPort(static_cast<unsigned short int>(Port));  // NOLINT
+    uint8_t tmp = GetPort(static_cast<uint16_t>(Port));  // NOLINT
     /* calculate new data */
     tmp ^= (0x01 << Bit);
     /* set port data */
-    SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+    SetPort(static_cast<uint16_t>(Port), tmp);  // NOLINT
 }
 
 DLLEXPORT short int GetPortBit(short int Port, char Bit) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return 1;
     /* get port data */
-    unsigned char tmp =
-        GetPort(static_cast<unsigned short int>(Port));  // NOLINT
+    uint8_t tmp = GetPort(static_cast<uint16_t>(Port));  // NOLINT
     /* get bit info */
     return static_cast<short int>((tmp & (0x01 << Bit)) != 0);  // NOLINT
 }
@@ -144,12 +139,11 @@ DLLEXPORT short int RightPortShift(short int Port, short int Val) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return 1;
     /* get port data */
-    unsigned char tmp =
-        GetPort(static_cast<unsigned short int>(Port));  // NOLINT
+    uint8_t tmp = GetPort(static_cast<uint16_t>(Port));  // NOLINT
     /* calculate new port byte */
     tmp >>= Val;
     /* set port data */
-    SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+    SetPort(static_cast<uint16_t>(Port), tmp);  // NOLINT
     /* return */
     return static_cast<short int>(tmp);  // NOLINT
 }
@@ -158,12 +152,11 @@ DLLEXPORT short int LeftPortShift(short int Port, short int Val) {  // NOLINT
     /* initialize objects */
     if (!_Load()) return 1;
     /* get port data */
-    unsigned char tmp =
-        GetPort(static_cast<unsigned short int>(Port));  // NOLINT
+    uint8_t tmp = GetPort(static_cast<uint16_t>(Port));  // NOLINT
     /* calculate new port byte */
     tmp <<= Val;
     /* set port data */
-    SetPort(static_cast<unsigned short int>(Port), tmp);  // NOLINT
+    SetPort(static_cast<uint16_t>(Port), tmp);  // NOLINT
     /* return */
     return static_cast<short int>(tmp);  // NOLINT
 }

@@ -88,12 +88,32 @@
              </item>
              <item>
               <property name="text">
-               <string>EEPROM 28Cxxx</string>
+               <string>EPROM 27</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>EPROM 27xxx</string>
+               <string>EEPROM 28C</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Flash 28F</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Flash SST 28xF</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Flash Intel 28F</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Flash Intel 28F 16-bit</string>
               </property>
              </item>
             </widget>
@@ -119,72 +139,72 @@
              </property>
              <item>
               <property name="text">
-               <string>2K</string>
+               <string>2K (x16)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>4K</string>
+               <string>4K (x32)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>8K</string>
+               <string>8K (x64)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>16K</string>
+               <string>16K (x128)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>32K</string>
+               <string>32K (x256)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>64K</string>
+               <string>64K (x512)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>128K</string>
+               <string>128K (x010)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>256K</string>
+               <string>256K (x020)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>512K</string>
+               <string>512K (x040)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>1M</string>
+               <string>1M (x080)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>2M</string>
+               <string>2M (x160)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>4M</string>
+               <string>4M (x320)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>8M</string>
+               <string>8M (x640)</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>16M</string>
+               <string>16M (x1280)</string>
               </property>
              </item>
             </widget>

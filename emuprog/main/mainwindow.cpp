@@ -34,8 +34,12 @@
 #define PROG_PCB45 "pcb45.dll"
 
 #define CHIP_SRAM "sram.dll"
-#define CHIP_EEPROM28C "eeprom28c.dll"
 #define CHIP_EPROM "eprom.dll"
+#define CHIP_EEPROM28C "eeprom28c.dll"
+#define CHIP_FLASH28F "flash28f.dll"
+#define CHIP_FLASH28SST "flash28sst.dll"
+#define CHIP_FLASH28I "flash28i.dll"
+#define CHIP_FLASH28I16 "flash28i16.dll"
 
 #define PCB3_PROGRAM "epr097ja.exe"
 #define PCB45_PROGRAM "epr098d5.exe"
@@ -80,7 +84,15 @@ void MainWindow::on_cbProg_activated(int index) {
 void MainWindow::on_cbChip_activated(int index) {
     QString item = ui_->cbChip->itemText(index).toLower();
     QSettings settings(EMUPROG_REGISTRY_KEY, QSettings::NativeFormat);
-    if (item.contains("eeprom 28c")) {
+    if (item.contains("flash intel 28f 16-bit")) {
+        settings.setValue(CHIPLIB_REGISTRY_VALUE, CHIP_FLASH28I16);
+    } else if (item.contains("flash intel 28f")) {
+        settings.setValue(CHIPLIB_REGISTRY_VALUE, CHIP_FLASH28I);
+    } else if (item.contains("flash sst 28")) {
+        settings.setValue(CHIPLIB_REGISTRY_VALUE, CHIP_FLASH28SST);
+    } else if (item.contains("flash 28f")) {
+        settings.setValue(CHIPLIB_REGISTRY_VALUE, CHIP_FLASH28F);
+    } else if (item.contains("eeprom 28c")) {
         settings.setValue(CHIPLIB_REGISTRY_VALUE, CHIP_EEPROM28C);
     } else if (item.contains("eprom 27")) {
         settings.setValue(CHIPLIB_REGISTRY_VALUE, CHIP_EPROM);
@@ -168,9 +180,17 @@ void MainWindow::loadSettings_() {
         ui_->cbProg->setCurrentIndex(0);
     }
     value = settings.value(CHIPLIB_REGISTRY_VALUE).toString().toLower();
-    if (value.contains(CHIP_EPROM)) {
-        ui_->cbChip->setCurrentIndex(2);
+    if (value.contains(CHIP_FLASH28I16)) {
+        ui_->cbChip->setCurrentIndex(6);
+    } else if (value.contains(CHIP_FLASH28I)) {
+        ui_->cbChip->setCurrentIndex(5);
+    } else if (value.contains(CHIP_FLASH28SST)) {
+        ui_->cbChip->setCurrentIndex(4);
+    } else if (value.contains(CHIP_FLASH28F)) {
+        ui_->cbChip->setCurrentIndex(3);
     } else if (value.contains(CHIP_EEPROM28C)) {
+        ui_->cbChip->setCurrentIndex(2);
+    } else if (value.contains(CHIP_EPROM)) {
         ui_->cbChip->setCurrentIndex(1);
     } else {
         ui_->cbChip->setCurrentIndex(0);

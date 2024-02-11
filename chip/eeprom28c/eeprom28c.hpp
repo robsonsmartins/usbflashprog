@@ -38,77 +38,77 @@
     Set Memory Size.
     @param[in] size Memory size (number of addressable positions)
  */
-DLLEXPORT void SetSize(unsigned long size);
+DLLEXPORT void SetSize(uint32_t size);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset VDD (main power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetVDD(unsigned char state);
+DLLEXPORT void SetVDD(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset VPP (high voltage programming power) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetVPP(unsigned char state);
+DLLEXPORT void SetVPP(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset OE (Output Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetOE(unsigned char state);
+DLLEXPORT void SetOE(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset CE (Chip Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetCE(unsigned char state);
+DLLEXPORT void SetCE(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset WE (Write Enable) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SetWE(unsigned char state);
+DLLEXPORT void SetWE(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Write a Address Bus value.
     @param[in] addr Address to be writed in bus
  */
-DLLEXPORT void SetAddrBus(unsigned long addr);
+DLLEXPORT void SetAddrBus(uint32_t addr);
 
 /** @ingroup lib_chip_eeprom28c
     Write a value to Data Bus.
     @param[in] data Data to be writed in bus
  */
-DLLEXPORT void SetDataBus(unsigned short data);
+DLLEXPORT void SetDataBus(uint16_t data);
 
 /** @ingroup lib_chip_eeprom28c
     Read a value from Data Bus.
     @return Data readed from bus. */
-DLLEXPORT unsigned short GetDataBus(void);
+DLLEXPORT uint16_t GetDataBus(void);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset Serial CS (Chip Select) pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SerialSetCS(unsigned char state);
+DLLEXPORT void SerialSetCS(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset Serial Clock pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SerialSetClk(unsigned char state);
+DLLEXPORT void SerialSetClk(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Set/Reset Serial Data pin.
     @param[in] state If different of zero (default), set pin; else, clear pin
  */
-DLLEXPORT void SerialSetData(unsigned char state);
+DLLEXPORT void SerialSetData(uint8_t state);
 
 /** @ingroup lib_chip_eeprom28c
     Read Serial Data pin current state (1 or 0) from chip.
     @return Pin level (high or low). */
-DLLEXPORT unsigned char SerialGetData(void);
+DLLEXPORT uint8_t SerialGetData(void);
 
 /** @ingroup lib_chip_eeprom28c
     Library Entry point for MS Windows.
@@ -131,7 +131,7 @@ class ChipEEPROM28C : public BaseParChip {
     /** Destructor. */
     virtual ~ChipEEPROM28C();
     /* reimplemented */
-    virtual void SetSize(unsigned long size);
+    virtual void SetSize(uint32_t size);
 
   protected:
     /* stores the step of current special command */
@@ -162,7 +162,7 @@ class ChipEEPROM28CWorkaround : public ChipEEPROM28C {
 
   protected:
     /* stores the current address */
-    unsigned long f_address;
+    uint32_t f_address;
     /* stores the sequencial read count */
     int f_readCount;
     /* reimplemented */

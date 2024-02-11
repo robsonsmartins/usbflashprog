@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="Eprom.exe"/>
+    <OBJFILES value="Eprom.obj uEprom.obj misc.obj 49Fxxx.obj M28Cxxx.obj i28Fx00.obj"/>
+    <RESFILES value="EPROM.res"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) uEprom.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value="rtl.lib vcl.lib bcbsmp.lib vclx.lib DLPortIO.lib"/>
+    <PACKAGES value="vclx.bpi rtl.bpi vcl.bpi dbrtl.bpi vcldb.bpi bdertl.bpi vcldbx.bpi 
+      bcbsmp.bpi dclocx.bpi qrpt.bpi teeui.bpi teedb.bpi tee.bpi ibsmp.bpi 
+      nmfast.bpi inetdb.bpi inet.bpi DLPortIO.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value=""/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL;USEPACKAGES"/>
+    <MAINSOURCE value="Eprom.cpp"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl;Portio"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;Portio"/>
+    <WARNINGS value="-w-par"/>
+    <WARNOPTSTR value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I$(BCB)\include -I$(BCB)\include\vcl -IPortio -src_suffix cpp -boa"/>
+    <CFLAG1 value="-O2 -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -Tkh30000 -ff -X- -a8 -5 -b- -k- 
+      -vi -c -tW -tWM"/>
+    <PFLAGS value="-$Y- -$L- -$D- -$A8 -v -M -JPHNE"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zn"/>
+    <LFLAGS value="-D&quot;&quot; -aa -Tpe -x"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0w32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="Eprom.cpp" FORMNAME="" UNITNAME="Eprom" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="EPROM.RES" FORMNAME="" UNITNAME="EPROM" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="uEprom.cpp" FORMNAME="frmEprom" UNITNAME="uEprom" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="misc.cpp" FORMNAME="" UNITNAME="misc" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="49Fxxx.cpp" FORMNAME="" UNITNAME="49Fxxx" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="M28Cxxx.cpp" FORMNAME="" UNITNAME="M28Cxxx" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="i28Fx00.cpp" FORMNAME="" UNITNAME="i28Fx00" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=0
+MinorVer=9
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=2057
+CodePage=1252
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=0.9.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=5
+Item0=$(BCB)\include;$(BCB)\include\vcl;Portio
+Item1=C:\DATI\Proj-VC\Prog-eprom-090d-test;$(BCB)\include;$(BCB)\include\vcl;Portio
+Item2=$(BCB)\include;$(BCB)\include\vcl;C:\DATI\Proj-VC\Prog-eprom-090d-test\Portio
+Item3=..\..\..\program files\borland\cbuilder3\projects;$(BCB)\include;$(BCB)\include\vcl;portIO
+Item4=c:\program files\borland\cbuilder3\projects;$(BCB)\include;$(BCB)\include\vcl;portIO
+
+[HistoryLists\hlLibraryPath]
+Count=8
+Item0=$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib;Portio
+Item1=$(BCB)\lib\obj;$(BCB)\lib;Portio
+Item2=C:\DATI\Proj-VC\Prog-eprom-090d-test;$(BCB)\lib\obj;$(BCB)\lib;Portio
+Item3=$(BCB)\lib\obj;$(BCB)\lib;C:\DATI\Proj-VC\Prog-eprom-090d-test\Portio
+Item4=portio;$(BCB)\lib\obj;$(BCB)\lib;C:\DATI\Proj-VC\Prog-eprom-090d-test
+Item5=..\..\..\program files\borland\cbuilder3\projects;portio;$(BCB)\lib\obj;$(BCB)\lib
+Item6=c:\program files\borland\cbuilder3\projects;portio;$(BCB)\lib\obj;$(BCB)\lib
+Item7=portio;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=2
+Item0=_RTLDLL
+Item1=_RTLDLL;USEPACKAGES
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+  </IDEOPTIONS>
+</PROJECT>

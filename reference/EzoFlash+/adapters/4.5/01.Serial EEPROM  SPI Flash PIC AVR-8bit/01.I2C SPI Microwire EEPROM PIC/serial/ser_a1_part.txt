@@ -1,0 +1,8 @@
+SER_A1 / SER_A1B PART LIST
+
+Angled socket connector 1x8, division 2.54
+IC Socket DIL-8 - 3pcs (SER_A1) 
+Strip connector socket 1x4, division 2.54 - 6pcs (SER_A1B)
+Straight pin header 2x2, division 2.54 
+Jumper, division 2.54 - 2pcs
+Resistor 2k2 (1.0k...2k2) - 2pcs

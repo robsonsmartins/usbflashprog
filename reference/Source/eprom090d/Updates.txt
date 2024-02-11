@@ -1,0 +1,102 @@
+Update informations:
+
+SCOPE : Add hardware test tabsheet.
+	Add Sector Protect panel for Flash MXIC 29F040.
+
+ORIGINAL SOURCE : Vers. (0.90b in About1.Click) declared on the web 0.90c or 0.91
+ 		  last uEprom.dfm (form) mod. 19/08/2001  20.35
+		  last Eprom.exe        built 19/08/2001  20.36
+
+COMPILER USED: C++ BUILDER ver. 4.0 !!!
+
+To add these modifications on source files for C++ BUILDER ver. 3.0 i think (i hope)
+that is enough sobstitute the following modified/added files and recompile.
+Please try and issue on the web the new release if it's OK.
+
+Files to add/substitute:uEprom.dfm
+			uEprom.cpp
+			uEprom.h
+			willem.h
+			49Fxxx.cpp
+			Unlock.bmp
+			Chip_Unlock.bmp
+			Sect_lock.bmp
+			Inspection.bmp
+
+
+
+Modification details:
+----------------------
+
+Form : uEprom.dfm
+-----------------
+1) Added Group Box (pMXICF29040) for sector protect/chip unprotect.
+2) Added Tab Sheet for Hardware tests.
+3) Increased width of tabsheet4 (prog and hex tables)to improve
+   the visibility of the tables. Only few pixels.
+
+File : uEprom.cpp
+-----------------
+1) Changed Version  from 0.90B to 0.09D in About1Click()
+
+2) Changed the height position of ON indicator of DIP-SWITCH. Lines 280 and 299.
+
+3) Modified line 112 as follow:
+   char inp_line[160];     	  // NC modified for c++ builder v. 4.0
+   //unsigned char inp_line[160]; // original statement for c++ builder v. 3.0
+
+4) Modified in function ProgGridDrawCell()
+   if((unsigned int)Offset < (Epr.BufferSize * 2)) //NC casting of Offset (c++ builder v.4.0 give warning).
+   //  if(Offset < (Epr.BufferSize * 2))  // Original statement (c++ builder v.3.0).
+
+   if((unsigned int)Offset <= (Epr.BufferSize * 2)) //NC casting of Offset (c++ builder v.4.0 give warning).
+   //  if(Offset <= (Epr.BufferSize * 2))  // Original statement (c++ builder v.3.0).
+
+5) Added in function "winstat()" :
+   frmEprom->pMXICF29040->Visible = false;   //NC added MXIC 29F040 block protect panel
+	......
+	......
+   case M29FXXX: if (Epr.BufferSize == 0x80000)
+                        {
+                        frmEprom->pMXICF29040->Visible = true;
+                        }
+                        break; //NC visible only if 29F040
+
+
+6) Added in frmEprom Events->FormCreate :
+ 
+   sgMXICF29SecVfyF29->Cells[0][0]="Sec        Address        Stat";
+
+   //Disable buttons sector protect/chip unprotect while not display sector status.
+   sbMXICF29SecProt->Enabled=false;
+   sbMXICF29ChipUnprt->Enabled=false; 
+
+ 
+
+File : 49Fxxx.cpp
+-----------------
+1) Added function int __fastcall MXIC_F29040_Sect_Status(int sectAddr);
+   for reading status of sectors of MXICF29040
+2) Added function void __fastcall MXIC_F29040_Sect_Protect(int sectAddr);
+   for protection of sector of MXICF29040
+3) Added function void __fastcall MXIC_F29040_Chip_Unprot(void);
+   for chip MXICF29040 unprotect.
+
+
+File : willem.h
+-----------------
+1) Added int __fastcall MXIC_F29040_Sect_Status(int sectAddr);
+2) Added void __fastcall MXIC_F29040_Sect_Protect(int sectAddr);
+3) Added void __fastcall MXIC_F29040_Chip_Unprot(void);
+
+
+BITMAP Added:
+-------------
+1)Unlock.bmp, Chip_Unlock.bmp, Sect_lock.bmp, Inspection.bmp. All
+  for added speed buttons.
+
+
+
+
+Date 28/08/2001   carlonb@libero.it      
+End of list.

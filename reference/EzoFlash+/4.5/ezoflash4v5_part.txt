@@ -1,0 +1,35 @@
+EZoFlash4v5. Part list.
+
+IC1..IC3- 4015
+IC4 	- 4503
+IC5 	- 74HC244
+IC6 	- 4021
+IC7 	- 74HC04
+IC8 	- 74LS06 
+IC9 	- 78L12
+IC10 	- L7805 
+V1,V2  	- BC327
+D1 	- LED, green, 3mm diameter
+D3 	- LED, yellow, 3mm diameter
+D5 	- LED, red, 3mm diameter
+D2,D4,D6..D9,D11 - 1N4148 
+D10 	- BAT41
+C1,C3 	- 470n
+C2,C4..C6 - 220n
+R1 	- 560
+R2,R3,R5..R9,R11,R19 - 2k2
+R4 	- 330
+R10 	- 4k7
+R12,R14..R18,R20,R21 - 10k
+R13 	- 1k 
+R-PACK 	- 10k x 9
+BU1 - D-Sub 25 poles male connector with angled solder pins
+BU2 - Chassis connector 2.5mm for PCB
+BU3 - Strip connector socket, division 2.54 , 2x16
+BU4 - Strip connector socket, division 2.54 , 1x5
+BU5 - Straight pin header, division 2.54 , 1x8
+JP1..JP3 - Straight pin header, division 2.54, 1x6 (one pin is removed) / 
+	Jumper , division 2.54 (2pcs)
+JP4..JP5 - Straight pin header, division 2.54, 1x3 / Jumper, division 2.54 (1pc)
+JP6 - Straight pin header, division 2.54, 1x2 / Jumper, division 2.54 (1pc)  
+JP97-JP98 - Straight pin header, division 2.54, 2x3 / Jumper, division 2.54 (2pcs)  

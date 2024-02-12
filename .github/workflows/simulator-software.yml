@@ -1,0 +1,116 @@
+# ------------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2024) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ------------------------------------------------------------------------------
+name: Build Simulator
+
+on:
+  workflow_dispatch:
+
+env:
+  BUILD_TYPE: Release
+  SOFTWARE_PROJECT_DIR: ${{github.workspace}}
+
+jobs:
+  build:
+    name: Build Simulator (Windows 32-bits)
+    runs-on: windows-latest
+
+    steps:
+      # ------------------------------------------------------------------------
+      # Checkout the sources
+      # ------------------------------------------------------------------------
+      - name: Checkout the Sources
+        uses: actions/checkout@v4
+        with:
+          ref: simulator
+    
+      # ------------------------------------------------------------------------
+      # Install MinGW (Windows)
+      # ------------------------------------------------------------------------
+      - name: Install MinGW32 (Windows 32-bits)
+        uses: msys2/setup-msys2@v2
+        with:
+            msystem: mingw32
+            install: 
+                mingw-w64-i686-toolchain
+                mingw-w64-i686-cmake
+            release: false
+
+      # ------------------------------------------------------------------------
+      # Install Inno Setup (Windows)
+      # ------------------------------------------------------------------------
+      - name: Install Inno Setup (Windows)
+        env:
+          INNO_SETUP_DOWNLOAD_URL: "https://files.jrsoftware.org/is/6/innosetup-6.2.1.exe"
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
+        run: |
+          wget "${{env.INNO_SETUP_DOWNLOAD_URL}}"
+          ./innosetup-6.2.1.exe //VERYSILENT //SUPPRESSMSGBOXES //SP //CURRENTUSER //LANG=en //NORESTART //NOICONS //DIR=".\is"
+        shell: msys2 {0}
+
+      # ------------------------------------------------------------------------
+      # Install Qt (Windows/MacOS)
+      # ------------------------------------------------------------------------
+      - name: Cache Qt (Windows 32-bits)
+        id: cache-qt-win32
+        uses: actions/cache@v4
+        with:
+          path: ../QtCacheWin32
+          key: ${{ runner.os }}-QtCacheWin32
+
+      - name: Install Qt (Windows 32-bits)
+        uses: jurplel/install-qt-action@v3
+        with:
+          cache: 'true'
+          cache-key-prefix: ${{ steps.cache-qt-win32.outputs.cache-hit }}
+          version: '5.15.2'
+          host: 'windows'
+          target: 'desktop'
+          arch: 'win32_mingw81'
+          dir: '${{env.SOFTWARE_PROJECT_DIR}}/qt/'
+          install-deps: 'true'
+          extra: '--timeout 30'
+
+      # ------------------------------------------------------------------------
+      # Configure CMake
+      # ------------------------------------------------------------------------
+      - name: Configure CMake (Windows)
+        env:
+          CMAKE_PREFIX_PATH: ${{env.Qt5_Dir}}
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: cmake -G "MinGW Makefiles" -DC_32BIT_COMPILER="C:/msys64/mingw32/bin/gcc.exe" -B build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        shell: msys2 {0}
+
+      # ------------------------------------------------------------------------
+      # Build
+      # ------------------------------------------------------------------------
+      - name: Build (Windows)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+        run: |
+          cmake --build build --config ${{env.BUILD_TYPE}}
+          echo "BUILD_REVISION=`date +%y%m%d`" >> $GITHUB_ENV
+        shell: msys2 {0}
+
+      # ------------------------------------------------------------------------
+      # Create the Installer
+      # ------------------------------------------------------------------------
+      - name: Create the Installer (Windows 32-bits)
+        working-directory: ${{env.SOFTWARE_PROJECT_DIR}}/scripts
+        run: |
+          ./is/iscc.exe //DARCH="Win32" //DQT_PATH="..\\qt\\Qt\\5.15.2\\mingw81_32" //Dversion="1.0" emuprog.iss
+          mv "../build/emuprog-1.0-0-win32-setup.exe" "../build/emuprog-1.0-${{env.BUILD_REVISION}}-win32-setup.exe"
+        shell: msys2 {0}
+
+      # ------------------------------------------------------------------------
+      # Upload the Installer
+      # ------------------------------------------------------------------------
+      - name: Upload the Installer (Windows 32-bits)
+        uses: actions/upload-artifact@v4
+        with:
+          path: "${{env.SOFTWARE_PROJECT_DIR}}/build/emuprog-*setup.exe"
+          name: "emuprog-win32-installer"

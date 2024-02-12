@@ -1,0 +1,67 @@
+# ------------------------------------------------------------------------------
+# USB EPROM/Flash Programmer
+#
+# Copyright (2024) Robson Martins
+#
+# This work is licensed under a Creative Commons Attribution-NonCommercial-
+# ShareAlike 4.0 International License.
+# ------------------------------------------------------------------------------
+name: Update Simulator Doc
+
+on:
+  workflow_dispatch:
+
+env:
+  SOFTWARE_PROJECT_DIR: ${{github.workspace}}
+
+jobs:
+  build:
+    name: Update Simulator Doc
+    runs-on: ubuntu-latest
+
+    steps:
+    # ------------------------------------------------------------------------
+    # Checkout the sources
+    # ------------------------------------------------------------------------
+    - name: Checkout the Sources
+      uses: actions/checkout@v4
+      with:
+        ref: simulator
+        persist-credentials: false
+        fetch-depth: 0
+
+    # ------------------------------------------------------------------------
+    # Install Prerequisites (Linux)
+    # ------------------------------------------------------------------------
+    - name: Install Prerequisites
+      run: |
+        sudo apt-get update
+        sudo apt-get install doxygen graphviz
+
+    # ------------------------------------------------------------------------
+    # Doxygen
+    # ------------------------------------------------------------------------
+    - name: Doxygen
+      working-directory: ${{env.SOFTWARE_PROJECT_DIR}}
+      run: |
+        rm -Rf ${{env.SOFTWARE_PROJECT_DIR}}/doc/html/
+        doxygen
+
+    # ------------------------------------------------------------------------
+    # Commit
+    # ------------------------------------------------------------------------
+    - name: Commit Files
+      run: |
+        git config --local user.email "noreply-github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add doc/html/
+        git commit -m "Update Software Documentation" -a
+
+    # ------------------------------------------------------------------------
+    # Push
+    # ------------------------------------------------------------------------
+    - name: Push Changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}

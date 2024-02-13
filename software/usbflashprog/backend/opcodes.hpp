@@ -52,83 +52,189 @@ enum kCmdResponseValueEnum {
 
 // ---------------------------------------------------------------------------
 
-/**
- * @ingroup Software
- * @brief Enumeration of the OpCodes.
- */
+/** @brief Enumeration of the OpCodes. */
 enum kCmdOpCodeEnum {
     /** @brief OPCODE / NOP : Opcode NOP. */
     kCmdNop = 0x00,
 
-    /** @brief OPCODE / VDD : Opcode VDD Control On/Off. */
+    /**
+     * @brief OPCODE / VDD : Opcode VDD Control On/Off.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVddCtrl = 0x01,
-    /** @brief OPCODE / VDD : Opcode VDD Set Voltage. */
+    /**
+     * @brief OPCODE / VDD : Opcode VDD Set Voltage.
+     * @details The parameter (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVddSetV = 0x02,
-    /** @brief OPCODE / VDD : Opcode VDD Get Voltage. */
+    /**
+     * @brief OPCODE / VDD : Opcode VDD Get Voltage.
+     * @details The result (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVddGetV = 0x03,
-    /** @brief OPCODE / VDD : Opcode VDD Get PWM Duty Cycle. */
+    /**
+     * @brief OPCODE / VDD : Opcode VDD Get PWM Duty Cycle.
+     * @details The result (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVddGetDuty = 0x04,
-    /** @brief OPCODE / VDD : Opcode VDD Get Calibration. */
+    /**
+     * @brief OPCODE / VDD : Opcode VDD Get Calibration.
+     * @details The result (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVddGetCal = 0x05,
     /** @brief OPCODE / VDD : Opcode VDD Init Calibration. */
     kCmdVddInitCal = 0x06,
-    /** @brief OPCODE / VDD : Opcode VDD Save Calibration. */
+    /**
+     * @brief OPCODE / VDD : Opcode VDD Save Calibration.
+     * @details The parameter (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVddSaveCal = 0x07,
-    /** @brief OPCODE / VDD : Opcode VDD on VPP. */
+    /**
+     * @brief OPCODE / VDD : Opcode VDD on VPP.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVddOnVpp = 0x08,
 
-    /** @brief OPCODE / VPP : Opcode VPP Control On/Off. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP Control On/Off.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVppCtrl = 0x11,
-    /** @brief OPCODE / VPP : Opcode VPP Set Voltage. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP Set Voltage.
+     * @details The parameter (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVppSetV = 0x12,
-    /** @brief OPCODE / VPP : Opcode VPP Get Voltage. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP Get Voltage.
+     * @details The result (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVppGetV = 0x13,
-    /** @brief OPCODE / VPP : Opcode VPP Get PWM Duty Cycle. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP Get PWM Duty Cycle.
+     * @details The result (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVppGetDuty = 0x14,
-    /** @brief OPCODE / VPP : Opcode VPP Get Calibration. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP Get Calibration.
+     * @details The result (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVppGetCal = 0x15,
     /** @brief OPCODE / VPP : Opcode VPP Init Calibration. */
     kCmdVppInitCal = 0x16,
-    /** @brief OPCODE / VPP : Opcode VPP Save Calibration. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP Save Calibration.
+     * @details The parameter (two bytes) represents the value.
+     *          MSB is integer part. LSB is fractional part.
+     */
     kCmdVppSaveCal = 0x17,
-    /** @brief OPCODE / VPP : Opcode VPP on A9. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP on A9.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVppOnA9 = 0x18,
-    /** @brief OPCODE / VPP : Opcode VPP on A18. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP on A18.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVppOnA18 = 0x19,
-    /** @brief OPCODE / VPP : Opcode VPP on CE. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP on CE.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVppOnCE = 0x1A,
-    /** @brief OPCODE / VPP : Opcode VPP on OE. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP on OE.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVppOnOE = 0x1B,
-    /** @brief OPCODE / VPP : Opcode VPP on WE. */
+    /**
+     * @brief OPCODE / VPP : Opcode VPP on WE.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdVppOnWE = 0x1C,
 
-    /** @brief OPCODE / BUS : Opcode CE Ctrl. */
+    /**
+     * @brief OPCODE / BUS : Opcode CE Ctrl.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdBusCE = 0x21,
-    /** @brief OPCODE / BUS : Opcode OE Ctrl. */
+    /**
+     * @brief OPCODE / BUS : Opcode OE Ctrl.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdBusOE = 0x22,
-    /** @brief OPCODE / BUS : Opcode WE Ctrl. */
+    /**
+     * @brief OPCODE / BUS : Opcode WE Ctrl.
+     * @details The parameter (one byte) indicates on/off.
+     * @see kCmdParamValueEnum
+     */
     kCmdBusWE = 0x23,
 
     /** @brief OPCODE / BUS : Opcode Address Clear. */
     kCmdBusAddrClr = 0x31,
     /** @brief OPCODE / BUS : Opcode Address Increment. */
     kCmdBusAddrInc = 0x32,
-    /** @brief OPCODE / BUS : Opcode Address Set. */
+    /**
+     * @brief OPCODE / BUS : Opcode Address Set.
+     * @details The parameter (four bytes) represents the
+     *          address (MSB up to LSB).
+     */
     kCmdBusAddrSet = 0x33,
-    /** @brief OPCODE / BUS : Opcode Address Set Byte. */
+    /**
+     * @brief OPCODE / BUS : Opcode Address Set Byte.
+     * @details The parameter (one byte) represents the address.
+     */
     kCmdBusAddrSetB = 0x34,
-    /** @brief OPCODE / BUS : Opcode Address Set Word. */
+    /**
+     * @brief OPCODE / BUS : Opcode Address Set Word.
+     * @details The parameter (two bytes) represents the
+     *          address (MSB up to LSB).
+     */
     kCmdBusAddrSetW = 0x35,
 
     /** @brief OPCODE / BUS : Opcode Data Clear. */
     kCmdBusDataClr = 0x41,
-    /** @brief OPCODE / BUS : Opcode Data Set Byte. */
+    /**
+     * @brief OPCODE / BUS : Opcode Data Set Byte.
+     * @details The parameter (one byte) represents the data.
+     */
     kCmdBusDataSet = 0x42,
-    /** @brief OPCODE / BUS : Opcode Data Set Word. */
+    /**
+     * @brief OPCODE / BUS : Opcode Data Set Word.
+     * @details The parameter (two bytes) represents the
+     *          data (MSB up to LSB).
+     */
     kCmdBusDataSetW = 0x43,
-    /** @brief OPCODE / BUS : Opcode Data Get Byte. */
+    /**
+     * @brief OPCODE / BUS : Opcode Data Get Byte.
+     * @details The result (one byte) represents the data.
+     */
     kCmdBusDataGet = 0x44,
-    /** @brief OPCODE / BUS : Opcode Data Get Word. */
+    /**
+     * @brief OPCODE / BUS : Opcode Data Get Word.
+     * @details The result (two bytes) represents the
+     *          data (MSB up to LSB).
+     */
     kCmdBusDataGetW = 0x45,
 
     /**
@@ -157,6 +263,7 @@ enum kCmdOpCodeEnum {
      * | 2 | VPP/~OE Pin      |
      * | 3 | ~PGM/~CE Pin     |
      * | 4 | PGM positive     |
+     * | 5 | 16-bit mode      |
      * +----------------------+
      * </pre>
      * @see kCmdDeviceAlgorithmEnum
@@ -178,83 +285,44 @@ enum kCmdOpCodeEnum {
      */
     kCmdDeviceSetupBus = 0x84,
     /**
-     * @brief OPCODE / DEVICE : Opcode Device Read Byte buffer
-     *   and Increment Address.
-     * @details The parameter (one byte) represents the buffer size,
-     *   in bytes.<br/>
-     *   The return is [size] bytes.
-     */
-    kCmdDeviceRead = 0x85,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Read Word buffer
+     * @brief OPCODE / DEVICE : Opcode Device Read Byte/Word buffer
      *   and Increment Address.
      * @details The parameter (one byte) represents the buffer size,
      *   in bytes.<br/>
      *   The return is [size] bytes. MSB first.
      */
-    kCmdDeviceReadW = 0x86,
+    kCmdDeviceRead = 0x85,
     /**
-     * @brief OPCODE / DEVICE : Opcode Device Write Byte buffer,
-     *   verify and Increment Address.
-     * @details The first parameter (one byte) represents the buffer size,
-     *   in bytes.<br/>
-     *   The second parameter ([size] bytes) is the data to write.
-     */
-    kCmdDeviceWrite = 0x87,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Write Word buffer,
+     * @brief OPCODE / DEVICE : Opcode Device Write Byte/Word buffer,
      *   verify and Increment Address.
      * @details The first parameter (one byte) represents the buffer size,
      *   in bytes.<br/>
      *   The second parameter ([size] bytes) is the data to write. MSB first.
      */
-    kCmdDeviceWriteW = 0x88,
+    kCmdDeviceWrite = 0x86,
     /**
-     * @brief OPCODE / DEVICE : Opcode Device Write Byte sector,
-     *   verify and Increment Address.
-     * @details The first parameter (two bytes) represents the sector size,
-     *   in bytes.<br/>
-     *   The second parameter ([size] bytes) is the data to write.
-     */
-    kCmdDeviceWriteSector = 0x89,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Write Word sector,
+     * @brief OPCODE / DEVICE : Opcode Device Write Byte/Word sector,
      *   verify and Increment Address.
      * @details The first parameter (two bytes) represents the sector size,
      *   in bytes. The following are data to write (size is specified).
      *   MSB first.
      */
-    kCmdDeviceWriteSectorW = 0x8A,
+    kCmdDeviceWriteSector = 0x87,
     /**
-     * @brief OPCODE / DEVICE : Opcode Device Verify Byte buffer
-     *   and Increment Address.
-     * @details The first parameter (one byte) represents the buffer size,
-     *   in bytes.<br/>
-     *   The second parameter ([size] bytes) is the data to verify.
-     */
-    kCmdDeviceVerify = 0x8B,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Verify Word buffer
+     * @brief OPCODE / DEVICE : Opcode Device Verify Byte/Word buffer
      *   and Increment Address.
      * @details The first parameter (one byte) represents the buffer size,
      *   in bytes.<br/>
      *   The second parameter ([size] bytes) is the data to verify. MSB first.
      */
-    kCmdDeviceVerifyW = 0x8C,
+    kCmdDeviceVerify = 0x88,
     /**
-     * @brief OPCODE / DEVICE : Opcode Device Check if Byte buffer is Blank
+     * @brief OPCODE / DEVICE : Opcode Device Check if Byte/Word buffer is Blank
      *   and Increment Address.
      * @details The parameter (one byte) represents the buffer size,
      *   in bytes.
      */
-    kCmdDeviceBlankCheck = 0x8D,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Check if Word buffer is Blank
-     *   and Increment Address.
-     * @details The parameter (one byte) represents the buffer size,
-     *   in bytes.
-     */
-    kCmdDeviceBlankCheckW = 0x8E,
+    kCmdDeviceBlankCheck = 0x89,
     /**
      * @brief OPCODE / DEVICE : Opcode Device Get ID.
      * @details The result (four bytes) represents Manufacturer/Device ID,
@@ -267,13 +335,13 @@ enum kCmdOpCodeEnum {
      * +--------------------------------------------+
      * </pre>
      */
-    kCmdDeviceGetId = 0x8F,
+    kCmdDeviceGetId = 0x8A,
     /** @brief OPCODE / DEVICE : Opcode Device Erase. */
-    kCmdDeviceErase = 0x90,
+    kCmdDeviceErase = 0x8B,
     /** @brief OPCODE / DEVICE : Opcode Device Unprotect. */
-    kCmdDeviceUnprotect = 0x91,
+    kCmdDeviceUnprotect = 0x8C,
     /** @brief OPCODE / DEVICE : Opcode Device Protect. */
-    kCmdDeviceProtect = 0x92
+    kCmdDeviceProtect = 0x8D
 };
 
 // ---------------------------------------------------------------------------
@@ -302,24 +370,28 @@ enum kCmdDeviceOperationEnum {
  * @brief Enumeration of the Device Algorithms.
  * @see kCmdDeviceConfigure
  */
+// clang-format off
 enum kCmdDeviceAlgorithmEnum {
     /** @brief CMD / DEVICE : Defines an unknown algorithm. */
-    kCmdDeviceAlgorithmUnknown = 0x00,
+    kCmdDeviceAlgorithmUnknown      = 0x00,  // 0000 0000
     /** @brief CMD / DEVICE : Defines an algorithm SRAM. */
-    kCmdDeviceAlgorithmSRAM = 0x01,
+    kCmdDeviceAlgorithmSRAM         = 0x04,  // 0000 0100
     /** @brief CMD / DEVICE : Defines an algorithm EPROM 27. */
-    kCmdDeviceAlgorithmEPROM27 = 0x02,
+    kCmdDeviceAlgorithmEPROM        = 0x08,  // 0000 1000
     /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C64. */
-    kCmdDeviceAlgorithmEEPROM28C64 = 0x03,
+    kCmdDeviceAlgorithmEEPROM28C64  = 0x0C,  // 0000 1100
     /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C256 or upper. */
-    kCmdDeviceAlgorithmEEPROM28C256 = 0x04,
+    kCmdDeviceAlgorithmEEPROM28C256 = 0x0D,  // 0000 1101
     /** @brief CMD / DEVICE : Defines an algorithm Flash 28F. */
-    kCmdDeviceAlgorithmFlash28F = 0x05,
+    kCmdDeviceAlgorithmFlash28F     = 0x10,  // 0001 0000
+    /** @brief CMD / DEVICE : Defines an algorithm Flash SST28SF. */
+    kCmdDeviceAlgorithmFlashSST28SF = 0x11,  // 0001 0001
     /** @brief CMD / DEVICE : Defines an algorithm Flash Am28F. */
-    kCmdDeviceAlgorithmFlashAm28F = 0x06,
+    kCmdDeviceAlgorithmFlashAm28F   = 0x12,  // 0001 0010
     /** @brief CMD / DEVICE : Defines an algorithm Flash i28F. */
-    kCmdDeviceAlgorithmFlashI28F = 0x07
+    kCmdDeviceAlgorithmFlashI28F    = 0x13   // 0001 0011
 };
+// clang-format on
 
 // ---------------------------------------------------------------------------
 
@@ -408,20 +480,14 @@ static const TCmdOpCodeMap kCmdOpCodes = {
     {kCmdDeviceConfigure      , {kCmdDeviceConfigure      , "Device Configure"       , 2, 0}},
     {kCmdDeviceSetupBus       , {kCmdDeviceSetupBus       , "Device Setup Bus"       , 1, 0}},
     {kCmdDeviceRead           , {kCmdDeviceRead           , "Device Read"            , 1, 0}},
-    {kCmdDeviceReadW          , {kCmdDeviceReadW          , "Device ReadWord"        , 1, 0}},
     {kCmdDeviceWrite          , {kCmdDeviceWrite          , "Device Write"           , 1, 0}},
-    {kCmdDeviceWriteW         , {kCmdDeviceWriteW         , "Device WriteWord"       , 1, 0}},
     {kCmdDeviceWriteSector    , {kCmdDeviceWriteSector    , "Device WriteSector"     , 2, 0}},
-    {kCmdDeviceWriteSectorW   , {kCmdDeviceWriteSectorW   , "Device WriteSectorWord" , 2, 0}},
     {kCmdDeviceVerify         , {kCmdDeviceVerify         , "Device Verify"          , 1, 0}},
-    {kCmdDeviceVerifyW        , {kCmdDeviceVerifyW        , "Device VerifyWord"      , 1, 0}},
     {kCmdDeviceBlankCheck     , {kCmdDeviceBlankCheck     , "Device BlankCheck"      , 1, 0}},
-    {kCmdDeviceBlankCheckW    , {kCmdDeviceBlankCheckW    , "Device BlankCheckWord"  , 1, 0}},
     {kCmdDeviceGetId          , {kCmdDeviceGetId          , "Device GetID"           , 0, 4}},
     {kCmdDeviceErase          , {kCmdDeviceErase          , "Device Erase"           , 0, 0}},
     {kCmdDeviceUnprotect      , {kCmdDeviceUnprotect      , "Device Unprotect"       , 0, 0}},
     {kCmdDeviceProtect        , {kCmdDeviceProtect        , "Device Protect"         , 0, 0}}
-
 };
 // clang-format on
 

@@ -47,6 +47,7 @@
 #include "backend/devices/parallel/sram.hpp"
 #include "backend/devices/parallel/eprom.hpp"
 #include "backend/devices/parallel/eeprom.hpp"
+#include "backend/devices/parallel/flash28f.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -812,6 +813,7 @@ void MainWindow::createDevice_() {
     createDeviceIfEPROM_(ui_->btnProgDevice->text());
     createDeviceIfErasableEPROM_(ui_->btnProgDevice->text());
     createDeviceIfEEPROM_(ui_->btnProgDevice->text());
+    createDeviceIfFlash28F_(ui_->btnProgDevice->text());
     if (!device_) {
         if (ui_->btnProgDevice->text() == ui_->actionDummy->text()) {
             device_ = new Dummy(this);
@@ -857,6 +859,7 @@ void MainWindow::createDeviceIfSRAM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
         ui_->labelProgSize->setEnabled(custom);
+        return;
     }
 }
 
@@ -903,6 +906,7 @@ void MainWindow::createDeviceIfEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
         ui_->labelProgSize->setEnabled(custom);
+        return;
     }
     size = 0x800;
     found = false;
@@ -950,8 +954,9 @@ void MainWindow::createDeviceIfEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
         ui_->labelProgSize->setEnabled(custom);
+        return;
     }
-    size = 0x800;
+    size = 0x20000;
     found = false;
     custom = false;
     // 27Cxxx 16 bits
@@ -985,11 +990,12 @@ void MainWindow::createDeviceIfEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode16Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
         ui_->labelProgSize->setEnabled(custom);
+        return;
     }
 }
 
 void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
-    uint32_t size = 0x800;
+    uint32_t size = 0x8000;
     bool found = false, custom = false;
     float vpp = 12.0f, vee = 14.0f, vdd = 5.0f;
     // W27x
@@ -1028,6 +1034,7 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
         ui_->labelProgSize->setEnabled(custom);
+        return;
     }
     found = false;
     vpp = 12.0f;
@@ -1061,6 +1068,7 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(false);
         ui_->labelProgSize->setEnabled(false);
+        return;
     }
     found = false;
     vpp = 12.75f;
@@ -1089,6 +1097,7 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(false);
         ui_->labelProgSize->setEnabled(false);
+        return;
     }
     found = false;
     vpp = 12.0f;
@@ -1120,6 +1129,7 @@ void MainWindow::createDeviceIfErasableEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(false);
         ui_->labelProgSize->setEnabled(false);
+        return;
     }
 }
 
@@ -1184,6 +1194,7 @@ void MainWindow::createDeviceIfEEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
         ui_->labelProgSize->setEnabled(custom);
+        return;
     }
     size = 0x800;
     found = false;
@@ -1226,6 +1237,225 @@ void MainWindow::createDeviceIfEEPROM_(const QString &label) {
         hexeditor_->setMode(QHexEditor::Mode8Bits);
         ui_->comboBoxProgSize->setEnabled(custom);
         ui_->labelProgSize->setEnabled(custom);
+        return;
+    }
+}
+
+void MainWindow::createDeviceIfFlash28F_(const QString &label) {
+    uint32_t size = 0x2000;
+    float vdd = 5.0f;
+    bool found = false, custom = false;
+    // 28F
+    if (label == ui_->actionFlash28F_8KB->text()) {
+        size = 0x2000;
+        found = true;
+    } else if (label == ui_->actionFlash28F_16KB->text()) {
+        size = 0x4000;
+        found = true;
+    } else if (label == ui_->actionFlash28F_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionFlash28F_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionFlash28F_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionFlashMX28F_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionFlash28F_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionFlashMX28F_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionFlash28F_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionFlash28Fxxx->text()) {
+        // custom 28F
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new Flash28F(this);
+        device_->setSize(size);
+        device_->setVddRd(vdd);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+        return;
+    }
+    size = 0x80000;
+    vdd = 5.0f;
+    found = false;
+    custom = false;
+    // SST28xF
+    if (label == ui_->actionFlashSST28SF_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionFlashSST28VF_512KB->text()) {
+        size = 0x80000;
+        vdd = 3.3f;
+        found = true;
+    } else if (label == ui_->actionFlashLE28F_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionFlashSST28xFxxx->text()) {
+        // custom SST28xF
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new FlashSST28SF(this);
+        device_->setSize(size);
+        device_->setVddRd(vdd);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+        return;
+    }
+    size = 0x8000;
+    vdd = 5.0f;
+    found = false;
+    custom = false;
+    // Am28F(A)
+    if (label == ui_->actionFlashAm28FA_32KB->text()) {
+        size = 0x8000;
+        found = true;
+    } else if (label == ui_->actionFlashAm28FA_64KB->text()) {
+        size = 0x10000;
+        found = true;
+    } else if (label == ui_->actionFlashAm28FA_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionFlashAm28FA_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionFlashAm28FAxxx->text()) {
+        // custom Am28F(A)
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new FlashAm28F(this);
+        device_->setSize(size);
+        device_->setVddRd(vdd);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+        return;
+    }
+    size = 0x20000;
+    vdd = 5.0f;
+    found = false;
+    custom = false;
+    // i28F
+    if (label == ui_->actionFlashI28F_128KB->text()) {
+        size = 0x20000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_256KB->text()) {
+        size = 0x40000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_1MB->text()) {
+        size = 0x100000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_2MB->text()) {
+        size = 0x200000;
+        found = true;
+    } else if (label == ui_->actionFlashI28Fxxx->text()) {
+        // custom i28F
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new FlashI28F(this);
+        device_->setSize(size);
+        device_->setVddRd(vdd);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+        return;
+    }
+    size = 0x80000;
+    vdd = 5.0f;
+    found = false;
+    custom = false;
+    // Sharp i28F
+    if (label == ui_->actionFlashLH28F_512KB->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionFlashLH28F_1MB->text()) {
+        size = 0x100000;
+        found = true;
+    } else if (label == ui_->actionFlashLH28F_2MB->text()) {
+        size = 0x200000;
+        found = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new FlashSharpI28F(this);
+        device_->setSize(size);
+        device_->setVddRd(vdd);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode8Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+        return;
+    }
+    size = 0x80000;
+    vdd = 5.0f;
+    found = false;
+    custom = false;
+    // i28F (16-bit)
+    if (label == ui_->actionFlashI28F_512KB_16bit->text()) {
+        size = 0x80000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_1MB_16bit->text()) {
+        size = 0x100000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_2MB_16bit->text()) {
+        size = 0x200000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_4MB_16bit->text()) {
+        size = 0x400000;
+        found = true;
+    } else if (label == ui_->actionFlashI28F_8MB_16bit->text()) {
+        size = 0x800000;
+        found = true;
+    } else if (label == ui_->actionFlashI28Fxxx_16bit->text()) {
+        // custom i28F (16-bit)
+        found = true;
+        custom = true;
+    }
+    if (found) {
+        ui_->actionDoProgram->setText(tr("Program"));
+        ui_->btnProgram->setToolTip(ui_->actionDoProgram->text());
+        device_ = new FlashI28F16Bit(this);
+        device_->setSize(size);
+        device_->setVddRd(vdd);
+        device_->setVddWr(vdd);
+        hexeditor_->setMode(QHexEditor::Mode16Bits);
+        ui_->comboBoxProgSize->setEnabled(custom);
+        ui_->labelProgSize->setEnabled(custom);
+        return;
     }
 }
 
@@ -1279,7 +1509,9 @@ void MainWindow::configureProgControls_() {
 
     ui_->spinBoxProgVDDrd->setEnabled(capability.hasVDD && port);
     ui_->labelProgVDDrd->setEnabled(ui_->spinBoxProgVDDrd->isEnabled());
-    ui_->spinBoxProgVDDwr->setEnabled(capability.hasVPP && port);
+    ui_->spinBoxProgVDDwr->setEnabled(
+        capability.hasVDD && port &&
+        (capability.hasProgram || capability.hasErase));
     ui_->labelProgVDDwr->setEnabled(ui_->spinBoxProgVDDwr->isEnabled());
     ui_->spinBoxProgVPP->setEnabled(capability.hasVPP && port);
     ui_->labelProgVPP->setEnabled(ui_->spinBoxProgVPP->isEnabled());

@@ -143,7 +143,14 @@ Runner::Runner(QObject* parent)
       running_(false),
       error_(false),
       address_(0),
-      bufferSize_(1) {}
+      bufferSize_(1) {
+    flags_.is16bit = false;
+    flags_.pgmCePin = false;
+    flags_.pgmPositive = false;
+    flags_.progWithVpp = false;
+    flags_.skipFF = false;
+    flags_.vppOePin = false;
+}
 
 Runner::~Runner() {
     close();
@@ -237,6 +244,7 @@ void Runner::setBufferSize(uint8_t value) {
         if (exp > 7) exp = 7;  // max 128
         value = 1 << exp;
     }
+    if (flags_.is16bit && value == 1) value = 2;
     if (bufferSize_ == value) return;
     bufferSize_ = value;
     DEBUG << "Setting buffer size:" << QString("%1").arg(value);
@@ -523,12 +531,15 @@ bool Runner::deviceConfigure(kCmdDeviceAlgorithmEnum algo,
     TRunnerCommand cmd;
     uint16_t value = algo;
     value <<= 8;
+    flags_ = flags;
+    if (flags.is16bit && bufferSize_ == 1) setBufferSize(2);
     // clang-format off
     if (flags.skipFF     ) value |= 0x01;
     if (flags.progWithVpp) value |= 0x02;
     if (flags.vppOePin   ) value |= 0x04;
     if (flags.pgmCePin   ) value |= 0x08;
     if (flags.pgmPositive) value |= 0x10;
+    if (flags.is16bit    ) value |= 0x20;
     // clang-format on
     cmd.setWord(kCmdDeviceConfigure, value);
     if (!sendCommand_(cmd)) return false;
@@ -593,33 +604,7 @@ QByteArray Runner::deviceRead() {
     memset(result.data(), 0xFF, bufferSize_);
     memcpy(result.data(), cmd.response.data() + 1,
            qMin(cmd.response.size() - 1, static_cast<int>(bufferSize_)));
-    address_ += bufferSize_;
-    return result;
-}
-
-QByteArray Runner::deviceReadW() {
-    QByteArray result;
-    TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceReadW, bufferSize_);
-    // setup expected response size
-    cmd.opcode.result = bufferSize_;
-    // no retry
-    if (!sendCommand_(cmd, 0)) {
-        DEBUG << "Error in deviceReadW(). Last address:"
-              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
-              << "Trying use addrSet()";
-        // error
-        // use addrSet
-        if (!addrSet(address_)) return result;
-        // call deviceReadW already
-        if (!sendCommand_(cmd, 0)) return result;
-    }
-    // set data
-    result.resize(bufferSize_);
-    memset(result.data(), 0xFF, bufferSize_);
-    memcpy(result.data(), cmd.response.data() + 1,
-           qMin(cmd.response.size() - 1, static_cast<int>(bufferSize_)));
-    address_ += (bufferSize_ / 2);
+    address_ += (flags_.is16bit ? (bufferSize_ / 2) : bufferSize_);
     return result;
 }
 
@@ -642,30 +627,7 @@ bool Runner::deviceWrite(const QByteArray& data) {
         // call deviceWrite already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_ += bufferSize_;
-    return true;
-}
-
-bool Runner::deviceWriteW(const QByteArray& data) {
-    TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceWriteW, bufferSize_);
-    // set data
-    cmd.params.resize(bufferSize_ + 2);
-    memset(cmd.params.data() + 2, 0xFF, bufferSize_);
-    memcpy(cmd.params.data() + 2, data.data(),
-           qMin(data.size(), static_cast<int>(bufferSize_)));
-    // no retry
-    if (!sendCommand_(cmd, 0)) {
-        DEBUG << "Error in deviceWriteW(). Last address:"
-              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
-              << "Trying use addrSet()";
-        // error
-        // use addrSet
-        if (!addrSet(address_)) return false;
-        // call deviceWriteW already
-        if (!sendCommand_(cmd, 0)) return false;
-    }
-    address_ += (bufferSize_ / 2);
+    address_ += (flags_.is16bit ? (bufferSize_ / 2) : bufferSize_);
     return true;
 }
 
@@ -688,30 +650,7 @@ bool Runner::deviceWriteSector(const QByteArray& data, uint16_t sectorSize) {
         // call deviceWriteSector already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_ += sectorSize;
-    return true;
-}
-
-bool Runner::deviceWriteSectorW(const QByteArray& data, uint16_t sectorSize) {
-    TRunnerCommand cmd;
-    cmd.setWord(kCmdDeviceWriteSectorW, sectorSize);
-    // set data
-    cmd.params.resize(sectorSize + 3);
-    memset(cmd.params.data() + 3, 0xFF, sectorSize);
-    memcpy(cmd.params.data() + 3, data.data(),
-           qMin(data.size(), static_cast<int>(sectorSize)));
-    // no retry
-    if (!sendCommand_(cmd, 0)) {
-        DEBUG << "Error in deviceWriteSectorW(). Last address:"
-              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
-              << "Trying use addrSet()";
-        // error
-        // use addrSet
-        if (!addrSet(address_)) return false;
-        // call deviceWriteSectorW already
-        if (!sendCommand_(cmd, 0)) return false;
-    }
-    address_ += (sectorSize / 2);
+    address_ += (flags_.is16bit ? (bufferSize_ / 2) : bufferSize_);
     return true;
 }
 
@@ -734,30 +673,7 @@ bool Runner::deviceVerify(const QByteArray& data) {
         // call deviceVerify already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_ += bufferSize_;
-    return true;
-}
-
-bool Runner::deviceVerifyW(const QByteArray& data) {
-    TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceVerifyW, bufferSize_);
-    // set data
-    cmd.params.resize(bufferSize_ + 2);
-    memset(cmd.params.data() + 2, 0xFF, bufferSize_);
-    memcpy(cmd.params.data() + 2, data.data(),
-           qMin(data.size(), static_cast<int>(bufferSize_)));
-    // no retry
-    if (!sendCommand_(cmd, 0)) {
-        DEBUG << "Error in deviceVerifyW(). Last address:"
-              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
-              << "Trying use addrSet()";
-        // error
-        // use addrSet
-        if (!addrSet(address_)) return false;
-        // call deviceVerifyW already
-        if (!sendCommand_(cmd, 0)) return false;
-    }
-    address_ += (bufferSize_ / 2);
+    address_ += (flags_.is16bit ? (bufferSize_ / 2) : bufferSize_);
     return true;
 }
 
@@ -775,25 +691,7 @@ bool Runner::deviceBlankCheck() {
         // call deviceBlankCheck already
         if (!sendCommand_(cmd, 0)) return false;
     }
-    address_ += bufferSize_;
-    return true;
-}
-
-bool Runner::deviceBlankCheckW() {
-    TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceBlankCheckW, bufferSize_);
-    // no retry
-    if (!sendCommand_(cmd, 0)) {
-        DEBUG << "Error in deviceBlankCheckW(). Last address:"
-              << QString("0x%1").arg(address_, 6, 16, QChar('0'))
-              << "Trying use addrSet()";
-        // error
-        // use addrSet
-        if (!addrSet(address_)) return false;
-        // call deviceBlankCheckW already
-        if (!sendCommand_(cmd, 0)) return false;
-    }
-    address_ += (bufferSize_ / 2);
+    address_ += (flags_.is16bit ? (bufferSize_ / 2) : bufferSize_);
     return true;
 }
 

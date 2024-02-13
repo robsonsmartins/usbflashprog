@@ -306,10 +306,6 @@
         <translation>EPROM (Electrical Erasable)</translation>
     </message>
     <message>
-        <source>Flash</source>
-        <translation>Flash</translation>
-    </message>
-    <message>
         <source>Operation canceled.</source>
         <translation>Operation canceled.</translation>
     </message>

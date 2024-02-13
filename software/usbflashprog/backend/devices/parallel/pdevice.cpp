@@ -46,7 +46,7 @@ ParDevice::~ParDevice() {}
 bool ParDevice::read(QByteArray &buffer) {
     INFO << "Reading device...";
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Read operation
     if (!initDevice(kDeviceOpRead)) {
@@ -70,7 +70,7 @@ bool ParDevice::read(QByteArray &buffer) {
 bool ParDevice::program(const QByteArray &buffer, bool verify) {
     INFO << "Programming device...";
     uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Prog operation
     if (!initDevice(kDeviceOpProg)) {
@@ -100,7 +100,7 @@ bool ParDevice::program(const QByteArray &buffer, bool verify) {
 bool ParDevice::verify(const QByteArray &buffer) {
     INFO << "Verifying device...";
     uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Read operation
     if (!initDevice(kDeviceOpRead)) {
@@ -124,7 +124,7 @@ bool ParDevice::verify(const QByteArray &buffer) {
 bool ParDevice::erase(bool check) {
     INFO << "Erasing device...";
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Erase operation
     if (!initDevice(kDeviceOpErase)) {
@@ -154,7 +154,7 @@ bool ParDevice::erase(bool check) {
 bool ParDevice::blankCheck() {
     INFO << "Blank checking device...";
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Read operation
     if (!initDevice(kDeviceOpRead)) {
@@ -178,7 +178,7 @@ bool ParDevice::blankCheck() {
 bool ParDevice::getId(TDeviceID &result) {
     INFO << "Getting device ID...";
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Get ID operation
     if (!initDevice(kDeviceOpGetId)) {
@@ -202,7 +202,7 @@ bool ParDevice::getId(TDeviceID &result) {
 bool ParDevice::unprotect() {
     INFO << "Unprotecting device...";
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Prog operation
     if (!initDevice(kDeviceOpProg)) {
@@ -226,7 +226,7 @@ bool ParDevice::unprotect() {
 bool ParDevice::protect() {
     INFO << "Protecting device...";
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     canceling_ = false;
     // Init pins/bus to Prog operation
     if (!initDevice(kDeviceOpProg)) {
@@ -251,9 +251,9 @@ bool ParDevice::programDevice(const QByteArray &buffer) {
     DEBUG << "Programming data...";
     uint32_t current = 0;
     uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     uint16_t data = 0xFFFF;
-    int increment = (is16bit_ ? 2 : 1);
+    int increment = (flags_.is16bit ? 2 : 1);
     if (!runner_.deviceSetTwp(twp_) || !runner_.deviceSetTwc(twc_)) {
         emit onProgress(current, total, true, false);
         WARNING << "Program error: setting tWP or tWC";
@@ -262,7 +262,7 @@ bool ParDevice::programDevice(const QByteArray &buffer) {
     QByteArray block;
     int blockSize = (sectorSize_ ? sectorSize_ : getBufferSize());
     uint32_t count = blockSize;
-    if (is16bit_) count /= 2;
+    if (flags_.is16bit && count >= 2) count /= 2;
     int i = 0;
     bool success;
     while (i < buffer.size()) {
@@ -282,12 +282,12 @@ bool ParDevice::programDevice(const QByteArray &buffer) {
             block.clear();
             do {
                 data = buffer[i] & 0xFF;
-                if (is16bit_) {
+                if (flags_.is16bit) {
                     data <<= 8;                      // MSB
                     data |= (buffer[i + 1] & 0xFF);  // LSB
                 }
                 // Insert data into block buffer
-                if (is16bit_) block.append((data & 0xFF00) >> 8);
+                if (flags_.is16bit) block.append((data & 0xFF00) >> 8);
                 block.append(data & 0xFF);
                 i += increment;
             } while (block.size() < blockSize);  // one block
@@ -295,18 +295,10 @@ bool ParDevice::programDevice(const QByteArray &buffer) {
             // Write data
             if (sectorSize_) {
                 // Write (and verify) sector
-                if (is16bit_) {
-                    success = runner_.deviceWriteSectorW(block, sectorSize_);
-                } else {
-                    success = runner_.deviceWriteSector(block, sectorSize_);
-                }
+                success = runner_.deviceWriteSector(block, sectorSize_);
             } else {
                 // Write (and verify) block
-                if (is16bit_) {
-                    success = runner_.deviceWriteW(block);
-                } else {
-                    success = runner_.deviceWrite(block);
-                }
+                success = runner_.deviceWrite(block);
             }
 
             // increment address
@@ -321,7 +313,7 @@ bool ParDevice::programDevice(const QByteArray &buffer) {
             if (attempt == maxAttemptsProg_) {
                 emit onProgress(current, total, true, false);
                 data = buffer[i] & 0xFF;
-                if (is16bit_) {
+                if (flags_.is16bit) {
                     data <<= 8;                      // MSB
                     data |= (buffer[i + 1] & 0xFF);  // LSB
                 }
@@ -330,7 +322,8 @@ bool ParDevice::programDevice(const QByteArray &buffer) {
                                "write 0x%3")
                                .arg(current, 6, 16, QChar('0'))
                                .arg(total, 6, 16, QChar('0'))
-                               .arg(data, is16bit_ ? 4 : 2, 16, QChar('0'));
+                               .arg(data, flags_.is16bit ? 4 : 2, 16,
+                                    QChar('0'));
                 return false;
             }
         }
@@ -343,13 +336,13 @@ bool ParDevice::verifyDevice(const QByteArray &buffer) {
     DEBUG << "Verifying data...";
     uint32_t current = 0;
     uint32_t total = qMin(size_, static_cast<uint32_t>(buffer.size()));
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     uint16_t data = 0xFFFF;
-    int increment = (is16bit_ ? 2 : 1);
+    int increment = (flags_.is16bit ? 2 : 1);
     QByteArray block;
     int blockSize = getBufferSize();
     uint32_t count = blockSize;
-    if (is16bit_) count /= 2;
+    if (flags_.is16bit && count >= 2) count /= 2;
     bool success;
     int i = 0;
     for (current = 0; current < total; current += count) {
@@ -368,29 +361,25 @@ bool ParDevice::verifyDevice(const QByteArray &buffer) {
         do {
             if (i >= buffer.size()) break;
             data = buffer[i] & 0xFF;
-            if (is16bit_) {
+            if (flags_.is16bit) {
                 data <<= 8;                      // MSB
                 data |= (buffer[i + 1] & 0xFF);  // LSB
             }
             // Insert data into block buffer
-            if (is16bit_) block.append((data & 0xFF00) >> 8);
+            if (flags_.is16bit) block.append((data & 0xFF00) >> 8);
             block.append(data & 0xFF);
             i += increment;
         } while (block.size() < blockSize);  // one block
 
         // Verify block
-        if (is16bit_) {
-            success = runner_.deviceVerifyW(block);
-        } else {
-            success = runner_.deviceVerify(block);
-        }
+        success = runner_.deviceVerify(block);
 
         // Error
         if (!success) {
             emit onProgress(current, total, true, false);
             i -= blockSize;
             data = buffer[i] & 0xFF;
-            if (is16bit_) {
+            if (flags_.is16bit) {
                 data <<= 8;                      // MSB
                 data |= (buffer[i + 1] & 0xFF);  // LSB
             }
@@ -398,7 +387,7 @@ bool ParDevice::verifyDevice(const QByteArray &buffer) {
                            "Verify error at 0x%1 of 0x%2. Expected data 0x%3")
                            .arg(current, 6, 16, QChar('0'))
                            .arg(total, 6, 16, QChar('0'))
-                           .arg(data, is16bit_ ? 4 : 2, 16, QChar('0'));
+                           .arg(data, flags_.is16bit ? 4 : 2, 16, QChar('0'));
             return false;
         }
     }
@@ -410,10 +399,10 @@ bool ParDevice::readDevice(QByteArray &buffer) {
     DEBUG << "Reading data...";
     uint32_t current = 0;
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     int blockSize = getBufferSize();
     uint32_t count = blockSize;
-    if (is16bit_) count /= 2;
+    if (flags_.is16bit && count >= 2) count /= 2;
     QByteArray data;
     buffer.clear();
     bool success;
@@ -428,11 +417,7 @@ bool ParDevice::readDevice(QByteArray &buffer) {
             return false;
         }
         // Read block
-        if (is16bit_) {
-            data = runner_.deviceReadW();
-        } else {
-            data = runner_.deviceRead();
-        }
+        data = runner_.deviceRead();
         success = (data.size() == blockSize);
         // Error
         if (!success) {
@@ -453,9 +438,9 @@ bool ParDevice::eraseDevice() {
     DEBUG << "Erasing data...";
     uint32_t current = 0;
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     uint32_t count = getBufferSize();
-    if (is16bit_) count /= 2;
+    if (flags_.is16bit && count >= 2) count /= 2;
     if (!runner_.deviceSetTwp(twp_) || !runner_.deviceSetTwc(twc_)) {
         emit onProgress(current, total, true, false);
         WARNING << "Erase error: setting tWP or tWC";
@@ -481,14 +466,8 @@ bool ParDevice::eraseDevice() {
             // Verify data, if not in Fast Erase mode
             if (!fastProg_) {
                 // Check block
-                if (is16bit_) {
-                    if (success && !runner_.deviceBlankCheckW()) {
-                        success = false;
-                    }
-                } else {
-                    if (success && !runner_.deviceBlankCheck()) {
-                        success = false;
-                    }
+                if (success && !runner_.deviceBlankCheck()) {
+                    success = false;
                 }
             }
             if (fastProg_ && success) break;
@@ -500,7 +479,7 @@ bool ParDevice::eraseDevice() {
                                "0x%3")
                                .arg(current, 6, 16, QChar('0'))
                                .arg(total, 6, 16, QChar('0'))
-                               .arg(is16bit_ ? "FFFF" : "FF");
+                               .arg(flags_.is16bit ? "FFFF" : "FF");
                 return false;
             }
             if (!success) break;
@@ -517,10 +496,10 @@ bool ParDevice::blankCheckDevice() {
     DEBUG << "Blank checking data...";
     uint32_t current = 0;
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
-    int increment = is16bit_ ? 2 : 1;
+    if (flags_.is16bit) total /= 2;
+    int increment = flags_.is16bit ? 2 : 1;
     uint32_t count = getBufferSize();
-    if (is16bit_) count /= 2;
+    if (flags_.is16bit && count >= 2) count /= 2;
     bool success;
     for (current = 0; current < total; current += count) {
         if ((current % 0x100) == 0) emit onProgress(current, total);
@@ -533,11 +512,7 @@ bool ParDevice::blankCheckDevice() {
             return false;
         }
         // Check block
-        if (is16bit_) {
-            success = runner_.deviceBlankCheckW();
-        } else {
-            success = runner_.deviceBlankCheck();
-        }
+        success = runner_.deviceBlankCheck();
         // Error
         if (!success) {
             emit onProgress(current, total, true, false);
@@ -555,7 +530,7 @@ bool ParDevice::getIdDevice(TDeviceID &deviceId) {
     DEBUG << "Getting ID...";
     uint32_t current = 0;
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     // Getting ID
     deviceId = runner_.deviceGetId();
     if (!deviceId.manufacturer && !deviceId.device) {
@@ -571,7 +546,7 @@ bool ParDevice::protectDevice(bool protect) {
     DEBUG << (protect ? "Protecting..." : "Unprotecting...");
     uint32_t current = 0;
     uint32_t total = size_;
-    if (is16bit_) total /= 2;
+    if (flags_.is16bit) total /= 2;
     if (!runner_.deviceSetTwp(twp_) || !runner_.deviceSetTwc(twc_)) {
         emit onProgress(current, total, true, false);
         WARNING << "Protect/Unprotect error: setting tWP or tWC";

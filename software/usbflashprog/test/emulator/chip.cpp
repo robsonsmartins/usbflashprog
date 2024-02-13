@@ -94,14 +94,10 @@ void BaseChip::fillData(uint16_t data) {
 }
 
 void BaseChip::read(void) {
-    /* checks the params */
-    if (f_addr_bus >= f_memory_area.size()) {
-        f_data_bus = 0xFFFF;
-        writeToLog("Error in Read(addr=%06.6lX)", f_addr_bus);
-        return;
-    }
-    static uint32_t last_addr = -1;
-    uint16_t data = f_memory_area[f_addr_bus];
+    static uint32_t last_addr = static_cast<uint32_t>(-1);
+    uint16_t data = (f_addr_bus < f_memory_area.size())
+                        ? f_memory_area[f_addr_bus]
+                        : 0xFFFF;
     if (f_data_bus == data && f_addr_bus == last_addr) return;
     /* returns the data from memory area */
     f_data_bus = data;
@@ -113,8 +109,8 @@ void BaseChip::read(void) {
 void BaseChip::write(void) {
     /* checks the params */
     if (f_addr_bus >= f_memory_area.size()) {
-        writeToLog("Error in Write(addr=%06.6lX,data=%04.4X)", f_addr_bus,
-                   f_data_bus);
+        writeToLog("Write: address out of range(addr=%06.6lX,data=%04.4X)",
+                   f_addr_bus, f_data_bus);
         return;
     }
     /* writes the data to memory area */
@@ -170,11 +166,9 @@ void BaseParChip::setWE(bool state) {
 }
 
 void BaseParChip::setAddrBus(uint32_t addr) {
-    /* calculates the valid address (into memory area) */
-    uint32_t addr_new = (addr & (f_memory_area.size() - 1));
-    if (f_addr_bus == addr_new) return;
+    if (f_addr_bus == addr) return;
     /* set addr bus */
-    f_addr_bus = addr_new;
+    f_addr_bus = addr;
 }
 
 void BaseParChip::setDataBus(uint16_t data) {

@@ -22,6 +22,7 @@
 
 #include <vector>
 
+#include "devcmd.hpp"
 #include "modules/vgenerator.hpp"
 #include "modules/bus.hpp"
 
@@ -50,6 +51,8 @@ class Device {
         bool pgmCePin;
         /** @brief PGM positive. */
         bool pgmPositive;
+        /** @brief 16-bit mode. */
+        bool is16bit;
     } TDeviceFlags;
 
     /** @brief Device Settings type. */
@@ -64,19 +67,16 @@ class Device {
         uint8_t algo;
     } TDeviceSettings;
 
-    /** @brief Defines a command to send to a device. */
-    typedef struct TDeviceCommand {
-        /** @brief Address. */
-        uint32_t addr;
-        /** @brief Data value. */
-        uint16_t data;
-    } TDeviceCommand;
-
   public:
     /** @brief Constructor. */
     Device();
     /** @brief Starts the device. */
     void init();
+    /**
+     * @brief Get configured Device settings.
+     * @return Device settings.
+     */
+    TDeviceSettings getSettings() const;
 
     /**
      * @brief VDD Control.
@@ -278,97 +278,51 @@ class Device {
      */
     bool setupBus(uint8_t operation);
     /**
-     * @brief Device Read Byte at current address.
-     * @details Read a buffer (count bytes) at current address, and
+     * @brief Device Read Byte/Word at current address.
+     * @details Read a buffer (count bytes/words) at current address, and
      *   increment the address.
-     * @param count Number of bytes to read. Default is 64.
-     * @return Buffer with read value if success, empty otherwise.
+     * @param count Number of bytes/words to read. Default is 64.
+     * @return Buffer with read value if success (MSB first), empty otherwise.
      */
     TByteArray read(size_t count = 64);
     /**
-     * @brief Device Read Word at current address.
-     * @details Read a buffer (count words) at current address, and
+     * @brief Device Write Byte/Word at current address.
+     * @details Write a buffer (count bytes/words) at current address, and
      *   increment the address.
-     * @param count Number of words to read. Default is 64.
-     * @return Buffer with read value if success (MSB first), empty otherwise.
-     */
-    TByteArray readW(size_t count = 64);
-    /**
-     * @brief Device Write Byte at current address.
-     * @details Write a buffer (count bytes) at current address, and
-     *   increment the address.
-     * @param value Buffer to write.
-     * @param count Number of bytes to write. Default is 64.
+     * @param value Buffer to write (MSB first).
+     * @param count Number of bytes/words to write. Default is 64.
      * @param verify If true (default), verify after write.
      * @return True if success, false otherwise.
      */
     bool write(const TByteArray& value, size_t count = 64, bool verify = true);
     /**
-     * @brief Device Write Word at current address.
-     * @details Write a buffer (count words) at current address, and
+     * @brief Device Write Sector Byte/Word at current address.
+     * @details Write a sector (count bytes/words) at current address, and
      *   increment the address.
-     * @param value Buffer to write (MSB first).
-     * @param count Number of words to write. Default is 64.
-     * @param verify If true (default), verify after write.
-     * @return True if success, false otherwise.
-     */
-    bool writeW(const TByteArray& value, size_t count = 64, bool verify = true);
-    /**
-     * @brief Device Write Sector Byte at current address.
-     * @details Write a sector (count bytes) at current address, and
-     *   increment the address.
-     * @param sector Sector to write.
-     * @param count Sector size, in bytes. Default is 16.
+     * @param sector Sector to write (MSB first).
+     * @param count Sector size, in bytes/words. Default is 16.
      * @param verify If true (default), verify after write.
      * @return True if success, false otherwise.
      */
     bool writeSector(const TByteArray& sector, size_t count = 16,
                      bool verify = true);
     /**
-     * @brief Device Write Sector Word at current address.
-     * @details Write a sector (count words) at current address, and
+     * @brief Device Verify Byte/Word at current address.
+     * @details Verify a buffer (count bytes/words) at current address, and
      *   increment the address.
-     * @param sector Sector to write (MSB first).
-     * @param count Sector size, in words. Default is 16.
-     * @param verify If true (default), verify after write.
-     * @return True if success, false otherwise.
-     */
-    bool writeSectorW(const TByteArray& sector, size_t count = 16,
-                      bool verify = true);
-    /**
-     * @brief Device Verify Byte at current address.
-     * @details Verify a buffer (count bytes) at current address, and
-     *   increment the address.
-     * @param value Buffer to verify.
-     * @param count Number of bytes to verify. Default is 64.
+     * @param value Buffer to verify (MSB first).
+     * @param count Number of bytes/words to verify. Default is 64.
      * @return True if success, false otherwise.
      */
     bool verify(const TByteArray& value, size_t count = 64);
     /**
-     * @brief Device Verify Word at current address.
-     * @details Verify a buffer (count words) at current address, and
+     * @brief Device Blank Check Byte/Word at current address.
+     * @details Blank Check a buffer (count bytes/words) at current address, and
      *   increment the address.
-     * @param value Buffer to verify (MSB first).
-     * @param count Number of words to verify. Default is 64.
-     * @return True if success, false otherwise.
-     */
-    bool verifyW(const TByteArray& value, size_t count = 64);
-    /**
-     * @brief Device Blank Check Byte at current address.
-     * @details Blank Check a buffer (count bytes) at current address, and
-     *   increment the address.
-     * @param count Number of bytes to check. Default is 64.
+     * @param count Number of bytes/words to check. Default is 64.
      * @return True if success, false otherwise.
      */
     bool blankCheck(size_t count = 64);
-    /**
-     * @brief Device Blank Check Word at current address.
-     * @details Blank Check a buffer (count words) at current address, and
-     *   increment the address.
-     * @param count Number of words to check. Default is 64.
-     * @return True if success, false otherwise.
-     */
-    bool blankCheckW(size_t count = 64);
     /**
      * @brief Device Get ID.
      * @param id[out] Manufacturer ID (MSB); Device ID (LSB).
@@ -425,98 +379,103 @@ class Device {
      * @return True if sucessfull. False otherwise.
      */
     bool protect28C_(bool protect, bool is256);
+    /* @brief Runs the device disable SDP (Flash SST28SF algorithm). */
+    void disableSdpFlashSST28SF_();
 
   private:
     /*
      * @brief Device read one byte/word at current address.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
      * @return Data if success, 0xFF or 0xFFFF otherwise.
      */
-    uint16_t read_(bool is16bit = false);
+    uint16_t read_(bool sendCmd = true);
     /*
      * @brief Device write one byte/word at current address.
      * @param data Data to write.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @param disableVpp True to disable VPP feature.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
      * @return True if success, false otherwise.
      */
-    bool write_(uint16_t data, bool is16bit = false);
+    bool write_(uint16_t data, bool disableVpp = false, bool sendCmd = true);
     /*
      * @brief Device verify one byte/word at current address.
      * @param data Data to verify.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @param fromProg If true, indicates call after programming action.
+     *   False (default) indicates call to read and compare only.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
      * @return True if success, false otherwise.
      */
-    bool verify_(uint16_t data, bool is16bit = false);
+    bool verify_(uint16_t data, bool fromProg = false, bool sendCmd = true);
+    /*
+     * @brief Device blank check one byte/word at current address.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
+     * @return True if success, false otherwise.
+     */
+    bool blankCheck_(bool sendCmd = true);
     /*
      * @brief Write one byte/word into device, at specified address.
      * @param addr Address to write.
      * @param data Data value to write.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @param disableVpp True to disable VPP feature.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
      * @return True if sucessfull. False otherwise.
      */
-    bool writeAtAddr_(uint32_t addr, uint16_t data, bool is16bit = false);
+    bool writeAtAddr_(uint32_t addr, uint16_t data, bool disableVpp = false,
+                      bool sendCmd = true);
     /*
-     * @brief Device Write Sector at current address.
-     * @details Write a sector (count bytes/words) at current address, and
-     *   increment the address.
-     * @param sector Sector to write.
-     * @param count Sector size, in bytes/words.
-     * @param verify If true, verify after write.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @brief Read one byte/word from device, at specified address.
+     * @param addr Address to read.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
+     * @return Data if success, 0xFF or 0xFFFF otherwise.
+     */
+    uint16_t readAtAddr_(uint32_t addr, bool sendCmd = true);
+    /*
+     * @brief Sends a command to device.
+     * @param cmd Command sequence to send.
+     * @param size Size of the command sequence, in bytes.
+     * @param rdCmd True to send a Read Command (no VPP activation).
      * @return True if success, false otherwise.
      */
-    bool writeSector_(const TByteArray& sector, size_t count, bool verify,
-                      bool is16bit = false);
+    bool sendCmd_(const TDeviceCommand* cmd, size_t size, bool rdCmd = false);
     /*
-     * @brief Device Read Buffer at current address.
-     * @details Read a buffer (count bytes/words) at current address, and
-     *   increment the address.
-     * @param count Buffer size, in bytes/words.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
-     * @return Buffer with read value if success, empty otherwise.
-     */
-    TByteArray readBuffer_(size_t count, bool is16bit = false);
-    /*
-     * @brief Device Write Buffer at current address.
-     * @details Write a buffer (count bytes/words) at current address, and
-     *   increment the address.
-     * @param value Buffer to write.
-     * @param count Buffer size, in bytes/words.
-     * @param verify If true, verify after write.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @brief Check the status byte of the device.
      * @return True if success, false otherwise.
      */
-    bool writeBuffer_(const TByteArray& value, size_t count, bool verify,
-                      bool is16bit = false);
+    bool checkStatus_();
     /*
-     * @brief Device Verify Buffer at current address.
-     * @details Verify a buffer (count bytes/words) at current address, and
-     *   increment the address.
-     * @param value Buffer to verify.
-     * @param count Buffer size, in bytes/words.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @brief Sends command to Read device (if has in the algorithm).
      * @return True if success, false otherwise.
      */
-    bool verifyBuffer_(const TByteArray& value, size_t count,
-                       bool is16bit = false);
+    bool sendCmdRead_();
     /*
-     * @brief Device Blank Check Buffer at current address.
-     * @details Blank Check a buffer (count bytes/words) at current address, and
-     *   increment the address.
-     * @param count Buffer size, in bytes/words.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @brief Sends command to Write device (if has in the algorithm).
      * @return True if success, false otherwise.
      */
-    bool blankCheckBuffer_(size_t count, bool is16bit = false);
+    bool sendCmdWrite_();
+    /*
+     * @brief Sends command to Verify device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool sendCmdVerify_();
+    /*
+     * @brief Sends command to Erase device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool sendCmdErase_();
+    /*
+     * @brief Sends command to GetId device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool sendCmdGetId_();
+    /* @brief Disables Software Data Protection (SDP), if has in the
+     *        algorithm. */
+    void disableSDP_();
 };
 
 #endif  // MODULES_DEVICE_HPP_

@@ -3581,11 +3581,88 @@ Wr</string>
       <addaction name="menuEEPROM28"/>
       <addaction name="menuEEPROMAT28"/>
      </widget>
+     <widget class="QMenu" name="menuFlash">
+      <property name="title">
+       <string notr="true">Flash</string>
+      </property>
+      <widget class="QMenu" name="menuFlash28F">
+       <property name="title">
+        <string notr="true">Flash 28F</string>
+       </property>
+       <widget class="QMenu" name="menuFlash28Fgeneric">
+        <property name="title">
+         <string notr="true">Flash 28F</string>
+        </property>
+        <addaction name="actionFlash28F_8KB"/>
+        <addaction name="actionFlash28F_16KB"/>
+        <addaction name="actionFlash28F_32KB"/>
+        <addaction name="actionFlash28F_64KB"/>
+        <addaction name="actionFlash28F_128KB"/>
+        <addaction name="actionFlash28F_256KB"/>
+        <addaction name="actionFlash28F_512KB"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlashMX28F_128KB"/>
+        <addaction name="actionFlashMX28F_256KB"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlash28Fxxx"/>
+       </widget>
+       <widget class="QMenu" name="menuFlashAm28FA">
+        <property name="title">
+         <string notr="true">Flash Am28F(A)</string>
+        </property>
+        <addaction name="actionFlashAm28FA_32KB"/>
+        <addaction name="actionFlashAm28FA_64KB"/>
+        <addaction name="actionFlashAm28FA_128KB"/>
+        <addaction name="actionFlashAm28FA_256KB"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlashAm28FAxxx"/>
+       </widget>
+       <widget class="QMenu" name="menuFlashI28F">
+        <property name="title">
+         <string notr="true">Flash i28F</string>
+        </property>
+        <addaction name="actionFlashI28F_128KB"/>
+        <addaction name="actionFlashI28F_256KB"/>
+        <addaction name="actionFlashI28F_512KB"/>
+        <addaction name="actionFlashI28F_1MB"/>
+        <addaction name="actionFlashI28F_2MB"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlashLH28F_512KB"/>
+        <addaction name="actionFlashLH28F_1MB"/>
+        <addaction name="actionFlashLH28F_2MB"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlashI28F_512KB_16bit"/>
+        <addaction name="actionFlashI28F_1MB_16bit"/>
+        <addaction name="actionFlashI28F_2MB_16bit"/>
+        <addaction name="actionFlashI28F_4MB_16bit"/>
+        <addaction name="actionFlashI28F_8MB_16bit"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlashI28Fxxx"/>
+        <addaction name="actionFlashI28Fxxx_16bit"/>
+       </widget>
+       <widget class="QMenu" name="menuFlash_SST28xF">
+        <property name="title">
+         <string notr="true">Flash SST28xF</string>
+        </property>
+        <addaction name="actionFlashSST28SF_512KB"/>
+        <addaction name="actionFlashSST28VF_512KB"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlashLE28F_512KB"/>
+        <addaction name="separator"/>
+        <addaction name="actionFlashSST28xFxxx"/>
+       </widget>
+       <addaction name="menuFlash28Fgeneric"/>
+       <addaction name="menuFlash_SST28xF"/>
+       <addaction name="menuFlashAm28FA"/>
+       <addaction name="menuFlashI28F"/>
+      </widget>
+      <addaction name="menuFlash28F"/>
+     </widget>
      <addaction name="menuSRAM"/>
      <addaction name="menuEPROM"/>
      <addaction name="menuEPROMElectricalErasable"/>
      <addaction name="menuEEPROM"/>
-     <addaction name="actionFlash"/>
+     <addaction name="menuFlash"/>
      <addaction name="actionDummy"/>
      <addaction name="actionDummy16Bit"/>
     </widget>
@@ -3872,17 +3949,6 @@ Wr</string>
    </property>
    <property name="text">
     <string>SPI Memory</string>
-   </property>
-   <property name="shortcut">
-    <string notr="true"/>
-   </property>
-  </action>
-  <action name="actionFlash">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Flash</string>
    </property>
    <property name="shortcut">
     <string notr="true"/>
@@ -4755,6 +4821,380 @@ Wr</string>
    </property>
    <property name="shortcut">
     <string notr="true">Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionFlash28F_8KB">
+   <property name="text">
+    <string notr="true">Flash 28F64</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F64</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F64</string>
+   </property>
+  </action>
+  <action name="actionFlash28F_16KB">
+   <property name="text">
+    <string notr="true">Flash 28F128</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F128</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F128</string>
+   </property>
+  </action>
+  <action name="actionFlash28F_32KB">
+   <property name="text">
+    <string notr="true">Flash 28F256</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F256</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F256</string>
+   </property>
+  </action>
+  <action name="actionFlash28F_64KB">
+   <property name="text">
+    <string notr="true">Flash 28F512</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F512</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F512</string>
+   </property>
+  </action>
+  <action name="actionFlash28F_128KB">
+   <property name="text">
+    <string notr="true">Flash 28F010</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F010</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F010</string>
+   </property>
+  </action>
+  <action name="actionFlash28F_256KB">
+   <property name="text">
+    <string notr="true">Flash 28F020</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F020</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F020</string>
+   </property>
+  </action>
+  <action name="actionFlash28F_512KB">
+   <property name="text">
+    <string notr="true">Flash 28F040</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F040</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F040</string>
+   </property>
+  </action>
+  <action name="actionFlashAm28FA_32KB">
+   <property name="text">
+    <string notr="true">Flash Am28F256A</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash Am28F256A</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash Am28F256A</string>
+   </property>
+  </action>
+  <action name="actionFlashAm28FA_64KB">
+   <property name="text">
+    <string notr="true">Flash Am28F512A</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash Am28F512A</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash Am28F512A</string>
+   </property>
+  </action>
+  <action name="actionFlashAm28FA_128KB">
+   <property name="text">
+    <string notr="true">Flash Am28F010A</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash Am28F010A</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash Am28F010A</string>
+   </property>
+  </action>
+  <action name="actionFlashAm28FA_256KB">
+   <property name="text">
+    <string notr="true">Flash Am28F020A</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash Am28F020A</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash Am28F020A</string>
+   </property>
+  </action>
+  <action name="actionFlashMX28F_128KB">
+   <property name="text">
+    <string notr="true">Flash MX28F1000</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash MX28F1000</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash MX28F1000</string>
+   </property>
+  </action>
+  <action name="actionFlashMX28F_256KB">
+   <property name="text">
+    <string notr="true">Flash MX28F2000</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash MX28F2000</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash MX28F2000</string>
+   </property>
+  </action>
+  <action name="actionFlash28Fxxx">
+   <property name="text">
+    <string notr="true">Flash 28Fxxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28Fxxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28Fxxx</string>
+   </property>
+  </action>
+  <action name="actionFlashAm28FAxxx">
+   <property name="text">
+    <string notr="true">Flash Am28FxxxA</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash Am28FxxxA</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash Am28FxxxA</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_128KB">
+   <property name="text">
+    <string notr="true">Flash 28F001</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F001</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F001</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_256KB">
+   <property name="text">
+    <string notr="true">Flash 28F002/28F200</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F002/28F200</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F002/28F200</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_512KB">
+   <property name="text">
+    <string notr="true">Flash 28F004/28F400</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F004/28F400</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F004/28F400</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_1MB">
+   <property name="text">
+    <string notr="true">Flash 28F008/28F800</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F008/28F800</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F008/28F800</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_2MB">
+   <property name="text">
+    <string notr="true">Flash 28F016</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F016</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F016</string>
+   </property>
+  </action>
+  <action name="actionFlashLH28F_512KB">
+   <property name="text">
+    <string notr="true">Flash LH28F004/LH28F400</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash LH28F004/LH28F400</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash LH28F004/LH28F400</string>
+   </property>
+  </action>
+  <action name="actionFlashLH28F_1MB">
+   <property name="text">
+    <string notr="true">Flash LH28F008/LH28F800</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash LH28F008/LH28F800</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash LH28F008/LH28F800</string>
+   </property>
+  </action>
+  <action name="actionFlashLH28F_2MB">
+   <property name="text">
+    <string notr="true">Flash LH28F160</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash LH28F160</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash LH28F160</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_512KB_16bit">
+   <property name="text">
+    <string notr="true">Flash 28F400 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F400 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F400 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_1MB_16bit">
+   <property name="text">
+    <string notr="true">Flash 28F800 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F800 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F800 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_2MB_16bit">
+   <property name="text">
+    <string notr="true">Flash 28F160 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F160 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F160 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_4MB_16bit">
+   <property name="text">
+    <string notr="true">Flash 28F320 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F320 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F320 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionFlashI28F_8MB_16bit">
+   <property name="text">
+    <string notr="true">Flash 28F640 (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash 28F640 (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash 28F640 (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionFlashI28Fxxx">
+   <property name="text">
+    <string notr="true">Flash i28Fxxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash i28Fxxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash i28Fxxx</string>
+   </property>
+  </action>
+  <action name="actionFlashI28Fxxx_16bit">
+   <property name="text">
+    <string notr="true">Flash i28Fxxx (16 bit)</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash i28Fxxx (16 bit)</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash i28Fxxx (16 bit)</string>
+   </property>
+  </action>
+  <action name="actionFlashSST28SF_512KB">
+   <property name="text">
+    <string notr="true">Flash SST28SF040A</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash SST28SF040A</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash SST28SF040A</string>
+   </property>
+  </action>
+  <action name="actionFlashSST28VF_512KB">
+   <property name="text">
+    <string notr="true">Flash SST28VF040A</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash SST28VF040A</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash SST28VF040A</string>
+   </property>
+  </action>
+  <action name="actionFlashLE28F_512KB">
+   <property name="text">
+    <string notr="true">Flash LE28F4001</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash LE28F4001</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash LE28F4001</string>
+   </property>
+  </action>
+  <action name="actionFlashSST28xFxxx">
+   <property name="text">
+    <string notr="true">Flash SST28xFxxx</string>
+   </property>
+   <property name="iconText">
+    <string notr="true">Flash SST28xFxxx</string>
+   </property>
+   <property name="toolTip">
+    <string notr="true">Flash SST28xFxxx</string>
    </property>
   </action>
  </widget>

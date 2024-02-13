@@ -306,10 +306,6 @@
         <translation>EPROM (Apagamento Elétrico)</translation>
     </message>
     <message>
-        <source>Flash</source>
-        <translation>Memória Flash</translation>
-    </message>
-    <message>
         <source>Operation canceled.</source>
         <translation>Operação cancelada.</translation>
     </message>

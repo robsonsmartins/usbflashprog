@@ -352,9 +352,6 @@ class Device : public QObject {
                     bool success = true, bool canceled = false);
 
   protected:
-    /* @brief Indicates if is in 16 bit mode.
-         Otherwise is 8 bit mode. */
-    bool is16bit_;
     /* @brief Maximum attempts to program a byte. */
     int maxAttemptsProg_;
     /* @brief True if is about the canceling. */

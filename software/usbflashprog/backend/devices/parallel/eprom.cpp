@@ -53,7 +53,7 @@ EPROM::EPROM(QObject *parent) : ParDevice(parent) {
     flags_.progWithVpp = true;
     flags_.pgmPositive = true;
     flags_.pgmCePin = true;
-    algo_ = kCmdDeviceAlgorithmEPROM27;
+    algo_ = kCmdDeviceAlgorithmEPROM;
     DEBUG << info_.toString();
 }
 
@@ -131,7 +131,7 @@ EPROM27C::~EPROM27C() {}
 
 EPROM27C16Bit::EPROM27C16Bit(QObject *parent) : EPROM27C(parent) {
     info_.name = "EPROM 27C (16Bit)";
-    is16bit_ = true;
+    flags_.is16bit = true;
     DEBUG << info_.toString();
 }
 

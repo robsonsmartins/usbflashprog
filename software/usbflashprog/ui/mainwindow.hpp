@@ -208,6 +208,11 @@ class MainWindow : public QMainWindow {
      * @param label The triggered action text.
      */
     void createDeviceIfEEPROM_(const QString &label);
+    /*
+     * @brief Creates device if it's an Flash 28F (Prog).
+     * @param label The triggered action text.
+     */
+    void createDeviceIfFlash28F_(const QString &label);
     /* @brief Enables/Disables the controls (Prog). */
     void configureProgControls_();
     /* @brief Configures the device based in the ui values (Prog). */

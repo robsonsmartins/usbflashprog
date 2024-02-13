@@ -164,6 +164,8 @@ class Runner : public QObject {
         bool pgmCePin;
         /** @brief PGM positive. */
         bool pgmPositive;
+        /** @brief 16-bit mode. */
+        bool is16bit;
     } TDeviceFlags;
 
   public:
@@ -451,63 +453,34 @@ class Runner : public QObject {
      */
     bool deviceResetBus();
     /**
-     * @brief Runs the Device Read Buffer (Byte) opcode.
+     * @brief Runs the Device Read Buffer opcode.
      * @return Read buffer if success, empty otherwise.
      */
     QByteArray deviceRead();
     /**
-     * @brief Runs the Device Read Buffer (Word) opcode.
-     * @return Read buffer if success, empty otherwise.
-     */
-    QByteArray deviceReadW();
-    /**
-     * @brief Runs the Device Write Buffer (Byte) opcode.
+     * @brief Runs the Device Write Buffer opcode.
      * @param data Data to write.
      * @return True if success, false otherwise.
      */
     bool deviceWrite(const QByteArray& data);
     /**
-     * @brief Runs the Device Write Buffer (Word) opcode.
-     * @param data Data to write.
-     * @return True if success, false otherwise.
-     */
-    bool deviceWriteW(const QByteArray& data);
-    /**
-     * @brief Runs the Device Write Sector (Byte) opcode.
+     * @brief Runs the Device Write Sector opcode.
      * @param data Data to write.
      * @param sectorSize Size of sector to write, in bytes.
      * @return True if success, false otherwise.
      */
     bool deviceWriteSector(const QByteArray& data, uint16_t sectorSize);
     /**
-     * @brief Runs the Device Write Sector (Word) opcode.
-     * @param data Data to write.
-     * @param sectorSize Size of sector to write, in bytes.
-     * @return True if success, false otherwise.
-     */
-    bool deviceWriteSectorW(const QByteArray& data, uint16_t sectorSize);
-    /**
-     * @brief Runs the Device Verify Buffer (Byte) opcode.
+     * @brief Runs the Device Verify Buffer opcode.
      * @param data Data to verify.
      * @return True if success, false otherwise.
      */
     bool deviceVerify(const QByteArray& data);
     /**
-     * @brief Runs the Device Verify Buffer (Word) opcode.
-     * @param data Data to verify.
-     * @return True if success, false otherwise.
-     */
-    bool deviceVerifyW(const QByteArray& data);
-    /**
-     * @brief Runs the Device Blank Check Buffer (Byte) opcode.
+     * @brief Runs the Device Blank Check Buffer opcode.
      * @return True if success, false otherwise.
      */
     bool deviceBlankCheck();
-    /**
-     * @brief Runs the Device Blank Check Buffer (Word) opcode.
-     * @return True if success, false otherwise.
-     */
-    bool deviceBlankCheckW();
     /**
      * @brief Runs the Device Get ID opcode.
      * @return Device/Manufacturer ID if success, zero values otherwise.
@@ -554,6 +527,8 @@ class Runner : public QObject {
     qint64 aliveTick_;
     /* @brief Stores the last address. */
     uint32_t address_;
+    /* @brief Stores the device flags. */
+    TDeviceFlags flags_;
     /* @brief Buffer size, in bytes. */
     uint8_t bufferSize_;
     /* @brief Indicates if an error occurred in the last operation. */

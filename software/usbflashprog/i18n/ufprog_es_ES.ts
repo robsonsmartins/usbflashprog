@@ -306,10 +306,6 @@
         <translation>EPROM (Borrado Eléctrico)</translation>
     </message>
     <message>
-        <source>Flash</source>
-        <translation>Flash</translation>
-    </message>
-    <message>
         <source>Operation canceled.</source>
         <translation>Operación cancelada.</translation>
     </message>

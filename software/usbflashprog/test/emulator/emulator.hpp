@@ -26,6 +26,7 @@
 
 #include "mock/qserialport.hpp"
 #include "chip.hpp"
+#include "devcmd.hpp"
 
 #include "../../backend/opcodes.hpp"
 
@@ -66,6 +67,8 @@ class Emulator : public QObject {
         bool pgmCePin;
         /** @brief PGM positive. */
         bool pgmPositive;
+        /** @brief 16-bit mode. */
+        bool is16bit;
     } TDeviceFlags;
 
   public:
@@ -177,24 +180,14 @@ class Emulator : public QObject {
     bool deviceResetBus();
     /** @copydoc Runner::deviceRead() */
     QByteArray deviceRead();
-    /** @copydoc Runner::deviceReadW() */
-    QByteArray deviceReadW();
     /** @copydoc Runner::deviceWrite(const QByteArray&) */
     bool deviceWrite(const QByteArray& data);
-    /** @copydoc Runner::deviceWriteW(const QByteArray&) */
-    bool deviceWriteW(const QByteArray& data);
     /** @copydoc Runner::deviceWriteSector(const QByteArray&, uint16_t) */
     bool deviceWriteSector(const QByteArray& data, uint16_t sectorSize);
-    /** @copydoc Runner::deviceWriteSectorW(const QByteArray&, uint16_t) */
-    bool deviceWriteSectorW(const QByteArray& data, uint16_t sectorSize);
     /** @copydoc Runner::deviceVerify(const QByteArray&) */
     bool deviceVerify(const QByteArray& data);
-    /** @copydoc Runner::deviceVerifyW(const QByteArray&) */
-    bool deviceVerifyW(const QByteArray& data);
     /** @copydoc Runner::deviceBlankCheck() */
     bool deviceBlankCheck();
-    /** @copydoc Runner::deviceBlankCheckW() */
-    bool deviceBlankCheckW();
     /** @copydoc Runner::deviceGetId() */
     TDeviceID deviceGetId();
     /** @copydoc Runner::deviceErase() */
@@ -247,24 +240,82 @@ class Emulator : public QObject {
     /* @brief Stores device algorithm. */
     uint8_t algo_;
     /* @brief Device Read Algorithm.
-     * @param is16bit True if device is 16-bit. Device is 8-bit otherwise.
+     * @param fromProg If true, indicates call after programming action.
+     *   False (default) indicates call to read only.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
      * @return Read value or 0xFF/0xFFFF if error. */
-    uint16_t deviceRead_(bool is16bit);
+    uint16_t deviceRead_(bool fromProg = false, bool sendCmd = true);
     /* @brief Device Write Algorithm.
      * @param value Value to write.
-     * @param is16bit True if device is 16-bit. Device is 8-bit otherwise.
      * @param disableSkipFF True to disable skip 0xFF feature.
+     * @param disableVpp True to disable VPP feature.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
      * @return True if success, false otherwise. */
-    bool deviceWrite_(uint16_t value, bool is16bit, bool disableSkipFF = false);
+    bool deviceWrite_(uint16_t value, bool disableSkipFF = false,
+                      bool disableVpp = false, bool sendCmd = true);
     /*
      * @brief Write one byte/word into device, at specified address.
      * @param addr Address to write.
      * @param data Data value to write.
-     * @param is16bit If true, indicates a 16-bit device.
-     *   False (default) indicates a 8-bit device.
+     * @param disableVpp True to disable VPP feature.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
      * @return True if sucessfull. False otherwise.
      */
-    bool writeAtAddr_(uint32_t addr, uint16_t data, bool is16bit = false);
+    bool writeAtAddr_(uint32_t addr, uint16_t data, bool disableVpp = false,
+                      bool sendCmd = true);
+    /*
+     * @brief Read one byte/word from device, at specified address.
+     * @param addr Address to read.
+     * @param sendCmd If true (default), sends the command to device
+     *   before perform operation (if any in algotithm). False otherwise.
+     * @return Data if success, 0xFF or 0xFFFF otherwise.
+     */
+    uint16_t readAtAddr_(uint32_t addr, bool sendCmd = true);
+    /*
+     * @brief Sends a command to device.
+     * @param cmd Command sequence to send.
+     * @param size Size of the command sequence, in bytes.
+     * @param disableVpp True to disable VPP feature.
+     * @return True if success, false otherwise.
+     */
+    bool deviceSendCmd_(const TDeviceCommand* cmd, size_t size,
+                        bool disableVpp = false);
+    /*
+     * @brief Check the status byte of the device.
+     * @return True if success, false otherwise.
+     */
+    bool deviceCheckStatus_();
+    /*
+     * @brief Sends command to Read device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool deviceSendCmdRead_();
+    /*
+     * @brief Sends command to Write device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool deviceSendCmdWrite_();
+    /*
+     * @brief Sends command to Verify device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool deviceSendCmdVerify_();
+    /*
+     * @brief Sends command to Erase device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool deviceSendCmdErase_();
+    /*
+     * @brief Sends command to GetId device (if has in the algorithm).
+     * @return True if success, false otherwise.
+     */
+    bool deviceSendCmdGetId_();
+    /* @brief Disables Software Data Protection (SDP), if has in the
+     *        algorithm. */
+    void disableSDP_();
     /* @brief Device Setup Bus Algorithm.
      * @param operation Operation to perform.
      * @return True if success, false otherwise. */
@@ -288,6 +339,8 @@ class Emulator : public QObject {
      *   Otherwise, uses the 28C64 algorithm.
      * @return True if success, false otherwise. */
     bool deviceProtect28C_(bool protect, bool is256);
+    /* @brief Runs the device disable SDP (Flash SST28SF algorithm). */
+    void disableSdpFlashSST28SF_();
 };
 
 #endif  // TEST_EMULATOR_EMULATOR_HPP_

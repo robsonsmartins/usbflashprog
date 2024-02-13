@@ -342,20 +342,11 @@ void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
 void Runner::runDeviceReadCommand_(uint8_t opcode) {
     TByteArray response;
     uint8_t blockSize;
+    bool is16bit = device_.getSettings().flags.is16bit;
     switch (opcode) {
         case kCmdDeviceRead:
             blockSize = getParamAsByte_();
-            response = device_.read(blockSize);
-            if (response.size() == blockSize) {
-                response.insert(response.begin(), kCmdResponseOk);
-                serial_.putBuf(response.data(), response.size());
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdDeviceReadW:
-            blockSize = getParamAsByte_();
-            response = device_.readW(blockSize / 2);
+            response = device_.read(is16bit ? (blockSize / 2) : blockSize);
             if (response.size() == blockSize) {
                 response.insert(response.begin(), kCmdResponseOk);
                 serial_.putBuf(response.data(), response.size());
@@ -371,20 +362,13 @@ void Runner::runDeviceReadCommand_(uint8_t opcode) {
 void Runner::runDeviceWriteCommand_(uint8_t opcode) {
     TByteArray buffer;
     uint16_t sectorSize;
+    bool is16bit = device_.getSettings().flags.is16bit;
     switch (opcode) {
         case kCmdDeviceWrite:
             sectorSize = getParamAsByte_();
             buffer = readByte_(sectorSize);
-            if (device_.write(buffer, sectorSize, true)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdDeviceWriteW:
-            sectorSize = getParamAsByte_();
-            buffer = readByte_(sectorSize);
-            if (device_.writeW(buffer, sectorSize / 2, true)) {
+            if (device_.write(buffer, is16bit ? (sectorSize / 2) : sectorSize,
+                              true)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -393,16 +377,8 @@ void Runner::runDeviceWriteCommand_(uint8_t opcode) {
         case kCmdDeviceWriteSector:
             sectorSize = getParamAsWord_();
             buffer = readByte_(sectorSize);
-            if (device_.writeSector(buffer, sectorSize, true)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdDeviceWriteSectorW:
-            sectorSize = getParamAsWord_();
-            buffer = readByte_(sectorSize);
-            if (device_.writeSectorW(buffer, sectorSize / 2, true)) {
+            if (device_.writeSector(
+                    buffer, is16bit ? (sectorSize / 2) : sectorSize, true)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -416,20 +392,12 @@ void Runner::runDeviceWriteCommand_(uint8_t opcode) {
 void Runner::runDeviceVerifyCommand_(uint8_t opcode) {
     TByteArray buffer;
     uint8_t blockSize;
+    bool is16bit = device_.getSettings().flags.is16bit;
     switch (opcode) {
         case kCmdDeviceVerify:
             blockSize = getParamAsByte_();
             buffer = readByte_(blockSize);
-            if (device_.verify(buffer, blockSize)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdDeviceVerifyW:
-            blockSize = getParamAsByte_();
-            buffer = readByte_(blockSize);
-            if (device_.verifyW(buffer, blockSize / 2)) {
+            if (device_.verify(buffer, is16bit ? (blockSize / 2) : blockSize)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -437,15 +405,7 @@ void Runner::runDeviceVerifyCommand_(uint8_t opcode) {
             break;
         case kCmdDeviceBlankCheck:
             blockSize = getParamAsByte_();
-            if (device_.blankCheck(blockSize)) {
-                serial_.putChar(kCmdResponseOk);
-            } else {
-                serial_.putChar(kCmdResponseNok);
-            }
-            break;
-        case kCmdDeviceBlankCheckW:
-            blockSize = getParamAsByte_();
-            if (device_.blankCheckW(blockSize / 2)) {
+            if (device_.blankCheck(is16bit ? (blockSize / 2) : blockSize)) {
                 serial_.putChar(kCmdResponseOk);
             } else {
                 serial_.putChar(kCmdResponseNok);

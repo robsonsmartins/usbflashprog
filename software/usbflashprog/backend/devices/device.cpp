@@ -63,7 +63,7 @@ const QMap<uint8_t, QString> kManufacturerList = {
     {0x9D, "Xicor"                  },
     {0xAD, "Hyundai"                },
     {0xB0, "Sharp"                  },
-    {0xBF, "SST"                    },
+    {0xBF, "SST/Sanyo"              },
     {0xC8, "GigaDevice"             },
     {0xDA, "ASD/WinBond"            },
     {0xEF, "ISSI"                   }
@@ -141,7 +141,6 @@ QString TDeviceInformation::toString() const {
 
 Device::Device(QObject *parent)
     : QObject(parent),
-      is16bit_(false),
       maxAttemptsProg_(1),
       canceling_(false),
       size_(0),
@@ -176,12 +175,13 @@ Device::Device(QObject *parent)
     flags_.vppOePin = false;
     flags_.pgmCePin = false;
     flags_.pgmPositive = false;
+    flags_.is16bit = false;
 }
 
 Device::~Device() {}
 
 bool Device::is16Bit() const {
-    return is16bit_;
+    return flags_.is16bit;
 }
 
 void Device::setPort(const QString &path) {

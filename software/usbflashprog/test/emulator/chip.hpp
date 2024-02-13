@@ -30,9 +30,9 @@
     @brief   Chip Special Command Structure. */
 typedef struct TChipCommand {
     /** @brief Command Address. */
-    unsigned long addr;
+    uint32_t addr;
     /** @brief Command Data. */
-    unsigned char data;
+    uint8_t data;
 } TChipCommand;
 
 // ---------------------------------------------------------------------------
@@ -42,12 +42,24 @@ typedef struct TChipCommand {
 enum TChipCommandOperation {
     /** @brief Unknown Operation. */
     ChipOperationUnknown,
+    /** @brief Read Operation. */
+    ChipOperationRead,
+    /** @brief Write Operation. */
+    ChipOperationWrite,
+    /** @brief Verify Operation. */
+    ChipOperationVerify,
     /** @brief Erase Operation. */
     ChipOperationErase,
+    /** @brief Blank Check Operation. */
+    ChipOperationBlankCheck,
+    /** @brief GetID Operation. */
+    ChipOperationGetId,
     /** @brief Unprotect Operation. */
     ChipOperationUnprotect,
     /** @brief Protect Operation. */
-    ChipOperationProtect
+    ChipOperationProtect,
+    /** @brief Reset Operation. */
+    ChipOperationReset
 };
 
 // ---------------------------------------------------------------------------

@@ -261,7 +261,7 @@ bool Dummy::protect() {
 
 Dummy16Bit::Dummy16Bit(QObject *parent) : Dummy(parent) {
     info_.name = "Dummy (16 bits)";
-    is16bit_ = true;
+    flags_.is16bit = true;
     DEBUG << info_.toString();
 }
 

@@ -34,12 +34,14 @@ set(PROJECT_SOURCES
     ../backend/devices/parallel/sram.cpp
     ../backend/devices/parallel/eprom.cpp
     ../backend/devices/parallel/eeprom.cpp
+    ../backend/devices/parallel/flash28f.cpp
     mock/qserialport.hpp
     emulator/emulator.cpp
     emulator/chip.cpp
     emulator/sram.cpp
     emulator/eprom.cpp
     emulator/eeprom.cpp
+    emulator/flash28f.cpp
     backend/chip_test.cpp
     backend/runner_test.cpp
     backend/opcodes_test.cpp

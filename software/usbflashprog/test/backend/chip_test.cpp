@@ -26,11 +26,13 @@
 #include "emulator/sram.hpp"
 #include "emulator/eprom.hpp"
 #include "emulator/eeprom.hpp"
+#include "emulator/flash28f.hpp"
 
 #include "../../backend/devices/device.hpp"
 #include "../../backend/devices/parallel/sram.hpp"
 #include "../../backend/devices/parallel/eprom.hpp"
 #include "../../backend/devices/parallel/eeprom.hpp"
+#include "../../backend/devices/parallel/flash28f.hpp"
 
 // ---------------------------------------------------------------------------
 
@@ -140,6 +142,72 @@ TEST_F(ChipTest, eeprom28AT_test) {
     ChipEEPROM *emuChip = new ChipEEPROM();
     Emulator::setChip(emuChip);
     EEPROM28AT *device = new EEPROM28AT();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, flash28F_test) {
+    ChipFlash28F *emuChip = new ChipFlash28F();
+    Emulator::setChip(emuChip);
+    Flash28F *device = new Flash28F();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, flashSST28F_test) {
+    ChipFlashSST28F *emuChip = new ChipFlashSST28F();
+    Emulator::setChip(emuChip);
+    FlashSST28SF *device = new FlashSST28SF();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, flashAm28F_test) {
+    ChipFlash28F *emuChip = new ChipFlash28F();
+    Emulator::setChip(emuChip);
+    FlashAm28F *device = new FlashAm28F();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, flashI28F_test) {
+    ChipFlashIntel28F *emuChip = new ChipFlashIntel28F();
+    Emulator::setChip(emuChip);
+    FlashI28F *device = new FlashI28F();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, flashSharpI28F_test) {
+    ChipFlashIntel28F *emuChip = new ChipFlashIntel28F();
+    Emulator::setChip(emuChip);
+    FlashSharpI28F *device = new FlashSharpI28F();
+    runChipTests(emuChip, device, 0x000800);  //  2KB
+    runChipTests(emuChip, device, 0x002000);  //  8KB
+    runChipTests(emuChip, device, 0x008000);  // 32KB
+    delete emuChip;
+    delete device;
+}
+
+TEST_F(ChipTest, flashI28F16Bit_test) {
+    ChipFlashIntel28F *emuChip = new ChipFlashIntel28F();
+    Emulator::setChip(emuChip);
+    FlashI28F16Bit *device = new FlashI28F16Bit();
     runChipTests(emuChip, device, 0x000800);  //  2KB
     runChipTests(emuChip, device, 0x002000);  //  8KB
     runChipTests(emuChip, device, 0x008000);  // 32KB

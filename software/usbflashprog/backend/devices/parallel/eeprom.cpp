@@ -46,7 +46,7 @@ EEPROM::EEPROM(QObject *parent) : ParDevice(parent) {
     size_ = 2048;
     twp_ = 2;
     twc_ = 10000;
-    protectAlgo_ = kCmdDeviceAlgorithm28C64;
+    algo_ = kCmdDeviceAlgorithmEEPROM28C64;
     maxAttemptsProg_ = 3;
     DEBUG << info_.toString();
 }
@@ -55,8 +55,8 @@ EEPROM::~EEPROM() {}
 
 void EEPROM::setSize(uint32_t value) {
     ParDevice::setSize(value);
-    protectAlgo_ = (size_ <= 0x2000) ? kCmdDeviceAlgorithm28C64
-                                     : kCmdDeviceAlgorithm28C256;
+    algo_ = (size_ <= 0x2000) ? kCmdDeviceAlgorithmEEPROM28C64
+                              : kCmdDeviceAlgorithmEEPROM28C256;
     bool oldValue = info_.capability.hasUnprotect;
     bool newValue = (size_ >= 0x2000);  // >= 8KB
     if (oldValue != newValue) {

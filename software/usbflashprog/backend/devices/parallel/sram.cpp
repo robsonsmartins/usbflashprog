@@ -43,6 +43,7 @@ SRAM::SRAM(QObject *parent) : ParDevice(parent) {
     vddRd_ = 5.0f;
     vddWr_ = 5.0f;
     size_ = 2048;
+    algo_ = kCmdDeviceAlgorithmSRAM;
     DEBUG << info_.toString();
 }
 

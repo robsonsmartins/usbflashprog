@@ -60,9 +60,9 @@ enum kDeviceTypeEnum {
  */
 typedef struct TDeviceID {
     /** @brief Manufacturer code. */
-    uint8_t manufacturer;
+    uint16_t manufacturer;
     /** @brief Device code. */
-    uint8_t device;
+    uint16_t device;
     /**
      * @brief Returns the name of the device manufacturer.
      * @return Manufacturer name, or "Unknown".
@@ -367,9 +367,9 @@ class Device : public QObject {
     uint32_t twc_;
     /* @brief Device settings. */
 #ifndef TEST_BUILD
-    Runner::TDeviceSettings flags_;
+    Runner::TDeviceFlags flags_;
 #else
-    Emulator::TDeviceSettings flags_;
+    Emulator::TDeviceFlags flags_;
 #endif
     /* @brief VDD to Read, in volts. */
     float vddRd_;
@@ -385,10 +385,8 @@ class Device : public QObject {
     bool fastProg_;
     /* @brief Sector size, in bytes (0 = byte mode). */
     uint16_t sectorSize_;
-    /* @brief Erase algorithm. */
-    kCmdDeviceAlgorithmEnum eraseAlgo_;
-    /* @brief Protect/Unprotect algorithm. */
-    kCmdDeviceAlgorithmEnum protectAlgo_;
+    /* @brief Chip algorithm. */
+    kCmdDeviceAlgorithmEnum algo_;
     /* @brief Serial port path. */
     QString port_;
     /* @brief The Runner instance. */

@@ -53,6 +53,7 @@ EPROM::EPROM(QObject *parent) : ParDevice(parent) {
     flags_.progWithVpp = true;
     flags_.pgmPositive = true;
     flags_.pgmCePin = true;
+    algo_ = kCmdDeviceAlgorithmEPROM27;
     DEBUG << info_.toString();
 }
 
@@ -149,7 +150,6 @@ EPROM27E::EPROM27E(QObject *parent) : EPROM27C(parent) {
     vddWr_ = 5.0f;
     vpp_ = 12.0f;
     vee_ = 14.0f;
-    eraseAlgo_ = kCmdDeviceAlgorithm27E;
     DEBUG << info_.toString();
 }
 

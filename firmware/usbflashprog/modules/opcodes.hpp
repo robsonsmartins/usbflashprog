@@ -134,8 +134,10 @@ enum kCmdOpCodeEnum {
      */
     kCmdDeviceSetTwc = 0x82,
     /**
-     * @brief OPCODE / DEVICE : Opcode Device Set Flags.
-     * @details The parameter (one byte) represents the flags, and
+     * @brief OPCODE / DEVICE : Opcode Device Configure.
+     * @details The first parameter (one byte) represents the device
+     *   algorithm.<br/>
+     *   The second parameter (one byte) represents the flags, and
      *   follows the table:
      * <pre>
      * +----------------------+
@@ -147,8 +149,9 @@ enum kCmdOpCodeEnum {
      * | 4 | PGM positive     |
      * +----------------------+
      * </pre>
+     * @see kCmdDeviceAlgorithmEnum
      */
-    kCmdDeviceSetFlags = 0x83,
+    kCmdDeviceConfigure = 0x83,
     /**
      * @brief OPCODE / DEVICE : Opcode Device Setup Bus.
      * @details The parameter (one byte) represents the operation, and
@@ -244,61 +247,22 @@ enum kCmdOpCodeEnum {
     kCmdDeviceBlankCheckW = 0x8E,
     /**
      * @brief OPCODE / DEVICE : Opcode Device Get ID.
-     * @details The result (two bytes) represents Manufacturer/Device ID,
+     * @details The result (four bytes) represents Manufacturer/Device ID,
      *  following the table:
      * <pre>
-     * +-------------------------------+
-     * |Response      | Description    |
-     * | First (MSB)  | Manufacurer ID |
-     * | Second (LSB) | Device ID      |
-     * +-------------------------------+
+     * +--------------------------------------------+
+     * |Response                   | Description    |
+     * | First (MSB)/Second (LSB)  | Manufacurer ID |
+     * | Third (MSB)/Fourth (LSB)  | Device ID      |
+     * +--------------------------------------------+
      * </pre>
      */
     kCmdDeviceGetId = 0x8F,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Erase.
-     * @details The parameter (one byte) represents the algorithm, and
-     *   follows the table:
-     * <pre>
-     * +-------------------------------+
-     * |Algorithm| Description         |
-     * |  0x01   | EPROM 27E/W27/27SF  |
-     * |  0x02   | EEPROM 28C64        |
-     * |  0x03   | EEPROM 28C256/upper |
-     * +-------------------------------+
-     * </pre>
-     * @see kCmdDeviceAlgorithmEnum
-     */
+    /** @brief OPCODE / DEVICE : Opcode Device Erase. */
     kCmdDeviceErase = 0x90,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Unprotect.
-     * @details The parameter (one byte) represents the algorithm, and
-     *   follows the table:
-     * <pre>
-     * +-------------------------------+
-     * |Algorithm| Description         |
-     * |  0x01   | EPROM 27E/W27/27SF  |
-     * |  0x02   | EEPROM 28C64        |
-     * |  0x03   | EEPROM 28C256/upper |
-     * +-------------------------------+
-     * </pre>
-     * @see kCmdDeviceAlgorithmEnum
-     */
+    /** @brief OPCODE / DEVICE : Opcode Device Unprotect. */
     kCmdDeviceUnprotect = 0x91,
-    /**
-     * @brief OPCODE / DEVICE : Opcode Device Protect.
-     * @details The parameter (one byte) represents the algorithm, and
-     *   follows the table:
-     * <pre>
-     * +-------------------------------+
-     * |Algorithm| Description         |
-     * |  0x01   | EPROM 27E/W27/27SF  |
-     * |  0x02   | EEPROM 28C64        |
-     * |  0x03   | EEPROM 28C256/upper |
-     * +-------------------------------+
-     * </pre>
-     * @see kCmdDeviceAlgorithmEnum
-     */
+    /** @brief OPCODE / DEVICE : Opcode Device Protect. */
     kCmdDeviceProtect = 0x92
 };
 
@@ -323,18 +287,25 @@ enum kCmdDeviceOperationEnum {
 
 /**
  * @brief Enumeration of the Device Algorithms.
- * @see kCmdDeviceErase
- * @see kCmdDeviceUnprotect
+ * @see kCmdDeviceConfigure
  */
 enum kCmdDeviceAlgorithmEnum {
     /** @brief CMD / DEVICE : Defines an unknown algorithm. */
     kCmdDeviceAlgorithmUnknown = 0x00,
-    /** @brief CMD / DEVICE : Defines an algorithm EPROM 27E/SF/W27. */
-    kCmdDeviceAlgorithm27E = 0x01,
+    /** @brief CMD / DEVICE : Defines an algorithm SRAM. */
+    kCmdDeviceAlgorithmSRAM = 0x01,
+    /** @brief CMD / DEVICE : Defines an algorithm EPROM 27. */
+    kCmdDeviceAlgorithmEPROM27 = 0x02,
     /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C64. */
-    kCmdDeviceAlgorithm28C64 = 0x02,
+    kCmdDeviceAlgorithmEEPROM28C64 = 0x03,
     /** @brief CMD / DEVICE : Defines an algorithm EEPROM 28C256 or upper. */
-    kCmdDeviceAlgorithm28C256 = 0x03
+    kCmdDeviceAlgorithmEEPROM28C256 = 0x04,
+    /** @brief CMD / DEVICE : Defines an algorithm Flash 28F. */
+    kCmdDeviceAlgorithmFlash28F = 0x05,
+    /** @brief CMD / DEVICE : Defines an algorithm Flash Am28F. */
+    kCmdDeviceAlgorithmFlashAm28F = 0x06,
+    /** @brief CMD / DEVICE : Defines an algorithm Flash i28F. */
+    kCmdDeviceAlgorithmFlashI28F = 0x07
 };
 
 // ---------------------------------------------------------------------------
@@ -421,7 +392,7 @@ static const TCmdOpCodeMap kCmdOpCodes = {
 
     {kCmdDeviceSetTwp         , {kCmdDeviceSetTwp         , "Device Set Twp"         , 4, 0}},
     {kCmdDeviceSetTwc         , {kCmdDeviceSetTwc         , "Device Set Twc"         , 4, 0}},
-    {kCmdDeviceSetFlags       , {kCmdDeviceSetFlags       , "Device Set Flags"       , 1, 0}},
+    {kCmdDeviceConfigure      , {kCmdDeviceConfigure      , "Device Configure"       , 2, 0}},
     {kCmdDeviceSetupBus       , {kCmdDeviceSetupBus       , "Device Setup Bus"       , 1, 0}},
     {kCmdDeviceRead           , {kCmdDeviceRead           , "Device Read"            , 1, 0}},
     {kCmdDeviceReadW          , {kCmdDeviceReadW          , "Device ReadWord"        , 1, 0}},
@@ -433,10 +404,10 @@ static const TCmdOpCodeMap kCmdOpCodes = {
     {kCmdDeviceVerifyW        , {kCmdDeviceVerifyW        , "Device VerifyWord"      , 1, 0}},
     {kCmdDeviceBlankCheck     , {kCmdDeviceBlankCheck     , "Device BlankCheck"      , 1, 0}},
     {kCmdDeviceBlankCheckW    , {kCmdDeviceBlankCheckW    , "Device BlankCheckWord"  , 1, 0}},
-    {kCmdDeviceGetId          , {kCmdDeviceGetId          , "Device GetID"           , 0, 2}},
-    {kCmdDeviceErase          , {kCmdDeviceErase          , "Device Erase"           , 1, 0}},
-    {kCmdDeviceUnprotect      , {kCmdDeviceUnprotect      , "Device Unprotect"       , 1, 0}},
-    {kCmdDeviceProtect        , {kCmdDeviceProtect        , "Device Protect"         , 1, 0}}
+    {kCmdDeviceGetId          , {kCmdDeviceGetId          , "Device GetID"           , 0, 4}},
+    {kCmdDeviceErase          , {kCmdDeviceErase          , "Device Erase"           , 0, 0}},
+    {kCmdDeviceUnprotect      , {kCmdDeviceUnprotect      , "Device Unprotect"       , 0, 0}},
+    {kCmdDeviceProtect        , {kCmdDeviceProtect        , "Device Protect"         , 0, 0}}
 
 };
 // clang-format on

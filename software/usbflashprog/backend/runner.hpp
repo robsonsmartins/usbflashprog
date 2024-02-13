@@ -153,7 +153,7 @@ class Runner : public QObject {
 
   public:
     /** @brief Device settings. */
-    typedef struct TDeviceSettings {
+    typedef struct TDeviceFlags {
         /** @brief Skip Write 0xFF. */
         bool skipFF;
         /** @brief Prog with VPP on. */
@@ -164,7 +164,7 @@ class Runner : public QObject {
         bool pgmCePin;
         /** @brief PGM positive. */
         bool pgmPositive;
-    } TDeviceSettings;
+    } TDeviceFlags;
 
   public:
     /**
@@ -432,11 +432,13 @@ class Runner : public QObject {
      */
     bool deviceSetTwc(uint32_t value);
     /**
-     * @brief Runs the Device Set Flags opcode.
-     * @param value Value to set.
+     * @brief Runs the Device Configure opcode.
+     * @param algo Device Algorithm.
+     * @param flags Device Flags.
      * @return True if success, false otherwise.
      */
-    bool deviceSetFlags(const TDeviceSettings& value);
+    bool deviceConfigure(kCmdDeviceAlgorithmEnum algo,
+                         const TDeviceFlags& flags);
     /**
      * @brief Runs the Device Setup Bus opcode.
      * @param operation Operation to realize.
@@ -513,22 +515,19 @@ class Runner : public QObject {
     TDeviceID deviceGetId();
     /**
      * @brief Runs the Device Erase opcode.
-     * @param algo Device algorithm.
      * @return True if success, false otherwise.
      */
-    bool deviceErase(kCmdDeviceAlgorithmEnum algo);
+    bool deviceErase();
     /**
      * @brief Runs the Device Unprotect opcode.
-     * @param algo Device algorithm.
      * @return True if success, false otherwise.
      */
-    bool deviceUnprotect(kCmdDeviceAlgorithmEnum algo);
+    bool deviceUnprotect();
     /**
      * @brief Runs the Device Protect opcode.
-     * @param algo Device algorithm.
      * @return True if success, false otherwise.
      */
-    bool deviceProtect(kCmdDeviceAlgorithmEnum algo);
+    bool deviceProtect();
     /**
      * @brief Pauses the program execution for a specified time
      *   (microsecond precision).

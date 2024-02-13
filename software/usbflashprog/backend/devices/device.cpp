@@ -15,6 +15,7 @@
  */
 // ---------------------------------------------------------------------------
 
+#include <QMap>
 #include <QTextStream>
 #include <QLoggingCategory>
 
@@ -33,69 +34,51 @@ Q_LOGGING_CATEGORY(device, "device")
 
 // ---------------------------------------------------------------------------
 
+// clang-format off
+/* @brief List of Manufacturers. */
+const QMap<uint8_t, QString> kManufacturerList = {
+    {0x01, "AMD"                    },
+    {0x02, "Macronix"               },
+    {0x04, "Fujitsu"                },
+    {0x07, "Maxwell"                },
+    {0x0C, "Microchip"              },
+    {0x29, "Microchip"              },
+    {0x15, "NXP/Philips/Signetics"  },
+    {0x1C, "EON"                    },
+    {0x1E, "Atmel"                  },
+    {0x1F, "Atmel"                  },
+    {0x20, "ST"                     },
+    {0x31, "Catalyst"               },
+    {0x37, "AMIC"                   },
+    {0x38, "Winbond"                },
+    {0x40, "SyncMOS"                },
+    {0x42, "SyncMOS"                },
+    {0x49, "Toshiba"                },
+    {0x4A, "Macronix/MXIC"          },
+    {0xC2, "Macronix/MXIC"          },
+    {0x50, "Spansion"               },
+    {0x7F, "Adesto"                 },
+    {0x89, "Intel/Texas Instruments"},
+    {0x8F, "Fairchild/National"     },
+    {0x9D, "Xicor"                  },
+    {0xAD, "Hyundai"                },
+    {0xB0, "Sharp"                  },
+    {0xBF, "SST"                    },
+    {0xC8, "GigaDevice"             },
+    {0xDA, "ASD/WinBond"            },
+    {0xEF, "ISSI"                   }
+};
+// clang-format on
+
+// ---------------------------------------------------------------------------
+
 TDeviceID::TDeviceID() : manufacturer(0), device(0) {}
 
 QString TDeviceID::getManufacturerName(void) const {
-    switch (manufacturer) {
-        case 0x01:
-            return "AMD";
-        case 0x02:  // to validate
-            return "Macronix";
-        case 0x04:
-            return "Fujitsu";
-        case 0x07:
-            return "Maxwell";
-        case 0x0C:  // to validate
-        case 0x29:
-            return "Microchip";
-        case 0x15:
-            return "NXP/Philips/Signetics";
-        case 0x1C:  // to validate
-            return "EON";
-        case 0x1E:
-        case 0x1F:
-            return "Atmel";
-        case 0x20:
-            return "ST";
-        case 0x31:
-            return "Catalyst";
-        case 0x37:  // to validate
-            return "AMIC";
-        case 0x38:  // to validate
-            return "Winbond";
-        case 0x40:
-        case 0x42:
-            return "SyncMOS";
-        case 0x49:  // to validate
-            return "Toshiba";
-        case 0x4A:  // to validate
-        case 0xC2:
-            return "Macronix/MXIC";
-        case 0x50:  // to validate
-            return "Spansion";
-        case 0x7F:  // to validate
-            return "Adesto";
-        case 0x89:
-            return "Intel/Texas Instruments";
-        case 0x8F:
-            return "Fairchild/National";
-        case 0x9D:  // to validate
-            return "Xicor";
-        case 0xAD:
-            return "Hyundai";
-        case 0xB0:
-            return "Sharp";
-        case 0xBF:
-            return "SST";
-        case 0xC8:  // to validate
-            return "GigaDevice";
-        case 0xDA:
-            return "ASD/WinBond";
-        case 0xEF:  // to validate
-            return "ISSI";
-        default:
-            return Device::tr("Unknown");
+    if (!kManufacturerList.contains(manufacturer)) {
+        return Device::tr("Unknown");
     }
+    return kManufacturerList.value(manufacturer);
 }
 
 // ---------------------------------------------------------------------------
@@ -171,8 +154,7 @@ Device::Device(QObject *parent)
       skipFF_(false),
       fastProg_(false),
       sectorSize_(0),
-      eraseAlgo_(kCmdDeviceAlgorithmUnknown),
-      protectAlgo_(kCmdDeviceAlgorithmUnknown),
+      algo_(kCmdDeviceAlgorithmUnknown),
       runner_(this) {
     info_.deviceType = kDeviceParallelMemory;
     info_.name = "Device";

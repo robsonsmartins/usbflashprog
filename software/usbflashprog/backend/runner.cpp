@@ -518,17 +518,19 @@ uint16_t Runner::dataGetW() {
     return cmd.responseAsWord();
 }
 
-bool Runner::deviceSetFlags(const TDeviceSettings& value) {
+bool Runner::deviceConfigure(kCmdDeviceAlgorithmEnum algo,
+                             const TDeviceFlags& flags) {
     TRunnerCommand cmd;
-    uint8_t flags = 0;
+    uint16_t value = algo;
+    value <<= 8;
     // clang-format off
-    if (value.skipFF     ) flags |= 0x01;
-    if (value.progWithVpp) flags |= 0x02;
-    if (value.vppOePin   ) flags |= 0x04;
-    if (value.pgmCePin   ) flags |= 0x08;
-    if (value.pgmPositive) flags |= 0x10;
+    if (flags.skipFF     ) value |= 0x01;
+    if (flags.progWithVpp) value |= 0x02;
+    if (flags.vppOePin   ) value |= 0x04;
+    if (flags.pgmCePin   ) value |= 0x08;
+    if (flags.pgmPositive) value |= 0x10;
     // clang-format on
-    cmd.setByte(kCmdDeviceSetFlags, flags);
+    cmd.setWord(kCmdDeviceConfigure, value);
     if (!sendCommand_(cmd)) return false;
     return true;
 }
@@ -800,29 +802,29 @@ TDeviceID Runner::deviceGetId() {
     TRunnerCommand cmd;
     cmd.set(kCmdDeviceGetId);
     if (!sendCommand_(cmd)) return result;
-    uint16_t rawCode = cmd.responseAsWord();
-    result.manufacturer = (rawCode & 0xFF00) >> 8;
-    result.device = (rawCode & 0xFF);
+    uint32_t rawCode = cmd.responseAsDWord();
+    result.manufacturer = (rawCode & 0xFFFF0000) >> 16;
+    result.device = (rawCode & 0xFFFF);
     return result;
 }
 
-bool Runner::deviceErase(kCmdDeviceAlgorithmEnum algo) {
+bool Runner::deviceErase() {
     TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceErase, algo);
+    cmd.set(kCmdDeviceErase);
     if (!sendCommand_(cmd)) return false;
     return true;
 }
 
-bool Runner::deviceUnprotect(kCmdDeviceAlgorithmEnum algo) {
+bool Runner::deviceUnprotect() {
     TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceUnprotect, algo);
+    cmd.set(kCmdDeviceUnprotect);
     if (!sendCommand_(cmd)) return false;
     return true;
 }
 
-bool Runner::deviceProtect(kCmdDeviceAlgorithmEnum algo) {
+bool Runner::deviceProtect() {
     TRunnerCommand cmd;
-    cmd.setByte(kCmdDeviceProtect, algo);
+    cmd.set(kCmdDeviceProtect);
     if (!sendCommand_(cmd)) return false;
     return true;
 }

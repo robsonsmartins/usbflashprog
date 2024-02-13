@@ -467,7 +467,7 @@ bool ParDevice::eraseDevice() {
     for (int attempt = 1; attempt <= maxAttemptsProg_; attempt++) {
         // Erase entire chip
         bool success = true;
-        if (!runner_.deviceErase(eraseAlgo_)) success = false;
+        if (!runner_.deviceErase()) success = false;
         for (current = 0; current < total; current += count) {
             if (current % 0x100 == 0) emit onProgress(current, total);
             runner_.processEvents();
@@ -580,9 +580,9 @@ bool ParDevice::protectDevice(bool protect) {
     // Protect/Unprotect
     bool success;
     if (protect) {
-        success = runner_.deviceProtect(protectAlgo_);
+        success = runner_.deviceProtect();
     } else {
-        success = runner_.deviceUnprotect(protectAlgo_);
+        success = runner_.deviceUnprotect();
     }
     if (!success) {
         emit onProgress(current, total, true, false);
@@ -600,9 +600,9 @@ bool ParDevice::initDevice(kDeviceOperation operation) {
         WARNING << "Error opening serial port";
         return false;
     }
-    if (!runner_.deviceSetFlags(flags_)) {
+    if (!runner_.deviceConfigure(algo_, flags_)) {
         emit onProgress(0, size_, true, false);
-        WARNING << "Error setting device flags";
+        WARNING << "Error configuring device";
         return false;
     }
     bool success = true;

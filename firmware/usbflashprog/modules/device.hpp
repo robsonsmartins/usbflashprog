@@ -60,6 +60,8 @@ class Device {
         uint32_t twc;
         /** @brief Device flags. */
         TDeviceFlags flags;
+        /** @brief Device algorithm. */
+        uint8_t algo;
     } TDeviceSettings;
 
     /** @brief Defines a command to send to a device. */
@@ -265,10 +267,10 @@ class Device {
      */
     void setTwc(uint32_t value);
     /**
-     * @brief Device Set Flags.
+     * @brief Device Configure.
      * @param value Value to set.
      */
-    void setFlags(uint8_t value);
+    void configure(uint16_t value);
     /**
      * @brief Device Setup Bus.
      * @param operation Operation to realize.
@@ -372,25 +374,22 @@ class Device {
      * @param id[out] Manufacturer ID (MSB); Device ID (LSB).
      * @return True if success, false otherwise.
      */
-    bool getId(uint16_t& id);
+    bool getId(uint32_t& id);
     /**
      * @brief Device Erase.
-     * @param algo Device algorithm.
      * @return True if success, false otherwise.
      */
-    bool erase(uint8_t algo);
+    bool erase();
     /**
      * @brief Device Unprotect.
-     * @param algo Device algorithm.
      * @return True if success, false otherwise.
      */
-    bool unprotect(uint8_t algo);
+    bool unprotect();
     /**
      * @brief Device Protect.
-     * @param algo Device algorithm.
      * @return True if success, false otherwise.
      */
-    bool protect(uint8_t algo);
+    bool protect();
 
   private:
     /* @brief VGenerator instance. */

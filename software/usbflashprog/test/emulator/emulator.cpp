@@ -79,7 +79,8 @@ Emulator::Emulator(QObject* parent)
       address_(0),
       bufferSize_(1),
       twp_(1),
-      twc_(1) {
+      twc_(1),
+      algo_(kCmdDeviceAlgorithmUnknown) {
     // clang-format off
     flags_.skipFF      = false;
     flags_.progWithVpp = false;
@@ -478,14 +479,16 @@ bool Emulator::deviceSetTwc(uint32_t value) {
     return true;
 }
 
-bool Emulator::deviceSetFlags(const TDeviceSettings& value) {
+bool Emulator::deviceConfigure(kCmdDeviceAlgorithmEnum algo,
+                               const TDeviceFlags& flags) {
     // clang-format off
-    flags_.skipFF      = value.skipFF     ;
-    flags_.progWithVpp = value.progWithVpp;
-    flags_.vppOePin    = value.vppOePin   ;
-    flags_.pgmCePin    = value.pgmCePin   ;
-    flags_.pgmPositive = value.pgmPositive;
+    flags_.skipFF      = flags.skipFF     ;
+    flags_.progWithVpp = flags.progWithVpp;
+    flags_.vppOePin    = flags.vppOePin   ;
+    flags_.pgmCePin    = flags.pgmCePin   ;
+    flags_.pgmPositive = flags.pgmPositive;
     // clang-format on
+    algo_ = algo;
     return true;
 }
 
@@ -770,28 +773,28 @@ TDeviceID Emulator::deviceGetId() {
     return result;
 }
 
-bool Emulator::deviceErase(kCmdDeviceAlgorithmEnum algo) {
+bool Emulator::deviceErase() {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    return deviceErase_(algo);
+    return deviceErase_();
 }
 
-bool Emulator::deviceUnprotect(kCmdDeviceAlgorithmEnum algo) {
+bool Emulator::deviceUnprotect() {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    return deviceProtect_(algo, false);
+    return deviceProtect_(false);
 }
 
-bool Emulator::deviceProtect(kCmdDeviceAlgorithmEnum algo) {
+bool Emulator::deviceProtect() {
     if (error_ || !running_ || !globalEmuParChip_) {
         error_ = true;
         return false;
     }
-    return deviceProtect_(algo, true);
+    return deviceProtect_(true);
 }
 
 void Emulator::usDelay(uint64_t value) {
@@ -979,7 +982,7 @@ TDeviceID Emulator::deviceGetId_() {
     TDeviceID result;
     // Setup bus
     if (!deviceSetupBus_(kCmdDeviceOperationGetId)) return result;
-    uint8_t manufacturer, device;
+    uint16_t manufacturer, device;
     // Get manufacturer data (byte)
     manufacturer = dataGet();
     // Increment Address (0x01)
@@ -996,9 +999,9 @@ TDeviceID Emulator::deviceGetId_() {
     return result;
 }
 
-bool Emulator::deviceErase_(kCmdDeviceAlgorithmEnum algo) {
-    switch (algo) {
-        case kCmdDeviceAlgorithm27E:
+bool Emulator::deviceErase_() {
+    switch (algo_) {
+        case kCmdDeviceAlgorithmEPROM27:
             return deviceErase27E_();
         default:
             return false;
@@ -1035,11 +1038,11 @@ bool Emulator::deviceErase27E_() {
     return !error_;
 }
 
-bool Emulator::deviceProtect_(kCmdDeviceAlgorithmEnum algo, bool protect) {
-    switch (algo) {
-        case kCmdDeviceAlgorithm28C64:
+bool Emulator::deviceProtect_(bool protect) {
+    switch (algo_) {
+        case kCmdDeviceAlgorithmEEPROM28C64:
             return deviceProtect28C_(protect, false);
-        case kCmdDeviceAlgorithm28C256:
+        case kCmdDeviceAlgorithmEEPROM28C256:
             return deviceProtect28C_(protect, true);
         default:
             return false;

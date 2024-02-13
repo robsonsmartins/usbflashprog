@@ -277,19 +277,22 @@ void Device::setTwc(uint32_t value) {
     settings_.twc = value;
 }
 
-void Device::setFlags(uint8_t value) {
+void Device::configure(uint16_t value) {
+    uint8_t flags = value & 0xFF;
+    uint8_t algo = (value & 0xFF00) >> 8;
     // 0 = Skip Write 0xFF
     // 1 = Prog with VPP on
     // 2 = VPP/~OE Pin
     // 3 = ~PGM/~CE Pin
     // 4 = PGM positive
     // clang-format off
-    settings_.flags.skipFF      = (value & 0x01) != 0;
-    settings_.flags.progWithVpp = (value & 0x02) != 0;
-    settings_.flags.vppOePin    = (value & 0x04) != 0;
-    settings_.flags.pgmCePin    = (value & 0x08) != 0;
-    settings_.flags.pgmPositive = (value & 0x10) != 0;
+    settings_.flags.skipFF      = (flags & 0x01) != 0;
+    settings_.flags.progWithVpp = (flags & 0x02) != 0;
+    settings_.flags.vppOePin    = (flags & 0x04) != 0;
+    settings_.flags.pgmCePin    = (flags & 0x08) != 0;
+    settings_.flags.pgmPositive = (flags & 0x10) != 0;
     // clang-format on
+    settings_.algo = algo;
 }
 
 bool Device::setupBus(uint8_t operation) {
@@ -423,11 +426,11 @@ bool Device::blankCheckW(size_t count) {
     return blankCheckBuffer_(count, true);
 }
 
-bool Device::getId(uint16_t& id) {
+bool Device::getId(uint32_t& id) {
     // Setup bus
     if (!setupBus(kCmdDeviceOperationGetId)) return false;
     bool success = true;
-    uint8_t manufacturer, device;
+    uint16_t manufacturer, device;
     // Get manufacturer data (byte)
     manufacturer = dataGet();
     // Increment Address (0x01)
@@ -449,10 +452,10 @@ bool Device::getId(uint16_t& id) {
     // Check if equals data at address 0x200/0x201
     if ((rd1 & 0xFF) == manufacturer && (rd2 & 0xFF) == device) success = false;
 
-    // If not success, return 0x00
+    // return ID
     if (success) {
         id = manufacturer;
-        id <<= 8;
+        id <<= 16;
         id |= device;
     }
     // Reset Bus
@@ -460,10 +463,10 @@ bool Device::getId(uint16_t& id) {
     return success;
 }
 
-bool Device::erase(uint8_t algo) {
+bool Device::erase() {
     // Erase entire chip
-    switch (algo) {
-        case kCmdDeviceAlgorithm27E:
+    switch (settings_.algo) {
+        case kCmdDeviceAlgorithmEPROM27:
             return erase27E_();
         default:
             return false;
@@ -500,24 +503,24 @@ bool Device::erase27E_() {
     return success;
 }
 
-bool Device::unprotect(uint8_t algo) {
+bool Device::unprotect() {
     // Unprotect entire chip
-    switch (algo) {
-        case kCmdDeviceAlgorithm28C64:
+    switch (settings_.algo) {
+        case kCmdDeviceAlgorithmEEPROM28C64:
             return protect28C_(false, false);
-        case kCmdDeviceAlgorithm28C256:
+        case kCmdDeviceAlgorithmEEPROM28C256:
             return protect28C_(false, true);
         default:
             return false;
     }
 }
 
-bool Device::protect(uint8_t algo) {
+bool Device::protect() {
     // Protect entire chip
-    switch (algo) {
-        case kCmdDeviceAlgorithm28C64:
+    switch (settings_.algo) {
+        case kCmdDeviceAlgorithmEEPROM28C64:
             return protect28C_(true, false);
-        case kCmdDeviceAlgorithm28C256:
+        case kCmdDeviceAlgorithmEEPROM28C256:
             return protect28C_(true, true);
         default:
             return false;

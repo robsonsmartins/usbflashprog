@@ -558,14 +558,14 @@ void MainWindow::on_actionGetID_triggered(bool checked) {
             this, progress_->windowTitle(),
             tr("Manufacturer: 0x%1 (%2)")
                     .arg(QString("%1")
-                             .arg(deviceId.manufacturer, 2, 16, QChar('0'))
+                             .arg(deviceId.manufacturer, 4, 16, QChar('0'))
                              .toUpper())
                     .arg(deviceId.getManufacturerName())
                     .leftJustified(kDialogLabelMinLength) +
                 "\n" +
                 tr("Device : 0x%1")
                     .arg(QString("%1")
-                             .arg(deviceId.device, 2, 16, QChar('0'))
+                             .arg(deviceId.device, 4, 16, QChar('0'))
                              .toUpper())
                     .leftJustified(kDialogLabelMinLength));
     } else {

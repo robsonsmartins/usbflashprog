@@ -55,7 +55,7 @@ class Emulator : public QObject {
 
   public:
     /** @brief Device settings. */
-    typedef struct TDeviceSettings {
+    typedef struct TDeviceFlags {
         /** @brief Skip Write 0xFF. */
         bool skipFF;
         /** @brief Prog with VPP on. */
@@ -66,7 +66,7 @@ class Emulator : public QObject {
         bool pgmCePin;
         /** @brief PGM positive. */
         bool pgmPositive;
-    } TDeviceSettings;
+    } TDeviceFlags;
 
   public:
     /** @copydoc Runner::Runner(QObject*) */
@@ -167,8 +167,10 @@ class Emulator : public QObject {
     bool deviceSetTwp(uint32_t value);
     /** @copydoc Runner::deviceSetTwc(uint32_t) */
     bool deviceSetTwc(uint32_t value);
-    /** @copydoc Runner::deviceSetFlags(const TDeviceSettings&) */
-    bool deviceSetFlags(const TDeviceSettings& value);
+    /** @copydoc
+     * Runner::deviceConfigure(kCmdDeviceAlgorithmEnum, const TDeviceFlags&) */
+    bool deviceConfigure(kCmdDeviceAlgorithmEnum algo,
+                         const TDeviceFlags& flags);
     /** @copydoc Runner::deviceSetupBus(kCmdDeviceOperationEnum) */
     bool deviceSetupBus(kCmdDeviceOperationEnum operation);
     /** @copydoc Runner::deviceResetBus() */
@@ -195,12 +197,12 @@ class Emulator : public QObject {
     bool deviceBlankCheckW();
     /** @copydoc Runner::deviceGetId() */
     TDeviceID deviceGetId();
-    /** @copydoc Runner::deviceErase(kCmdDeviceAlgorithmEnum) */
-    bool deviceErase(kCmdDeviceAlgorithmEnum algo);
-    /** @copydoc Runner::deviceUnprotect(kCmdDeviceAlgorithmEnum) */
-    bool deviceUnprotect(kCmdDeviceAlgorithmEnum algo);
-    /** @copydoc Runner::deviceProtect(kCmdDeviceAlgorithmEnum) */
-    bool deviceProtect(kCmdDeviceAlgorithmEnum algo);
+    /** @copydoc Runner::deviceErase() */
+    bool deviceErase();
+    /** @copydoc Runner::deviceUnprotect() */
+    bool deviceUnprotect();
+    /** @copydoc Runner::deviceProtect() */
+    bool deviceProtect();
     /** @copydoc Runner::usDelay(uint64_t) */
     static void usDelay(uint64_t value);
     /** @copydoc Runner::msDelay(uint32_t) */
@@ -241,7 +243,9 @@ class Emulator : public QObject {
     /* @brief tWC Setting (microseconds). */
     uint32_t twc_;
     /* @brief Stores device settings. */
-    TDeviceSettings flags_;
+    TDeviceFlags flags_;
+    /* @brief Stores device algorithm. */
+    uint8_t algo_;
     /* @brief Device Read Algorithm.
      * @param is16bit True if device is 16-bit. Device is 8-bit otherwise.
      * @return Read value or 0xFF/0xFFFF if error. */
@@ -269,14 +273,12 @@ class Emulator : public QObject {
      * @return Device/Manufacturer ID if success, zero values otherwise. */
     TDeviceID deviceGetId_();
     /* @brief Device Erase Algorithm.
-     * @param algo Device algorithm.
      * @return True if success, false otherwise. */
-    bool deviceErase_(kCmdDeviceAlgorithmEnum algo);
+    bool deviceErase_();
     /* @brief Runs the Device Protect/Unprotect algorithm.
-     * @param algo Device algorithm.
      * @param protect Protect/Unprotect device.
      * @return True if success, false otherwise. */
-    bool deviceProtect_(kCmdDeviceAlgorithmEnum algo, bool protect);
+    bool deviceProtect_(bool protect);
     /* @brief Device Erase 27E Algorithm.
      * @return True if success, false otherwise. */
     bool deviceErase27E_();

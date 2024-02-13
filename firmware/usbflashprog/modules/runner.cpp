@@ -322,9 +322,9 @@ void Runner::runDeviceSettingsCommand_(uint8_t opcode) {
             serial_.putChar(kCmdResponseOk, true);
             device_.setTwc(getParamAsDWord_());
             break;
-        case kCmdDeviceSetFlags:
+        case kCmdDeviceConfigure:
             serial_.putChar(kCmdResponseOk, true);
-            device_.setFlags(getParamAsByte_());
+            device_.configure(getParamAsWord_());
             break;
         case kCmdDeviceSetupBus:
             if (device_.setupBus(getParamAsByte_())) {
@@ -457,15 +457,15 @@ void Runner::runDeviceVerifyCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceGetIdCommand_(uint8_t opcode) {
-    uint16_t w;
+    uint32_t dw;
     TByteArray response;
     switch (opcode) {
         case kCmdDeviceGetId:
-            if (device_.getId(w)) {
+            if (device_.getId(dw)) {
                 // response
-                response.resize(3);
+                response.resize(5);
                 response[0] = kCmdResponseOk;
-                createParamsFromWord_(&response, w);
+                createParamsFromDWord_(&response, dw);
                 serial_.putBuf(response.data(), response.size());
             } else {
                 serial_.putChar(kCmdResponseNok);
@@ -477,11 +477,9 @@ void Runner::runDeviceGetIdCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceEraseCommand_(uint8_t opcode) {
-    uint8_t algo;
     switch (opcode) {
         case kCmdDeviceErase:
-            algo = getParamAsByte_();
-            if (device_.erase(algo)) {
+            if (device_.erase()) {
                 // response
                 serial_.putChar(kCmdResponseOk);
             } else {
@@ -494,11 +492,9 @@ void Runner::runDeviceEraseCommand_(uint8_t opcode) {
 }
 
 void Runner::runDeviceProtectCommand_(uint8_t opcode) {
-    uint8_t algo;
     switch (opcode) {
         case kCmdDeviceProtect:
-            algo = getParamAsByte_();
-            if (device_.protect(algo)) {
+            if (device_.protect()) {
                 // response
                 serial_.putChar(kCmdResponseOk);
             } else {
@@ -506,8 +502,7 @@ void Runner::runDeviceProtectCommand_(uint8_t opcode) {
             }
             break;
         case kCmdDeviceUnprotect:
-            algo = getParamAsByte_();
-            if (device_.unprotect(algo)) {
+            if (device_.unprotect()) {
                 // response
                 serial_.putChar(kCmdResponseOk);
             } else {

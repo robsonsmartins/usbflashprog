@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['windowpos_865',['windowPos',['../a01080.html#adeb89e885cdffdc00f266750bf7315d8',1,'TApplicationSettings']]],
-  ['windowsize_866',['windowSize',['../a01080.html#a15b9031b351388c19979fe94e9f2b59e',1,'TApplicationSettings']]]
+  ['twc_931',['twc',['../a01109.html#a23c4345bb80d772dcce96500ab606efa',1,'TProgrammerSettings']]],
+  ['twp_932',['twp',['../a01109.html#aad5d79cb23f0fa7aa738d4443b18598f',1,'TProgrammerSettings']]]
 ];

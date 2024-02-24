@@ -1,7 +1,0 @@
-<map id="EEPROM" name="EEPROM">
-<area shape="rect" id="node1" title="Parallel EEPROM Class." alt="" coords="97,857,225,979"/>
-<area shape="rect" id="node4" href="$a01000.html" title="Parallel EEPROM AT28Cxxx Class." alt="" coords="5,1027,151,1133"/>
-<area shape="rect" id="node5" href="$a00996.html" title="Parallel EEPROM 28Cxxx Class." alt="" coords="175,1034,314,1126"/>
-<area shape="rect" id="node2" href="$a01024.html" title="Parallel Device Base Class." alt="" coords="62,424,259,809"/>
-<area shape="rect" id="node3" href="$a00980.html" title="Device Base Class." alt="" coords="79,5,242,376"/>
-</map>

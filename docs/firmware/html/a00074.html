@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: device.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: devcmd.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,44 +66,833 @@ $(function() {
 </div>
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
-<div class="title">device.cpp File Reference<div class="ingroups"><a class="el" href="a00200.html">Firmware Project</a></div></div>  </div>
+<div class="title">devcmd.hpp File Reference<div class="ingroups"><a class="el" href="a00203.html">Firmware Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the <a class="el" href="a01086.html" title="Device Operation Class.">Device</a> operation Class.  
+<p>Header of the <a class="el" href="a01093.html" title="Device Operation Class.">Device</a> Commands.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="a00077.html">modules/device.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00020.html">config.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00083.html">modules/opcodes.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for device.cpp:</div>
+Include dependency graph for devcmd.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00075.png" border="0" usemap="#adevice_8cpp" alt=""/></div>
-<map name="adevice_8cpp" id="adevice_8cpp">
-<area shape="rect" title="Implementation of the Device operation Class." alt="" coords="767,5,859,32"/>
-<area shape="rect" href="a00077.html" title="Header of the Device Operation Class." alt="" coords="358,80,511,107"/>
-<area shape="rect" href="a00020.html" title="Configuration of UsbFlashProg." alt="" coords="769,80,858,107"/>
-<area shape="rect" href="a00083.html" title="Opcodes for communication." alt="" coords="882,80,1046,107"/>
-<area shape="rect" title=" " alt="" coords="70,304,133,331"/>
-<area shape="rect" href="a00095.html" title="Header of the Voltage Generator Classes." alt="" coords="445,155,625,181"/>
-<area shape="rect" href="a00071.html" title="Header of the Bus Classes." alt="" coords="209,155,343,181"/>
-<area shape="rect" href="a00038.html" title="Header of the Pico GPIO Class." alt="" coords="282,304,385,331"/>
-<area shape="rect" href="a00044.html" title="Header of the Pico Multi Core Class." alt="" coords="487,229,623,256"/>
-<area shape="rect" href="a00017.html" title="Header of the DC To DC Converter Class." alt="" coords="647,229,785,256"/>
-<area shape="rect" href="a00011.html" title="Header of the 74HC595 Class." alt="" coords="255,229,411,256"/>
-<area shape="rect" title=" " alt="" coords="503,379,545,405"/>
-<area shape="rect" href="a00026.html" title="Header of the Pico ADC Class." alt="" coords="667,304,765,331"/>
-<area shape="rect" href="a00050.html" title="Header of the Pico PWM Class." alt="" coords="804,304,911,331"/>
-<area shape="rect" href="a00005.html" title="Header of the 74HC165 Class." alt="" coords="23,229,179,256"/>
-<area shape="rect" title=" " alt="" coords="927,155,985,181"/>
-<area shape="rect" title=" " alt="" coords="1009,155,1060,181"/>
+<div class="center"><img src="a00075.png" border="0" usemap="#adevcmd_8hpp" alt=""/></div>
+<map name="adevcmd_8hpp" id="adevcmd_8hpp">
+<area shape="rect" title="Header of the Device Commands." alt="" coords="5,5,108,32"/>
+<area shape="rect" title=" " alt="" coords="23,80,90,107"/>
 </map>
 </div>
-</div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the <a class="el" href="a01086.html" title="Device Operation Class.">Device</a> operation Class. </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a01089.html">TDeviceCommand</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a command to send to a device.  <a href="a01089.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:ab76b8d60a47ede0c3aea82560def3dce"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#ab76b8d60a47ede0c3aea82560def3dce">ANY_ADDRESS</a>&#160;&#160;&#160;static_cast&lt;uint32_t&gt;(-1)</td></tr>
+<tr class="memdesc:ab76b8d60a47ede0c3aea82560def3dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents Any Address.  <a href="a00074.html#ab76b8d60a47ede0c3aea82560def3dce">More...</a><br /></td></tr>
+<tr class="separator:ab76b8d60a47ede0c3aea82560def3dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a882e9e2c5419840df7493468acaa4a22"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a882e9e2c5419840df7493468acaa4a22">ANY_DATA</a>&#160;&#160;&#160;static_cast&lt;uint16_t&gt;(-1)</td></tr>
+<tr class="memdesc:a882e9e2c5419840df7493468acaa4a22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents Any Data.  <a href="a00074.html#a882e9e2c5419840df7493468acaa4a22">More...</a><br /></td></tr>
+<tr class="separator:a882e9e2c5419840df7493468acaa4a22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ad528ecd5701800862673a7e052a8a108"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#ad528ecd5701800862673a7e052a8a108">kDeviceErasePulseDuration27E</a> = 100</td></tr>
+<tr class="memdesc:ad528ecd5701800862673a7e052a8a108"><td class="mdescLeft">&#160;</td><td class="mdescRight">EPROM 27E: Erase pulse duration, in milliseconds.  <a href="a00074.html#ad528ecd5701800862673a7e052a8a108">More...</a><br /></td></tr>
+<tr class="separator:ad528ecd5701800862673a7e052a8a108"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d35476b13df382941f50a49e91aa4fe"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a3d35476b13df382941f50a49e91aa4fe">kDeviceCmdUnprotect28C64</a> []</td></tr>
+<tr class="memdesc:a3d35476b13df382941f50a49e91aa4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Unprotect an EEPROM 28C/X28 64 (ST/Atmel/Xicor).  <a href="a00074.html#a3d35476b13df382941f50a49e91aa4fe">More...</a><br /></td></tr>
+<tr class="separator:a3d35476b13df382941f50a49e91aa4fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b1ac82abdae84a44ab2ab6e8e6645c7"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a1b1ac82abdae84a44ab2ab6e8e6645c7">kDeviceCmdProtect28C64</a> []</td></tr>
+<tr class="memdesc:a1b1ac82abdae84a44ab2ab6e8e6645c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Protect an EEPROM 28C/X28 64 (ST/Atmel/Xicor).  <a href="a00074.html#a1b1ac82abdae84a44ab2ab6e8e6645c7">More...</a><br /></td></tr>
+<tr class="separator:a1b1ac82abdae84a44ab2ab6e8e6645c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fab8a9b0c6d97c7db67e3839e101670"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a2fab8a9b0c6d97c7db67e3839e101670">kDeviceCmdUnprotect28C256</a> []</td></tr>
+<tr class="memdesc:a2fab8a9b0c6d97c7db67e3839e101670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Unprotect an EEPROM 28C/X28 256 (ST/Atmel/Xicor).  <a href="a00074.html#a2fab8a9b0c6d97c7db67e3839e101670">More...</a><br /></td></tr>
+<tr class="separator:a2fab8a9b0c6d97c7db67e3839e101670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76c6c29ba18c944ced967961c521dd60"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a76c6c29ba18c944ced967961c521dd60">kDeviceCmdProtect28C256</a> []</td></tr>
+<tr class="memdesc:a76c6c29ba18c944ced967961c521dd60"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Protect an EEPROM 28C/X28 256 (ST/Atmel/Xicor).  <a href="a00074.html#a76c6c29ba18c944ced967961c521dd60">More...</a><br /></td></tr>
+<tr class="separator:a76c6c29ba18c944ced967961c521dd60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e2c5ab70e30922c9cb1be01f5bac62"><td class="memItemLeft" align="right" valign="top">constexpr uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a09e2c5ab70e30922c9cb1be01f5bac62">kDeviceEraseDelay28F</a> = 10</td></tr>
+<tr class="memdesc:a09e2c5ab70e30922c9cb1be01f5bac62"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F: Erase delay, in milliseconds.  <a href="a00074.html#a09e2c5ab70e30922c9cb1be01f5bac62">More...</a><br /></td></tr>
+<tr class="separator:a09e2c5ab70e30922c9cb1be01f5bac62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a019bcf2841cfe32e3d49231a61fe544a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a019bcf2841cfe32e3d49231a61fe544a">kDeviceCmdRead28F</a> []</td></tr>
+<tr class="memdesc:a019bcf2841cfe32e3d49231a61fe544a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Read a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F.  <a href="a00074.html#a019bcf2841cfe32e3d49231a61fe544a">More...</a><br /></td></tr>
+<tr class="separator:a019bcf2841cfe32e3d49231a61fe544a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d2c19bd1936c81564294f1dbdaa39ff"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a3d2c19bd1936c81564294f1dbdaa39ff">kDeviceCmdWrite28F</a> []</td></tr>
+<tr class="memdesc:a3d2c19bd1936c81564294f1dbdaa39ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F.  <a href="a00074.html#a3d2c19bd1936c81564294f1dbdaa39ff">More...</a><br /></td></tr>
+<tr class="separator:a3d2c19bd1936c81564294f1dbdaa39ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af79036bd815a9941b7e2816e4e7c3426"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#af79036bd815a9941b7e2816e4e7c3426">kDeviceCmdVerify28F</a> []</td></tr>
+<tr class="memdesc:af79036bd815a9941b7e2816e4e7c3426"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Verify a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F.  <a href="a00074.html#af79036bd815a9941b7e2816e4e7c3426">More...</a><br /></td></tr>
+<tr class="separator:af79036bd815a9941b7e2816e4e7c3426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616e13f50b30bef832a1d186443d448b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a616e13f50b30bef832a1d186443d448b">kDeviceCmdErase28F</a> []</td></tr>
+<tr class="memdesc:a616e13f50b30bef832a1d186443d448b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F.  <a href="a00074.html#a616e13f50b30bef832a1d186443d448b">More...</a><br /></td></tr>
+<tr class="separator:a616e13f50b30bef832a1d186443d448b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3583e1162ecdadf0f5b79361e1cbd96f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a3583e1162ecdadf0f5b79361e1cbd96f">kDeviceCmdGetId28F</a> []</td></tr>
+<tr class="memdesc:a3583e1162ecdadf0f5b79361e1cbd96f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F.  <a href="a00074.html#a3583e1162ecdadf0f5b79361e1cbd96f">More...</a><br /></td></tr>
+<tr class="separator:a3583e1162ecdadf0f5b79361e1cbd96f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22fdef668f0ce2df0fff4b8c4c23c6c0"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a22fdef668f0ce2df0fff4b8c4c23c6c0">kDeviceCmdWriteSST28SF</a> []</td></tr>
+<tr class="memdesc:a22fdef668f0ce2df0fff4b8c4c23c6c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF.  <a href="a00074.html#a22fdef668f0ce2df0fff4b8c4c23c6c0">More...</a><br /></td></tr>
+<tr class="separator:a22fdef668f0ce2df0fff4b8c4c23c6c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fb81ca8ef09c22521608139012e899b"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a8fb81ca8ef09c22521608139012e899b">kDeviceCmdEraseSST28SF</a> []</td></tr>
+<tr class="memdesc:a8fb81ca8ef09c22521608139012e899b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF.  <a href="a00074.html#a8fb81ca8ef09c22521608139012e899b">More...</a><br /></td></tr>
+<tr class="separator:a8fb81ca8ef09c22521608139012e899b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8927c753517b8b5557c5ac23bfa2d1db"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a8927c753517b8b5557c5ac23bfa2d1db">kDeviceCmdGetIdSST28SF</a> []</td></tr>
+<tr class="memdesc:a8927c753517b8b5557c5ac23bfa2d1db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF.  <a href="a00074.html#a8927c753517b8b5557c5ac23bfa2d1db">More...</a><br /></td></tr>
+<tr class="separator:a8927c753517b8b5557c5ac23bfa2d1db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e77355c5cfd74260d3d42923bfa0003"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a5e77355c5cfd74260d3d42923bfa0003">kDeviceCmdDisableSdpSST28SF</a> []</td></tr>
+<tr class="memdesc:a5e77355c5cfd74260d3d42923bfa0003"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to disable SDP in a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF.  <a href="a00074.html#a5e77355c5cfd74260d3d42923bfa0003">More...</a><br /></td></tr>
+<tr class="separator:a5e77355c5cfd74260d3d42923bfa0003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbde04d883ec0b96c5caade947c6c23f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#acbde04d883ec0b96c5caade947c6c23f">kDeviceCmdEnableSdpSST28SF</a> []</td></tr>
+<tr class="memdesc:acbde04d883ec0b96c5caade947c6c23f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to enable SDP in a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF.  <a href="a00074.html#acbde04d883ec0b96c5caade947c6c23f">More...</a><br /></td></tr>
+<tr class="separator:acbde04d883ec0b96c5caade947c6c23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c7471b610b5b744333d4fb89f470f70"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a6c7471b610b5b744333d4fb89f470f70">kDeviceCmdReadAm28F</a> []</td></tr>
+<tr class="memdesc:a6c7471b610b5b744333d4fb89f470f70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Read a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A).  <a href="a00074.html#a6c7471b610b5b744333d4fb89f470f70">More...</a><br /></td></tr>
+<tr class="separator:a6c7471b610b5b744333d4fb89f470f70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0eceebfe5df67048c7f340a3a09396"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#ada0eceebfe5df67048c7f340a3a09396">kDeviceCmdWriteAm28F</a> []</td></tr>
+<tr class="memdesc:ada0eceebfe5df67048c7f340a3a09396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A).  <a href="a00074.html#ada0eceebfe5df67048c7f340a3a09396">More...</a><br /></td></tr>
+<tr class="separator:ada0eceebfe5df67048c7f340a3a09396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0041495761eef270deef53dc377349a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#aa0041495761eef270deef53dc377349a">kDeviceCmdEraseAm28F</a> []</td></tr>
+<tr class="memdesc:aa0041495761eef270deef53dc377349a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A).  <a href="a00074.html#aa0041495761eef270deef53dc377349a">More...</a><br /></td></tr>
+<tr class="separator:aa0041495761eef270deef53dc377349a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7442ba9933d3e05774efb41a4ffdf05f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a7442ba9933d3e05774efb41a4ffdf05f">kDeviceCmdGetIdAm28F</a> []</td></tr>
+<tr class="memdesc:a7442ba9933d3e05774efb41a4ffdf05f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A).  <a href="a00074.html#a7442ba9933d3e05774efb41a4ffdf05f">More...</a><br /></td></tr>
+<tr class="separator:a7442ba9933d3e05774efb41a4ffdf05f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e83b9de10d36925af8cde39b55a83a"><td class="memItemLeft" align="right" valign="top">constexpr uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a64e83b9de10d36925af8cde39b55a83a">kDeviceStatusByteOkI28F</a> = 0x80</td></tr>
+<tr class="memdesc:a64e83b9de10d36925af8cde39b55a83a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F Status Byte OK.  <a href="a00074.html#a64e83b9de10d36925af8cde39b55a83a">More...</a><br /></td></tr>
+<tr class="separator:a64e83b9de10d36925af8cde39b55a83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d884ca23d3301fa67ad4f6efbf47557"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a0d884ca23d3301fa67ad4f6efbf47557">kDeviceCmdReadI28F</a> []</td></tr>
+<tr class="memdesc:a0d884ca23d3301fa67ad4f6efbf47557"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Read a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F.  <a href="a00074.html#a0d884ca23d3301fa67ad4f6efbf47557">More...</a><br /></td></tr>
+<tr class="separator:a0d884ca23d3301fa67ad4f6efbf47557"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1675e4f37c30f64e49c8506256841a8e"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a1675e4f37c30f64e49c8506256841a8e">kDeviceCmdWriteI28F</a> []</td></tr>
+<tr class="memdesc:a1675e4f37c30f64e49c8506256841a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F.  <a href="a00074.html#a1675e4f37c30f64e49c8506256841a8e">More...</a><br /></td></tr>
+<tr class="separator:a1675e4f37c30f64e49c8506256841a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57a52cc11a1fed7bc7344b5afb03f2d4"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a57a52cc11a1fed7bc7344b5afb03f2d4">kDeviceCmdEraseI28F</a> []</td></tr>
+<tr class="memdesc:a57a52cc11a1fed7bc7344b5afb03f2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F.  <a href="a00074.html#a57a52cc11a1fed7bc7344b5afb03f2d4">More...</a><br /></td></tr>
+<tr class="separator:a57a52cc11a1fed7bc7344b5afb03f2d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e62a1fc4f966b0764fe35e3d33fea24"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="a01089.html">TDeviceCommand</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00074.html#a8e62a1fc4f966b0764fe35e3d33fea24">kDeviceCmdGetIdI28F</a> []</td></tr>
+<tr class="memdesc:a8e62a1fc4f966b0764fe35e3d33fea24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F.  <a href="a00074.html#a8e62a1fc4f966b0764fe35e3d33fea24">More...</a><br /></td></tr>
+<tr class="separator:a8e62a1fc4f966b0764fe35e3d33fea24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Header of the <a class="el" href="a01093.html" title="Device Operation Class.">Device</a> Commands. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="ab76b8d60a47ede0c3aea82560def3dce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab76b8d60a47ede0c3aea82560def3dce">&#9670;&nbsp;</a></span>ANY_ADDRESS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANY_ADDRESS&#160;&#160;&#160;static_cast&lt;uint32_t&gt;(-1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Represents Any Address. </p>
+
+</div>
+</div>
+<a id="a882e9e2c5419840df7493468acaa4a22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a882e9e2c5419840df7493468acaa4a22">&#9670;&nbsp;</a></span>ANY_DATA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ANY_DATA&#160;&#160;&#160;static_cast&lt;uint16_t&gt;(-1)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Represents Any Data. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="ad528ecd5701800862673a7e052a8a108"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad528ecd5701800862673a7e052a8a108">&#9670;&nbsp;</a></span>kDeviceErasePulseDuration27E</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint32_t kDeviceErasePulseDuration27E = 100</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>EPROM 27E: Erase pulse duration, in milliseconds. </p>
+
+</div>
+</div>
+<a id="a3d35476b13df382941f50a49e91aa4fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d35476b13df382941f50a49e91aa4fe">&#9670;&nbsp;</a></span>kDeviceCmdUnprotect28C64</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdUnprotect28C64[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0x80},</div>
+<div class="line">    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0x20}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Unprotect an EEPROM 28C/X28 64 (ST/Atmel/Xicor). </p>
+
+</div>
+</div>
+<a id="a1b1ac82abdae84a44ab2ab6e8e6645c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b1ac82abdae84a44ab2ab6e8e6645c7">&#9670;&nbsp;</a></span>kDeviceCmdProtect28C64</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdProtect28C64[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x1555, 0xAA}, {0x0AAA, 0x55}, {0x1555, 0xA0}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Protect an EEPROM 28C/X28 64 (ST/Atmel/Xicor). </p>
+
+</div>
+</div>
+<a id="a2fab8a9b0c6d97c7db67e3839e101670"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fab8a9b0c6d97c7db67e3839e101670">&#9670;&nbsp;</a></span>kDeviceCmdUnprotect28C256</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdUnprotect28C256[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0x80},</div>
+<div class="line">    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0x20}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Unprotect an EEPROM 28C/X28 256 (ST/Atmel/Xicor). </p>
+
+</div>
+</div>
+<a id="a76c6c29ba18c944ced967961c521dd60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76c6c29ba18c944ced967961c521dd60">&#9670;&nbsp;</a></span>kDeviceCmdProtect28C256</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdProtect28C256[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x5555, 0xAA}, {0x2AAA, 0x55}, {0x5555, 0xA0}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Protect an EEPROM 28C/X28 256 (ST/Atmel/Xicor). </p>
+
+</div>
+</div>
+<a id="a09e2c5ab70e30922c9cb1be01f5bac62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09e2c5ab70e30922c9cb1be01f5bac62">&#9670;&nbsp;</a></span>kDeviceEraseDelay28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint32_t kDeviceEraseDelay28F = 10</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F: Erase delay, in milliseconds. </p>
+
+</div>
+</div>
+<a id="a019bcf2841cfe32e3d49231a61fe544a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a019bcf2841cfe32e3d49231a61fe544a">&#9670;&nbsp;</a></span>kDeviceCmdRead28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdRead28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x00}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Read a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F. </p>
+
+</div>
+</div>
+<a id="a3d2c19bd1936c81564294f1dbdaa39ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d2c19bd1936c81564294f1dbdaa39ff">&#9670;&nbsp;</a></span>kDeviceCmdWrite28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdWrite28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x40}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F. </p>
+
+</div>
+</div>
+<a id="af79036bd815a9941b7e2816e4e7c3426"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af79036bd815a9941b7e2816e4e7c3426">&#9670;&nbsp;</a></span>kDeviceCmdVerify28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdVerify28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0xC0}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Verify a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F. </p>
+
+</div>
+</div>
+<a id="a616e13f50b30bef832a1d186443d448b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a616e13f50b30bef832a1d186443d448b">&#9670;&nbsp;</a></span>kDeviceCmdErase28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdErase28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x20}, { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x20}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F. </p>
+
+</div>
+</div>
+<a id="a3583e1162ecdadf0f5b79361e1cbd96f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3583e1162ecdadf0f5b79361e1cbd96f">&#9670;&nbsp;</a></span>kDeviceCmdGetId28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdGetId28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x00, 0x90}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> 28F. </p>
+
+</div>
+</div>
+<a id="a22fdef668f0ce2df0fff4b8c4c23c6c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22fdef668f0ce2df0fff4b8c4c23c6c0">&#9670;&nbsp;</a></span>kDeviceCmdWriteSST28SF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdWriteSST28SF[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x10}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF. </p>
+
+</div>
+</div>
+<a id="a8fb81ca8ef09c22521608139012e899b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fb81ca8ef09c22521608139012e899b">&#9670;&nbsp;</a></span>kDeviceCmdEraseSST28SF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdEraseSST28SF[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x20}, { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0xD0}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF. </p>
+<p>This erase a sector (256), not the full device. </p>
+
+</div>
+</div>
+<a id="a8927c753517b8b5557c5ac23bfa2d1db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8927c753517b8b5557c5ac23bfa2d1db">&#9670;&nbsp;</a></span>kDeviceCmdGetIdSST28SF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdGetIdSST28SF[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x00, 0x90}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF. </p>
+
+</div>
+</div>
+<a id="a5e77355c5cfd74260d3d42923bfa0003"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e77355c5cfd74260d3d42923bfa0003">&#9670;&nbsp;</a></span>kDeviceCmdDisableSdpSST28SF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdDisableSdpSST28SF[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { 0x1823,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x1820,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x1822,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) },</div>
+<div class="line">    { 0x0418,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x041B,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, </div>
+<div class="line">    { 0x0419,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x041A,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to disable SDP in a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF. </p>
+
+</div>
+</div>
+<a id="acbde04d883ec0b96c5caade947c6c23f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbde04d883ec0b96c5caade947c6c23f">&#9670;&nbsp;</a></span>kDeviceCmdEnableSdpSST28SF</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdEnableSdpSST28SF[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { 0x1823,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x1820,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x1822,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) },</div>
+<div class="line">    { 0x0418,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x041B,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, </div>
+<div class="line">    { 0x0419,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }, {0x040A,  <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(-1) }</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to enable SDP in a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> SST28SF. </p>
+
+</div>
+</div>
+<a id="a6c7471b610b5b744333d4fb89f470f70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7471b610b5b744333d4fb89f470f70">&#9670;&nbsp;</a></span>kDeviceCmdReadAm28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdReadAm28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x00}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Read a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A). </p>
+
+</div>
+</div>
+<a id="ada0eceebfe5df67048c7f340a3a09396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada0eceebfe5df67048c7f340a3a09396">&#9670;&nbsp;</a></span>kDeviceCmdWriteAm28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdWriteAm28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x10}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A). </p>
+
+</div>
+</div>
+<a id="aa0041495761eef270deef53dc377349a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0041495761eef270deef53dc377349a">&#9670;&nbsp;</a></span>kDeviceCmdEraseAm28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdEraseAm28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x30}, { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x30}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A). </p>
+
+</div>
+</div>
+<a id="a7442ba9933d3e05774efb41a4ffdf05f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7442ba9933d3e05774efb41a4ffdf05f">&#9670;&nbsp;</a></span>kDeviceCmdGetIdAm28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdGetIdAm28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x00, 0x90}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> Am28F(A). </p>
+
+</div>
+</div>
+<a id="a64e83b9de10d36925af8cde39b55a83a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64e83b9de10d36925af8cde39b55a83a">&#9670;&nbsp;</a></span>kDeviceStatusByteOkI28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr uint8_t kDeviceStatusByteOkI28F = 0x80</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F Status Byte OK. </p>
+
+</div>
+</div>
+<a id="a0d884ca23d3301fa67ad4f6efbf47557"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d884ca23d3301fa67ad4f6efbf47557">&#9670;&nbsp;</a></span>kDeviceCmdReadI28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdReadI28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0xFF}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Read a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F. </p>
+
+</div>
+</div>
+<a id="a1675e4f37c30f64e49c8506256841a8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1675e4f37c30f64e49c8506256841a8e">&#9670;&nbsp;</a></span>kDeviceCmdWriteI28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdWriteI28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x40}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Write a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F. </p>
+
+</div>
+</div>
+<a id="a57a52cc11a1fed7bc7344b5afb03f2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57a52cc11a1fed7bc7344b5afb03f2d4">&#9670;&nbsp;</a></span>kDeviceCmdEraseI28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdEraseI28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0x20}, { <span class="keyword">static_cast&lt;</span>uint32_t<span class="keyword">&gt;</span>(-1) , 0xD0}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to Erase a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F. </p>
+<p>This erase a block (n bytes), not the full device. </p>
+
+</div>
+</div>
+<a id="a8e62a1fc4f966b0764fe35e3d33fea24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e62a1fc4f966b0764fe35e3d33fea24">&#9670;&nbsp;</a></span>kDeviceCmdGetIdI28F</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="a01089.html">TDeviceCommand</a> kDeviceCmdGetIdI28F[]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    {0x00, 0x90}</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p>Command sequence to GetID a <a class="el" href="a01041.html" title="Pico Flash Class.">Flash</a> i28F. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

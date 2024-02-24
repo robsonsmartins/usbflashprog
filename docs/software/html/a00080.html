@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: runner.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: opcodes.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,63 +69,39 @@ $(function() {
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">runner.cpp File Reference<div class="ingroups"><a class="el" href="a00149.html">Software Project</a></div></div>  </div>
+<div class="title">opcodes.cpp File Reference<div class="ingroups"><a class="el" href="a00158.html">Software Project</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the <a class="el" href="a01068.html" title="Runner Class.">Runner</a> Class.  
+<p>Implementation of the Opcodes for communication.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QDateTime&gt;</code><br />
-<code>#include &lt;QApplication&gt;</code><br />
-<code>#include &lt;QLoggingCategory&gt;</code><br />
-<code>#include &lt;chrono&gt;</code><br />
-<code>#include &lt;thread&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00083.html">backend/runner.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00005.html">devices/device.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00086.html">config.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cmath&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00083.html">backend/opcodes.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for runner.cpp:</div>
+Include dependency graph for opcodes.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00081.png" border="0" usemap="#arunner_8cpp" alt=""/></div>
-<map name="arunner_8cpp" id="arunner_8cpp">
-<area shape="rect" title="Implementation of the Runner Class." alt="" coords="500,5,591,32"/>
-<area shape="rect" title=" " alt="" coords="5,80,101,107"/>
-<area shape="rect" title=" " alt="" coords="126,80,231,107"/>
-<area shape="rect" title=" " alt="" coords="255,80,398,107"/>
-<area shape="rect" title=" " alt="" coords="423,80,489,107"/>
-<area shape="rect" title=" " alt="" coords="513,80,577,107"/>
-<area shape="rect" title=" " alt="" coords="601,80,668,107"/>
-<area shape="rect" href="a00083.html" title="Header of the Runner Class." alt="" coords="747,155,896,181"/>
-<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="692,80,839,107"/>
-<area shape="rect" href="a00086.html" title="Configuration of UsbFlashProg." alt="" coords="1139,80,1229,107"/>
-<area shape="rect" title=" " alt="" coords="421,229,496,256"/>
-<area shape="rect" title=" " alt="" coords="1113,229,1183,256"/>
-<area shape="rect" title=" " alt="" coords="1034,229,1089,256"/>
-<area shape="rect" title=" " alt="" coords="521,229,618,256"/>
-<area shape="rect" title=" " alt="" coords="642,229,737,256"/>
-<area shape="rect" title=" " alt="" coords="761,229,881,256"/>
-<area shape="rect" href="a00077.html" title="Opcodes for communication." alt="" coords="905,229,1009,256"/>
-<area shape="rect" title=" " alt="" coords="837,304,904,331"/>
-<area shape="rect" title=" " alt="" coords="928,304,987,331"/>
-<area shape="rect" title=" " alt="" coords="1011,304,1061,331"/>
-<area shape="rect" title=" " alt="" coords="1145,155,1223,181"/>
-<area shape="rect" title=" " alt="" coords="1248,155,1315,181"/>
-<area shape="rect" title=" " alt="" coords="1339,155,1419,181"/>
+<div class="center"><img src="a00081.png" border="0" usemap="#aopcodes_8cpp" alt=""/></div>
+<map name="aopcodes_8cpp" id="aopcodes_8cpp">
+<area shape="rect" title="Implementation of the Opcodes for communication." alt="" coords="53,5,156,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,68,107"/>
+<area shape="rect" href="a00083.html" title="Opcodes for communication." alt="" coords="93,80,255,107"/>
+<area shape="rect" title=" " alt="" coords="54,155,121,181"/>
+<area shape="rect" title=" " alt="" coords="145,155,203,181"/>
+<area shape="rect" title=" " alt="" coords="227,155,278,181"/>
 </map>
 </div>
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a647dbe717558569de52b11ddd71f76e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#a647dbe717558569de52b11ddd71f76e7">operator==</a> (const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;a, const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;b)</td></tr>
-<tr class="separator:a647dbe717558569de52b11ddd71f76e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4e43100845654abce98f4bf44c947f9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00080.html#ab4e43100845654abce98f4bf44c947f9">operator==</a> (const <a class="el" href="a01089.html">TCmdOpCode</a> &amp;a, const <a class="el" href="a01089.html">TCmdOpCode</a> &amp;b)</td></tr>
+<tr class="separator:ab4e43100845654abce98f4bf44c947f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the <a class="el" href="a01068.html" title="Runner Class.">Runner</a> Class. </p>
+<div class="textblock"><p>Implementation of the Opcodes for communication. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a647dbe717558569de52b11ddd71f76e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a647dbe717558569de52b11ddd71f76e7">&#9670;&nbsp;</a></span>operator==()</h2>
+<a id="ab4e43100845654abce98f4bf44c947f9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4e43100845654abce98f4bf44c947f9">&#9670;&nbsp;</a></span>operator==()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -133,13 +109,13 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">bool operator== </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="a01089.html">TCmdOpCode</a> &amp;&#160;</td>
           <td class="paramname"><em>a</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="a01064.html">TRunnerCommand</a> &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="a01089.html">TCmdOpCode</a> &amp;&#160;</td>
           <td class="paramname"><em>b</em>&#160;</td>
         </tr>
         <tr>

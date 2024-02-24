@@ -1,8 +1,0 @@
-<map id="eprom.cpp" name="eprom.cpp">
-<area shape="rect" id="node1" title="Implementation of EPROM Chip Emulation." alt="" coords="81,5,171,32"/>
-<area shape="rect" id="node2" href="$a01472.html" title="Header of EPROM Chip Emulation." alt="" coords="80,80,172,107"/>
-<area shape="rect" id="node3" href="$a00119.html" title="Header of Chip Emulation Base Classes." alt="" coords="87,155,165,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,229,68,256"/>
-<area shape="rect" id="node5" title=" " alt="" coords="93,229,159,256"/>
-<area shape="rect" id="node6" title=" " alt="" coords="184,229,255,256"/>
-</map>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buffersize_789',['bufferSize',['../a01076.html#ad1859b3438b8d5562f5c3c0ecbe760d4',1,'TProgrammerSettings']]]
+  ['addr_859',['addr',['../a01133.html#ab439e3a90339e2e8ca8f82d4557a34e5',1,'TChipCommand::addr()'],['../a01145.html#ab439e3a90339e2e8ca8f82d4557a34e5',1,'TDeviceCommand::addr()']]]
 ];

@@ -1,7 +1,6 @@
-<map id="qhexfile.hpp" name="qhexfile.hpp">
-<area shape="rect" id="node1" title="Header of the QHexFile Class." alt="" coords="89,5,191,32"/>
-<area shape="rect" id="node2" href="$a00059.html" title="Header of the QEpromFileBase Class." alt="" coords="65,80,215,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="105,155,175,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="199,155,297,181"/>
+<map id="qepromfilebase.hpp" name="qepromfilebase.hpp">
+<area shape="rect" id="node1" title="Header of the QEpromFileBase Class." alt="" coords="65,5,215,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="105,80,175,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="199,80,297,107"/>
 </map>

@@ -1,0 +1,10 @@
+<map id="Flash28F" name="Flash28F">
+<area shape="rect" id="node1" title="Parallel Flash 28F Class." alt="" coords="165,857,293,964"/>
+<area shape="rect" id="node4" href="$a01041.html" title="Parallel Flash Am28F Class." alt="" coords="5,1012,144,1104"/>
+<area shape="rect" id="node5" href="$a01045.html" title="Parallel Flash i28F Class." alt="" coords="169,1012,290,1104"/>
+<area shape="rect" id="node8" href="$a01037.html" title="Parallel Flash SST28SF Class." alt="" coords="315,1012,464,1104"/>
+<area shape="rect" id="node2" href="$a01057.html" title="Parallel Device Base Class." alt="" coords="131,424,328,809"/>
+<area shape="rect" id="node3" href="$a00989.html" title="Device Base Class." alt="" coords="148,5,311,376"/>
+<area shape="rect" id="node6" href="$a01053.html" title="Parallel Flash i28F (16&#45;bit) Class." alt="" coords="61,1152,216,1244"/>
+<area shape="rect" id="node7" href="$a01049.html" title="Parallel Flash Sharp i28F Class." alt="" coords="241,1152,399,1244"/>
+</map>

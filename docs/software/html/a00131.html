@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: mainwindow.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: emulator.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,106 +62,51 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_1788f8309b1a812dcb800a185471cf6c.html">ui</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li><li class="navelem"><a class="el" href="dir_b0afe3511d9fcde78b0afd204ff1c02d.html">emulator</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">mainwindow.cpp File Reference<div class="ingroups"><a class="el" href="a00149.html">Software Project</a></div></div>  </div>
+<div class="title">emulator.cpp File Reference<div class="ingroups"><a class="el" href="a00159.html">Unit Tests</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the Main Window Class.  
+<p>Implementation of <a class="el" href="a01153.html" title="Emulator Class.">Emulator</a> Class.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QtGlobal&gt;</code><br />
-<code>#include &lt;QMessageBox&gt;</code><br />
-<code>#include &lt;QInputDialog&gt;</code><br />
-<code>#include &lt;QTimer&gt;</code><br />
-<code>#include &lt;QThread&gt;</code><br />
-<code>#include &lt;QStyle&gt;</code><br />
-<code>#include &lt;QScreen&gt;</code><br />
-<code>#include &lt;QWindow&gt;</code><br />
-<code>#include &lt;QDesktopWidget&gt;</code><br />
-<code>#include &lt;QDesktopServices&gt;</code><br />
-<code>#include &lt;QFileDialog&gt;</code><br />
-<code>#include &lt;QFileInfo&gt;</code><br />
-<code>#include &lt;QMenu&gt;</code><br />
-<code>#include &lt;QAction&gt;</code><br />
-<code>#include &lt;QSettings&gt;</code><br />
-<code>#include &lt;QSignalBlocker&gt;</code><br />
-<code>#include &lt;cstdio&gt;</code><br />
-<code>#include &lt;cstring&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;locale&gt;</code><br />
-<code>#include &lt;cmath&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00134.html">mainwindow.hpp</a>&quot;</code><br />
-<code>#include &quot;./ui_mainwindow.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00086.html">config.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00146.html">settings.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00077.html">backend/opcodes.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00011.html">backend/devices/parallel/dummy.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01490.html">backend/devices/parallel/sram.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a01469.html">backend/devices/parallel/eprom.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00017.html">backend/devices/parallel/eeprom.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;QRandomGenerator&gt;</code><br />
+<code>#include &lt;chrono&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00005.html">../../backend/devices/device.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="a00134.html">emulator.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for mainwindow.cpp:</div>
+Include dependency graph for emulator.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00132.png" border="0" usemap="#amainwindow_8cpp" alt=""/></div>
-<map name="amainwindow_8cpp" id="amainwindow_8cpp">
-<area shape="rect" title="Implementation of the Main Window Class." alt="" coords="1545,5,1675,32"/>
-<area shape="rect" title=" " alt="" coords="2185,259,2264,285"/>
-<area shape="rect" title=" " alt="" coords="46,87,161,114"/>
-<area shape="rect" title=" " alt="" coords="185,87,291,114"/>
-<area shape="rect" title=" " alt="" coords="1456,259,1527,285"/>
-<area shape="rect" title=" " alt="" coords="366,87,443,114"/>
-<area shape="rect" title=" " alt="" coords="468,87,533,114"/>
-<area shape="rect" title=" " alt="" coords="557,87,633,114"/>
-<area shape="rect" title=" " alt="" coords="657,87,741,114"/>
-<area shape="rect" title=" " alt="" coords="765,87,897,114"/>
-<area shape="rect" title=" " alt="" coords="922,87,1063,114"/>
-<area shape="rect" title=" " alt="" coords="1088,87,1185,114"/>
-<area shape="rect" title=" " alt="" coords="1210,87,1290,114"/>
-<area shape="rect" title=" " alt="" coords="1315,87,1383,114"/>
-<area shape="rect" title=" " alt="" coords="1407,87,1480,114"/>
-<area shape="rect" title=" " alt="" coords="1505,87,1590,114"/>
-<area shape="rect" title=" " alt="" coords="1614,87,1734,114"/>
-<area shape="rect" title=" " alt="" coords="1758,87,1819,114"/>
-<area shape="rect" title=" " alt="" coords="1843,87,1910,114"/>
-<area shape="rect" title=" " alt="" coords="101,483,159,509"/>
-<area shape="rect" title=" " alt="" coords="1985,87,2046,114"/>
-<area shape="rect" title=" " alt="" coords="2071,87,2133,114"/>
-<area shape="rect" href="a00134.html" title="Header of the Main Window Class." alt="" coords="1985,177,2117,203"/>
-<area shape="rect" href="a00077.html" title="Opcodes for communication." alt="" coords="277,408,381,435"/>
-<area shape="rect" title=" " alt="" coords="2260,87,2403,114"/>
-<area shape="rect" href="a00086.html" title="Configuration of UsbFlashProg." alt="" coords="2420,177,2509,203"/>
-<area shape="rect" href="a00146.html" title="Header of the Settings Dialog Class." alt="" coords="2427,87,2529,114"/>
-<area shape="rect" href="a00011.html" title="Class of a Parallel Dummy Device." alt="" coords="3204,169,3387,211"/>
-<area shape="rect" href="a01490.html" title="Class of a Parallel SRAM." alt="" coords="2831,80,3013,121"/>
-<area shape="rect" href="a01469.html" title="Classes of the Parallel EPROM." alt="" coords="3296,80,3479,121"/>
-<area shape="rect" href="a00017.html" title="Classes of the Parallel EEPROM." alt="" coords="3037,80,3220,121"/>
-<area shape="rect" title=" " alt="" coords="1993,259,2109,285"/>
-<area shape="rect" title=" " alt="" coords="1551,259,1656,285"/>
-<area shape="rect" title=" " alt="" coords="1679,259,1810,285"/>
-<area shape="rect" href="a00140.html" title="Header of the QHexEditor Class." alt="" coords="1835,259,1969,285"/>
-<area shape="rect" href="a00083.html" title="Header of the Runner Class." alt="" coords="2838,333,2987,360"/>
-<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="3026,259,3231,285"/>
-<area shape="rect" title=" " alt="" coords="1795,333,1889,360"/>
-<area shape="rect" title=" " alt="" coords="1913,333,2009,360"/>
-<area shape="rect" href="a00053.html" title="Header of the QEpromFile Class." alt="" coords="3012,333,3256,360"/>
-<area shape="rect" title=" " alt="" coords="3637,408,3711,435"/>
-<area shape="rect" title=" " alt="" coords="2664,408,2735,435"/>
-<area shape="rect" title=" " alt="" coords="3347,408,3444,435"/>
-<area shape="rect" title=" " alt="" coords="2885,408,2940,435"/>
-<area shape="rect" title=" " alt="" coords="337,483,403,509"/>
-<area shape="rect" title=" " alt="" coords="262,483,313,509"/>
-<area shape="rect" title=" " alt="" coords="2339,259,2406,285"/>
-<area shape="rect" title=" " alt="" coords="2430,259,2510,285"/>
-<area shape="rect" title=" " alt="" coords="2321,177,2395,203"/>
-<area shape="rect" href="a00029.html" title="Class of a Parallel Device." alt="" coords="3078,177,3179,203"/>
+<div class="center"><img src="a00132.png" border="0" usemap="#aemulator_8cpp" alt=""/></div>
+<map name="aemulator_8cpp" id="aemulator_8cpp">
+<area shape="rect" title="Implementation of Emulator Class." alt="" coords="274,5,381,32"/>
+<area shape="rect" title=" " alt="" coords="29,87,180,114"/>
+<area shape="rect" title=" " alt="" coords="205,87,271,114"/>
+<area shape="rect" title=" " alt="" coords="295,87,359,114"/>
+<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="455,80,610,121"/>
+<area shape="rect" href="a00134.html" title="Header of Emulator Class." alt="" coords="301,169,409,196"/>
+<area shape="rect" title=" " alt="" coords="185,244,259,271"/>
+<area shape="rect" title=" " alt="" coords="609,244,680,271"/>
+<area shape="rect" title=" " alt="" coords="849,244,947,271"/>
+<area shape="rect" href="a00089.html" title="Header of the Runner Class." alt="" coords="458,169,607,196"/>
+<area shape="rect" title=" " alt="" coords="412,244,467,271"/>
+<area shape="rect" title=" " alt="" coords="491,244,585,271"/>
+<area shape="rect" title=" " alt="" coords="705,244,825,271"/>
+<area shape="rect" href="a00083.html" title="Opcodes for communication." alt="" coords="283,244,387,271"/>
+<area shape="rect" title=" " alt="" coords="203,319,270,345"/>
+<area shape="rect" title=" " alt="" coords="302,319,361,345"/>
+<area shape="rect" title=" " alt="" coords="385,319,435,345"/>
+<area shape="rect" href="a00125.html" title="Header of Chip Emulation Base Classes." alt="" coords="83,244,161,271"/>
+<area shape="rect" title=" " alt="" coords="5,319,68,345"/>
+<area shape="rect" title=" " alt="" coords="92,319,163,345"/>
 </map>
 </div>
 </div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the Main Window Class. </p>
+<div class="textblock"><p>Implementation of <a class="el" href="a01153.html" title="Emulator Class.">Emulator</a> Class. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

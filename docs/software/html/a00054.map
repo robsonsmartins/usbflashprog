@@ -1,8 +1,7 @@
-<map id="qepromfile.hpp" name="qepromfile.hpp">
-<area shape="rect" id="node1" title="Header of the QEpromFile Class." alt="" coords="113,5,233,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,155,80,181"/>
-<area shape="rect" id="node3" title=" " alt="" coords="121,155,191,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="226,155,323,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="324,80,449,107"/>
-<area shape="rect" id="node6" href="$a00059.html" title="Header of the QEpromFileBase Class." alt="" coords="98,80,249,107"/>
+<map id="qbinfile.hpp" name="qbinfile.hpp">
+<area shape="rect" id="node1" title="Header of the QBinFile Class." alt="" coords="91,5,189,32"/>
+<area shape="rect" id="node2" href="$a00065.html" title="Header of the QEpromFileBase Class." alt="" coords="65,80,215,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,80,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="105,155,175,181"/>
+<area shape="rect" id="node5" title=" " alt="" coords="199,155,297,181"/>
 </map>

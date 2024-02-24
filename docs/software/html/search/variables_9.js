@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['opcode_847',['opcode',['../a01064.html#a061932bab6caa48bdabcedd4c4c00f8f',1,'TRunnerCommand']]]
+  ['manufacturer_918',['manufacturer',['../a00977.html#a5e080992dc6826d8afba45f4d79f6c1c',1,'TDeviceID']]]
 ];

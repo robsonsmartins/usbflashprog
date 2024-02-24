@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['skipff_900',['skipFF',['../a01090.html#a86a539042a7753cfb1a9b4109f04b1ee',1,'TDeviceFlags']]]
+  ['result_945',['result',['../a01105.html#a556c80259568976b607ec50f8747d42a',1,'TCmdOpCode']]],
+  ['runner_946',['runner',['../a00065.html#a12aac167511bbe888ec5a5589d672ffa',1,'main.cpp']]]
 ];

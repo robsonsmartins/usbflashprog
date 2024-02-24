@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>USB EPROM/Flash Programmer: emulator.cpp File Reference</title>
+<title>USB EPROM/Flash Programmer: chip.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -67,46 +67,37 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">emulator.cpp File Reference<div class="ingroups"><a class="el" href="a00150.html">Unit Tests</a></div></div>  </div>
+<div class="title">chip.cpp File Reference<div class="ingroups"><a class="el" href="a00159.html">Unit Tests</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of <a class="el" href="a01112.html" title="Emulator Class.">Emulator</a> Class.  
+<p>Implementation of Chip Emulation Base Classes.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;QRandomGenerator&gt;</code><br />
-<code>#include &lt;chrono&gt;</code><br />
-<code>#include &lt;thread&gt;</code><br />
-<code>#include &quot;<a class="el" href="a00005.html">../../backend/devices/device.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="a00125.html">emulator.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;QRandomGenerator&gt;</code><br />
+<code>#include &lt;QLoggingCategory&gt;</code><br />
+<code>#include &lt;QString&gt;</code><br />
+<code>#include &quot;<a class="el" href="a00125.html">chip.hpp</a>&quot;</code><br />
+<code>#include &quot;main.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for emulator.cpp:</div>
+Include dependency graph for chip.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="a00123.png" border="0" usemap="#aemulator_8cpp" alt=""/></div>
-<map name="aemulator_8cpp" id="aemulator_8cpp">
-<area shape="rect" title="Implementation of Emulator Class." alt="" coords="274,5,381,32"/>
-<area shape="rect" title=" " alt="" coords="29,87,180,114"/>
-<area shape="rect" title=" " alt="" coords="205,87,271,114"/>
-<area shape="rect" title=" " alt="" coords="295,87,359,114"/>
-<area shape="rect" href="a00005.html" title="Base class of a Device." alt="" coords="455,80,610,121"/>
-<area shape="rect" href="a00125.html" title="Header of Emulator Class." alt="" coords="301,169,409,196"/>
-<area shape="rect" title=" " alt="" coords="185,244,259,271"/>
-<area shape="rect" title=" " alt="" coords="609,244,680,271"/>
-<area shape="rect" title=" " alt="" coords="849,244,947,271"/>
-<area shape="rect" href="a00083.html" title="Header of the Runner Class." alt="" coords="458,169,607,196"/>
-<area shape="rect" title=" " alt="" coords="412,244,467,271"/>
-<area shape="rect" title=" " alt="" coords="491,244,585,271"/>
-<area shape="rect" title=" " alt="" coords="705,244,825,271"/>
-<area shape="rect" href="a00077.html" title="Opcodes for communication." alt="" coords="283,244,387,271"/>
-<area shape="rect" title=" " alt="" coords="203,319,270,345"/>
-<area shape="rect" title=" " alt="" coords="302,319,361,345"/>
-<area shape="rect" title=" " alt="" coords="385,319,435,345"/>
-<area shape="rect" href="a00119.html" title="Header of Chip Emulation Base Classes." alt="" coords="83,244,161,271"/>
-<area shape="rect" title=" " alt="" coords="5,319,68,345"/>
-<area shape="rect" title=" " alt="" coords="92,319,163,345"/>
+<div class="center"><img src="a00123.png" border="0" usemap="#achip_8cpp" alt=""/></div>
+<map name="achip_8cpp" id="achip_8cpp">
+<area shape="rect" title="Implementation of Chip Emulation Base Classes." alt="" coords="365,5,441,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,67,107"/>
+<area shape="rect" title=" " alt="" coords="91,80,242,107"/>
+<area shape="rect" title=" " alt="" coords="266,80,409,107"/>
+<area shape="rect" title=" " alt="" coords="433,80,503,107"/>
+<area shape="rect" href="a00125.html" title="Header of Chip Emulation Base Classes." alt="" coords="528,80,605,107"/>
+<area shape="rect" title=" " alt="" coords="629,80,712,107"/>
+<area shape="rect" title=" " alt="" coords="446,155,509,181"/>
+<area shape="rect" title=" " alt="" coords="533,155,600,181"/>
+<area shape="rect" title=" " alt="" coords="625,155,695,181"/>
 </map>
 </div>
 </div><a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of <a class="el" href="a01112.html" title="Emulator Class.">Emulator</a> Class. </p>
+<div class="textblock"><p>Implementation of Chip Emulation Base Classes. </p>
 <dl class="section author"><dt>Author</dt><dd>Robson Martins (<a href="https://www.robsonmartins.com">https://www.robsonmartins.com</a>) </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->

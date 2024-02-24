@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['erase_76',['erase',['../a01086.html#a6497985f8bd30e908dbea924091c764a',1,'Device']]]
+  ['erase_79',['erase',['../a01093.html#a405793a116d0a9ab4ededcebcbb7743b',1,'Device']]]
 ];

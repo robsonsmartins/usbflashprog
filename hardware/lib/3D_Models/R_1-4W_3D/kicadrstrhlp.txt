@@ -1,0 +1,81 @@
+
+Download Link:
+https://www.invntefx.com/ssl/_3dmodels/KICADRSTRS.zip
+Unzip Foldername: KICADRSTRS.zip
+
+Open this instructions help text file:
+kicadrstrhlp.txt
+
+==========
+
+3D MODEL WRL/STP FILES
+Copy Foldername: R_1-4W_3D
+To --->
+V6.0 Directory
+C:\Program Files\KiCad\6.0\share\kicad\3dmodels\
+and
+V7.0 Directory
+C:\Program Files\KiCad\7.0\share\kicad\3dmodels\
+
+==========
+
+PCB MODEL FOOTPRINT FILES
+Copy Foldername:
+R_1-4W_V6.pretty
+To --->
+V6.0 Directory
+C:\Program Files\KiCad\6.0\share\kicad\footprints\
+----------
+Copy Foldername:
+R_1-4W_V7.pretty
+To --->
+V7.0 Directory
+C:\Program Files\KiCad\7.0\share\kicad\footprints\
+
+==========
+
+V6.0
+Open PCB Editor --->
+Preferences (File Menu Tab) --->
+Manage Footprint Libraries ...
+At Bottom 'Click On' Folder Icon
+GOTO --->
+C:\Program Files\KiCad\6.0\share\kicad\footprints\
+Add Foldername: R_1-4W_V6.pretty
+
+In PCB Editor 'Press A Key' or Add Footprint Icon [Right Menu Bar] ...
+GOTO --->
+C:\Program Files\KiCad\6.0\share\kicad\footprints\R_1-4W_V6
+Add Footprint Filename: R_1-4W.kicad_mod
+
+Return to 'Select Item(s)' Arrow Icon [Right Menu Bar]
+'Double-Click' on Footprint (Opens Footprint Properties) --->
+Select 3D Models (Far Right Tab)
+
+Assign 3D Resistor Model of Choice
+V6.0 Directory
+C:\Program Files\KiCad\6.0\share\kicad\3dmodels\R_1-4W_3D\
+----------
+V7.0
+Open PCB Editor --->
+Preferences (Tab) --->
+Manage Footprint Libraries ...
+At Bottom 'Click On' Folder Icon
+GOTO --->
+C:\Program Files\KiCad\7.0\share\kicad\footprints\
+Add Foldername: R_1-4W_V7.pretty
+
+In PCB Editor 'Press A Key' or Add Footprint Icon [Right Menu Bar] ...
+GOTO --->
+C:\Program Files\KiCad\7.0\share\kicad\footprints\R_1-4W_V7
+Add Footprint Filename: R_1-4W.kicad_mod
+
+Return to 'Select Item(s)' Arrow Icon [Right Menu Bar]
+'Double-Click' on Footprint (Opens Footprint Properties) --->
+Select 3D Models (Far Right Tab)
+
+Assign 3D Resistor Model of Choice
+V7.0 Directory
+C:\Program Files\KiCad\7.0\share\kicad\3dmodels\R_1-4W_3D
+
+==========

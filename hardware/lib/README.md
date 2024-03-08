@@ -14,6 +14,14 @@ KiCad resources to help create designs using the Raspberry Pi MCUs.
 - License: [Unlicensed License](https://github.com/HeadBoffin/RP_Silicon_KiCad/blob/main/LICENSE)
 - Version: [28 Jan 2021](https://github.com/HeadBoffin/RP_Silicon_KiCad/commit/8ab84dd99d44e12403f169a6abfef67583b1366e)
 
+### KiCad\-RP\-Pico
+
+A simple repository of files needed to add a 3D footprint of the Raspberry Pi Pico board to KiCad.
+
+- Repository: [KiCad-RP-Pico at GitHub](https://github.com/ncarandini/KiCad-RP-Pico)
+- License: [TPCWare KiCad Library License](https://github.com/ncarandini/KiCad-RP-Pico/blob/main/LICENSE)
+- Version: [04 Aug 2021](https://github.com/ncarandini/KiCad-RP-Pico/commit/ae1434c30d1d188bc6f0e62ef45307a41bbce4ca)
+
 ### kubabuda/misc_footprints
 
 Library of KiCad footprints with various parts.

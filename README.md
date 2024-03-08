@@ -40,7 +40,7 @@ The current status of this project is:
 ![Current Revision](https://img.shields.io/badge/Current%20Version-v0.3.0--rev.A-blue?style=plastic)
 ![Specifications](https://img.shields.io/badge/Specifications-almost%20stable-green?style=plastic)
 ![Hardware Design SCH](https://img.shields.io/badge/Hardware%20Design%20(Schematics)-almost%20stable-yellowgreen?style=plastic)
-![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-not%20started%20yet-red?style=plastic)
+![Hardware Design PCB](https://img.shields.io/badge/Hardware%20Design%20(PCB)-almost%20stable-yellowgreen?style=plastic)
 ![Firmware](https://img.shields.io/badge/Firmware-almost%20stable-yellowgreen?style=plastic)
 ![PC Software](https://img.shields.io/badge/PC%20Software-almost%20stable-yellowgreen?style=plastic)
 ![User Documentation](https://img.shields.io/badge/User%20Documentation-not%20started%20yet-red?style=plastic)

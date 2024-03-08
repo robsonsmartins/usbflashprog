@@ -1,0 +1,23 @@
+G04 #@! TF.GenerationSoftware,KiCad,Pcbnew,8.0.0*
+G04 #@! TF.CreationDate,2024-03-08T17:43:01-03:00*
+G04 #@! TF.ProjectId,usbflashprog,75736266-6c61-4736-9870-726f672e6b69,v0.3.0 rev.A*
+G04 #@! TF.SameCoordinates,Original*
+G04 #@! TF.FileFunction,Profile,NP*
+%FSLAX46Y46*%
+G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
+G04 Created by KiCad (PCBNEW 8.0.0) date 2024-03-08 17:43:01*
+%MOMM*%
+%LPD*%
+G01*
+G04 APERTURE LIST*
+G04 #@! TA.AperFunction,Profile*
+%ADD10C,0.100000*%
+G04 #@! TD*
+G04 APERTURE END LIST*
+D10*
+X64775000Y-24314000D02*
+X213545000Y-24314000D01*
+X213545000Y-156474000D01*
+X64775000Y-156474000D01*
+X64775000Y-24314000D01*
+M02*
